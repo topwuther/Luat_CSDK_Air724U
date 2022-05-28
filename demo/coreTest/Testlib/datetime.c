@@ -41,8 +41,8 @@ bool demo_get_system_datetime()
 
 bool datetimeTest(void)
 {
-	//1. 设置系统时间
+	//1. 璁剧疆绯荤粺鏃堕棿
 	demo_set_system_datetime();
-	//2. 获取系统时间
+	//2. 鑾峰彇绯荤粺鏃堕棿
 	demo_get_system_datetime();
 }

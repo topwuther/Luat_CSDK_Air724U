@@ -1,5 +1,5 @@
-/*cÓïÑÔÊµÏÖ£¬¿ÉÔÚlinuxÆ½Ì¨ÉÏÓÃÁË£¬ÔÚWindowsÏÂ¿ÉÒÔÓÃGetPrivateProfileString»òGetPrivateProfileInt·½±ã¶ÁÈ¡.iniÅäÖÃÎÄ¼şÄÚÈİ£¬
-µ«ÊÇÔÚLinuxÆ½Ì¨ÉÏ¾ÍÒ»³ïÄªÕ¹ÁË¡£ÎªÁË½â¾ö¸ÃÎÊÌâ£¬´òËãÓÃCÀ´¶ÁÈ¡.ini£¬¼´¿É²»ÊÜÆ½Ì¨µÄÏŞÖÆÁË*/
+/*cè¯­è¨€å®ç°ï¼Œå¯åœ¨linuxå¹³å°ä¸Šç”¨äº†ï¼Œåœ¨Windowsä¸‹å¯ä»¥ç”¨GetPrivateProfileStringæˆ–GetPrivateProfileIntæ–¹ä¾¿è¯»å–.inié…ç½®æ–‡ä»¶å†…å®¹ï¼Œ
+ä½†æ˜¯åœ¨Linuxå¹³å°ä¸Šå°±ä¸€ç­¹è«å±•äº†ã€‚ä¸ºäº†è§£å†³è¯¥é—®é¢˜ï¼Œæ‰“ç®—ç”¨Cæ¥è¯»å–.iniï¼Œå³å¯ä¸å—å¹³å°çš„é™åˆ¶äº†*/
 #include <string.h>
 #ifdef WIN32
 #include <Windows.h>
@@ -18,7 +18,7 @@ char g_szConfigPath[MAX_PATH];
 
 #define fgetc getc
 
-//´ÓINIÎÄ¼ş¶ÁÈ¡×Ö·û´®ÀàĞÍÊı¾İ
+//ä»INIæ–‡ä»¶è¯»å–å­—ç¬¦ä¸²ç±»å‹æ•°æ®
 char *GetIniKeyString(char *title,char *key,char *filename) 
 { 
 	FILE *fp; 
@@ -60,7 +60,7 @@ char *GetIniKeyString(char *title,char *key,char *filename)
 			{ 
 				if(strstr(szLine,key)!=NULL) 
 				{ 
-					//×¢ÊÍĞĞ
+					//æ³¨é‡Šè¡Œ
 					if ('#' == szLine[0])
 					{
 					}
@@ -70,7 +70,7 @@ char *GetIniKeyString(char *title,char *key,char *filename)
 					}
 					else
 					{
-						//ÕÒ´òkey¶ÔÓ¦±äÁ¿
+						//æ‰¾æ‰“keyå¯¹åº”å˜é‡
 						tmp++;
 						while(*tmp && (*tmp == ' ' || *tmp == '\t')) tmp++;
 						strend = tmp;
@@ -89,7 +89,7 @@ char *GetIniKeyString(char *title,char *key,char *filename)
 				strcat(tmpstr,"]");
 				if( strncmp(tmpstr,szLine,strlen(tmpstr)) == 0 ) 
 				{
-					//ÕÒµ½title
+					//æ‰¾åˆ°title
 					flag = 1; 
 				}
 			}
@@ -99,7 +99,7 @@ char *GetIniKeyString(char *title,char *key,char *filename)
 	return ""; 
 }
  
-//´ÓINIÎÄ¼ş¶ÁÈ¡ÕûÀàĞÍÊı¾İ
+//ä»INIæ–‡ä»¶è¯»å–æ•´ç±»å‹æ•°æ®
 int GetIniKeyInt(char *title,char *key,char *filename)
 {
 	return atoi(GetIniKeyString(title,key,filename));

@@ -160,7 +160,7 @@ int demo_ota_httpdownload(void)
 
 		// Get the data
 		nRetCode = HTTPClientReadData(pHTTP,readBuff,sizeof(readBuff),300,&readSize);
-		//Éı¼¶´íÎóÂë
+		//å‡çº§é”™è¯¯ç 
 		if(!strncmp("{\"code\":", readBuff, strlen("{\"code\":")))
 		{
 			int status = 0, cout = 0;
@@ -184,7 +184,7 @@ int demo_ota_httpdownload(void)
 		readTotalLen += readSize;
 		iot_debug_print("[ota] HTTPClientReadData readSize %d", readSize);
 		iot_debug_print("[ota] HTTPClientReadData readTotalLen %d, %d", readTotalLen, fsz);
-		//Ô¶³ÌÉı¼¶
+		//è¿œç¨‹å‡çº§
 		int ret = iot_fota_download(readBuff, readSize, fsz);
 		if(ret != 0)
 		{
@@ -399,10 +399,10 @@ static VOID demo_ota_getinfo(VOID)
 
 int appimg_enter(void *param)
 {    
-    //¿ª»úÁ¢¿ÌÊ¹ÓÃÎÄ¼şÏµÍ³£¬»á¿´²»µ½´òÓ¡ĞÅÏ¢
+    //å¼€æœºç«‹åˆ»ä½¿ç”¨æ–‡ä»¶ç³»ç»Ÿï¼Œä¼šçœ‹ä¸åˆ°æ‰“å°ä¿¡æ¯
     iot_debug_print("[ota] appimg_enter");
 	iot_os_sleep(2000);
-    //×¢²áÍøÂç×´Ì¬»Øµ÷º¯Êı
+    //æ³¨å†Œç½‘ç»œçŠ¶æ€å›è°ƒå‡½æ•°
     iot_network_set_cb(demo_otaworkIndCallBack);
     g_s_ota_task = iot_os_create_task(demo_ota_task,
                         NULL,

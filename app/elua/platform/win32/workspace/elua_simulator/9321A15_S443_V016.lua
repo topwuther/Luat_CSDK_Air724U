@@ -248,7 +248,7 @@ local function hex2ascii(str)
 end
 
 local function RestorePara()
-	cP["DOMAIN"] = "device.cmmat.com:1087"  --ÖØÇì
+	cP["DOMAIN"] = "device.cmmat.com:1087"  --é‡åº†
     cP["FREQ"] = 15
 	cP["PULSE"] = 120
 	cP["TRACE"] = "1"
@@ -329,7 +329,7 @@ local function CounterInit()
 	c.GpsPrt = 180
 	c.GpsRltPrt = 10
 	c.gpsfind = 0
-	c.moved = 0   --¼ì²éĞ¡ÇøÎ»ÒÆµÄÊ±¼ä£¬p.moveÊ±¼äÄÚ²»ÔÙ¼ì²é
+	c.moved = 0   --æ£€æŸ¥å°åŒºä½ç§»çš„æ—¶é—´ï¼Œp.moveæ—¶é—´å†…ä¸å†æ£€æŸ¥
 	c.T2 = 0
 	c.T3 = 0
 	c.DeepSC = 2^30
@@ -918,17 +918,17 @@ local function LightOffGsm()
 end
 
 local function GsmWorkLight()
-	if GsEq("CONNECTED") and  RsEq("IDLE") then  -- ³¤ÁÁ
+	if GsEq("CONNECTED") and  RsEq("IDLE") then  -- é•¿äº®
 		if p.gsmLt < 2 then
 			LightOnGsm()
 		end
-	elseif GsEq("CONNECTED") and (RsEq("BEGINSEND") or RsEq("SENDING") or RsEq("SENT")) then --¿ìÉÁ
+	elseif GsEq("CONNECTED") and (RsEq("BEGINSEND") or RsEq("SENDING") or RsEq("SENT")) then --å¿«é—ª
 		if p.gsmLt < 2 then
 			LightOnGsm()
 		else
 			LightOffGsm()
 		end
-	elseif (RsEq("SIMOK") or RsEq("CENG") or RsEq("IDLE")) and GsEq("CONNECTED") then  --¼ì²âµ½SIM¿¨¾ÍÂıÉÁ
+	elseif (RsEq("SIMOK") or RsEq("CENG") or RsEq("IDLE")) and GsEq("CONNECTED") then  --æ£€æµ‹åˆ°SIMå¡å°±æ…¢é—ª
 		p.gsmLt = (p.gsmLt + 1) % 4
 		if p.gsmLt == 0 then
 			LightOffGsm()
@@ -953,7 +953,7 @@ local function GpsWorkLight()
 	    if p.gpsLt <2 then
 		  LightOnGps()
 		end
-	elseif gps.open then  -- ÂıÉÁ
+	elseif gps.open then  -- æ…¢é—ª
 		p.gpsLt = (p.gpsLt + 1) % 4
 		if p.gpsLt == 0 then
 			LightOffGps()
@@ -2383,12 +2383,12 @@ end
 
 local function CheckGuard()
 	local t1 = c.gen - ACC.cs
-	if ACC.s == 0 and t1 >= 0 and t1 < 3 and p.guard == "ON" then   --µã»ğ
+	if ACC.s == 0 and t1 >= 0 and t1 < 3 and p.guard == "ON" then   --ç‚¹ç«
 		p.guard = "OFF"
 		p.statechg = true
 		ClearGuardInfo()
 		vprint("guard off")
-	elseif ACC.s == 1 and (c.gen - ACC.cs) >= cP["ACCLT"] and p.guard == "OFF"	then  --Ï¨»ğ
+	elseif ACC.s == 1 and (c.gen - ACC.cs) >= cP["ACCLT"] and p.guard == "OFF"	then  --ç†„ç«
 		InitGuardInfo()
 		p.guard = "ON"
 		p.statechg = true
@@ -3005,7 +3005,7 @@ while true do
 		elseif t.reset == msg.timer_id then
 			ResetSys()
 		end
-     elseif msg.id == rtos.MSG_INT then -- ÖĞ¶ÏÏûÏ¢
+     elseif msg.id == rtos.MSG_INT then -- ä¸­æ–­æ¶ˆæ¯
 		handleInt(msg.int_id,msg.int_resnum)
 	elseif msg.id == rtos.MSG_PMD then
 		ProcessChg(msg)

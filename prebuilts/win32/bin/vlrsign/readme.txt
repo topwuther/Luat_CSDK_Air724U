@@ -1,36 +1,36 @@
 1 RSAKeyGen.exe
-  RSAKeyGen.exe ÊÇÇ©ÃûÃØÔ¿Éú³É¹¤¾ß£¬Ë«»÷ÔËĞĞ¾Í¿ÉÒÔÁË¡£
+  RSAKeyGen.exe æ˜¯ç­¾åç§˜é’¥ç”Ÿæˆå·¥å…·ï¼ŒåŒå‡»è¿è¡Œå°±å¯ä»¥äº†ã€‚
 
-²ÎÊıËµÃ÷£º
-	password  ÊäÈë¿ÚÁî£¬8 Î»ASCIIÂë,ÒÔºóVLRSign.exe£¬¸ù¾İ¶ÁÈ¡Ç©ÃûÃØÔ¿Ê±»ØÈ¥Ğ£Ñé¿ÚÁîÊÇ·ñÕıÈ·¡£
-	Product Name ÊäÈë²úÆ·Ãû³Æ£¬²»³¬¹ı49¸ö×Ö·û£¬ÒÔºóVLRSign.exe¸ù¾İÊäÈëµÄ²úÆ·Ãû³Æ¼ìË÷ÏàÓ¦µÄÇ©ÃûÃØÔ¿¡£
+å‚æ•°è¯´æ˜ï¼š
+	password  è¾“å…¥å£ä»¤ï¼Œ8 ä½ASCIIç ,ä»¥åVLRSign.exeï¼Œæ ¹æ®è¯»å–ç­¾åç§˜é’¥æ—¶å›å»æ ¡éªŒå£ä»¤æ˜¯å¦æ­£ç¡®ã€‚
+	Product Name è¾“å…¥äº§å“åç§°ï¼Œä¸è¶…è¿‡49ä¸ªå­—ç¬¦ï¼Œä»¥åVLRSign.exeæ ¹æ®è¾“å…¥çš„äº§å“åç§°æ£€ç´¢ç›¸åº”çš„ç­¾åç§˜é’¥ã€‚
 
 
 
 2 VLRSign.exe
 
-VLRSign.exe ±¾Ç©Ãû¹¤¾ßÖ±Õë¶Ô8910Æ½Ì¨,ĞèÒªÔÚÃüÁîĞĞ´°¿ÚÖĞÔËĞĞ¡£
+VLRSign.exe æœ¬ç­¾åå·¥å…·ç›´é’ˆå¯¹8910å¹³å°,éœ€è¦åœ¨å‘½ä»¤è¡Œçª—å£ä¸­è¿è¡Œã€‚
 
-Ñ¡ÏîËµÃ÷£º
-	-pw 	ÊÇÊ¹ÓÃRSAKeyGen.exe Éú³ÉÇ©ÃûÃØÔ¿Ê±ÊäÈëµÄÃÜÂë£¬¸ÃÃÜÂëÊÇ¶ÁÈ¡Ç©ÃûÃØÔ¿µÄ¿ÚÁî¡£
-	-pn 	ÊÇRSAKeyGen.exe Éú³ÉÇ©ÃûÃØÔ¿Ê±ÊäÈëµÄ²úÆ·Ãû³Æ£¬ÓÃÓÚ¼ìË÷Ç©ÃûÃØÔ¿¡£
-	-plen 	ÊÇÕë¶ÔÒªÇ©ÃûµÄ¶ÔÏóÌî³äµÄ³¤¶È¡£Õë¶Ô8910Æ½Ì¨ nor_fdl1.img nor_bootloader.img -plen ¹Ì¶¨Îª0xbce0¡£
-	-ha   	ÊÇÇ©ÃûÖĞÊ¹ÓÃºÎÖÖhashËã·¨¡£Õë¶Ô8910Æ½Ì¨ nor_fdl1.img nor_bootloader.img -ha ¹Ì¶¨Ê¹ÓÃBlake2¡£
-		nor_fdl.bin ÒÔ¼° ÏµÍ³ÎÄ¼ş£¨ÀıÈç£ºUIX8910_UIS8910C_128X128_320X240_refphone_stone_MX.bin£©Ê¹ÓÃ SHA1-32
-	-img  	Ö¸¶¨Ç©ÃûµÄÎÄ¼şÂ·¾¶ºÍÎÄ¼şÃû¡£
-	-out  	ÖÆ¶¨Ç©ÃûÍê³ÉºóµÄÊä³öÎÄ¼şÂ·¾¶ºÍÎÄ¼şÃû¡£
-	-pw2	´Ë°æÖĞ¸ú ¡°-pw¡± Ò»ÖÂ ½öÔÚ¶Ô nor_fdl.binÇ©ÃûÊ±ĞèÒª¡£
-	-pn2	´Ë°æÖĞ¸ú ¡°-pn¡±Ò»ÖÂ½öÔÚ¶Ô nor_fdl.binÇ©ÃûÊ±ĞèÒª¡£
-	-ipbk   ´Ë²ÎÊı½öÔÚ¶Ô nor_fdl.binÇ©ÃûÊ±ĞèÒªĞëÖ¸¶¨Îªtrue¡£
+é€‰é¡¹è¯´æ˜ï¼š
+	-pw 	æ˜¯ä½¿ç”¨RSAKeyGen.exe ç”Ÿæˆç­¾åç§˜é’¥æ—¶è¾“å…¥çš„å¯†ç ï¼Œè¯¥å¯†ç æ˜¯è¯»å–ç­¾åç§˜é’¥çš„å£ä»¤ã€‚
+	-pn 	æ˜¯RSAKeyGen.exe ç”Ÿæˆç­¾åç§˜é’¥æ—¶è¾“å…¥çš„äº§å“åç§°ï¼Œç”¨äºæ£€ç´¢ç­¾åç§˜é’¥ã€‚
+	-plen 	æ˜¯é’ˆå¯¹è¦ç­¾åçš„å¯¹è±¡å¡«å……çš„é•¿åº¦ã€‚é’ˆå¯¹8910å¹³å° nor_fdl1.img nor_bootloader.img -plen å›ºå®šä¸º0xbce0ã€‚
+	-ha   	æ˜¯ç­¾åä¸­ä½¿ç”¨ä½•ç§hashç®—æ³•ã€‚é’ˆå¯¹8910å¹³å° nor_fdl1.img nor_bootloader.img -ha å›ºå®šä½¿ç”¨Blake2ã€‚
+		nor_fdl.bin ä»¥åŠ ç³»ç»Ÿæ–‡ä»¶ï¼ˆä¾‹å¦‚ï¼šUIX8910_UIS8910C_128X128_320X240_refphone_stone_MX.binï¼‰ä½¿ç”¨ SHA1-32
+	-img  	æŒ‡å®šç­¾åçš„æ–‡ä»¶è·¯å¾„å’Œæ–‡ä»¶åã€‚
+	-out  	åˆ¶å®šç­¾åå®Œæˆåçš„è¾“å‡ºæ–‡ä»¶è·¯å¾„å’Œæ–‡ä»¶åã€‚
+	-pw2	æ­¤ç‰ˆä¸­è·Ÿ â€œ-pwâ€ ä¸€è‡´ ä»…åœ¨å¯¹ nor_fdl.binç­¾åæ—¶éœ€è¦ã€‚
+	-pn2	æ­¤ç‰ˆä¸­è·Ÿ â€œ-pnâ€ä¸€è‡´ä»…åœ¨å¯¹ nor_fdl.binç­¾åæ—¶éœ€è¦ã€‚
+	-ipbk   æ­¤å‚æ•°ä»…åœ¨å¯¹ nor_fdl.binç­¾åæ—¶éœ€è¦é¡»æŒ‡å®šä¸ºtrueã€‚
 	
-Àı×Ó£º
+ä¾‹å­ï¼š
 
 .\VLRSign.exe  -pw 12345678 -pn test -plen 0xbce0 -ha Blake2 -img ..\test\data\nor_bootloader.img -out ..\test\data\nor_bootloader_signed.img
 .\VLRSign.exe  -pw 12345678 -pn test -plen 0xbce0 -ha Blake2 -img ..\test\data\nor_fdl1.img -out ..\test\data\nor_fdl1_signed.img
 .\VLRSign.exe -pw 12345678 -pn test  -ha SHA1-32 -ipbk true -pw2 12345678 -pn2 test -img  ..\test\data\nor_fdl.bin -out ..\test\data\nor_fdl_signed.bin
 .\VLRSign.exe  -pw 12345678 -pn test  -ha SHA1-32 -slen 0x100000 -img ..\test\data\UIX8910_UIS8910C_128X128_320X240_refphone_stone_MX.bin -out ..\test\data\UIX8910_UIS8910C_128X128_320X240_refphone_stone_MX_signed.bin
 
-3 8910DM Æ½Ì¨
+3 8910DM å¹³å°
 
 .\VLRSign.exe  -pw 12345678 -pn test  -ha Blake2 -img ..\test\data\bbapp\fdl1.img -out ..\test\data\bbapp\fdl1_signed.img
 .\VLRSign.exe  -pw 12345678 -pn test  -ha Blake2 -img ..\test\data\bbapp\fdl2.img -out ..\test\data\bbapp\fdl2_signed.img

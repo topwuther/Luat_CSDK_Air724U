@@ -79,7 +79,7 @@ int platform_uart_recv( unsigned id, unsigned timer_id, s32 timeout )
   }
 }
 
-/*+\NEW\lifei\2012.01.23\解决编译warning*/
+/*+\NEW\lifei\2012.01.23\瑙ｅ喅缂栬瘧warning*/
 #if 0
 static void cmn_rx_handler( int usart_id, u8 data )
 {
@@ -121,7 +121,7 @@ static void cmn_rx_handler( int usart_id, u8 data )
   buf_write( BUF_ID_UART, usart_id, ( t_buf_data* )&data );
 }
 #endif
-/*-\NEW\lifei\2012.01.23\解决编译warning*/
+/*-\NEW\lifei\2012.01.23\瑙ｅ喅缂栬瘧warning*/
 
 // Send: version with and without mux
 u32 platform_uart_send( unsigned id, u8 data ) 
@@ -148,12 +148,12 @@ u32 platform_uart_send( unsigned id, u8 data )
   return platform_s_uart_send( id, data );
 }
 
-/*+\NEW\liweiqiang\2013.4.7\修改uart数据发送为buffer方式 */
+/*+\NEW\liweiqiang\2013.4.7\淇敼uart鏁版嵁鍙戦�佷负buffer鏂瑰紡 */
 u32 platform_uart_send_buff( unsigned id, const u8 *buff, u16 len )
 {
     return platform_s_uart_send_buff(id, buff, len);
 }
-/*-\NEW\liweiqiang\2013.4.7\修改uart数据发送为buffer方式 */
+/*-\NEW\liweiqiang\2013.4.7\淇敼uart鏁版嵁鍙戦�佷负buffer鏂瑰紡 */
 
 #ifdef BUF_ENABLE_UART
 static elua_int_c_handler prev_uart_rx_handler;

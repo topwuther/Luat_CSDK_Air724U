@@ -3,13 +3,13 @@
  *
  * Name: list.c
  *
- * Author: Àîì¿ïê
+ * Author: æŽç‚œé•ª
  * Verison: V0.1
  * Date: 2009.11.30
  *
  * File Description:
  *
- *      ÊµÏÖÍ¨ÓÃÁ´±í
+ *      å®žçŽ°é€šç”¨é“¾è¡¨
  **************************************************************************/
 #include "list.h"
 #define NULL 0
@@ -23,7 +23,7 @@ void list_add_before(list_head *node, list_head *pos)
 
 void list_add_after(list_head *node, list_head *pos)
 {
-  	if(pos->next==NULL && pos->prev == NULL) //¿ÕÁ´±í
+  	if(pos->next==NULL && pos->prev == NULL) //ç©ºé“¾è¡¨
 	{
 		pos->next = node;
 		node->prev= pos;

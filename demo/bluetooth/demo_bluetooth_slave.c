@@ -57,14 +57,14 @@ typedef struct ble_report_info
 
 typedef struct ble_add_characteristic
 {
-    T_OPENAT_BLE_CHARACTERISTIC_PARAM uuid_c; //ÌØÕ÷uuid  
-    T_OPENAT_BLE_DESCRIPTOR_PARAM *uuid_d; //ÌØÕ÷ÃèÊö
-    UINT8 count;//ÃèÊöÊıÁ¿
+    T_OPENAT_BLE_CHARACTERISTIC_PARAM uuid_c; //ç‰¹å¾uuid  
+    T_OPENAT_BLE_DESCRIPTOR_PARAM *uuid_d; //ç‰¹å¾æè¿°
+    UINT8 count;//æè¿°æ•°é‡
 } ble_add_characteristic_t;
 
 
 
-UINT16 connect_handle = 0xff;//Á¬½Ó¾ä±ú
+UINT16 connect_handle = 0xff;//è¿æ¥å¥æŸ„
 
 static void AppConvertBinToHex(
     UINT8 *bin_ptr, // in: the binary format string
@@ -148,10 +148,10 @@ void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 BOOL ble_poweron(VOID)
 {
     iot_debug_print("[bluetooth]bt poweron");
-    iot_bt_open(BLE_SLAVE);//´ò¿ªÀ¶ÑÀ
+    iot_bt_open(BLE_SLAVE);//æ‰“å¼€è“ç‰™
     return TRUE;
 }
-/*ÏÈÌí¼Ó·şÎñ£¬ÔÚÒÀ´ÎÌí¼ÓÌØÕ÷£¬ÈôÌØÕ÷ÏÂ°üº¬ÌØĞÔÃèÊö£¬ÔòÌí¼ÓÌØÕ÷ºó½Ó×ÅÌí¼ÓÃèÊö*/
+/*å…ˆæ·»åŠ æœåŠ¡ï¼Œåœ¨ä¾æ¬¡æ·»åŠ ç‰¹å¾ï¼Œè‹¥ç‰¹å¾ä¸‹åŒ…å«ç‰¹æ€§æè¿°ï¼Œåˆ™æ·»åŠ ç‰¹å¾åæ¥ç€æ·»åŠ æè¿°*/
 BOOL AddService()
 {
     int i,j;
@@ -163,30 +163,30 @@ BOOL AddService()
     T_OPENAT_BLE_CHARACTERISTIC_PARAM uuid_c2 = {0};
     T_OPENAT_BLE_DESCRIPTOR_PARAM uuid_d1 = {0};
     T_OPENAT_BLE_DESCRIPTOR_PARAM uuid_d2 = {0};
-    uuid.uuid_short = BT_8910_TP_UUID;//·şÎñuuid
+    uuid.uuid_short = BT_8910_TP_UUID;//æœåŠ¡uuid
     uuid.uuid_type = UUID_SHORT;
-    uuid_c1.uuid.uuid_short = BT_8910_TP_UUID_CHAR;//ÌØÕ÷uuid
+    uuid_c1.uuid.uuid_short = BT_8910_TP_UUID_CHAR;//ç‰¹å¾uuid
     uuid_c1.uuid.uuid_type = UUID_SHORT;
-    uuid_c1.attvalue = ATT_CHARA_PROP_READ | ATT_CHARA_PROP_WRITE;//ÌØÕ÷ÊôĞÔ
-    uuid_c1.permisssion = ATT_PM_READABLE|ATT_PM_WRITEABLE;//ÌØÕ÷È¨ÏŞ
-    uuid_c2.uuid.uuid_short = BT_8910_FEEDBACK_CHAR;//ÌØÕ÷uuid
+    uuid_c1.attvalue = ATT_CHARA_PROP_READ | ATT_CHARA_PROP_WRITE;//ç‰¹å¾å±æ€§
+    uuid_c1.permisssion = ATT_PM_READABLE|ATT_PM_WRITEABLE;//ç‰¹å¾æƒé™
+    uuid_c2.uuid.uuid_short = BT_8910_FEEDBACK_CHAR;//ç‰¹å¾uuid
     uuid_c2.uuid.uuid_type = UUID_SHORT;
-    uuid_c2.attvalue = ATT_CHARA_PROP_READ | ATT_CHARA_PROP_NOTIFY | ATT_CHARA_PROP_INDICATE;//ÌØÕ÷ÊôĞÔ
-    uuid_c2.permisssion = ATT_PM_READABLE;//ÌØÕ÷È¨ÏŞ
+    uuid_c2.attvalue = ATT_CHARA_PROP_READ | ATT_CHARA_PROP_NOTIFY | ATT_CHARA_PROP_INDICATE;//ç‰¹å¾å±æ€§
+    uuid_c2.permisssion = ATT_PM_READABLE;//ç‰¹å¾æƒé™
     
-    T_OPENAT_BLE_DESCRIPTOR_PARAM bt_descriptor[2] = {0};//ÌØÕ÷ÃèÊö
-    bt_descriptor[0].uuid.uuid_short = ATT_UUID_CHAR_USER;//ÃèÊöuuid
+    T_OPENAT_BLE_DESCRIPTOR_PARAM bt_descriptor[2] = {0};//ç‰¹å¾æè¿°
+    bt_descriptor[0].uuid.uuid_short = ATT_UUID_CHAR_USER;//æè¿°uuid
     bt_descriptor[0].uuid.uuid_type = UUID_SHORT;
-    memcpy(bt_descriptor[0].value,"123456789",strlen("123456789"));//ÃèÊöÊôĞÔ
-    bt_descriptor[1].uuid.uuid_short = ATT_UUID_CLIENT;//ÃèÊöuuid
+    memcpy(bt_descriptor[0].value,"123456789",strlen("123456789"));//æè¿°å±æ€§
+    bt_descriptor[1].uuid.uuid_short = ATT_UUID_CLIENT;//æè¿°uuid
     bt_descriptor[1].uuid.uuid_type = UUID_SHORT;
-    bt_descriptor[1].configurationBits = 1;//ÃèÊöÊôĞÔ
+    bt_descriptor[1].configurationBits = 1;//æè¿°å±æ€§
     ble_add_characteristic_t service_param[2] = {{uuid_c1,NULL,0},
                                         {uuid_c2,bt_descriptor,2}}; 
 
     param1.uuid = iot_os_malloc(sizeof(T_OPENAT_BLE_UUID));
     memcpy(param1.uuid,&uuid,sizeof(T_OPENAT_BLE_UUID));
-    iot_ble_iotctl(0,BLE_ADD_SERVICE,param1);//Ìí¼Ó·şÎñ
+    iot_ble_iotctl(0,BLE_ADD_SERVICE,param1);//æ·»åŠ æœåŠ¡
     if(param1.uuid != NULL)
         iot_os_free(param1.uuid);
     param1.data = NULL;
@@ -194,7 +194,7 @@ BOOL AddService()
     {
         param2.characteristicparam = iot_os_malloc(sizeof(T_OPENAT_BLE_CHARACTERISTIC_PARAM));
         memcpy(param2.characteristicparam,&service_param[i].uuid_c,sizeof(T_OPENAT_BLE_CHARACTERISTIC_PARAM));
-        iot_ble_iotctl(0,BLE_ADD_CHARACTERISTIC,param2);//Ìí¼ÓÌØÕ÷
+        iot_ble_iotctl(0,BLE_ADD_CHARACTERISTIC,param2);//æ·»åŠ ç‰¹å¾
         if(param2.characteristicparam != NULL)
             iot_os_free(param2.characteristicparam);
         param2.characteristicparam = NULL;
@@ -204,7 +204,7 @@ BOOL AddService()
             {
                 param3.descriptorparam = iot_os_malloc(sizeof(T_OPENAT_BLE_DESCRIPTOR_PARAM));
                 memcpy(param3.descriptorparam,&bt_descriptor[j],sizeof(T_OPENAT_BLE_DESCRIPTOR_PARAM));
-                iot_ble_iotctl(0,BLE_ADD_DESCRIPTOR,param3);//Ìí¼ÓÃèÊö
+                iot_ble_iotctl(0,BLE_ADD_DESCRIPTOR,param3);//æ·»åŠ æè¿°
                 if(param3.descriptorparam != NULL)
                     iot_os_free(param3.descriptorparam);
                 param3.descriptorparam = NULL;
@@ -224,47 +224,47 @@ BOOL advertising(VOID)
     U_OPENAT_BT_IOTCTL_PARAM  param5;
     //T_OPENAT_BLE_ADV_DATA advdata;
     //T_OPENAT_BLE_ADV_DATA scanrspdata;
-    //UINT8 data1[BLE_MAX_ADV_MUBER] = {0x02,0x01,0x06,0x04,0xff,0x01,0x02,0x03};//¹ã²¥°üÊı¾İ
-    //UINT8 data2[BLE_MAX_ADV_MUBER] = {0x02,0x0a,0x04};//ÏìÓ¦°üÊı¾İ
+    //UINT8 data1[BLE_MAX_ADV_MUBER] = {0x02,0x01,0x06,0x04,0xff,0x01,0x02,0x03};//å¹¿æ’­åŒ…æ•°æ®
+    //UINT8 data2[BLE_MAX_ADV_MUBER] = {0x02,0x0a,0x04};//å“åº”åŒ…æ•°æ®
     //memcpy(advdata.data,data1,BLE_MAX_ADV_MUBER);
     //advdata.len = strlen(data1);
     //memcpy(scanrspdata.data,data2,BLE_MAX_ADV_MUBER);
     //scanrspdata.len = strlen(data2);
-    //T_OPENAT_BLE_ADV_PARAM advparam = {0x80,0xa0,0,0,0,"11:22:33:44:55:66",0x07,0};//¹ã²¥²ÎÊı
+    //T_OPENAT_BLE_ADV_PARAM advparam = {0x80,0xa0,0,0,0,"11:22:33:44:55:66",0x07,0};//å¹¿æ’­å‚æ•°
     iot_debug_print("[bluetooth]bt advertising");
     param1.data = iot_os_malloc(strlen("Luat_Air724UG"));
     memcpy(param1.data,"Luat_Air724UG",strlen("Luat_Air724UG"));
-    iot_ble_iotctl(0,BLE_SET_NAME,param1);//ÉèÖÃ¹ã²¥Ãû³Æ
+    iot_ble_iotctl(0,BLE_SET_NAME,param1);//è®¾ç½®å¹¿æ’­åç§°
     if(param1.data != NULL)
         iot_os_free(param1.data);
     param1.data = NULL;
 /*
     param2.advdata = iot_os_malloc(sizeof(T_OPENAT_BLE_ADV_DATA));
     memcpy(param2.advdata,&advdata,sizeof(T_OPENAT_BLE_ADV_DATA));
-    iot_ble_iotctl(0,BLE_SET_ADV_DATA,param2);//ÉèÖÃ¹ã²¥°üÊı¾İ
+    iot_ble_iotctl(0,BLE_SET_ADV_DATA,param2);//è®¾ç½®å¹¿æ’­åŒ…æ•°æ®
     if(param2.advdata != NULL)
         iot_os_free(param2.advdata);
     param2.advdata = NULL;
 
     param3.advdata = iot_os_malloc(sizeof(T_OPENAT_BLE_ADV_DATA));
     memcpy(param3.advdata,&scanrspdata,sizeof(T_OPENAT_BLE_ADV_DATA));
-    iot_ble_iotctl(0,BLE_SET_SCANRSP_DATA,param3);//ÉèÖÃÏìÓ¦°üÊı¾İ
+    iot_ble_iotctl(0,BLE_SET_SCANRSP_DATA,param3);//è®¾ç½®å“åº”åŒ…æ•°æ®
     if(param3.advdata != NULL)
         iot_os_free(param3.advdata);
     param3.advdata = NULL;
 
-    //AddService();//Ìí¼Ó×Ô¶¨ÒåÀ¶ÑÀ·şÎñ
+    //AddService();//æ·»åŠ è‡ªå®šä¹‰è“ç‰™æœåŠ¡
 
     param4.advparam = iot_os_malloc(sizeof(T_OPENAT_BLE_ADV_PARAM));
     memcpy(param4.advparam,&advparam,sizeof(T_OPENAT_BLE_ADV_PARAM));
-    iot_ble_iotctl(0,BLE_SET_ADV_PARAM,param4);//ÉèÖÃ¹ã²¥²ÎÊı
+    iot_ble_iotctl(0,BLE_SET_ADV_PARAM,param4);//è®¾ç½®å¹¿æ’­å‚æ•°
     if(param4.advparam != NULL)
         iot_os_free(param4.advparam);
     param4.advparam = NULL;
 */
     iot_os_sleep(1000);
     param5.advEnable = 1;
-    iot_ble_iotctl(0,BLE_SET_ADV_ENABLE,param5);//´ò¿ª¹ã²¥  
+    iot_ble_iotctl(0,BLE_SET_ADV_ENABLE,param5);//æ‰“å¼€å¹¿æ’­  
     return TRUE;
 }
 
@@ -275,11 +275,11 @@ BOOL ble_data_trans(VOID)
     uuid.uuid_short = BT_8910_FEEDBACK_CHAR;
     uuid.uuid_type = UUID_SHORT;
     char *bleRcvBuffer = NULL;
-    /*Á´½Ó³É¹¦*/
+    /*é“¾æ¥æˆåŠŸ*/
     while(1)
     {
         
-        iot_os_wait_message(ble_test_handle,&msg);//µÈ´ı½ÓÊÕµ½Êı¾İ
+        iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…æ¥æ”¶åˆ°æ•°æ®
         if(msg->eventid == OPENAT_BLE_RECV_DATA)
         {
             bleRcvBuffer = iot_os_malloc(BLE_MAX_DATA_COUNT*2+1);                                                 
@@ -291,7 +291,7 @@ BOOL ble_data_trans(VOID)
             iot_debug_print("[bluetooth]bt recv data %s",bleRcvBuffer);
 
             iot_ble_write(connect_handle,uuid,msg->bleRcvBuffer,msg->len);  
-            //test µ±½ÓÊÕµ½"close"Ê±Ö÷¶¯¶Ï¿ªÀ¶ÑÀÁ¬½Ó
+            //test å½“æ¥æ”¶åˆ°"close"æ—¶ä¸»åŠ¨æ–­å¼€è“ç‰™è¿æ¥
             if(memcmp(msg->bleRcvBuffer,"close",sizeof("close")) == 0)
             {
                 iot_ble_disconnect(connect_handle);
@@ -310,21 +310,21 @@ BOOL ble_data_trans(VOID)
 VOID ble_test(VOID)
 {
     ble_report_info_t *msg = NULL;
-    //1.  ´ò¿ªÀ¶ÑÀ
+    //1.  æ‰“å¼€è“ç‰™
     ble_poweron();
-    iot_os_wait_message(ble_test_handle,&msg);//µÈ´ıÀ¶ÑÀ´ò¿ª
+    iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…è“ç‰™æ‰“å¼€
     if(msg->eventid == OPENAT_BT_ME_ON_CNF)
     {
         if(msg != NULL)
             iot_os_free(msg);
         msg = NULL;
-        //2.¹ã²¥À¶ÑÀ
+        //2.å¹¿æ’­è“ç‰™
         advertising();
-        iot_os_wait_message(ble_test_handle,&msg);//µÈ´ıÁ¬½Ó³É¹¦
+        iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…è¿æ¥æˆåŠŸ
         if(msg->eventid == OPENAT_BLE_CONNECT_IND)
         {     
-            //3. Êı¾İ´«Êä
-            connect_handle = msg->handle;//Á¬½Ó¾ä±ú
+            //3. æ•°æ®ä¼ è¾“
+            connect_handle = msg->handle;//è¿æ¥å¥æŸ„
             if(msg != NULL)
                 iot_os_free(msg);
             msg = NULL;

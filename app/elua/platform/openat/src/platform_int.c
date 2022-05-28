@@ -13,9 +13,9 @@
 #define VTMR_TIMER_ID         ( -1 )
 #endif
 
-/*+\NEW\lifei\2012.01.23\½â¾ö±àÒëwarning*/
+/*+\NEW\lifei\2012.01.23\è§£å†³ç¼–è¯‘warning*/
 #if 0
-//Ö§³ÖÖĞ¶ÏµÄGPIO id
+//æ”¯æŒä¸­æ–­çš„GPIO id
 static const HAL_GPIO_GPO_ID_T validGpioIntId[] = 
 {
     HAL_GPIO_NONE, HAL_GPIO_1, HAL_GPIO_2, HAL_GPIO_3, 
@@ -87,7 +87,7 @@ static void dm_Gpio7DetectHandler(void)
     dm_GpioIntHandler(HAL_GPIO_7);
 }
 #endif
-/*-\NEW\lifei\2012.01.23\½â¾ö±àÒëwarning*/
+/*-\NEW\lifei\2012.01.23\è§£å†³ç¼–è¯‘warning*/
 
 
 // ****************************************************************************
@@ -167,8 +167,8 @@ static int int_gpio_negedge_get_flag( elua_int_resnum resnum, int clear )
 
 void platform_int_init(void)
 {
-    /*+\NEW\lifei\2012.01.23\½â¾ö±àÒëwarning*/
-/* ÆÁ±Î¹Ì¶¨µÄIOÖĞ¶Ï³õÊ¼»¯´úÂë,ºóĞøĞŞ¸ÄÎª¸ù¾İÓÃ»§pio setupÊµ¼ÊĞèÒªÔÙ½øĞĞ³õÊ¼»¯ */
+    /*+\NEW\lifei\2012.01.23\è§£å†³ç¼–è¯‘warning*/
+/* å±è”½å›ºå®šçš„IOä¸­æ–­åˆå§‹åŒ–ä»£ç ,åç»­ä¿®æ”¹ä¸ºæ ¹æ®ç”¨æˆ·pio setupå®é™…éœ€è¦å†è¿›è¡Œåˆå§‹åŒ– */
 #if 0
     HAL_GPIO_CFG_T gpioCfg;
 
@@ -189,7 +189,7 @@ void platform_int_init(void)
     gpioCfg.irqHandler = dm_Gpio7DetectHandler;
     hal_GpioOpen(HAL_GPIO_7, &gpioCfg);
 #endif   
-    /*-\NEW\lifei\2012.01.23\½â¾ö±àÒëwarning*/ 
+    /*-\NEW\lifei\2012.01.23\è§£å†³ç¼–è¯‘warning*/ 
 }
 
 // ****************************************************************************

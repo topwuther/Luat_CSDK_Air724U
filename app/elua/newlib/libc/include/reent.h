@@ -22,8 +22,8 @@ _ssize_t _write_r( int file, const void *ptr, size_t len );
 _ssize_t _read_r( int file, void *ptr, size_t len );
 off_t _lseek_r( int file, off_t off, int whence );
 
-/*+\NEW\liweiqiang\2013.5.11\增加remove接口*/
+/*+\NEW\liweiqiang\2013.5.11\澧炲姞remove鎺ュ彛*/
 int _unlink_r(const char *path);
-/*-\NEW\liweiqiang\2013.5.11\增加remove接口*/
+/*-\NEW\liweiqiang\2013.5.11\澧炲姞remove鎺ュ彛*/
 
 #endif //__REENT_H__

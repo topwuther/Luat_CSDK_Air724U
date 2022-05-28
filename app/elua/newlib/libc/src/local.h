@@ -24,7 +24,7 @@ int	lualibc_sflags(const char *, int *);
 	((((fp)->_flags & __SWR) == 0 || (fp)->_bf._base == NULL) && \
 	 __swsetup(fp))
 #else
-// ¼òÒ×µÄstdioÊµÏÖÅÐ¶ÏflagsÖ§³ÖÐ´¼´¿É
+// ç®€æ˜“çš„stdioå®žçŽ°åˆ¤æ–­flagsæ”¯æŒå†™å³å¯
 #define	cantwrite(fp) \
 	(((fp)->_flags & (__SWR|__SRW)) == 0)
 #endif

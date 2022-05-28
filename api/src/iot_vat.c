@@ -336,7 +336,7 @@ static int iot_vat_atoi(char* str_p)
 	}
 	return num;
 }
-/*»ñÈ¡Ğ¡ÇøºÍÁÚĞ¡ÇøĞÅÏ¢*/
+/*è·å–å°åŒºå’Œé‚»å°åŒºä¿¡æ¯*/
 static VOID GetCellInfo(UINT8 *pData)
 {
 	int cut = 0;
@@ -502,7 +502,7 @@ static VOID iot_vat_ATCmdIndHandle(UINT8 *pData, UINT16 length)
 	                iot_vat_queue_head_out();
 	                AtCmdDelayExe(0);
 	                break;
-				case AT_RSP_PAUSE:				/*Ìí¼ÓÔİÍ£Ö´ĞĞAT¶ÓÁĞÃüÁî*/
+				case AT_RSP_PAUSE:				/*æ·»åŠ æš‚åœæ‰§è¡ŒATé˜Ÿåˆ—å‘½ä»¤*/
 					iot_vat_queue_head_out();
 					break;
 	            case AT_RSP_FUN_OVER:	
@@ -580,10 +580,10 @@ static VOID iot_vat_Modeuleinit(VOID)
 	//OPENAT_init_at(iot_vat_ATCmdIndHandle);	
 }
 
-/**ÓÃÀ´ÅúÁ¿·¢ËÍATÃüÁî
-*@param		cmd:  ATÃüÁî²ÎÊı
-*@param   	cmd_count:  ATÃüÁî¸öÊı
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
+/**ç”¨æ¥æ‰¹é‡å‘é€ATå‘½ä»¤
+*@param		cmd:  ATå‘½ä»¤å‚æ•°
+*@param   	cmd_count:  ATå‘½ä»¤ä¸ªæ•°
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
 **/
 BOOL iot_vat_push_cmd(AtCmdEntity cmd[],u8 cmd_count)
 {
@@ -594,9 +594,9 @@ BOOL iot_vat_push_cmd(AtCmdEntity cmd[],u8 cmd_count)
     return result;
 }
 
-/**ÓÃÀ´ÉèÖÃĞéÄâATÍ¨µÀµÄ»Øµ÷º¯Êı
-*@param		vatHandle:  ĞéÄâATÖ÷¶¯ÉÏ±¨»òÕßATÃüÁî½á¹û·µ»ØµÄ»Øµ÷º¯Êı
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
+/**ç”¨æ¥è®¾ç½®è™šæ‹ŸATé€šé“çš„å›è°ƒå‡½æ•°
+*@param		vatHandle:  è™šæ‹ŸATä¸»åŠ¨ä¸ŠæŠ¥æˆ–è€…ATå‘½ä»¤ç»“æœè¿”å›çš„å›è°ƒå‡½æ•°
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
 **/
 BOOL iot_vat_init(PAT_MESSAGE vatHandle)
 {
@@ -608,11 +608,11 @@ BOOL iot_vat_init(PAT_MESSAGE vatHandle)
     return TRUE;
 }
 
-/**ÓÃÀ´·¢ËÍATÃüÁî
-*@param		cmdStr:  ATÃüÁî×Ö·û´®
-*@param   	cmdLen:  ATÃüÁî³¤¶È
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
-*@note      ×¢Òâ£¬ATÃüÁî×Ö·û´®cmdStrÖĞĞèÒª°üº¬"\r\n"»òÕß"\r"½áÎ²
+/**ç”¨æ¥å‘é€ATå‘½ä»¤
+*@param		cmdStr:  ATå‘½ä»¤å­—ç¬¦ä¸²
+*@param   	cmdLen:  ATå‘½ä»¤é•¿åº¦
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
+*@note      æ³¨æ„ï¼ŒATå‘½ä»¤å­—ç¬¦ä¸²cmdSträ¸­éœ€è¦åŒ…å«"\r\n"æˆ–è€…"\r"ç»“å°¾
 **/
 BOOL iot_vat_send_cmd(UINT8* cmdStr, UINT16 cmdLen)
 {

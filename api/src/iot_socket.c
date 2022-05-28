@@ -29,49 +29,49 @@ void lwip_freeaddrinfo(struct addrinfo *ai);
 
 
 
-/**����socket
-*@param		domain:		��֧��AF_INET (IPV4 ����Э��)
-@param		type:		֧��SOCK_STREAM/SOCK_DGRAM���ֱ��ʾTCP��UDP����
-@param		protocol:   ��֧��0
+/**创建socket
+*@param		domain:		仅支持AF_INET (IPV4 网络协议)
+@param		type:		支持SOCK_STREAM/SOCK_DGRAM，分别表示TCP、UDP连接
+@param		protocol:   仅支持0
 
 
-*@return	>=0: 	    socket�����������ں�������
-*           <0:         ����socketʧ��
-*@note      ������socket���ú���Ҫ��close����ر�
+*@return	>=0: 	    socket描述符，用于后续操作
+*           <0:         创建socket失败
+*@note      创建的socket不用后需要用close将其关闭
 **/
 
 int socket(int domain, int type, int protocol)
 {
     return lwip_socket(domain, type, protocol);
 }
-/**��ȡ������Ӧ��IP��ַ
-*@param		name:		����������:www.airm2m.com/www.baidu.com
-*@return	struct hostent �ṹ��: �ýṹ�������һ��DNS�����������ip��ַ
-*           NULL:  ��������ʧ��
+/**获取域名对应的IP地址
+*@param		name:		域名，例如:www.airm2m.com/www.baidu.com
+*@return	struct hostent 结构体: 该结构体包含了一个DNS域名解析后的ip地址
+*           NULL:  域名解析失败
 **/                       
 struct hostent* gethostbyname(const char *name)
 {
     return lwip_gethostbyname(name);
 }
-/**�ر�socket
-*@param		fd:	����socket�ӿڷ��ص�socket������
-*@return	0:  ��ʾ�ɹ�
-            -1  ��ʾ�д���
+/**关闭socket
+*@param		fd:	调用socket接口返回的socket描述符
+*@return	0:  表示成功
+            -1  表示有错误
 *           
 **/                          
 int close (int fd)
 {
     return lwip_close(fd);
 }
-/**����socket������
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      level: ֧��SOL_SOCKET/IPPROTO_TCP
-@param      optname:  SOL_SOCKET��ӦoptnameΪ SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
-                      IPPROTO_TCP��ӦoptnameΪ SO_TCP_SACKDISABLE/SO_TCP_NODELAY
+/**设置socket的属性
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      level: 支持SOL_SOCKET/IPPROTO_TCP
+@param      optname:  SOL_SOCKET对应optname为 SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
+                      IPPROTO_TCP对应optname为 SO_TCP_SACKDISABLE/SO_TCP_NODELAY
 @param      optval_p:
 @param      optlen:
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+*@return	0:  表示成功
+            <0  表示有错误
 *
 **/          
 
@@ -84,15 +84,15 @@ int setsockopt(int socketfd,
     return lwip_setsockopt(socketfd, level, optname, optval_p, optlen);
 }                 
 
-/**��ȡsocket������
-*@param   socketfd: ����socket�ӿڷ��ص�socket������
-@param      level: ֧��SOL_SOCKET/IPPROTO_TCP
-@param      optname:  SOL_SOCKET��ӦoptnameΪ SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
-                      IPPROTO_TCP��ӦoptnameΪ SO_TCP_SACKDISABLE/SO_TCP_NODELAY
+/**获取socket的属性
+*@param   socketfd: 调用socket接口返回的socket描述符
+@param      level: 支持SOL_SOCKET/IPPROTO_TCP
+@param      optname:  SOL_SOCKET对应optname为 SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
+                      IPPROTO_TCP对应optname为 SO_TCP_SACKDISABLE/SO_TCP_NODELAY
 @param      optval_p:
 @param      optlen_p:
-*@return  0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+*@return  0:  表示成功
+            <0  表示有错误
 *
 **/          
 
@@ -104,12 +104,12 @@ int getsockopt(int socketfd,
 {
     return lwip_getsockopt(socketfd, level, optname, optval_p, optlen_p);
 }       
-/**����socket�ı��ض˿ں�ip��ַ��һ����Է�����������Ҫ����
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      my_addr:   ip��ַ�Ͷ˿ڣ�ipһ������INADDR_ANY
-@param      addrlen:  ��ַ����
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+/**设置socket的本地端口和ip地址，一般针对服务器代码需要设置
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      my_addr:   ip地址和端口，ip一般设置INADDR_ANY
+@param      addrlen:  地址长度
+*@return	0:  表示成功
+            <0  表示有错误
 *           
 **/                         
 int bind(int socketfd, 
@@ -118,23 +118,23 @@ int bind(int socketfd,
 {
     return lwip_bind(socketfd, my_addr, addrlen);
 }                      
-/**�����ͷ������˵�����
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      addr:   ָ����������ַ�Ͷ˿�
+/**建立和服务器端的连接
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      addr:   指定服务器地址和端口
 @param      addrlen:  sizeof(struct openat_sockaddr)
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+*@return	0:  表示成功
+            <0  表示有错误
 *           
 **/                                      
 int connect(int socketfd, const struct openat_sockaddr *addr, openat_socklen_t addrlen)
 {
     return lwip_connect(socketfd, addr, addrlen);
 }
-/**����socket���ӣ�һ�����������������ͻ��˵�����
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
+/**监听socket连接，一般用作服务器监听客户端的连接
+*@param		socketfd:	调用socket接口返回的socket描述符
 @param      backlog:   0
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+*@return	0:  表示成功
+            <0  表示有错误
 *           
 **/                             
 int listen(int socketfd, 
@@ -143,13 +143,13 @@ int listen(int socketfd,
 {
     return lwip_listen(socketfd, backlog);
 }
-/**�ȴ����ӣ�һ������listen֮��ȴ��ͻ��˵�����
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      addr:   ���ؿͻ���ip��ַ�Ͷ˿�
-@param      addrlen: ���ص�ַ����
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
-*@note      ������һֱ������֪���пͻ�������           
+/**等待连接，一般用于listen之后等待客户端的连接
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      addr:   返回客户端ip地址和端口
+@param      addrlen: 返回地址长度
+*@return	0:  表示成功
+            <0  表示有错误
+*@note      函数会一直阻塞，知道有客户端连接           
 **/                             
 int accept(int socketfd, 
                         struct openat_sockaddr *addr, 
@@ -157,16 +157,16 @@ int accept(int socketfd,
 {
     return lwip_accept(socketfd, addr, addrlen);
 }
-/**��������
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      buf:   ���ڴ�����ݵĻ���
-@param      len:   buf�ĳ���
-@param      flags: ��֧��MSG_DONTWAIT/MSG_PEEK/MSG_OOB������ͨ������ָ�������־��һ��Ϊ0
+/**接收数据
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      buf:   用于存放数据的缓存
+@param      len:   buf的长度
+@param      flags: 仅支持MSG_DONTWAIT/MSG_PEEK/MSG_OOB，可以通过或来指定多个标志，一般为0
 
-*@return	>0:  ���յ������ݳ���
-            =0:  �Է��Ѿ��Ͽ�����
-            <0:  ��ȡ����
-*@note      ��flagsû������MSG_DONTWAIT���ú�����������ֱ�������ݻ��߶�ȡ��ʱ
+*@return	>0:  接收到的数据长度
+            =0:  对方已经断开连接
+            <0:  读取错误
+*@note      当flags没有设置MSG_DONTWAIT，该函数会阻塞，直到有数据或者读取超时
 **/                                        
 int recv(int socketfd, 
                       void *buf, 
@@ -175,17 +175,17 @@ int recv(int socketfd,
 {
     return lwip_recv(socketfd, buf, len, flags);
 }                      
-/**����ָ��ip��ַ�����������ݣ�һ������UDP��ȡ����
-*@param		sockfd:	����socket�ӿڷ��ص�socket������
-@param      buf:   ���ڴ�����ݵĻ���
-@param      len:   buf�ĳ���
-@param      flags: ��֧��0
-@param      src_addr: ip��ַ�Ͷ˿�
+/**接收指定ip地址发送来的数据，一般用于UDP收取数据
+*@param		sockfd:	调用socket接口返回的socket描述符
+@param      buf:   用于存放数据的缓存
+@param      len:   buf的长度
+@param      flags: 仅支持0
+@param      src_addr: ip地址和端口
 @param      addrlen: sizeof(struct openat_sockaddr)
 
-*@return	>0: ʵ���յ������ݳ���
-            =0:  �Է��Ѿ��Ͽ�����
-            <0:  ��ȡ����
+*@return	>0: 实际收到的数据长度
+            =0:  对方已经断开连接
+            <0:  读取错误
 **/   
 
 int recvfrom(int sockfd, void *buf, size_t len, int flags,
@@ -193,14 +193,14 @@ int recvfrom(int sockfd, void *buf, size_t len, int flags,
 {
     return lwip_recvfrom(sockfd, buf, len, flags, src_addr, addrlen);
 }
-/**��������
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      msg:   ��������
-@param      len:   ���ݳ���
-@param      flags: ��֧��MSG_DONTWAIT/MSG_OOB������ͨ������ָ�������־��һ��Ϊ0
+/**发送数据
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      msg:   数据内容
+@param      len:   数据长度
+@param      flags: 仅支持MSG_DONTWAIT/MSG_OOB，可以通过或来指定多个标志，一般为0
 
-*@return	>=0:  ʵ�ʷ��͵ĳ���
-            <0: ���ʹ���
+*@return	>=0:  实际发送的长度
+            <0: 发送错误
 **/   
 
 int send(int socketfd,
@@ -210,16 +210,16 @@ int send(int socketfd,
 {
     return lwip_send(socketfd, msg, len, flags);
 }                      
-/**�������ݵ�ָ��ip��ַ��һ������udp��������
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      buf:   ��������
-@param      len:   ���ݳ���
-@param      flags: ��֧��0
-@param      to_p: ָ��ip��ַ�Ͷ˿ں�
+/**发送数据到指定ip地址，一般用于udp发送数据
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      buf:   数据内容
+@param      len:   数据长度
+@param      flags: 仅支持0
+@param      to_p: 指定ip地址和端口号
 @param      tolen: sizeof(struct openat_sockaddr)
 
-*@return	>=0:  ʵ�ʷ��͵ĳ���
-            <0:  ���ʹ���
+*@return	>=0:  实际发送的长度
+            <0:  发送错误
 **/                        
 int sendto(int socketfd,
                         const void *buf,
@@ -230,15 +230,15 @@ int sendto(int socketfd,
 {
     return lwip_sendto(socketfd, buf, len, flags, to_p, tolen);
 }
-/**������ʽ�ȴ�socket���ӵ�״̬
-*@param		maxfdp1:	���socketfd+1
-@param      readset:   ��ȡ���ϣ�����ΪNULL
-@param      writeset:  д���ϣ�����ΪNULL
-@param      exceptset: �쳣���ϣ�����ΪNULL
-@param      timeout: ��ʱʱ��
+/**阻塞方式等待socket连接的状态
+*@param		maxfdp1:	最大socketfd+1
+@param      readset:   读取集合，可以为NULL
+@param      writeset:  写集合，可以为NULL
+@param      exceptset: 异常集合，可以为NULL
+@param      timeout: 超时时间
 
-*@return	0:   �ȴ���ʱ
-            >0:  readset+writeset+exceptset�ļ��ϸ���
+*@return	0:   等待超时
+            >0:  readset+writeset+exceptset的集合个数
             <0  -1
 **/                 
 int select(int maxfdp1, 
@@ -249,61 +249,61 @@ int select(int maxfdp1,
 {
     return lwip_select(maxfdp1, readset, writeset, exceptset, timeout);
 }
-/**��ȡsocket�Ĵ���ֵ
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-*@return	[EBADF �� ENO_RECOVERY]
+/**获取socket的错误值
+*@param		socketfd:	调用socket接口返回的socket描述符
+*@return	[EBADF 到 ENO_RECOVERY]
 **/                                       
 int socket_errno(int socketfd)
 {
     return (int)CFW_TcpipGetLastError();
 }
 
-/**�豸�����������豸���ƽӿ�
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      cmd:   	ָ���ĳһ�������Ӧ�������ĳһ������
-@param      argp:   �ɱ�������������йأ����ݽ���������Ĳ��������ǽ������ݵĻ���
-*@return	>=0:  ʵ�ʷ��͵ĳ���
-            <0:  ���ʹ���
+/**设备驱动程序中设备控制接口
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      cmd:   	指令，如某一个命令对应驱动层的某一个功能
+@param      argp:   可变参数，跟命令有关，传递进入驱动层的参数或者是接收数据的缓存
+*@return	>=0:  实际发送的长度
+            <0:  发送错误
 **/
 int	ioctl(int socketfd, long cmd, void *argp)
 {
 	return lwip_ioctl(socketfd, cmd, argp);
 }
 
-/**�����ļ��������������ļ������Խӿ�
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-*@param      cmd:   	ָ���ĳһ�������Ӧ�������ĳһ������
-*@param      val:   ������ʹ�õĲ���
-*@return	>=0:  ʵ�ʷ��͵ĳ���
-            <0:  ���ʹ���
+/**根据文件描述符来操作文件的特性接口
+*@param		socketfd:	调用socket接口返回的socket描述符
+*@param      cmd:   	指令，如某一个命令对应驱动层的某一个功能
+*@param      val:   供命令使用的参数
+*@return	>=0:  实际发送的长度
+            <0:  发送错误
 **/
 int	fcntl(int socketfd, int cmd, int val)
 {
 	return lwip_fcntl(socketfd, cmd, val);
 }
 
-/**��ȡһ��������������
-*@param		socketfd:	����socket�ӿڷ��ص�socket������
-@param      name:   	������������
-@param      namelen:   	�����������ֳ���
-*@return	0:  ��ʾ�ɹ�
-            <0  ��ʾ�д���
+/**获取一个描述符的名字
+*@param		socketfd:	调用socket接口返回的socket描述符
+@param      name:   	描述符的名字
+@param      namelen:   	描述符的名字长度
+*@return	0:  表示成功
+            <0  表示有错误
 **/
 int getsockname (int socketfd, struct openat_sockaddr *name, openat_socklen_t *namelen)
 {
 	return lwip_getsockname(socketfd,name,namelen);
 }
 
-/**����������ַ����
-*@param		nodename:	һ�����������ߵ�ַ��
-@param      servname:   ������������ʮ���ƵĶ˿ںţ�Ҳ�������Ѷ���ķ�������
-@param      hints:   	������һ����ָ�룬Ҳ������һ��ָ��ĳ��openat_addrinfo�ṹ���ָ��
-@param      res: 		ͨ��resָ���������һ��ָ��openat_addrinfo�ṹ��������ָ��
+/**主机名到地址解析
+*@param		nodename:	一个主机名或者地址串
+@param      servname:   服务名可以是十进制的端口号，也可以是已定义的服务名称
+@param      hints:   	可以是一个空指针，也可以是一个指向某个openat_addrinfo结构体的指针
+@param      res: 		通过res指针参数返回一个指向openat_addrinfo结构体链表的指针
 
-*@return	>=0:  ʵ�ʷ��͵ĳ���
-            <0:  ���ʹ���
-*@note      ����֧��IPv4���Ҳ�����������ָ�������ַ���͵��κ���Ϣ��
-			���صĽṹֻ���������ڴ洢IPv4��ַ�Ŀռ�
+*@return	>=0:  实际发送的长度
+            <0:  发送错误
+*@note      仅仅支持IPv4，且不允许调用者指定所需地址类型的任何信息，
+			返回的结构只包含了用于存储IPv4地址的空间
 **/
 int getaddrinfo(const char *nodename,
        const char *servname,
@@ -313,8 +313,8 @@ int getaddrinfo(const char *nodename,
 	return lwip_getaddrinfo(nodename, servname, hints, res);
 }
 
-/**�洢�ռ�ͨ������freeaddrinfo ������ϵͳ
-*@param		ai:	ָ����getaddrinfo���صĵ�һ��openat_addrinfo�ṹ
+/**存储空间通过调用freeaddrinfo 返还给系统
+*@param		ai:	指向由getaddrinfo返回的第一个openat_addrinfo结构
 *
 **/
 void freeaddrinfo(struct openat_addrinfo *ai)

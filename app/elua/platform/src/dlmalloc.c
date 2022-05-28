@@ -565,7 +565,7 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
 #endif /* _WIN32_WCE */
 #endif /*MMAP_CLEARS */
 #else
-#include "dlconfig.h" //²»Í¬Æ½Ì¨dlmallocÅäÖÃÎÄ¼ş
+#include "dlconfig.h" //ä¸åŒå¹³å°dlmallocé…ç½®æ–‡ä»¶
 #endif  /* WIN32 */
 
 #if defined(DARWIN) || defined(_DARWIN)
@@ -839,12 +839,12 @@ extern "C" {
 #define dlindependent_comalloc independent_comalloc
 #define dlbulk_free            bulk_free
 #endif /* USE_DL_PREFIX */
-/*+\bug\rww\2020.9.27\Ôö´ólua×ÜÄÚ´æ*/
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
-/*+\bug4026\zhuwangbin\2020.12.23\LUA_FULL_FUNCTION_SUPPORT ram¿Õ¼äÌ«ÉÙ£¬×Ô¶¯»¯²âÊÔÓĞÎÊÌâ*/
+/*+\bug\rww\2020.9.27\å¢å¤§luaæ€»å†…å­˜*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
+/*+\bug4026\zhuwangbin\2020.12.23\LUA_FULL_FUNCTION_SUPPORT ramç©ºé—´å¤ªå°‘ï¼Œè‡ªåŠ¨åŒ–æµ‹è¯•æœ‰é—®é¢˜*/
 char malloc_buf[768 * 1024];
-/*-\bug4026\zhuwangbin\2020.12.23\LUA_FULL_FUNCTION_SUPPORT ram¿Õ¼äÌ«ÉÙ£¬×Ô¶¯»¯²âÊÔÓĞÎÊÌâ*/
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\bug4026\zhuwangbin\2020.12.23\LUA_FULL_FUNCTION_SUPPORT ramç©ºé—´å¤ªå°‘ï¼Œè‡ªåŠ¨åŒ–æµ‹è¯•æœ‰é—®é¢˜*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 static int  malloc_index = 0;
 
 void* sbrk(size_t size)
@@ -863,7 +863,7 @@ void* sbrk(size_t size)
 
   return ptr;
 }
-/*-\bug\rww\2020.9.27\Ôö´ólua×ÜÄÚ´æ*/
+/*-\bug\rww\2020.9.27\å¢å¤§luaæ€»å†…å­˜*/
 /*
   L_MALLOC(size_t n)
   Returns a pointer to a newly allocated chunk of at least n bytes, or

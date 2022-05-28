@@ -36,11 +36,11 @@ extern unsigned long strtoul(const char *, char **, int);
 #define abs(x)              ((x<0)?(-(x)):(x))
 #endif
 
-/*+\NEW\liweiqiang\2013.10.25\支持环境变量访问 */
+/*+\NEW\liweiqiang\2013.10.25\鏀寔鐜鍙橀噺璁块棶 */
 #undef getenv
 #define getenv lualibc_getenv
 char *lualibc_getenv(const char *name);
-/*-\NEW\liweiqiang\2013.10.25\支持环境变量访问 */
+/*-\NEW\liweiqiang\2013.10.25\鏀寔鐜鍙橀噺璁块棶 */
 
 #undef system
 #define system lualibc_system

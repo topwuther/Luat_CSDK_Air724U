@@ -59,7 +59,7 @@
 #define ULONG_MAX                   0xffffffff
 #endif
 
-/*begin\add by wangzhiqiang\2001.6.27\移植工作*/
+/*begin\add by wangzhiqiang\2001.6.27\绉绘宸ヤ綔*/
 #ifndef USHRT_MAX
 #define USHRT_MAX                   0xFFFFU
 #endif
@@ -67,7 +67,7 @@
 #ifndef UCHAR_MAX
 #define UCHAR_MAX                   0xFFU
 #endif
-/*end\add by wangzhiqiang\2001.6.27\移植工作*/
+/*end\add by wangzhiqiang\2001.6.27\绉绘宸ヤ綔*/
 #ifdef u8
 #undef u8
 #endif
@@ -155,13 +155,13 @@ typedef unsigned short              WORD;
 typedef unsigned long               DWORD;  /* actually long, but this should be okay */
 #endif
 
-/*+\NEW\zhuwangbin\2020.4.26\添加openat cam接口*/
+/*+\NEW\zhuwangbin\2020.4.26\娣诲姞openat cam鎺ュ彛*/
 #ifndef _HWREG_ACCESS_H_
 typedef volatile unsigned char      REG8;
 typedef volatile unsigned short     REG16;
 typedef volatile unsigned int       REG32;
 #endif
-/*-\NEW\zhuwangbin\2020.4.26\添加openat cam接口*/
+/*-\NEW\zhuwangbin\2020.4.26\娣诲姞openat cam鎺ュ彛*/
 
 typedef int                         INT;
 typedef char                        S8;
@@ -183,7 +183,8 @@ typedef float                       float32;
 typedef unsigned long long          U64;
 typedef long long                   S64;
 #endif
-#endif
+#endif
+
 
 
 #ifndef __INT16_T__

@@ -264,12 +264,12 @@
 /* #undef CONFIG_AM_AT_PLATFORM */
 
 
-/*+new\rww\2020.4.30\lua tts float¿Õ¼ä²»×ã*/
+/*+new\rww\2020.4.30\lua tts floatç©ºé—´ä¸è¶³*/
 /* #undef CONFIG_BUILD_LUA_TTS */
 
 
 /* #undef CONFIG_BUILD_LUA_FLOAT */
-/*-new\rww\2020.4.30\lua tts float¿Õ¼ä²»×ã*/
+/*-new\rww\2020.4.30\lua tts floatç©ºé—´ä¸è¶³*/
 
 /*zhuwangbin 2020-5-20 add at+gpio*/
 /* #undef CONFIG_AT_GPIO_SUPPORT */
@@ -281,9 +281,9 @@
 /* #undef CONFIG_ATR_TB_API_SUPPORT */
 
 
-/*+\NEW\czm\2020.07.21\Ìí¼ÓÖĞ¹úµçĞÅ×Ô×¢²áÏîÄ¿*/
+/*+\NEW\czm\2020.07.21\æ·»åŠ ä¸­å›½ç”µä¿¡è‡ªæ³¨å†Œé¡¹ç›®*/
 /* #undef CONFIG_BUILD_AT_CTREG */
-/*-\NEW\czm\2020.07.21\Ìí¼ÓÖĞ¹úµçĞÅ×Ô×¢²áÏîÄ¿*/
+/*-\NEW\czm\2020.07.21\æ·»åŠ ä¸­å›½ç”µä¿¡è‡ªæ³¨å†Œé¡¹ç›®*/
 
 #undef CONFIG_AT_WITHOUT_SAT
 #undef CONFIG_AT_WITHOUT_SMS

@@ -1,8 +1,8 @@
 #include "iot_lcd.h"
 
 
-/**Ğ´Èë lcdÃüÁî
-*@param		cmd: ÃüÁî
+/**å†™å…¥ lcdå‘½ä»¤
+*@param		cmd: å‘½ä»¤
 **/
 VOID iot_lcd_write_cmd(                          
                         UINT8 cmd 
@@ -11,8 +11,8 @@ VOID iot_lcd_write_cmd(
     return  IVTBL(send_color_lcd_command)(cmd);
 }
 
-/**lcd Ğ´ÈëlcdÊı¾İ 
-*@param	 	data: Êı¾İ
+/**lcd å†™å…¥lcdæ•°æ® 
+*@param	 	data: æ•°æ®
 **/
 VOID iot_lcd_write_data(                               
                         UINT8 data                
@@ -21,24 +21,24 @@ VOID iot_lcd_write_data(
     return IVTBL(send_color_lcd_data)(data);
 }
 
-/**lcd³õÊ¼»¯
-*@param		param: lcd³õÊ¼»¯²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**lcdåˆå§‹åŒ–
+*@param		param: lcdåˆå§‹åŒ–å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/	
 BOOL iot_lcd_color_init(T_AMOPENAT_COLOR_LCD_PARAM *param )
 {
     return IVTBL(init_color_lcd)(  param );
 }
 
-/**  Ë¢ĞÂlcd
-*@param		rect: ĞèÒªË¢ĞÂµÄÇøÓò
-*@param		pDisplayBuffer: Ë¢ĞÂµÄ»º³åÇø
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**  åˆ·æ–°lcd
+*@param		rect: éœ€è¦åˆ·æ–°çš„åŒºåŸŸ
+*@param		pDisplayBuffer: åˆ·æ–°çš„ç¼“å†²åŒº
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 VOID iot_lcd_update_color_screen(
-				T_AMOPENAT_LCD_RECT_T* rect,        /* ĞèÒªË¢ĞÂµÄÇøÓò */
+				T_AMOPENAT_LCD_RECT_T* rect,        /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
 				UINT16 *pDisplayBuffer    )
 {
     IVTBL(update_color_lcd_screen)(                       
@@ -46,11 +46,11 @@ VOID iot_lcd_update_color_screen(
                             pDisplayBuffer       
                                    );
 }
-/** ½âÂëjpg¸ñÊ½Í¼Æ¬
-*@param		buffer: »º´æÏÔÊ¾buffer
-*@param		len: »º´æÏÔÊ¾buffer³¤¶È
-*@param		imageinfo: ÎÄ¼ş¸ñÊ½
-*@return	INT32: ½âÂë×´Ì¬Âë
+/** è§£ç jpgæ ¼å¼å›¾ç‰‡
+*@param		buffer: ç¼“å­˜æ˜¾ç¤ºbuffer
+*@param		len: ç¼“å­˜æ˜¾ç¤ºbufferé•¿åº¦
+*@param		imageinfo: æ–‡ä»¶æ ¼å¼
+*@return	INT32: è§£ç çŠ¶æ€ç 
 **/
 INT32 iot_decode_jpeg(
                     UINT8 * buffer,
@@ -61,9 +61,9 @@ INT32 iot_decode_jpeg(
     return IVTBL(ImgsDecodeJpeg)(buffer, len, imageinfo);
 }
 
-/** ÊÍ·Åjpg¸ñÊ½½âÂëÊı¾İ
-*@param		imageinfo: ÎÄ¼ş¸ñÊ½
-*@return	INT32: ÊÍ·Å×´Ì¬Âë
+/** é‡Šæ”¾jpgæ ¼å¼è§£ç æ•°æ®
+*@param		imageinfo: æ–‡ä»¶æ ¼å¼
+*@return	INT32: é‡Šæ”¾çŠ¶æ€ç 
 **/
 INT32 iot_free_jpeg_decodedata(
                     T_AMOPENAT_IMAGE_INFO * imageinfo

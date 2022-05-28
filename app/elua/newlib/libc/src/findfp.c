@@ -7,7 +7,7 @@
  * Date:    2012/11/28
  *
  * Description:
- *    ��ֻ֧�־�̬�����ļ�ָ��, ��̬�ռ䲻���̬���书�ܺ�������
+ *    暂只支持静态分配文件指针, 静态空间不足后动态分配功能后续开发
  **************************************************************************/
 
 #include <unistd.h>
@@ -31,7 +31,7 @@ struct glue __sglue = { &uglue, 3, __sF };
  * Find a free FILE for fopen et al.
  */
  
-/*+\NEW\zhuwangbin\2020.3.29\ lua����û��ʹ���Դ���__sfp�ӿڣ�ʹ����8910 newlib�еĽӿڵ����ڴ�й©*/
+/*+\NEW\zhuwangbin\2020.3.29\ lua解析没有使用自带的__sfp接口，使用了8910 newlib中的接口导致内存泄漏*/
 FILE *
 LUA__sfp(void)
 {
@@ -53,5 +53,5 @@ found:
 
 	return (fp);
 }
-/*-\NEW\zhuwangbin\2020.3.29\ lua����û��ʹ���Դ���__sfp�ӿڣ�ʹ����8910 newlib�еĽӿڵ����ڴ�й©*/
+/*-\NEW\zhuwangbin\2020.3.29\ lua解析没有使用自带的__sfp接口，使用了8910 newlib中的接口导致内存泄漏*/
 

@@ -1,4 +1,4 @@
--- Í¨ÓÃ´¦Àí¿â
+-- é€šç”¨å¤„ç†åº“
 module(...,package.seeall)
 
 local tonumber = tonumber

@@ -1,10 +1,10 @@
 #include "iot_audio.h"
 
 /****************************** AUDIO ******************************/
-/**´ò¿ªÓïÒô
-*@note  ÔÚÍ¨»°¿ªÊ¼Ê±µ÷ÓÃ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‰“å¼€è¯­éŸ³
+*@note  åœ¨é€šè¯å¼€å§‹æ—¶è°ƒç”¨
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_auido_open_tch(                                           
                         VOID
@@ -13,10 +13,10 @@ BOOL iot_auido_open_tch(
     return IVTBL(open_tch)();
 }
 
-/**¹Ø±ÕÓïÒô
-*@note  Í¨»°½áÊøÊ±µ÷ÓÃ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å…³é—­è¯­éŸ³
+*@note  é€šè¯ç»“æŸæ—¶è°ƒç”¨
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_close_tch(                                          
                         VOID
@@ -25,12 +25,12 @@ BOOL iot_audio_close_tch(
     return IVTBL(close_tch)();
 }
 
-/**²¥·ÅTONEÒô
-*@param  toneType:      TONEÒôÀàÐÍ
-*@param  duration:      ²¥·ÅÊ±³¤
-*@param  volume:        ²¥·ÅÒôÁ¿
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ’­æ”¾TONEéŸ³
+*@param  toneType:      TONEéŸ³ç±»åž‹
+*@param  duration:      æ’­æ”¾æ—¶é•¿
+*@param  volume:        æ’­æ”¾éŸ³é‡
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_play_tone(                                         
                         E_AMOPENAT_TONE_TYPE toneType,      
@@ -41,9 +41,9 @@ BOOL iot_audio_play_tone(
     return IVTBL(play_tone)(toneType, duration, volume);
 }
 
-/**Í£Ö¹²¥·ÅTONEÒô
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**åœæ­¢æ’­æ”¾TONEéŸ³
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_stop_tone(                                         
                         VOID
@@ -53,12 +53,12 @@ BOOL iot_audio_stop_tone(
 }
 
 
-/**²¥·ÅDTMFÒô
-*@param  dtmfType:      DTMFÀàÐÍ
-*@param  duration:      ²¥·ÅÊ±³¤
-*@param  volume:        ²¥·ÅÒôÁ¿
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ’­æ”¾DTMFéŸ³
+*@param  dtmfType:      DTMFç±»åž‹
+*@param  duration:      æ’­æ”¾æ—¶é•¿
+*@param  volume:        æ’­æ”¾éŸ³é‡
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_play_dtmf(                                        
                         E_AMOPENAT_DTMF_TYPE dtmfType,     
@@ -69,9 +69,9 @@ BOOL iot_audio_play_dtmf(
     return IVTBL(play_dtmf)(dtmfType, duration, volume);
 }
 
-/**Í£Ö¹²¥·ÅDTMFÒô
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**åœæ­¢æ’­æ”¾DTMFéŸ³
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_stop_dtmf(                                          
                         VOID
@@ -80,19 +80,19 @@ BOOL iot_audio_stop_dtmf(
     return IVTBL(stop_dtmf)();
 }
 
-/**²¥·ÅÒôÆµ
-*@param  playParam:     ²¥·Å²ÎÊý
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ’­æ”¾éŸ³é¢‘
+*@param  playParam:     æ’­æ”¾å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_play_music(T_AMOPENAT_PLAY_PARAM*  playParam)
 {
     return IVTBL(play_music)(playParam);
 }
 
-/**Í£Ö¹ÒôÆµ²¥·Å
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**åœæ­¢éŸ³é¢‘æ’­æ”¾
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_stop_music(                                       
                         VOID
@@ -101,9 +101,9 @@ BOOL iot_audio_stop_music(
     return IVTBL(stop_music)();
 }
 
-/**ÔÝÍ£ÒôÆµ²¥·Å
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æš‚åœéŸ³é¢‘æ’­æ”¾
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_pause_music(                                       
                         VOID
@@ -112,9 +112,9 @@ BOOL iot_audio_pause_music(
     return IVTBL(pause_music)();
 }
 
-/**»Ö¸´ÒôÆµ²¥·Å
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ¢å¤éŸ³é¢‘æ’­æ”¾
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_resume_music(                                     
                         VOID
@@ -123,9 +123,9 @@ BOOL iot_audio_resume_music(
     return IVTBL(resume_music)();
 }
 
-/**ÉèÖÃÑïÉùÆ÷¾²Òô
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è®¾ç½®æ‰¬å£°å™¨é™éŸ³
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_mute_speaker(                                       
                         VOID
@@ -134,9 +134,9 @@ BOOL iot_audio_mute_speaker(
     return IVTBL(mute_speaker)();
 }
 
-/**½â³ýÑïÉùÆ÷¾²Òô
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è§£é™¤æ‰¬å£°å™¨é™éŸ³
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_unmute_speaker(                                    
                         VOID
@@ -145,10 +145,10 @@ BOOL iot_audio_unmute_speaker(
     return IVTBL(unmute_speaker)();
 }
 
-/**ÉèÖÃÑïÉùÆ÷µÄÒôÁ¿Öµ
-*@param     vol:   ÉèÖÃÑïÉùÆ÷ÒôÁ¿Öµ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è®¾ç½®æ‰¬å£°å™¨çš„éŸ³é‡å€¼
+*@param     vol:   è®¾ç½®æ‰¬å£°å™¨éŸ³é‡å€¼
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_set_speaker_vol(                                   
                         UINT32 vol 
@@ -157,8 +157,8 @@ BOOL iot_audio_set_speaker_vol(
     return IVTBL(set_music_volume)(vol);
 }
 
-/**»ñÈ¡ÑïÉùÆ÷µÄÒôÁ¿Öµ
-*@return	UINT32: 	 ·µ»ØÑïÉùÆ÷µÄÒôÁ¿Öµ
+/**èŽ·å–æ‰¬å£°å™¨çš„éŸ³é‡å€¼
+*@return	UINT32: 	 è¿”å›žæ‰¬å£°å™¨çš„éŸ³é‡å€¼
 **/
 UINT32 iot_audio_get_speaker_vol(                
                         VOID
@@ -167,10 +167,10 @@ UINT32 iot_audio_get_speaker_vol(
     return IVTBL(get_music_volume)();
 }
 
-/**ÉèÍ¨»°µÄÒôÁ¿Öµ
-*@param     vol:   ÉèÖÃÍ¨»°ÒôÁ¿Öµ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è®¾é€šè¯çš„éŸ³é‡å€¼
+*@param     vol:   è®¾ç½®é€šè¯éŸ³é‡å€¼
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_set_sph_vol(                                   
                         UINT32 vol 
@@ -179,8 +179,8 @@ BOOL iot_audio_set_sph_vol(
     return IVTBL(set_sph_vol)(vol);
 }
 
-/**»ñÈ¡Í¨»°µÄÒôÁ¿Öµ
-*@return	UINT32: 	 ·µ»ØÍ¨»°µÄÒôÁ¿Öµ
+/**èŽ·å–é€šè¯çš„éŸ³é‡å€¼
+*@return	UINT32: 	 è¿”å›žé€šè¯çš„éŸ³é‡å€¼
 **/
 UINT32 iot_audio_get_sph_vol(                
                         VOID
@@ -190,10 +190,10 @@ UINT32 iot_audio_get_sph_vol(
 }
 
 
-/**ÉèÖÃÒôÆµÍ¨µÀ
-*@param     channel:    Í¨µÀ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è®¾ç½®éŸ³é¢‘é€šé“
+*@param     channel:    é€šé“
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_set_channel(                                        
                         E_AMOPENAT_AUDIO_CHANNEL channel   
@@ -202,8 +202,8 @@ BOOL iot_audio_set_channel(
     return IVTBL(set_channel)(channel,OPENAT_AUDEV_INPUT_MAINMIC);
 }
 
-/**»ñÈ¡µ±Ç°Í¨µÀ
-*@return	E_AMOPENAT_AUDIO_CHANNEL: 	  ·µ»ØÍ¨µÀÖµ
+/**èŽ·å–å½“å‰é€šé“
+*@return	E_AMOPENAT_AUDIO_CHANNEL: 	  è¿”å›žé€šé“å€¼
 **/
 E_AMOPENAT_AUDIO_CHANNEL iot_audio_get_current_channel(            
                         VOID
@@ -213,11 +213,11 @@ E_AMOPENAT_AUDIO_CHANNEL iot_audio_get_current_channel(
     return IVTBL(get_current_channel)();
 }
 
-/**¿ªÊ¼Â¼Òô
-*@param     param:   Â¼Òô²ÎÊý
-*@param     cb:     »ñÈ¡Â¼ÒôÊý¾Ý»Øµ÷
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å¼€å§‹å½•éŸ³
+*@param     param:   å½•éŸ³å‚æ•°
+*@param     cb:     èŽ·å–å½•éŸ³æ•°æ®å›žè°ƒ
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_rec_start(
                     			E_AMOPENAT_RECORD_PARAM* param,
@@ -226,22 +226,22 @@ BOOL iot_audio_rec_start(
     return ((IVTBL(audio_record)(param, cb) == 0) ? 1 : 0);
 }
 
-/**Í£Ö¹Â¼Òô
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**åœæ­¢å½•éŸ³
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_audio_rec_stop()
 {
     return ((IVTBL(audio_stop_record)() == 0) ? 1 : 0);
 }
 
-/**Á÷²¥·Å
-*@param  playformat:    Êý¾ÝÁ÷ÀàÐÍ
-*@param  cb:    		Êý¾ÝÁ÷»Øµ÷º¯Êý
-*@param  data:    		Êý¾ÝÁ÷
-*@param  len:  		  	Êý¾ÝÁ÷³¤¶È
-*@return	>0: 	    ²¥·Å³¤¶È
-*           -1:      	²¥·ÅÊ§°Ü
+/**æµæ’­æ”¾
+*@param  playformat:    æ•°æ®æµç±»åž‹
+*@param  cb:    		æ•°æ®æµå›žè°ƒå‡½æ•°
+*@param  data:    		æ•°æ®æµ
+*@param  len:  		  	æ•°æ®æµé•¿åº¦
+*@return	>0: 	    æ’­æ”¾é•¿åº¦
+*           -1:      	æ’­æ”¾å¤±è´¥
 **/
 int iot_audio_streamplay(E_AMOPENAT_AUD_FORMAT playformat,AUD_PLAY_CALLBACK_T cb,char* data,int len)
 {
@@ -249,13 +249,13 @@ int iot_audio_streamplay(E_AMOPENAT_AUD_FORMAT playformat,AUD_PLAY_CALLBACK_T cb
 }
 
 
-/**Á÷²¥·ÅV2
-*@param  playformat:    Êý¾ÝÁ÷ÀàÐÍ
-*@param  cb:    		Êý¾ÝÁ÷»Øµ÷º¯Êý
-*@param  data:    		Êý¾ÝÁ÷
-*@param  len:  		  	Êý¾ÝÁ÷³¤¶È
-*@return	>0: 	    ²¥·Å³¤¶È
-*           -1:      	²¥·ÅÊ§°Ü
+/**æµæ’­æ”¾V2
+*@param  playformat:    æ•°æ®æµç±»åž‹
+*@param  cb:    		æ•°æ®æµå›žè°ƒå‡½æ•°
+*@param  data:    		æ•°æ®æµ
+*@param  len:  		  	æ•°æ®æµé•¿åº¦
+*@return	>0: 	    æ’­æ”¾é•¿åº¦
+*           -1:      	æ’­æ”¾å¤±è´¥
 **/
 int iot_audio_streamplayV2(E_AMOPENAT_AUD_PLAY_TYPE playtype,E_AMOPENAT_AUD_FORMAT playformat,AUD_PLAY_CALLBACK_T cb,char* data,int len)
 {

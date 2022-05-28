@@ -30,7 +30,7 @@ int lualibc_system(const char *__string)
 }
 
 
-/*+\NEW\liweiqiang\2013.10.25\支持环境变量访问*/
+/*+\NEW\liweiqiang\2013.10.25\鏀寔鐜鍙橀噺璁块棶*/
 extern char *getLuaPath(void);
 extern char *getLuaDir(void);
 extern char *getLuaDataDir(void);
@@ -48,7 +48,7 @@ char *lualibc_getenv(const char *name)
 
     return NULL;
 }
-/*-\NEW\liweiqiang\2013.10.25\支持环境变量访问*/
+/*-\NEW\liweiqiang\2013.10.25\鏀寔鐜鍙橀噺璁块棶*/
 
 void lualibc_abort(void)
 {

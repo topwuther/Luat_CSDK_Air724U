@@ -1,4 +1,4 @@
--- ¾¯±¨´¦Àí
+-- è­¦æŠ¥å¤„ç†
 require"sys"
 require"cc"
 require"sms"
@@ -7,7 +7,7 @@ require"nvm"
 module(...,package.seeall)
 
 local MAX_TTS_TIMES = 3
-local CALL_INTERVAL = 5000 -- ±¨¾¯µç»°Ôö¼Ó¼ä¸ôÊ±¼ä,·ñÔòÎŞ·¨À´µç³··À
+local CALL_INTERVAL = 5000 -- æŠ¥è­¦ç”µè¯å¢åŠ é—´éš”æ—¶é—´,å¦åˆ™æ— æ³•æ¥ç”µæ’¤é˜²
 
 local alarms = {}
 local state = "IDLE"
@@ -42,7 +42,7 @@ local function playtts()
 end
 
 local function ttsplayend()
-	sys.timer_start(playtts,500) --500msÑÓÊ±²¥·Åtts,±ÜÃâ¶ÂÈûÏµÍ³
+	sys.timer_start(playtts,500) --500mså»¶æ—¶æ’­æ”¾tts,é¿å…å µå¡ç³»ç»Ÿ
 end
 
 local function stoptts()
@@ -237,7 +237,7 @@ function stop(user)
 	index = 0
 	sys.deregapp(sendcnf)
 	sys.deregapp(ccapp)
-	if user ~= "alarm" then -- ÄÚ²¿Í£Ö¹,È«²¿½áÊø²»ĞèÒª¹Ò¶Ï
+	if user ~= "alarm" then -- å†…éƒ¨åœæ­¢,å…¨éƒ¨ç»“æŸä¸éœ€è¦æŒ‚æ–­
 		cc.hangup()
 		stoptts()
 	end
@@ -246,10 +246,10 @@ function stop(user)
 		alarms = {}
 	else
 		table.remove(alarms,1)
-		-- ¼ÌĞøÏÂÒ»¸ö»º³åµÄ±¨¾¯·ÀÇø
+		-- ç»§ç»­ä¸‹ä¸€ä¸ªç¼“å†²çš„æŠ¥è­¦é˜²åŒº
 		if #alarms > 0 then
 			state = "NEXT_ALARM"
-			-- 2Ãëºó¿ªÊ¼ÏÂÒ»ÂÖ±¨¾¯,ÒÔ´ıÍøÂç×ÊÔ´ÊÍ·Å
+			-- 2ç§’åå¼€å§‹ä¸‹ä¸€è½®æŠ¥è­¦,ä»¥å¾…ç½‘ç»œèµ„æºé‡Šæ”¾
 			sys.timer_start(gonext,2000)
 		end
 	end

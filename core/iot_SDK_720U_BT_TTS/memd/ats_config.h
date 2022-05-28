@@ -113,7 +113,7 @@
 #define CONFIG_AT_GLOBAL_APN_SUPPORT
 
 
-/*+\new\task_183\rww\2020.4.1\Ìí¼Ólibat°æ±¾ºÅ*/
+/*+\new\task_183\rww\2020.4.1\æ·»åŠ libatç‰ˆæœ¬å·*/
 /* #undef CONFIG_BUILD_AT */
 
 #ifdef CONFIG_BUILD_AT
@@ -159,7 +159,7 @@
 
 #define CONFIG_AT_GPRS_DEFAULT_LTE_CID 5
 
-/*-\new\task_183\rww\2020.4.1\Ìí¼Ólibat°æ±¾ºÅ*/
+/*-\new\task_183\rww\2020.4.1\æ·»åŠ libatç‰ˆæœ¬å·*/
 
 /**
  * whether some blueu verify at command can be used
@@ -171,10 +171,10 @@
  */
 #define CONFIG_AT_BT_APP_SUPPORT
 
-/**+\new\zhuwangbin\2020.5.26\Ìí¼Ómqtt 3GPPºê¿ØÖÆmqtt 3GPPµÄatÖ¸Áî£¬·½±ã²Ã¼ô **/
+/**+\new\zhuwangbin\2020.5.26\æ·»åŠ mqtt 3GPPå®æ§åˆ¶mqtt 3GPPçš„atæŒ‡ä»¤ï¼Œæ–¹ä¾¿è£å‰ª **/
 #define CONFIG_ATR_MQTT_SUPPORT
 #define CONFIG_ATR_3GPP_SUPPORT
-/**-\new\zhuwangbin\2020.5.26\Ìí¼Ómqtt 3GPPºê¿ØÖÆmqtt 3GPPµÄatÖ¸Áî£¬·½±ã²Ã¼ô **/
+/**-\new\zhuwangbin\2020.5.26\æ·»åŠ mqtt 3GPPå®æ§åˆ¶mqtt 3GPPçš„atæŒ‡ä»¤ï¼Œæ–¹ä¾¿è£å‰ª **/
 
 #endif
 

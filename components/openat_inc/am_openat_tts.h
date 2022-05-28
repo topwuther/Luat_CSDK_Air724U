@@ -1,6 +1,6 @@
 #ifndef _AM_OPENAT_TTS_H_
 #define _AM_OPENAT_TTS_H_
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 
 typedef enum 
 {
@@ -11,10 +11,10 @@ typedef enum
 
 typedef enum 
 {
-	OPENAT_TTS_PARAM_SPEED, /*²¥·ÅËÙ¶È -32768 to +32767 */
-	OPENAT_TTS_PARAM_VOLUME, /*²¥·ÅÒôÁ¿²ÎÊý -32768 to +32767 */
-	OPENAT_TTS_PARAM_PITCH, /*²¥·ÅÉùµ÷²ÎÊý -32768 to +32767 */
-	OPENAT_TTS_PARAM_CODEPAGE,/* ÎÄ±¾ÀàÐÍ */
+	OPENAT_TTS_PARAM_SPEED, /*æ’­æ”¾é€Ÿåº¦ -32768 to +32767 */
+	OPENAT_TTS_PARAM_VOLUME, /*æ’­æ”¾éŸ³é‡å‚æ•° -32768 to +32767 */
+	OPENAT_TTS_PARAM_PITCH, /*æ’­æ”¾å£°è°ƒå‚æ•° -32768 to +32767 */
+	OPENAT_TTS_PARAM_CODEPAGE,/* æ–‡æœ¬ç±»åž‹ */
 }OPENAT_TTS_PARAM_FLAG;
 
 typedef enum 
@@ -22,12 +22,12 @@ typedef enum
 	OPENAT_CODEPAGE_ASCII,
 	OPENAT_CODEPAGE_GBK,
 	OPENAT_CODEPAGE_BIG5,
-	OPENAT_CODEPAGE_UTF16LE, //UTF-16£¬Ð¡Í·
-	OPENAT_CODEPAGE_UTF16BE,  //UTF-16£¬´óÍ·
+	OPENAT_CODEPAGE_UTF16LE, //UTF-16ï¼Œå°å¤´
+	OPENAT_CODEPAGE_UTF16BE,  //UTF-16ï¼Œå¤§å¤´
 	OPENAT_CODEPAGE_UTF8, //UTF-8
 	OPENAT_CODEPAGE_UTF16, 
 	OPENAT_CODEPAGE_UNICODE,
-	OPENAT_CODEPAGE_PHONETIC_PLAIN, //Phontic plain Òô±ê±àÂë
+	OPENAT_CODEPAGE_PHONETIC_PLAIN, //Phontic plain éŸ³æ ‡ç¼–ç 
 }TTS_CODEPAGE_PARAM;
 
 typedef enum 
@@ -35,13 +35,13 @@ typedef enum
 	FIRST_START,
 	PLAYING,
 	STOP
-}TTSStatus;//tts ÔËÐÐ×´Ì¬
+}TTSStatus;//tts è¿è¡ŒçŠ¶æ€
 
 typedef enum 
 {	
-	OPENAT_TTS_PLAY_OPREATION,	/*²¥·Å²Ù×÷*/
-	OPENAT_TTS_FINISH_OPRETION,	/*²¥·Å½áÊø²Ù×÷*/
-	OPENAT_TTS_STOP_OPREATION,	/*Í£Ö¹²¥·Å²Ù×÷*/
+	OPENAT_TTS_PLAY_OPREATION,	/*æ’­æ”¾æ“ä½œ*/
+	OPENAT_TTS_FINISH_OPRETION,	/*æ’­æ”¾ç»“æŸæ“ä½œ*/
+	OPENAT_TTS_STOP_OPREATION,	/*åœæ­¢æ’­æ”¾æ“ä½œ*/
 
 }OPENAT_TTS_OPERATION;
 
@@ -67,7 +67,7 @@ typedef enum
 
 }OPENAT_TTS_CB_MSG;
 
-typedef void (*TTS_PLAY_CB)(OPENAT_TTS_CB_MSG msg_id,u8 event);	/*²¥·Å½áÊø»Øµ÷º¯Êý*/
+typedef void (*TTS_PLAY_CB)(OPENAT_TTS_CB_MSG msg_id,u8 event);	/*æ’­æ”¾ç»“æŸå›žè°ƒå‡½æ•°*/
 
 
 BOOL OPENAT_tts_init(TTS_PLAY_CB fCb);
@@ -79,5 +79,5 @@ BOOL OPENAT_tts_stop();
 
 
 
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 #endif

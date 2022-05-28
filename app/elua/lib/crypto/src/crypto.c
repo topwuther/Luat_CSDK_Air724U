@@ -6,7 +6,7 @@
  * Date:    2018/5/15
  *
  * Description:
- *          lua.crypto¿â
+ *          lua.cryptoåº“
  **************************************************************************/
 
 #ifdef crypto_rsa_encrypt
@@ -363,9 +363,9 @@ static int l_crypto_sha256(lua_State *L)
         b.p[i * 2] = I_crypto_common_hb2hex(out[i] >> 4);
         b.p[i * 2 + 1] = I_crypto_common_hb2hex(out[i]);
     }
-   /*+\BUG\WANGJIAN\2019.4.10\ĞŞ¸Äcrypto.sha256 ·µ»Ø32¸ö×Ö½Ú*/ 
+   /*+\BUG\WANGJIAN\2019.4.10\ä¿®æ”¹crypto.sha256 è¿”å›32ä¸ªå­—èŠ‚*/ 
     b.p += strlen(b.buffer);
-   /*-\BUG\WANGJIAN\2019.4.10\ĞŞ¸Äcrypto.sha256 ·µ»Ø32¸ö×Ö½Ú*/ 
+   /*-\BUG\WANGJIAN\2019.4.10\ä¿®æ”¹crypto.sha256 è¿”å›32ä¸ªå­—èŠ‚*/ 
     luaL_pushresult( &b );
 #endif
     return 1;
@@ -469,23 +469,23 @@ static int l_crypto_aes128_ecb_encrypt(lua_State *L)
     u8 pPadBuf[AES_BLOCK_LEN];
     u8 *pInBuf = NULL;
 
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if(nPswdLen!=16)
     {
         return luaL_error(L, "invalid password length=%d, only support AES128", nPswdLen);
     }
    
-    //¹¹ÔìÌî³äÊı¾İ
+    //æ„é€ å¡«å……æ•°æ®
     memset(pPadBuf, 0, sizeof(pPadBuf));
     
-    //¼ÓÃÜ
+    //åŠ å¯†
     {       
         luaL_Buffer b;
         u32 nRmnLen;
         memset(b.buffer,0,LUAL_BUFFERSIZE);
         luaL_buffinit( L, &b );
 
-         //Ô­Ê¼Êı¾İºÍÌî³äÊı¾İÆ´½ÓÔÚÒ»Æğ
+         //åŸå§‹æ•°æ®å’Œå¡«å……æ•°æ®æ‹¼æ¥åœ¨ä¸€èµ·
         pInBuf = malloc(nBufLen+nPadLen);
         if(pInBuf == NULL)
         {
@@ -498,7 +498,7 @@ static int l_crypto_aes128_ecb_encrypt(lua_State *L)
         nBufLen += nPadLen;
         nRmnLen = nBufLen;
        
-        //¿ªÊ¼·Ö×é¼ÓÃÜ£¬Ã¿16×Ö½ÚÒ»×é
+        //å¼€å§‹åˆ†ç»„åŠ å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„
         while(nRmnLen>0)
         {
             AES_Encrypt("ECB", nRmnLen, pInBuf+nBufLen-nRmnLen, nPswdLen, pPassword, "");
@@ -522,14 +522,14 @@ static int l_crypto_aes128_ecb_decrypt(lua_State *L)
     size_t nPswdLen = 0;
     u8 *pPassword = lua_tolstring(L, 3, &nPswdLen);
 
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if(nPswdLen!=16)
     {
         return luaL_error(L, "invalid password length=%d, only support AES128", nPswdLen);
     }
     
     
-    //½âÃÜ
+    //è§£å¯†
     {       
         luaL_Buffer b;
         u32 nRmnLen;
@@ -538,12 +538,12 @@ static int l_crypto_aes128_ecb_decrypt(lua_State *L)
 
         nRmnLen = nBufLen;
 
-        //¿ªÊ¼·Ö×é½âÃÜ£¬Ã¿16×Ö½ÚÒ»×é
+        //å¼€å§‹åˆ†ç»„è§£å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„
         while(nRmnLen>0)
         {
             AES_Decrypt("ECB", nRmnLen, pBuf+nBufLen-nRmnLen, nPswdLen, pPassword, "");
 
-            //É¾³ıÌî³äÊı¾İ
+            //åˆ é™¤å¡«å……æ•°æ®
             if(nRmnLen==AES_BLOCK_LEN)
             {
                 DeletePaddingBuf(&b, "ZERO", AES_BLOCK_LEN, pBuf+nBufLen-nRmnLen);
@@ -574,7 +574,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
     u8 pPadBuf[AES_BLOCK_LEN];
     u8 *pInBuf = NULL;
 
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if((nPswdLen!=16) && (nPswdLen!=24) && (nPswdLen!=32))
     {
         return luaL_error(L, "invalid password length=%d, only support AES128,AES192,AES256", nPswdLen);
@@ -592,7 +592,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         return luaL_error(L, "invalid iv length=%d, only support 16", nIVLen);
     }
     
-    //¹¹ÔìÌî³äÊı¾İ
+    //æ„é€ å¡«å……æ•°æ®
     if((strcmp(pPadding, "PKCS5")==0) || (strcmp(pPadding, "PKCS7")==0))
     {
         memset(pPadBuf, nPadLen, sizeof(pPadBuf));
@@ -602,14 +602,14 @@ static int l_crypto_aes_encrypt(lua_State *L)
         memset(pPadBuf, 0, sizeof(pPadBuf));
     }   
     
-    //¼ÓÃÜ
+    //åŠ å¯†
     {       
         luaL_Buffer b;
         u32 nRmnLen;
         memset(b.buffer,0,LUAL_BUFFERSIZE);
         luaL_buffinit( L, &b );
 
-         //Ô­Ê¼Êı¾İºÍÌî³äÊı¾İÆ´½ÓÔÚÒ»Æğ
+         //åŸå§‹æ•°æ®å’Œå¡«å……æ•°æ®æ‹¼æ¥åœ¨ä¸€èµ·
         if (strcmp(pPadding, "NONE")!=0)
         {
             pInBuf = malloc(nBufLen+nPadLen);
@@ -638,7 +638,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
 
         if(strcmp(pMode, "ECB") == 0)
         {
-            //¿ªÊ¼·Ö×é¼ÓÃÜ£¬Ã¿16×Ö½ÚÒ»×é
+            //å¼€å§‹åˆ†ç»„åŠ å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„
             while(nRmnLen>0)
             {
                 AES_Encrypt(pMode, nRmnLen, pInBuf+nBufLen-nRmnLen, nPswdLen, pPassword, pIV);
@@ -648,7 +648,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         }
         else if((strcmp(pMode, "CBC") == 0) || (strcmp(pMode, "CTR") == 0))
         {
-            //´ı¼ÓÃÜÊı¾İÒ»´ÎĞÔ´«Èë
+            //å¾…åŠ å¯†æ•°æ®ä¸€æ¬¡æ€§ä¼ å…¥
             AES_Encrypt(pMode, nBufLen, pInBuf, nPswdLen, pPassword, pIV);
             luaL_addlstring(&b, pInBuf, nBufLen);
         }
@@ -676,7 +676,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
     size_t nIVLen = 0;
     u8 *pIV =  lua_tolstring(L, 5, &nIVLen);
 
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if((nPswdLen!=16) && (nPswdLen!=24) && (nPswdLen!=32))
     {
         return luaL_error(L, "invalid password length=%d, only support AES128,AES192,AES256", nPswdLen);
@@ -695,7 +695,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
     }    
     
     
-    //½âÃÜ
+    //è§£å¯†
     {       
         luaL_Buffer b;
         u32 nRmnLen;
@@ -706,12 +706,12 @@ static int l_crypto_aes_decrypt(lua_State *L)
 
         if(strcmp(pMode, "ECB") == 0)
         {
-            //¿ªÊ¼·Ö×é½âÃÜ£¬Ã¿16×Ö½ÚÒ»×é
+            //å¼€å§‹åˆ†ç»„è§£å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„
             while(nRmnLen>0)
             {
                 AES_Decrypt(pMode, nRmnLen, pBuf+nBufLen-nRmnLen, nPswdLen, pPassword, pIV);
 
-                //É¾³ıÌî³äÊı¾İ
+                //åˆ é™¤å¡«å……æ•°æ®
                 if(nRmnLen==AES_BLOCK_LEN)
                 {
                     DeletePaddingBuf(&b, pPadding, AES_BLOCK_LEN, pBuf+nBufLen-nRmnLen);
@@ -725,7 +725,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
         }
         else if((strcmp(pMode, "CBC") == 0) || (strcmp(pMode, "CTR") == 0))
         {
-            //´ı½âÃÜÊı¾İÒ»´ÎĞÔ´«Èë
+            //å¾…è§£å¯†æ•°æ®ä¸€æ¬¡æ€§ä¼ å…¥
             AES_Decrypt(pMode, nBufLen, pBuf, nPswdLen, pPassword, pIV);
             DeletePaddingBuf(&b, pPadding, nBufLen, pBuf);
         }
@@ -752,7 +752,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
     unsigned char *pOutBuff = NULL;
     unsigned char nPassWord = NULL;
 
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if((nPswdLen!=16) && (nPswdLen!=24) && (nPswdLen!=32))
     {
         return luaL_error(L, "invalid password length=%d, only support AES128,AES192,AES256", nPswdLen);
@@ -770,7 +770,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         return luaL_error(L, "invalid iv length=%d, only support 16", nIVLen);
     }
     
-    //¹¹ÔìÌî³äÊı¾İ
+    //æ„é€ å¡«å……æ•°æ®
     if((strcmp(pPadding, "PKCS5")==0) || (strcmp(pPadding, "PKCS7")==0))
     {
         memset(pPadBuf, nPadLen, sizeof(pPadBuf));
@@ -798,7 +798,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         nPassWord = malloc(32);
         memset(nPassWord,pPassword,32);
     }
-    //¼ÓÃÜ
+    //åŠ å¯†
       
         luaL_Buffer b;
         u32 nRmnLen;
@@ -810,7 +810,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         unsigned char input[16];
         unsigned char nonce_counter[16];
 
-         //Ô­Ê¼Êı¾İºÍÌî³äÊı¾İÆ´½ÓÔÚÒ»Æğ
+         //åŸå§‹æ•°æ®å’Œå¡«å……æ•°æ®æ‹¼æ¥åœ¨ä¸€èµ·
         pInBuf = malloc(nBufLen+nPadLen);
         if(pInBuf == NULL)
         {
@@ -826,7 +826,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
 
         if(strcmp(pMode, "ECB") == 0)
         {
-            //¿ªÊ¼·Ö×é¼ÓÃÜ£¬Ã¿16×Ö½ÚÒ»×é
+            //å¼€å§‹åˆ†ç»„åŠ å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„
             while(nRmnLen>0)
             {
                 aes_setkey_enc(&ctx,nPassWord,nPswdLen);
@@ -839,7 +839,7 @@ static int l_crypto_aes_encrypt(lua_State *L)
         }
         else if( strcmp(pMode, "CBC") == 0 )
         {
-            //´ı¼ÓÃÜÊı¾İÒ»´ÎĞÔ´«Èë
+            //å¾…åŠ å¯†æ•°æ®ä¸€æ¬¡æ€§ä¼ å…¥
             pOutBuff = malloc(nBufLen);
             aes_setkey_enc(&ctx,nPassWord,nPswdLen);
             aes_crypt_cbc(&ctx,
@@ -881,7 +881,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
     u8 *pIV =  lua_tolstring(L, 5, &nIVLen);
     unsigned char *pOutBuff = NULL;
     unsigned char nPassWord[32];
-    //¼ì²é²ÎÊıºÏ·¨ĞÔ
+    //æ£€æŸ¥å‚æ•°åˆæ³•æ€§
     if((nPswdLen!=16) && (nPswdLen!=24) && (nPswdLen!=32))
     {
         return luaL_error(L, "invalid password length=%d, only support AES128,AES192,AES256", nPswdLen);
@@ -914,7 +914,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
         nPswdLen = 256; 
         memset(nPassWord,pPassword,32);  
     }       
-    //½âÃÜ
+    //è§£å¯†
     {       
         luaL_Buffer b;
         u32 nRmnLen;
@@ -930,7 +930,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
 
         if(strcmp(pMode, "ECB") == 0)
         {
-            //¿ªÊ¼·Ö×é½âÃÜ£¬Ã¿16×Ö½ÚÒ»×é           
+            //å¼€å§‹åˆ†ç»„è§£å¯†ï¼Œæ¯16å­—èŠ‚ä¸€ç»„           
             while(nRmnLen>0)
             {
                 aes_setkey_dec(&ctx,nPassWord,nPswdLen);
@@ -939,7 +939,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
                     AES_DECRYPT,
                     input,
                     output);
-                //É¾³ıÌî³äÊı¾İ
+                //åˆ é™¤å¡«å……æ•°æ®
                 if(nRmnLen==AES_BLOCK_LEN)
                 {
                     DeletePaddingBuf(&b, pPadding, AES_BLOCK_LEN, pBuf+nBufLen-nRmnLen);
@@ -953,7 +953,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
         }
         else if(strcmp(pMode, "CBC") == 0 )
         {
-            //´ı½âÃÜÊı¾İÒ»´ÎĞÔ´«Èë
+            //å¾…è§£å¯†æ•°æ®ä¸€æ¬¡æ€§ä¼ å…¥
             pOutBuff = malloc(nBufLen);
             aes_setkey_dec(&ctx,nPassWord,nPswdLen);
             aes_crypt_cbc(&ctx,
@@ -984,7 +984,7 @@ static int l_crypto_aes_decrypt(lua_State *L)
 }
 #endif
 
-/*+\NEW\wangyuan\2020.04.14\ BUG_1445:rsa¼Ó½âÃÜ½Ó¿Ú²»¿ÉÓÃ*/
+/*+\NEW\wangyuan\2020.04.14\ BUG_1445:rsaåŠ è§£å¯†æ¥å£ä¸å¯ç”¨*/
 INT32 crypto_rsa_encrypt(UINT8 *pKeyMode, UINT8 *pKeyBuf, INT32 nKeyLen, UINT8 *pPswd, INT32 nPswdLen, 
 										UINT8 *pEncryptMode, UINT8 *pInBuf, INT32 nInbufLen, UINT8 *pOutBuf)
 {
@@ -1274,7 +1274,7 @@ static int l_crypto_rsa_sha256_verify(lua_State *L)
 
     return 1;
 }
-/*-\NEW\wangyuan\2020.04.14\ BUG_1445:rsa¼Ó½âÃÜ½Ó¿Ú²»¿ÉÓÃ*/
+/*-\NEW\wangyuan\2020.04.14\ BUG_1445:rsaåŠ è§£å¯†æ¥å£ä¸å¯ç”¨*/
 
 #if 1//def AM_XXTEA_SUPPORT 
 #include "xxtea.h"
@@ -1343,12 +1343,12 @@ const LUA_REG_TYPE crypto_map[] =
     { LSTRKEY( "xxtea_encrypt" ),  LFUNCVAL( l_crypto_xxtea_encrypt ) },
     { LSTRKEY( "xxtea_decrypt" ),  LFUNCVAL( l_crypto_xxtea_decrypt ) },
     #endif
-	/*+\NEW\wangyuan\2020.04.14\ BUG_1445:rsa¼Ó½âÃÜ½Ó¿Ú²»¿ÉÓÃ*/
+	/*+\NEW\wangyuan\2020.04.14\ BUG_1445:rsaåŠ è§£å¯†æ¥å£ä¸å¯ç”¨*/
 	{ LSTRKEY( "rsa_encrypt" ),  LFUNCVAL( l_crypto_rsa_encrypt ) },
 	{ LSTRKEY( "rsa_decrypt" ),  LFUNCVAL( l_crypto_rsa_decrypt ) },
 	{ LSTRKEY( "rsa_sha256_sign" ),  LFUNCVAL( l_crypto_rsa_sha256_sign ) },
 	{ LSTRKEY( "rsa_sha256_verify" ),  LFUNCVAL( l_crypto_rsa_sha256_verify ) },
-	/*-\NEW\wangyuan\2020.04.14\ BUG_1445:rsa¼Ó½âÃÜ½Ó¿Ú²»¿ÉÓÃ*/
+	/*-\NEW\wangyuan\2020.04.14\ BUG_1445:rsaåŠ è§£å¯†æ¥å£ä¸å¯ç”¨*/
 	
     { LNILKEY, LNILVAL }
 };

@@ -858,10 +858,10 @@ LUA_API int lua_cpcall (lua_State *L, lua_CFunction func, void *ud) {
   return status;
 }
 
-/*+\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*+\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 //extern void platform_sys_set_max_freq(void);
 //extern void platform_sys_set_min_freq(void);
-/*-\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*-\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 
 LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,
                       const char *chunkname) {
@@ -869,7 +869,7 @@ LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,
   int status;
   lua_lock(L);
   
-/*+\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*+\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 #if !defined(WIN32)
   //platform_sys_set_max_freq();
 #endif
@@ -879,7 +879,7 @@ LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,
 #if !defined(WIN32)
   //platform_sys_set_min_freq();
 #endif
-/*-\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*-\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 
   lua_unlock(L);
   return status;

@@ -700,7 +700,7 @@ void *vfs_fs_handle(const char *path);
 void *vfs_mount_handle(const char *path);
 
 
-/*»ñÈ¡fsµÄerrno*/
+/*Â»Ã±ÃˆÂ¡fsÂµÃ„errno*/
 int vfs_getErrno();
 
 

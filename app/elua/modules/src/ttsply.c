@@ -24,7 +24,7 @@
 #include "platform_conf.h"
 #include "platform_ttsply.h"
 #include "lrodefs.h"  
-/*+\new\wj\2019.12.27\添加TTS功能*/
+/*+\new\wj\2019.12.27\娣诲姞TTS鍔熻兘*/
 #if defined(__AM_LUA_TTSPLY_SUPPORT__)
 
 #define MIN_OPT_LEVEL 2
@@ -117,7 +117,7 @@ const LUA_REG_TYPE ttsplycore_map[] =
 
   { LNILKEY, LNILVAL }
 };
-/*-\new\wj\2019.12.27\添加TTS功能*/
+/*-\new\wj\2019.12.27\娣诲姞TTS鍔熻兘*/
 LUALIB_API int luaopen_ttsplycore( lua_State *L )
 {
     luaL_register( L, AUXLIB_TTSPLYCORE, ttsplycore_map );

@@ -220,10 +220,10 @@ FILE *lualibc_fopen(const char *file, const char *mode)
         return (NULL);
 
 	
-	/*+\NEW\zhuwangbin\2020.3.29\ lua½âÎöÃ»ÓĞÊ¹ÓÃ×Ô´øµÄ__sfp½Ó¿Ú£¬Ê¹ÓÃÁË8910 newlibÖĞµÄ½Ó¿Úµ¼ÖÂÄÚ´æĞ¹Â©*/
+	/*+\NEW\zhuwangbin\2020.3.29\ luaè§£ææ²¡æœ‰ä½¿ç”¨è‡ªå¸¦çš„__sfpæ¥å£ï¼Œä½¿ç”¨äº†8910 newlibä¸­çš„æ¥å£å¯¼è‡´å†…å­˜æ³„æ¼*/
     if((fp = LUA__sfp()) == NULL)
         return (NULL);
-	/*-\NEW\zhuwangbin\2020.3.29\ lua½âÎöÃ»ÓĞÊ¹ÓÃ×Ô´øµÄ__sfp½Ó¿Ú£¬Ê¹ÓÃÁË8910 newlibÖĞµÄ½Ó¿Úµ¼ÖÂÄÚ´æĞ¹Â©*/
+	/*-\NEW\zhuwangbin\2020.3.29\ luaè§£ææ²¡æœ‰ä½¿ç”¨è‡ªå¸¦çš„__sfpæ¥å£ï¼Œä½¿ç”¨äº†8910 newlibä¸­çš„æ¥å£å¯¼è‡´å†…å­˜æ³„æ¼*/
 	
     if((f = _open_r(file, oflags, 0)) < 0){
         fp->_flags = 0;         /* release */
@@ -267,7 +267,7 @@ int lualibc_fclose(FILE *fp)
         return (EOF);
     }
 
-    //r = fp->_flags & __SWR ? __sflush(fp) : 0; ÓÉÓÚ²»ĞèÒªÇå³ı»º´æ¹ÊÖ±½Ó·µ»Ø0
+    //r = fp->_flags & __SWR ? __sflush(fp) : 0; ç”±äºä¸éœ€è¦æ¸…é™¤ç¼“å­˜æ•…ç›´æ¥è¿”å›0
     
     if(fp->_close != NULL && (*fp->_close)(fp->_cookie)){
         r = EOF;
@@ -302,7 +302,7 @@ int lualibc_getc(FILE *fp)
 
 int lualibc_ungetc(int c, FILE *fp)
 {
-    // ÓÉÓÚÃ»ÓĞÊµÏÖÍêÕûµÄstdio ¹ÊÔİ²»Ö§³Östdin ungetc
+    // ç”±äºæ²¡æœ‰å®ç°å®Œæ•´çš„stdio æ•…æš‚ä¸æ”¯æŒstdin ungetc
     ASSERT(fp != stdin);
 
 
@@ -337,10 +337,10 @@ size_t lualibc_fread(void *buf, size_t size, size_t count, FILE *fp)
     unsigned int* data = NULL;
     unsigned char* temp = buf;
     unsigned int offset  = ftell(fp);
-    unsigned int act_low_boundary = (offset & 0xFFFFFE00); /*ÒÔ512¶ÔÆëµÄ¶ÁÈ¡ÎÄ¼şµÄÆğÊ¼Î»ÖÃ*/
-    unsigned int read_count;        /*ĞèÒª´ÓÎÄ¼şÖĞ¶ÁÈ¡µÄ³¤¶È*/
-    unsigned int act_up_boundary;   /*ÒÔ512¶ÔÆëµÄ¶ÁÈ¡ÎÄ¼şµÄ½áÊøÎ»ÖÃ*/
-    unsigned int act_count;         /*¶ÁÈ¡µ½µÄÓĞĞ§Êı¾İ³¤¶È*/
+    unsigned int act_low_boundary = (offset & 0xFFFFFE00); /*ä»¥512å¯¹é½çš„è¯»å–æ–‡ä»¶çš„èµ·å§‹ä½ç½®*/
+    unsigned int read_count;        /*éœ€è¦ä»æ–‡ä»¶ä¸­è¯»å–çš„é•¿åº¦*/
+    unsigned int act_up_boundary;   /*ä»¥512å¯¹é½çš„è¯»å–æ–‡ä»¶çš„ç»“æŸä½ç½®*/
+    unsigned int act_count;         /*è¯»å–åˆ°çš„æœ‰æ•ˆæ•°æ®é•¿åº¦*/
 
     if(LUA_UNCOMPRESS_FILE & fp->_type)
     {
@@ -359,13 +359,13 @@ size_t lualibc_fread(void *buf, size_t size, size_t count, FILE *fp)
         read_count = act_up_boundary - act_low_boundary; 
 
 
-        /*¶àÉêÇë8¸ö×Ö½ÚµÄÄÚ´æ£¬ÒÔ±£Ö¤ÄÜ4×Ö½Ú¶ÔÆë*/
+        /*å¤šç”³è¯·8ä¸ªå­—èŠ‚çš„å†…å­˜ï¼Œä»¥ä¿è¯èƒ½4å­—èŠ‚å¯¹é½*/
         data = (unsigned int*)L_MALLOC(4 + read_count + 4);
         
-        /*±£Ö¤4×Ö½Ú¶ÔÆë*/
+        /*ä¿è¯4å­—èŠ‚å¯¹é½*/
         temp = (unsigned char*)((((unsigned int)data + 3) >> 2) << 2);
 
-        /*°ÑÎÄ¼şÖ¸ÕëÒÆµ½ÒÔ512¶ÔÆëµÄÎ»ÖÃ*/
+        /*æŠŠæ–‡ä»¶æŒ‡é’ˆç§»åˆ°ä»¥512å¯¹é½çš„ä½ç½®*/
         lualibc_fseek(fp, act_low_boundary, SEEK_SET);
         
     }
@@ -404,7 +404,7 @@ size_t lualibc_fread(void *buf, size_t size, size_t count, FILE *fp)
             
             act_count = resid;
 
-            /*Èç¹ûÃ»ÓĞ¶Áµ½×ã¹»¶àµÄÊı¾İ£¬ÒâÎ¶×Å¿ìµ½ÎÄ¼şµÄÄ©Î²ÁË*/
+            /*å¦‚æœæ²¡æœ‰è¯»åˆ°è¶³å¤Ÿå¤šçš„æ•°æ®ï¼Œæ„å‘³ç€å¿«åˆ°æ–‡ä»¶çš„æœ«å°¾äº†*/
             if(read_count > len)
             {
                 lualibc_fseek(fp, 0, SEEK_END);
@@ -416,7 +416,7 @@ size_t lualibc_fread(void *buf, size_t size, size_t count, FILE *fp)
                 }
             }
             
-            /*°ÑÎÄ¼şÖ¸ÕëÒÆµ½ÕæÊµµÄÎ»ÖÃ*/
+            /*æŠŠæ–‡ä»¶æŒ‡é’ˆç§»åˆ°çœŸå®çš„ä½ç½®*/
             lualibc_fseek(fp, offset + act_count, SEEK_SET);
 
 #ifdef CRYPTO_DEBUG
@@ -537,7 +537,7 @@ int lualibc_setvbuf(FILE *fp, char *buf, int mode, size_t size)
     return (-1);
 }
 
-/*+\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 int lualibc_remove(const char *filename)
 {
     if(_unlink_r(filename) == -1)
@@ -545,7 +545,7 @@ int lualibc_remove(const char *filename)
 
     return 0;
 }
-/*-\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 
 int lualibc_rename(const char *old, const char *new)
 {

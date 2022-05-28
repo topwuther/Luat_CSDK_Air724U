@@ -7,7 +7,7 @@
  * Date:    2013/6/6
  *
  * Description:
- *          lua.adc adc·ÃÎÊ¿â
+ *          lua.adc adcè®¿é—®åº“
  **************************************************************************/
 
 #include <stdlib.h>
@@ -21,7 +21,7 @@
 #include "platform_pmd.h"
 
 // adc.open(id)
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 static int adc_open(lua_State *L) {
     int id = luaL_checkinteger(L, 1);
 	int scale =  luaL_optinteger(L, 2, 0);
@@ -35,7 +35,7 @@ static int adc_open(lua_State *L) {
 
     return 1; 
 }
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 
 // adc.read(id)
 static int adc_read(lua_State *L) {    
@@ -82,12 +82,12 @@ LUALIB_API int luaopen_adc( lua_State *L )
 {
     luaL_register( L, AUXLIB_ADC, adc_map );
 
-	/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+	/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 	MOD_REG_NUMBER(L, "SCALE_1V250", PLATFORM_ADC_SCALE_1V250);
     MOD_REG_NUMBER(L, "SCALE_2V444", PLATFORM_ADC_SCALE_2V444);
     MOD_REG_NUMBER(L, "SCALE_3V233", PLATFORM_ADC_SCALE_3V233);
     MOD_REG_NUMBER(L, "SCALE_5V000", PLATFORM_ADC_SCALE_5V000);
-	/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+	/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 	
     return 1;
 }  

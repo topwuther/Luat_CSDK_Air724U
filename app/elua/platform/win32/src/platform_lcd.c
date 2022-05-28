@@ -19,9 +19,9 @@ COLORREF rgb5652rgb888(unsigned char *image)
     COLORREF color;
     
     B=(*image) & 0x1F;//000BBBBB 
-    G=(( *(image+1) << 3 ) & 0x38) + (( *image >> 5 ) & 0x07) ;//µÃµ½00GGGGGG00 
-    R=( *(image+1) >> 3 ) & 0x1F; //µÃµ½000RRRRR 
-    colorB=B * 255 / 31; // °Ñ5bitsÓ³Éäµ½8bits
+    G=(( *(image+1) << 3 ) & 0x38) + (( *image >> 5 ) & 0x07) ;//å¾—åˆ°00GGGGGG00 
+    R=( *(image+1) >> 3 ) & 0x1F; //å¾—åˆ°000RRRRR 
+    colorB=B * 255 / 31; // æŠŠ5bitsæ˜ å°„åˆ°8bits
     colorG=G * 255 / 63; 
     colorR=R * 255 / 31; 
     
@@ -51,7 +51,7 @@ void platform_lcd_init(const PlatformDispInitParam *pParam)
     //printf("[platform_lcd_init]: rst pin is port %d pin %d\r\n", PLATFORM_IO_GET_PORT(pParam->pin_rst), PLATFORM_IO_GET_PIN(pParam->pin_rst));
 }
 
-/*+\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*+\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
 PlatformRect RectLast;
 u8 *bufferLast = NULL;
 #define OFFSET_X 400
@@ -110,4 +110,4 @@ void platform_lcd_update_period(void)
     lcd_update_function(&RectLast,bufferLast);
 
 }
-/*-\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*-\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/

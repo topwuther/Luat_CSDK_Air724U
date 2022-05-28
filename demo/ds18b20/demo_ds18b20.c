@@ -14,7 +14,7 @@ char TempStr[10] = {0};
 static void oled_task(PVOID pParameter)
 {
 
-    if (OLED_Init() == FALSE) //初始化OLED
+    if (OLED_Init() == FALSE) //鍒濆鍖朞LED
     {
         while (1)
         {
@@ -29,9 +29,9 @@ static void oled_task(PVOID pParameter)
 
     while (1)
     {
-        OLED_ShowString(50, 40, TempStr, 12); //显示ASCII字符
-        OLED_ShowNum(50, 52, TempNum, 6, 12); //显示ASCII字符
-        OLED_Refresh_Gram();                  //更新显示到OLED
+        OLED_ShowString(50, 40, TempStr, 12); //鏄剧ずASCII瀛楃
+        OLED_ShowNum(50, 52, TempNum, 6, 12); //鏄剧ずASCII瀛楃
+        OLED_Refresh_Gram();                  //鏇存柊鏄剧ず鍒癘LED
         iot_os_sleep(1000);
         iot_debug_print("[oled]demo_oled run!");
     }

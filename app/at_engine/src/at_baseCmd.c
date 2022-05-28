@@ -1,9 +1,9 @@
 #include "at.h"
 #include "at_baseCmd.h"
 //#include "gsm.h"
-//执行AT命令
-//存储数据
-//上传
+//鎵цAT鍛戒护
+//瀛樺偍鏁版嵁
+//涓婁紶
 
 at_cmdResult at_NEW_Cmdtest(uint8_t id)
 {

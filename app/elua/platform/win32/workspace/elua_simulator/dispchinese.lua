@@ -5,13 +5,13 @@ local function lcdinit()
 	local lcdparam = {
 		width = 128,
 		height = 64,
-		bpp = 1, -- bits per pixel 1ÎªºÚ°×ÆÁ
-		xoffset = 1, -- ÈôÎª0¿É²»ÅäÖÃ¸ÃÏî
-		yoffset = 32, -- ÈôÎª0¿É²»ÅäÖÃ¸ÃÏî
+		bpp = 1, -- bits per pixel 1ä¸ºé»‘ç™½å±
+		xoffset = 1, -- è‹¥ä¸º0å¯ä¸é…ç½®è¯¥é¡¹
+		yoffset = 32, -- è‹¥ä¸º0å¯ä¸é…ç½®è¯¥é¡¹
 		bus = disp.BUS_SPI4LINE,
 		pinrst = pio.P0_12, -- LCD_RST GPIO_12
-		pincs = pio.P1_7, -- LCD_CS GPO_7 ÈôÊ¹ÓÃÄ¬ÈÏÆ¬Ñ¡Ôò²»ÉèÖÃ¸ÃÏî
-		initcmd = { -- ³õÊ¼»¯²ÎÊı±í
+		pincs = pio.P1_7, -- LCD_CS GPO_7 è‹¥ä½¿ç”¨é»˜è®¤ç‰‡é€‰åˆ™ä¸è®¾ç½®è¯¥é¡¹
+		initcmd = { -- åˆå§‹åŒ–å‚æ•°è¡¨
 			0xE2,
 			0xA3,
 			0xA0,
@@ -25,7 +25,7 @@ local function lcdinit()
 		},
 	}
 
-	-- ³õÊ¼»¯ÏÔÊ¾½Ó¿Ú
+	-- åˆå§‹åŒ–æ˜¾ç¤ºæ¥å£
 	disp.init(lcdparam)
 end
 
@@ -34,8 +34,8 @@ pmd.ldoset(1,pmd.LDO_LCD) -- backlight on
 lcdinit()
 
 disp.clear()
--- ×Ö¸ß16
-disp.puttext("¡¢¡£¡ª¡­¡®¡¯¡°¡±¡²¡³¡´¡µ¡¶¡·¡¸¡¹¡º¡»¡¾¡¿£¡£¨£©£¬£®£º£»£¿£­",0,0)
+-- å­—é«˜16
+disp.puttext("ã€ã€‚â€•â€¦â€˜â€™â€œâ€ã€”ã€•ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼ï¼ˆï¼‰ï¼Œï¼ï¼šï¼›ï¼Ÿï¼",0,0)
 
 disp.update()
 

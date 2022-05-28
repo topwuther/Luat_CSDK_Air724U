@@ -15,25 +15,25 @@
 #include <devman.h>
 #include "am_openat_fs.h"
 
-/*+\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
+/*+\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
 typedef enum
 {
-	E_PLATFROM_FLASH_INTERNAL, // mount ÄÚ²¿µÄflashÇøÓò
-    E_PLATFROM_FLASH_EXTERN_PINLCD, // mount Íâ²¿µÄflashÇøÓò£¬Ê¹ÓÃLCD pin½Å¸´ÓÃ  V_LCD¹©µç
-    E_PLATFROM_FLASH_EXTERN_PINGPIO,// mount Íâ²¿µÄflashÇøÓò£¬Ê¹ÓÃGPIO pin½Å¸´ÓÃ V_PAD_1V8¹©µç
+	E_PLATFROM_FLASH_INTERNAL, // mount å†…éƒ¨çš„flashåŒºåŸŸ
+    E_PLATFROM_FLASH_EXTERN_PINLCD, // mount å¤–éƒ¨çš„flashåŒºåŸŸï¼Œä½¿ç”¨LCD pinè„šå¤ç”¨  V_LCDä¾›ç”µ
+    E_PLATFROM_FLASH_EXTERN_PINGPIO,// mount å¤–éƒ¨çš„flashåŒºåŸŸï¼Œä½¿ç”¨GPIO pinè„šå¤ç”¨ V_PAD_1V8ä¾›ç”µ
 }PLATFORM_FLASH_TYPE;
 
 
 typedef struct
 {
-	char *path;    //mountµÄÎÄ¼şÏµÍ³¸ùÄ¿Â¼ ³¤¶È>=5
-	UINT32 offset; //flash µØÖ·Æ«ÒÆÁ¿
-	UINT32 size;  //ÎÄ¼şÏµÍ³µÄ´óĞ¡
+	char *path;    //mountçš„æ–‡ä»¶ç³»ç»Ÿæ ¹ç›®å½• é•¿åº¦>=5
+	UINT32 offset; //flash åœ°å€åç§»é‡
+	UINT32 size;  //æ–‡ä»¶ç³»ç»Ÿçš„å¤§å°
 	PLATFORM_FLASH_TYPE exFlash;
-	UINT8 clkDiv; //Íâ²¿flash·ÖÆµ·¶Î§2-255. clk=166M/clkDiv	
+	UINT8 clkDiv; //å¤–éƒ¨flashåˆ†é¢‘èŒƒå›´2-255. clk=166M/clkDiv	
 }PLATFORM_FS_MOUNT_PARAM;
 
-/*-\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
+/*-\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
 const DM_DEVICE* platform_fs_init(void);
 
 int platformfs_removedir_r( const char *path );
@@ -54,18 +54,18 @@ int platformfs_findclose_r(int find_id);
 int platformfs_makedir_r( const char *path, int mode );
 
 _ssize_t platformfs_get_size_r(const char *path);
-/*+\BUG\wangyuan\2020.06.11\½«sdcard¹ÒÔØ¡¢Ğ¶ÔØ¡¢¸ñÊ½»¯²Ù×÷·Åµ½io¿âÖĞ*/
-/*+\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
+/*+\BUG\wangyuan\2020.06.11\å°†sdcardæŒ‚è½½ã€å¸è½½ã€æ ¼å¼åŒ–æ“ä½œæ”¾åˆ°ioåº“ä¸­*/
+/*+\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
 BOOL platform_sdcard_fsMount(void);
 
 BOOL platform_sdcard_fsUMount(void);
 
 BOOL platformfs_Format_sdcard(void);
-/*-\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
-/*-\BUG\wangyuan\2020.06.11\½«sdcard¹ÒÔØ¡¢Ğ¶ÔØ¡¢¸ñÊ½»¯²Ù×÷·Åµ½io¿âÖĞ*/
+/*-\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
+/*-\BUG\wangyuan\2020.06.11\å°†sdcardæŒ‚è½½ã€å¸è½½ã€æ ¼å¼åŒ–æ“ä½œæ”¾åˆ°ioåº“ä¸­*/
 #endif //__PLATFORM_FS_H__
 
-/*+\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*+\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/
 BOOL platformfs_otp_erase(UINT16 address, UINT16 size);
 
 BOOL platformfs_otp_write(UINT16 address, char * data, UINT32 size);
@@ -73,4 +73,4 @@ BOOL platformfs_otp_write(UINT16 address, char * data, UINT32 size);
 BOOL platformfs_otp_read(UINT16 address, char * data, UINT32 size);
 
 BOOL platformfs_otp_lock(UINT16 address, UINT16 size);
-/*-\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*-\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/

@@ -1,15 +1,15 @@
 /*
- * 1¡¢DEMO»ùÓÚMQTT-3.1.1Ğ­Òé±àĞ´£¬²âÊÔÓÃ¿Í»§¶ËMQTT.fx-1.3.0£¬¼òµ¥ÑİÊ¾ÁË±¨ÎÄÀàĞÍ1~14µÄÊ¹ÓÃ·½·¨£¬
- *   ²¢ÇÒÆôÓÃÁË»á»°ÇåÀí¹¦ÄÜ£¬Òò´ËÒ²²»Ê¹ÓÃÏûÏ¢ÖØÊÔ¹¦ÄÜ
- * 2¡¢DEMO¶©ÔÄ2¸öÖ÷Ìâ£¬air202/gprs/tx,air202/ctrl£¬Îª·ÀÖ¹³åÍ»£¬ÇëÓÃ»§ĞŞ¸ÄÎªÆäËûÖ÷Ìâ
- * 3¡¢ÓÃ»§µÄ¿Í»§¶ËÉÏ¶©ÔÄ1¸öÖ÷Ìâ£¬air202/gprs/rx£¬Îª·ÀÖ¹³åÍ»£¬ÇëÓÃ»§ĞŞ¸ÄÎªÆäËûÖ÷Ìâ£¬»òÕßÊ¹ÓÃ×Ô¼ºµÄ·şÎñÆ÷
- * 4¡¢connect³É¹¦ºó£¬Ä£¿éÍùair202/gprs/txÖ÷ÌâÉÏpublishÒ»ÌõµÇÂ¼ÏûÏ¢
- * 5¡¢ÓÃ»§Íùair202/gprs/txÖ÷ÌâÉÏpublishÊı¾İ£¬Ä£¿é½ÓÊÕºóÔ­Ñùpublishµ½air202/gprs/rx
- * 6¡¢ÓÃ»§Íùair202/ctrlÖ÷ÌâÉÏpublish"quit"£¬Ä£¿éÍùair202/gprs/txÖ÷ÌâÉÏpublishÒ»Ìõqos0µÄÍË³öÏûÏ¢£¬
- * 	    Ä£¿éÈ¡ÏûËùÓĞ¶©ÔÄ£¬disconnect£¬ÈÎÎñÍ£Ö¹
- * 7¡¢DEMOËùÓĞ±¨ÎÄ³¤¶ÈÏŞÖÆÔÚ1460£¬¿ÉÒÔĞŞ¸Ä
- * 8¡¢MQTTĞ­ÒéÓÉÓÚ¾­¹ıÖĞ×ª£¬ËùÒÔ¿Í»§¶ËÊÕµ½Ä£¿éµÄ·µ»ØĞÅÏ¢£¬´ó¸ÅÔÚ1~3Ãë×óÓÒ¶¼ÊÇÕı³£
- * 9¡¢ºê¶¨ÒåºÍÈ«¾Ö±äÁ¿¿É¸ù¾İÊµ¼ÊÇé¿öĞŞ¸Ä
+ * 1ã€DEMOåŸºäºMQTT-3.1.1åè®®ç¼–å†™ï¼Œæµ‹è¯•ç”¨å®¢æˆ·ç«¯MQTT.fx-1.3.0ï¼Œç®€å•æ¼”ç¤ºäº†æŠ¥æ–‡ç±»å‹1~14çš„ä½¿ç”¨æ–¹æ³•ï¼Œ
+ *   å¹¶ä¸”å¯ç”¨äº†ä¼šè¯æ¸…ç†åŠŸèƒ½ï¼Œå› æ­¤ä¹Ÿä¸ä½¿ç”¨æ¶ˆæ¯é‡è¯•åŠŸèƒ½
+ * 2ã€DEMOè®¢é˜…2ä¸ªä¸»é¢˜ï¼Œair202/gprs/tx,air202/ctrlï¼Œä¸ºé˜²æ­¢å†²çªï¼Œè¯·ç”¨æˆ·ä¿®æ”¹ä¸ºå…¶ä»–ä¸»é¢˜
+ * 3ã€ç”¨æˆ·çš„å®¢æˆ·ç«¯ä¸Šè®¢é˜…1ä¸ªä¸»é¢˜ï¼Œair202/gprs/rxï¼Œä¸ºé˜²æ­¢å†²çªï¼Œè¯·ç”¨æˆ·ä¿®æ”¹ä¸ºå…¶ä»–ä¸»é¢˜ï¼Œæˆ–è€…ä½¿ç”¨è‡ªå·±çš„æœåŠ¡å™¨
+ * 4ã€connectæˆåŠŸåï¼Œæ¨¡å—å¾€air202/gprs/txä¸»é¢˜ä¸Špublishä¸€æ¡ç™»å½•æ¶ˆæ¯
+ * 5ã€ç”¨æˆ·å¾€air202/gprs/txä¸»é¢˜ä¸Špublishæ•°æ®ï¼Œæ¨¡å—æ¥æ”¶ååŸæ ·publishåˆ°air202/gprs/rx
+ * 6ã€ç”¨æˆ·å¾€air202/ctrlä¸»é¢˜ä¸Špublish"quit"ï¼Œæ¨¡å—å¾€air202/gprs/txä¸»é¢˜ä¸Špublishä¸€æ¡qos0çš„é€€å‡ºæ¶ˆæ¯ï¼Œ
+ * 	    æ¨¡å—å–æ¶ˆæ‰€æœ‰è®¢é˜…ï¼Œdisconnectï¼Œä»»åŠ¡åœæ­¢
+ * 7ã€DEMOæ‰€æœ‰æŠ¥æ–‡é•¿åº¦é™åˆ¶åœ¨1460ï¼Œå¯ä»¥ä¿®æ”¹
+ * 8ã€MQTTåè®®ç”±äºç»è¿‡ä¸­è½¬ï¼Œæ‰€ä»¥å®¢æˆ·ç«¯æ”¶åˆ°æ¨¡å—çš„è¿”å›ä¿¡æ¯ï¼Œå¤§æ¦‚åœ¨1~3ç§’å·¦å³éƒ½æ˜¯æ­£å¸¸
+ * 9ã€å®å®šä¹‰å’Œå…¨å±€å˜é‡å¯æ ¹æ®å®é™…æƒ…å†µä¿®æ”¹
  */
 #include "string.h"
 #include "iot_os.h"
@@ -35,13 +35,13 @@ enum
 #define SOCKET_CLOSE(A)         if (A >= 0) {close(A);A = -1;}
 
 
-#define MQTT_RECONNECT_MAX			(8)				//×î´óÖØÁ¬´ÎÊı
-#define MQTT_PUBLISH_DEFAULT_QOS	MQTT_MSG_QOS2	//Ä£¿éPUBLISHµÄÄ¬ÈÏQOS,QOS1
-#define MQTT_PAYLOAD_MAX			(1400)			//ÓĞĞ§ÔØºÉ×î´ó³¤¶È1400
-#define MQTT_MSG_LEN_MAX			(1460)			//MQTT±¨ÎÄ×î´ó³¤¶È1460
-#define MQTT_HEAD_LEN_MAX			(128)			//MQTT±¨Í·×î´ó³¤¶È128
-#define MQTT_TCP_TO					(30)			//MQTT TCPÊÕ·¢³¬Ê±30S
-#define MQTT_HEAT_TO				(120)			//MQTTĞÄÌøÖÜÆÚ120S
+#define MQTT_RECONNECT_MAX			(8)				//æœ€å¤§é‡è¿æ¬¡æ•°
+#define MQTT_PUBLISH_DEFAULT_QOS	MQTT_MSG_QOS2	//æ¨¡å—PUBLISHçš„é»˜è®¤QOS,QOS1
+#define MQTT_PAYLOAD_MAX			(1400)			//æœ‰æ•ˆè½½è·æœ€å¤§é•¿åº¦1400
+#define MQTT_MSG_LEN_MAX			(1460)			//MQTTæŠ¥æ–‡æœ€å¤§é•¿åº¦1460
+#define MQTT_HEAD_LEN_MAX			(128)			//MQTTæŠ¥å¤´æœ€å¤§é•¿åº¦128
+#define MQTT_TCP_TO					(30)			//MQTT TCPæ”¶å‘è¶…æ—¶30S
+#define MQTT_HEAT_TO				(120)			//MQTTå¿ƒè·³å‘¨æœŸ120S
 #define MQTT_TOPIC_LEN					(256)
 #ifdef __SSL_ENABLE__
 #define MQTT_SSL_URL				"mqtt.test.com"
@@ -62,9 +62,9 @@ const MQTT_SubscribeStruct DemoSub[2] =
 				.Qos = MQTT_SUBSCRIBE_QOS2,
 		}
 };
-const int8_t *DemoPublishTopicGPRS = "air202/gprs/rx";//Ä£¿é·¢²¼µ½·şÎñÆ÷µÄÖ÷Ìâ
-const int8_t *DemoClientID = NULL;	//Èç¹ûÌîĞ´NULL£¬ÔòÓÉ·şÎñÆ÷×Ô¶¯·ÖÅä
-//ÒÔÏÂ±äÁ¿£¬¿É¸ù¾İÊµ¼ÊĞèÒªÌîĞ´NULL£¬µ«ÊÇ±ØĞëÍ¬Ê±ĞŞ¸ÄCONNECTÖĞµÄÁ¬½Ó±êÊ¶Î»£¬·ñÔò»á³ö´í
+const int8_t *DemoPublishTopicGPRS = "air202/gprs/rx";//æ¨¡å—å‘å¸ƒåˆ°æœåŠ¡å™¨çš„ä¸»é¢˜
+const int8_t *DemoClientID = NULL;	//å¦‚æœå¡«å†™NULLï¼Œåˆ™ç”±æœåŠ¡å™¨è‡ªåŠ¨åˆ†é…
+//ä»¥ä¸‹å˜é‡ï¼Œå¯æ ¹æ®å®é™…éœ€è¦å¡«å†™NULLï¼Œä½†æ˜¯å¿…é¡»åŒæ—¶ä¿®æ”¹CONNECTä¸­çš„è¿æ¥æ ‡è¯†ä½ï¼Œå¦åˆ™ä¼šå‡ºé”™
 const int8_t *DemoWillTopic = "air202/gprs/rx";
 const int8_t *DemoWillMsg = "error offline";
 const int8_t *DemoUser = "user";
@@ -72,26 +72,26 @@ const int8_t *DemoPasswd = "password";
 /*************************************************************/
 static HANDLE hTimer;
 static HANDLE hSocketTask;
-static E_OPENAT_NETWORK_STATE NWState;				//ÍøÂç×´Ì¬
-static uint8_t MQTTRxBuf[MQTT_MSG_LEN_MAX];			//MQTT½ÓÊÕ±¨ÎÄ»º´æ
-static uint8_t MQTTTxBuf[MQTT_MSG_LEN_MAX];			//MQTT·¢ËÍ±¨ÎÄ»º´æ
-static uint8_t MQTTTempBuf[MQTT_PAYLOAD_MAX];		//MQTTÁÙÊ±Êı¾İ»º´æ
-static uint8_t MQTTPayload[MQTT_PAYLOAD_MAX];		//MQTTÓĞĞ§ÔØºÉ»º´æ
-static uint8_t MQTTAnalyzeBuf[MQTT_MSG_LEN_MAX * 2];//MQTT½ÓÊÕĞèÒª½âÎöµÄÊı¾İ»º´æ
+static E_OPENAT_NETWORK_STATE NWState;				//ç½‘ç»œçŠ¶æ€
+static uint8_t MQTTRxBuf[MQTT_MSG_LEN_MAX];			//MQTTæ¥æ”¶æŠ¥æ–‡ç¼“å­˜
+static uint8_t MQTTTxBuf[MQTT_MSG_LEN_MAX];			//MQTTå‘é€æŠ¥æ–‡ç¼“å­˜
+static uint8_t MQTTTempBuf[MQTT_PAYLOAD_MAX];		//MQTTä¸´æ—¶æ•°æ®ç¼“å­˜
+static uint8_t MQTTPayload[MQTT_PAYLOAD_MAX];		//MQTTæœ‰æ•ˆè½½è·ç¼“å­˜
+static uint8_t MQTTAnalyzeBuf[MQTT_MSG_LEN_MAX * 2];//MQTTæ¥æ”¶éœ€è¦è§£æçš„æ•°æ®ç¼“å­˜
 
 static Buffer_Struct TxBuffer;
 static Buffer_Struct PayloadBuffer;
-static uint16_t gPackID = 0;						//È«¾Ö±¨ÎÄ±êÊ¶·û
+static uint16_t gPackID = 0;						//å…¨å±€æŠ¥æ–‡æ ‡è¯†ç¬¦
 static uint8_t ToFlag = 0;
 static int MQTT_MessageAnalyze(MQTT_HeadStruct *Rxhead, int32_t Socketfd, uint8_t *QuitFlag);
 static uint32_t MQTT_Gethostbyname(void)
 {
-    //ÓòÃû½âÎö
+    //åŸŸåè§£æ
 	openat_ip_addr_t *IP;
     struct hostent *hostentP = NULL;
     char *ipAddr = NULL;
 
-    //»ñÈ¡ÓòÃûipĞÅÏ¢
+    //è·å–åŸŸåipä¿¡æ¯
     hostentP = gethostbyname(MQTT_URL);
 
     if (!hostentP)
@@ -100,7 +100,7 @@ static uint32_t MQTT_Gethostbyname(void)
         return 0;
     }
 
-    // ½«ip×ª»»³É×Ö·û´®
+    // å°†ipè½¬æ¢æˆå­—ç¬¦ä¸²
     ipAddr = ipaddr_ntoa((const openat_ip_addr_t *)hostentP->h_addr_list[0]);
 
     DBG_ERROR("gethostbyname %s ip %s", MQTT_URL, ipAddr);
@@ -123,8 +123,8 @@ static int32_t Socket_ConnectServer(void)
 	        DBG_ERROR("create tcp socket error");
 	        return -1;
 	    }
-	    // ½¨Á¢TCPÁ´½Ó
-	    memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // ³õÊ¼»¯·şÎñÆ÷µØÖ·
+	    // å»ºç«‹TCPé“¾æ¥
+	    memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // åˆå§‹åŒ–æœåŠ¡å™¨åœ°å€
 	    TCPServerAddr.sin_family = OPENAT_AF_INET;
 	    TCPServerAddr.sin_port = htons((unsigned short)MQTT_PORT);
 	    TCPServerAddr.sin_addr.s_addr = IP;
@@ -201,7 +201,7 @@ static int32_t MQTT_TCPRx(int32_t Socketfd, uint32_t TimeoutSec)
     return Result;
 }
 
-//MQTT±¨ÎÄÔ¤ÏÈ´¦Àí
+//MQTTæŠ¥æ–‡é¢„å…ˆå¤„ç†
 static int32_t MQTT_RxPreDeal(MQTT_HeadStruct *Rxhead, int32_t RxLen)
 {
 	uint8_t *Payload = NULL;
@@ -230,7 +230,7 @@ static int32_t MQTT_RxPreDeal(MQTT_HeadStruct *Rxhead, int32_t RxLen)
 	return 0;
 }
 
-//MQTT CONNECT¹ı³Ì
+//MQTT CONNECTè¿‡ç¨‹
 static int32_t MQTT_Connect(int32_t Socketfd)
 {
 	uint32_t TxLen;
@@ -269,7 +269,7 @@ static int32_t MQTT_Connect(int32_t Socketfd)
 	return 0;
 }
 
-//MQTT¶©ÔÄÖ÷Ìâ¹ı³Ì
+//MQTTè®¢é˜…ä¸»é¢˜è¿‡ç¨‹
 static int32_t MQTT_Subscribe(int32_t Socketfd)
 {
 	int i;
@@ -304,7 +304,7 @@ static int32_t MQTT_Subscribe(int32_t Socketfd)
 		return -1;
 	}
 
-	//¶©ÔÄÁË¶àÉÙ¸öÖ÷Ìâ£¬¾ÍÓĞ¶àÉÙ¸ö»Ø¸´×Ö½Ú
+	//è®¢é˜…äº†å¤šå°‘ä¸ªä¸»é¢˜ï¼Œå°±æœ‰å¤šå°‘ä¸ªå›å¤å­—èŠ‚
 	for (i = 0; i < sizeof(DemoSub)/sizeof(MQTT_SubscribeStruct);i++)
 	{
 		switch (PayloadBuffer.Data[i])
@@ -322,7 +322,7 @@ static int32_t MQTT_Subscribe(int32_t Socketfd)
 	return 1;
 }
 
-//MQTT È¡Ïû¶©ÔÄÖ÷Ìâ¹ı³Ì
+//MQTT å–æ¶ˆè®¢é˜…ä¸»é¢˜è¿‡ç¨‹
 static int32_t MQTT_Unsubscribe(int32_t Socketfd)
 {
 	uint32_t TxLen;
@@ -359,7 +359,7 @@ static int32_t MQTT_Unsubscribe(int32_t Socketfd)
 	return 0;
 }
 
-//MQTT ĞÄÌø¹ı³Ì
+//MQTT å¿ƒè·³è¿‡ç¨‹
 static int32_t MQTT_Heart(int32_t Socketfd)
 {
 	uint32_t TxLen;
@@ -552,9 +552,9 @@ static void MQTT_Task(PVOID pParameter)
 	while (!Quit)
 	{
 		SOCKET_CLOSE(Socketfd);
-		iot_os_sleep(5000);	//ÕâÀï×îºÃÊ¹ÓÃtimerÀ´ÑÓ³Ù£¬demo¼ò»¯Ê¹ÓÃ
+		iot_os_sleep(5000);	//è¿™é‡Œæœ€å¥½ä½¿ç”¨timeræ¥å»¶è¿Ÿï¼Œdemoç®€åŒ–ä½¿ç”¨
 		iot_os_stop_timer(hTimer);
-		iot_os_start_timer(hTimer, 90*1000);//90ÃëÄÚÈç¹ûÃ»ÓĞ¼¤»îAPN£¬ÖØÆôÄ£¿é
+		iot_os_start_timer(hTimer, 90*1000);//90ç§’å†…å¦‚æœæ²¡æœ‰æ¿€æ´»APNï¼Œé‡å¯æ¨¡å—
 		ToFlag = 0;
 		if (NWState != OPENAT_NETWORK_LINKED)
 		{
@@ -619,7 +619,7 @@ static void MQTT_Task(PVOID pParameter)
 			continue;
 		}
 
-		iot_os_start_timer(hTimer, MQTT_HEAT_TO*1000);//Æô¶¯ĞÄÌø¼ÆÊ±
+		iot_os_start_timer(hTimer, MQTT_HEAT_TO*1000);//å¯åŠ¨å¿ƒè·³è®¡æ—¶
 		ToFlag = 0;
 		Error = 0;
 		LastRxByte = 0;
@@ -713,7 +713,7 @@ static void MQTT_Task(PVOID pParameter)
 						}
 						else
 						{
-							iot_os_start_timer(hTimer, MQTT_HEAT_TO*1000);//Æô¶¯ĞÄÌø¼ÆÊ±
+							iot_os_start_timer(hTimer, MQTT_HEAT_TO*1000);//å¯åŠ¨å¿ƒè·³è®¡æ—¶
 						}
 						break;
 					default:

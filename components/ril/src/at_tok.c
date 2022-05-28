@@ -187,12 +187,12 @@ int at_tok_hasmore(char **p_cur)
     return ! (*p_cur == NULL || **p_cur == '\0');
 }
 
-/*+\New\xiongjunqun\2011.10.31\Ìí¼ÓĞÂµÄº¯Êı²éÕÒĞ¡À¨»¡*/  
+/*+\New\xiongjunqun\2011.10.31\æ·»åŠ æ–°çš„å‡½æ•°æŸ¥æ‰¾å°æ‹¬å¼§*/  
 int at_tok_nextparenthes(char **p_cur,char **p_out)
 {
-/*+\BUG WM-85\xiongjunqun\2012.01.16\ÇåÀí±àÒë¹ı³ÌÖĞµÄwarning*/
+/*+\BUG WM-85\xiongjunqun\2012.01.16\æ¸…ç†ç¼–è¯‘è¿‡ç¨‹ä¸­çš„warning*/
     if (*p_cur == NULL) return -1;
-/*-\BUG WM-85\xiongjunqun\2012.01.16\ÇåÀí±àÒë¹ı³ÌÖĞµÄwarning*/
+/*-\BUG WM-85\xiongjunqun\2012.01.16\æ¸…ç†ç¼–è¯‘è¿‡ç¨‹ä¸­çš„warning*/
     while (**p_cur != '\0' && **p_cur != '(') {
         (*p_cur)++;
     }
@@ -207,4 +207,4 @@ int at_tok_nextparenthes(char **p_cur,char **p_out)
 		return -1;
     }
 }
-/*-\New\xiongjunqun\2011.10.31\Ìí¼ÓĞÂµÄº¯Êı²éÕÒĞ¡À¨»¡*/   
+/*-\New\xiongjunqun\2011.10.31\æ·»åŠ æ–°çš„å‡½æ•°æŸ¥æ‰¾å°æ‹¬å¼§*/   

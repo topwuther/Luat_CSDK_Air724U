@@ -54,9 +54,9 @@ VOID demo_flash_erase(VOID)
 
 VOID demo_flash(VOID)
 {
-    demo_flash_erase(); // ²Áflash
-    demo_flash_write(); // Ğ´flash
-    demo_flash_read();  // ¶Áflash
+    demo_flash_erase(); // æ“¦flash
+    demo_flash_write(); // å†™flash
+    demo_flash_read();  // è¯»flash
 }
 
 VOID demo_flash_init(VOID)
@@ -73,7 +73,7 @@ VOID demo_flash_init(VOID)
 
 int appimg_enter(void *param)
 {    
-    //¿ª»úÁ¢¿ÌÊ¹ÓÃflash£¬»á¿´²»µ½´òÓ¡ĞÅÏ¢
+    //å¼€æœºç«‹åˆ»ä½¿ç”¨flashï¼Œä¼šçœ‹ä¸åˆ°æ‰“å°ä¿¡æ¯
 	iot_os_sleep(400);
     flash_print("[flash] app_main");
 

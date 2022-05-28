@@ -26,7 +26,7 @@ static int demo_socket_tcp_recv(int socketfd)
 {
     unsigned char recv_buff[64] = {0};
     int recv_len;
-    // TCP ½ÓÊÜÊı¾İ
+    // TCP æ¥å—æ•°æ®
     recv_len = recv(socketfd, recv_buff, sizeof(recv_buff), 0);
     socket_dbg("[coreTest-socket]: tcp recv result %d data %s", recv_len, recv_buff);
     return recv_len;
@@ -35,7 +35,7 @@ static int demo_socket_tcp_recv(int socketfd)
 static int demo_socket_tcp_send(int socketfd)
 {
     int send_len;
-    // TCP ·¢ËÍÊı¾İ
+    // TCP å‘é€æ•°æ®
     send_len = send(socketfd, "hello i'm client", strlen("hello i'm client"), 0);
     socket_dbg("[coreTest-socket]: tcp send [hello i'm client] result = %d", send_len);
     return send_len;
@@ -47,7 +47,7 @@ static int demo_socket_tcp_connect_server(void)
     int connErr;
     struct openat_sockaddr_in tcp_server_addr;
 
-    // ´´½¨tcp socket
+    // åˆ›å»ºtcp socket
     socketfd = socket(OPENAT_AF_INET, OPENAT_SOCK_STREAM, 0);
     if (socketfd < 0)
     {
@@ -57,8 +57,8 @@ static int demo_socket_tcp_connect_server(void)
 
     socket_dbg("[coreTest-socket]: create tcp socket success");
 
-    // ½¨Á¢TCPÁ´½Ó
-    memset(&tcp_server_addr, 0, sizeof(tcp_server_addr)); // ³õÊ¼»¯·şÎñÆ÷µØÖ·
+    // å»ºç«‹TCPé“¾æ¥
+    memset(&tcp_server_addr, 0, sizeof(tcp_server_addr)); // åˆå§‹åŒ–æœåŠ¡å™¨åœ°å€
     tcp_server_addr.sin_family = OPENAT_AF_INET;
     tcp_server_addr.sin_port = htons((unsigned short)DEMO_SERVER_TCP_PORT);
     inet_aton(DEMO_SERVER_TCP_IP, &tcp_server_addr.sin_addr);
@@ -100,12 +100,12 @@ static int demo_socket_udp_send(int socketfd)
     int send_len;
     struct openat_sockaddr_in udp_server_addr;
 
-    memset(&udp_server_addr, 0, sizeof(udp_server_addr)); // ³õÊ¼»¯·şÎñÆ÷µØÖ·
+    memset(&udp_server_addr, 0, sizeof(udp_server_addr)); // åˆå§‹åŒ–æœåŠ¡å™¨åœ°å€
     udp_server_addr.sin_family = OPENAT_AF_INET;
     udp_server_addr.sin_port = htons((unsigned short)DEMO_SERVER_UDP_PORT);
     inet_aton(DEMO_SERVER_UDP_IP, &udp_server_addr.sin_addr);
 
-    // UDP ·¢ËÍÊı¾İ
+    // UDP å‘é€æ•°æ®
     send_len = sendto(socketfd, "hello i'm client", strlen("hello i'm client"), 0, (struct sockaddr *)&udp_server_addr, sizeof(struct openat_sockaddr));
     socket_dbg("[coreTest-socket]: udp send [hello i'm client] result = %d", send_len);
     return send_len;
@@ -119,13 +119,13 @@ static int demo_socket_udp_recv(int socketfd)
 
     struct openat_sockaddr_in udp_server_addr;
 
-    memset(&udp_server_addr, 0, sizeof(udp_server_addr)); // ³õÊ¼»¯·şÎñÆ÷µØÖ·
+    memset(&udp_server_addr, 0, sizeof(udp_server_addr)); // åˆå§‹åŒ–æœåŠ¡å™¨åœ°å€
     udp_server_addr.sin_family = OPENAT_AF_INET;
     udp_server_addr.sin_port = htons((unsigned short)DEMO_SERVER_UDP_PORT);
     inet_aton(DEMO_SERVER_UDP_IP, &udp_server_addr.sin_addr);
     udp_server_len = sizeof(udp_server_addr);
 
-    // UDP ½ÓÊÜÊı¾İ
+    // UDP æ¥å—æ•°æ®
     recv_len = recvfrom(socketfd, recv_buff, sizeof(recv_buff), 0, (struct sockaddr *)&udp_server_addr, &udp_server_len);
     socket_dbg("[coreTest-socket]: udp recv result %d data %s", recv_len, recv_buff);
 
@@ -144,7 +144,7 @@ static void demo_socket_udp_client()
             return;
         }
     }
-    // ´´½¨tcp socket
+    // åˆ›å»ºtcp socket
     socket_dbg("[coreTest-socket]: create udp socket success");
 
     int ret = demo_socket_udp_send(socketfd);
@@ -153,7 +153,7 @@ static void demo_socket_udp_client()
         int err = socket_errno(socketfd);
         socket_dbg("[coreTest-False-socket]: send last error %d", err);
     }
-    //×èÈû¶ÁÈ¡
+    //é˜»å¡è¯»å–
     ret = demo_socket_udp_recv(socketfd);
     if (ret <= 0)
         socket_dbg("[coreTest-False-socket]: recv error %d", socket_errno(socketfd));
@@ -165,13 +165,13 @@ static void demo_socket_udp_client()
 
 static void demo_gethostbyname(void)
 {
-    //ÓòÃû½âÎö
+    //åŸŸåè§£æ
 
     char *name = "www.baidu.com";
     struct openat_hostent *hostentP = NULL;
     char *ipAddr = NULL;
 
-    //»ñÈ¡ÓòÃûipĞÅÏ¢
+    //è·å–åŸŸåipä¿¡æ¯
     hostentP = gethostbyname(name);
 
     if (!hostentP)
@@ -180,7 +180,7 @@ static void demo_gethostbyname(void)
         return;
     }
 
-    // ½«ip×ª»»³É×Ö·û´®
+    // å°†ipè½¬æ¢æˆå­—ç¬¦ä¸²
     ipAddr = ipaddr_ntoa((const openat_ip_addr_t *)hostentP->h_addr_list[0]);
 
     socket_dbg("[coreTest-socket]: gethostbyname %s ip %s", name, ipAddr);

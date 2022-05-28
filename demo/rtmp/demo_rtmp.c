@@ -240,7 +240,7 @@ bool rtmp_open_url(RTMP_PLAY_CALLBACK cb,const char* url)
 {
 	RTMP_PLAYER *rp = &g_rtmp_play;
 	
-	RTMP_LogSetCallback(iot_debug_print); //ÉèÖÃdebugº¯Êı
+	RTMP_LogSetCallback(iot_debug_print); //è®¾ç½®debugå‡½æ•°
 	RTMP_LogSetLevel(RTMP_LOGDEBUG);	
 	RTMP_Log(RTMP_LOGINFO,"rtmp_open_url state = %d,url = %s",rp->player_state,url);	
 	
@@ -264,7 +264,8 @@ bool rtmp_close()
 	
 	return true;
 }
-
+
+
 static void demo_networkIndCallBack(E_OPENAT_NETWORK_STATE state)
 {
     iot_debug_print("[rtmp] network ind state %d", state);
@@ -277,7 +278,7 @@ void demo_rtmp_task(void *param)
 	{
 		while(g_network_state != OPENAT_NETWORK_LINKED)	
 		{
-			iot_os_sleep(500); //µÈ´ıPDP¼¤»î
+			iot_os_sleep(500); //ç­‰å¾…PDPæ¿€æ´»
 		}
 		g_rtmp_sema = osiSemaphoreCreate(1, 0);
 		
@@ -288,7 +289,7 @@ void demo_rtmp_task(void *param)
 		rtmp_close();
 
 		if(g_rtmp_sema)
-			osiSemaphoreAcquire(g_rtmp_sema); //µÈ´ı¹Ø±ÕÍê³É
+			osiSemaphoreAcquire(g_rtmp_sema); //ç­‰å¾…å…³é—­å®Œæˆ
 		
 		iot_os_sleep(5000);
 	}
@@ -298,7 +299,7 @@ void demo_rtmp_init(void)
 { 
     iot_debug_print("[rtmp] demo_rtmp_init");
 	
-    //×¢²áÍøÂç×´Ì¬»Øµ÷º¯Êı
+    //æ³¨å†Œç½‘ç»œçŠ¶æ€å›è°ƒå‡½æ•°
     iot_network_set_cb(demo_networkIndCallBack);
 
     iot_os_create_task(demo_rtmp_task,

@@ -33,11 +33,11 @@ s32 platform_spi_send(u32 id, u8* data, int len)
         return -1;
     }
     memset(rev_temp, 0, len);
-	/*+\BUG1029\rww\2020.1.14\spi csw_mem ËÀ»ú*/
+	/*+\BUG1029\rww\2020.1.14\spi csw_mem æ­»æœº*/
 	s32 rwlen = IVTBL(RwSPI)((E_AMOPENAT_SPI_PORT)id, data, rev_temp, len);
 	free(rev_temp);
     return rwlen;
-	/*-\BUG1029\rww\2020.1.14\spi csw_mem ËÀ»ú*/
+	/*-\BUG1029\rww\2020.1.14\spi csw_mem æ­»æœº*/
     //return IVTBL(WriteSPI)((E_AMOPENAT_SPI_PORT)id, data, len, NULL);
 }
 
@@ -53,7 +53,7 @@ s32 platform_spi_recv(u32 id, u8** data, int len)
     send = malloc(len);
     if(send == NULL)
     {
-    /*+\BUG1029\rww\2020.1.14\spi csw_mem ËÀ»ú*/
+    /*+\BUG1029\rww\2020.1.14\spi csw_mem æ­»æœº*/
     	free(*data);
         return -1;
     }
@@ -61,7 +61,7 @@ s32 platform_spi_recv(u32 id, u8** data, int len)
 	s32 rwlen = IVTBL(RwSPI)((E_AMOPENAT_SPI_PORT)id, send, *data, len);
 	free(send);
     return rwlen;
-	/*-\BUG1029\rww\2020.1.14\spi csw_mem ËÀ»ú*/
+	/*-\BUG1029\rww\2020.1.14\spi csw_mem æ­»æœº*/
     //return IVTBL(ReadSPI)((E_AMOPENAT_SPI_PORT)id, *data, len);
 }
 

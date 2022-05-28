@@ -7,7 +7,7 @@
  * Date:    2020/5/11
  *
  * Description:
- *          lua.wifi·ÃÎÊ¿â
+ *          lua.wifiè®¿é—®åº“
  **************************************************************************/
 #if defined(LUA_WIFISCAN_SUPPORT)
 #include <stdlib.h>
@@ -24,7 +24,7 @@ HANDLE wifiscantimer=0;
 UINT32 wifiscanmax = 0;
 UINT32 wifiscanmaxtimeout = 0;
 
-/*+\bug\wj\2020.11.23\½«wifiÉ¨Ãè¸ÄÎªÒì²½£¬·ñÔò»á×èÈûluaTask*/
+/*+\bug\wj\2020.11.23\å°†wifiæ‰«ææ”¹ä¸ºå¼‚æ­¥ï¼Œå¦åˆ™ä¼šé˜»å¡luaTask*/
 void wifi_scan_cb(OPENAT_wifiScanRequest* req)
 {
 	char* wifiinfo = NULL;
@@ -46,9 +46,9 @@ void wifi_scan_cb(OPENAT_wifiScanRequest* req)
 			while(j < req->found)
 			{
 				OPENAT_wifiApInfo *w = &req->aps[j];
-				/*+\BUG\wangyuan\2020.07.10\BUG_2539:V0018 wifiÉ¨ÃèµÃµ½µÄap macµØÖ·ÓĞµÄ¶ªÁË0*/
+				/*+\BUG\wangyuan\2020.07.10\BUG_2539:V0018 wifiæ‰«æå¾—åˆ°çš„ap macåœ°å€æœ‰çš„ä¸¢äº†0*/
 				num += sprintf(wifiinfo + num, "%04x%08lx,%d,%u;",w->bssid_high, w->bssid_low, w->rssival, w->channel);
-				/*-\BUG\wangyuan\2020.07.10\BUG_2539:V0018 wifiÉ¨ÃèµÃµ½µÄap macµØÖ·ÓĞµÄ¶ªÁË0*/
+				/*-\BUG\wangyuan\2020.07.10\BUG_2539:V0018 wifiæ‰«æå¾—åˆ°çš„ap macåœ°å€æœ‰çš„ä¸¢äº†0*/
 				j++;
 			}
 		}
@@ -113,7 +113,7 @@ static int wifi_getinfo(lua_State *L) {
     return 1;
 
 }
-/*-\bug\wj\2020.11.23\½«wifiÉ¨Ãè¸ÄÎªÒì²½£¬·ñÔò»á×èÈûluaTask*/
+/*-\bug\wj\2020.11.23\å°†wifiæ‰«ææ”¹ä¸ºå¼‚æ­¥ï¼Œå¦åˆ™ä¼šé˜»å¡luaTask*/
 #include "lrodefs.h"  
 
 // Module function map

@@ -1,5 +1,5 @@
 
--- ¶ÌĞÅÔ¶³ÌÒ£¿Ø²Ù×÷
+-- çŸ­ä¿¡è¿œç¨‹é¥æ§æ“ä½œ
 require"sys"
 require"common"
 require"sms"
@@ -22,14 +22,14 @@ local function procsms(num,data)
 		local admin = nvm.isadmin(num)
 		local alarmnum = nvm.isalarmnum(num)
 
-		if op == "Í£Ö¹±¨¾¯" and alarmnum ==  true then opfnc = defense.alarmstop
-		elseif op == "²¼·À" and admin == true then opfnc = defense.alert
-		elseif op == "³··À" and admin == true then opfnc = defense.disarm
-		elseif op == "ÔÚÄÄÀï" and admin == true then replypos(num) return --²éÑ¯Î»ÖÃ
+		if op == "åœæ­¢æŠ¥è­¦" and alarmnum ==  true then opfnc = defense.alarmstop
+		elseif op == "å¸ƒé˜²" and admin == true then opfnc = defense.alert
+		elseif op == "æ’¤é˜²" and admin == true then opfnc = defense.disarm
+		elseif op == "åœ¨å“ªé‡Œ" and admin == true then replypos(num) return --æŸ¥è¯¢ä½ç½®
 		else print("num invalid operation",num,string.byte(op,1,-1)) return
 		end
 
-		sms.send(num,common.binstohexs(common.gb2312toucs2be(op..(opfnc("sms") == true and "³É¹¦" or "Ê§°Ü"))))
+		sms.send(num,common.binstohexs(common.gb2312toucs2be(op..(opfnc("sms") == true and "æˆåŠŸ" or "å¤±è´¥"))))
 	else
 		print("invalid data",data)
 	end
@@ -41,7 +41,7 @@ end
 
 local function readcnf(result,num,data,pos)
 	procsms(num,data)
-	-- É¾³ıĞÂ¶ÌĞÅ
+	-- åˆ é™¤æ–°çŸ­ä¿¡
 	sms.delete(pos)
 end
 

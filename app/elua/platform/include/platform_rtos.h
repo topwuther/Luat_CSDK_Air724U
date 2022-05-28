@@ -7,7 +7,7 @@
  * Date:    2013/3/7
  *
  * Description:
- *          luaÆ½Ì¨²ãrtos¿â½Ó¿Ú
+ *          luaå¹³å°å±‚rtosåº“æ¥å£
  **************************************************************************/
 
 #ifndef __PLATFORM_RTOS_H__
@@ -33,9 +33,9 @@ typedef enum
   MSG_ID_RTOS_AUDIO,
   MSG_ID_RTOS_WEAR_STATUS,
   MSG_ID_RTOS_RECORD,
-  /*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+  /*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
   MSG_ID_ROTS_STRAM_RECORD_IND, //14
-  /*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+  /*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
   MSG_ID_RTOS_ALARM,
   MSG_ID_APP_MTHL_ACTIVATE_PDP_CNF,
   MSG_ID_APP_MTHL_GET_HOST_BY_NAME_CNF,
@@ -61,27 +61,27 @@ typedef enum
   MSG_ID_TCPIP_SOCKET_CONNECT_CNF,
   MSG_ID_TCPIP_SOCKET_SEND_IND,
   MSG_ID_TCPIP_SOCKET_CLOSE_IND,
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
   MSG_ID_RTOS_TTSPLY_STATUS,
   MSG_ID_RTOS_TTSPLY_ERROR,
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
   MSG_ID_RTOS_MSG_ZBAR,
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
-  /*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+  /*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
   MSG_ID_RTOS_MSG_WIFI,
-  /*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
-  /*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+  /*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
+  /*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
   MSG_ID_RTOS_BLUETOOTH,
-  /*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
-  /*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+  /*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
+  /*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
   MSG_ID_RTOS_HEADSET,
-  /*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
-  /*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+  /*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
+  /*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
   MSG_ID_RTOS_RTMP,
-  /*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+  /*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
   MSG_ID_NULL,
 
   MSG_ID_MAX = 0x100,
@@ -89,7 +89,7 @@ typedef enum
 }platform_msg_type;
 
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 typedef enum PlatformPoweronReasonTag
 {
     PLATFORM_POWERON_KEY,
@@ -98,22 +98,22 @@ typedef enum PlatformPoweronReasonTag
     PLATFORM_POWERON_RESTART,
     PLATFORM_POWERON_OTHER,
     PLATFORM_POWERON_UNKNOWN,
-    /*+\NewReq NEW\zhuth\2014.6.18\Ôö¼Ó¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
+    /*+\NewReq NEW\zhuth\2014.6.18\å¢åŠ å¼€æœºåŸå› å€¼æ¥å£*/
     PLATFORM_POWERON_EXCEPTION,
     PLATFORM_POWERON_HOST,
     PLATFORM_POWERON_WATCHDOG,
-    /*-\NewReq NEW\zhuth\2014.6.18\Ôö¼Ó¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
+    /*-\NewReq NEW\zhuth\2014.6.18\å¢åŠ å¼€æœºåŸå› å€¼æ¥å£*/
 
 }PlatformPoweronReason;    
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 
-// ³õÊ¼»¯µÄÄ£¿éID
+// åˆå§‹åŒ–çš„æ¨¡å—ID
 typedef enum PlatformRtosModuleTag
 {
     RTOS_MODULE_ID_KEYPAD,
-	/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+	/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     RTOS_MODULE_ID_ALARM,
-	/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+	/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
     RTOS_MODULE_ID_TOUCH,
     // touch screen...
@@ -130,7 +130,7 @@ typedef struct KeypadMatrixDataTag
 typedef struct KeypadMsgDataTag
 {
     u8   type;  // keypad type
-    BOOL bPressed; /* ÊÇ·ñÊÇ°´ÏÂÏûÏ¢ */
+    BOOL bPressed; /* æ˜¯å¦æ˜¯æŒ‰ä¸‹æ¶ˆæ¯ */
     union {
         struct {
             u8 row;
@@ -147,15 +147,15 @@ typedef struct TouchMsgDataTag
     UINT16   y;
 }TouchMsgData;
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
 typedef struct PlatformIntDataTag
 {
     elua_int_id             id;
     elua_int_resnum         resnum;
 }PlatformIntData;
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
 
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
 #define PLATFORM_BATT_NOT_CHARGING      0
 #define PLATFORM_BATT_CHARING           1
 #define PLATFORM_BATT_CHARGE_STOP       2
@@ -168,15 +168,15 @@ typedef struct PlatformPmdDataTag
     u8      battLevel;
     u16     battVolt;
 }PlatformPmdData;
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
 
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 typedef struct PlatformAudioDataTag
 {
     BOOL    playEndInd;
     BOOL    playErrorInd;
 }PlatformAudioData;
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 
 typedef struct PlatformRecordDataTag
 {
@@ -184,23 +184,23 @@ typedef struct PlatformRecordDataTag
     BOOL    recordErrorInd;
 }PlatformRecordData;
 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 typedef struct PlatformZbarDataTag
 {
     BOOL    result;
     u8 *pType;
     u8 *pData;
 }PlatformZbarData;
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
-/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
 typedef struct PlatformWifiDataTag
 {
     UINT32    num;
     CHAR* pData;
 }PlatformWifiData;
-/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 
 typedef struct PlatformBluetoothDataTag
 {
@@ -213,7 +213,7 @@ typedef struct PlatformBluetoothDataTag
     UINT8 long_uuid[16];
     UINT8 uuid_flag;
 }PlatformBluetoothData;
-/*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 
 
 
@@ -221,7 +221,7 @@ typedef struct PlatformWearStatusDataTag
 {
     BOOL    wearStatus;
 }PlatformWearStatusData;
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 //#if defined(__AM_LUA_TTSPLY_SUPPORT__)
 typedef struct tagPlatformTtsPlyData
 {
@@ -229,7 +229,7 @@ typedef struct tagPlatformTtsPlyData
     s32    ttsPlyErrorInd;
 }PlatformTtsPlyData;
 //#endif //__AM_LUA_TTSPLY_SUPPORT__
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 #define PLATFORM_RTOS_WAIT_MSG_INFINITE         (OPENAT_OS_SUSPENDED)
 
 #if 0
@@ -239,15 +239,15 @@ typedef enum PlatformMsgIdTag
     RTOS_MSG_TIMER,
     RTOS_MSG_UART_RX_DATA,
     RTOS_MSG_KEYPAD,
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
     RTOS_MSG_INT,             
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
     RTOS_MSG_PMD,
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
     RTOS_MSG_AUDIO,
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 
     NumOfMsgIds
 }PlatformMsgId;
@@ -300,46 +300,46 @@ typedef struct
   UINT8 socket_index;
   UINT32 length;
 }PlatformSocketSendCnf;
-/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 typedef struct
 {
 	UINT8 msg_id;
 	UINT32 param;
 }PlatformHeadsetData;
-/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
-/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
+/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 typedef struct
 {
 	BOOL result;
 	UINT8 result_code;
 }PlatformRtmpData;
-/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 typedef union PlatformMsgDataTag
 {
     int                 timer_id;
     int                 uart_id;
     KeypadMsgData       keypadMsgData;
     TouchMsgData        touchMsgData;
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
     PlatformIntData     interruptData;
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
     PlatformPmdData     pmdData;
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
     PlatformAudioData   audioData;
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 
     PlatformRecordData recordData;
-	/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+	/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
 	int streamRecordLen;
-	/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+	/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
     PlatformWearStatusData wearStatusData;
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
     //#if defined(__AM_LUA_TTSPLY_SUPPORT__)
     PlatformTtsPlyData ttsPlyData;
     //#endif //__AM_LUA_TTSPLY_SUPPORT__
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
     PlatformGpsData    gpsData;
     PlatformGpsOpenInd gpsOpenInd;
     PlatformRemSimInsertInd remSimInsertInd;
@@ -350,24 +350,24 @@ typedef union PlatformMsgDataTag
     PlatformPdpActiveCnf    pdpActiveCnf;
     PlatformSocketSendCnf   socketSendCnf;
 	
-	/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
     PlatformZbarData      zbarData;
-	/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
-	/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+	/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
+	/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
 	PlatformWifiData      wifiData;
-	/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
-	/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+	/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
+	/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 	PlatformBluetoothData      blueData;
-	/*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
-	/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+	/*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
+	/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 	PlatformHeadsetData headsetData;
-	/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
-	/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+	/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
+	/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 	PlatformRtmpData	  rtmpData;
-	/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+	/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 }PlatformMsgData;
 
-/*±ØĞëÒª½¨Á¢ÕâÃ´Ò»¸ö½á¹¹£¬ÒÔLOCAL_PARA_HDR£¬ÒòÎªconstruct_local_paraÊ±¶¼ÊÇ±ØĞëÒª´øÉÏLOCAL_PARA_HDRµÄ*/
+/*å¿…é¡»è¦å»ºç«‹è¿™ä¹ˆä¸€ä¸ªç»“æ„ï¼Œä»¥LOCAL_PARA_HDRï¼Œå› ä¸ºconstruct_local_paraæ—¶éƒ½æ˜¯å¿…é¡»è¦å¸¦ä¸ŠLOCAL_PARA_HDRçš„*/
 typedef struct  LOCAL_PARAM_STRUCT_TAG
 {
     //LOCAL_PARA_HDR
@@ -384,7 +384,7 @@ typedef struct PlatformKeypadInitParamTag
     }matrix;
 }PlatformKeypadInitParam;
 
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 typedef struct PlatformSetAlarmParamTag
 {
     BOOL alarmon;
@@ -395,20 +395,20 @@ typedef struct PlatformSetAlarmParamTag
     u8 min;
     u8 sec;
 }PlatformSetAlarmParam;
-/*+\NEW\zhuwangbin\2019.12.10\lua °æ±¾±àÒë²»¹ı*/
+/*+\NEW\zhuwangbin\2019.12.10\lua ç‰ˆæœ¬ç¼–è¯‘ä¸è¿‡*/
 #undef ASSERT
 #define ASSERT(cOND)	{if (!(cOND)) {platform_assert(__FILE__, (short)__LINE__);}}
-/*-\NEW\zhuwangbin\2019.12.10\lua °æ±¾±àÒë²»¹ı*/
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\zhuwangbin\2019.12.10\lua ç‰ˆæœ¬ç¼–è¯‘ä¸è¿‡*/
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 int platform_rtos_init(void);
 
-/*+\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*+\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 int platform_rtos_poweroff(int type);
-/*-\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*-\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 
-/*+\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 int platform_rtos_restart(void);
-/*-\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 
 int platform_rtos_init_module(int module, void *pParam);
 
@@ -422,20 +422,20 @@ int platform_rtos_start_timer(int timer_id, int milliSecond);
 
 int platform_rtos_stop_timer(int timer_id);
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 int platform_rtos_tick(void);
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 int platform_get_poweron_reason(void);
 
 int platform_rtos_poweron(int flag);
 
 void platform_poweron_try(void);
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 int platform_rtos_setalarm(void *pParam);
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
 // +panjun, 2015.08.26, Simplify MMI's frame for Video.
 int platform_rtos_repoweron(void);
@@ -444,9 +444,9 @@ char*  platform_base64_encode(const char *str, int length);
 
 extern void LuaChargingPwnOnThanPwnOn(void);
 
-/*+\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/  
+/*+\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/  
 char* platform_base64_decode (const char *src, int length,int* decodedLen);
-/*-\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*-\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 //+panjun,160503,Add an API "rtos.disk_free".
 long platform_rtos_disk_free(int drvtype);
 int platform_rtos_disk_volume(int drvtype);
@@ -462,11 +462,11 @@ int platform_rtos_fota_process(const char* data, int len, int total);
 int platform_rtos_fota_end(void);
 BOOL platform_rtos_set_trace_port(u8 port, u8 usb_port_diag_output);
 u8 platform_rtos_get_trace_port(void);
-/*+\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*+\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 int platform_rtos_sendok(char *src);
-/*-\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
-/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+/*-\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
+/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 int platform_rtos_set_luainfo(char *src);
-/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 #endif //__PLATFORM_RTOS_H__
 

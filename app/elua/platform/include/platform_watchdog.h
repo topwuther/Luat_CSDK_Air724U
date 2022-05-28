@@ -7,7 +7,7 @@
  * Date:    2014/4/5
  *
  * Description:
- *          platform watchdog �ӿ�
+ *          platform watchdog ½Ó¿Ú
  **************************************************************************/
 
 #ifndef _PLATFORM_WATCHDOG_H_

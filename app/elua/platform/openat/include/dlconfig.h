@@ -7,7 +7,7 @@
  * Date:    2013/5/4
  *
  * Description:
- *          dlmalloc�����ļ�
+ *          dlmalloc配置文件
  **************************************************************************/
 
 #if !defined(_DL_CONFIG_H_)
@@ -35,7 +35,7 @@
 #if defined(DLMALLOC_DEFAULT_GRANULARITY)
 #define DEFAULT_GRANULARITY ((size_t)(DLMALLOC_DEFAULT_GRANULARITY))
 #else
-/*����mmap��ϵͳ����һ�η�����ڴ��СΪ256K*/
+/*定义mmap从系统堆中一次分配的内存大小为256K*/
 #define DEFAULT_GRANULARITY ((size_t)256U * (size_t)1024U)
 #endif
 

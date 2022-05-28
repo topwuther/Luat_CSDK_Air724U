@@ -7,7 +7,7 @@
  * Date:    2013/6/17
  *
  * Description:
- *          c库函数time接口实现
+ *          c搴撳嚱鏁皌ime鎺ュ彛瀹炵幇
  **************************************************************************/
 
 #include "stdio.h"
@@ -30,9 +30,9 @@ time_t lualibc_time(time_t *_timer)
 {
     T_AMOPENAT_SYSTEM_DATETIME sysDateTime;
 	
-/*+\NEW\RUFEI\2015.2.6\修改openat的rtc接口*/
+/*+\NEW\RUFEI\2015.2.6\淇敼openat鐨剅tc鎺ュ彛*/
     if(!OPENAT_get_system_datetime(&sysDateTime))
-/*-\NEW\RUFEI\2015.2.6\修改openat的rtc接口*/
+/*-\NEW\RUFEI\2015.2.6\淇敼openat鐨剅tc鎺ュ彛*/
         return (time_t)-1;
 
     return _gmtotime_t( sysDateTime.nYear, 

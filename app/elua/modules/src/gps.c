@@ -7,7 +7,7 @@
  * Date:    2014/8/6
  *
  * Description:
- *          lua.gpscore gpscore·ÃÎÊ¿â
+ *          lua.gpscore gpscoreÂ·ÃƒÃŽÃŠÂ¿Ã¢
  **************************************************************************/
 #ifdef LUA_GPS_LIB
 

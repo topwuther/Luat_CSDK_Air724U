@@ -95,46 +95,46 @@ LUALIB_API int ( luaopen_crypto)( lua_State *L );
 #define AUXLIB_PMD     "pmd"
 LUALIB_API int ( luaopen_pmd )( lua_State *L );
 
-/*+\NEW\liweiqiang\2013.7.16\Ôö¼Óiconv×Ö·û±àÂë×ª»»¿â */
+/*+\NEW\liweiqiang\2013.7.16\å¢åŠ iconvå­—ç¬¦ç¼–ç è½¬æ¢åº“ */
 #define AUXLIB_ICONV     "iconv"
 LUALIB_API int ( luaopen_iconv)( lua_State *L );
-/*-\NEW\liweiqiang\2013.7.16\Ôö¼Óiconv×Ö·û±àÂë×ª»»¿â */
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\liweiqiang\2013.7.16\å¢åŠ iconvå­—ç¬¦ç¼–ç è½¬æ¢åº“ */
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 #ifdef LUA_BLUETOOTH_LIB
 #define AUXLIB_BLUETOOTH "btcore"
 LUALIB_API int ( luaopen_bluetooth)( lua_State *L );
 #endif
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 #ifdef LUA_AUDIO_LIB
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 #define AUXLIB_AUDIOCORE "audiocore"
 LUALIB_API int ( luaopen_audiocore)( lua_State *L );
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 #endif
-/*+\NEW\liweiqiang\2014.2.9\Ôö¼Ózlib¿â */
+/*+\NEW\liweiqiang\2014.2.9\å¢åŠ zlibåº“ */
 #define AUXLIB_ZLIB "zlib"
 LUALIB_API int ( luaopen_zlib)( lua_State *L );
-/*-\NEW\liweiqiang\2014.2.9\Ôö¼Ózlib¿â */
+/*-\NEW\liweiqiang\2014.2.9\å¢åŠ zlibåº“ */
 
-/*+\NEW\liweiqiang\2014.4.8\watchdog¿â */
+/*+\NEW\liweiqiang\2014.4.8\watchdogåº“ */
 #define AUXLIB_WATCHDOG      "watchdog"
 LUALIB_API int ( luaopen_watchdog )( lua_State *L );
-/*-\NEW\liweiqiang\2014.4.8\watchdog¿â */
+/*-\NEW\liweiqiang\2014.4.8\watchdogåº“ */
 #ifdef LUA_GPS_LIB
-/*+\NEW\zhuth\2014.8.6\Ôö¼Ógpscore½Ó¿Ú¿â*/
+/*+\NEW\zhuth\2014.8.6\å¢åŠ gpscoreæ¥å£åº“*/
 #define AUXLIB_GPSCORE      "gpscore"
 LUALIB_API int ( luaopen_gpscore )( lua_State *L );
-/*-\NEW\zhuth\2014.8.6\Ôö¼Ógpscore½Ó¿Ú¿â*/
+/*-\NEW\zhuth\2014.8.6\å¢åŠ gpscoreæ¥å£åº“*/
 #endif
 
 #define AUXLIB_TCPIPSOCK      "socketcore"
 LUALIB_API int ( luaopen_tcpipsock )( lua_State *L );
 
 
-/*+\NEW\xiongjunqun\2015.06.11\Ôö¼Ófactory½Ó¿Ú¿â*/
+/*+\NEW\xiongjunqun\2015.06.11\å¢åŠ factoryæ¥å£åº“*/
 #define AUXLIB_FACTORY      "factory"
 LUALIB_API int ( luaopen_factorycore )( lua_State * L );
-/*-\NEW\xiongjunqun\2015.06.11\Ôö¼Ófactory½Ó¿Ú¿â*/
+/*-\NEW\xiongjunqun\2015.06.11\å¢åŠ factoryæ¥å£åº“*/
 
 #ifdef LUA_QRENCODE_SUPPORT
 #define AUXLIB_QRENCODE      "qrencode"
@@ -162,12 +162,12 @@ LUALIB_API int ( luaopen_ttsplycore )( lua_State * L );
 LUALIB_API int ( luaopen_onewire )( lua_State * L );
 
 
-/*+\NEW\zhutianhua\2018.3.7 14:8\Ö§³ÖPBC¿â*/
+/*+\NEW\zhutianhua\2018.3.7 14:8\æ”¯æŒPBCåº“*/
 #if defined(AM_PBC_SUPPORT)
 #define AUXLIB_PBC     "protobuf.c"
 LUALIB_API int ( luaopen_protobuf_c)( lua_State *L );
 #endif
-/*-\NEW\zhutianhua\2018.3.7 14:8\Ö§³ÖPBC¿â*/
+/*-\NEW\zhutianhua\2018.3.7 14:8\æ”¯æŒPBCåº“*/
 
 // Helper macros
 #define MOD_CHECK_ID( mod, id )\

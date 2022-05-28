@@ -68,8 +68,8 @@ typedef struct
 {
   LOCAL_PARA_HDR
   kal_uint8 sock_id;
-  kal_bool result;//ÊÇ·ñ³É¹¦£»
-  kal_int32 ret_val;//Êµ¼ÊËÍµ½TCP·¢ËÍBufferÖĞµÄdata size
+  kal_bool result;//æ˜¯å¦æˆåŠŸï¼›
+  kal_int32 ret_val;//å®é™…é€åˆ°TCPå‘é€Bufferä¸­çš„data size
   kal_uint32    user_data;
 } mthl_send_data_cnf_struct, mthl_send_data_ind_struct;
 
@@ -101,8 +101,8 @@ typedef struct
 typedef struct
 { 
   LOCAL_PARA_HDR
-  kal_bool result;//¹Ø±ÕÊÇ·ñ³É¹¦£»
-  kal_uint8 sock_id;//¹Ø±ÕµÄSockets ID£»
+  kal_bool result;//å…³é—­æ˜¯å¦æˆåŠŸï¼›
+  kal_uint8 sock_id;//å…³é—­çš„Sockets IDï¼›
   kal_uint32    user_data;
 } mthl_close_sock_cnf_struct;
 

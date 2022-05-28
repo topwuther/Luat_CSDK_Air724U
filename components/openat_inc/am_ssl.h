@@ -442,7 +442,7 @@ typedef enum {
     TLS_S_CONNECTING  = 1,
     TLS_S_HANDSHAKING = 2,
     TLS_S_HANDSHAKED  = 3,
-    TLS_S_SHUTDOWNED  = 4 //ÔİÊ±Î´ÓÃ
+    TLS_S_SHUTDOWNED  = 4 //æš‚æ—¶æœªç”¨
 } tls_state_enum;
     
 /***************************************************************************
@@ -640,17 +640,17 @@ typedef struct
     ssl_context              *ctx;          /* sec_ssl_ctx_new()/sec_ssl_ctx_free() */
     ctr_drbg_context         *ctr;
     entropy_context          *ent;
-	/*+\BUG\wj\2020.2.19\ÑéÖ¤SSLÍ¨¹ı*/
+	/*+\BUG\wj\2020.2.19\éªŒè¯SSLé€šè¿‡*/
     x509_crt                *ca;
     x509_crt                *user_ca;
     pk_context              *private_key;
-    /*-\BUG\wj\2020.2.19\ÑéÖ¤SSLÍ¨¹ı*/
+    /*-\BUG\wj\2020.2.19\éªŒè¯SSLé€šè¿‡*/
     
     kal_uint16               app_str;
 
     /* context state */
     #define TLS_CTX_INUSE    (0x0001)
-    kal_uint16               state; //ÊÇ·ñÕıÔÚÊ¹ÓÃ
+    kal_uint16               state; //æ˜¯å¦æ­£åœ¨ä½¿ç”¨
 
     kal_int16              app_mod_id;
     openat_tls_version_enum         version;
@@ -661,7 +661,7 @@ typedef struct
     kal_int32                cipher_num;
 
     /* tls_set_verify */
-    kal_uint32               *root_cert_id;   /* pointer to an array of cert ids end by 0.  //Î´Ê¹ÓÃ
+    kal_uint32               *root_cert_id;   /* pointer to an array of cert ids end by 0.  //æœªä½¿ç”¨
                                                * tls_malloc()/tls_mfree() */
     kal_char                 ca_path[TLS_MAX_FILENAME_LEN +1];
     tls_cert_verify_callback verify_callback;
@@ -721,13 +721,13 @@ typedef struct {
     kal_int16         app_mod_id;
 
     tls_context_struct  *ctx;       /* backward pointer to global context */
-    tls_state_enum      state; //³õÊ¼×´Ì¬»òÔòÎÕÊÖÊ§°Ü×´Ì¬Îª£ºTLS_S_CLOSED£¬ÎÕÊÖ³É¹¦ÎªTLS_S_HANDSHAKED
+    tls_state_enum      state; //åˆå§‹çŠ¶æ€æˆ–åˆ™æ¡æ‰‹å¤±è´¥çŠ¶æ€ä¸ºï¼šTLS_S_CLOSEDï¼Œæ¡æ‰‹æˆåŠŸä¸ºTLS_S_HANDSHAKED
 
     /* auxiliary flags for remembering states */
     #define TLS_AUTO_REHANDSHAKE      (0x01)
     #define TLS_REHANDSHAKING         (0x02)
     #define TLS_HANDSHAKE_REQUESTED   (0x04)
-    kal_uint32          flags;  //Ã»ÓÃ
+    kal_uint32          flags;  //æ²¡ç”¨
 
     #define RCVD_INVALID_CERT     (0x01u << 0)
     #define INVALID_CERT_NOTIFIED (0x01u << 1)
@@ -737,16 +737,16 @@ typedef struct {
     #define OCSP_VERIFIED         (0x01u << 5)
     #define PROCESSING_HANDSHAKE  (RCVD_INVALID_CERT | RCVD_CLIENT_AUTH | OCSP_VERIFYING)
 
-    kal_uint32          cert_state; //ÔİÊ±Î´ÓÃ£¬ÖµÎª0 /* handling cert with mmi_certman or certman */
+    kal_uint32          cert_state; //æš‚æ—¶æœªç”¨ï¼Œå€¼ä¸º0 /* handling cert with mmi_certman or certman */
 
     /* invalid certificate */
-    kal_bool            check_cert; //Ö»ÉèÖÃÁËÖµ£¬²¢Ã»ÓĞÊµ¼ÊÊ¹ÓÃ
+    kal_bool            check_cert; //åªè®¾ç½®äº†å€¼ï¼Œå¹¶æ²¡æœ‰å®é™…ä½¿ç”¨
 #ifdef _DEFENCE_MITM_
     tls_cert_fngrpt_record  *server_cert_fngrpt;
 #endif /* _DEFENCE_MITM_ */
-    kal_uint8           *peer_cert;       //ÖµÎªNULL£¬²¢Î´Êµ¼ÊÊ¹ÓÃ          /* tls_malloc()/tls_mfree() */
-    kal_uint32          peer_cert_len;    //ÖµÎªNULL£¬²¢Î´Êµ¼ÊÊ¹ÓÃ
-    kal_uint32          peer_cert_warning; //²¢Î´Êµ¼ÊÊ¹ÓÃ
+    kal_uint8           *peer_cert;       //å€¼ä¸ºNULLï¼Œå¹¶æœªå®é™…ä½¿ç”¨          /* tls_malloc()/tls_mfree() */
+    kal_uint32          peer_cert_len;    //å€¼ä¸ºNULLï¼Œå¹¶æœªå®é™…ä½¿ç”¨
+    kal_uint32          peer_cert_warning; //å¹¶æœªå®é™…ä½¿ç”¨
     kal_char           *peer_cert_filename;    /* tls_malloc()/tls_mfree() */
 
 #ifdef __OCSP_SUPPORT__
@@ -758,7 +758,7 @@ typedef struct {
 
     /* client authentication */
     //sec_cert_types      cert_type;      /* len, types[SEC_MAX_CERT_TYPES], in raw format */
-    kal_uint8           auth_name_cnt;  //²¢Î´Êµ¼ÊÊ¹ÓÃ
+    kal_uint8           auth_name_cnt;  //å¹¶æœªå®é™…ä½¿ç”¨
     //sec_auth_names      auth_names[TLS_MAX_AUTHNAMES]; /* just write them to files */
     kal_char            *certauth_filename;     /* tls_malloc()/tls_mfree() */
 	f_openat_tls_notify_indcb tls_notify_indcb;

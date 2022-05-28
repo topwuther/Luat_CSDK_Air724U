@@ -229,7 +229,7 @@
 #  define NO_DUMMY_DECL
 #endif
 
-/*+\New\lisiqi\2018.03.08\解压大的ZIP文件*/
+/*+\New\lisiqi\2018.03.08\瑙ｅ帇澶х殑ZIP鏂囦欢*/
 #ifdef LUA_ZIP_SUPPORT
 /* Maximum value for memLevel in deflateInit2 */
 #ifndef MAX_MEM_LEVEL
@@ -267,7 +267,7 @@
 #  define MAX_WBITS   12 /* 32K LZ77 window */
 #endif
 #endif
-/*-\New\lisiqi\2018.03.08\解压大的ZIP文件*/
+/*-\New\lisiqi\2018.03.08\瑙ｅ帇澶х殑ZIP鏂囦欢*/
 
 /* The memory requirements for deflate are (in bytes):
             (1 << (windowBits+2)) +  (1 << (memLevel+9))

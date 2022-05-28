@@ -117,7 +117,7 @@ int asprintf(char **str, const char *fmt, ...)
     return str_l;
 }
 
-/*-\bug WM-25\wangzhiqiang\2011.10.8\¼ÓÈëÄÚ´æĞ¹Â©µÄ²âÊÔ´úÂë*/
+/*-\bug WM-25\wangzhiqiang\2011.10.8\åŠ å…¥å†…å­˜æ³„æ¼çš„æµ‹è¯•ä»£ç */
 
 void pal_ril_channel_write(const char *s, int len, BOOL CR_flag )
 {

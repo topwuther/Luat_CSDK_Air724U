@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ø™∑≈∆ΩÃ®
+  Description: AMOPENAT ÂºÄÊîæÂπ≥Âè∞
   Others:
   History: 
-    Version£∫ Date:       Author:   Modification:
-    V0.1      2012.12.14  lifei     ¥¥Ω®Œƒº˛
+    VersionÔºö Date:       Author:   Modification:
+    V0.1      2012.12.14  lifei     ÂàõÂª∫Êñá‰ª∂
 *********************************************************/
 #ifndef AM_OPENAT_IMAGE_H
 #define AM_OPENAT_IMAGE_H
@@ -39,9 +39,9 @@ typedef struct
 }T_AMOPENAT_DECODE_INPUT_PARAM;
 
 INT32 OPENAT_ImgsDecodeJpeg(UINT8 * buffer, UINT32 len, T_AMOPENAT_IMAGE_INFO *imageinfo);
-/*+\BUG\wangyuan\2020.09.11\  ≈‰OPENAT_ImgsFreeJpegDecodedataΩ”ø⁄*/
+/*+\BUG\wangyuan\2020.09.11\ÈÄÇÈÖçOPENAT_ImgsFreeJpegDecodedataÊé•Âè£*/
 INT32 OPENAT_ImgsFreeJpegDecodedata(T_AMOPENAT_IMAGE_INFO *imageinfo);
-/*-\BUG\wangyuan\2020.09.11\  ≈‰OPENAT_ImgsFreeJpegDecodedataΩ”ø⁄*/
+/*-\BUG\wangyuan\2020.09.11\ÈÄÇÈÖçOPENAT_ImgsFreeJpegDecodedataÊé•Âè£*/
 INT32 OPENAT_ImgsEncodeJpegBuffer(
           T_AMOPENAT_DECODE_INPUT_PARAM *inputParam,
           UINT8    *outBuffer,

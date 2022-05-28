@@ -9,17 +9,17 @@ dlg = iup.dialog
 {
 	iup.vbox
 	{
-		iup.label{title="执行文件", id="label_luadb"},
+		iup.label{title="鎵ц鏂囦欢", id="label_luadb"},
 		iup.hbox
 		{
 			iup.text{expand="YES", id="text_luadb"},
-			iup.button{title="浏览", id="btn_browse"},
+			iup.button{title="娴忚", id="btn_browse"},
 		},
 		iup.hbox
 		{
-			iup.label{title="串口配置",id="label_uartset"},
+			iup.label{title="涓插彛閰嶇疆",id="label_uartset"},
 			iup.fill{},
-			iup.button{title="刷新端口",id="btn_rcom"},
+			iup.button{title="鍒锋柊绔彛",id="btn_rcom"},
 		},
 		iup.hbox
 		{
@@ -52,7 +52,7 @@ dlg = iup.dialog
 			iup.button{title="CANCEL",size="50x",id="btn_cancel"},
 		},
 	}
-	;title = "配置",size = "200x", margin = "10x10", resize = "NO", maxbox = "NO", minbox = "NO"
+	;title = "閰嶇疆",size = "200x", margin = "10x10", resize = "NO", maxbox = "NO", minbox = "NO"
 }
 
 text_luadb.value = set.get("luadb")
@@ -61,7 +61,7 @@ local param = {}
 param.uart = {unpack(set.get("uart"))}
 
 function btn_browse:action()
-	filedlg = iup.filedlg{dialogtype = "SELECT", title = "选择luadb文件",
+	filedlg = iup.filedlg{dialogtype = "SELECT", title = "閫夋嫨luadb鏂囦欢",
 						  filter = "*.bin;*.lua", filterinfo = "lua or luadb files",
 						  directory=set.get("luadb")}
 

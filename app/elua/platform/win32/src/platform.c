@@ -82,7 +82,7 @@ void platform_sendsound_end(void)
     //strcat(atcbuff,"+DTMFDET:69\r\n");
 }
 
-/* 兼容旧版本的sleep接口 */
+/* 鍏煎鏃х増鏈殑sleep鎺ュ彛 */
 void platform_os_sleep(u32 ms)
 {
     Sleep(ms);

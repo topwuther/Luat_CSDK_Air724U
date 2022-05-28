@@ -15,7 +15,7 @@
 #define LUA_SHELL_TASK_PRIO     (OPENAT_CUST_TASKS_PRIORITY_BASE+10)
 
 #define CUST_MAIN_TASK_STACK_SIZE       (2*1024)
-#define LUA_SHELL_TASK_STACK_SIZE       (16*1024)/*¶ÑÕ»¼Ó´óÖÁ16K±ÜÃâÔØÈë´ó½Å±¾¶ÑÕ»Òç³ö*/
+#define LUA_SHELL_TASK_STACK_SIZE       (16*1024)/*å †æ ˆåŠ å¤§è‡³16Ké¿å…è½½å…¥å¤§è„šæœ¬å †æ ˆæº¢å‡º*/
 extern char malloc_buf[1180*1024];
 extern int pocFotaOta ;
 
@@ -32,19 +32,19 @@ typedef struct {
     PVOID data;
 }CustMessageContext;
 
-/*+\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+/*+\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
 extern void LuaDeleteMainFile(void);
-/*-\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+/*-\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
 
 extern int LuaAppTask(void);
 extern void RILAPI_ReceiveData(void *data, int len);
 extern void platform_setup_vat_queue(void);
 
-/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 extern u32 Get_usbdata_mode(void);
 extern void USBAPI_ReceiveData(void *data, int len);
 extern void platform_setup_usb_queue(void);
-/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 
 static VOID cust_poweron_reason_init(VOID);
 static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage);
@@ -81,14 +81,14 @@ struct
 /* Main function call by OpenAT platform */
 VOID cust_main(VOID)
 {
-    /* ÃÜÔ¿ÒÑ¾­×¼±¸ºÃ ĞèÒª·¢³öÍ¨Öª */
+    /* å¯†é’¥å·²ç»å‡†å¤‡å¥½ éœ€è¦å‘å‡ºé€šçŸ¥ */
     IVTBL(set_enc_data_ok)();
 
     cust_poweron_reason_init();
 
-    /*+\NEW\liweiqiang\2013.9.22\Ôö¼Óvat»º³åÇøĞÅºÅÁ¿±£»¤*/
+    /*+\NEW\liweiqiang\2013.9.22\å¢åŠ vatç¼“å†²åŒºä¿¡å·é‡ä¿æŠ¤*/
     platform_setup_vat_queue();
-    /*-\NEW\liweiqiang\2013.9.22\Ôö¼Óvat»º³åÇøĞÅºÅÁ¿±£»¤*/
+    /*-\NEW\liweiqiang\2013.9.22\å¢åŠ vatç¼“å†²åŒºä¿¡å·é‡ä¿æŠ¤*/
     
     IVTBL(init_at)(cust_at_message);
     
@@ -97,16 +97,16 @@ VOID cust_main(VOID)
     E_AMOPENAT_PM_CHR_MODE pmdmode;
 
     memset(&pmdcfg, 0, sizeof(T_AMOPENAT_PMD_CFG));
-#if 1  /*Ä£¿éÄÚÖÃ³äµç·½°¸*/
+#if 1  /*æ¨¡å—å†…ç½®å……ç”µæ–¹æ¡ˆ*/
     pmdmode = OPENAT_PM_CHR_BY_DEFAULT;
-    /*ºÍÓ²¼şÉè¼ÆÓĞ¹Ø*/
+    /*å’Œç¡¬ä»¶è®¾è®¡æœ‰å…³*/
     pmdcfg.deFault.batdetectEnable = TRUE;
     
     pmdcfg.deFault.tempdetectEnable = FALSE;
     pmdcfg.deFault.templowLevel = 0;
     pmdcfg.deFault.temphighLevel = 0;
 
-/*+\NEW\2013.8.5\A9321µ÷Õû³äµçÅäÖÃ,³äÂúµçÑ¹4.25V ¿ì³äµçÁ÷150mA Êµ²â217mA */
+/*+\NEW\2013.8.5\A9321è°ƒæ•´å……ç”µé…ç½®,å……æ»¡ç”µå‹4.25V å¿«å……ç”µæµ150mA å®æµ‹217mA */
     pmdcfg.deFault.batLevelEnable = TRUE;
     pmdcfg.deFault.batfullLevel = 4200;
     pmdcfg.deFault.batPreChargLevel = 4050;
@@ -119,21 +119,21 @@ VOID cust_main(VOID)
     /*current:----currentFirst----currentSecond---currentThird----*/
     pmdcfg.deFault.currentControlEnable = TRUE; 
     pmdcfg.deFault.currentFirst = OPENAT_PM_CHARGER_500MA;
-    pmdcfg.deFault.intervalTimeFirst = 9*60; /*9·ÖÖÓ*/
+    pmdcfg.deFault.intervalTimeFirst = 9*60; /*9åˆ†é’Ÿ*/
     pmdcfg.deFault.batLevelFirst = 4150;
     pmdcfg.deFault.currentSecond = OPENAT_PM_CHARGER_300MA;
-    pmdcfg.deFault.intervalTimeSecond = 6*60;/*6·ÖÖÓ*/
+    pmdcfg.deFault.intervalTimeSecond = 6*60;/*6åˆ†é’Ÿ*/
     pmdcfg.deFault.batLevelSecond = 4190;
     pmdcfg.deFault.currentThird = OPENAT_PM_CHARGER_100MA;
-    pmdcfg.deFault.intervalTimeThird = 3*60; /*3·ÖÖÓ*/  
-/*-\NEW\2013.8.5\A9321µ÷Õû³äµçÅäÖÃ,³äÂúµçÑ¹4.25V ¿ì³äµçÁ÷150mA Êµ²â217mA */
+    pmdcfg.deFault.intervalTimeThird = 3*60; /*3åˆ†é’Ÿ*/  
+/*-\NEW\2013.8.5\A9321è°ƒæ•´å……ç”µé…ç½®,å……æ»¡ç”µå‹4.25V å¿«å……ç”µæµ150mA å®æµ‹217mA */
 
     pmdcfg.deFault.chargTimeOutEnable = FALSE;
     pmdcfg.deFault.TimeOutMinutes = 240;
 #endif
 #if 0
     pmdmode = OPENAT_PM_CHR_BY_IC;
-    /*ºÍÓ²¼şÉè¼ÆÓĞ¹Ø*/
+    /*å’Œç¡¬ä»¶è®¾è®¡æœ‰å…³*/
     pmdcfg.ic.batdetectEnable = TRUE;
     pmdcfg.ic.tempdetectEnable = FALSE;
     pmdcfg.ic.templowLevel = 0;
@@ -154,7 +154,7 @@ VOID cust_main(VOID)
 #endif
     ASSERT(IVTBL(init_pmd)(pmdmode, &pmdcfg, cust_pm_message));
     
-    /* ´´½¨custom appÏß³Ì */
+    /* åˆ›å»ºcustom appçº¿ç¨‹ */
     g_CustTaskHandle = IVTBL(create_task)((PTASK_MAIN)cust_task_main, 
                                             NULL, 
                                             NULL, 
@@ -187,7 +187,7 @@ VOID cust_main(VOID)
 
 static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
 {
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
     static PlatformPmdData pmdData = 
     {
         TRUE,
@@ -232,7 +232,7 @@ static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
         case OPENAT_DRV_EVT_CHR_PRESENT_IND:
             pmdData.chargerStatus = pmMessage->param.chrpresentind.present;
             if(pmdData.chargerStatus == FALSE)
-                pmdData.chargeState = PLATFORM_BATT_NOT_CHARGING; // ³äµçÆ÷°Î³ö,ÉèÎª²»ÔÚ³äµç×´Ì¬
+                pmdData.chargeState = PLATFORM_BATT_NOT_CHARGING; // å……ç”µå™¨æ‹”å‡º,è®¾ä¸ºä¸åœ¨å……ç”µçŠ¶æ€
             break;
         case OPENAT_DRV_EVT_BAT_PRESENT_IND:
             pmdData.battStatus = pmMessage->param.batpresentind.present;
@@ -240,7 +240,7 @@ static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
         case OPENAT_DRV_EVT_BAT_LEVEL_IND:
             if(pmdData.battLevel == pmMessage->param.batlevelind.batteryLevel)
             {
-                //µç³ØÈİÁ¿Ã»ÓĞ±ä»¯²»×÷ÏûÏ¢ÌáÊ¾
+                //ç”µæ± å®¹é‡æ²¡æœ‰å˜åŒ–ä¸ä½œæ¶ˆæ¯æç¤º
                 return;
             }
             pmdData.battLevel = pmMessage->param.batlevelind.batteryLevel;
@@ -248,38 +248,38 @@ static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
             pmdData.battVolt = battStatus.batteryVolt;
             break;
         case OPENAT_DRV_EVT_BAT_CHARGING:
-        /*+\NEW\liweiqiang\2013.7.19\ĞŞÕı³äµçÊ±µç³ØÈİÁ¿²»¸üĞÂµÄÎÊÌâ*/
-/*+\NEW\RUFEI\2015.6.5\½â¾ö³äµç¿ª»ú£¬²»ÉÏ±¨³äµçÆ÷ÔÚÎ»ÎÊÌâ*/
+        /*+\NEW\liweiqiang\2013.7.19\ä¿®æ­£å……ç”µæ—¶ç”µæ± å®¹é‡ä¸æ›´æ–°çš„é—®é¢˜*/
+/*+\NEW\RUFEI\2015.6.5\è§£å†³å……ç”µå¼€æœºï¼Œä¸ä¸ŠæŠ¥å……ç”µå™¨åœ¨ä½é—®é¢˜*/
             if(pmdData.chargerStatus == FALSE)
             {
                 pmdData.chargerStatus = TRUE;
             }
-/*-\NEW\RUFEI\2015.6.5\½â¾ö³äµç¿ª»ú£¬²»ÉÏ±¨³äµçÆ÷ÔÚÎ»ÎÊÌâ*/
+/*-\NEW\RUFEI\2015.6.5\è§£å†³å……ç”µå¼€æœºï¼Œä¸ä¸ŠæŠ¥å……ç”µå™¨åœ¨ä½é—®é¢˜*/
             if(PLATFORM_BATT_CHARING == pmdData.chargeState &&
                 pmdData.battLevel == pmMessage->param.chargingind.batteryLevel)
             {
-                // ³äµçÊ±Ò»Ö±»áÉÏ±¨¸ÃÏûÏ¢ Èô×´Ì¬Î´¸Ä±äÇÒµç³ØÈİÁ¿Î´±ä»¯²»×÷Æµ·±ÌáÊ¾
+                // å……ç”µæ—¶ä¸€ç›´ä¼šä¸ŠæŠ¥è¯¥æ¶ˆæ¯ è‹¥çŠ¶æ€æœªæ”¹å˜ä¸”ç”µæ± å®¹é‡æœªå˜åŒ–ä¸ä½œé¢‘ç¹æç¤º
                 return;
             }
             pmdData.chargeState = PLATFORM_BATT_CHARING;
             pmdData.battLevel = pmMessage->param.chargingind.batteryLevel;
             IVTBL(get_batteryStatus)(&battStatus);
             pmdData.battVolt = battStatus.batteryVolt;
-        /*-\NEW\liweiqiang\2013.7.19\ĞŞÕı³äµçÊ±µç³ØÈİÁ¿²»¸üĞÂµÄÎÊÌâ*/
+        /*-\NEW\liweiqiang\2013.7.19\ä¿®æ­£å……ç”µæ—¶ç”µæ± å®¹é‡ä¸æ›´æ–°çš„é—®é¢˜*/
             break;
         case OPENAT_DRV_EVT_BAT_CHR_FULL:
-/*+\NEW\RUFEI\2015.6.5\½â¾ö³äµç¿ª»ú£¬²»ÉÏ±¨³äµçÆ÷ÔÚÎ»ÎÊÌâ*/
+/*+\NEW\RUFEI\2015.6.5\è§£å†³å……ç”µå¼€æœºï¼Œä¸ä¸ŠæŠ¥å……ç”µå™¨åœ¨ä½é—®é¢˜*/
             if(pmdData.chargerStatus == FALSE)
             {
                 pmdData.chargerStatus = TRUE;
             }
-/*-\NEW\RUFEI\2015.6.5\½â¾ö³äµç¿ª»ú£¬²»ÉÏ±¨³äµçÆ÷ÔÚÎ»ÎÊÌâ*/
-        /*+\NEW\liweiqiang\2013.7.19\ĞŞÕı³äµçÊ±µç³ØÈİÁ¿²»¸üĞÂµÄÎÊÌâ*/
+/*-\NEW\RUFEI\2015.6.5\è§£å†³å……ç”µå¼€æœºï¼Œä¸ä¸ŠæŠ¥å……ç”µå™¨åœ¨ä½é—®é¢˜*/
+        /*+\NEW\liweiqiang\2013.7.19\ä¿®æ­£å……ç”µæ—¶ç”µæ± å®¹é‡ä¸æ›´æ–°çš„é—®é¢˜*/
             pmdData.chargeState = PLATFORM_BATT_CHARGE_STOP;
             pmdData.battLevel = pmMessage->param.chrfullind.batteryLevel;
             IVTBL(get_batteryStatus)(&battStatus);
             pmdData.battVolt = battStatus.batteryVolt;
-        /*-\NEW\liweiqiang\2013.7.19\ĞŞÕı³äµçÊ±µç³ØÈİÁ¿²»¸üĞÂµÄÎÊÌâ*/
+        /*-\NEW\liweiqiang\2013.7.19\ä¿®æ­£å……ç”µæ—¶ç”µæ± å®¹é‡ä¸æ›´æ–°çš„é—®é¢˜*/
             break;
         case OPENAT_DRV_EVT_BAT_CHR_STOP:
             if(pmMessage->param.chrstopind.chrStopReason == OPENAT_PM_CHR_STOP_NO_CHARGER)
@@ -294,7 +294,7 @@ static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
             break;
     }
     
-    //if(pmdData.battLevel != 0xff) //È¥µôlevelÎ´³õÊ¼»¯µÄÅĞ¶Ï,±ÜÃâÖ±½Ó²å³äµçÆ÷¿ª»úÎ´ÉÏ±¨µç³ØÈİÁ¿µ¼ÖÂÒ»Ö±ÎŞ·¨ÉÏ±¨pmdÏûÏ¢
+    //if(pmdData.battLevel != 0xff) //å»æ‰levelæœªåˆå§‹åŒ–çš„åˆ¤æ–­,é¿å…ç›´æ¥æ’å……ç”µå™¨å¼€æœºæœªä¸ŠæŠ¥ç”µæ± å®¹é‡å¯¼è‡´ä¸€ç›´æ— æ³•ä¸ŠæŠ¥pmdæ¶ˆæ¯
     {
         PlatformMsgData msgData;
 
@@ -302,7 +302,7 @@ static void cust_pm_message(T_AMOPENAT_PM_MSG* pmMessage)
         
         platform_rtos_send(MSG_ID_RTOS_PMD, &msgData);
     }
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
 }
 
 /* AT message from OpenAT platform */
@@ -355,7 +355,7 @@ static VOID cust_wait_for_poweron_reason(BOOL bDeleteSema)
     }
 }
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 int cust_get_poweron_reason(void)
 {
     return (int)g_PowronInfo.reason;
@@ -371,9 +371,9 @@ void cust_poweron_system(void)
         IVTBL(poweron_system)(OPENAT_PM_STARTUP_MODE_DEFAULT, OPENAT_PM_STARTUP_MODE_DEFAULT);
     }
 }
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 
-/*+\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*+\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 void cust_repoweron_system(void)
 {
     static BOOL hasRePoweron = FALSE;
@@ -384,9 +384,9 @@ void cust_repoweron_system(void)
         IVTBL(poweron_system)(OPENAT_PM_STARTUP_MODE_ON, OPENAT_PM_STARTUP_MODE_ON);
     }
 }
-/*-\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*-\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 
-/*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
 #define LUA_DIR "/lua"
 #define LUA_DATA_DIR "/ldata"
 #define LUA_DIR_UNI     L"/lua"
@@ -406,24 +406,24 @@ char *getLuaDataDir(void)
 {
     return LUA_DATA_DIR;
 }
-/*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
 void removeLuaDir(void)
 {
-    /*+\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+    /*+\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
     LuaDeleteMainFile();
-/*-\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
-/*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-    IVTBL(remove_dir)(LUA_DIR); //Òì³£ÍË³öÉ¾³ıËùÓĞ½Å±¾
-/*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-/*+\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
-    IVTBL(remove_dir)(LUA_DATA_DIR); //Òì³£ÍË³öÉ¾³ıËùÓĞÊı¾İ
-    IVTBL(remove_dir)("/luazip"); //Òì³£ÍË³öÉ¾³ıÉı¼¶°ü
-/*-\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
+/*-\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
+/*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+    IVTBL(remove_dir)(LUA_DIR); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰è„šæœ¬
+/*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+/*+\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
+    IVTBL(remove_dir)(LUA_DATA_DIR); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰æ•°æ®
+    IVTBL(remove_dir)("/luazip"); //å¼‚å¸¸é€€å‡ºåˆ é™¤å‡çº§åŒ…
+/*-\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
 }
 
 /*lua app main*/
 static HANDLE luaShellSem = 0;
-/*+\NEW\zhuwangbin\2020.2.26\Ìí¼Ólua Ô¶³ÌÉı¼¶ */
+/*+\NEW\zhuwangbin\2020.2.26\æ·»åŠ lua è¿œç¨‹å‡çº§ */
 #include "hal_config.h"
 #define OTA_APP_MAGIN ("APPUPDATE")
 #define OTA_APP_FILE_NAME "app"
@@ -619,7 +619,7 @@ updateEnd:
 	}
 	return;
 }
-/*-\NEW\zhuwangbin\2020.2.26\Ìí¼Ólua Ô¶³ÌÉı¼¶ */
+/*-\NEW\zhuwangbin\2020.2.26\æ·»åŠ lua è¿œç¨‹å‡çº§ */
 
 VOID __lua_exit()
 {
@@ -629,20 +629,20 @@ VOID __lua_exit()
 
 static VOID lua_shell_main(void *task_entry_ptr)
 {
-/*+\NEW\liweiqiang\2013.4.25\Ôö¼ÓluaÍË³öassert´¦Àí */
+/*+\NEW\liweiqiang\2013.4.25\å¢åŠ luaé€€å‡ºassertå¤„ç† */
     int luaExitStatus;
-	/*+\BUG\wangyuan\2020.06.22\BUG_2360:coretest²âÊÔ£¬Ò»Ö±´òÓ¡SET_PDP_4G_WAITAPN*/
+	/*+\BUG\wangyuan\2020.06.22\BUG_2360:coretestæµ‹è¯•ï¼Œä¸€ç›´æ‰“å°SET_PDP_4G_WAITAPN*/
     lua_task_init();
 	
-	/*+\NEW\zhuwangbin\2020.2.26\Ìí¼Ólua Ô¶³ÌÉı¼¶ */
+	/*+\NEW\zhuwangbin\2020.2.26\æ·»åŠ lua è¿œç¨‹å‡çº§ */
 	lua_update();
-	/*+\NEW\liangjian\2021.1.25\Ôö¼Ólua ºÍ csdk Éı¼¶¸ù¾İ±êÖ¾Î»ÅĞ¶Ï*/
+	/*+\NEW\liangjian\2021.1.25\å¢åŠ lua å’Œ csdk å‡çº§æ ¹æ®æ ‡å¿—ä½åˆ¤æ–­*/
 	vfs_unlink(OPENAT_UPDATE_FILE_NAME);
 
-	/*-\NEW\liangjian\2021.1.25\Ôö¼Ólua ºÍ csdk Éı¼¶¸ù¾İ±êÖ¾Î»ÅĞ¶Ï*/
+	/*-\NEW\liangjian\2021.1.25\å¢åŠ lua å’Œ csdk å‡çº§æ ¹æ®æ ‡å¿—ä½åˆ¤æ–­*/
 	
-	/*-\NEW\zhuwangbin\2020.2.26\Ìí¼Ólua Ô¶³ÌÉı¼¶ */
-	/*-\BUG\wangyuan\2020.06.22\BUG_2360:coretest²âÊÔ£¬Ò»Ö±´òÓ¡SET_PDP_4G_WAITAPN*/
+	/*-\NEW\zhuwangbin\2020.2.26\æ·»åŠ lua è¿œç¨‹å‡çº§ */
+	/*-\BUG\wangyuan\2020.06.22\BUG_2360:coretestæµ‹è¯•ï¼Œä¸€ç›´æ‰“å°SET_PDP_4G_WAITAPN*/
     IVTBL(print)("lua_shell_main - LUA_SYNC_MMI(OK).");
     #if 0
     OPENAT_print("lua_shell_main enter 111");
@@ -657,16 +657,16 @@ static VOID lua_shell_main(void *task_entry_ptr)
     
     OPENAT_print("lua_shell_main enter 22222");
 
-/*+\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+/*+\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
     IVTBL(make_dir)(L"/luazip", 0);
-/*-\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
-/*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*-\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
+/*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
     IVTBL(make_dir)(LUA_DIR_UNI, 0);
     IVTBL(make_dir)(LUA_DATA_UNI, 0);
-/*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-/*+\NEW\liweiqiang\2013.10.24\´´½¨Â¼ÒôÄ¿Â¼,ÒÔ²¥·ÅÂ¼ÒôÎÄ¼ş */
+/*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+/*+\NEW\liweiqiang\2013.10.24\åˆ›å»ºå½•éŸ³ç›®å½•,ä»¥æ’­æ”¾å½•éŸ³æ–‡ä»¶ */
     IVTBL(make_dir)(L"/RecDir", 0);
-/*-\NEW\liweiqiang\2013.10.24\´´½¨Â¼ÒôÄ¿Â¼,ÒÔ²¥·ÅÂ¼ÒôÎÄ¼ş */
+/*-\NEW\liweiqiang\2013.10.24\åˆ›å»ºå½•éŸ³ç›®å½•,ä»¥æ’­æ”¾å½•éŸ³æ–‡ä»¶ */
 
     OPENAT_print("lua_shell_main enter 33333");
     //OPENAT_sleep(1000);
@@ -697,37 +697,37 @@ static VOID lua_shell_main(void *task_entry_ptr)
 
 	osiThreadCallback(osiThreadCurrent(), __lua_exit, NULL);
     
-/*+\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+/*+\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
     LuaDeleteMainFile();
-/*-\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
-    /*+\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+/*-\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
+    /*+\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
     if(!OPENAT_is_nor_flash())
     {
-        IVTBL(remove_file_rec)(LUA_DIR_UNI); //Òì³£ÍË³öÉ¾³ıËùÓĞ½Å±¾
-        IVTBL(remove_file_rec)(LUA_DATA_UNI); //Òì³£ÍË³öÉ¾³ıËùÓĞÊı¾İ
-        IVTBL(remove_file_rec)(L"/luazip"); //Òì³£ÍË³öÉ¾³ıÉı¼¶°ü
+        IVTBL(remove_file_rec)(LUA_DIR_UNI); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰è„šæœ¬
+        IVTBL(remove_file_rec)(LUA_DATA_UNI); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰æ•°æ®
+        IVTBL(remove_file_rec)(L"/luazip"); //å¼‚å¸¸é€€å‡ºåˆ é™¤å‡çº§åŒ…
     }
     else
     {
-    /*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-        IVTBL(remove_file_rec)(LUA_DIR); //Òì³£ÍË³öÉ¾³ıËùÓĞ½Å±¾
-    /*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-    /*+\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
-        IVTBL(remove_file_rec)(LUA_DATA_DIR); //Òì³£ÍË³öÉ¾³ıËùÓĞÊı¾İ
-        IVTBL(remove_file_rec)("/luazip"); //Òì³£ÍË³öÉ¾³ıÉı¼¶°ü
-    /*-\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
+    /*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+        IVTBL(remove_file_rec)(LUA_DIR); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰è„šæœ¬
+    /*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+    /*+\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
+        IVTBL(remove_file_rec)(LUA_DATA_DIR); //å¼‚å¸¸é€€å‡ºåˆ é™¤æ‰€æœ‰æ•°æ®
+        IVTBL(remove_file_rec)("/luazip"); //å¼‚å¸¸é€€å‡ºåˆ é™¤å‡çº§åŒ…
+    /*-\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
     }
-    /*-\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+    /*-\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
     OPENAT_print("[lua_shell_main]: lua exit status %d", luaExitStatus);
-	/*+\BUG\wangyuan\2020.04.07\BUG_1328£º720U£¬Lua½Å±¾Èç¹û¿ª»ú¾Í±¨´í£¬Ã»ÓĞlua´íÎóĞÅÏ¢Êä³ö*/	
-    IVTBL(wait_semaphore)(luaShellSem, 10000); // 10ÃëºóÖØÆôÏµÍ³
-	/*-\BUG\wangyuan\2020.04.07\BUG_1328£º720U£¬Lua½Å±¾Èç¹û¿ª»ú¾Í±¨´í£¬Ã»ÓĞlua´íÎóĞÅÏ¢Êä³ö*/	
+	/*+\BUG\wangyuan\2020.04.07\BUG_1328ï¼š720Uï¼ŒLuaè„šæœ¬å¦‚æœå¼€æœºå°±æŠ¥é”™ï¼Œæ²¡æœ‰luaé”™è¯¯ä¿¡æ¯è¾“å‡º*/	
+    IVTBL(wait_semaphore)(luaShellSem, 10000); // 10ç§’åé‡å¯ç³»ç»Ÿ
+	/*-\BUG\wangyuan\2020.04.07\BUG_1328ï¼š720Uï¼ŒLuaè„šæœ¬å¦‚æœå¼€æœºå°±æŠ¥é”™ï¼Œæ²¡æœ‰luaé”™è¯¯ä¿¡æ¯è¾“å‡º*/	
 
-/*+\NEW\liweiqiang\2013.9.20\luaÒì³£ÍË³öºóÖØÆôÏµÍ³,±ÜÃâÎÄ¼şÎ´Ğ´Èëµ½flashÖĞ*/
+/*+\NEW\liweiqiang\2013.9.20\luaå¼‚å¸¸é€€å‡ºåé‡å¯ç³»ç»Ÿ,é¿å…æ–‡ä»¶æœªå†™å…¥åˆ°flashä¸­*/
     // ASSERT(FALSE);
     //IVTBL(restart)();
-/*-\NEW\liweiqiang\2013.9.20\luaÒì³£ÍË³öºóÖØÆôÏµÍ³,±ÜÃâÎÄ¼şÎ´Ğ´Èëµ½flashÖĞ*/
-/*-\NEW\liweiqiang\2013.4.25\Ôö¼ÓluaÍË³öassert´¦Àí */
+/*-\NEW\liweiqiang\2013.9.20\luaå¼‚å¸¸é€€å‡ºåé‡å¯ç³»ç»Ÿ,é¿å…æ–‡ä»¶æœªå†™å…¥åˆ°flashä¸­*/
+/*-\NEW\liweiqiang\2013.4.25\å¢åŠ luaé€€å‡ºassertå¤„ç† */
     osiEvent_t event;
 
     for (;;)
@@ -738,17 +738,17 @@ static VOID lua_shell_main(void *task_entry_ptr)
     }
 }
 
-/*+\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 BOOL cust_pmd_init(PlatformPmdCfg *cfg)
 {
-/*+\NEW\liweiqiang\2014.2.8\ÍêÉÆµçÔ´¹ÜÀíÅäÖÃ½Ó¿Ú */
+/*+\NEW\liweiqiang\2014.2.8\å®Œå–„ç”µæºç®¡ç†é…ç½®æ¥å£ */
 #define GET_FILED_VAL(fIELD, dEFault) (cfg->fIELD == PMD_CFG_INVALID_VALUE ? (dEFault) : (cfg->fIELD))
     T_AMOPENAT_PMD_CFG pmdcfg;
     E_AMOPENAT_PM_CHR_MODE pmdmode;
 
     pmdmode = OPENAT_PM_CHR_BY_DEFAULT;
-    /*ºÍÓ²¼şÉè¼ÆÓĞ¹Ø*/
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+    /*å’Œç¡¬ä»¶è®¾è®¡æœ‰å…³*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     pmdcfg.deFault.batdetectEnable = (GET_FILED_VAL(batdetectEnable, 0) == 1);
     
     pmdcfg.deFault.tempdetectEnable = FALSE;
@@ -770,14 +770,14 @@ BOOL cust_pmd_init(PlatformPmdCfg *cfg)
     pmdcfg.deFault.fullCurrent = GET_FILED_VAL(fullCurrent, OPENAT_PM_CHARGER_30MA);
     pmdcfg.deFault.ccOnTime = 0; 
     pmdcfg.deFault.ccOnTime = 0; 
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     pmdcfg.deFault.chargTimeOutEnable = FALSE;
     pmdcfg.deFault.TimeOutMinutes = 240;
-/*-\NEW\liweiqiang\2014.2.8\ÍêÉÆµçÔ´¹ÜÀíÅäÖÃ½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.2.8\å®Œå–„ç”µæºç®¡ç†é…ç½®æ¥å£ */
 
     return OPENAT_init_pmd(pmdmode, &pmdcfg, cust_pm_message);
 }
-/*-\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 
 
 
@@ -792,15 +792,15 @@ kal_bool lua_task_init ( void)
 
     platform_setup_vat_queue();
 
-	/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 	platform_setup_usb_queue();
-	/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 	
     OPENAT_init_at(cust_at_message);
     //OPENAT_RegisterVirtualATCallBack(cust_at_message);
     
     OPENAT_print("lua_task_init enter 22222");
-    /*+\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+    /*+\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
     if(!OPENAT_is_nor_flash())
     {
         IVTBL(make_dir)(L"/luazip", 0);
@@ -810,18 +810,18 @@ kal_bool lua_task_init ( void)
     }
     else
     {
-    /*+\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+    /*+\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
         IVTBL(make_dir)("/luazip", 0);
-    /*-\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
-    /*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+    /*-\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
+    /*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
         IVTBL(make_dir)(LUA_DIR, 0);
         IVTBL(make_dir)(LUA_DATA_DIR, 0);
-    /*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-    /*+\NEW\liweiqiang\2013.10.24\´´½¨Â¼ÒôÄ¿Â¼,ÒÔ²¥·ÅÂ¼ÒôÎÄ¼ş */
+    /*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+    /*+\NEW\liweiqiang\2013.10.24\åˆ›å»ºå½•éŸ³ç›®å½•,ä»¥æ’­æ”¾å½•éŸ³æ–‡ä»¶ */
         IVTBL(make_dir)("/RecDir", 0);
-    /*-\NEW\liweiqiang\2013.10.24\´´½¨Â¼ÒôÄ¿Â¼,ÒÔ²¥·ÅÂ¼ÒôÎÄ¼ş */
+    /*-\NEW\liweiqiang\2013.10.24\åˆ›å»ºå½•éŸ³ç›®å½•,ä»¥æ’­æ”¾å½•éŸ³æ–‡ä»¶ */
     }
-    /*-\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+    /*-\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
 
     OPENAT_print("lua_task_init enter 33333");
 
@@ -833,7 +833,7 @@ kal_bool lua_task_init ( void)
 
 kal_bool lua_task_create(void)
 {
-    //TODO ´´½¨Ïß³Ì
+    //TODO åˆ›å»ºçº¿ç¨‹
     OPENAT_create_task(&g_LuaShellTaskHandle, lua_shell_main, NULL, NULL, 
                   32*1024, 
                   24,

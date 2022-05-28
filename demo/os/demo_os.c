@@ -57,7 +57,7 @@ static VOID demo_os_task2_main(PVOID pParameter)
         case DEMO_TASK2_MSG:                   
             iot_debug_print("[os] task2 recv msg 'DEMO_TASK2_MSG'");
             iot_debug_print("[os] task2 release sem");
-             //6. ÊÕµ½ÏûÏ¢ºóÊÍ·ÅĞÅºÅÁ¿
+             //6. æ”¶åˆ°æ¶ˆæ¯åé‡Šæ”¾ä¿¡å·é‡
             iot_os_release_semaphore(demo_os_sem);
             
             break;
@@ -84,11 +84,11 @@ static VOID demo_os_task1_main(PVOID pParameter)
     
     iot_debug_print("[os] task1");
 
-    // 4.·¢ËÍÏûÏ¢¸øtask2
+    // 4.å‘é€æ¶ˆæ¯ç»™task2
     demo_os_msg_send(demo_os_task2, DEMO_TASK2_MSG, NULL, 0);
     iot_debug_print("[os] task1 send msg 'DEMO_TASK2_MSG' to task2");
 
-    // 5. µÈ´ıtask2ÊÕµ½ÏûÏ¢ÊÍ·ÅĞÅºÅÁ¿
+    // 5. ç­‰å¾…task2æ”¶åˆ°æ¶ˆæ¯é‡Šæ”¾ä¿¡å·é‡
     iot_debug_print("[os] task1 wait sem");
     iot_os_wait_semaphore(demo_os_sem, 0);
     iot_debug_print("[os] task1 got sem");
@@ -119,15 +119,15 @@ static VOID demo_os_task1_main(PVOID pParameter)
 
 VOID demo_os(VOID)
 {
-    //1. ´´½¨task1 , 
+    //1. åˆ›å»ºtask1 , 
     demo_os_task1 =  iot_os_create_task(demo_os_task1_main, NULL, 
         2048, 1, OPENAT_OS_CREATE_DEFAULT, "task1");
 
-    //2. ´´½¨task2 , 
+    //2. åˆ›å»ºtask2 , 
     demo_os_task2 =  iot_os_create_task(demo_os_task2_main, NULL, 
         2048, 2, OPENAT_OS_CREATE_DEFAULT, "task2");
 
-    //3. ´´½¨ĞÅºÅÁ¿
+    //3. åˆ›å»ºä¿¡å·é‡
     demo_os_sem = iot_os_create_semaphore(0);
 }
 

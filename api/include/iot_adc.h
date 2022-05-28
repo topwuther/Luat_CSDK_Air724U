@@ -4,33 +4,33 @@
 #include "iot_os.h"
 
 /**
- * @ingroup iot_sdk_device ÍâÉè½Ó¿Ú
+ * @ingroup iot_sdk_device å¤–è®¾æ¥å£
  * @{
  */
 /**
- * @defgroup iot_sdk_adc adc½Ó¿Ú
+ * @defgroup iot_sdk_adc adcæ¥å£
  * @{
  */
 
-/**ADC³õÊ¼»¯ 
-*@param		channel:		adcÍ¨µÀ
-*@param     mode:       adcÄ£Ê½
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**ADCåˆå§‹åŒ– 
+*@param		channel:		adcé€šé“
+*@param     mode:       adcæ¨¡å¼
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_adc_init(
-                        E_AMOPENAT_ADC_CHANNEL channel  /* ADC±àºÅ */,
+                        E_AMOPENAT_ADC_CHANNEL channel  /* ADCç¼–å· */,
     					E_AMOPENAT_ADC_CFG_MODE mode
                 );
 
 
-/**¶ÁÈ¡ADCÊı¾İ
-*@note ADCÖµ£¬¿ÉÒÔÎª¿Õ, µçÑ¹Öµ£¬¿ÉÒÔÎª¿Õ
-*@param		channel:		adcÍ¨µÀ
-*@param		adcValue:	ADCÖµ£¬¿ÉÒÔÎª¿Õ
-*@param		voltage:	µçÑ¹Öµ£¬¿ÉÒÔÎª¿Õ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è¯»å–ADCæ•°æ®
+*@note ADCå€¼ï¼Œå¯ä»¥ä¸ºç©º, ç”µå‹å€¼ï¼Œå¯ä»¥ä¸ºç©º
+*@param		channel:		adcé€šé“
+*@param		adcValue:	ADCå€¼ï¼Œå¯ä»¥ä¸ºç©º
+*@param		voltage:	ç”µå‹å€¼ï¼Œå¯ä»¥ä¸ºç©º
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_adc_read(
                         E_AMOPENAT_ADC_CHANNEL channel,    

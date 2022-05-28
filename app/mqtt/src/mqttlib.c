@@ -190,7 +190,7 @@ uint8_t* MQTT_DecodeMsg(MQTT_HeadStruct *Head, uint32_t HeadDataLenMax, uint32_t
 
 
 	case MQTT_CMD_PUBLISH:
-		//获取主题
+		//鑾峰彇涓婚
 		HeadDataLen = RxBuf[Pos];
 		HeadDataLen = (HeadDataLen << 8) + RxBuf[Pos + 1];
 		Pos += 2;

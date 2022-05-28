@@ -25,13 +25,13 @@ TTS_PARAM_T g_demo_tts;
 
 #define TTS_DEBUG(fmt, args...) do { iot_debug_print("[iot_tts] "fmt, ##args); } while(0)
 #define TTS_SUSPENDED (0xFFFFFFFF)
-char *tts_text = "ÉÏº£ºÏÖæÍ¨ĞÅ¿Æ¼¼ÓĞÏŞ¹«Ë¾»¶Ó­Äú";
+char *tts_text = "ä¸Šæµ·åˆå®™é€šä¿¡ç§‘æŠ€æœ‰é™å…¬å¸æ¬¢è¿æ‚¨";
 const char unicodeHexStr[] = "6B228FCE003100310033";
 
 void tts_play_cb(OPENAT_TTS_CB_MSG msg_id,u8 event)
 {
 	TTS_DEBUG("tts_play_cb msg_id = %d,event = %d",msg_id,event);
-	/*ÊÍ·ÅĞÅºÅÁ¿£¬ÔÊĞíÏÂ´Î²¥·Å*/
+	/*é‡Šæ”¾ä¿¡å·é‡ï¼Œå…è®¸ä¸‹æ¬¡æ’­æ”¾*/
 	iot_os_release_semaphore(g_demo_tts.demo_tts_sem);
 }
 
@@ -74,12 +74,12 @@ static VOID demo_tts_task(PVOID pParameter)
     TTS_DEBUG("start");
 
 	iot_tts_init(tts_play_cb);
-	/*Í¨¹ıĞÅºÅÁ¿×èÈû¿ØÖÆ*/
+	/*é€šè¿‡ä¿¡å·é‡é˜»å¡æ§åˆ¶*/
 	g_demo_tts.demo_tts_sem = iot_os_create_semaphore(1);
 	char unicodeStr[20] = {0};
 	while(1)
 	{
-		/*ÑÓÊ±Ò»Ãë*/
+		/*å»¶æ—¶ä¸€ç§’*/
 		iot_os_sleep(1000);
 		TTS_DEBUG("tts player start first");
 		iot_os_wait_semaphore(g_demo_tts.demo_tts_sem,TTS_SUSPENDED);
@@ -87,11 +87,11 @@ static VOID demo_tts_task(PVOID pParameter)
 		iot_tts_play(tts_text,strlen(tts_text));
 
 		TTS_DEBUG("tts player start second");
-		/*µÈ´ı²¥·Å½áÊø*/
+		/*ç­‰å¾…æ’­æ”¾ç»“æŸ*/
 		iot_os_wait_semaphore(g_demo_tts.demo_tts_sem,TTS_SUSPENDED);
-		/*ÉèÖÃÒôÁ¿£¬·¶Î§ÊÇ0-100,²ÎÊıÉèÖÃ±ØĞëÔÚ²¥·Å½áÊø*/
+		/*è®¾ç½®éŸ³é‡ï¼ŒèŒƒå›´æ˜¯0-100,å‚æ•°è®¾ç½®å¿…é¡»åœ¨æ’­æ”¾ç»“æŸ*/
 		iot_tts_set_param(OPENAT_TTS_PARAM_VOLUME,100);
-		/*ÉèÖÃ²¥·ÅËÙ¶È£¬·¶Î§ÊÇ0-100*/
+		/*è®¾ç½®æ’­æ”¾é€Ÿåº¦ï¼ŒèŒƒå›´æ˜¯0-100*/
 		//iot_tts_set_param(OPENAT_TTS_PARAM_SPEED,50);
 		HexStrToLittleEndianUnicode(unicodeHexStr,strlen(unicodeHexStr),unicodeStr);
 		iot_tts_set_param(OPENAT_TTS_PARAM_CODEPAGE,OPENAT_CODEPAGE_UNICODE);
@@ -101,7 +101,7 @@ static VOID demo_tts_task(PVOID pParameter)
 
 VOID demo_tts(VOID)
 {
-    //1. ´´½¨demo_tts_task ,Ñ­»·²¥·Åtts 
+    //1. åˆ›å»ºdemo_tts_task ,å¾ªç¯æ’­æ”¾tts 
     g_demo_tts.demo_tts_task =  iot_os_create_task(demo_tts_task, NULL, 
         2048, 1, OPENAT_OS_CREATE_DEFAULT, "demo_tts_task");
 }

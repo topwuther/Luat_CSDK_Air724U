@@ -1,4 +1,4 @@
--- µç»°Ô¶³Ì¿ØÖÆ
+-- ç”µè¯è¿œç¨‹æ§åˆ¶
 require"sys"
 require"cc"
 require"nvm"
@@ -14,14 +14,14 @@ local function changemode(num)
 	local result,optext
 	if defense.getstate() == "DISARM" or defense.getstate() == "DISARMING" then
 		result = defense.alert("call")
-		optext = "²¼·À"
+		optext = "å¸ƒé˜²"
 	else
 		result = defense.disarm("call")
-		optext = "³··À"
+		optext = "æ’¤é˜²"
 	end
 
 	if result == true then
-		sms.send(num,common.binstohexs(common.gb2312toucs2be(optext.."³É¹¦")))
+		sms.send(num,common.binstohexs(common.gb2312toucs2be(optext.."æˆåŠŸ")))
 	end
 end
 
@@ -46,11 +46,11 @@ local function incall(id,num)
 		return
 	end
 
-	if lastnum == "" or lastnum ~= num or lastime == 0 then -- ²»Í¬ºÅÂë,ÖØÖÃ¼ÆÊı
+	if lastnum == "" or lastnum ~= num or lastime == 0 then -- ä¸åŒå·ç ,é‡ç½®è®¡æ•°
 		lastnum = num
 		lastime = getime()
 		calltimes = 1
-	else -- ÏàÍ¬ºÅÂë,¼ÆÊı
+	else -- ç›¸åŒå·ç ,è®¡æ•°
 		if checkinterval() == true then
 			calltimes = calltimes+1
 		else
@@ -59,7 +59,7 @@ local function incall(id,num)
 	end
 
 	if calltimes >= nvm.get("incalltimes") then
-		--ÖØÖÃ²¢ÇĞ»»Ä£Ê½
+		--é‡ç½®å¹¶åˆ‡æ¢æ¨¡å¼
 		calltimes = 0
 		lastnum = ""
 		lastime = 0

@@ -9,12 +9,12 @@ extern BOOL g_s_traceflag;
 **                 DEBUG                  **
 *******************************************/
 
-/**assert断言
-*@param		condition:	断言条件
-*@param		func:	    断言函数
-*@param		line:	    断言位置
-*@return	TURE: 	    成功
-*           FALSE:      失败
+/**assert鏂█
+*@param		condition:	鏂█鏉′欢
+*@param		func:	    鏂█鍑芥暟
+*@param		line:	    鏂█浣嶇疆
+*@return	TURE: 	    鎴愬姛
+*           FALSE:      澶辫触
 **/
 VOID iot_debug_assert(                                          
                         BOOL condition,                  
@@ -26,7 +26,7 @@ VOID iot_debug_assert(
 }
 
 
-/**调试信息打印
+/**璋冭瘯淇℃伅鎵撳嵃
 **/
 VOID iot_debug_print(CHAR *fmt, ...)
 {
@@ -41,9 +41,9 @@ VOID iot_debug_print(CHAR *fmt, ...)
 	va_end (args);
 }
 
-/**设置软件异常时，设备模式
-*@param	  mode:   OPENAT_FAULT_RESET 重启模式
-				  OPENAT_FAULT_HANG  调试模式
+/**璁剧疆杞欢寮傚父鏃讹紝璁惧妯″紡
+*@param	  mode:   OPENAT_FAULT_RESET 閲嶅惎妯″紡
+				  OPENAT_FAULT_HANG  璋冭瘯妯″紡
 **/
 
 VOID iot_debug_set_fault_mode(E_OPENAT_FAULT_MODE mode)

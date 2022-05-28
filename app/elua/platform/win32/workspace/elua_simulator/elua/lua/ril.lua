@@ -1,5 +1,5 @@
 
--- ¶¨ÒåÄ£¿é,µ¼ÈëÒÀÀµ¿â
+-- å®šä¹‰æ¨¡å—,å¯¼å…¥ä¾èµ–åº“
 local base = _G
 local table = require"table"
 local string = require"string"
@@ -8,7 +8,7 @@ local rtos = require"rtos"
 local sys = require"sys"
 module("ril")
 
---¼ÓÔØ³£ÓÃµÄÈ«¾Öº¯ÊıÖÁ±¾µØ
+--åŠ è½½å¸¸ç”¨çš„å…¨å±€å‡½æ•°è‡³æœ¬åœ°
 local setmetatable = base.setmetatable
 local print = base.print
 local type = base.type
@@ -17,8 +17,8 @@ local sfind = string.find
 local vwrite = uart.write
 local vread = uart.read
 
--- ³£Á¿
-local TIMEOUT = 60000 --1·ÖÖÓÎŞ·´À¡ ÅĞ¶¨atÃüÁîÖ´ĞĞÊ§°Ü
+-- å¸¸é‡
+local TIMEOUT = 60000 --1åˆ†é’Ÿæ— åé¦ˆ åˆ¤å®šatå‘½ä»¤æ‰§è¡Œå¤±è´¥
 -- cmd type: 0:no reuslt 1:number 2:sline 3:mline 4:string 10:spec
 local NORESULT = 0
 local NUMBERIC = 1
@@ -47,23 +47,23 @@ local RILCMD = {
 -- local var
 local radioready = false
 
--- ÃüÁî¶ÓÁĞ
+-- å‘½ä»¤é˜Ÿåˆ—
 local cmdqueue = {
 	"ATE0",
 	"AT+CMEE=0",
 }
--- µ±Ç°ÕıÔÚÖ´ĞĞµÄÃüÁî,²ÎÊı,·´À¡»Øµ÷,ÃüÁîÍ·,ÀàĞÍ
+-- å½“å‰æ­£åœ¨æ‰§è¡Œçš„å‘½ä»¤,å‚æ•°,åé¦ˆå›è°ƒ,å‘½ä»¤å¤´,ç±»å‹
 local currcmd,currarg,currsp,cmdhead,cmdtype
--- ·´À¡½á¹û,ÖĞ¼äĞÅÏ¢,½á¹ûĞÅÏ¢
+-- åé¦ˆç»“æœ,ä¸­é—´ä¿¡æ¯,ç»“æœä¿¡æ¯
 local result,interdata,respdata
 
--- ril»á³öÏÖÈıÖÖÇé¿ö: ÃüÁî»Ø¸´\Ö÷¶¯ÉÏ±¨\ÃüÁî³¬Ê±
--- ³¬Ê±
+-- rilä¼šå‡ºç°ä¸‰ç§æƒ…å†µ: å‘½ä»¤å›å¤\ä¸»åŠ¨ä¸ŠæŠ¥\å‘½ä»¤è¶…æ—¶
+-- è¶…æ—¶
 local function atimeout()
-	rtos.restart() -- ÃüÁîÏìÓ¦³¬Ê±×Ô¶¯ÖØÆôÏµÍ³
+	rtos.restart() -- å‘½ä»¤å“åº”è¶…æ—¶è‡ªåŠ¨é‡å¯ç³»ç»Ÿ
 end
 
--- ÃüÁî»Ø¸´
+-- å‘½ä»¤å›å¤
 local function defrsp(cmd,success,response,intermediate)
 	print("default response:",cmd,success,response,intermediate)
 end
@@ -100,7 +100,7 @@ local function rsp()
 	result,interdata,respdata = nil
 end
 
--- Ö÷¶¯ÉÏ±¨ÌáÊ¾
+-- ä¸»åŠ¨ä¸ŠæŠ¥æç¤º
 local function defurc(data)
 	print("defurc:",data)
 end
@@ -130,10 +130,10 @@ end
 local function procatc(data)
 	print("atc:",data)
 
-	if interdata and cmdtype == MLINE then -- ¼ÌĞø½ÓÊÕ¶àĞĞ·´À¡Ö±ÖÁ³öÏÖOKÎªÖ¹
-		-- ¶àĞĞ·´À¡µÄÃüÁîÈç¹û½ÓÊÕµ½ÖĞ¼äÊı¾İËµÃ÷Ö´ĞĞ³É¹¦ÁË,ÅĞ¶¨Ö®ºóµÄÊı¾İ½áÊø¾ÍÊÇOK
+	if interdata and cmdtype == MLINE then -- ç»§ç»­æ¥æ”¶å¤šè¡Œåé¦ˆç›´è‡³å‡ºç°OKä¸ºæ­¢
+		-- å¤šè¡Œåé¦ˆçš„å‘½ä»¤å¦‚æœæ¥æ”¶åˆ°ä¸­é—´æ•°æ®è¯´æ˜æ‰§è¡ŒæˆåŠŸäº†,åˆ¤å®šä¹‹åçš„æ•°æ®ç»“æŸå°±æ˜¯OK
 		if data ~= "OK\r\n" then
-			if sfind(data,"\r\n",-2) then -- È¥µô×îºóµÄ»»ĞĞ·û
+			if sfind(data,"\r\n",-2) then -- å»æ‰æœ€åçš„æ¢è¡Œç¬¦
 				data = string.sub(data,1,-3)
 			end
 			interdata = interdata .. "\r\n" .. data
@@ -145,7 +145,7 @@ local function procatc(data)
 		data,urcfilter = urcfilter(data)
 	end
 
-	if sfind(data,"\r\n",-2) then -- Èô×îºóÁ½¸ö×Ö½ÚÊÇ\r\nÔòÉ¾µô
+	if sfind(data,"\r\n",-2) then -- è‹¥æœ€åä¸¤ä¸ªå­—èŠ‚æ˜¯\r\nåˆ™åˆ æ‰
 		data = string.sub(data,1,-3)
 	end
 
@@ -153,7 +153,7 @@ local function procatc(data)
 		return
 	end
 
-	if currcmd == nil then -- µ±Ç°ÎŞÃüÁîÔÚÖ´ĞĞÔòÅĞ¶¨Îªurc
+	if currcmd == nil then -- å½“å‰æ— å‘½ä»¤åœ¨æ‰§è¡Œåˆ™åˆ¤å®šä¸ºurc
 		urc(data)
 		return
 	end
@@ -171,7 +171,7 @@ local function procatc(data)
 		result = false
 		respdata = data
 	elseif data == "> " then
-		if cmdhead == "+CMGS" then -- ¸ù¾İÌáÊ¾·û·¢ËÍ¶ÌĞÅ»òÕßÊı¾İ
+		if cmdhead == "+CMGS" then -- æ ¹æ®æç¤ºç¬¦å‘é€çŸ­ä¿¡æˆ–è€…æ•°æ®
 			print("send:",currarg)
 			vwrite(uart.ATC,currarg,"\026")
 		elseif cmdhead == "+CIPSEND" then
@@ -181,17 +181,17 @@ local function procatc(data)
 			print("error promot cmd:",currcmd)
 		end
 	else
-		--¸ù¾İÃüÁîÀàĞÍÀ´ÅĞ¶ÏÊÕµ½µÄÊı¾İÊÇurc»òÕß·´À¡Êı¾İ
-		if cmdtype == NORESULT then -- ÎŞ½á¹ûÃüÁî ´ËÊ±ÊÕµ½µÄÊı¾İÖ»ÓĞURC
+		--æ ¹æ®å‘½ä»¤ç±»å‹æ¥åˆ¤æ–­æ”¶åˆ°çš„æ•°æ®æ˜¯urcæˆ–è€…åé¦ˆæ•°æ®
+		if cmdtype == NORESULT then -- æ— ç»“æœå‘½ä»¤ æ­¤æ—¶æ”¶åˆ°çš„æ•°æ®åªæœ‰URC
 			isurc = true
-		elseif cmdtype == NUMBERIC then -- È«Êı×Ö
+		elseif cmdtype == NUMBERIC then -- å…¨æ•°å­—
 			local numstr = smatch(data,"(%d+)")
 			if numstr == data then
 				interdata = data
 			else
 				isurc = true
 			end
-		elseif cmdtype == STRING then -- ×Ö·û´®
+		elseif cmdtype == STRING then -- å­—ç¬¦ä¸²
 			local str = smatch(data,"(.+)")
 			interdata = data
 		elseif cmdtype == SLINE or cmdtype == MLINE then
@@ -257,7 +257,7 @@ local function getcmd(item)
 		return
 	end
 
-	if head == "+CMGS" or head == "+CIPSEND" then -- ±ØĞëÓĞ²ÎÊı
+	if head == "+CMGS" or head == "+CIPSEND" then -- å¿…é¡»æœ‰å‚æ•°
 		if arg == nil or arg == "" then
 			print("request error no arg",head)
 			return
@@ -275,7 +275,7 @@ end
 
 local function sendat()
 	if not radioready or readat or currcmd ~= nil then
-		-- Î´³õÊ¼»¯/ÕıÔÚ¶ÁÈ¡atcÊı¾İ¡¢ÓĞÃüÁîÔÚÖ´ĞĞ¡¢¶ÓÁĞÎŞÃüÁî Ö±½ÓÍË³ö
+		-- æœªåˆå§‹åŒ–/æ­£åœ¨è¯»å–atcæ•°æ®ã€æœ‰å‘½ä»¤åœ¨æ‰§è¡Œã€é˜Ÿåˆ—æ— å‘½ä»¤ ç›´æ¥é€€å‡º
 		return
 	end
 
@@ -316,13 +316,13 @@ local function atcreader()
 		end
 	end
 	readat = false
-	sendat() -- atcÉÏ±¨Êı¾İ´¦ÀíÍêÒÔºó²ÅÖ´ĞĞ·¢ËÍATÃüÁî
+	sendat() -- atcä¸ŠæŠ¥æ•°æ®å¤„ç†å®Œä»¥åæ‰æ‰§è¡Œå‘é€ATå‘½ä»¤
 end
 
 sys.regmsg("atc",atcreader)
 
 function request(cmd,arg,onrsp)
-	--²åÈë»º³å¶ÓÁĞ
+	--æ’å…¥ç¼“å†²é˜Ÿåˆ—
 	if not arg and not onrsp then
 		table.insert(cmdqueue,cmd)
 	else

@@ -4,46 +4,46 @@
 #include "iot_os.h"
 
 /**
- * @defgroup iot_sdk_audio ÒôÆµ½Ó¿Ú
+ * @defgroup iot_sdk_audio éŸ³é¢‘æ¥å£
  * @{
  */
 
 	/**@example tts/demo_tts.c
-	* tts½Ó¿ÚÊ¾Àı
+	* ttsæ¥å£ç¤ºä¾‹
 	*/ 
 
-/**³õÊ¼»¯ttsÒıÇæ
-*@param		cb:		TTS²¥·Å½á¹û»Øµ÷º¯Êı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**åˆå§‹åŒ–ttså¼•æ“
+*@param		cb:		TTSæ’­æ”¾ç»“æœå›è°ƒå‡½æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_tts_init(
                     TTS_PLAY_CB cb         
               );
 
-/**tts²¥·ÅÎÄ±¾
-*@param		text:		´ı²¥·ÅÎÄ±¾
-*@param		len:		ÎÄ±¾³¤¶È£¨×Ö½Ú£©
-*@return	TRUE: 	    ³É¹¦
-			FALSE:      Ê§°Ü
+/**ttsæ’­æ”¾æ–‡æœ¬
+*@param		text:		å¾…æ’­æ”¾æ–‡æœ¬
+*@param		len:		æ–‡æœ¬é•¿åº¦ï¼ˆå­—èŠ‚ï¼‰
+*@return	TRUE: 	    æˆåŠŸ
+			FALSE:      å¤±è´¥
 **/
 BOOL iot_tts_play(                                   
                     char *text,u32 len                    
               );
 
 
-/**ttsÍ£Ö¹²¥·Å
-*@return	TRUE: 	    ³É¹¦
-			FALSE:      Ê§°Ü
+/**ttsåœæ­¢æ’­æ”¾
+*@return	TRUE: 	    æˆåŠŸ
+			FALSE:      å¤±è´¥
 **/
 BOOL iot_tts_stop(      );
 
 
-/**ÉèÖÃttsÅäÖÃ²ÎÊı
-*@param		flag:		²ÎÊı±êÖ¾
-*@param		value:		²ÎÊıÖµ
-*@return	TRUE: 	    ³É¹¦
-			FALSE:      Ê§°Ü
+/**è®¾ç½®ttsé…ç½®å‚æ•°
+*@param		flag:		å‚æ•°æ ‡å¿—
+*@param		value:		å‚æ•°å€¼
+*@return	TRUE: 	    æˆåŠŸ
+			FALSE:      å¤±è´¥
 **/
 BOOL iot_tts_set_param(
 		OPENAT_TTS_PARAM_FLAG flag,u32 value

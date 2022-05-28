@@ -1,10 +1,10 @@
 #include "iot_gpio.h"
 
-/**≈‰÷√gpio 
-*@param		port:		GPIO±‡∫≈
-*@param		cfg:		≈‰÷√–≈œ¢
-*@return	TRUE: 	    ≥…π¶
-*           FALSE:       ß∞‹
+/**ÈÖçÁΩÆgpio 
+*@param		port:		GPIOÁºñÂè∑
+*@param		cfg:		ÈÖçÁΩÆ‰ø°ÊÅØ
+*@return	TRUE: 	    ÊàêÂäü
+*           FALSE:      Â§±Ë¥•
 **/
 BOOL iot_gpio_open(                          
                         E_AMOPENAT_GPIO_PORT port, 
@@ -14,11 +14,11 @@ BOOL iot_gpio_open(
     return OPENAT_config_gpio(port, cfg);
 }
 
-/**…Ë÷√gpio 
-*@param		port:		GPIO±‡∫≈
+/**ËÆæÁΩÆgpio 
+*@param		port:		GPIOÁºñÂè∑
 *@param		value:		0 or 1
-*@return	TRUE: 	    ≥…π¶
-*           FALSE:       ß∞‹
+*@return	TRUE: 	    ÊàêÂäü
+*           FALSE:      Â§±Ë¥•
 **/
 BOOL iot_gpio_set(                               
                         E_AMOPENAT_GPIO_PORT port,  
@@ -28,11 +28,11 @@ BOOL iot_gpio_set(
     return OPENAT_set_gpio(port, value);
 }
 
-/**∂¡»°gpio 
-*@param		port:		GPIO±‡∫≈
+/**ËØªÂèñgpio 
+*@param		port:		GPIOÁºñÂè∑
 *@param		value:		0 or 1
-*@return	TRUE: 	    ≥…π¶
-*           FALSE:       ß∞‹
+*@return	TRUE: 	    ÊàêÂäü
+*           FALSE:      Â§±Ë¥•
 **/				
 BOOL iot_gpio_read(                            
                         E_AMOPENAT_GPIO_PORT port, 
@@ -42,10 +42,10 @@ BOOL iot_gpio_read(
     return OPENAT_read_gpio(port, value);
 }
 
-/**πÿ±’gpio 
-*@param		port:		GPIO±‡∫≈
-*@return	TRUE: 	    ≥…π¶
-*           FALSE:       ß∞‹
+/**ÂÖ≥Èó≠gpio 
+*@param		port:		GPIOÁºñÂè∑
+*@return	TRUE: 	    ÊàêÂäü
+*           FALSE:      Â§±Ë¥•
 **/	
 BOOL iot_gpio_close(                            
                         E_AMOPENAT_GPIO_PORT port

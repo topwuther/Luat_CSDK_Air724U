@@ -18,11 +18,11 @@
 
 
 /**
- * @brief ·¢ËÍSSL·â×°ºÃµÄÊı¾İ£¬Èç¹ûÊ¹ÓÃsocket±à³ÌµÄ£¬¿ÉÒÔÖ±½Ó²Î¿¼£¬Èç¹ûÊ¹ÓÃATÖ¸Áî±à³ÌµÄ£¬ÄÇÃ´ĞèÒª×Ô¼ºÀ´ÊµÏÖ
- * @param Socketfd [in] socket id£¬Èç¹ûÊÇATÖ¸Áî£¬µ¥Â·Á´½Ó£¬´«Èë0£¬²»ÓÃ¹Ü£¬¶àÂ·Á´½ÓµÄ£¬´«ÈëCIPSTARTÊ±ÓÃµÄÍ¨µÀºÅ
- * @param Buf [in] ĞèÒª·¢ËÍÊı¾İµÄÖ¸Õë
- * @param TxLen [in] ĞèÒª·¢ËÍµÄ³¤¶È
- * @return  ·µ»Ø·¢ËÍµÄ³¤¶È£¬ -1±íÊ¾·¢ËÍÊ§°Ü.
+ * @brief å‘é€SSLå°è£…å¥½çš„æ•°æ®ï¼Œå¦‚æœä½¿ç”¨socketç¼–ç¨‹çš„ï¼Œå¯ä»¥ç›´æ¥å‚è€ƒï¼Œå¦‚æœä½¿ç”¨ATæŒ‡ä»¤ç¼–ç¨‹çš„ï¼Œé‚£ä¹ˆéœ€è¦è‡ªå·±æ¥å®ç°
+ * @param Socketfd [in] socket idï¼Œå¦‚æœæ˜¯ATæŒ‡ä»¤ï¼Œå•è·¯é“¾æ¥ï¼Œä¼ å…¥0ï¼Œä¸ç”¨ç®¡ï¼Œå¤šè·¯é“¾æ¥çš„ï¼Œä¼ å…¥CIPSTARTæ—¶ç”¨çš„é€šé“å·
+ * @param Buf [in] éœ€è¦å‘é€æ•°æ®çš„æŒ‡é’ˆ
+ * @param TxLen [in] éœ€è¦å‘é€çš„é•¿åº¦
+ * @return  è¿”å›å‘é€çš„é•¿åº¦ï¼Œ -1è¡¨ç¤ºå‘é€å¤±è´¥.
  */
 static int32_t SSL_SocketTx(int32_t Socketfd, void *Buf, uint16_t TxLen)
 {
@@ -63,11 +63,11 @@ static int32_t SSL_SocketTx(int32_t Socketfd, void *Buf, uint16_t TxLen)
 }
 
 /**
- * @brief ½ÓÊÕSSL·â×°ºÃµÄÊı¾İ£¬Èç¹ûÊ¹ÓÃsocket±à³ÌµÄ£¬¿ÉÒÔÖ±½Ó²Î¿¼£¬Èç¹ûÊ¹ÓÃATÖ¸Áî±à³ÌµÄ£¬ÄÇÃ´ĞèÒª×Ô¼ºÀ´ÊµÏÖ
- * @param Socketfd [in] socket id£¬Èç¹ûÊÇATÖ¸Áî£¬µ¥Â·Á´½Ó£¬´«Èë0£¬²»ÓÃ¹Ü£¬¶àÂ·Á´½ÓµÄ£¬´«ÈëCIPSTARTÊ±ÓÃµÄÍ¨µÀºÅ
- * @param Buf [in] ´æ·Å½ÓÊÕÊı¾İµÄÖ¸Õë
- * @param TxLen [in] ĞèÒª½ÓÊÕµÄ³¤¶È£¬¿ÉÄÜ»á³¬³ö±¾´Î½ÓÊÕµÄ³¤¶È£¬Ã»¹ØÏµ
- * @return  ·µ»Ø½ÓÊÕµÄ³¤¶È£¬ -1±íÊ¾½ÓÊÕÊ§°Ü.
+ * @brief æ¥æ”¶SSLå°è£…å¥½çš„æ•°æ®ï¼Œå¦‚æœä½¿ç”¨socketç¼–ç¨‹çš„ï¼Œå¯ä»¥ç›´æ¥å‚è€ƒï¼Œå¦‚æœä½¿ç”¨ATæŒ‡ä»¤ç¼–ç¨‹çš„ï¼Œé‚£ä¹ˆéœ€è¦è‡ªå·±æ¥å®ç°
+ * @param Socketfd [in] socket idï¼Œå¦‚æœæ˜¯ATæŒ‡ä»¤ï¼Œå•è·¯é“¾æ¥ï¼Œä¼ å…¥0ï¼Œä¸ç”¨ç®¡ï¼Œå¤šè·¯é“¾æ¥çš„ï¼Œä¼ å…¥CIPSTARTæ—¶ç”¨çš„é€šé“å·
+ * @param Buf [in] å­˜æ”¾æ¥æ”¶æ•°æ®çš„æŒ‡é’ˆ
+ * @param TxLen [in] éœ€è¦æ¥æ”¶çš„é•¿åº¦ï¼Œå¯èƒ½ä¼šè¶…å‡ºæœ¬æ¬¡æ¥æ”¶çš„é•¿åº¦ï¼Œæ²¡å…³ç³»
+ * @return  è¿”å›æ¥æ”¶çš„é•¿åº¦ï¼Œ -1è¡¨ç¤ºæ¥æ”¶å¤±è´¥.
  */
 static int32_t SSL_SocketRx(int32_t Socketfd, void *Buf, uint16_t RxLen)
 {
@@ -104,14 +104,14 @@ static int32_t SSL_SocketRx(int32_t Socketfd, void *Buf, uint16_t RxLen)
 
 
 
-//¹ØÓÚµÚÒ»¸ö²ÎÊı£¬fd ÒÑÁ¬½ÓµÄsocketÃèÊö·û¡£¾ÍÊÇËµ´´½¨socket ²»°üº¬ÔÚÕâ¸öº¯ÊıÖĞ£¿
-//ÄÇÃ´ÎÒÃÇ¼ÙÉèÒ»ÏÂ²âÊÔ´úÂë
-// (1)Socket_ConnectServer Á¬½Ó·µ»Ø socketid
+//å…³äºç¬¬ä¸€ä¸ªå‚æ•°ï¼Œfd å·²è¿æ¥çš„socketæè¿°ç¬¦ã€‚å°±æ˜¯è¯´åˆ›å»ºsocket ä¸åŒ…å«åœ¨è¿™ä¸ªå‡½æ•°ä¸­ï¼Ÿ
+//é‚£ä¹ˆæˆ‘ä»¬å‡è®¾ä¸€ä¸‹æµ‹è¯•ä»£ç 
+// (1)Socket_ConnectServer è¿æ¥è¿”å› socketid
 uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *root_ca, uplus_u8 root_ca_num)
 {
 
 	int32_t Ret;
-	//ÉèÖÃÍøÂç×´Ì¬»Øµ÷º¯Êı,Õâ¸öº¯ÊıÎÒºÜ²»Àí½â£¿ÏÈ²»¹Ü
+	//è®¾ç½®ç½‘ç»œçŠ¶æ€å›è°ƒå‡½æ•°,è¿™ä¸ªå‡½æ•°æˆ‘å¾ˆä¸ç†è§£ï¼Ÿå…ˆä¸ç®¡
 	//iot_network_set_cb(SSL_NetworkIndCallBack);
 	T_AMOPENAT_SYSTEM_DATETIME Datetime;
 	SSL_RegSocketCallback(SSL_SocketTx, SSL_SocketRx);
@@ -119,7 +119,7 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 
 
 
-	SSL_CTX * SSLCtrl = SSL_CreateCtrl(1); //»º´æ1¸ösession£¬·ñÔòÏÂÃæµÄ´òÓ¡Ö÷KEY»áÊ§°Ü
+	SSL_CTX * SSLCtrl = SSL_CreateCtrl(1); //ç¼“å­˜1ä¸ªsessionï¼Œå¦åˆ™ä¸‹é¢çš„æ‰“å°ä¸»KEYä¼šå¤±è´¥
 	SSL * SSLLink = NULL;
 	if (!SSLCtrl)
 	{
@@ -134,8 +134,8 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_X509_CACERT, (const uint8_t *)root_ca->ca, strlen(root_ca->ca), NULL);
 
 	//
-	//Èç¹ûÊÇË«ÏòÈÏÖ¤µÄ£¬ĞèÒª¼ÓÔØ¿Í»§¶ËµÄÖ¤ÊéºÍË½Ô¿
-	//ÔİÊ±ÏÈµ¥ÏòµÄ°É£¬¿´Õâ¸öAPIÖ»Ö§³Öµ¥Ïò
+	//å¦‚æœæ˜¯åŒå‘è®¤è¯çš„ï¼Œéœ€è¦åŠ è½½å®¢æˆ·ç«¯çš„è¯ä¹¦å’Œç§é’¥
+	//æš‚æ—¶å…ˆå•å‘çš„å§ï¼Œçœ‹è¿™ä¸ªAPIåªæ”¯æŒå•å‘
 //	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_X509_CERT, ClientCert, strlen(ClientCert), NULL);
 //	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_RSA_KEY, ClientRSAKey, strlen(ClientRSAKey), NULL);
 //#endif
@@ -146,7 +146,7 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 		SSLLink = NULL;
 	}
 
-	iot_os_sleep(5000);	//ÕâÀï×îºÃÊ¹ÓÃtimerÀ´ÑÓ³Ù£¬demo¼ò»¯Ê¹ÓÃ
+	iot_os_sleep(5000);	//è¿™é‡Œæœ€å¥½ä½¿ç”¨timeræ¥å»¶è¿Ÿï¼Œdemoç®€åŒ–ä½¿ç”¨
 
 //	if(NWState != OPENAT_NETWORK_LINKED)
 //	{
@@ -154,10 +154,10 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 //	}
 
 
-	//°Ñ¼ì²éÍøÂçÁ¬½ÓµÄº¯Êı·Åµ½º¯ÊıÀïÃæ»¹ÊÇµ¥¶ÀÌáÈ¡³öÈ¥£¿
-//	iot_os_sleep(5000);	//ÕâÀï×îºÃÊ¹ÓÃtimerÀ´ÑÓ³Ù£¬demo¼ò»¯Ê¹ÓÃ
+	//æŠŠæ£€æŸ¥ç½‘ç»œè¿æ¥çš„å‡½æ•°æ”¾åˆ°å‡½æ•°é‡Œé¢è¿˜æ˜¯å•ç‹¬æå–å‡ºå»ï¼Ÿ
+//	iot_os_sleep(5000);	//è¿™é‡Œæœ€å¥½ä½¿ç”¨timeræ¥å»¶è¿Ÿï¼Œdemoç®€åŒ–ä½¿ç”¨
 //	iot_os_stop_timer(hTimer);
-//	iot_os_start_timer(hTimer, 90*1000);//90ÃëÄÚÈç¹ûÃ»ÓĞ¼¤»îAPN£¬ÖØÆôÄ£¿é
+//	iot_os_start_timer(hTimer, 90*1000);//90ç§’å†…å¦‚æœæ²¡æœ‰æ¿€æ´»APNï¼Œé‡å¯æ¨¡å—
 //	ToFlag = 0;
 //	while (NWState != OPENAT_NETWORK_LINKED)
 //	{
@@ -177,8 +177,8 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 //	iot_os_stop_timer(hTimer);
 
 
-	//ĞèÒª¶ÔÊ±¼äĞ£×¼£¬DEMOÖĞ¼ò»¯ÎªÖ±½ÓÉèÖÃÊ±¼äÁË
-	//¼ÇµÃÒÔÇ°SSLµÄÖ¤ÊéµÄ»°£¬ĞèÒªÉèÖÃ±¾µØÊ±¼äµÄ
+	//éœ€è¦å¯¹æ—¶é—´æ ¡å‡†ï¼ŒDEMOä¸­ç®€åŒ–ä¸ºç›´æ¥è®¾ç½®æ—¶é—´äº†
+	//è®°å¾—ä»¥å‰SSLçš„è¯ä¹¦çš„è¯ï¼Œéœ€è¦è®¾ç½®æœ¬åœ°æ—¶é—´çš„
 	Datetime.nYear = 2017;
 	Datetime.nMonth = 12;
 	Datetime.nDay = 1;
@@ -205,9 +205,9 @@ uplus_ctx_id uplus_net_ssl_client_create(uplus_s32 fd, struct uplus_ca_chain *ro
 
 
 /*!
- * \brief SSLÎÕÊÖ¡£
- * \param [in] id SSL»á»°±êÊ¶¡£
- * \return ³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1£¬¼ÌĞøÎÕÊÖ·µ»Ø1¡£
+ * \brief SSLæ¡æ‰‹ã€‚
+ * \param [in] id SSLä¼šè¯æ ‡è¯†ã€‚
+ * \return æˆåŠŸè¿”å›0ï¼Œå¤±è´¥è¿”å›-1ï¼Œç»§ç»­æ¡æ‰‹è¿”å›1ã€‚
  */
 uplus_s32 uplus_net_ssl_client_handshake(uplus_ctx_id id)
 {

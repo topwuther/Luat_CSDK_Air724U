@@ -369,7 +369,7 @@ LUAI_DATA const TValue luaO_nilobject_;
 LUAI_FUNC int luaO_log2 (unsigned int x);
 LUAI_FUNC int luaO_int2fb (unsigned int x);
 LUAI_FUNC int luaO_fb2int (int x);
-LUAI_FUNC int luaO_hexavalue (int c);/*\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+LUAI_FUNC int luaO_hexavalue (int c);/*\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 LUAI_FUNC int luaO_rawequalObj (const TValue *t1, const TValue *t2);
 LUAI_FUNC int luaO_str2d (const char *s, lua_Number *result);
 LUAI_FUNC const char *luaO_pushvfstring (lua_State *L, const char *fmt,

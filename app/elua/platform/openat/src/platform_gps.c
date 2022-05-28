@@ -7,7 +7,7 @@
  * Date:    2014/8/6
  *
  * Description:
- *          lua gpscoreÆ½Ì¨½Ó¿ÚÊµÏÖ
+ *          lua gpscoreå¹³å°æ¥å£å®ç°
  **************************************************************************/
 #ifdef LUA_GPS_LIB
 
@@ -19,11 +19,11 @@
 #include "am_openat_drv.h"
 
 
-//lua open ´«Èë¹¤×÷Ä£Ê½
+//lua open ä¼ å…¥å·¥ä½œæ¨¡å¼
 //lua close
 //lua write
 //lua read
-//lua dataind µ÷ÓÃ read
+//lua dataind è°ƒç”¨ read
 
 
 #define GPS_MAX_NMEA 30
@@ -43,9 +43,9 @@ static const char* g_s_gps_indInfo[] =
   "GSA"
 };
 
-/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
 static UINT32 g_s_gps_indInfo_count[GPS_DATA_IND_COUNT] = {0};
-/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
 
 
 BOOL gps_buf_write(VOID* buf, UINT32 len)
@@ -65,9 +65,9 @@ BOOL gps_buf_write(VOID* buf, UINT32 len)
   {
 		if(strstr(buf, g_s_gps_indInfo[i]) != NULL)
 		{
-			/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+			/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
 			g_s_gps_indInfo_count[i]++;
-			/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+			/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
 
 			break;
 		}
@@ -79,12 +79,12 @@ BOOL gps_buf_write(VOID* buf, UINT32 len)
     return FALSE;
   }
 
-	/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+	/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
   if (!((i == 0) || ((g_s_gps_indInfo_count[i] % 5) == 0)))
   {
 		return;
   } 
-	/*-\NEW\zhuwangbin\2016.10.12\ ÏûÏ¢·¢ËÍÌ«Æµ·±µ¼ÖÂËÀ»ú */
+	/*-\NEW\zhuwangbin\2016.10.12\ æ¶ˆæ¯å‘é€å¤ªé¢‘ç¹å¯¼è‡´æ­»æœº */
 
   freeSpace = QueueGetFreeSpace(&g_s_gpsDataQueue);
 
@@ -114,7 +114,7 @@ typedef struct OPENAT_INTERNAL_MSG_TAG
 }OPENAT_INTERNAL_MSG;
 
 
-/*-\NEW\zhuwangbin\2016.10.12\mmi Ö±½Óµ÷ÓÃplatform_rtos_send¿ÉÄÜµ¼ÖÂËÀ»úµÄÎÊÌâ */	
+/*-\NEW\zhuwangbin\2016.10.12\mmi ç›´æ¥è°ƒç”¨platform_rtos_sendå¯èƒ½å¯¼è‡´æ­»æœºçš„é—®é¢˜ */	
 void platform_gps_open_ind_to_lua(void *buffer)
 {
 	PlatformMsgData msgData;
@@ -123,7 +123,7 @@ void platform_gps_open_ind_to_lua(void *buffer)
 	platform_rtos_send(MSG_ID_GPS_OPEN_IND, &msgData);
 }
 
-/*-\NEW\zhuwangbin\2016.10.12\mmi Ö±½Óµ÷ÓÃplatform_rtos_send¿ÉÄÜµ¼ÖÂËÀ»úµÄÎÊÌâ */
+/*-\NEW\zhuwangbin\2016.10.12\mmi ç›´æ¥è°ƒç”¨platform_rtos_sendå¯èƒ½å¯¼è‡´æ­»æœºçš„é—®é¢˜ */
 void mdi_gps_gps_open_ind_hdler(void *param)
 {
 	/*----------------------------------------------------------------*/
@@ -136,7 +136,7 @@ void mdi_gps_gps_open_ind_hdler(void *param)
 
 	platform_gps_open_ind_to_lua((void *)result); 
 }
-/*-\NEW\zhuwangbin\2016.10.12\mmi Ö±½Óµ÷ÓÃplatform_rtos_send¿ÉÄÜµ¼ÖÂËÀ»úµÄÎÊÌâ */
+/*-\NEW\zhuwangbin\2016.10.12\mmi ç›´æ¥è°ƒç”¨platform_rtos_sendå¯èƒ½å¯¼è‡´æ­»æœºçš„é—®é¢˜ */
 
 
 
@@ -149,10 +149,10 @@ static void gps_ind(E_AMOPENAT_DATA_TYPE type, VOID *buffer, UINT32 length)
   {
     case OPENAT_GPS_PARSER_RAW_DATA:
     case OPENAT_GPS_UART_RAW_DATA:
-      //»º´æ
+      //ç¼“å­˜
       if(gps_buf_write(buffer, length))
       {
-      //·¢ËÍÏûÏ¢
+      //å‘é€æ¶ˆæ¯
       msgData.gpsData.dataMode = (UINT16)type;
       msgData.gpsData.dataLen = length;
       platform_rtos_send(MSG_ID_GPS_DATA_IND, &msgData);
@@ -167,7 +167,7 @@ static void gps_ind(E_AMOPENAT_DATA_TYPE type, VOID *buffer, UINT32 length)
 #else
 
   gps_buf_write(buffer, length);
-  //·¢ËÍÏûÏ¢
+  //å‘é€æ¶ˆæ¯
   msgData.gpsData.dataMode = (UINT16)type;
   msgData.gpsData.dataLen = length;
   platform_rtos_send(MSG_ID_GPS_DATA_IND, &msgData);
@@ -185,7 +185,8 @@ int platform_gps_open(UINT8 mode){
     case GPS_MODE_LOCATION:
       workMode = OPENAT_GPS_UART_MODE_LOCATION;
       break;
-    default:
+    default:
+
       workMode = OPENAT_GPS_UART_MODE_LOCATION_WITH_QOP;
       break;
   }
@@ -214,20 +215,22 @@ int platform_gps_close(void){
 
 int platform_gps_read(UINT8* data)
 {
-
+
+
   UINT16 dataValid;
   if(g_s_gpsDataQueue.empty)
   {
     return 0;
-  }
+  }
+
   
   dataValid = g_s_gpsDataQueue.size - QueueGetFreeSpace(&g_s_gpsDataQueue);
   ASSERT(dataValid > GPS_NMEA_HEAD);
 
-  //È¡³öÊı¾İÍ·
+  //å–å‡ºæ•°æ®å¤´
   QueueDelete(&g_s_gpsDataQueue, (UINT8*)&dataValid, 2);
-  //È¡³öÊı¾İ
-//  ASSERT(len >= dataValid); //²»Ö§³Ö¶ÁÈ¡²¿·ÖÊı¾İ
+  //å–å‡ºæ•°æ®
+//  ASSERT(len >= dataValid); //ä¸æ”¯æŒè¯»å–éƒ¨åˆ†æ•°æ®
   ASSERT(dataValid <= GPS_MAX_NMEA_LEN);
   QueueDelete(&g_s_gpsDataQueue, (UINT8*)data, dataValid);
   
@@ -245,7 +248,8 @@ int platform_gps_write(VOID* buf, UINT32 len){
   {
     return PLATFORM_ERR;
   }
-}
+}
+
 
 void platform_gps_init(void)
 {

@@ -1,10 +1,10 @@
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #ifdef AM_LUA_CAMERA_SUPPORT
 #include "string.h"
 #include "malloc.h"
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 #include "osi_api.h"
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 #include "assert.h"
 #include "am_openat.h"
 
@@ -41,7 +41,7 @@ typedef struct
 	int nInitCmdSize;
 	int *pInitCmd;
 }camOpenParam_t;
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 typedef struct
 {
 	int sensorWidth;
@@ -63,10 +63,10 @@ typedef struct
 	camScanParan_t scan;
 	camExternParam_t exCamera;
 }platCamCtx_t;
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 platCamCtx_t platCamCtx;
 
-/*+\NEW\zhuwangbin\2020.07.16\ÖØĞÂÕûÀícamera¼Ä´æÆ÷ºÍÅäÖÃÂß¼­*/
+/*+\NEW\zhuwangbin\2020.07.16\é‡æ–°æ•´ç†cameraå¯„å­˜å™¨å’Œé…ç½®é€»è¾‘*/
 static AMOPENAT_CAMERA_REG prvCameraInitReg[]  =
 {
 	
@@ -620,10 +620,10 @@ static AMOPENAT_CAMERA_REG prvCambMirrorFReg[] =
 {
  	{0x17, 0x14}, //bMirror = false
 };
-/*-\NEW\zhuwangbin\2020.07.16\ÖØĞÂÕûÀícamera¼Ä´æÆ÷ºÍÅäÖÃÂß¼­*/
+/*-\NEW\zhuwangbin\2020.07.16\é‡æ–°æ•´ç†cameraå¯„å­˜å™¨å’Œé…ç½®é€»è¾‘*/
 
 
-/*ÌáÈ¡yuvÊı¾İÖĞµÄy*/
+/*æå–yuvæ•°æ®ä¸­çš„y*/
 static unsigned char * prvZbarScannerY(unsigned char *data, int width, int height)
 {
 	unsigned char *src = data,*end = data + (width * height * 2);
@@ -643,13 +643,13 @@ static unsigned char * prvZbarScannerY(unsigned char *data, int width, int heigh
     return workingbuffer;
 }
 
-/*½âÎö¶şÎ¬ÂëÖĞµÄÊı¾İ*/
+/*è§£æäºŒç»´ç ä¸­çš„æ•°æ®*/
 static void prvZbarScannerRun(int width, int height, int size, unsigned char *dataInput)
 {
 	int len;
 	char *data;
 	
-	//´´½¨¾ä±ú£¬ handle != 0 ±íÊ¾½âÂë³É¹¦
+	//åˆ›å»ºå¥æŸ„ï¼Œ handle != 0 è¡¨ç¤ºè§£ç æˆåŠŸ
 	int handle = OPENAT_zbar_scanner_open(width, height, size, dataInput);
     
 	if (handle)
@@ -658,14 +658,14 @@ static void prvZbarScannerRun(int width, int height, int size, unsigned char *da
 		{    
 			CAM_FUNC();
 			
-			// ½âÂë³É¹¦»ñÈ¡¶şÎ¬ÂëĞÅÏ¢
+			// è§£ç æˆåŠŸè·å–äºŒç»´ç ä¿¡æ¯
 			data = OPENAT_zbar_get_data(handle, &len);
 			data[len] = 0;
 
 			//OPENAT_CameraPreviewClose();
 			OPENAT_print("prvZbarScannerRun %s,%d,%s", OPENAT_zbar_get_type(handle), len, data);
 			
-			//·¢ËÍÏûÏ¢Í¨Öªlua
+			//å‘é€æ¶ˆæ¯é€šçŸ¥lua
 			PlatformMsgData rtosmsg;
 
 			rtosmsg.zbarData.result = TRUE;
@@ -678,14 +678,14 @@ static void prvZbarScannerRun(int width, int height, int size, unsigned char *da
 			        		
 	        platform_rtos_send(MSG_ID_RTOS_MSG_ZBAR, &rtosmsg);	
 			
-		 // ÅĞ¶ÏÊÇ·ñÓĞÏÂÒ»¸öÊı¾İ
+		 // åˆ¤æ–­æ˜¯å¦æœ‰ä¸‹ä¸€ä¸ªæ•°æ®
 		}while(OPENAT_zbar_find_nextData(handle) > 0);
 
-		// ÊÍ·Å¾ä±ú
+		// é‡Šæ”¾å¥æŸ„
 		OPENAT_zbar_scanner_close(handle);
 	}
 }
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 static void prvCamScanProcess(void *param)
 {
 	OPENAT_print("prvCamScanProcess scannerBuff %x", platCamCtx.scan.scannerBuff);
@@ -742,14 +742,14 @@ static BOOL prvCamScanOpen(void)
 
 static BOOL prvCamScanClose(void)
 {
-	/*É¾³ıwork queue*/
+	/*åˆ é™¤work queue*/
 	if (platCamCtx.scan.wq)
 	{
 		osiWorkQueueDelete(platCamCtx.scan.wq);
 		platCamCtx.scan.wq = NULL;
 	}
 
-	/*É¾³ırx_work*/
+	/*åˆ é™¤rx_work*/
 	if (platCamCtx.scan.work)
 	{
 		osiWorkDelete(platCamCtx.scan.work);
@@ -763,7 +763,7 @@ static BOOL prvCamScanClose(void)
 }
 
 
-/*Ô¤ÀÀ»Øµ÷º¯Êı, »ñÈ¡Ô¤ÀÀÊı¾İ*/
+/*é¢„è§ˆå›è°ƒå‡½æ•°, è·å–é¢„è§ˆæ•°æ®*/
 static void prvCmaCallback(T_AMOPENAT_CAMERA_MESSAGE *pMsg)
 {
 	CAM_FUNC();
@@ -771,7 +771,7 @@ static void prvCmaCallback(T_AMOPENAT_CAMERA_MESSAGE *pMsg)
     {
         case OPENAT_DRV_EVT_CAMERA_DATA_IND:
         {
-            // »ñÈ¡cameraµÃµ½µÄÊı¾İ, ÏÈÌáÈ¡yÏòÁ¿£¬È»ºóÔÚscan workÖĞ½âÎö
+            // è·å–cameraå¾—åˆ°çš„æ•°æ®, å…ˆæå–yå‘é‡ï¼Œç„¶ååœ¨scan workä¸­è§£æ
             if (platCamCtx.exCamera.bZbarScan)
 			{
 				platCamCtx.scan.scannerBuff = prvZbarScannerY((unsigned char *)pMsg->dataParam.data, 
@@ -790,7 +790,7 @@ static void prvCmaCallback(T_AMOPENAT_CAMERA_MESSAGE *pMsg)
             break;
     }
 }
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 static BOOL prvCamScannerStart(void)
 {
 	BOOL ret;
@@ -800,10 +800,10 @@ static BOOL prvCamScannerStart(void)
 	previewParam.startY = platCamCtx.previewParam.startY;
 	previewParam.endX = platCamCtx.previewParam.endX;
 	previewParam.endY = platCamCtx.previewParam.endY;
-	/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 	previewParam.zoom = platCamCtx.previewParam.zoom;
 	previewParam.rotation = platCamCtx.previewParam.rotation;
-	/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+	/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 	ret = OPENAT_CameraPreviewOpen(&previewParam);
 	if (!ret)
 	{
@@ -817,9 +817,9 @@ static BOOL prvCamScannerStart(void)
 
 static BOOL prvCamScannerStop(void)
 {
-	/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+	/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 	prvCamScanClose();
-	/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+	/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 	return OPENAT_CameraPreviewClose();
 }
 
@@ -837,10 +837,10 @@ static BOOL prvCamOpen(void)
 		TRUE,
 		TRUE,
 		TRUE, 
-		/*+\NEW\zhuwangbin\2020.07.16\Ìí¼ÓVGAÅÄÕÕ¹¦ÄÜ£¬²»Ö§³ÖVGAÉ¨Âë*/
+		/*+\NEW\zhuwangbin\2020.07.16\æ·»åŠ VGAæ‹ç…§åŠŸèƒ½ï¼Œä¸æ”¯æŒVGAæ‰«ç */
 		(platCamCtx.openParam.bJump) ? CAM_SENSOR_WIDTH : CAM_SENSOR_WIDTH *2,
 		(platCamCtx.openParam.bJump) ? CAM_SENSOR_HEIGHT : CAM_SENSOR_HEIGHT *2,
-		/*-\NEW\zhuwangbin\2020.07.16\Ìí¼ÓVGAÅÄÕÕ¹¦ÄÜ£¬²»Ö§³ÖVGAÉ¨Âë*/
+		/*-\NEW\zhuwangbin\2020.07.16\æ·»åŠ VGAæ‹ç…§åŠŸèƒ½ï¼Œä¸æ”¯æŒVGAæ‰«ç */
 		CAMERA_IMAGE_FORMAT_YUV422,
 		prvCameraInitReg,
         sizeof(prvCameraInitReg)/sizeof(AMOPENAT_CAMERA_REG),
@@ -851,8 +851,8 @@ static BOOL prvCamOpen(void)
 		OPENAT_SPI_OUT_Y1_V0_Y0_U0
 	};
 	
-	/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
-	/*ÊÇ·ñÌí¼ÓÉ¨Âë¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
+	/*æ˜¯å¦æ·»åŠ æ‰«ç åŠŸèƒ½*/
 	if (platCamCtx.openParam.bZbarScan)
 	{
 		if (!prvCamScanOpen())
@@ -862,7 +862,7 @@ static BOOL prvCamOpen(void)
 		}
 		initParam.messageCallback = prvCmaCallback;
 	}	
-	/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+	/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 	CAM_FUNC();
 
 	if(!init)
@@ -884,7 +884,7 @@ static BOOL prvCamOpen(void)
 		return FALSE;
 	}
 	
-	/*+\NEW\zhuwangbin\2020.07.16\ÖØĞÂÕûÀícamera¼Ä´æÆ÷ºÍÅäÖÃÂß¼­*/
+	/*+\NEW\zhuwangbin\2020.07.16\é‡æ–°æ•´ç†cameraå¯„å­˜å™¨å’Œé…ç½®é€»è¾‘*/
 	if (platCamCtx.openParam.bJump)
 	{
 		OPENAT_CameraWriteReg(prvCamQvgaReg, sizeof(prvCamQvgaReg)/sizeof(AMOPENAT_CAMERA_REG));
@@ -894,7 +894,7 @@ static BOOL prvCamOpen(void)
 		OPENAT_CameraWriteReg(prvCamVgaReg, sizeof(prvCamVgaReg)/sizeof(AMOPENAT_CAMERA_REG));
 	}
 	
-	/**ÊÇ·ñÊ¹ÄÜbMiior**/
+	/**æ˜¯å¦ä½¿èƒ½bMiior**/
 	if (platCamCtx.openParam.bMirror)
 	{
 		OPENAT_CameraWriteReg(prvCambMirrorTReg, sizeof(prvCambMirrorTReg)/sizeof(AMOPENAT_CAMERA_REG));
@@ -904,12 +904,12 @@ static BOOL prvCamOpen(void)
 	{
 		OPENAT_CameraWriteReg(prvCambMirrorFReg, sizeof(prvCambMirrorFReg)/sizeof(AMOPENAT_CAMERA_REG));
 	}
-	/*-\NEW\zhuwangbin\2020.07.16\ÖØĞÂÕûÀícamera¼Ä´æÆ÷ºÍÅäÖÃÂß¼­*/
+	/*-\NEW\zhuwangbin\2020.07.16\é‡æ–°æ•´ç†cameraå¯„å­˜å™¨å’Œé…ç½®é€»è¾‘*/
 	CAM_FUNC();
 	return TRUE;
 }
 
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 static BOOL prvCamOpenExt(T_PLATFORM_CAMERA_PARAM *param)
 {
 	static BOOL init = FALSE;
@@ -942,7 +942,7 @@ static BOOL prvCamOpenExt(T_PLATFORM_CAMERA_PARAM *param)
 
 	CAM_FUNC();
 
-	/*ÊÇ·ñÌí¼ÓÉ¨Âë¹¦ÄÜ*/
+	/*æ˜¯å¦æ·»åŠ æ‰«ç åŠŸèƒ½*/
 	if (platCamCtx.exCamera.bZbarScan)
 	{
 		if (!prvCamScanOpen())
@@ -976,12 +976,12 @@ static BOOL prvCamOpenExt(T_PLATFORM_CAMERA_PARAM *param)
 	CAM_FUNC();
 	return TRUE;
 }
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 static BOOL prvCamClose(void)
 {
-	/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+	/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 	prvCamScanClose();
-	/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+	/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 	
 	OPENAT_CameraPreviewClose();
 	OPENAT_CameraPowerOff();
@@ -1016,14 +1016,14 @@ static BOOL prvZbarCamCtl(camType_t type)
 	return ret;
 }
 
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 BOOL platform_CameraWriteReg(int *pInitCmd, int nInitCmdSize)
 {
 	AMOPENAT_CAMERA_REG *sInitCmd;
 	int i;
-	/*+\bug\rww\2020.11.18\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©*/
+	/*+\bug\rww\2020.11.18\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼*/
 	BOOL retval;
-	/*-\bug\rww\2020.11.18\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©*/
+	/*-\bug\rww\2020.11.18\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼*/
 
 	if (nInitCmdSize / 2 <= 0)
 	{
@@ -1044,17 +1044,17 @@ BOOL platform_CameraWriteReg(int *pInitCmd, int nInitCmdSize)
 		sInitCmd[i/2].value = (unsigned char)pInitCmd[i+1];
 		//OPENAT_print("platform_CameraWriteRegList %d, {%x,%x}",nInitCmdSize, sInitCmd[i/2].addr, sInitCmd[i/2].value);
 	}
-	/*+\bug\rww\2020.11.18\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©*/
+	/*+\bug\rww\2020.11.18\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼*/
 	retval = OPENAT_CameraWriteReg(sInitCmd, nInitCmdSize/2);
 
 	platform_free(sInitCmd);
 
 	return retval;
-	/*-\bug\rww\2020.11.18\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©*/
+	/*-\bug\rww\2020.11.18\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼*/
 }
-/*-\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 
-// »ñÈ¡cameraµÃµ½µÄÊı¾İ£¬ ·¢ËÍµ½zbartask È¥½âÎö
+// è·å–cameraå¾—åˆ°çš„æ•°æ®ï¼Œ å‘é€åˆ°zbartask å»è§£æ
 BOOL platform_camera_poweron(BOOL video_mode, int nCamType, BOOL bZbarScan, BOOL bMirror, BOOL bJump)
 {
 	OPENAT_print("[%s,%d] faile video_mode %d, nCamType %d, bzbar %d, bMirror %d, bJump %d",__FUNCTION__, __LINE__,video_mode, nCamType, bZbarScan, bMirror, bJump);
@@ -1064,13 +1064,13 @@ BOOL platform_camera_poweron(BOOL video_mode, int nCamType, BOOL bZbarScan, BOOL
 		return FALSE;
 	}
 	
-	/*+\NEW\zhuwangbin\2020.07.16\Ìí¼ÓVGAÅÄÕÕ¹¦ÄÜ£¬²»Ö§³ÖVGAÉ¨Âë*/
+	/*+\NEW\zhuwangbin\2020.07.16\æ·»åŠ VGAæ‹ç…§åŠŸèƒ½ï¼Œä¸æ”¯æŒVGAæ‰«ç */
 	if (!bJump && bZbarScan)
 	{
 		OPENAT_print("camera_poweron !jump & zbarScan error");
 		return FALSE;
 	}
-	/*-\NEW\zhuwangbin\2020.07.16\Ìí¼ÓVGAÅÄÕÕ¹¦ÄÜ£¬²»Ö§³ÖVGAÉ¨Âë*/
+	/*-\NEW\zhuwangbin\2020.07.16\æ·»åŠ VGAæ‹ç…§åŠŸèƒ½ï¼Œä¸æ”¯æŒVGAæ‰«ç */
 	platCamCtx.openParam.video_mode = video_mode;
 	platCamCtx.openParam.nCamType = nCamType;
 	platCamCtx.openParam.bZbarScan = bZbarScan;
@@ -1079,7 +1079,7 @@ BOOL platform_camera_poweron(BOOL video_mode, int nCamType, BOOL bZbarScan, BOOL
     return prvZbarCamCtl(CCAM_TYPE_OPEN);
 }
 
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 BOOL platform_camera_poweron_ext(T_PLATFORM_CAMERA_PARAM *param, BOOL bZbarScan)
 {
 	platCamCtx.exCamera.bZbarScan = bZbarScan;
@@ -1087,16 +1087,16 @@ BOOL platform_camera_poweron_ext(T_PLATFORM_CAMERA_PARAM *param, BOOL bZbarScan)
 	platCamCtx.exCamera.sensorWidth = param->sensorWidth;
     return prvCamOpenExt(param);
 }
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 
 BOOL platform_camera_poweroff(void)
 {
-	/*+\NEW\zhuwangbin\2020.06.1\Ê¹ÓÃcamera É¨Âëdemo £¬·ÅÖÃ´ó¸Å°ëĞ¡Ê±£¬ÆÁÄ»¿¨ÔÚÉ¨ÃèÊ§°Ü£¬²»»á¼ÌĞøÖ´ĞĞÁË*/
+	/*+\NEW\zhuwangbin\2020.06.1\ä½¿ç”¨camera æ‰«ç demo ï¼Œæ”¾ç½®å¤§æ¦‚åŠå°æ—¶ï¼Œå±å¹•å¡åœ¨æ‰«æå¤±è´¥ï¼Œä¸ä¼šç»§ç»­æ‰§è¡Œäº†*/
 	platCamCtx.openParam.nInitCmdSize = 0;
 	platCamCtx.openParam.bZbarScan = 0;
 	memset(&platCamCtx.previewParam, 0, sizeof(platCamCtx.previewParam));
 	//memset(&platCamCtx, 0, sizeof(platCamCtx));
-	/*-\NEW\zhuwangbin\2020.06.1\Ê¹ÓÃcamera É¨Âëdemo £¬·ÅÖÃ´ó¸Å°ëĞ¡Ê±£¬ÆÁÄ»¿¨ÔÚÉ¨ÃèÊ§°Ü£¬²»»á¼ÌĞøÖ´ĞĞÁË*/
+	/*-\NEW\zhuwangbin\2020.06.1\ä½¿ç”¨camera æ‰«ç demo ï¼Œæ”¾ç½®å¤§æ¦‚åŠå°æ—¶ï¼Œå±å¹•å¡åœ¨æ‰«æå¤±è´¥ï¼Œä¸ä¼šç»§ç»­æ‰§è¡Œäº†*/
     return prvZbarCamCtl(CCAM_TYPE_CLOSE);
 }
 
@@ -1108,15 +1108,15 @@ BOOL platform_camera_preview_open(u16 offsetx, u16 offsety, u16 startx, u16 star
     previewParam.endX = endx;
     previewParam.endY = endy;
     previewParam.recordAudio = FALSE;
-	/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 	previewParam.rotation = platCamCtx.previewParam.rotation;
 	previewParam.zoom = platCamCtx.previewParam.zoom;
-	/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+	/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 	memcpy(&platCamCtx.previewParam, &previewParam, sizeof(previewParam));
     return prvZbarCamCtl(CCAM_TYPE_SCANNER_START);
 }
 
-/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 BOOL platform_camera_preview_zoom(int zoom)
 {
 	platCamCtx.previewParam.zoom = zoom;
@@ -1136,7 +1136,7 @@ BOOL platform_camera_preview_rotation(int rotation)
 
 	return TRUE;
 }
-/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 
 
 BOOL platform_camera_preview_close(void)
@@ -1144,7 +1144,7 @@ BOOL platform_camera_preview_close(void)
     return prvZbarCamCtl(CCAM_TYPE_SCANNER_STOP);
 }
 
-/*+\NEW\zhuwangbin\2020.05.19\Ìí¼ÓcameraÅÄÕÕ¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.19\æ·»åŠ cameraæ‹ç…§åŠŸèƒ½*/
 BOOL platform_camera_capture(u16 width, u16 height, u16 quality)
 {
     T_AMOPENAT_CAM_CAPTURE_PARAM captureParam;
@@ -1176,7 +1176,7 @@ BOOL platform_camera_save_photo(const char* filename)
 	
     return result;
 }
-/*-\NEW\zhuwangbin\2020.05.19\Ìí¼ÓcameraÅÄÕÕ¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.19\æ·»åŠ cameraæ‹ç…§åŠŸèƒ½*/
 int platform_encodeJpegBuffer(UINT8 *inFilename,
                                 int inFormat,
                                 int inWidth,
@@ -1270,4 +1270,4 @@ int platform_encodeJpegBuffer(UINT8 *inFilename,
 #endif
 }
 #endif
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/

@@ -12,7 +12,7 @@
  *     panjun 2016.03.17 Create some APIs of TTS play.
  **************************************************************************/
 
-/*+\new\wj\2019.12.27\添加TTS功能*/
+/*+\new\wj\2019.12.27\娣诲姞TTS鍔熻兘*/
 #include "string.h"
 //#include "FileMgrSrvGProt.h"
 
@@ -96,5 +96,5 @@ int platform_ttsply_stop(void)
 {
     return IVTBL(tts_stop)();
 }
-/*+\new\wj\2019.12.27\添加TTS功能*/
+/*+\new\wj\2019.12.27\娣诲姞TTS鍔熻兘*/
 

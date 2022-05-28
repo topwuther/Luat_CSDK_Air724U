@@ -25,7 +25,7 @@
 static int16_t ICACHE_FLASH_ATTR at_cmdSearch(int8_t cmdLen, uint8_t *pCmd, at_funcationType *atFunTable)
 {
 	int16_t i;
-	/*+/NEW WIFI-10/ZWB/2014.11.18/¼æÈİATÖ¸Áî´óĞ¡Ğ´*/
+	/*+/NEW WIFI-10/ZWB/2014.11.18/å…¼å®¹ATæŒ‡ä»¤å¤§å°å†™*/
 	uint8_t *temp_pCmd = pCmd;
 
 	for (i = 0; i < cmdLen; i++, temp_pCmd++)
@@ -35,7 +35,7 @@ static int16_t ICACHE_FLASH_ATTR at_cmdSearch(int8_t cmdLen, uint8_t *pCmd, at_f
 			*temp_pCmd = *temp_pCmd - ('a' - 'A');
 		}
 	}
-	/*-/NEW WIFI-10/ZWB/2014.11.18/¼æÈİATÖ¸Áî´óĞ¡Ğ´*/
+	/*-/NEW WIFI-10/ZWB/2014.11.18/å…¼å®¹ATæŒ‡ä»¤å¤§å°å†™*/
 
 	if (cmdLen == 0)
 	{

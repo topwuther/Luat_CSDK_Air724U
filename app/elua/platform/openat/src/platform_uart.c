@@ -7,7 +7,7 @@
  * Date:    2012/10/15
  *
  * Description:
- *  2013.08.07 liweiqiang       Ôö¼Óuart1Ö§³Ö
+ *  2013.08.07 liweiqiang       å¢åŠ uart1æ”¯æŒ
  **************************************************************************/
 #if 1
 #include "string.h"
@@ -28,18 +28,18 @@
 #define COS_WAIT_FOREVER            OPENAT_OS_SUSPENDED
 
 //vat recv queue
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 #define VATC_RX_BUF_SIZE            8192
 #define VATC_READ_BUF_SIZE          512
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 
 #define UART_RX_BUF_SIZE            2048
 
-// ÁÙÊ±»º³åÇø
+// ä¸´æ—¶ç¼“å†²åŒº
 #define RX_BUFFER_SIZE          256
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 #define READ_BUFFER_SIZE        126
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 
 #define PHY_PORT(ID)            (uartmap[ID].port)
 
@@ -47,11 +47,11 @@ typedef struct UartPhyContextTag
 {
     CycleQueue  rxqueue;
     uint8       temprxbuff[RX_BUFFER_SIZE];
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
     uint8       readbuf[READ_BUFFER_SIZE];
     uint8       readindex;
     uint8       readsize;
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 }UartPhyContext;
 
 typedef struct UartMapTag
@@ -59,7 +59,7 @@ typedef struct UartMapTag
     const E_AMOPENAT_UART_PORT port;
     const PUART_MESSAGE        msg;
 }UartMap;
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 typedef enum{
 	UART_NO_EVENT_CONFIG = -1,
 	UART_RX_EVENT_CONFIG,
@@ -71,36 +71,36 @@ typedef struct{
 	PLATFORM_UART_EVENT_CONFIG UartConfigEvent;
 	int UartConfigId;
 }PLATFORM_UART_CONFIG;
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 typedef struct UartContextTag
 {
     uint8 opened;
-    uint8 workmode; //uartÊı¾İÌáÊ¾·½Ê½:1:ÓÃ»§ÂÖÑ¯ ÆäËû:ÏûÏ¢ÌáÊ¾ 2: host uart ID A2Êı¾İÍ¸´«
-    /*+\NEW\zhutianhua\2018.12.27 14:20\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+    uint8 workmode; //uartæ•°æ®æç¤ºæ–¹å¼:1:ç”¨æˆ·è½®è¯¢ å…¶ä»–:æ¶ˆæ¯æç¤º 2: host uart ID A2æ•°æ®é€ä¼ 
+    /*+\NEW\zhutianhua\2018.12.27 14:20\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
     uint8 rs485Io;
     uint8 rs485ValidLevel;
-	/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+	/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
 	uint32 rs485DelayTime;
-	/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
-    /*-\NEW\zhutianhua\2018.12.27 14:20\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-    /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
-    uint32 uartBand;//´æ´¢´®¿ÚµÄ²¨ÌØÂÊ¡£485Í¨Ñ¶ĞèÒª¼ÆËãoeµÄÍ£Ö¹Ê±¼ä
-    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+	/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
+    /*-\NEW\zhutianhua\2018.12.27 14:20\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+    /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
+    uint32 uartBand;//å­˜å‚¨ä¸²å£çš„æ³¢ç‰¹ç‡ã€‚485é€šè®¯éœ€è¦è®¡ç®—oeçš„åœæ­¢æ—¶é—´
+    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 }UartContext;
 
-/*+\NEW\zhutianhua\2018.12.27 15:8\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+/*+\NEW\zhutianhua\2018.12.27 15:8\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 #define RS485_INVALID_LEVEL 0xFF
-/*-\NEW\zhutianhua\2018.12.27 15:8\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+/*-\NEW\zhutianhua\2018.12.27 15:8\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 
-/*+\NEW\liweiqiang\2014.7.21\ĞŞÕıAM002_LUAÏîÄ¿RAM²»¹»±àÒë²»¹ıµÄÎÊÌâ*/
+/*+\NEW\liweiqiang\2014.7.21\ä¿®æ­£AM002_LUAé¡¹ç›®RAMä¸å¤Ÿç¼–è¯‘ä¸è¿‡çš„é—®é¢˜*/
 #if defined(LOW_MEMORY_SUPPORT)
 static UartPhyContext uartPhyContext[3]/*openat uart 1 & 2 & host uart*/;
 #else
 static uint8 uart1RxBuff[UART_RX_BUF_SIZE];
 static uint8 uart2RxBuff[UART_RX_BUF_SIZE];
-/*+\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*+\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 static uint8 uart3RxBuff[UART_RX_BUF_SIZE];
-/*-\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*-\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 
 static UartPhyContext uartPhyContext[3]/*openat uart 1 & 2 & host uart*/ =
 {
@@ -128,7 +128,7 @@ static UartPhyContext uartPhyContext[3]/*openat uart 1 & 2 & host uart*/ =
             0,
         },
     },
-/*+\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*+\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
     // OPENAT_UART_3,
     {
         .rxqueue = {
@@ -141,12 +141,12 @@ static UartPhyContext uartPhyContext[3]/*openat uart 1 & 2 & host uart*/ =
             0,
         },
     },
-/*-\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*-\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 };
 #endif
-/*-\NEW\liweiqiang\2014.7.21\ĞŞÕıAM002_LUAÏîÄ¿RAM²»¹»±àÒë²»¹ıµÄÎÊÌâ*/
+/*-\NEW\liweiqiang\2014.7.21\ä¿®æ­£AM002_LUAé¡¹ç›®RAMä¸å¤Ÿç¼–è¯‘ä¸è¿‡çš„é—®é¢˜*/
 
-/*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+/*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 HANDLE rs485_oe_task_hand = NULL;
 
 typedef enum
@@ -156,30 +156,30 @@ typedef enum
   close_rs485_oe
 }rs485_oe_event;
 
-/*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+/*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 
 static void uart0_message_handle(T_AMOPENAT_UART_MESSAGE* evt);
 static void uart1_message_handle(T_AMOPENAT_UART_MESSAGE* evt);
 static void uart2_message_handle(T_AMOPENAT_UART_MESSAGE* evt);
-/*+\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*+\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 static void uart3_message_handle(T_AMOPENAT_UART_MESSAGE* evt);
-/*-\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*-\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 
 static const UartMap uartmap[NUM_UART] = 
 {
     {OPENAT_UART_1,uart1_message_handle},
     {OPENAT_UART_2,uart2_message_handle},
-/*+\NEW\zhuwangbin\2019.12.31\Ìí¼Óuart3¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2019.12.31\æ·»åŠ uart3åŠŸèƒ½*/
     {OPENAT_UART_3,uart3_message_handle},
-/*-\NEW\zhuwangbin\2019.12.31\Ìí¼Óuart3¹¦ÄÜ*/
-/*-\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*-\NEW\zhuwangbin\2019.12.31\æ·»åŠ uart3åŠŸèƒ½*/
+/*-\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 };
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 static PLATFORM_UART_CONFIG gUartConfig = {
 	.UartConfigEvent = UART_NO_EVENT_CONFIG,
 	.UartConfigId = -1,
 };
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 static UartContext uartContext[NUM_UART];
 
 static HANDLE hAtcReadSem = 0;
@@ -193,13 +193,13 @@ CycleQueue vatcRx_Q = {
     0,
     0,
 };
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 static uint8 vatc_read_buffer[VATC_READ_BUF_SIZE];
 static uint16 vatc_read_buf_size;
 static uint16 vatc_read_buf_index;
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 
-/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 static HANDLE hUsbReadSem = 0;
 static uint8 usbRxBuff[VATC_RX_BUF_SIZE];
 CycleQueue usbRx_Q = {
@@ -216,13 +216,13 @@ static uint8 usb_read_buffer[VATC_READ_BUF_SIZE];
 static uint16 usb_read_buf_size;
 static uint16 usb_read_buf_index;
 u32 usbdata_mode = 0;
-/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 
-/*+\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
-static char debugStdoutBuffer[128];//openat½Ó¿ÚµÄprint½Ó¿Úbuff×î´óÎª127×Ö½ÚÓëÆäÍ¬²½
-/*-\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
+/*+\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
+static char debugStdoutBuffer[128];//openatæ¥å£çš„printæ¥å£buffæœ€å¤§ä¸º127å­—èŠ‚ä¸å…¶åŒæ­¥
+/*-\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
 static UINT16 debugStdoutCachedCount = 0;
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 static void sendUartMessage(int uart_id,platform_msg_type event_id)
 {
     PlatformMsgData msgData;
@@ -243,8 +243,8 @@ static void sendUartMessage(int uart_id,platform_msg_type event_id)
 		platform_rtos_send(event_id, &msgData);
 	}
 }
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
-/*+\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
+/*+\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
 static void sendUartTxDoneMessage(int uart_id)
 {
     PlatformMsgData msgData;
@@ -253,14 +253,14 @@ static void sendUartTxDoneMessage(int uart_id)
 
     platform_rtos_send(MSG_ID_RTOS_UART_TX_DONE, &msgData);
 }
-/*-\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*-\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
 
 static void uart_message_handle(uint8 id, T_AMOPENAT_UART_MESSAGE* evt)
 {
     uint32 length;
     uint8 phyid = uartmap[id].port;
-/*+\NEW\liweiqiang\2013.4.7\ÓÅ»¯uart/atcÊı¾İ½ÓÊÕÏûÏ¢ÌáÊ¾,±ÜÃâ·¢ÏûÏ¢¹ıÓÚÆµ·±µ¼ÖÂÏµÍ³ÎŞ·¨ÏìÓ¦ */
-    BOOL needMsg = FALSE; // bufferÊÇ¿ÕµÄÊ±ºò,·ÅÈëÊı¾İ²ÅĞèÒª×÷ÌáÊ¾
+/*+\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–uart/atcæ•°æ®æ¥æ”¶æ¶ˆæ¯æç¤º,é¿å…å‘æ¶ˆæ¯è¿‡äºé¢‘ç¹å¯¼è‡´ç³»ç»Ÿæ— æ³•å“åº” */
+    BOOL needMsg = FALSE; // bufferæ˜¯ç©ºçš„æ—¶å€™,æ”¾å…¥æ•°æ®æ‰éœ€è¦ä½œæç¤º
     int count = (evt->param.dataLen / RX_BUFFER_SIZE);
     int i = 0;
 
@@ -276,7 +276,7 @@ static void uart_message_handle(uint8 id, T_AMOPENAT_UART_MESSAGE* evt)
                 {
                     needMsg = uartPhyContext[phyid].rxqueue.empty ? TRUE : FALSE;
                 }
-                // ´Ë´¦ºóĞø×îºÃ¼ÓÉÏ±£»¤,Ğ´Èë»º³åÔÚuartÖĞ¶Ï,¶ÁÈ¡Êı¾İÔÚlua shellÏß³Ì
+                // æ­¤å¤„åç»­æœ€å¥½åŠ ä¸Šä¿æŠ¤,å†™å…¥ç¼“å†²åœ¨uartä¸­æ–­,è¯»å–æ•°æ®åœ¨lua shellçº¿ç¨‹
                 QueueInsert(&uartPhyContext[phyid].rxqueue, uartPhyContext[phyid].temprxbuff, length);
             }
         }
@@ -294,30 +294,30 @@ static void uart_message_handle(uint8 id, T_AMOPENAT_UART_MESSAGE* evt)
                 {
                     needMsg = uartPhyContext[phyid].rxqueue.empty ? TRUE : FALSE;
                 }
-                // ´Ë´¦ºóĞø×îºÃ¼ÓÉÏ±£»¤,Ğ´Èë»º³åÔÚuartÖĞ¶Ï,¶ÁÈ¡Êı¾İÔÚlua shellÏß³Ì
+                // æ­¤å¤„åç»­æœ€å¥½åŠ ä¸Šä¿æŠ¤,å†™å…¥ç¼“å†²åœ¨uartä¸­æ–­,è¯»å–æ•°æ®åœ¨lua shellçº¿ç¨‹
                 QueueInsert(&uartPhyContext[phyid].rxqueue, uartPhyContext[phyid].temprxbuff, length);
             }
         }
 
         if(needMsg)
         {
-			/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+			/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
             sendUartMessage(id+1,MSG_ID_RTOS_UART_RX_DATA);
-			/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+			/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
         }   
     }
-	/*+\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+	/*+\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
     else if(evt->evtId == OPENAT_DRV_EVT_UART_TX_DONE_IND)
     {
-        /*+\NEW\zhutianhua\2018.12.27 15:33\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+        /*+\NEW\zhutianhua\2018.12.27 15:33\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
         platform_uart_disable_rs485_oe(id);
-        /*-\NEW\zhutianhua\2018.12.27 15:33\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-		/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+        /*-\NEW\zhutianhua\2018.12.27 15:33\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+		/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
         sendUartMessage(id+1,MSG_ID_RTOS_UART_TX_DONE);
-		/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+		/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
     }
-	/*-\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
-/*-\NEW\liweiqiang\2013.4.7\ÓÅ»¯uart/atcÊı¾İ½ÓÊÕÏûÏ¢ÌáÊ¾,±ÜÃâ·¢ÏûÏ¢¹ıÓÚÆµ·±µ¼ÖÂÏµÍ³ÎŞ·¨ÏìÓ¦ */
+	/*-\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
+/*-\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–uart/atcæ•°æ®æ¥æ”¶æ¶ˆæ¯æç¤º,é¿å…å‘æ¶ˆæ¯è¿‡äºé¢‘ç¹å¯¼è‡´ç³»ç»Ÿæ— æ³•å“åº” */
 }
 
 
@@ -330,18 +330,18 @@ static void uart2_message_handle(T_AMOPENAT_UART_MESSAGE* evt)
 {
     uart_message_handle(1, evt);
 }
-/*+\NEW\zhuwangbin\2019.12.31\Ìí¼Óuart3¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2019.12.31\æ·»åŠ uart3åŠŸèƒ½*/
 static void uart3_message_handle(T_AMOPENAT_UART_MESSAGE* evt)
 {
     uart_message_handle(2, evt);
 }
-/*-\NEW\zhuwangbin\2019.12.31\Ìí¼Óuart3¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2019.12.31\æ·»åŠ uart3åŠŸèƒ½*/
 
-/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
 static void host_uart_recv(UINT8 *data, UINT32 length)
 {
     uint8 phyid = OPENAT_UART_3;
-    BOOL needMsg = FALSE; // bufferÊÇ¿ÕµÄÊ±ºò,·ÅÈëÊı¾İ²ÅĞèÒª×÷ÌáÊ¾
+    BOOL needMsg = FALSE; // bufferæ˜¯ç©ºçš„æ—¶å€™,æ”¾å…¥æ•°æ®æ‰éœ€è¦ä½œæç¤º
 
     if(length != 0)
     {
@@ -355,7 +355,7 @@ static void host_uart_recv(UINT8 *data, UINT32 length)
         sendUartMessage(3,MSG_ID_RTOS_UART_RX_DATA);
     }
 }
-/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
 
 /****************************************************************************
  *
@@ -366,32 +366,32 @@ static void host_uart_recv(UINT8 *data, UINT32 length)
  *
  * Returns: void 
  *
- * Description: ´ò¿ª´®¿Ú
+ * Description: æ‰“å¼€ä¸²å£
  *
  ****************************************************************************/
- /*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+ /*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 static u32 uart_phy_open( unsigned id, u32 baud, int databits, int parity, int stopbits, u32 mode, u32 txDoneReport)
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 {
     T_AMOPENAT_UART_PARAM uartParam;
     
     if(uartContext[id].opened)
         return baud;
 
-    /*+\NEW\zhutianhua\2018.12.27 15:19\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+    /*+\NEW\zhutianhua\2018.12.27 15:19\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
     uartContext[id].rs485ValidLevel = RS485_INVALID_LEVEL;
-    /*-\NEW\zhutianhua\2018.12.27 15:19\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+    /*-\NEW\zhutianhua\2018.12.27 15:19\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 
-/*+\NEW\liweiqiang\2014.7.21\ĞŞÕıAM002_LUAÏîÄ¿RAM²»¹»±àÒë²»¹ıµÄÎÊÌâ*/
+/*+\NEW\liweiqiang\2014.7.21\ä¿®æ­£AM002_LUAé¡¹ç›®RAMä¸å¤Ÿç¼–è¯‘ä¸è¿‡çš„é—®é¢˜*/
     if(!uartPhyContext[PHY_PORT(id)].rxqueue.buf)
     {
         uartPhyContext[PHY_PORT(id)].rxqueue.buf = lualibc_calloc(1, UART_RX_BUF_SIZE);
         uartPhyContext[PHY_PORT(id)].rxqueue.size = UART_RX_BUF_SIZE;
         QueueClean(&uartPhyContext[PHY_PORT(id)].rxqueue);
     }
-/*-\NEW\liweiqiang\2014.7.21\ĞŞÕıAM002_LUAÏîÄ¿RAM²»¹»±àÒë²»¹ıµÄÎÊÌâ*/
+/*-\NEW\liweiqiang\2014.7.21\ä¿®æ­£AM002_LUAé¡¹ç›®RAMä¸å¤Ÿç¼–è¯‘ä¸è¿‡çš„é—®é¢˜*/
 #if 0
-/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
     if(PHY_PORT(id) == uart_port3 && mode == 2)
     {
         if(1)
@@ -405,11 +405,11 @@ static u32 uart_phy_open( unsigned id, u32 baud, int databits, int parity, int s
             return 0;
         }
     }
-/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
 #endif
-    /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
     uartContext[id].uartBand = baud;
-    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
     uartParam.baud  = baud;
     uartParam.dataBits = databits;
 
@@ -448,7 +448,7 @@ static u32 uart_phy_open( unsigned id, u32 baud, int databits, int parity, int s
             break;
     }
 
-/*+\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*+\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
     if(PHY_PORT(id) == OPENAT_UART_3)
     {
         uartParam.flowControl = OPENAT_UART_FLOWCONTROL_NONE;
@@ -457,7 +457,7 @@ static u32 uart_phy_open( unsigned id, u32 baud, int databits, int parity, int s
     {
         uartParam.flowControl = OPENAT_UART_FLOWCONTROL_NONE;
     }
-/*-\NEW\liweiqiang\2013.8.31\Ôö¼Óhost uartÍ¨Ñ¶Ö§³Ö*/
+/*-\NEW\liweiqiang\2013.8.31\å¢åŠ host uarté€šè®¯æ”¯æŒ*/
 
     if(platform_get_console_port() == id)
     {
@@ -475,9 +475,9 @@ static u32 uart_phy_open( unsigned id, u32 baud, int databits, int parity, int s
         }
     }
 	
-	/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+	/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
     uartParam.txDoneReport = txDoneReport;
-	/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+	/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 
     if(TRUE == IVTBL(config_uart)(PHY_PORT(id), &uartParam))
     {
@@ -494,7 +494,7 @@ uart_open_error:
     return 0;
 }
 
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 static u32 uart_phy_close(unsigned id)
 {
     u32 ret;
@@ -503,26 +503,26 @@ static u32 uart_phy_close(unsigned id)
         return PLATFORM_OK;
 
 #if 0
-/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
     if(PHY_PORT(id) == uart_port3 && uartContext[id].workmode == 2)
     {
-        // host uart´ËÖÖÄ£Ê½²»ĞèÒª¹Ø±Õ
+        // host uartæ­¤ç§æ¨¡å¼ä¸éœ€è¦å…³é—­
         return PLATFORM_OK;
     }
-/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
 #endif    
     ret = IVTBL(close_uart)(PHY_PORT(id)) ? PLATFORM_OK : PLATFORM_ERR;
 
     uartContext[id].opened = FALSE;
 
     QueueClean(&uartPhyContext[PHY_PORT(id)].rxqueue);
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
     uartPhyContext[PHY_PORT(id)].readindex = uartPhyContext[PHY_PORT(id)].readsize = 0;
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 
     return ret;
 }
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 #if 0
 
 static HANDLE g_uartLoop = NULL;
@@ -548,18 +548,18 @@ static u32 uart_phy_write(u8 id, uint8 *data_p, uint16 length)
     if(!uartContext[id].opened)
         return 0;
 
-    /*+\NEW\zhutianhua\2018.12.27 15:28\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+    /*+\NEW\zhutianhua\2018.12.27 15:28\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
     platform_uart_enable_rs485_oe(id);
-    /*-\NEW\zhutianhua\2018.12.27 15:28\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+    /*-\NEW\zhutianhua\2018.12.27 15:28\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 
 #if 0
-/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*+\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
     if(PHY_PORT(id) == uart_port3 && uartContext[id].workmode == 2)
     {
         //IVTBL(host_send_data)(data_p, length);
         return length;
     }
-/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2Êı¾İÍ¸´«Ö§³Ö */
+/*-\NEW\liweiqiang\2014.1.2\host uart ID 0xA2æ•°æ®é€ä¼ æ”¯æŒ */
     
 
     if(!g_uartLoop)
@@ -579,13 +579,13 @@ static u32 uart_phy_read(u8 id, uint8 *data_p, uint16 length, u32 timeout)
 
     if(uartContext[id].workmode == 1)
     {
-        // ÓÃ»§ÂÖÑ¯·½Ê½Ö±½Ó´Óuart½Ó¿Ú¶ÁÈ¡
+        // ç”¨æˆ·è½®è¯¢æ–¹å¼ç›´æ¥ä»uartæ¥å£è¯»å–
         return IVTBL(read_uart)(PHY_PORT(id), data_p, length, timeout);
     }
     else
     {
-        // ÏûÏ¢ÌáÊ¾·½Ê½:´Ó»·ĞÎ»º³åÇø¶ÁÈ¡
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+        // æ¶ˆæ¯æç¤ºæ–¹å¼:ä»ç¯å½¢ç¼“å†²åŒºè¯»å–
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
         u32 rcvdlen = 0;
         UartPhyContext *context = &uartPhyContext[PHY_PORT(id)];
 
@@ -593,9 +593,9 @@ static u32 uart_phy_read(u8 id, uint8 *data_p, uint16 length, u32 timeout)
         {
             if(context->readindex >= context->readsize)
             {
-            /*+\NEW\liweiqiang\2014.4.12\Ôö¼Ó´®¿Ú»º³åÇøÊı¾İ±£»¤ */
+            /*+\NEW\liweiqiang\2014.4.12\å¢åŠ ä¸²å£ç¼“å†²åŒºæ•°æ®ä¿æŠ¤ */
                 context->readsize = QueueDelete(&context->rxqueue, context->readbuf, READ_BUFFER_SIZE);
-            /*-\NEW\liweiqiang\2014.4.12\Ôö¼Ó´®¿Ú»º³åÇøÊı¾İ±£»¤ */
+            /*-\NEW\liweiqiang\2014.4.12\å¢åŠ ä¸²å£ç¼“å†²åŒºæ•°æ®ä¿æŠ¤ */
 
                 context->readindex = 0;
 
@@ -606,11 +606,11 @@ static u32 uart_phy_read(u8 id, uint8 *data_p, uint16 length, u32 timeout)
         }
         
         return rcvdlen;
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶Ô´®¿Úuart¿âÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹ä¸²å£uartåº“æ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
     }
 }
 
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 static u32 vatc_read(uint8 *data_p, uint16 length, u32 timeout)
 {
     u32 rcvdlen = 0;
@@ -632,9 +632,9 @@ static u32 vatc_read(uint8 *data_p, uint16 length, u32 timeout)
     
     return rcvdlen;
 }
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
 
-/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 static u32 usb_read(uint8 *data_p, uint16 length, u32 timeout)
 {
     u32 rcvdlen = 0;
@@ -656,9 +656,9 @@ static u32 usb_read(uint8 *data_p, uint16 length, u32 timeout)
     
     return rcvdlen;
 }
-/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 
-/*+\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
+/*+\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
 static void debugPortFlush(void)
 {
     if(debugStdoutCachedCount != 0)
@@ -696,7 +696,7 @@ static void debugPortWrite(const u8 *buff, u16 len)
         }
     }
 }
-/*-\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
+/*-\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
 
 u32 vatc_mode = 0;
 
@@ -705,8 +705,8 @@ u32 vatc_mode = 0;
 
 void RILAPI_ReceiveData(void *data, int len)
 {
-/*+\NEW\liweiqiang\2013.4.7\ÓÅ»¯uart/atcÊı¾İ½ÓÊÕÏûÏ¢ÌáÊ¾,±ÜÃâ·¢ÏûÏ¢¹ıÓÚÆµ·±µ¼ÖÂÏµÍ³ÎŞ·¨ÏìÓ¦ */
-    BOOL needMsg = FALSE; // bufferÊÇ¿ÕµÄÊ±ºò,·ÅÈëÊı¾İ²ÅĞèÒª×÷ÌáÊ¾
+/*+\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–uart/atcæ•°æ®æ¥æ”¶æ¶ˆæ¯æç¤º,é¿å…å‘æ¶ˆæ¯è¿‡äºé¢‘ç¹å¯¼è‡´ç³»ç»Ÿæ— æ³•å“åº” */
+    BOOL needMsg = FALSE; // bufferæ˜¯ç©ºçš„æ—¶å€™,æ”¾å…¥æ•°æ®æ‰éœ€è¦ä½œæç¤º
     
     OPENAT_wait_semaphore(hAtcReadSem, COS_WAIT_FOREVER);
     needMsg = vatcRx_Q.empty ? TRUE : FALSE;
@@ -715,11 +715,11 @@ void RILAPI_ReceiveData(void *data, int len)
 
     if(needMsg && (vatc_mode != 1))
     {	
-		/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+		/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
         sendUartMessage(PLATFORM_UART_ID_ATC,MSG_ID_RTOS_UART_RX_DATA);
-		/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+		/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
     }
-/*-\NEW\liweiqiang\2013.4.7\ÓÅ»¯uart/atcÊı¾İ½ÓÊÕÏûÏ¢ÌáÊ¾,±ÜÃâ·¢ÏûÏ¢¹ıÓÚÆµ·±µ¼ÖÂÏµÍ³ÎŞ·¨ÏìÓ¦ */
+/*-\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–uart/atcæ•°æ®æ¥æ”¶æ¶ˆæ¯æç¤º,é¿å…å‘æ¶ˆæ¯è¿‡äºé¢‘ç¹å¯¼è‡´ç³»ç»Ÿæ— æ³•å“åº” */
 }
 
 void platform_setup_vat_queue(void)
@@ -728,7 +728,7 @@ void platform_setup_vat_queue(void)
     hAtcReadSem = OPENAT_create_semaphore(1);
 }
 
-/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 u32 Get_usbdata_mode(void)
 {
 	return usbdata_mode;
@@ -736,7 +736,7 @@ u32 Get_usbdata_mode(void)
 
 void USBAPI_ReceiveData(void *data, int len)
 {
-    BOOL needMsg = FALSE; // bufferÊÇ¿ÕµÄÊ±ºò,·ÅÈëÊı¾İ²ÅĞèÒª×÷ÌáÊ¾
+    BOOL needMsg = FALSE; // bufferæ˜¯ç©ºçš„æ—¶å€™,æ”¾å…¥æ•°æ®æ‰éœ€è¦ä½œæç¤º
     
     OPENAT_wait_semaphore(hUsbReadSem, COS_WAIT_FOREVER);
     needMsg = usbRx_Q.empty ? TRUE : FALSE;
@@ -745,13 +745,13 @@ void USBAPI_ReceiveData(void *data, int len)
 
     if(needMsg)
     {
-		/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+		/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
         sendUartMessage(PLATFORM_PORT_ID_USB,MSG_ID_RTOS_UART_RX_DATA);
-		/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+		/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
     }
 }
 
-/**+\BUG3623\zhuwangbin\2020.11.18\uart.on(uart.USB, "receive" ¶ªÊı¾İ**/
+/**+\BUG3623\zhuwangbin\2020.11.18\uart.on(uart.USB, "receive" ä¸¢æ•°æ®**/
 BOOL USBAPI_IsEmpty(void)
 {
 	BOOL isEmpty;
@@ -774,57 +774,57 @@ u32 USBAPI_FreeSpace(void)
 
 	return space;
 }
-/**-\BUG3623\zhuwangbin\2020.11.18\uart.on(uart.USB, "receive" ¶ªÊı¾İ**/
+/**-\BUG3623\zhuwangbin\2020.11.18\uart.on(uart.USB, "receive" ä¸¢æ•°æ®**/
 
 void platform_setup_usb_queue(void)
 {
     QueueClean(&usbRx_Q);
     hUsbReadSem = OPENAT_create_semaphore(1);
 }
-/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int stopbits, u32 mode, u32 txDoneReport)
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 {      
     u32 ret = baud;
 
     if(PLATFORM_UART_ID_ATC == id)
     {
         vatc_mode = mode;
-        /* ÔÚ³õÊ¼»¯vatÖ®Ç°¾Í³õÊ¼»¯»º³åÇø,²»ÓÉlua¿ØÖÆ³õÊ¼»¯,±ÜÃâÂ©µôvatµÄÊı¾İ */
+        /* åœ¨åˆå§‹åŒ–vatä¹‹å‰å°±åˆå§‹åŒ–ç¼“å†²åŒº,ä¸ç”±luaæ§åˆ¶åˆå§‹åŒ–,é¿å…æ¼æ‰vatçš„æ•°æ® */
     }
     else if(PLATFORM_PORT_ID_DEBUG == id)
     {   
         memset(debugStdoutBuffer, 0, sizeof(debugStdoutBuffer));
         debugStdoutCachedCount = 0;
     }
-	/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 	else if(PLATFORM_PORT_ID_USB == id)
     {   
 		usbdata_mode = 1;
     }
-	/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
     else
     {
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
         ret = uart_phy_open(id, baud, databits, parity, stopbits, mode, txDoneReport);
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 	}
 
     return ret;
 }
 
-/*+\NEW\zhutianhua\2018.12.27 14:54\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+/*+\NEW\zhutianhua\2018.12.27 14:54\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 void platform_uart_enable_rs485_oe( unsigned char id)
 {
     if(uartContext[id].opened && uartContext[id].rs485ValidLevel != RS485_INVALID_LEVEL)
     {
-    /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
        //IVTBL(set_gpio)(platform_pio_get_gpio_port(uartContext[id].rs485Io), uartContext[id].rs485ValidLevel);
        //OPENAT_print("platform_uart_enable_rs485_oe id=%d, realIO=%d, level=%d\n", id, platform_pio_get_gpio_port(uartContext[id].rs485Io), uartContext[id].rs485ValidLevel);
         OPENAT_send_message(rs485_oe_task_hand, enable_rs485_oe, (void *)&id, sizeof(id));
-    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 	}
 }
 
@@ -832,11 +832,11 @@ void platform_uart_disable_rs485_oe( unsigned char id)
 {
     if(uartContext[id].opened && uartContext[id].rs485ValidLevel != RS485_INVALID_LEVEL)
     {
-    /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
        //IVTBL(set_gpio)(platform_pio_get_gpio_port(uartContext[id].rs485Io), (uartContext[id].rs485ValidLevel==0) ? 1 : 0);
        //OPENAT_print("platform_uart_disable_rs485_oe id=%d, realIO=%d, level=%d\n", id, platform_pio_get_gpio_port(uartContext[id].rs485Io), (uartContext[id].rs485ValidLevel==0) ? 1 : 0);
         OPENAT_send_message(rs485_oe_task_hand, disable_rs485_oe, (void *)&id, sizeof(id));
-    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
     }
 }
 
@@ -844,17 +844,17 @@ void platform_uart_close_rs485_oe( unsigned char id)
 {
     if(uartContext[id].opened && uartContext[id].rs485ValidLevel != RS485_INVALID_LEVEL)
     {
-    /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
         //platform_uart_disable_rs485_oe(id);
         //OPENAT_print("platform_uart_close_rs485_oe id=%d, realIO=%d\n", id, platform_pio_get_gpio_port(uartContext[id].rs485Io));
         //IVTBL(close_gpio)(platform_pio_get_gpio_port(uartContext[id].rs485Io));        
         //uartContext[id].rs485ValidLevel = RS485_INVALID_LEVEL;
         OPENAT_send_message(rs485_oe_task_hand, close_rs485_oe, (void *)&id, sizeof(id));
-    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
     }
 }
 
-/*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+/*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 void rs485_oe_task(void* p)
 {
     char *oe_pin = NULL;
@@ -869,13 +869,13 @@ void rs485_oe_task(void* p)
             OPENAT_print("platform_uart_enable_rs485_oe id=%d, realIO=%d, level=%d\n", *oe_pin, platform_pio_get_gpio_port(uartContext[*oe_pin].rs485Io), uartContext[*oe_pin].rs485ValidLevel);
             break;
         case disable_rs485_oe:
-            // Modbus Í¨Ñ¶Ê±¹æ¶¨Ö÷»ú·¢ËÍÍêÒ»×éÃüÁî±ØĞë¼ä¸ô3.5¸ö×Ö·ûÔÙ·¢ËÍÏÂÒ»×éĞÂÃüÁî£¬Õâ¸ö3.5×Ö·ûÖ÷ÒªÓÃÀ´¸æËßÆäËûÉè±¸Õâ´ÎÃüÁî£¨Êı¾İ£©ÒÑ½áÊø
-            //1*1000*1000ÊÇÒ»ÃëÖÓÊ±¼ä¡£
-            //(1 * 1000 * 1000 / oe_band)´ú±í´«ÊäÒ»¸öÎ»ĞèÒª¶àÉÙms
-            //±ÈÈç9600bps£¬ÒâË¼¾ÍÊÇËµÃ¿1Ãë£¨Ò²¾ÍÊÇ1000ºÁÃë£©´«Êä9600¸öÎ»£¬
+            // Modbus é€šè®¯æ—¶è§„å®šä¸»æœºå‘é€å®Œä¸€ç»„å‘½ä»¤å¿…é¡»é—´éš”3.5ä¸ªå­—ç¬¦å†å‘é€ä¸‹ä¸€ç»„æ–°å‘½ä»¤ï¼Œè¿™ä¸ª3.5å­—ç¬¦ä¸»è¦ç”¨æ¥å‘Šè¯‰å…¶ä»–è®¾å¤‡è¿™æ¬¡å‘½ä»¤ï¼ˆæ•°æ®ï¼‰å·²ç»“æŸ
+            //1*1000*1000æ˜¯ä¸€ç§’é’Ÿæ—¶é—´ã€‚
+            //(1 * 1000 * 1000 / oe_band)ä»£è¡¨ä¼ è¾“ä¸€ä¸ªä½éœ€è¦å¤šå°‘ms
+            //æ¯”å¦‚9600bpsï¼Œæ„æ€å°±æ˜¯è¯´æ¯1ç§’ï¼ˆä¹Ÿå°±æ˜¯1000æ¯«ç§’ï¼‰ä¼ è¾“9600ä¸ªä½ï¼Œ
             //osiDelayUS(4 * 10 * (1 * 1000 * 1000 / uartContext[*oe_pin].uartBand));
-            //Õâ¸öµØ·½°´ÀíËµÓ¦¸ÃĞ´4£¬µ«ÊÇµÈÈÎÎñµ÷¶È¹ıÀ´¡£Êµ¼ÊÒÑ¾­¹ıÈ¥Ò»¶ÎÊ±¼äÁË£¬ÎªÁËÌá¸ß´«ÊäĞ§ÂÊ¡£×öÏàÓ¦µÄ¼õÉÙ
-            /*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+            //è¿™ä¸ªåœ°æ–¹æŒ‰ç†è¯´åº”è¯¥å†™4ï¼Œä½†æ˜¯ç­‰ä»»åŠ¡è°ƒåº¦è¿‡æ¥ã€‚å®é™…å·²ç»è¿‡å»ä¸€æ®µæ—¶é—´äº†ï¼Œä¸ºäº†æé«˜ä¼ è¾“æ•ˆç‡ã€‚åšç›¸åº”çš„å‡å°‘
+            /*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
             if (uartContext[*oe_pin].rs485DelayTime)
             {
 				osiDelayUS(uartContext[*oe_pin].rs485DelayTime);
@@ -884,7 +884,7 @@ void rs485_oe_task(void* p)
 			{
 				osiDelayUS(5 * (1 * 1000 * 1000 / uartContext[*oe_pin].uartBand));
             }
-			/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+			/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
 			IVTBL(set_gpio)(platform_pio_get_gpio_port(uartContext[*oe_pin].rs485Io), (uartContext[*oe_pin].rs485ValidLevel==0) ? 1 : 0);
             OPENAT_print("platform_uart_disable_rs485_oe id=%d, realIO=%d, level=%d\n", *oe_pin, platform_pio_get_gpio_port(uartContext[*oe_pin].rs485Io), (uartContext[*oe_pin].rs485ValidLevel==0) ? 1 : 0);
             break;
@@ -897,22 +897,22 @@ void rs485_oe_task(void* p)
         default:
             break;
         }
-		/*+\bug_3639\rww\2020.11.18\ÄÚ´æĞ¹Â©ËÀ»ú*/
+		/*+\bug_3639\rww\2020.11.18\å†…å­˜æ³„æ¼æ­»æœº*/
 		if (oe_pin != NULL)
 		{
 			OPENAT_free(oe_pin);
 		}
-		/*-\bug_3639\rww\2020.11.18\ÄÚ´æĞ¹Â©ËÀ»ú*/
+		/*-\bug_3639\rww\2020.11.18\å†…å­˜æ³„æ¼æ­»æœº*/
     }
 }
 
-/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
-/*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
+/*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 u32 platform_uart_setup_rs485_oe(unsigned id, u32 rs485IO, u32 rs485ValidLevel, u32 rs485DelayTime)
 {      
     u32 ret = PLATFORM_ERR;
 
-    if(id < NUM_UART) //·ÇÌØÊâ¶Ë¿Ú²Å¿ÉÒÔÅäÖÃ
+    if(id < NUM_UART) //éç‰¹æ®Šç«¯å£æ‰å¯ä»¥é…ç½®
     {
         if(uartContext[id].opened)
         {
@@ -925,7 +925,7 @@ u32 platform_uart_setup_rs485_oe(unsigned id, u32 rs485IO, u32 rs485ValidLevel, 
             uartContext[id].rs485ValidLevel = rs485ValidLevel;
 			uartContext[id].rs485DelayTime = rs485DelayTime;
             OPENAT_print("platform_uart_setup_rs485_oe id=%d, io=%d, level=%d\n", id, rs485IO, cfg.param.defaultState);
-            /*+\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+            /*+\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
 			if(rs485_oe_task_hand == NULL)
             {
                 OPENAT_create_task(&rs485_oe_task_hand, rs485_oe_task, NULL, NULL,
@@ -934,39 +934,39 @@ u32 platform_uart_setup_rs485_oe(unsigned id, u32 rs485IO, u32 rs485ValidLevel, 
                                             0,
                                             "rs485_oe_task");
             }
-		    /*-\NEW\czm\2020.9.11\bug:2929 485·¢ËÍ1200²¨ÌØÂÊÏÂ×îºóÒ»×Ö½Ú´íÎó*/
+		    /*-\NEW\czm\2020.9.11\bug:2929 485å‘é€1200æ³¢ç‰¹ç‡ä¸‹æœ€åä¸€å­—èŠ‚é”™è¯¯*/
             ret = PLATFORM_OK;
         }
     }
 
     return ret;
 }
-/*-\NEW\zhutianhua\2018.12.27 14:54\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+/*-\NEW\zhutianhua\2018.12.27 14:54\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
 
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 u32 platform_uart_close( unsigned id )
 {
     u32 ret = PLATFORM_ERR;
     
-    if(id < NUM_UART) //·ÇÌØÊâ¶Ë¿Ú²Å¿ÉÒÔ¹Ø±Õ
+    if(id < NUM_UART) //éç‰¹æ®Šç«¯å£æ‰å¯ä»¥å…³é—­
     {
-        /*+\NEW\zhutianhua\2018.12.27 15:8\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+        /*+\NEW\zhutianhua\2018.12.27 15:8\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
         platform_uart_close_rs485_oe(id);
-        /*-\NEW\zhutianhua\2018.12.27 15:8\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+        /*-\NEW\zhutianhua\2018.12.27 15:8\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
         return uart_phy_close(id);
     }
-	/*+\BUG\shenyuanyuan\2020.4.10\usb at¿ÚÓ¦¸Ã¿ÉÒÔÔÚatºÍdata¹¦ÄÜ¹¦ÄÜÖ®¼äÁé»îÇĞ»»*/
+	/*+\BUG\shenyuanyuan\2020.4.10\usb atå£åº”è¯¥å¯ä»¥åœ¨atå’ŒdataåŠŸèƒ½åŠŸèƒ½ä¹‹é—´çµæ´»åˆ‡æ¢*/
 	else if( id == PLATFORM_PORT_ID_USB)
 	{
 		usbdata_mode = 0;
 		return PLATFORM_OK;
 	}
-	/*-\BUG\shenyuanyuan\2020.4.10\usb at¿ÚÓ¦¸Ã¿ÉÒÔÔÚatºÍdata¹¦ÄÜ¹¦ÄÜÖ®¼äÁé»îÇĞ»»*/
+	/*-\BUG\shenyuanyuan\2020.4.10\usb atå£åº”è¯¥å¯ä»¥åœ¨atå’ŒdataåŠŸèƒ½åŠŸèƒ½ä¹‹é—´çµæ´»åˆ‡æ¢*/
 
     return ret;
 }
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 
 u32 platform_s_uart_send( unsigned id, u8 data )
 {
@@ -979,9 +979,9 @@ u32 platform_s_uart_send( unsigned id, u8 data )
     }
     else if(PLATFORM_PORT_ID_DEBUG == id)
     {
-/*+\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
+/*+\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
         debugPortWrite(&data, 1);
-/*-\NEW\liweiqiang\2013.4.7\ÓÅ»¯debug¿ÚÊä³ö*/
+/*-\NEW\liweiqiang\2013.4.7\ä¼˜åŒ–debugå£è¾“å‡º*/
     }
     else
     {
@@ -991,11 +991,11 @@ u32 platform_s_uart_send( unsigned id, u8 data )
     return ret;
 }
 
-/*+\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
-/*+\BUG\wangyuan\2020.04.03\usbĞéÄâ´®¿Ú¹¦ÄÜ²»ÄÜÊ¹ÓÃ*/
+/*+\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
+/*+\BUG\wangyuan\2020.04.03\usbè™šæ‹Ÿä¸²å£åŠŸèƒ½ä¸èƒ½ä½¿ç”¨*/
 //#include "at_engine.h"
 //extern atDevice_t *gAtDevice;
-/*-\BUG\wangyuan\2020.04.03\usbĞéÄâ´®¿Ú¹¦ÄÜ²»ÄÜÊ¹ÓÃ*/
+/*-\BUG\wangyuan\2020.04.03\usbè™šæ‹Ÿä¸²å£åŠŸèƒ½ä¸èƒ½ä½¿ç”¨*/
 u32 platform_s_uart_send_buff( unsigned id, const u8 *buff, u16 len )
 {
     u32 ret = len;
@@ -1009,27 +1009,27 @@ u32 platform_s_uart_send_buff( unsigned id, const u8 *buff, u16 len )
     {
         debugPortWrite(buff, len);
     }
-	/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 	// else if(PLATFORM_PORT_ID_USB == id)
     // {  
     // 	int    plen = 0;
 	// 	char   *pbuf = NULL;
 	//     if(buff != NULL && gAtDevice != NULL)
 	//     {
-    //         /*+\BUG\hedonghao\2019.9.2\Ê¹ÓÃusbdataµÄdemo£¬pc¶Ë´®¿Ú¹¤¾ßÍ¨¹ıusbÃ¶¾Ù³öµÄusb at¿ÚºÍÄ£¿éÍ¨ĞÅ£¬´®¿Ú¹¤¾ß·¢ËÍÒ»Ğ©ÌØÊâ×Ö·û½áÎ²µÄÊı¾İ(×îºóÔÙ¼ÓÉÏ»Ø³µ»»ĞĞ)£¬Ä£¿é»áËÀ»ú£¬±ØÏÖ */
+    //         /*+\BUG\hedonghao\2019.9.2\ä½¿ç”¨usbdataçš„demoï¼Œpcç«¯ä¸²å£å·¥å…·é€šè¿‡usbæšä¸¾å‡ºçš„usb atå£å’Œæ¨¡å—é€šä¿¡ï¼Œä¸²å£å·¥å…·å‘é€ä¸€äº›ç‰¹æ®Šå­—ç¬¦ç»“å°¾çš„æ•°æ®(æœ€åå†åŠ ä¸Šå›è½¦æ¢è¡Œ)ï¼Œæ¨¡å—ä¼šæ­»æœºï¼Œå¿…ç° */
 	//         plen = len+3;
 	//         pbuf = (char *)malloc(plen * sizeof(char));
 	//         ASSERT(pbuf != NULL);
     //         sprintf(pbuf, "%s\r\n",buff);
     //         pbuf[plen - 1] = '\0';
-	// 		/*+\BUG\wangyuan\2020.04.03\usbĞéÄâ´®¿Ú¹¦ÄÜ²»ÄÜÊ¹ÓÃ*/
+	// 		/*+\BUG\wangyuan\2020.04.03\usbè™šæ‹Ÿä¸²å£åŠŸèƒ½ä¸èƒ½ä½¿ç”¨*/
 	// 		atDeviceWrite(gAtDevice, buff, len);
-	// 		/*-\BUG\wangyuan\2020.04.03\usbĞéÄâ´®¿Ú¹¦ÄÜ²»ÄÜÊ¹ÓÃ*/
-    //         /*-\BUG\hedonghao\2019.9.2\Ê¹ÓÃusbdataµÄdemo£¬pc¶Ë´®¿Ú¹¤¾ßÍ¨¹ıusbÃ¶¾Ù³öµÄusb at¿ÚºÍÄ£¿éÍ¨ĞÅ£¬´®¿Ú¹¤¾ß·¢ËÍÒ»Ğ©ÌØÊâ×Ö·û½áÎ²µÄÊı¾İ(×îºóÔÙ¼ÓÉÏ»Ø³µ»»ĞĞ)£¬Ä£¿é»áËÀ»ú£¬±ØÏÖ */
+	// 		/*-\BUG\wangyuan\2020.04.03\usbè™šæ‹Ÿä¸²å£åŠŸèƒ½ä¸èƒ½ä½¿ç”¨*/
+    //         /*-\BUG\hedonghao\2019.9.2\ä½¿ç”¨usbdataçš„demoï¼Œpcç«¯ä¸²å£å·¥å…·é€šè¿‡usbæšä¸¾å‡ºçš„usb atå£å’Œæ¨¡å—é€šä¿¡ï¼Œä¸²å£å·¥å…·å‘é€ä¸€äº›ç‰¹æ®Šå­—ç¬¦ç»“å°¾çš„æ•°æ®(æœ€åå†åŠ ä¸Šå›è½¦æ¢è¡Œ)ï¼Œæ¨¡å—ä¼šæ­»æœºï¼Œå¿…ç° */
 	// 		free(pbuf);
 	// 	}
     // }
-	/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
     else
     {
         OPENAT_print("uart phy write:%d %d", id,len);
@@ -1038,9 +1038,9 @@ u32 platform_s_uart_send_buff( unsigned id, const u8 *buff, u16 len )
 
     return ret;
 }
-/*-\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
+/*-\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
 
-/* ¼æÈİ¾É°æ±¾µÄsleep½Ó¿Ú */
+/* å…¼å®¹æ—§ç‰ˆæœ¬çš„sleepæ¥å£ */
 void platform_os_sleep(u32 ms)
 {
     IVTBL(sleep)(ms);
@@ -1053,19 +1053,19 @@ int platform_s_uart_recv( unsigned id, s32 timeout )
     
     if(PLATFORM_UART_ID_ATC == id)
     {
-/*+\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*+\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
         rcvdLength = vatc_read(rcvdBuf, 1, timeout);
-/*-\NEW\liweiqiang\2014.4.12\ÓÅ»¯¶ÔĞéÄâATÃ¿´ÎÖ»¶ÁÈ¡Ò»¸ö×Ö½ÚµÄ´¦Àí */
+/*-\NEW\liweiqiang\2014.4.12\ä¼˜åŒ–å¯¹è™šæ‹ŸATæ¯æ¬¡åªè¯»å–ä¸€ä¸ªå­—èŠ‚çš„å¤„ç† */
     }
-	/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 	else if(PLATFORM_PORT_ID_USB == id)
     {
         rcvdLength = usb_read(rcvdBuf, 1, timeout);
     }
-	/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+	/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
     else if(PLATFORM_PORT_ID_DEBUG == id)
     {
-        // debug¿Ú¶ÁÈ¡Ö±½Ó¶ÂÈû¹ÒÆğ
+        // debugå£è¯»å–ç›´æ¥å µå¡æŒ‚èµ·
         HANDLE hDebugPortReadSem = IVTBL(create_semaphore)(0);
         PUB_TRACE("[platform_s_uart_recv]: read from debug port, stop!");
         IVTBL(wait_semaphore)(hDebugPortReadSem, COS_WAIT_FOREVER);
@@ -1083,12 +1083,12 @@ int platform_s_uart_set_flow_control( unsigned id, int type )
 {
   return PLATFORM_ERR;
 }
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 int platform_uart_config_event(int uartId, PLATFORM_UART_EVENT_CONFIG event)
 {
 	gUartConfig.UartConfigEvent = event;
 	gUartConfig.UartConfigId = uartId;
 	return 1;
 }
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 #endif

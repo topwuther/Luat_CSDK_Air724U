@@ -7,7 +7,7 @@
  * Date:    2012/11/29
  *
  * Description:
- *   ʵ��newlib/stubs.c����Ҫƽ̨֧�ֵ�һЩstdio.c�Ľӿ�
+ *   实现newlib/stubs.c中需要平台支持的一些stdio.c的接口
  * History:
  *     panjun 2015.04.30 Add an 'platform_separator_strrpl()' API to replace a sub-string.
  **************************************************************************/

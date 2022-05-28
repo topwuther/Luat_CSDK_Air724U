@@ -28,7 +28,7 @@ typedef struct rtos_ble_scan_report_info
 	UINT8 rssi;
 } plat_ble_scan_report_info_t;
 
-/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 #define PLA_BLE_RX_BUF_SIZE 2048
 static uint8 BLERxBuff[PLA_BLE_RX_BUF_SIZE];
@@ -41,7 +41,7 @@ static CycleQueue ble_recv_queue = {
 	0,
 	0,
 };
-/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 {
@@ -55,7 +55,7 @@ static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 	case OPENAT_BLE_RECV_DATA:
 		if ((result->len != 0) && (result->dataPtr != NULL))
 		{
-			/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+			/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 
 			plat_ble_recv_buff BLERxRecvOne = {0};
 			BLERxRecvOne.uuid_flag = result->uuid_flag;
@@ -65,9 +65,9 @@ static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 			BLERxRecvOne.dataPtr = malloc(result->len);
 			memcpy(BLERxRecvOne.dataPtr, result->dataPtr, result->len);
 
-			/*+\NEW\czm\2020.11.27\´úÂëÆÀÉó: ²åÈë¶ÓÁĞÇ°ÅĞ¶ÏÊ£Óà¿Õ¼ä£¬¼ÓÁÙ½çÇø±£»¤*/
+			/*+\NEW\czm\2020.11.27\ä»£ç è¯„å®¡: æ’å…¥é˜Ÿåˆ—å‰åˆ¤æ–­å‰©ä½™ç©ºé—´ï¼ŒåŠ ä¸´ç•ŒåŒºä¿æŠ¤*/
 			HANDLE crihand = OPENAT_enter_critical_section();
-			//Èç¹û¶ÓÁĞÖĞÊ£Óà¿Õ¼ä²»¹»£¬ÔòÅ×Æú¸Ã°üÊı¾İ
+			//å¦‚æœé˜Ÿåˆ—ä¸­å‰©ä½™ç©ºé—´ä¸å¤Ÿï¼Œåˆ™æŠ›å¼ƒè¯¥åŒ…æ•°æ®
 			if (QueueGetFreeSpace(&ble_recv_queue) > sizeof(plat_ble_recv_buff))
 			{
 				QueueInsert(&ble_recv_queue, (uint8 *)&BLERxRecvOne, sizeof(plat_ble_recv_buff));
@@ -79,15 +79,15 @@ static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 				OPENAT_print("DRV_BT:  ble_recv_queue Insufficient queue space!");
 			}
 			OPENAT_exit_critical_section(crihand);
-			/*-\NEW\czm\2020.11.27\´úÂëÆÀÉó: ²åÈë¶ÓÁĞÇ°ÅĞ¶ÏÊ£Óà¿Õ¼ä£¬¼ÓÁÙ½çÇø±£»¤*/
+			/*-\NEW\czm\2020.11.27\ä»£ç è¯„å®¡: æ’å…¥é˜Ÿåˆ—å‰åˆ¤æ–­å‰©ä½™ç©ºé—´ï¼ŒåŠ ä¸´ç•ŒåŒºä¿æŠ¤*/
 
 			// rtosmsg.blueData.len = result->len;
 			// rtosmsg.blueData.uuid_flag = result->uuid_flag;
 			// rtosmsg.blueData.uuid = result->uuid;
 			// memcpy(rtosmsg.blueData.long_uuid, result->long_uuid, sizeof(result->long_uuid));
-			/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+			/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 
-			/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+			/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 			//QueueInsert(&ble_recv_queue, result->dataPtr, result->len);
 			//rtosmsg.blueData.pData = bleData;
@@ -95,7 +95,7 @@ static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 			// bleData = OPENAT_malloc(result->len);
 			// memcpy(bleData, result->dataPtr, result->len);
 			// rtosmsg.blueData.pData = bleData;
-			/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+			/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 		}
 		break;
 	case OPENAT_BLE_SET_SCAN_REPORT:
@@ -133,7 +133,7 @@ static void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 
 	platform_rtos_send(MSG_ID_RTOS_BLUETOOTH, &rtosmsg);
 }
-/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
 
 BOOL platform_ble_open(u8 mode)
 {
@@ -162,24 +162,24 @@ BOOL platform_ble_send_string(u8 *data, int len, u8 *uuid_c, u16 handle)
     return state;
 }
 
-/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
-/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
+/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 int platform_ble_recv(plat_ble_recv_buff *data)
 {
-	static plat_ble_recv_buff recv_buff = {0}; //±£´æÒ»´Î¶ÁÈ¡µÄËùÓĞÊı¾İ
-	static UINT8 buf_index = 0;				   //±£´æÊı¾İ±»È¡×ßÁË¶àÉÙ
+	static plat_ble_recv_buff recv_buff = {0}; //ä¿å­˜ä¸€æ¬¡è¯»å–çš„æ‰€æœ‰æ•°æ®
+	static UINT8 buf_index = 0;				   //ä¿å­˜æ•°æ®è¢«å–èµ°äº†å¤šå°‘
 	if (data == NULL || data->dataPtr == NULL)
 	{
 		OPENAT_print("DRV_BT:  platform_ble_recv data == NULL || data->dataPtr == NULL");
 		return -1;
 	}
 
-	if ((buf_index == recv_buff.len) && recv_buff.len != 0) //µ±Ç°Êı¾İ°üÄÚÈİÈ«²¿È¡ÍêÁË
+	if ((buf_index == recv_buff.len) && recv_buff.len != 0) //å½“å‰æ•°æ®åŒ…å†…å®¹å…¨éƒ¨å–å®Œäº†
 	{
 		OPENAT_print("DRV_BT:  platform_ble_recv (buf_index == recv_buff.len) && recv_buff.len != 0");
 		recv_buff.len = 0;
-		buf_index = 0; //ÖØ×°Æ«ÒÆ
-		return 0;	   //·µ»ØÒ»¸ö0£¬¸æËßÓÃ»§Õâ¸öÊı¾İ°üÒÑ¾­½áÊø¡£ÏÂÒ»´Î¶ÁÈ¡£¬È¡µ½µÄ¾ÍÊÇÏÂÒ»¸öÊı¾İ°ü
+		buf_index = 0; //é‡è£…åç§»
+		return 0;	   //è¿”å›ä¸€ä¸ª0ï¼Œå‘Šè¯‰ç”¨æˆ·è¿™ä¸ªæ•°æ®åŒ…å·²ç»ç»“æŸã€‚ä¸‹ä¸€æ¬¡è¯»å–ï¼Œå–åˆ°çš„å°±æ˜¯ä¸‹ä¸€ä¸ªæ•°æ®åŒ…
 	}
 
 	if (recv_buff.len == 0)
@@ -187,25 +187,25 @@ int platform_ble_recv(plat_ble_recv_buff *data)
 		if (recv_buff.dataPtr != NULL)
 			free(recv_buff.dataPtr);
 		memset(&recv_buff, 0, sizeof(plat_ble_recv_buff));
-		int status = QueueDelete(&ble_recv_queue, (uint8 *)&recv_buff, sizeof(plat_ble_recv_buff)); //¶ÁÏÂÒ»°üÊı¾İ
-		buf_index = 0;																				//ÖØ×°Æ«ÒÆ
-		if (status == 0)																			//¶ÓÁĞÖĞÃ»ÓĞÊı¾İÁË
+		int status = QueueDelete(&ble_recv_queue, (uint8 *)&recv_buff, sizeof(plat_ble_recv_buff)); //è¯»ä¸‹ä¸€åŒ…æ•°æ®
+		buf_index = 0;																				//é‡è£…åç§»
+		if (status == 0)																			//é˜Ÿåˆ—ä¸­æ²¡æœ‰æ•°æ®äº†
 			return 0;
 	}
 
-	UINT8 recvlen = 0; //Êµ¼ÊÄÜÈ¡µ½µÄÊı¾İ°ü³¤¶È
+	UINT8 recvlen = 0; //å®é™…èƒ½å–åˆ°çš„æ•°æ®åŒ…é•¿åº¦
 
-	if ((recv_buff.len - buf_index) > data->len) //Èç¹ûÊ£ÏÂµÄÊı¾İ³¤¶È×ã¹»
-		recvlen = data->len;					 //Òª¶àÉÙÈ¡¶àÉÙ
-	else										 //Èç¹ûÊ£ÏÂµÄÊı¾İ³¤¶È²»¹»ÓÃ»§Òª¶ÁÈ¡µÄÊı¾İ³¤¶È
-		recvlen = recv_buff.len - buf_index;	 //ÓĞ¶àÉÙÈ¡¶àÉÙ
+	if ((recv_buff.len - buf_index) > data->len) //å¦‚æœå‰©ä¸‹çš„æ•°æ®é•¿åº¦è¶³å¤Ÿ
+		recvlen = data->len;					 //è¦å¤šå°‘å–å¤šå°‘
+	else										 //å¦‚æœå‰©ä¸‹çš„æ•°æ®é•¿åº¦ä¸å¤Ÿç”¨æˆ·è¦è¯»å–çš„æ•°æ®é•¿åº¦
+		recvlen = recv_buff.len - buf_index;	 //æœ‰å¤šå°‘å–å¤šå°‘
 
-	memcpy(data->dataPtr, recv_buff.dataPtr + buf_index, recvlen); //¿½±´Ö¸¶¨³¤¶ÈµÄÊı¾İ
-	buf_index += recvlen;										   //Ö¸ÏòÏÖÔÚµÄÊı¾İÎ»ÖÃ
+	memcpy(data->dataPtr, recv_buff.dataPtr + buf_index, recvlen); //æ‹·è´æŒ‡å®šé•¿åº¦çš„æ•°æ®
+	buf_index += recvlen;										   //æŒ‡å‘ç°åœ¨çš„æ•°æ®ä½ç½®
 
-	data->uuid_flag = recv_buff.uuid_flag; //µ±Ç°Êı¾İ°üµÄUUID±êÖ¾Î»
+	data->uuid_flag = recv_buff.uuid_flag; //å½“å‰æ•°æ®åŒ…çš„UUIDæ ‡å¿—ä½
 
-	if (recv_buff.uuid_flag == 0) //×ª´æµ±Ç°uuid
+	if (recv_buff.uuid_flag == 0) //è½¬å­˜å½“å‰uuid
 		data->uuid = recv_buff.uuid;
 	else
 		memcpy(data->long_uuid, recv_buff.long_uuid, sizeof(recv_buff.long_uuid));
@@ -213,8 +213,8 @@ int platform_ble_recv(plat_ble_recv_buff *data)
 	OPENAT_print("DRV_BT:  platform_ble_recv QueueDelete recvlen:%d", recvlen);
 	return recvlen;
 }
-/*-\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
-/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+/*-\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
+/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 BOOL platform_ble_set_name(u8 *data)
 {

@@ -4,55 +4,55 @@
 #include "iot_os.h"
 
 /**
- * @ingroup iot_sdk_device ÍâÉè½Ó¿Ú
+ * @ingroup iot_sdk_device å¤–è®¾æ¥å£
  * @{
  */
 /**
- * @defgroup iot_sdk_lcd lcd½Ó¿Ú
+ * @defgroup iot_sdk_lcd lcdæ¥å£
  * @{
  */
  
 /**@example zbar/demo_zbar_lcd.c
-* LCD&¼üÅÌ½Ó¿ÚÊ¾Àı
+* LCD&é”®ç›˜æ¥å£ç¤ºä¾‹
 */ 
 
-/**Ğ´Èë lcdÃüÁî
-*@param		cmd: ÃüÁî
+/**å†™å…¥ lcdå‘½ä»¤
+*@param		cmd: å‘½ä»¤
 **/
 VOID iot_lcd_write_cmd(                          
                         UINT8 cmd 
                    );
 
-/**lcd Ğ´ÈëlcdÊı¾İ 
-*@param	 	data: Êı¾İ
+/**lcd å†™å…¥lcdæ•°æ® 
+*@param	 	data: æ•°æ®
 **/
 VOID iot_lcd_write_data(                               
                         UINT8 data                
                 );
 
 
-/**lcd³õÊ¼»¯
-*@param		param: lcd³õÊ¼»¯²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**lcdåˆå§‹åŒ–
+*@param		param: lcdåˆå§‹åŒ–å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/	
 BOOL iot_lcd_color_init(T_AMOPENAT_COLOR_LCD_PARAM *param );
 
-/**  Ë¢ĞÂlcd
-*@param		rect: ĞèÒªË¢ĞÂµÄÇøÓò
-*@param		pDisplayBuffer: Ë¢ĞÂµÄ»º³åÇø
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**  åˆ·æ–°lcd
+*@param		rect: éœ€è¦åˆ·æ–°çš„åŒºåŸŸ
+*@param		pDisplayBuffer: åˆ·æ–°çš„ç¼“å†²åŒº
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 VOID iot_lcd_update_color_screen(
-				T_AMOPENAT_LCD_RECT_T* rect,        /* ĞèÒªË¢ĞÂµÄÇøÓò */
+				T_AMOPENAT_LCD_RECT_T* rect,        /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
 				UINT16 *pDisplayBuffer    );
 
-/** ½âÂëjpg¸ñÊ½Í¼Æ¬
-*@param		buffer:ÏÔÊ¾buffer
-*@param		len:ÏÔÊ¾buffer³¤¶È
-*@param		imageinfo: ÎÄ¼ş¸ñÊ½
-*@return	INT32: ½âÂë×´Ì¬Âë
+/** è§£ç jpgæ ¼å¼å›¾ç‰‡
+*@param		buffer:æ˜¾ç¤ºbuffer
+*@param		len:æ˜¾ç¤ºbufferé•¿åº¦
+*@param		imageinfo: æ–‡ä»¶æ ¼å¼
+*@return	INT32: è§£ç çŠ¶æ€ç 
 **/
 INT32 iot_decode_jpeg(
                     UINT8 * buffer,
@@ -60,9 +60,9 @@ INT32 iot_decode_jpeg(
                     T_AMOPENAT_IMAGE_INFO * imageinfo
                     );
 
-/** ÊÍ·Åjpg¸ñÊ½½âÂëÊı¾İ
-*@param		imageinfo: ÎÄ¼ş¸ñÊ½
-*@return	INT32: ÊÍ·Å×´Ì¬Âë
+/** é‡Šæ”¾jpgæ ¼å¼è§£ç æ•°æ®
+*@param		imageinfo: æ–‡ä»¶æ ¼å¼
+*@return	INT32: é‡Šæ”¾çŠ¶æ€ç 
 **/
 INT32 iot_free_jpeg_decodedata(
                     T_AMOPENAT_IMAGE_INFO * imageinfo

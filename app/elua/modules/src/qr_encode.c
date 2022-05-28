@@ -7,7 +7,7 @@
  * Date:    2013/6/6
  *
  * Description:
- *          lua.pwm pwm·ÃÎÊ¿â
+ *          lua.pwm pwmè®¿é—®åº“
  **************************************************************************/
 #ifdef LUA_QRENCODE_SUPPORT
 
@@ -49,7 +49,7 @@ static int qr_encode_show(lua_State *L) {
     return 0; 
 }
 
-/*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 static int l_qr_create(lua_State *L) {
     size_t  len      = 0;
     int width;
@@ -95,7 +95,7 @@ static int l_qr_encode(lua_State *L) {
     
     return 2; 
 }
-/*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 
 #include "lrodefs.h"  
 
@@ -104,10 +104,10 @@ const LUA_REG_TYPE qr_encode_map[] =
 { 
   { LSTRKEY( "show" ),  LFUNCVAL( qr_encode_show ) },
 
-  /*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */	  
+  /*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */	  
   { LSTRKEY( "build" ),  LFUNCVAL( l_qr_create ) },
   { LSTRKEY("encode"), LFUNCVAL(l_qr_encode)},
-  /*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */	
+  /*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */	
 
   
   { LNILKEY, LNILVAL }

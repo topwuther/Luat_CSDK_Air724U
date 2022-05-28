@@ -7,7 +7,7 @@
  * Date:    2013/10/21
  *
  * Description:
- *          ÒôÆµ½Ó¿Ú
+ *          éŸ³é¢‘æ¥å£
  * History:
  *     panjun 2015.05.06 Optimize audio's API.
  *     panjun 2015.04.30 Add audio's API according to MTK.
@@ -55,16 +55,16 @@ static void audio_play_callback(E_AMOPENAT_PLAY_ERROR result)
     platform_rtos_send(MSG_ID_RTOS_AUDIO, &rtosmsg);
 
 }
-/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.07.31\BUG_2736:CSDK ´óÌÆ¶Ô½²»úĞèÇó Ö§³ÖÁ÷Â¼Òô*/
+/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\BUG\wangyuan\2020.07.31\BUG_2736:CSDK å¤§å”å¯¹è®²æœºéœ€æ±‚ æ”¯æŒæµå½•éŸ³*/
 static void audio_stream_record_cb(int event, char* data, int len)
-/*-\BUG\wangyuan\2020.07.31\BUG_2736:CSDK ´óÌÆ¶Ô½²»úĞèÇó Ö§³ÖÁ÷Â¼Òô*/
+/*-\BUG\wangyuan\2020.07.31\BUG_2736:CSDK å¤§å”å¯¹è®²æœºéœ€æ±‚ æ”¯æŒæµå½•éŸ³*/
 {
 	PlatformMsgData rtosmsg;
 	rtosmsg.streamRecordLen = len;
 	platform_rtos_send(MSG_ID_ROTS_STRAM_RECORD_IND, &rtosmsg);
 }
-/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
 static void audio_record_callback(E_AMOPENAT_RECORD_ERROR result)
 {
     PlatformMsgData rtosmsg;
@@ -124,16 +124,16 @@ static E_AMOPENAT_PLAY_MODE getDataFormat(PlatformAudioFormat audFormat)
 	#if 0
     static const E_AMOPENAT_PLAY_MODE mode[NumOfPlatformAudFormats] =
     {
-    	/*+\BUG\wangyuan\2020.12.31\BUG_4041:3024LUA°æ±¾Â¼ÒôdemoÂ¼Òô¹¦ÄÜÃ»ÓĞ×÷ÓÃ*/
+    	/*+\BUG\wangyuan\2020.12.31\BUG_4041:3024LUAç‰ˆæœ¬å½•éŸ³demoå½•éŸ³åŠŸèƒ½æ²¡æœ‰ä½œç”¨*/
 		OPENAT_AUD_FORMAT_MP3,
         OPENAT_AUD_FORMAT_PCM,
         OPENAT_AUD_FORMAT_WAVPCM,
         OPENAT_AUD_FORMAT_AMRNB,
         OPENAT_AUD_FORMAT_AMRWB,
-        /*-\BUG\wangyuan\2020.12.31\BUG_4041:3024LUA°æ±¾Â¼ÒôdemoÂ¼Òô¹¦ÄÜÃ»ÓĞ×÷ÓÃ*/
-		/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+        /*-\BUG\wangyuan\2020.12.31\BUG_4041:3024LUAç‰ˆæœ¬å½•éŸ³demoå½•éŸ³åŠŸèƒ½æ²¡æœ‰ä½œç”¨*/
+		/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
         OPENAT_AUD_FORMAT_SPEEX,
-		/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+		/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
         //OPENAT_AUD_PLAY_MODE_MIDI,
     };
 
@@ -150,9 +150,9 @@ static E_AMOPENAT_PLAY_MODE getDataFormat(PlatformAudioFormat audFormat)
 		case PLATFORM_AUD_WAV: return OPENAT_AUD_FORMAT_WAVPCM;
 		case PLATFORM_AUD_AMRNB: return OPENAT_AUD_FORMAT_AMRNB;
 		case PLATFORM_AUD_AMRWB: return OPENAT_AUD_FORMAT_AMRWB;
-		/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+		/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 		case PLATFORM_AUD_SPEEX: return OPENAT_AUD_FORMAT_SPEEX;
-		/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+		/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 		default: return OPENAT_AUD_FORMAT_QTY;
 	}
 }
@@ -234,11 +234,11 @@ int platform_audio_play(AudioPlayParam *param)
 	        return PLATFORM_ERR;
 	    }
 
-		/*+\NEW\shenyuanyuan\2020.3.26\ĞŞ¸Äµ÷ÓÃaudiocore.playËÀ»úÎÊÌâ*/
+		/*+\NEW\shenyuanyuan\2020.3.26\ä¿®æ”¹è°ƒç”¨audiocore.playæ­»æœºé—®é¢˜*/
 		playParam.playFileParam.fileName = param->u.filename;
 
 		playParam.playFileParam.fileFormat = fileformat;
-		/*-\NEW\shenyuanyuan\2020.3.26\ĞŞ¸Äµ÷ÓÃaudiocore.playËÀ»úÎÊÌâ*/
+		/*-\NEW\shenyuanyuan\2020.3.26\ä¿®æ”¹è°ƒç”¨audiocore.playæ­»æœºé—®é¢˜*/
 		playParam.playFileParam.callback = audio_play_callback;
 	}
         
@@ -256,9 +256,9 @@ int platform_audio_play(AudioPlayParam *param)
     return PLATFORM_OK;
 }
 
-/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 int platform_audio_streamplay(PlatformAudioPlayType PlayType,PlatformAudioFormat format,char* data,int len)
-/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 {
 	E_AMOPENAT_AUD_FORMAT dataformat;
 
@@ -268,20 +268,20 @@ int platform_audio_streamplay(PlatformAudioPlayType PlayType,PlatformAudioFormat
         PUB_TRACE("platform_audio_play:unknown format");
         return PLATFORM_ERR;
     }
-	/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
     //PUB_TRACE("platform_audio_streamplay:PlatformAudioPlayType:%d PlatformAudioFormat:%d dataformat:%d" ,PlayType ,format,dataformat);	
 	if(PlayType != PLATFORM_AUD_PLAY_TYPE_POC)
 		return OPENAT_streamplay(dataformat,audio_play_callback,data,len);
 	else
 		return OPENAT_streamplayV2(PlayType,dataformat,audio_play_callback,data,len);
-	/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/	
+	/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/	
 }
-/*+\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
+/*+\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
 int platform_audio_getStreamRemainDataLen()
 {
 	return OPENAT_StreamRemainDataLen();
 }
-/*-\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
+/*-\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
 int platform_audio_stop(void)
 {
 
@@ -290,8 +290,8 @@ int platform_audio_stop(void)
     return PLATFORM_OK;
 }
 
-/*+\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+/*+\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
+/*+\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
 int platform_audio_set_channel(PlatformAudioChannel outputchannel,PlatformMicChannel inputchannel)
 {
 	if(inputchannel == 0xff)
@@ -304,12 +304,12 @@ int platform_audio_set_channel(PlatformAudioChannel outputchannel,PlatformMicCha
     }
     
     IVTBL(set_channel)(outputchannel, inputchannel);
-/*-\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
     return PLATFORM_OK;
 }
 
-/*+\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
-/*+\bug\wj\2020.5.6\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*+\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
+/*+\bug\wj\2020.5.6\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 int platform_audio_set_sph_vol(PlatformAudioVol vol)
 {
 	int playvol[NumOfPlatformAudVols] =
@@ -333,8 +333,8 @@ int platform_audio_set_sph_vol(PlatformAudioVol vol)
     IVTBL(set_sph_vol)(playvol[vol]);
     return PLATFORM_OK;
 }
-/*-\bug\wj\2020.5.6\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
-/*-\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*-\bug\wj\2020.5.6\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
+/*-\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 
 int platform_audio_set_vol(PlatformAudioVol vol)
 {
@@ -383,7 +383,7 @@ int platform_audio_set_loopback(BOOL flag, PlatformAudioLoopback typ, BOOL setvo
 }
 
 
-/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
 int platform_audio_record(char* file_name, int time_sec, int quality, PlatformAudioRecordType type, PlatformAudioFormat format)
 {
 	E_AMOPENAT_RECORD_PARAM param;
@@ -399,7 +399,7 @@ int platform_audio_record(char* file_name, int time_sec, int quality, PlatformAu
 	param.quality = (E_AMOPENAT_RECORD_QUALITY)quality;
 	param.type = (E_AMOPENAT_RECORD_TYPE)type;
 
-	/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 	PUB_TRACE("platform_audio_record type=%d format=%d" ,type ,format);
 
 	openat_format = getDataFormat(format);
@@ -409,12 +409,12 @@ int platform_audio_record(char* file_name, int time_sec, int quality, PlatformAu
 	// 	case 1: openat_format = OPENAT_AUD_FORMAT_PCM; break;
 	// 	case 2: openat_format = OPENAT_AUD_FORMAT_WAVPCM;break;
 	// 	case 3: openat_format = OPENAT_AUD_FORMAT_AMRNB;break;
-	// 	/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	// 	/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 	// 	case 4: openat_format = OPENAT_AUD_FORMAT_SPEEX;break;
-	// 	/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	// 	/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 	// 	default: return PLATFORM_ERR;
 	// }
-	/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 	param.format = openat_format;
 	param.time_sec = time_sec;
 	
@@ -425,17 +425,17 @@ int platform_audio_record(char* file_name, int time_sec, int quality, PlatformAu
 	}
 	return PLATFORM_ERR;
 }
-/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
 int platform_audio_stop_record(void)
 {
     return OPENAT_audio_stop_record() == 0 ? PLATFORM_OK : PLATFORM_ERR;
 }
 
 int platform_audio_stream_record(int time_sec, int quality, int type, int format, 
-	/*+\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*+\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
 	int length
-	/*-\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*-\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
 	)
 {
 	E_AMOPENAT_RECORD_PARAM param;
@@ -454,17 +454,17 @@ int platform_audio_stream_record(int time_sec, int quality, int type, int format
 		case 1: openat_format = OPENAT_AUD_FORMAT_PCM; break;
 		case 2: openat_format = OPENAT_AUD_FORMAT_WAVPCM;break;
 		case 3: openat_format = OPENAT_AUD_FORMAT_AMRNB;break;
-		/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+		/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 		case 4: openat_format = OPENAT_AUD_FORMAT_SPEEX;break;
-		/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+		/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 		default: return PLATFORM_ERR;
 	}
 	param.format = openat_format;
 	param.time_sec = time_sec;
 	param.stream_record_cb = audio_stream_record_cb;
-	/*+\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*+\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
     param.thresholdLength = length;
-	/*-\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*-\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
     if(OPENAT_audio_record(&param,audio_record_callback) == 0)
     {
 		is_recording = TRUE;
@@ -488,15 +488,15 @@ int platform_audio_delete_record()
 	OPENAT_delete_record();
 	return 1;
 }
-/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
+/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
 BOOL platform_audio_start_voice()
 {
 	return OPENAT_audio_start_voice();
 }
-/*-\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
+/*-\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
 
-/*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 int platform_setpa(PlatformSpkPaType type)
 {
 	return OPENAT_setpa((OPENAT_SPKPA_TYPE_T)type);
@@ -506,9 +506,9 @@ int platform_getpa(void)
 {
 	return OPENAT_getpa();
 }
-/*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 
-/*+\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*+\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 int platform_setexpa(BOOL enable, UINT16 gpio, UINT16 count, 
 					UINT16 us,  E_AMOPENAT_AUDIO_CHANNEL outDev)
 {
@@ -521,9 +521,9 @@ int platform_setexpa(BOOL enable, UINT16 gpio, UINT16 count,
 
 	return OPENAT_ExPASet(&param);
 }
-/*-\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*-\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 
-/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 void platform_rtmp_callback(E_OPENAT_RTMP_RESULT_CODE code)
 {
 	PlatformRtmpData rtmpData;
@@ -543,8 +543,8 @@ BOOL platform_rtmp_close()
 	return OPENAT_rtmp_close();
 	
 }
-/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
-/*+\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
+/*+\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 int platform_headPlug(int type)
 {
 	if (type >= OPENAT_AUD_HEADSET_TYPE_QTY)
@@ -554,12 +554,12 @@ int platform_headPlug(int type)
 	
 	return OPENAT_headPlug(type);
 }
-/*-\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 				
 #endif
 
-/*-\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
-/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*-\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
+/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 static void platform_headset_notify_cb(void *ctx, E_OPENAT_AUD_HEADSET_NOTIFY_MSG id, uint32 param)
 {
 	PlatformMsgData rtosmsg;
@@ -580,4 +580,4 @@ void platform_headset_init(BOOL autoControl)
 	}
 	OPENAT_headsetInit();
 }
-/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/

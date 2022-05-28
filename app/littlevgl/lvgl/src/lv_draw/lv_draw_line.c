@@ -261,7 +261,7 @@ static void line_draw_skew(line_draw_t * main_line, bool dir_ori, const lv_area_
     width = style->line.width;
 
     /* The pattern stores the points of the line ending. It has the good direction and length.
-     * The worth case is the 45° line where pattern can have 1.41 x `width` points*/
+     * The worth case is the 45Â° line where pattern can have 1.41 x `width` points*/
 
     lv_coord_t pattern_size = width * 2;
     lv_point_t * pattern = lv_draw_get_buf(pattern_size * sizeof(lv_point_t));

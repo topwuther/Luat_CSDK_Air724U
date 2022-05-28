@@ -1,8 +1,8 @@
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #ifndef __PLATFORM_CAMERA_H__
 #define __PLATFORM_CAMERA_H__
 
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 typedef struct T_PLATFORM_CAMERA_REG_TAG
 {
     UINT16      addr;
@@ -35,25 +35,25 @@ typedef enum
 typedef enum
 {
 	PLATFORM_SPI_SPEED_DEFAULT,
-	PLATFORM_SPI_SPEED_SDR, /*µ¥±¶ËÙÂÊ*/
-	PLATFORM_SPI_SPEED_DDR, /*Ë«±¶ËÙÂÊ*/
-	PLATFORM_SPI_SPEED_QDR, /*ËÄ±¶ËÙÂÊ Ôİ²»Ö§³Ö*/
+	PLATFORM_SPI_SPEED_SDR, /*å•å€é€Ÿç‡*/
+	PLATFORM_SPI_SPEED_DDR, /*åŒå€é€Ÿç‡*/
+	PLATFORM_SPI_SPEED_QDR, /*å››å€é€Ÿç‡ æš‚ä¸æ”¯æŒ*/
 }PLATFORM_SPI_SPEED_MODE_E;
 
-/*camera sensorÊôĞÔÅäÖÃ*/
+/*camera sensorå±æ€§é…ç½®*/
 typedef struct T_PLATFORM_CAMERA_PARAM_TAG
 {
-    UINT8       i2cSlaveAddr;               /* ÉãÏñÍ·i2c·ÃÎÊµØÖ· */
-    UINT16      sensorWidth;                /* ÉãÏñÍ·µÄ¿í */
-    UINT16      sensorHeight;				/* ÉãÏñÍ·µÄ¸ß */    
-    PPLATFORM_CAMERA_REG initRegTable_p;  /* ÉãÏñÍ·³õÊ¼»¯Ö¸Áî±í */
-    UINT16 initRegTableCount;          /* ÉãÏñÍ·³õÊ¼»¯Ö¸ÁîÊı */
-    PLATFORM_CAMERA_REG idReg;          /* ÉãÏñÍ·ID¼Ä´æÆ÷ÓëÖµ */
-    PLATFORM_CAMERA_SPI_MODE_E       spi_mode; /*ÉãÏñÍ·SPIÄ£Ê½*/
-    PLATFORM_CAMERA_SPI_YUV_OUT_E  spi_yuv_out; /*ÉãÏñÍ·YUV¸ñÊ½*/
-	PLATFORM_SPI_SPEED_MODE_E spi_speed; /*ÉãÏñÍ·²É¼¯ËÙÂÊ*/
+    UINT8       i2cSlaveAddr;               /* æ‘„åƒå¤´i2cè®¿é—®åœ°å€ */
+    UINT16      sensorWidth;                /* æ‘„åƒå¤´çš„å®½ */
+    UINT16      sensorHeight;				/* æ‘„åƒå¤´çš„é«˜ */    
+    PPLATFORM_CAMERA_REG initRegTable_p;  /* æ‘„åƒå¤´åˆå§‹åŒ–æŒ‡ä»¤è¡¨ */
+    UINT16 initRegTableCount;          /* æ‘„åƒå¤´åˆå§‹åŒ–æŒ‡ä»¤æ•° */
+    PLATFORM_CAMERA_REG idReg;          /* æ‘„åƒå¤´IDå¯„å­˜å™¨ä¸å€¼ */
+    PLATFORM_CAMERA_SPI_MODE_E       spi_mode; /*æ‘„åƒå¤´SPIæ¨¡å¼*/
+    PLATFORM_CAMERA_SPI_YUV_OUT_E  spi_yuv_out; /*æ‘„åƒå¤´YUVæ ¼å¼*/
+	PLATFORM_SPI_SPEED_MODE_E spi_speed; /*æ‘„åƒå¤´é‡‡é›†é€Ÿç‡*/
 }T_PLATFORM_CAMERA_PARAM;
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 
 BOOL platform_camera_poweron(BOOL video_mode, int nCamType, BOOL bZbarScan, BOOL bMirror, BOOL bJump);
 
@@ -75,15 +75,15 @@ BOOL platform_camera_capture(u16 width, u16 height, u16 quality);
 BOOL platform_camera_save_photo(const char* filename);
 
 
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 BOOL platform_CameraWriteReg(int *pInitCmd, int nInitCmdSize);
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 
-/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 BOOL platform_camera_preview_zoom(int zoom);
 BOOL platform_camera_preview_rotation(int rotation);
-/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 
 
 #endif
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/

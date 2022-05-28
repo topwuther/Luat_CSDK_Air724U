@@ -47,7 +47,7 @@ int find_dm_entry( const char* name, char **pactname )
     tempname[ preal - name ] = '\0';
   }
     
-/*+\NEW\liweiqiang\2013.5.11\Ä¿Â¼ÏÂÎÄ¼şÎŞ·¨Õı³£·ÃÎÊ*/
+/*+\NEW\liweiqiang\2013.5.11\ç›®å½•ä¸‹æ–‡ä»¶æ— æ³•æ­£å¸¸è®¿é—®*/
   // Find device
   for( i = 0; i < dm_get_num_devices(); i ++ )
   {
@@ -67,7 +67,7 @@ int find_dm_entry( const char* name, char **pactname )
     i = devrootIndex;
     preal = name;
   }
-/*-\NEW\liweiqiang\2013.5.11\Ä¿Â¼ÏÂÎÄ¼şÎŞ·¨Õı³£·ÃÎÊ*/
+/*-\NEW\liweiqiang\2013.5.11\ç›®å½•ä¸‹æ–‡ä»¶æ— æ³•æ­£å¸¸è®¿é—®*/
     
   // Find the actual first char of the name
   preal ++;
@@ -108,9 +108,9 @@ int _open_r( const char *name, int flags, int mode )
   // Device found, call its function
   if( ( res = pdev->p_open_r( actname, flags, mode ) ) < 0 )
   {
-/*+\NEW\liweiqiang\2014.2.13\Ôö¼Ófopen errorÖµÉèÖÃ */
+/*+\NEW\liweiqiang\2014.2.13\å¢åŠ fopen errorå€¼è®¾ç½® */
     errno = res;
-/*-\NEW\liweiqiang\2014.2.13\Ôö¼Ófopen errorÖµÉèÖÃ */
+/*-\NEW\liweiqiang\2014.2.13\å¢åŠ fopen errorå€¼è®¾ç½® */
     return res;
   }
   return DM_MAKE_DESC( devid, res );
@@ -203,12 +203,12 @@ _ssize_t _write_r( int file, const void *ptr, size_t len )
   return pdev->p_write_r( DM_GET_FD( file ), ptr, len );  
 }
 
-/*+\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 int _unlink_r(const char *path)
 {
   return platform_sys_unlink(path);
 }
-/*-\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 
 // ****************************************************************************
 // Miscalenous functions
@@ -224,7 +224,7 @@ int _vfprintf_r(FILE *fp, const char *fmt, va_list ap)
 }
 #endif
 
-/*+\NEW\liweiqiang\2013.12.6\¶ÔÓÚ³¬¹ı500KµÄdlÄÚ´æ³Ø,ÄÇÃ´Î±libcµÄmalloc´Ódlmalloc·ÖÅä */
+/*+\NEW\liweiqiang\2013.12.6\å¯¹äºè¶…è¿‡500Kçš„dlå†…å­˜æ± ,é‚£ä¹ˆä¼ªlibcçš„mallocä»dlmallocåˆ†é… */
 #if defined(USE_DLMALLOC_ALLOCATOR)
 #ifdef MUXUSE_DLMALLOC_MEMORY_AS_LUA_SCRIPT_LOAD
 #define CNAME(func) OPENAT_##func
@@ -235,7 +235,7 @@ int _vfprintf_r(FILE *fp, const char *fmt, va_list ap)
 #elif defined(USE_PLATFORM_ALLOCATOR)
 #define CNAME(func) platform_##func
 #endif
-/*-\NEW\liweiqiang\2013.12.6\¶ÔÓÚ³¬¹ı500KµÄdlÄÚ´æ³Ø,ÄÇÃ´Î±libcµÄmalloc´Ódlmalloc·ÖÅä */
+/*-\NEW\liweiqiang\2013.12.6\å¯¹äºè¶…è¿‡500Kçš„dlå†…å­˜æ± ,é‚£ä¹ˆä¼ªlibcçš„mallocä»dlmallocåˆ†é… */
 
 #ifdef MUXUSE_DLMALLOC_MEMORY_AS_LUA_SCRIPT_LOAD
 extern BOOL bScriptLoaded;

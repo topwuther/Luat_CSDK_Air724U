@@ -3,7 +3,7 @@ module(...,package.seeall)
 local cache = ""
 local longitude,latitude
 
--- ¶È·Ö·Ö¸ñÊ½×ª»»Îª¶È¸ñÊ½
+-- åº¦åˆ†åˆ†æ ¼å¼è½¬æ¢ä¸ºåº¦æ ¼å¼
 function dmmtod(strdmm)
 	local strd
 	local n = string.find(strdmm,"%.")
@@ -12,12 +12,12 @@ function dmmtod(strdmm)
 
 	local d,m,mm = string.sub(strdmm,1,n-3),string.sub(strdmm,n-2,n-1),string.sub(strdmm,n+1,-1)
 
-	-- ·ÖµÄĞ¡Êı²¿·Ö²¹×ã5Î»
+	-- åˆ†çš„å°æ•°éƒ¨åˆ†è¡¥è¶³5ä½
 	if string.len(mm) < 5 then
 		mm = mm..string.rep("0",5-string.len(mm))
 	end
 
-	-- ½«·Ö×ª»»Îª¶È
+	-- å°†åˆ†è½¬æ¢ä¸ºåº¦
 	m = tonumber(m..mm)/60
 
 	strd = d.."."..string.format("%0"..string.len(mm).."d",m)
@@ -28,9 +28,9 @@ end
 function googlepos()
 	if longitude and longitude ~= "" and latitude and latitude ~= "" then
 		print("GPSRAW:",longitude,latitude)
-		return "GPS×ø±ê(±±Î³,¶«¾­):"..dmmtod(longitude)..","..dmmtod(latitude)
+		return "GPSåæ ‡(åŒ—çº¬,ä¸œç»):"..dmmtod(longitude)..","..dmmtod(latitude)
 	else
-		return "Î´¶¨Î»"
+		return "æœªå®šä½"
 	end
 end
 
@@ -56,6 +56,6 @@ local function recv()
 end
 
 sys.reguart(2,recv)
--- 2ÃëÖÓÂÖÑ¯Ò»´Î
+-- 2ç§’é’Ÿè½®è¯¢ä¸€æ¬¡
 --sys.timer_start(recv,2000)
 uart.setup(2,9600,8,uart.PAR_NONE,uart.STOP_1)

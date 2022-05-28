@@ -195,9 +195,9 @@ void simulate_uart_write_thread(LPVOID lparam)
     }
 }
 
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊýÅÐ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int stopbits, u32 mode, u32 txDoneReport)
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊýÅÐ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 {     
     ComDev *dev = _find_com_dev(id);
     DCB dcb;
@@ -220,10 +220,10 @@ u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int st
     }
 
     dev->hCom = CreateFile(dev->name,//"COMx"
-        GENERIC_READ|GENERIC_WRITE, //ÔÊÐí¶ÁºÍÐ´
-        0, //¶ÀÕ¼·½Ê½
+        GENERIC_READ|GENERIC_WRITE, //å…è®¸è¯»å’Œå†™
+        0, //ç‹¬å æ–¹å¼
         NULL,
-        OPEN_EXISTING, //´ò¿ª¶ø²»ÊÇ´´½¨
+        OPEN_EXISTING, //æ‰“å¼€è€Œä¸æ˜¯åˆ›å»º
         FILE_ATTRIBUTE_NORMAL|FILE_FLAG_OVERLAPPED,
 		NULL);
 
@@ -246,19 +246,19 @@ u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int st
     GetCommState(dev->hCom, &dcb);
     if(baud == 0)
     {
-        dcb.BaudRate = 115200; //²¨ÌØÂÊ 
-        dcb.ByteSize = 8; //Êý¾ÝÎ»
-        dcb.Parity = NOPARITY; //ÆæÅ¼Ð£ÑéÎ»
-        dcb.StopBits = ONESTOPBIT; //Í£Ö¹Î»
+        dcb.BaudRate = 115200; //æ³¢ç‰¹çŽ‡ 
+        dcb.ByteSize = 8; //æ•°æ®ä½
+        dcb.Parity = NOPARITY; //å¥‡å¶æ ¡éªŒä½
+        dcb.StopBits = ONESTOPBIT; //åœæ­¢ä½
         dcb.fDtrControl = DTR_CONTROL_ENABLE;
         dcb.fRtsControl = RTS_CONTROL_ENABLE;
     }
     else
     {
-        dcb.BaudRate = baud; //²¨ÌØÂÊ
-        dcb.ByteSize = databits; //Êý¾ÝÎ»
-        dcb.Parity = NOPARITY; //ÆæÅ¼Ð£ÑéÎ»
-        dcb.StopBits = ONESTOPBIT; //Í£Ö¹Î»
+        dcb.BaudRate = baud; //æ³¢ç‰¹çŽ‡
+        dcb.ByteSize = databits; //æ•°æ®ä½
+        dcb.Parity = NOPARITY; //å¥‡å¶æ ¡éªŒä½
+        dcb.StopBits = ONESTOPBIT; //åœæ­¢ä½
     }
 
     dcb.fInX = FALSE;
@@ -277,11 +277,11 @@ u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int st
         COMMTIMEOUTS to;
         GetCommTimeouts(dev->hCom, &to);
         //memset(&to, 0, sizeof(to));
-        //Éè¶¨¶Á³¬Ê±
+        //è®¾å®šè¯»è¶…æ—¶
         to.ReadIntervalTimeout = 50;
         to.ReadTotalTimeoutMultiplier = 1;
         to.ReadTotalTimeoutConstant = 10;
-        //Éè¶¨Ð´³¬Ê±
+        //è®¾å®šå†™è¶…æ—¶
         //to.WriteTotalTimeoutMultiplier = 500;
         //to.WriteTotalTimeoutConstant = 2000;
         SetCommTimeouts(dev->hCom, &to);
@@ -294,7 +294,7 @@ u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int st
     }
 #endif // 0
 
-    SetupComm(dev->hCom, 1024, 1024); //ÊäÈë»º³åÇøºÍÊä³ö»º³åÇøµÄ´óÐ¡¶¼ÊÇ1024
+    SetupComm(dev->hCom, 1024, 1024); //è¾“å…¥ç¼“å†²åŒºå’Œè¾“å‡ºç¼“å†²åŒºçš„å¤§å°éƒ½æ˜¯1024
 
     PurgeComm(dev->hCom, PURGE_TXABORT|PURGE_TXCLEAR|PURGE_RXABORT|PURGE_RXCLEAR);
     

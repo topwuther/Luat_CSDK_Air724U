@@ -7,7 +7,7 @@
  * Date:    2014/4/5
  *
  * Description:
- *          lua.watchdog watchdog·ÃÎÊ¿â
+ *          lua.watchdog watchdogÂ·ÃƒÃŽÃŠÂ¿Ã¢
  **************************************************************************/
 
 #include <stdlib.h>

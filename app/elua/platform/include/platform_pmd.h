@@ -7,7 +7,7 @@
  * Date:    2013/3/26
  *
  * Description:
- *          platform power manage ½Ó¿Ú
+ *          platform power manage æ¥å£
  **************************************************************************/
 
 #ifndef _PLATFORM_PMD_H_
@@ -17,60 +17,60 @@ typedef enum PlatformLdoIdTag
 {
     PLATFORM_LDO_VLCD,
     PLATFORM_LDO_VMMC,
-	/*+\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
+	/*+\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
     PLATFORM_LDO_VSIM1,
-	/*-\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
-	/*+\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
+	/*-\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
+	/*+\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
 	PLATFORM_LDO_VCAMA,
 	PLATFORM_LDO_VCAMD,
-	/*-\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
-	/*+\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
+	/*+\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 	PLATFORM_LDO_VIBR,
-	/*-\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
-	/*+\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*-\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
+	/*+\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	PLATFORM_LDO_VBACKLIGHT_R,
 	PLATFORM_LDO_VBACKLIGHT_G,
 	PLATFORM_LDO_VBACKLIGHT_B,
 	PLATFORM_LDO_VBACKLIGHT_W,
-	/*-\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*-\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	
-	/*+\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*+\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 	PLATFORM_LDO_POWER_HMICBIAS,
-	/*-\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*-\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
     PLATFORM_LDO_QTY
 }PlatformLdoId;
 
-/*+\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
-/*+\NEW\liweiqiang\2014.2.8\ÍêÉÆµçÔ´¹ÜÀíÅäÖÃ½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
+/*+\NEW\liweiqiang\2014.2.8\å®Œå–„ç”µæºç®¡ç†é…ç½®æ¥å£ */
 #define PMD_CFG_INVALID_VALUE           (0xffff)
 
 typedef struct PlatformPmdCfgTag
 {
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
-    u16             ccLevel;/*ºãÁ÷½×¶Î:4.1*/
-    u16             cvLevel;/*ºãÑ¹½×¶Î:4.2*/
-    u16             ovLevel;/*³äµçÏŞÖÆ£º4.3*/
-    u16             pvLevel;/*»Ø³ä4.1*/
-    u16             poweroffLevel;/*¹Ø»úµçÑ¹£º3.4£¬½öÓÃÓÚ¼ÆËãµçÁ¿°Ù·Ö±È£¬Êµ¼ÊÓÉÉÏ²ã¿ØÖÆ¹Ø»ú*/
-    u16             ccCurrent;/*ºãÁ÷½×¶ÎµçÁ÷*/
-    u16             fullCurrent;/*ºãÑ¹³äÂúµçÁ÷£º30*/
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
-    /*+\NEW\zhuth\2014.11.6\µçÔ´¹ÜÀíÅäÖÃ²ÎÊıÖĞÌí¼ÓÊÇ·ñ¼ì²âµç³ØµÄÅäÖÃ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
+    u16             ccLevel;/*æ’æµé˜¶æ®µ:4.1*/
+    u16             cvLevel;/*æ’å‹é˜¶æ®µ:4.2*/
+    u16             ovLevel;/*å……ç”µé™åˆ¶ï¼š4.3*/
+    u16             pvLevel;/*å›å……4.1*/
+    u16             poweroffLevel;/*å…³æœºç”µå‹ï¼š3.4ï¼Œä»…ç”¨äºè®¡ç®—ç”µé‡ç™¾åˆ†æ¯”ï¼Œå®é™…ç”±ä¸Šå±‚æ§åˆ¶å…³æœº*/
+    u16             ccCurrent;/*æ’æµé˜¶æ®µç”µæµ*/
+    u16             fullCurrent;/*æ’å‹å……æ»¡ç”µæµï¼š30*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
+    /*+\NEW\zhuth\2014.11.6\ç”µæºç®¡ç†é…ç½®å‚æ•°ä¸­æ·»åŠ æ˜¯å¦æ£€æµ‹ç”µæ± çš„é…ç½®*/
     u16             batdetectEnable;
-    /*-\NEW\zhuth\2014.11.6\µçÔ´¹ÜÀíÅäÖÃ²ÎÊıÖĞÌí¼ÓÊÇ·ñ¼ì²âµç³ØµÄÅäÖÃ*/
+    /*-\NEW\zhuth\2014.11.6\ç”µæºç®¡ç†é…ç½®å‚æ•°ä¸­æ·»åŠ æ˜¯å¦æ£€æµ‹ç”µæ± çš„é…ç½®*/
 }PlatformPmdCfg;
-/*-\NEW\liweiqiang\2014.2.8\ÍêÉÆµçÔ´¹ÜÀíÅäÖÃ½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.2.8\å®Œå–„ç”µæºç®¡ç†é…ç½®æ¥å£ */
 
 int platform_pmd_init(PlatformPmdCfg *pmdCfg);
-/*-\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 
 int platform_ldo_set(PlatformLdoId id, int level);
 
 //sleep_wake: 1 sleep 0 wakeup
 int platform_pmd_powersave(int sleep_wake);
 
-/*+\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*+\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 int platform_pmd_get_charger(void);
-/*-\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 
 #endif//_PLATFORM_PMD_H_

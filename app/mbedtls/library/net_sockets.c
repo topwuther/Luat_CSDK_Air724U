@@ -182,8 +182,8 @@ int mbedtls_net_connect( mbedtls_net_context *ctx, const char *host,
     	ret = MBEDTLS_ERR_NET_SOCKET_FAILED;
         return ret;
     }
-    // 建立TCP链接
-    //memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // 初始化服务器地址
+    // 寤虹珛TCP閾炬帴
+    //memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // 鍒濆鍖栨湇鍔″櫒鍦板潃
     //TCPServerAddr.sin_family = AF_INET;
     //TCPServerAddr.sin_port = htons((unsigned short)port);
     if ((ret = connect(ctx->fd, (struct sockaddr *)&sa, sizeof(struct sockaddr))) < 0)
@@ -250,8 +250,8 @@ int mbedtls_net_connect_v2( mbedtls_net_context *ctx, const char *host,
     	ret = MBEDTLS_ERR_NET_SOCKET_FAILED;
         return ret;
     }
-    // 建立TCP链接
-    //memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // 初始化服务器地址
+    // 寤虹珛TCP閾炬帴
+    //memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // 鍒濆鍖栨湇鍔″櫒鍦板潃
     //TCPServerAddr.sin_family = AF_INET;
     //TCPServerAddr.sin_port = htons((unsigned short)port);
     if ((ret = connect(ctx->fd, (struct sockaddr *)&sa, sizeof(struct sockaddr))) < 0)

@@ -1,7 +1,7 @@
 print(_INTERNAL_VERSION)
 
 local putext = disp.puttext
-local state = 0 -- »°»ú×´Ì¬: 0:¿ª»úÖĞ 1:idle 2:¹Ø»úÖĞ
+local state = 0 -- è¯æœºçŠ¶æ€: 0:å¼€æœºä¸­ 1:idle 2:å…³æœºä¸­
 local onofftone = "AT+AMRT=1,1,0"
 local msg,imei,currcmd = nil
 local callexist = 4
@@ -25,7 +25,7 @@ local currwin = ""
 
 local keytab = {[0+2] = "dad",[0+0] = "mum", [4+1] = "home", [4+0] = "school",[0+1] = "sos"}
 
-local soslist = { -- sos½çÃæÏÂµÄ½ô¼±ºÅÂëÑ¡Ôñ
+local soslist = { -- sosç•Œé¢ä¸‹çš„ç´§æ€¥å·ç é€‰æ‹©
 	dad = "112",
 	mum = "120",
 	home = "119",
@@ -33,7 +33,7 @@ local soslist = { -- sos½çÃæÏÂµÄ½ô¼±ºÅÂëÑ¡Ôñ
 	sos = "122",
 }
 
-local dialist = { -- ¿ì½İ²¦ºÅÁĞ±í
+local dialist = { -- å¿«æ·æ‹¨å·åˆ—è¡¨
 	dad = "10086",
 	mum = "10086",
 	home = "10086",

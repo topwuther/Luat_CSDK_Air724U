@@ -3,7 +3,7 @@
 #include "iot_camera.h"
 #include "demo_zbar.h"
 
-//Ä¬ÈÏsensorÊÇgc0310, ´ò¿ªAM_CAM_BF20A6ºêÊ¹ÓÃBF20A6
+//é»˜è®¤sensoræ˜¯gc0310, æ‰“å¼€AM_CAM_BF20A6å®ä½¿ç”¨BF20A6
 
 #ifdef AM_CAM_BF20A6 
 #define CAM_ID_REG  0xfc
@@ -131,7 +131,7 @@ static AMOPENAT_CAMERA_REG cameraInitReg[]  =
 	{0x55,0x56},
 	{0x56,0x03},
 	{0x7e,0x15},
-	{0x57,0x37},//A¹âcolor
+	{0x57,0x37},//Aå…‰color
 	{0x58,0x1E},
 	{0x59,0xAF},
 	{0x5a,0xC5},
@@ -142,9 +142,9 @@ static AMOPENAT_CAMERA_REG cameraInitReg[]  =
 	{0x5e,0x10},
 	
 	{0xd6,0x88},//contrast
-	{0xd5,0x25},//µÍ¹â¼ÓÁÁ¶È
-	{0xb0,0xa4},//»ÒÉ«ÇøÓò½µ±¥ºÍ¶È
-	{0xb5,0x08},//µÍ¹â½µ±¥ºÍ¶ÈãĞÖµ
+	{0xd5,0x25},//ä½å…‰åŠ äº®åº¦
+	{0xb0,0xa4},//ç°è‰²åŒºåŸŸé™é¥±å’Œåº¦
+	{0xb5,0x08},//ä½å…‰é™é¥±å’Œåº¦é˜ˆå€¼
 	{0xb1,0xc8},//saturation
 	{0xb2,0xc8},
 	{0xb3,0xd0},
@@ -724,7 +724,7 @@ static AMOPENAT_CAMERA_REG cameraMirrorDisReg[] =
 	{0x17, 0x14}
 };
 
-/*²âÊÔiot_camera_WriteReg½Ó¿Ú*/
+/*æµ‹è¯•iot_camera_WriteRegæ¥å£*/
 static void camera_writeReg(void)
 {
 #ifndef AM_CAM_BF20A6
@@ -781,14 +781,14 @@ BOOL cameraInit(PCAMERA_MESSAGE cb)
 	previewParam.startX = 0;
 	previewParam.startY = 0;
 	
-	/*++/²âÊÔĞ´lcd·ÅËõÏÔÊ¾ºÍ·´×ªÏÔÊ¾¹¦ÄÜ£¬ĞèÒª¿ÉÒÔ´ò¿ªºê*/
+	/*++/æµ‹è¯•å†™lcdæ”¾ç¼©æ˜¾ç¤ºå’Œåè½¬æ˜¾ç¤ºåŠŸèƒ½ï¼Œéœ€è¦å¯ä»¥æ‰“å¼€å®*/
 #ifdef ZBAR_ZOOM_ROTATION
-	/*·ÅËõÏÔÊ¾4±¶*/
+	/*æ”¾ç¼©æ˜¾ç¤º4å€*/
 	previewParam.zoom = -2;
-	/* ·´×ª90¶È*/
+	/* åè½¬90åº¦*/
 	previewParam.rotation = 90;
 
-	/*ÏÔÊ¾µÄÇøÓòÒ²ĞèÒª°´ÕÕ2±¶·ÅËõ£¬·´×ª90¶Á£¬ÇĞ»»¿í¸ß*/
+	/*æ˜¾ç¤ºçš„åŒºåŸŸä¹Ÿéœ€è¦æŒ‰ç…§2å€æ”¾ç¼©ï¼Œåè½¬90è¯»ï¼Œåˆ‡æ¢å®½é«˜*/
 	previewParam.endX = CAM_SENSOR_HEIGHT/2;
 	previewParam.endY = CAM_SENSOR_WIDTH/2;
 #else
@@ -797,7 +797,7 @@ BOOL cameraInit(PCAMERA_MESSAGE cb)
 	previewParam.endX = CAM_DISP_WIDTH;
 	previewParam.endY = CAM_DISP_HEIGHT;
 #endif
-	/*--/²âÊÔĞ´lcd·ÅËõÏÔÊ¾ºÍ·´×ªÏÔÊ¾¹¦ÄÜ£¬ĞèÒª¿ÉÒÔ´ò¿ªºê*/
+	/*--/æµ‹è¯•å†™lcdæ”¾ç¼©æ˜¾ç¤ºå’Œåè½¬æ˜¾ç¤ºåŠŸèƒ½ï¼Œéœ€è¦å¯ä»¥æ‰“å¼€å®*/
 	
 	ret = iot_camera_preview_open(&previewParam);
 	if (!ret)
@@ -805,7 +805,7 @@ BOOL cameraInit(PCAMERA_MESSAGE cb)
 
 	iot_debug_print("zwb camera_writeReg test");
 
-	/*++/²âÊÔĞ´camera¼Ä´æÆ÷½Ó¿Ú,ÉèÖÃCAM¾µÏñ¹¦ÄÜ,ĞèÒªÊ±¿ÉÒÔ´ò¿ªºê*/
+	/*++/æµ‹è¯•å†™cameraå¯„å­˜å™¨æ¥å£,è®¾ç½®CAMé•œåƒåŠŸèƒ½,éœ€è¦æ—¶å¯ä»¥æ‰“å¼€å®*/
 #ifdef ZBAR_WRITEREG
 	while(1)
 	{	
@@ -815,7 +815,7 @@ BOOL cameraInit(PCAMERA_MESSAGE cb)
 		iot_os_sleep(3000);
 	}
 #endif
-	/*--/²âÊÔĞ´camera¼Ä´æÆ÷½Ó¿Ú,ÉèÖÃCAM¾µÏñ¹¦ÄÜ,ĞèÒªÊ±¿ÉÒÔ´ò¿ªºê*/
+	/*--/æµ‹è¯•å†™cameraå¯„å­˜å™¨æ¥å£,è®¾ç½®CAMé•œåƒåŠŸèƒ½,éœ€è¦æ—¶å¯ä»¥æ‰“å¼€å®*/
 	return TRUE;
 }
 

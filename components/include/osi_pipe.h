@@ -33,9 +33,9 @@ typedef enum
 {
     OSI_PIPE_EVENT_RX_ARRIVED = (1 << 0),  ///< received new data
     OSI_PIPE_EVENT_TX_COMPLETE = (1 << 2), ///< all data had been sent
-	/*+\NEW\zhuwangbin\2020.3.30\ 添加读数据上报的event */
+	/*+\NEW\zhuwangbin\2020.3.30\ 娣诲姞璇绘暟鎹笂鎶ョ殑event */
     OSI_PIPE_EVENT_RX_IND = (1 << 3),
-	/*-\NEW\zhuwangbin\2020.3.30\ 添加读数据上报的event */
+	/*-\NEW\zhuwangbin\2020.3.30\ 娣诲姞璇绘暟鎹笂鎶ョ殑event */
 } osiPipeEvent_t;
 
 /**

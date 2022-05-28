@@ -12,7 +12,7 @@
 #include <ctype.h>
 
 #ifdef LUA_GPIO_I2C
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
 static int i2c_gSensorParam_get(lua_State *L)
 {
   unsigned int id = luaL_checkinteger( L, 1 );
@@ -27,7 +27,7 @@ static int i2c_gSensorParam_get(lua_State *L)
   lua_pushinteger( L, slave_id);
   return 2;
 }
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
 
 // Lua: speed = i2c.setup( id, speed, slaveaddr )
 static int i2c_setup( lua_State *L )
@@ -155,9 +155,9 @@ const LUA_REG_TYPE gpio_i2c_map[] =
   { LSTRKEY( "write" ), LFUNCVAL( i2c_write ) },
   { LSTRKEY( "read" ), LFUNCVAL( i2c_read ) },
 
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
   { LSTRKEY( "gsensorParam_get" ),  LFUNCVAL( i2c_gSensorParam_get ) },
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
   
   { LNILKEY, LNILVAL }
 };

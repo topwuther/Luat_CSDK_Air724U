@@ -7,7 +7,7 @@
  * Date:    2013/3/28
  *
  * Description:
- *          lua.pmd¿â µçÔ´¹ÜÀí¿â
+ *          lua.pmdåº“ ç”µæºç®¡ç†åº“
  **************************************************************************/
 
 #include <stdlib.h>
@@ -20,7 +20,7 @@
 #include "platform_conf.h"
 #include "platform_pmd.h"
 
-/*+\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 static int getFiledInt(lua_State *L, int index, const char *key, int defval)
 {
     lua_getfield(L, index, key);
@@ -35,7 +35,7 @@ static int pmd_init(lua_State *L) {
 
     luaL_checktype(L, 1, LUA_TTABLE);
     
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     GET_FIELD_VAL(ccLevel, PMD_CFG_INVALID_VALUE);
     GET_FIELD_VAL(cvLevel, PMD_CFG_INVALID_VALUE);
     GET_FIELD_VAL(ovLevel, PMD_CFG_INVALID_VALUE);
@@ -43,16 +43,16 @@ static int pmd_init(lua_State *L) {
     GET_FIELD_VAL(poweroffLevel, PMD_CFG_INVALID_VALUE);
     GET_FIELD_VAL(ccCurrent, PMD_CFG_INVALID_VALUE);
     GET_FIELD_VAL(fullCurrent, PMD_CFG_INVALID_VALUE);
-    /*+\NEW\zhuth\2014.11.6\µçÔ´¹ÜÀíÅäÖÃ²ÎÊıÖĞÌí¼ÓÊÇ·ñ¼ì²âµç³ØµÄÅäÖÃ*/
+    /*+\NEW\zhuth\2014.11.6\ç”µæºç®¡ç†é…ç½®å‚æ•°ä¸­æ·»åŠ æ˜¯å¦æ£€æµ‹ç”µæ± çš„é…ç½®*/
     GET_FIELD_VAL(batdetectEnable, PMD_CFG_INVALID_VALUE);
-    /*-\NEW\zhuth\2014.11.6\µçÔ´¹ÜÀíÅäÖÃ²ÎÊıÖĞÌí¼ÓÊÇ·ñ¼ì²âµç³ØµÄÅäÖÃ*/
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+    /*-\NEW\zhuth\2014.11.6\ç”µæºç®¡ç†é…ç½®å‚æ•°ä¸­æ·»åŠ æ˜¯å¦æ£€æµ‹ç”µæ± çš„é…ç½®*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
     lua_pushinteger(L, platform_pmd_init(&pmdcfg));
 
     return 1;
 }
-/*-\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 
 // pmd.ldoset
 static int pmd_ldo_set(lua_State *L) {
@@ -78,13 +78,13 @@ static int pmd_deepsleep(lua_State *L) {
     return 0; 
 }
 
-/*+\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*+\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 //pmd.charger()
 static int pmd_charger(lua_State *L) {
     lua_pushboolean(L, platform_pmd_get_charger());
     return 1;
 }
-/*-\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 
 
 static int pmd_chargingcurrent(lua_State *L) {
@@ -123,19 +123,19 @@ static int pmd_speakerMode_set(lua_State *L) {
 // Module function map
 const LUA_REG_TYPE pmd_map[] =
 { 
-/*+\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
   { LSTRKEY( "init" ),  LFUNCVAL( pmd_init ) },
-/*-\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
   { LSTRKEY( "ldoset" ),  LFUNCVAL( pmd_ldo_set ) },
   { LSTRKEY( "sleep" ),  LFUNCVAL( pmd_deepsleep ) },
-  /*+\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+  /*+\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
   { LSTRKEY( "charger" ),  LFUNCVAL( pmd_charger ) },
-  /*-\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+  /*-\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 
   { LSTRKEY( "chrcurrent" ),  LFUNCVAL( pmd_chargingcurrent ) },
-/*+NEW\zhuwangbin\2017.2.10\Ìí¼Ó³äµç²ÎÊı²éÑ¯½Ó¿Ú*/
+/*+NEW\zhuwangbin\2017.2.10\æ·»åŠ å……ç”µå‚æ•°æŸ¥è¯¢æ¥å£*/
   { LSTRKEY( "param_get" ),  LFUNCVAL( pmd_chg_param_get ) },
-/*+NEW\zhuwangbin\2017.2.10\Ìí¼Ó³äµç²ÎÊı²éÑ¯½Ó¿Ú*/
+/*+NEW\zhuwangbin\2017.2.10\æ·»åŠ å……ç”µå‚æ•°æŸ¥è¯¢æ¥å£*/
   { LSTRKEY( "speakerMode_set" ),  LFUNCVAL( pmd_speakerMode_set ) },
   { LNILKEY, LNILVAL }
 };
@@ -144,31 +144,31 @@ LUALIB_API int luaopen_pmd( lua_State *L )
 {
     luaL_register( L, AUXLIB_PMD, pmd_map );
 
-/*+\NEW\liweiqiang\2013.10.10\Ôö¼ÓLDO_VLCD¿ØÖÆPOWER_VLCD*/
+/*+\NEW\liweiqiang\2013.10.10\å¢åŠ LDO_VLCDæ§åˆ¶POWER_VLCD*/
     MOD_REG_NUMBER(L, "LDO_VLCD", PLATFORM_LDO_VLCD);
-/*-\NEW\liweiqiang\2013.10.10\Ôö¼ÓLDO_VLCD¿ØÖÆPOWER_VLCD*/
+/*-\NEW\liweiqiang\2013.10.10\å¢åŠ LDO_VLCDæ§åˆ¶POWER_VLCD*/
 
-/*+\NEW\liweiqiang\2013.11.8\Ôö¼ÓLDO_VASW,VMMC¿ØÖÆ*/
+/*+\NEW\liweiqiang\2013.11.8\å¢åŠ LDO_VASW,VMMCæ§åˆ¶*/
     MOD_REG_NUMBER(L, "LDO_VMMC", PLATFORM_LDO_VMMC);
-/*+\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
+/*+\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
 	MOD_REG_NUMBER(L, "LDO_VSIM1", PLATFORM_LDO_VSIM1);
-/*-\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
-	/*+\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
+/*-\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
+	/*+\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
 	MOD_REG_NUMBER(L, "LDO_VCAMA", PLATFORM_LDO_VCAMA);
 	MOD_REG_NUMBER(L, "LDO_VCAMD", PLATFORM_LDO_VCAMD);
-	/*-\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
-	/*+\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
+	/*+\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 	MOD_REG_NUMBER(L, "LDO_VIBR", PLATFORM_LDO_VIBR);
-	/*-\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 	
-	/*+\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*+\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	MOD_REG_NUMBER(L, "LDO_VBACKLIGHT_R", PLATFORM_LDO_VBACKLIGHT_R);
 	MOD_REG_NUMBER(L, "LDO_VBACKLIGHT_G", PLATFORM_LDO_VBACKLIGHT_G);
 	MOD_REG_NUMBER(L, "LDO_VBACKLIGHT_B", PLATFORM_LDO_VBACKLIGHT_B);
 	MOD_REG_NUMBER(L, "LDO_VBACKLIGHT_W", PLATFORM_LDO_VBACKLIGHT_W);
-	/*-\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
-	/*+\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*-\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
+	/*+\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 	MOD_REG_NUMBER(L, "LDO_HMICBIAS", PLATFORM_LDO_POWER_HMICBIAS);
-	/*-\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*-\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
     return 1;
 }  

@@ -94,7 +94,7 @@ static inline int valid_number_character(char ch)
     return 0;
 }
 
-#if 0 // ²»Ö§³Ölocale ²»ĞèÒªÕâ¸ö´¦Àí
+#if 0 // ä¸æ”¯æŒlocale ä¸éœ€è¦è¿™ä¸ªå¤„ç†
 /* Calculate the size of the buffer required for a strtod locale
  * conversion. */
 static int strtod_buffer_size(const char *s)
@@ -280,7 +280,7 @@ static void set_number_format(char *fmt, double num, int precision)
     fmt[i] = 0;
 #else
     fmt[0] = '%';
-#if 0 //²»Ö§³Ö¸¡µãÊä³ö   
+#if 0 //ä¸æ”¯æŒæµ®ç‚¹è¾“å‡º   
     if(num - d1 != 0)
     {
         fmt[1] = 'f';
@@ -307,7 +307,7 @@ int fpconv_g_fmt(char *str, double num, int precision)
     /* Pass through when decimal point character is dot. */
     if (locale_decimal_point == '.')
         //return mysnprintf(str, FPCONV_G_FMT_BUFSIZE, fmt, num);
-        //²»Ö§³Ö¸¡µã£¬½«numÖ±½Ó×ª»¯³ÉintÀàĞÍ
+        //ä¸æ”¯æŒæµ®ç‚¹ï¼Œå°†numç›´æ¥è½¬åŒ–æˆintç±»å‹
         return snprintf(str, FPCONV_G_FMT_BUFSIZE, fmt, (int)num);
 
     /* snprintf() to a buffer then translate for other decimal point characters */

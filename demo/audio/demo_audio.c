@@ -20,11 +20,11 @@ VOID demo_time_handle(T_AMOPENAT_TIMER_PARAMETER *pParameter)
     T_AMOPENAT_PLAY_PARAM playParam;
     BOOL err;
 
-    //6. ¹Ø±ÕÂ¼Òô
+    //6. å…³é—­å½•éŸ³
     err = iot_audio_rec_stop();
     audio_print("[audio] AUDREC stop BOOL %d", err);
 
-    //7. ²¥·ÅÂ¼Òô  
+    //7. æ’­æ”¾å½•éŸ³  
     playParam.playBuffer = FALSE;
     playParam.playFileParam.callback = demo_paly_handle;
     playParam.playFileParam.fileFormat = OPENAT_AUD_FORMAT_AMRNB;
@@ -42,7 +42,7 @@ static void demo_audio_rec_handle(E_AMOPENAT_RECORD_ERROR result)
 
 VOID demo_audio_set_channel(VOID)
 {
-    // ÉèÖÃÍ¨µÀ
+    // è®¾ç½®é€šé“
     switch(DEMO_RECORD_CH)
     {
         case OPENAT_AUDIOHAL_ITF_EARPIECE:
@@ -57,7 +57,8 @@ VOID demo_audio_set_channel(VOID)
             break;   
     }
 
-    audio_print("[audio] AUDREC channel %d", DEMO_RECORD_CH);
+    audio_print("[audio] AUDREC channel %d", DEMO_RECORD_CH);
+
 }
 
 
@@ -74,12 +75,13 @@ VOID demo_audRecStart(VOID)
 	param.time_sec = 10;
     err = iot_audio_rec_start(&param, demo_audio_rec_handle);
 
-    audio_print("[audio] AUDREC start BOOL %d", err);
+    audio_print("[audio] AUDREC start BOOL %d", err);
+
 }
 
 VOID demo_audRecStopTimer(VOID)
 {
-    // ¶¨Ê±5ÃëÖÓÍ£Ö¹Â¼Òô
+    // å®šæ—¶5ç§’é’Ÿåœæ­¢å½•éŸ³
     g_demo_timer1 = iot_os_create_timer((PTIMER_EXPFUNC)demo_time_handle, NULL);
     iot_os_start_timer(g_demo_timer1, DEMO_TIMER_TIMEOUT);
 }
@@ -88,13 +90,13 @@ VOID demo_audRecStopTimer(VOID)
 VOID demo_audio_init(VOID)
 {
    
-    // 1.ÉèÖÃÍ¨µÀºÍÉùÒô
+    // 1.è®¾ç½®é€šé“å’Œå£°éŸ³
     demo_audio_set_channel();
 
-    //2.  ¿ªÊ¼Â¼Òô
+    //2.  å¼€å§‹å½•éŸ³
     demo_audRecStart();
 
-    //3. ÉèÖÃ¶¨Ê±¹Ø±ÕÂ¼Òô, ²¢²¥·ÅÂ¼Òô
+    //3. è®¾ç½®å®šæ—¶å…³é—­å½•éŸ³, å¹¶æ’­æ”¾å½•éŸ³
     demo_audRecStopTimer();
 }
 

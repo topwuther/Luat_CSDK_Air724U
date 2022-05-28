@@ -248,7 +248,7 @@ int rtmp_mbedtls_init(MBEDTLS_TLS_HANDLE *handle)
 	 */
 	mbedtls_printf( "  . Loading the CA root certificate ..." );
 
-	/*Ã»Ö¤Êé£¬×¢ÊÍµô*/
+	/*æ²¡è¯ä¹¦ï¼Œæ³¨é‡Šæ‰*/
 	#if 0
 	if(ca_crt != NULL)
 	{
@@ -312,7 +312,7 @@ int rtmp_mbedtls_handshake(MBEDTLS_TLS_HANDLE *handle)
 	
 	
     uint32_t flags;
-	/*ÉÏ²ãÒÑ¾­×ö¹ı£¬×¢ÊÍµô*/
+	/*ä¸Šå±‚å·²ç»åšè¿‡ï¼Œæ³¨é‡Šæ‰*/
 	#if 0
 	mbedtls_printf(" . tls init ....");
 	if(exit_code = demo_mbedtls_init(handle,host,port,ca_crt,ca_crt_len)  != MBEDTLS_ERR_TLS_ERR_NO)
@@ -347,7 +347,7 @@ int rtmp_mbedtls_handshake(MBEDTLS_TLS_HANDLE *handle)
         }
     }
 	
-	/*²»ĞèÒªĞ£Ñé·şÎñÆ÷Ö¤Êé£¬×¢ÊÍµô*/
+	/*ä¸éœ€è¦æ ¡éªŒæœåŠ¡å™¨è¯ä¹¦ï¼Œæ³¨é‡Šæ‰*/
 	#if 0
     mbedtls_printf( " ok\n" );
 

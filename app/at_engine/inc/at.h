@@ -29,25 +29,25 @@ extern UINT8 g_s_at_resultBuff[];
 
 #define UART_EVENT_RECV_DATA (0X100)
 #define UART_EVENT_INT_ERR (0x101)
-/*-/BUG/brezen/2014.11.15/ĞŞ¸ÄHTTP¿ØÖÆÁ¬½ÓÎÊÌâ*/
+/*-/BUG/brezen/2014.11.15/ä¿®æ”¹HTTPæ§åˆ¶è¿æ¥é—®é¢˜*/
 #define os_memcmp memcmp
 #define os_memset memset
 #define os_memcpy memcpy
 #define os_sprintf sprintf
 
-/*+/NEW WIFI-10/brezen/2014.11.12/Ö§³ÖÍ¸´«Ä£Ê½+¹¤¾ß¿ØÖÆ*/
+/*+/NEW WIFI-10/brezen/2014.11.12/æ”¯æŒé€ä¼ æ¨¡å¼+å·¥å…·æ§åˆ¶*/
 #define at_putNewLine() at_uart_send("\r\n", 2);
 
 #define at_backOk at_uart_send("\r\nOK\r\n", strlen("\r\nOK\r\n"));
 #define at_backError at_uart_send("\r\nERROR\r\n", strlen("\r\nERROR\r\n"));
 #define at_backTeError "+CTE ERROR: %d\r\n"
-/*+/BUG/brezen/2014.9.25/TCPÏà¹ØÃüÁîÏÔÊ¾ÎÊÌâ*/
+/*+/BUG/brezen/2014.9.25/TCPç›¸å…³å‘½ä»¤æ˜¾ç¤ºé—®é¢˜*/
 #define AM_ERR_TIMEOUT ("+CME ERROR: connect timeout\r\n")
 #define AM_ERR_NO_DEVICE_CONNECTED ("+CME ERROR: no device connected\r\n")
 #define AM_ERR_MODE_NOT_SUPPORT ("+CME ERROR: mode not support\r\n")
-/*+/BUG/brezen/2014.9.30/CIPSERVERÖ§³Ö¼àÌıÁ½¸ö²»Í¬¶Ë¿Ú*/
+/*+/BUG/brezen/2014.9.30/CIPSERVERæ”¯æŒç›‘å¬ä¸¤ä¸ªä¸åŒç«¯å£*/
 #define AM_ERR_MEM_FULL ("+CME ERROR: memory full\r\n")
-/*-/BUG/brezen/2014.9.30/CIPSERVERÖ§³Ö¼àÌıÁ½¸ö²»Í¬¶Ë¿Ú*/
+/*-/BUG/brezen/2014.9.30/CIPSERVERæ”¯æŒç›‘å¬ä¸¤ä¸ªä¸åŒç«¯å£*/
 #define AM_ERR_INVALID_INPUT_VALUE ("+CME ERROR: invalid input value\r\n")
 #define AM_ERR_IPMODE_NOT_SUPPORT ("+CME ERROR: transparent mode not support\r\n")
 #define AM_ERR_SOCKET_NOT_CONNECT ("+CME ERROR: The socket is not connected\r\n")
@@ -68,20 +68,20 @@ extern UINT8 g_s_at_resultBuff[];
 #define AM_CLOSE_OK ("CLOSE OK\r\n")
 #define AM_MUX_SEND_OK ("\r\n%d,SEND OK\r\n")
 #define AM_SEND_OK ("\r\nSEND OK\r\n")
-/*+/BUG WIFI-3/brezen/2014.12.4/AT+CIPCLOSEÎŞĞ§¹û*/
+/*+/BUG WIFI-3/brezen/2014.12.4/AT+CIPCLOSEæ— æ•ˆæœ*/
 #define AM_MUX_SEND_FAIL ("\r\n%d,SEND FAIL\r\n")
 #define AM_SEND_FAIL ("\r\nSEND FAIL\r\n")
-/*-/BUG WIFI-3/brezen/2014.12.4/AT+CIPCLOSEÎŞĞ§¹û*/
+/*-/BUG WIFI-3/brezen/2014.12.4/AT+CIPCLOSEæ— æ•ˆæœ*/
 #define AM_MUX_DATA_ACCEPT ("\r\nDATA ACCEPT:%d,%d\r\n")
 #define AM_DATA_ACCEPT ("\r\nDATA ACCEPT:%d\r\n")
 #define AM_MUX_CONNECT_FAILD ("%d,CONNECT FAIL\r\n")
 #define AM_CONNECT_FAILD ("CONNECT FAIL\r\n")
-/*+/BUG WIFI-2/brezen/2014.11.7/AT¸ñÊ½´íÎó*/
+/*+/BUG WIFI-2/brezen/2014.11.7/ATæ ¼å¼é”™è¯¯*/
 #define AM_MUX_ALREAY_CONNECT ("%d,ALREADY CONNECT\r\n")
 #define AM_ALREAY_CONNECT ("ALREADY CONNECT\r\n")
-/*-/BUG WIFI-2/brezen/2014.11.7/AT¸ñÊ½´íÎó*/
+/*-/BUG WIFI-2/brezen/2014.11.7/ATæ ¼å¼é”™è¯¯*/
 #define AM_CLIENT_CLOSED ("%d,CLOSED\r\n")
-/*+/BUG WIFI-2/brezen/2014.11.7/AT¸ñÊ½´íÎó*/
+/*+/BUG WIFI-2/brezen/2014.11.7/ATæ ¼å¼é”™è¯¯*/
 #define AM_MUX_DATA ("\r\n+RECEIVE,%d,%d:\r\n")
 #define AM_DATA ("\r\n+IPD,%d:")
 
@@ -89,11 +89,11 @@ extern UINT8 g_s_at_resultBuff[];
 #define AM_SC_STATUS_GETTING_SSID_PSWD ("SC_STATUS_GETTING_SSID_PSWD\r\n")
 #define AM_SC_STATUS_GOT_SSID_PSWD ("SC_STATUS_GOT_SSID_PSWD\r\n")
 #define AM_SC_STATUS_LINK ("SC_STATUS_LINK\r\n")
-/*-/BUG WIFI-2/brezen/2014.11.7/AT¸ñÊ½´íÎó*/
-/*+/NEW WIFI-75/liuaochuan/2015.4.13/ ¶ÔÓĞĞ©ÃüÁîÔö¼Ó¹Ø»ú±£´æ¹¦ÄÜ*/
+/*-/BUG WIFI-2/brezen/2014.11.7/ATæ ¼å¼é”™è¯¯*/
+/*+/NEW WIFI-75/liuaochuan/2015.4.13/ å¯¹æœ‰äº›å‘½ä»¤å¢åŠ å…³æœºä¿å­˜åŠŸèƒ½*/
 #define AM_ERR_ALREADY_OPENED ("+CME ERROR:The function is already opened\r\n")
 #define AM_ERR_ALREADY_CLOSED ("+CME ERROR:The function is already closed\r\n")
-/*+/NEW WIFI-75/liuaochuan/2015.4.13/ ¶ÔÓĞĞ©ÃüÁîÔö¼Ó¹Ø»ú±£´æ¹¦ÄÜ*/
+/*+/NEW WIFI-75/liuaochuan/2015.4.13/ å¯¹æœ‰äº›å‘½ä»¤å¢åŠ å…³æœºä¿å­˜åŠŸèƒ½*/
 #define AM_AT_RESULT_BUF_SIZE (128)
 #define AM_AT_SEND_RESULT(str, ...)                              \
 	do                                                           \
@@ -103,7 +103,7 @@ extern UINT8 g_s_at_resultBuff[];
 		len = os_sprintf(g_s_at_resultBuff, str, ##__VA_ARGS__); \
 		at_uart_send(g_s_at_resultBuff, len);                    \
 	} while (0)
-/*-/BUG/brezen/2014.9.25/TCPÏà¹ØÃüÁîÏÔÊ¾ÎÊÌâ*/
+/*-/BUG/brezen/2014.9.25/TCPç›¸å…³å‘½ä»¤æ˜¾ç¤ºé—®é¢˜*/
 //#define AT_DEBUG_MODE
 #define at_debug iot_debug_print
 
@@ -133,14 +133,14 @@ typedef enum
 	cmdResultOk,
 	cmdResultNotSupport,
 	cmdResultNotFound,
-	cmdResultProcessAgain, //µ×²ãºÍÉÏ²ã¶¼´¦Àí
+	cmdResultProcessAgain, //åº•å±‚å’Œä¸Šå±‚éƒ½å¤„ç†
 	cmdResultProcessing,
-	cmdResultReplace, //ÒÔ±ğÃûÔËĞĞµ×²ãAT
+	cmdResultReplace, //ä»¥åˆ«åè¿è¡Œåº•å±‚AT
 	cmdResultError,
 	cmdResultNull,
 } at_cmdResult;
 
-//ipµØÖ·µÄÊıÁ¿
+//ipåœ°å€çš„æ•°é‡
 
 typedef enum
 {
@@ -178,7 +178,7 @@ typedef enum
 	teClient,
 	teServer
 } teType;
-/*+/NEW WIFI-10/brezen/2014.11.12/Ö§³ÖÍ¸´«Ä£Ê½+¹¤¾ß¿ØÖÆ*/
+/*+/NEW WIFI-10/brezen/2014.11.12/æ”¯æŒé€ä¼ æ¨¡å¼+å·¥å…·æ§åˆ¶*/
 typedef enum
 {
 	TIMER_SEND_DATA_REPEAT_ID,
@@ -188,7 +188,7 @@ typedef enum
 	TIMER_MAX_ID
 } E_TIMER_ID;
 
-/*-/NEW WIFI-25/liuaochuan/2014.12.5/Ö§³ÖCIFSRĞŞ¸ÄIPµØÖ·*/
+/*-/NEW WIFI-25/liuaochuan/2014.12.5/æ”¯æŒCIFSRä¿®æ”¹IPåœ°å€*/
 
 #define AT_LINKID_INVALID (0xff)
 typedef struct
@@ -197,23 +197,23 @@ typedef struct
 	at_stateType atState; /*at_state*/
 
 	uint8 uartDataBuffer[at_dataLenMax];
-	uint16 uartDataRecivedLen; /*´ÓuartÒÑ¾­ÊÕµ½µÄÊı¾İ at_dataLen*/
-	BOOL enterSleep;		   /*½øÈëË¯Ãß*/
-	BOOL vatIndToUartPort;	   /* TRUE: vatIndHandleÊä³öµ½´«Êä FALSE: vatIndHandleÊä³öµ½ril*/
+	uint16 uartDataRecivedLen; /*ä»uartå·²ç»æ”¶åˆ°çš„æ•°æ® at_dataLen*/
+	BOOL enterSleep;		   /*è¿›å…¥ç¡çœ */
+	BOOL vatIndToUartPort;	   /* TRUE: vatIndHandleè¾“å‡ºåˆ°ä¼ è¾“ FALSE: vatIndHandleè¾“å‡ºåˆ°ril*/
 	BOOL echoMode;
 } T_AT_CONTEXT;
-/*-/NEW WIFI-10/brezen/2014.11.12/Ö§³ÖÍ¸´«Ä£Ê½+¹¤¾ß¿ØÖÆ*/
+/*-/NEW WIFI-10/brezen/2014.11.12/æ”¯æŒé€ä¼ æ¨¡å¼+å·¥å…·æ§åˆ¶*/
 
 T_AT_CONTEXT *at_ptrAtContext(void);
 
-/*+/NEW WIFI-13/brezen/2014.12.22/²¨ÌØÂÊ×ÔÊÊÓ¦*/
+/*+/NEW WIFI-13/brezen/2014.12.22/æ³¢ç‰¹ç‡è‡ªé€‚åº”*/
 
 typedef struct
 {
 	uint32 baud;
 	uint32 clk;
 } T_UART_BAUD_CLK;
-/*-/NEW WIFI-13/brezen/2014.12.22/²¨ÌØÂÊ×ÔÊÊÓ¦*/
+/*-/NEW WIFI-13/brezen/2014.12.22/æ³¢ç‰¹ç‡è‡ªé€‚åº”*/
 
 void at_init(void);
 uint32 at_uart_send(char *data, uint32 len);

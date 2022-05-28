@@ -35,13 +35,13 @@ function blinkon()
 	end
 
 	if mode == "initing" then
-		-- ¿ª»ú³õÊ¼»¯ºìµÆÉÁË¸
+		-- å¼€æœºåˆå§‹åŒ–çº¢ç¯é—ªçƒ
 		pinop.pinset(true,pins.def.LED2_EN)
 	elseif mode == "alertind" or mode == "readyind" then
-		-- ²¼·À×´Ì¬»òÕß³õÊ¼»¯Íê³ÉÂÌµÆÉÁË¸
+		-- å¸ƒé˜²çŠ¶æ€æˆ–è€…åˆå§‹åŒ–å®Œæˆç»¿ç¯é—ªçƒ
 		pinop.pinset(true,pins.def.LED1_EN)
 	elseif mode == "blink" then
-		-- ±à³Ì×´Ì¬ºìÂÌµÆÒ»ÆğÉÁË¸
+		-- ç¼–ç¨‹çŠ¶æ€çº¢ç»¿ç¯ä¸€èµ·é—ªçƒ
 		pinop.pinset(true,pins.def.LED1_EN)
 		pinop.pinset(true,pins.def.LED2_EN)
 	end

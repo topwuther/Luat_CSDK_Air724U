@@ -154,8 +154,8 @@ int http_client_task_init(void)
 	tls_os_task_create(NULL, NULL,
 			http_client_rx,
                     NULL,
-                    (void *)httpClientStk,          /* 任务栈的起始地址 */
-                    HTTP_CLIENT_STK_SIZE * sizeof(u32), /* 任务栈的大小     */
+                    (void *)httpClientStk,          /* 浠诲姟鏍堢殑璧峰鍦板潃 */
+                    HTTP_CLIENT_STK_SIZE * sizeof(u32), /* 浠诲姟鏍堢殑澶у皬     */
                     TLS_HTTP_CLIENT_TASK_PRIO,
                     0);
 	return WM_SUCCESS;

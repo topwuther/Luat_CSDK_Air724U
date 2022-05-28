@@ -54,18 +54,18 @@ enum
   PLATFORM_IO_PIN_GET,
   PLATFORM_IO_PIN_DIR_INPUT,
   PLATFORM_IO_PIN_DIR_OUTPUT,
-  /*+\NEW\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+  /*+\NEW\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
   PLATFORM_IO_PIN_DIR_OUTPUT1,
-  /*-\NEW\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
-  /*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NEW\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
+  /*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   PLATFORM_IO_PIN_DIR_INT, 
-  /*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   PLATFORM_IO_PIN_PULLUP,
   PLATFORM_IO_PIN_PULLDOWN,
   PLATFORM_IO_PIN_NOPULL,
-/*+\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
   PLATFORM_IO_PIN_CLOSE,
-/*-\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
   // Port operations
   PLATFORM_IO_PORT_SET_VALUE,
   PLATFORM_IO_PORT_GET_VALUE,
@@ -155,21 +155,21 @@ enum
 
 // The platform UART functions
 int platform_uart_exists( unsigned id );
-/*+\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int stopbits, u32 mode, u32 txDoneReport);
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
-/*-\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
+/*-\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 u32 platform_uart_close( unsigned id );
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 int platform_uart_set_buffer( unsigned id, unsigned size );
 u32 platform_uart_send( unsigned id, u8 data );
 u32 platform_s_uart_send( unsigned id, u8 data );
-/*+\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
+/*+\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
 u32 platform_uart_send_buff( unsigned id, const u8 *buff, u16 len );
 u32 platform_s_uart_send_buff( unsigned id, const u8 *buff, u16 len );
-/*-\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
+/*-\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
 int platform_uart_recv( unsigned id, unsigned timer_id, s32 timeout );
 int platform_s_uart_recv( unsigned id, s32 timeout );
 int platform_uart_set_flow_control( unsigned id, int type );
@@ -269,7 +269,7 @@ enum
   PLATFORM_ADC_OP_SET_CLOCK,
 };
 
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 enum
 {
 	PLATFORM_ADC_SCALE_DEFAULT = 0,
@@ -278,7 +278,7 @@ enum
     PLATFORM_ADC_SCALE_3V233 = 3233, 
     PLATFORM_ADC_SCALE_5V000 = 5000,
 };
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 
 // Functions requiring platform-specific implementation
 int platform_adc_update_sequence();
@@ -291,9 +291,9 @@ int platform_adc_exists( unsigned id );
 int platform_adc_check_timer_id( unsigned id, unsigned timer_id );
 u32 platform_adc_op( unsigned id, int op, u32 data );
 /*+\NEW\RUFEI\2015.8.27\Add adc fuction*/
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 int platform_adc_open(unsigned id, unsigned mode, int value);
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 int platform_adc_read(unsigned id, int *adc, int *volt);
 int platform_adc_close(unsigned id);
 /*-\NEW\RUFEI\2015.8.27\Add adc fuction*/

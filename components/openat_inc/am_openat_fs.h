@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ����ƽ̨
+  Description: AMOPENAT 开放平台
   Others:
   History: 
-    Version�� Date:       Author:   Modification:
-    V0.1      2012.12.14  lifei     �����ļ�
+    Version： Date:       Author:   Modification:
+    V0.1      2012.12.14  lifei     创建文件
 *********************************************************/
 #ifndef AM_OPENAT_FS_H
 #define AM_OPENAT_FS_H
@@ -28,7 +28,7 @@
 
 // Max number of directory layer.
 #define FS_NR_DIR_LAYERS_MAX             16
-/*+\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+/*+\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
 // Max folder or File name size in byts for uincode.
 #define FS_FILE_NAME_UNICODE_LEN    (2*FS_FILE_NAME_LEN) 
 
@@ -38,7 +38,7 @@
 
 // Size of terminated character('\0' for Unicode).
 #define LEN_FOR_UNICODE_NULL_CHAR   2
-/*-\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+/*-\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
 // Length of terminated character('\0' for OEM).
 #define LEN_FOR_NULL_CHAR                   1
 
@@ -66,7 +66,7 @@ typedef enum E_AMOPENAT_FILE_OPEN_FLAG_TAG
     //set share
     FS_O_SHARE      = 0x04000,
 #endif
-/*+\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+/*+\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
 #if 0
     FS_O_APPEND = (8),  //0x100
     FS_O_TRUNC  = 0x400,
@@ -76,7 +76,7 @@ typedef enum E_AMOPENAT_FILE_OPEN_FLAG_TAG
     FS_O_RDWR = (2),  //0x10
     FS_O_EXCL  = 0x800
 #endif
-/*-\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+/*-\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
 }E_AMOPENAT_FILE_OPEN_FLAG;
 
 typedef enum E_AMOPENAT_FILE_SEEK_FLAG_TAG
@@ -123,7 +123,7 @@ typedef struct T_AMOPENAT_FS_FIND_DATA_TAG
     UINT32  atime;    // Time of last access to the file
     UINT32  mtime;   // Time of last data modification
     UINT32  ctime;    // Time of last status(or inode) change
-    /*+\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+    /*+\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
     UINT8   st_name[ FS_FILE_NAME_UNICODE_LEN + LEN_FOR_UNICODE_NULL_CHAR ]; // The name of file. 
 }AMOPENAT_FS_FIND_DATA,*PAMOPENAT_FS_FIND_DATA;
 
@@ -177,16 +177,16 @@ typedef enum E_AMOPENAT_FS_ERR_CODE_TAG
     ERR_FS_NAME_BUFFER_TOO_SHORT        = -4200068,
     ERR_FS_NOT_REGULAR                  = -42000100,
 }E_AMOPENAT_FS_ERR_CODE;
-/*-\NEW\WJ\2018.10.10\ȥ��USES_NOR_FLASH��*/
+/*-\NEW\WJ\2018.10.10\去掉USES_NOR_FLASH宏*/
 
 typedef struct T_AMOPENAT_TFLASH_INIT_PARAM_TAG
 {
-/*+\BUG WM-719\maliang\2013.3.21\�ļ�ϵͳ�ӿںͲ�����Ƶ�ļ��ӿڵ��ļ�����Ϊunicode little ending����*/
-    const WCHAR* pszMountPointUniLe; // T�����ؽڵ�,����ʱT���ļ����ڴ�Ŀ¼�� UNICODE little endian
-/*-\BUG WM-719\maliang\2013.3.21\�ļ�ϵͳ�ӿںͲ�����Ƶ�ļ��ӿڵ��ļ�����Ϊunicode little ending����*/
+/*+\BUG WM-719\maliang\2013.3.21\文件系统接口和播放音频文件接口的文件名改为unicode little ending类型*/
+    const WCHAR* pszMountPointUniLe; // T卡挂载节点,访问时T卡文件均在此目录下 UNICODE little endian
+/*-\BUG WM-719\maliang\2013.3.21\文件系统接口和播放音频文件接口的文件名改为unicode little ending类型*/
 }AMOPENAT_TFLASH_INIT_PARAM, *PAMOPENAT_TFLASH_INIT_PARAM;
 
-/*+\NewReq WM-743\maliang\2013.3.28\[OpenAt]���ӽӿڻ�ȡ�ļ�ϵͳ��Ϣ*/
+/*+\NewReq WM-743\maliang\2013.3.28\[OpenAt]增加接口获取文件系统信息*/
 typedef enum E_AMOPENAT_FILE_DEVICE_NAME_TAG
 {
     E_AMOPENAT_FS_INTERNAL,
@@ -195,9 +195,9 @@ typedef enum E_AMOPENAT_FILE_DEVICE_NAME_TAG
 
 typedef enum E_AMOPENAT_FLASH_TYPE_TAG
 {
-    E_AMOPENAT_FLASH_INTERNAL, // mount �ڲ���flash����
-    E_AMOPENAT_FLASH_EXTERN_PINLCD, // mount �ⲿ��flash����ʹ��LCD pin�Ÿ���  V_LCD����
-    E_AMOPENAT_FLASH_EXTERN_PINGPIO,// mount �ⲿ��flash����ʹ��GPIO pin�Ÿ��� V_PAD_1V8����
+    E_AMOPENAT_FLASH_INTERNAL, // mount 内部的flash区域
+    E_AMOPENAT_FLASH_EXTERN_PINLCD, // mount 外部的flash区域，使用LCD pin脚复用  V_LCD供电
+    E_AMOPENAT_FLASH_EXTERN_PINGPIO,// mount 外部的flash区域，使用GPIO pin脚复用 V_PAD_1V8供电
 }E_AMOPENAT_FLASH_TYPE;
 
 typedef struct T_AMOPENAT_FILE_INFO_TAG
@@ -205,20 +205,20 @@ typedef struct T_AMOPENAT_FILE_INFO_TAG
     UINT64  totalSize;    // Total size
     UINT64  usedSize;     // Has used  size 
 }T_AMOPENAT_FILE_INFO;
-/*-\NewReq WM-743\maliang\2013.3.28\[OpenAt]���ӽӿڻ�ȡ�ļ�ϵͳ��Ϣ*/
+/*-\NewReq WM-743\maliang\2013.3.28\[OpenAt]增加接口获取文件系统信息*/
 
-/*+\NEW\zhuwangbin\2020.08.08\�����ļ�ϵͳmount�ӿ�*/
+/*+\NEW\zhuwangbin\2020.08.08\添加文件系统mount接口*/
 typedef struct T_AMOPENAT_FSUSER_MOUNT_TAG
 {
-	char *path;    //mount���ļ�ϵͳ��Ŀ¼ ����>=5
-	UINT32 offset; //flash ��ַƫ����
-	UINT32 size;  //�ļ�ϵͳ�Ĵ�С
+	char *path;    //mount的文件系统根目录 长度>=5
+	UINT32 offset; //flash 地址偏移量
+	UINT32 size;  //文件系统的大小
 	E_AMOPENAT_FLASH_TYPE exFlash;
-	UINT8 clkDiv; //�ⲿflash��Ƶ��Χ2-255. clk=166M/clkDiv
+	UINT8 clkDiv; //外部flash分频范围2-255. clk=166M/clkDiv
 } T_AMOPENAT_USER_FSMOUNT;
-/*-\NEW\zhuwangbin\2020.08.08\�����ļ�ϵͳmount�ӿ�*/
+/*-\NEW\zhuwangbin\2020.08.08\添加文件系统mount接口*/
 
-/*+\BUG\AMOPENAT-74\brezen\2013.9.24\����FLASH NV�ӿڣ�������Ӧ�������*/
+/*+\BUG\AMOPENAT-74\brezen\2013.9.24\添加FLASH NV接口，用来适应掉电机制*/
 #define  NV_SUCCESS                (0)
 #define  NV_ERR_NO_MORE_MEM        (-1)
 #define  NV_ERR_WRITE_FLASH        (-2)
@@ -235,6 +235,6 @@ typedef struct T_AMOPENAT_FSUSER_MOUNT_TAG
 #define  NV_ERR_WRITE_FLASH_TIMEOUT (-13)
 #define  NV_ERR_ERASE_FLASH_TIMEOUT (-14)
 #define  NV_ERR_OPER_NOT_SUPPORT    (-15)
-/*-\BUG\AMOPENAT-74\brezen\2013.9.24\����FLASH NV�ӿڣ�������Ӧ�������*/
+/*-\BUG\AMOPENAT-74\brezen\2013.9.24\添加FLASH NV接口，用来适应掉电机制*/
 #endif /* AM_OPENAT_FS_H */
 

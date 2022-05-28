@@ -1,4 +1,4 @@
-±à¼­elua_simulator\release\simulator.wlua£¬×¢ÊÍµôluawinio.popen_show("core.exe")
-Ë«»÷ÔËĞĞelua_simulator\release\simulator.wlua£¬ÉèÖÃºÃÎÄ¼şºÍ¶Ë¿Ú
-´ò¿ªworkspace\elua_simulator\elua_simulator.dsw
-DebugÉèÖÃ´°¿ÚÉèÖÃºÃexecutable for debug sessionºÍworking directory£ºrelease\core.exeºÍrelease
+ç¼–è¾‘elua_simulator\release\simulator.wluaï¼Œæ³¨é‡Šæ‰luawinio.popen_show("core.exe")
+åŒå‡»è¿è¡Œelua_simulator\release\simulator.wluaï¼Œè®¾ç½®å¥½æ–‡ä»¶å’Œç«¯å£
+æ‰“å¼€workspace\elua_simulator\elua_simulator.dsw
+Debugè®¾ç½®çª—å£è®¾ç½®å¥½executable for debug sessionå’Œworking directoryï¼šrelease\core.exeå’Œrelease

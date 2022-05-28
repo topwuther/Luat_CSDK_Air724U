@@ -2,7 +2,7 @@
 require"pack"
 module(...,package.seeall)
 
- --�׵׺�ɫΪ�͵�ƽ �ڵװ�ɫΪ�ߵ�ƽ
+ --白底黑色为低电平 黑底白色为高电平
 
 local GPIO_EVENT_DIR=1
 local GPIO_EVENT_SET=2
@@ -22,7 +22,7 @@ local dlg = iup.dialog
 	title = "GPIO",
 	iup.vbox
 	{
-		iup.label{title="��ɫ������ʾ�ߵ�ƽ,��ɫ������ʾ�͵�ƽ\nPX_XX O/I��ʾ������������͹ܽ�,����ܽŵ�����ת״̬"},
+		iup.label{title="黑色背景表示高电平,白色背景表示低电平\nPX_XX O/I表示输出或者输入型管脚,输入管脚单击翻转状态"},
 		iup.matrix
 		{
 			numcol = 4,

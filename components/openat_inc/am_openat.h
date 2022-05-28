@@ -1,39 +1,39 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2012.12.14  lifei     ´´½¨ÎÄ¼ş
-	V0.2      2012.12.26  brezen    Ìí¼Ópmd½Ó¿Ú
-	V0.3      2012.12.29  brezen    Ìí¼Óspi½Ó¿Ú
-	V0.4      2013.01.08  brezen    ĞŞ¸Äspi½Ó¿Ú
-	V0.5      2O13.01.14  brezen    1¡¢Ôö¼ÓºÚ°×ÆÁ³õÊ¼»¯²ÎÊı
-	                                2¡¢Ôö¼ÓºÚ°×ÆÁÇåÆÁ½Ó¿Ú
-									3¡¢¼õÉÙºÚ°×ÆÁÖ¸Áî´¦ÀíÊ±¼ä£¬Âú×ãµ¥¶ÀÊ¹ÓÃÖ¸ÁîË¢ÆÁ
-    V0.6      2013.01.14  brezen    ĞŞ¸ÄºÚ°×ÆÁÇåÆÁ½Ó¿Ú²ÎÊı
-	V0.7      2013.01.15  brezen    ĞŞ¸ÄºÚ°×ÆÁÇåÆÁ½Ó¿Ú²ÎÊı
-    V0.8      2013.01.17  brezen    1¡¢Ìí¼ÓÏµÍ³µçÔ´¿ØÖÆ½Ó¿Ú 2¡¢Ìí¼ÓÏµÍ³¿ª¹Ø»ú½Ó¿Ú
-    V0.9      2013.01.23  brezen    ĞŞ¸ÄSPIµÄ±àÒëwarning  
-    V1.0      2013.01.28  brezen    Ìí¼ÓPSAM¿¨½Ó¿Ú
-    V1.1      2013.01.30  brezen    ĞŞ¸Äpoweron_systemº¯Êı²ÎÊı
-    V1.2      2013.02.06  Jack.li   Ìí¼ÓÉãÏñÍ·½Ó¿Ú
-    V1.3      2013.02.07  Jack.li   Ìí¼ÓÊÓÆµÂ¼ÖÆ¡¢ÊÓÆµ²¥·Å½Ó¿Ú
-    V1.4      2013.02.10  Jack.li   ĞŞ¸Ä²ÊÆÁ³õÊ¼»¯½Ó¿Ú
-    V1.5      2013.02.26  brezen    Ìí¼Óenter_deepsleep/exit_deepsleep½Ó¿Ú
-    V1.6      2013.03.21  maliang    ÎÄ¼şÏµÍ³½Ó¿ÚºÍ²¥·ÅÒôÆµÎÄ¼ş½Ó¿ÚµÄÎÄ¼şÃû¸ÄÎªunicode little endingÀàĞÍ
-    V1.7      2013.04.03  Jack.li    Ôö¼ÓI2C½Ó¿Ú
-    V1.8      2013.05.15  xc        Ôö¼Ótts½Ó¿Ú
-	V1.9      2013.07.18  brezen    Ìí¼Óset_dte_at_filter½Ó¿Ú
-	V2.0      2013.07.22  brezen    Ìí¼Ósend_data_to_dte  send_data_to_ci set_dte_device½Ó¿Ú
-	V2.1      2013.08.20  brezen    Õë¶ÔPSAM¿¨Ë«ÏòÈÏÖ¤Ê§°Ü£¬rw_psamÌí¼Ó·Ö²¼·¢ËÍ²ÎÊıstopClock
-	V2.2      2013.09.16  brezen    Ìí¼Óflush_file½Ó¿Ú£¬µôµçÖ®Ç°Ç¿ĞĞĞ´Èëflash
-	V2.3      2013.09.24  brezen    Ìí¼ÓNV½Ó¿Ú
-	V2.4      2013.09.26  brezen    Ö§³ÖÁ½ÕÅPSAM¿¨
-	V2.5      2013.12.30  brezen    Ìí¼ÓÀ¶ÑÀ½Ó¿Ú
-	V2.6      2014.6.26   brezen    Ìí¼ÓÀ¶ÑÀspp½Ó¿Ú
-	V2.7      2015.04.21  panjun    Ôö¼ÓOLEDµÄÑÓÊ±¡¢SPI½Ó¿Ú
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2012.12.14  lifei     åˆ›å»ºæ–‡ä»¶
+	V0.2      2012.12.26  brezen    æ·»åŠ pmdæ¥å£
+	V0.3      2012.12.29  brezen    æ·»åŠ spiæ¥å£
+	V0.4      2013.01.08  brezen    ä¿®æ”¹spiæ¥å£
+	V0.5      2O13.01.14  brezen    1ã€å¢åŠ é»‘ç™½å±åˆå§‹åŒ–å‚æ•°
+	                                2ã€å¢åŠ é»‘ç™½å±æ¸…å±æ¥å£
+									3ã€å‡å°‘é»‘ç™½å±æŒ‡ä»¤å¤„ç†æ—¶é—´ï¼Œæ»¡è¶³å•ç‹¬ä½¿ç”¨æŒ‡ä»¤åˆ·å±
+    V0.6      2013.01.14  brezen    ä¿®æ”¹é»‘ç™½å±æ¸…å±æ¥å£å‚æ•°
+	V0.7      2013.01.15  brezen    ä¿®æ”¹é»‘ç™½å±æ¸…å±æ¥å£å‚æ•°
+    V0.8      2013.01.17  brezen    1ã€æ·»åŠ ç³»ç»Ÿç”µæºæ§åˆ¶æ¥å£ 2ã€æ·»åŠ ç³»ç»Ÿå¼€å…³æœºæ¥å£
+    V0.9      2013.01.23  brezen    ä¿®æ”¹SPIçš„ç¼–è¯‘warning  
+    V1.0      2013.01.28  brezen    æ·»åŠ PSAMå¡æ¥å£
+    V1.1      2013.01.30  brezen    ä¿®æ”¹poweron_systemå‡½æ•°å‚æ•°
+    V1.2      2013.02.06  Jack.li   æ·»åŠ æ‘„åƒå¤´æ¥å£
+    V1.3      2013.02.07  Jack.li   æ·»åŠ è§†é¢‘å½•åˆ¶ã€è§†é¢‘æ’­æ”¾æ¥å£
+    V1.4      2013.02.10  Jack.li   ä¿®æ”¹å½©å±åˆå§‹åŒ–æ¥å£
+    V1.5      2013.02.26  brezen    æ·»åŠ enter_deepsleep/exit_deepsleepæ¥å£
+    V1.6      2013.03.21  maliang    æ–‡ä»¶ç³»ç»Ÿæ¥å£å’Œæ’­æ”¾éŸ³é¢‘æ–‡ä»¶æ¥å£çš„æ–‡ä»¶åæ”¹ä¸ºunicode little endingç±»å‹
+    V1.7      2013.04.03  Jack.li    å¢åŠ I2Cæ¥å£
+    V1.8      2013.05.15  xc        å¢åŠ ttsæ¥å£
+	V1.9      2013.07.18  brezen    æ·»åŠ set_dte_at_filteræ¥å£
+	V2.0      2013.07.22  brezen    æ·»åŠ send_data_to_dte  send_data_to_ci set_dte_deviceæ¥å£
+	V2.1      2013.08.20  brezen    é’ˆå¯¹PSAMå¡åŒå‘è®¤è¯å¤±è´¥ï¼Œrw_psamæ·»åŠ åˆ†å¸ƒå‘é€å‚æ•°stopClock
+	V2.2      2013.09.16  brezen    æ·»åŠ flush_fileæ¥å£ï¼Œæ‰ç”µä¹‹å‰å¼ºè¡Œå†™å…¥flash
+	V2.3      2013.09.24  brezen    æ·»åŠ NVæ¥å£
+	V2.4      2013.09.26  brezen    æ”¯æŒä¸¤å¼ PSAMå¡
+	V2.5      2013.12.30  brezen    æ·»åŠ è“ç‰™æ¥å£
+	V2.6      2014.6.26   brezen    æ·»åŠ è“ç‰™sppæ¥å£
+	V2.7      2015.04.21  panjun    å¢åŠ OLEDçš„å»¶æ—¶ã€SPIæ¥å£
 	V2.8      2015.05.20  panjun    Export two values 'lua_lcd_height' and 'lua_lcd_width'.
 	V2.9      2015.06.22  panjun    Optimize mechanism of LUA's timer.
 	V3.0      2015.07.04  panjun    Define a macro 'OPENAT_MAX_TIMER_ID', Increase quantity of OPENAT's timer.
@@ -50,16 +50,16 @@
 #include "am_openat_vat.h"
 #include "am_openat_tts.h"
 #include "am_openat_image.h"
-/*-\NEW\zhuwangbin\2020.3.25\Ìí¼ÓjpgÎÄ¼şµÄ½âÂëºÍÏÔÊ¾*/
-/*+\NEW\WZQ\2014.11.7\¼ÓÈëSSL RSA¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.3.25\æ·»åŠ jpgæ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º*/
+/*+\NEW\WZQ\2014.11.7\åŠ å…¥SSL RSAåŠŸèƒ½*/
 #ifdef AM_OPENAT_SSL_RSA_SUPPORT
 #include "openat_SSLRSA.h"
 #endif
 
 #include "am_openat_zbar.h"
 #include "openat_camera.h"
-/*-\NEW\WZQ\2014.11.7\¼ÓÈëSSL RSA¹¦ÄÜ*/
-/*+\NEW\WJ\2019.1.8\Ìí¼ÓÖ¤ÊéÓĞĞ§Ê±¼äĞ£Ñé*/
+/*-\NEW\WZQ\2014.11.7\åŠ å…¥SSL RSAåŠŸèƒ½*/
+/*+\NEW\WJ\2019.1.8\æ·»åŠ è¯ä¹¦æœ‰æ•ˆæ—¶é—´æ ¡éªŒ*/
 typedef struct {
     int     sec;         /* seconds */
     int     min;         /* minutes */
@@ -68,7 +68,7 @@ typedef struct {
     int     mon;         /* month */
     int     year;        /* year */
 }t_time;
-/*-\NEW\WJ\2019.1.8\Ìí¼ÓÖ¤ÊéÓĞĞ§Ê±¼äĞ£Ñé*/
+/*-\NEW\WJ\2019.1.8\æ·»åŠ è¯ä¹¦æœ‰æ•ˆæ—¶é—´æ ¡éªŒ*/
 
 #define IVTBL(func) OPENAT_##func
 
@@ -80,14 +80,14 @@ typedef struct {
 #define  LUA_TIMER_BASE LUA_APP_TIMER_0
 #define  LUA_GIF_TIMER_BASE LUA_GIF_TIMER_0
 
-/*\+NEW\yezhishe\2018.11.23\Ìí¼ÓGPIO8,9,10,11\*/
+/*\+NEW\yezhishe\2018.11.23\æ·»åŠ GPIO8,9,10,11\*/
 #define GPIO8_R28 8
 #define GPIO9_R27 9
 #define GPIO10_R26 10
 #define GPIO11_R17 11
-/*\-NEW\yezhishe\2018.11.23\Ìí¼ÓGPIO8,9,10,11\*/
+/*\-NEW\yezhishe\2018.11.23\æ·»åŠ GPIO8,9,10,11\*/
 
-/*+\NEW\wangyuan\2020.05.07\BUG_1126:Ö§³Öwifi¶¨Î»¹¦ÄÜ*/
+/*+\NEW\wangyuan\2020.05.07\BUG_1126:æ”¯æŒwifiå®šä½åŠŸèƒ½*/
 typedef struct
 {
 	UINT32 bssid_low;  	//< mac address low
@@ -103,46 +103,46 @@ typedef struct
 	UINT32 maxtimeout; ///< max timeout in milliseconds for each channel
 	OPENAT_wifiApInfo *aps;	 ///< room for aps
 } OPENAT_wifiScanRequest;
-/*-\NEW\wangyuan\2020.05.07\BUG_1126:Ö§³Öwifi¶¨Î»¹¦ÄÜ*/
+/*-\NEW\wangyuan\2020.05.07\BUG_1126:æ”¯æŒwifiå®šä½åŠŸèƒ½*/
 
 typedef void (*openat_wifi_info_cb)(OPENAT_wifiScanRequest* req);
 
     /*******************************************
     **                 SYSTEM                 **
     *******************************************/
-BOOL OPENAT_create_task(                          /* ´´½¨Ïß³Ì½Ó¿Ú */
+BOOL OPENAT_create_task(                          /* åˆ›å»ºçº¿ç¨‹æ¥å£ */
                             HANDLE* handlePtr,
-                            PTASK_MAIN pTaskEntry,  /* Ïß³ÌÖ÷º¯Êı */
-                            PVOID pParameter,       /* ×÷Îª²ÎÊı´«µİ¸øÏß³ÌÖ÷º¯Êı */
-                            PVOID pStackAddr,       /* Ïß³ÌÕ»µØÖ·£¬µ±Ç°²»Ö§³Ö£¬Çë´«ÈëNULL */
-                            UINT32 nStackSize,      /* Ïß³ÌÕ»´óĞ¡ */
-                            UINT8 nPriority,        /* Ïß³ÌÓÅÏÈ¼¶£¬¸Ã²ÎÊıÔ½´ó£¬Ïß³ÌÓÅÏÈ¼¶Ô½µÍ */
-                            UINT16 nCreationFlags,  /* Ïß³ÌÆô¶¯±ê¼Ç£¬ Çë²Î¿¼E_AMOPENAT_OS_CREATION_FLAG */
-                            UINT16 nTimeSlice,      /* ÔİÊ±²»Ö§³Ö£¬Çë´«Èë0 */
-                            PCHAR pTaskName         /* Ïß³ÌÃû³Æ */
+                            PTASK_MAIN pTaskEntry,  /* çº¿ç¨‹ä¸»å‡½æ•° */
+                            PVOID pParameter,       /* ä½œä¸ºå‚æ•°ä¼ é€’ç»™çº¿ç¨‹ä¸»å‡½æ•° */
+                            PVOID pStackAddr,       /* çº¿ç¨‹æ ˆåœ°å€ï¼Œå½“å‰ä¸æ”¯æŒï¼Œè¯·ä¼ å…¥NULL */
+                            UINT32 nStackSize,      /* çº¿ç¨‹æ ˆå¤§å° */
+                            UINT8 nPriority,        /* çº¿ç¨‹ä¼˜å…ˆçº§ï¼Œè¯¥å‚æ•°è¶Šå¤§ï¼Œçº¿ç¨‹ä¼˜å…ˆçº§è¶Šä½ */
+                            UINT16 nCreationFlags,  /* çº¿ç¨‹å¯åŠ¨æ ‡è®°ï¼Œ è¯·å‚è€ƒE_AMOPENAT_OS_CREATION_FLAG */
+                            UINT16 nTimeSlice,      /* æš‚æ—¶ä¸æ”¯æŒï¼Œè¯·ä¼ å…¥0 */
+                            PCHAR pTaskName         /* çº¿ç¨‹åç§° */
                           );
 VOID OPENAT_delete_task(HANDLE         task);
 
-HANDLE OPENAT_current_task(                         /* »ñÈ¡µ±Ç°Ïß³Ì½Ó¿Ú */
+HANDLE OPENAT_current_task(                         /* è·å–å½“å‰çº¿ç¨‹æ¥å£ */
                             VOID
                           );
-/*+\BUG\wangyuan\2020.06.30\BUG_2411:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
-BOOL OPENAT_suspend_task(                           /* ¹ÒÆğÏß³Ì½Ó¿Ú */
-    HANDLE hTask            /* Ïß³Ì¾ä±ú£¬create_task½Ó¿Ú·µ»ØÖµ */
+/*+\BUG\wangyuan\2020.06.30\BUG_2411:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
+BOOL OPENAT_suspend_task(                           /* æŒ‚èµ·çº¿ç¨‹æ¥å£ */
+    HANDLE hTask            /* çº¿ç¨‹å¥æŸ„ï¼Œcreate_taskæ¥å£è¿”å›å€¼ */
 );
 
-BOOL OPENAT_resume_task(                            /* »Ö¸´Ïß³Ì½Ó¿Ú */
-    HANDLE hTask            /* Ïß³Ì¾ä±ú£¬create_task½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_resume_task(                            /* æ¢å¤çº¿ç¨‹æ¥å£ */
+    HANDLE hTask            /* çº¿ç¨‹å¥æŸ„ï¼Œcreate_taskæ¥å£è¿”å›å€¼ */
 );
-/*-\BUG\wangyuan\2020.06.30\BUG_2411:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
-BOOL OPENAT_get_task_info(                          /* »ñÈ¡µ±Ç°Ïß³Ì´´½¨ĞÅÏ¢½Ó¿Ú */
-                            HANDLE hTask,           /* Ïß³Ì¾ä±ú£¬create_task½Ó¿Ú·µ»ØÖµ */
-                            T_AMOPENAT_TASK_INFO *pTaskInfo /* Ïß³ÌĞÅÏ¢´æ´¢½Ó¿Ú */
+/*-\BUG\wangyuan\2020.06.30\BUG_2411:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
+BOOL OPENAT_get_task_info(                          /* è·å–å½“å‰çº¿ç¨‹åˆ›å»ºä¿¡æ¯æ¥å£ */
+                            HANDLE hTask,           /* çº¿ç¨‹å¥æŸ„ï¼Œcreate_taskæ¥å£è¿”å›å€¼ */
+                            T_AMOPENAT_TASK_INFO *pTaskInfo /* çº¿ç¨‹ä¿¡æ¯å­˜å‚¨æ¥å£ */
                          );
 
 
 
-    /****************************** Ïß³ÌÏûÏ¢¶ÓÁĞ½Ó¿Ú ******************************/
+    /****************************** çº¿ç¨‹æ¶ˆæ¯é˜Ÿåˆ—æ¥å£ ******************************/
 BOOL OPENAT_wait_message(
                                      HANDLE   task,
                                      int* msg_id,
@@ -157,71 +157,71 @@ BOOL OPENAT_free_message(
                                      );
 
     
-BOOL OPENAT_send_message(                           /* ·¢ËÍÏûÏ¢½Ó¿Ú£¬Ìí¼Óµ½ÏûÏ¢¶ÓÁĞÎ²²¿ */
+BOOL OPENAT_send_message(                           /* å‘é€æ¶ˆæ¯æ¥å£ï¼Œæ·»åŠ åˆ°æ¶ˆæ¯é˜Ÿåˆ—å°¾éƒ¨ */
                                       HANDLE   destTask,
                                       int msg_id,
-                                      void* pMessage,          /* ´æ´¢ÏûÏ¢Ö¸Õë */
+                                      void* pMessage,          /* å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ */
                                       int message_length);
 
-/*+\TASK\wangyuan\2020.06.28\task_255:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
-BOOL OPENAT_SendHighPriorityMessage(			   /* ·¢ËÍ¸ßÓÅÏÈ¼¶ÏûÏ¢½Ó¿Ú£¬Ìí¼Óµ½ÏûÏ¢¶ÓÁĞÍ·²¿ */
+/*+\TASK\wangyuan\2020.06.28\task_255:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
+BOOL OPENAT_SendHighPriorityMessage(			   /* å‘é€é«˜ä¼˜å…ˆçº§æ¶ˆæ¯æ¥å£ï¼Œæ·»åŠ åˆ°æ¶ˆæ¯é˜Ÿåˆ—å¤´éƒ¨ */
 											  HANDLE   destTask,
 											  int msg_id,
-											  void* pMessage,		   /* ´æ´¢ÏûÏ¢Ö¸Õë */
+											  void* pMessage,		   /* å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ */
 											  int message_length);
 
-/*-\TASK\wangyuan\2020.06.28\task_255:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
+/*-\TASK\wangyuan\2020.06.28\task_255:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
 
 
-BOOL OPENAT_available_message(                      /* ¼ì²âÏûÏ¢¶ÓÁĞÖĞÊÇ·ñÓĞÏûÏ¢ */
-                            HANDLE hTask            /* Ïß³Ì¾ä±ú£¬create_task½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_available_message(                      /* æ£€æµ‹æ¶ˆæ¯é˜Ÿåˆ—ä¸­æ˜¯å¦æœ‰æ¶ˆæ¯ */
+                            HANDLE hTask            /* çº¿ç¨‹å¥æŸ„ï¼Œcreate_taskæ¥å£è¿”å›å€¼ */
                              );
 
 /******************************************************
-   ÏòOPENAT TASK·¢ÏûÏ¢µÄ½Ó¿Ú
+   å‘OPENAT TASKå‘æ¶ˆæ¯çš„æ¥å£
 *******************************************************/
-BOOL OPENAT_send_internal_message(                           /* ·¢ËÍÏûÏ¢½Ó¿Ú£¬Ìí¼Óµ½ÏûÏ¢¶ÓÁĞÎ²²¿ */
+BOOL OPENAT_send_internal_message(                           /* å‘é€æ¶ˆæ¯æ¥å£ï¼Œæ·»åŠ åˆ°æ¶ˆæ¯é˜Ÿåˆ—å°¾éƒ¨ */
                                       int msg_id,
-                                      void* pMessage,          /* ´æ´¢ÏûÏ¢Ö¸Õë */
+                                      void* pMessage,          /* å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ */
                                       int message_length
                                       );
 
-/****************************** Ê±¼ä&¶¨Ê±Æ÷½Ó¿Ú ******************************/
-HANDLE OPENAT_create_timer(                         /* ´´½¨¶¨Ê±Æ÷½Ó¿Ú */
-                            PTIMER_EXPFUNC pFunc,   /* ¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
-                            PVOID pParameter        /* ×÷Îª²ÎÊı´«µİ¸ø¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
+/****************************** æ—¶é—´&å®šæ—¶å™¨æ¥å£ ******************************/
+HANDLE OPENAT_create_timer(                         /* åˆ›å»ºå®šæ—¶å™¨æ¥å£ */
+                            PTIMER_EXPFUNC pFunc,   /* å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
+                            PVOID pParameter        /* ä½œä¸ºå‚æ•°ä¼ é€’ç»™å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
                           );
 
-/*+\NEW\zhuwangbin\2020.2.12\½«timerµÄ»Øµ÷ÓÉÖĞ¶Ï¸Ä³Étask*/
-HANDLE OPENAT_create_timerTask(                         /* ´´½¨¶¨Ê±Æ÷½Ó¿Ú */
-                            PTIMER_EXPFUNC pFunc,   /* ¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
-                            PVOID pParameter        /* ×÷Îª²ÎÊı´«µİ¸ø¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
+/*+\NEW\zhuwangbin\2020.2.12\å°†timerçš„å›è°ƒç”±ä¸­æ–­æ”¹æˆtask*/
+HANDLE OPENAT_create_timerTask(                         /* åˆ›å»ºå®šæ—¶å™¨æ¥å£ */
+                            PTIMER_EXPFUNC pFunc,   /* å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
+                            PVOID pParameter        /* ä½œä¸ºå‚æ•°ä¼ é€’ç»™å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
                           );
 
-/*-\NEW\zhuwangbin\2020.2.12\½«timerµÄ»Øµ÷ÓÉÖĞ¶Ï¸Ä³Étask*/
-HANDLE OPENAT_create_hir_timer(						/* ´´½¨¶¨Ê±Æ÷½Ó¿Ú */
-						PTIMER_EXPFUNC pFunc,	/* ¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
-						PVOID pParameter		/* ×÷Îª²ÎÊı´«µİ¸ø¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı */
+/*-\NEW\zhuwangbin\2020.2.12\å°†timerçš„å›è°ƒç”±ä¸­æ–­æ”¹æˆtask*/
+HANDLE OPENAT_create_hir_timer(						/* åˆ›å»ºå®šæ—¶å™¨æ¥å£ */
+						PTIMER_EXPFUNC pFunc,	/* å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
+						PVOID pParameter		/* ä½œä¸ºå‚æ•°ä¼ é€’ç»™å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•° */
 					  );
 
 
-BOOL OPENAT_start_timer(                            /* Æô¶¯¶¨Ê±Æ÷½Ó¿Ú */
-                            HANDLE hTimer,          /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
-                            UINT32 nMillisecondes   /* ¶¨Ê±Æ÷Ê±¼ä */
+BOOL OPENAT_start_timer(                            /* å¯åŠ¨å®šæ—¶å™¨æ¥å£ */
+                            HANDLE hTimer,          /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
+                            UINT32 nMillisecondes   /* å®šæ—¶å™¨æ—¶é—´ */
                        );
 
-BOOL OPENAT_loop_start_timer(                            /* Æô¶¯Ñ­»·¶¨Ê±Æ÷½Ó¿Ú */
-                            HANDLE hTimer,          /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
-                            UINT32 nMillisecondes   /* ¶¨Ê±Æ÷Ê±¼ä */
+BOOL OPENAT_loop_start_timer(                            /* å¯åŠ¨å¾ªç¯å®šæ—¶å™¨æ¥å£ */
+                            HANDLE hTimer,          /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
+                            UINT32 nMillisecondes   /* å®šæ—¶å™¨æ—¶é—´ */
                        );
 
-BOOL OPENAT_start_precise_timer(                            /* Æô¶¯¶¨Ê±Æ÷½Ó¿Ú */
-                            HANDLE hTimer,          /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
-                            UINT32 nMillisecondes   /* ¶¨Ê±Æ÷Ê±¼ä */
+BOOL OPENAT_start_precise_timer(                            /* å¯åŠ¨å®šæ—¶å™¨æ¥å£ */
+                            HANDLE hTimer,          /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
+                            UINT32 nMillisecondes   /* å®šæ—¶å™¨æ—¶é—´ */
                        );
 
-BOOL OPENAT_stop_timer(                             /* Í£Ö¹¶¨Ê±Æ÷½Ó¿Ú */
-                            HANDLE hTimer           /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_stop_timer(                             /* åœæ­¢å®šæ—¶å™¨æ¥å£ */
+                            HANDLE hTimer           /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
                       );
 
 UINT64 OPENAT_timer_remaining(
@@ -243,14 +243,14 @@ BOOL OPENAT_stop_gif(void);
 
 VOID OPENAT_lcd_sleep(BOOL);
 
-BOOL OPENAT_delete_timer(                           /* É¾³ı¶¨Ê±Æ÷½Ó¿Ú */
-                            HANDLE hTimer           /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_delete_timer(                           /* åˆ é™¤å®šæ—¶å™¨æ¥å£ */
+                            HANDLE hTimer           /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
                         );
 
 
 
-BOOL OPENAT_available_timer(                        /* ¼ì²é¶¨Ê±Æ÷ÊÇ·ñÒÑ¾­Æô¶¯½Ó¿Ú */
-                            HANDLE hTimer           /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_available_timer(                        /* æ£€æŸ¥å®šæ—¶å™¨æ˜¯å¦å·²ç»å¯åŠ¨æ¥å£ */
+                            HANDLE hTimer           /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
                            );
 
 
@@ -263,150 +263,150 @@ UINT32 OPENAT_get_timestamp(void);
 BOOL OPENAT_gmtime(UINT32 timestamp, T_AMOPENAT_SYSTEM_DATETIME* pDatetime);
 
 
-BOOL OPENAT_get_system_datetime(                    /* »ñÈ¡ÏµÍ³Ê±¼ä½Ó¿Ú */
-                            T_AMOPENAT_SYSTEM_DATETIME* pDatetime/* ´æ´¢Ê±¼äÖ¸Õë */
+BOOL OPENAT_get_system_datetime(                    /* è·å–ç³»ç»Ÿæ—¶é—´æ¥å£ */
+                            T_AMOPENAT_SYSTEM_DATETIME* pDatetime/* å­˜å‚¨æ—¶é—´æŒ‡é’ˆ */
                            );
 
 
 
-BOOL OPENAT_set_system_datetime(                    /* ÉèÖÃÏµÍ³Ê±¼ä½Ó¿Ú */
-                            T_AMOPENAT_SYSTEM_DATETIME* pDatetime/* ´æ´¢Ê±¼äÖ¸Õë */
+BOOL OPENAT_set_system_datetime(                    /* è®¾ç½®ç³»ç»Ÿæ—¶é—´æ¥å£ */
+                            T_AMOPENAT_SYSTEM_DATETIME* pDatetime/* å­˜å‚¨æ—¶é—´æŒ‡é’ˆ */
                            );
-/*+\NEW\wangyuan\2020.05.08\Ìí¼ÓÉèÖÃºÍ»ñÈ¡µ±Ç°Ê±ÇøµÄ½Ó¿Ú*/
+/*+\NEW\wangyuan\2020.05.08\æ·»åŠ è®¾ç½®å’Œè·å–å½“å‰æ—¶åŒºçš„æ¥å£*/
 void OPENAT_Set_TimeZone(INT32 timeZone);
 
 INT8 OPENAT_get_TimeZone(VOID);
-/*-\NEW\wangyuan\2020.05.08\Ìí¼ÓÉèÖÃºÍ»ñÈ¡µ±Ç°Ê±ÇøµÄ½Ó¿Ú*/
+/*-\NEW\wangyuan\2020.05.08\æ·»åŠ è®¾ç½®å’Œè·å–å½“å‰æ—¶åŒºçš„æ¥å£*/
 
-/****************************** ALARM½Ó¿Ú ******************************/
-/*+\BUG\wangyuan\2020.04.30\BUG_1757:Air724Ä¿Ç°Ã»ÓĞalarm demo*/
-BOOL OPENAT_InitAlarm(                                        /* ÄÖÖÓ³õÊ¼»¯½Ó¿Ú */
-                            T_AMOPENAT_ALARM_CONFIG *pConfig   /* ÄÖÖÓÅäÖÃ²ÎÊı */
+/****************************** ALARMæ¥å£ ******************************/
+/*+\BUG\wangyuan\2020.04.30\BUG_1757:Air724ç›®å‰æ²¡æœ‰alarm demo*/
+BOOL OPENAT_InitAlarm(                                        /* é—¹é’Ÿåˆå§‹åŒ–æ¥å£ */
+                            T_AMOPENAT_ALARM_CONFIG *pConfig   /* é—¹é’Ÿé…ç½®å‚æ•° */
                        ); 
 
 
 
-BOOL OPENAT_SetAlarm(                                        /* ÄÖÖÓÉèÖÃ/É¾³ı½Ó¿Ú */
-                            T_AMOPENAT_ALARM_PARAM *pAlarmSet    /* ÄÖÖÓÉèÖÃ²ÎÊı */
+BOOL OPENAT_SetAlarm(                                        /* é—¹é’Ÿè®¾ç½®/åˆ é™¤æ¥å£ */
+                            T_AMOPENAT_ALARM_PARAM *pAlarmSet    /* é—¹é’Ÿè®¾ç½®å‚æ•° */
                        );
 
-/*-\BUG\wangyuan\2020.04.30\BUG_1757:Air724Ä¿Ç°Ã»ÓĞalarm demo*/
+/*-\BUG\wangyuan\2020.04.30\BUG_1757:Air724ç›®å‰æ²¡æœ‰alarm demo*/
 
-/****************************** ÁÙ½ç×ÊÔ´½Ó¿Ú ******************************/
-HANDLE OPENAT_enter_critical_section(               /* ½øÈëÁÙ½ç×ÊÔ´Çø½Ó¿Ú£¬¹Ø±ÕËùÓĞÖĞ¶Ï */
+/****************************** ä¸´ç•Œèµ„æºæ¥å£ ******************************/
+HANDLE OPENAT_enter_critical_section(               /* è¿›å…¥ä¸´ç•Œèµ„æºåŒºæ¥å£ï¼Œå…³é—­æ‰€æœ‰ä¸­æ–­ */
                             VOID
                                     );
 
 
-VOID OPENAT_exit_critical_section(                  /* ÍË³öÁÙ½ç×ÊÔ´Çø½Ó¿Ú£¬¿ªÆôÖĞ¶Ï */
-                            HANDLE hSection         /* ÁÙ½ç×ÊÔ´Çø¾ä±ú£¬enter_critical_section½Ó¿Ú·µ»ØÖµ */
+VOID OPENAT_exit_critical_section(                  /* é€€å‡ºä¸´ç•Œèµ„æºåŒºæ¥å£ï¼Œå¼€å¯ä¸­æ–­ */
+                            HANDLE hSection         /* ä¸´ç•Œèµ„æºåŒºå¥æŸ„ï¼Œenter_critical_sectionæ¥å£è¿”å›å€¼ */
                                  );
 
 
 
-/****************************** ĞÅºÅÁ¿½Ó¿Ú ******************************/
-HANDLE OPENAT_create_semaphore(                     /* ´´½¨ĞÅºÅÁ¿½Ó¿Ú */
-                            UINT32 nInitCount       /* ĞÅºÅÁ¿ÊıÁ¿ */
+/****************************** ä¿¡å·é‡æ¥å£ ******************************/
+HANDLE OPENAT_create_semaphore(                     /* åˆ›å»ºä¿¡å·é‡æ¥å£ */
+                            UINT32 nInitCount       /* ä¿¡å·é‡æ•°é‡ */
                               );
 
 
 
-BOOL OPENAT_delete_semaphore(                       /* É¾³ıĞÅºÅÁ¿½Ó¿Ú */
-                            HANDLE hSem             /* ĞÅºÅÁ¿¾ä±ú£¬create_semaphore½Ó¿Ú·µ»ØÖµ */
+BOOL OPENAT_delete_semaphore(                       /* åˆ é™¤ä¿¡å·é‡æ¥å£ */
+                            HANDLE hSem             /* ä¿¡å·é‡å¥æŸ„ï¼Œcreate_semaphoreæ¥å£è¿”å›å€¼ */
                             );
 
 
 
-BOOL OPENAT_wait_semaphore(                         /* »ñÈ¡ĞÅºÅÁ¿½Ó¿Ú */
-                            HANDLE hSem,            /* ĞÅºÅÁ¿¾ä±ú£¬create_semaphore½Ó¿Ú·µ»ØÖµ */
-                            UINT32 nTimeOut         /* Ä¿Ç°²»Ö§³Ö */
+BOOL OPENAT_wait_semaphore(                         /* è·å–ä¿¡å·é‡æ¥å£ */
+                            HANDLE hSem,            /* ä¿¡å·é‡å¥æŸ„ï¼Œcreate_semaphoreæ¥å£è¿”å›å€¼ */
+                            UINT32 nTimeOut         /* ç›®å‰ä¸æ”¯æŒ */
                           );
 
 
 
 BOOL OPENAT_release_semaphore(
-                            HANDLE hSem             /* ĞÅºÅÁ¿¾ä±ú£¬create_semaphore½Ó¿Ú·µ»ØÖµ */
+                            HANDLE hSem             /* ä¿¡å·é‡å¥æŸ„ï¼Œcreate_semaphoreæ¥å£è¿”å›å€¼ */
                              );
 
 
 
-UINT32 OPENAT_get_semaphore_value(                   /* »ñÈ¡ÏûºÄÁ¿Öµ*/
-                            HANDLE hSem             /* ĞÅºÅÁ¿¾ä±ú£¬create_semaphore½Ó¿Ú·µ»ØÖµ */  
+UINT32 OPENAT_get_semaphore_value(                   /* è·å–æ¶ˆè€—é‡å€¼*/
+                            HANDLE hSem             /* ä¿¡å·é‡å¥æŸ„ï¼Œcreate_semaphoreæ¥å£è¿”å›å€¼ */  
                             );
 
 
 
-/****************************** ÄÚ´æ½Ó¿Ú ******************************/
+/****************************** å†…å­˜æ¥å£ ******************************/
 
 #define OPENAT_malloc(size) OPENAT_malloc1(size, (char*)__FUNCTION__,(UINT32) __LINE__)
 #define OPENAT_calloc(cnt,size) OPENAT_malloc1(cnt*size, (char*)__FUNCTION__,(UINT32) __LINE__)
-PVOID OPENAT_malloc1(                                /* ÄÚ´æÉêÇë½Ó¿Ú */
-                            UINT32 nSize,            /* ÉêÇëµÄÄÚ´æ´óĞ¡ */
-							/*+\NEW \zhuwangbin\2020.02.3\ĞŞ¸Äwarning*/
+PVOID OPENAT_malloc1(                                /* å†…å­˜ç”³è¯·æ¥å£ */
+                            UINT32 nSize,            /* ç”³è¯·çš„å†…å­˜å¤§å° */
+							/*+\NEW \zhuwangbin\2020.02.3\ä¿®æ”¹warning*/
                             const char*  func,
-							/*-\NEW \zhuwangbin\2020.02.3\ĞŞ¸Äwarning*/
+							/*-\NEW \zhuwangbin\2020.02.3\ä¿®æ”¹warning*/
                             UINT32 line
                    );
 
 
 
 PVOID OPENAT_realloc(                               /**/
-                            PVOID pMemory,          /* ÄÚ´æÖ¸Õë£¬malloc½Ó¿Ú·µ»ØÖµ */
-                            UINT32 nSize            /* ÉêÇëµÄÄÚ´æ´óĞ¡ */
+                            PVOID pMemory,          /* å†…å­˜æŒ‡é’ˆï¼Œmallocæ¥å£è¿”å›å€¼ */
+                            UINT32 nSize            /* ç”³è¯·çš„å†…å­˜å¤§å° */
                     );
 
 
 
-VOID OPENAT_free(                                   /* ÄÚ´æÊÍ·Å½Ó¿Ú */
-                            PVOID pMemory           /* ÄÚ´æÖ¸Õë£¬malloc½Ó¿Ú·µ»ØÖµ */
+VOID OPENAT_free(                                   /* å†…å­˜é‡Šæ”¾æ¥å£ */
+                            PVOID pMemory           /* å†…å­˜æŒ‡é’ˆï¼Œmallocæ¥å£è¿”å›å€¼ */
                 );
 
 
-/*+\bug2307\zhuwangbin\2020.06.20\Ìí¼ÓOPENAT_MemoryUsed½Ó¿Ú*/
-VOID OPENAT_MemoryUsed(UINT32* total, UINT32* used); /* »ñÈ¡¿ÉÓÃÄÚ´æÊ¹ÓÃÇé¿ö*/
-/*-\bug2307\zhuwangbin\2020.06.20\Ìí¼ÓOPENAT_MemoryUsed½Ó¿Ú*/
-/****************************** ÔÓÏî½Ó¿Ú ******************************/
-BOOL OPENAT_sleep(                                  /* ÏµÍ³Ë¯Ãß½Ó¿Ú */
-                            UINT32 nMillisecondes   /* Ë¯ÃßÊ±¼ä */
+/*+\bug2307\zhuwangbin\2020.06.20\æ·»åŠ OPENAT_MemoryUsedæ¥å£*/
+VOID OPENAT_MemoryUsed(UINT32* total, UINT32* used); /* è·å–å¯ç”¨å†…å­˜ä½¿ç”¨æƒ…å†µ*/
+/*-\bug2307\zhuwangbin\2020.06.20\æ·»åŠ OPENAT_MemoryUsedæ¥å£*/
+/****************************** æ‚é¡¹æ¥å£ ******************************/
+BOOL OPENAT_sleep(                                  /* ç³»ç»Ÿç¡çœ æ¥å£ */
+                            UINT32 nMillisecondes   /* ç¡çœ æ—¶é—´ */
                  );
 
-BOOL OPENAT_Delayms(                                  /* ÑÓÊ±½Ó¿Ú */
-                            UINT32 nMillisecondes   /* ÑÓÊ±Ê±¼ä */
+BOOL OPENAT_Delayms(                                  /* å»¶æ—¶æ¥å£ */
+                            UINT32 nMillisecondes   /* å»¶æ—¶æ—¶é—´ */
                  );
 
-INT64 OPENAT_get_system_tick(                      /* »ñÈ¡ÏµÍ³tick½Ó¿Ú */
+INT64 OPENAT_get_system_tick(                      /* è·å–ç³»ç»Ÿtickæ¥å£ */
                             VOID
                              );
 
 
 
-UINT32 OPENAT_rand(                                 /* »ñÈ¡Ëæ»úÊı½Ó¿Ú */
+UINT32 OPENAT_rand(                                 /* è·å–éšæœºæ•°æ¥å£ */
                             VOID
                   );
 
 
 
-VOID OPENAT_srand(                                  /* ÉèÖÃËæ»úÊıÖÖ×Ó½Ó¿Ú */
-                            UINT32 seed             /* Ëæ»úÊıÖÖ×Ó */
+VOID OPENAT_srand(                                  /* è®¾ç½®éšæœºæ•°ç§å­æ¥å£ */
+                            UINT32 seed             /* éšæœºæ•°ç§å­ */
                  );
 
 
 
-VOID OPENAT_shut_down(                              /* ¹Ø»ú½Ó¿Ú */
+VOID OPENAT_shut_down(                              /* å…³æœºæ¥å£ */
                             VOID
                      );
 
 
 
-VOID OPENAT_restart(                                /* ÖØÆô½Ó¿Ú */
+VOID OPENAT_restart(                                /* é‡å¯æ¥å£ */
                             VOID
                    );
 
 
 
-/*+\NEW\liweiqiang\2013.7.1\[OpenAt]Ôö¼ÓÏµÍ³Ö÷ÆµÉèÖÃ½Ó¿Ú*/
-VOID OPENAT_sys_request_freq(                       /* Ö÷Æµ¿ØÖÆ½Ó¿Ú */
-                            E_AMOPENAT_SYS_FREQ freq/* Ö÷ÆµÖµ */
+/*+\NEW\liweiqiang\2013.7.1\[OpenAt]å¢åŠ ç³»ç»Ÿä¸»é¢‘è®¾ç½®æ¥å£*/
+VOID OPENAT_sys_request_freq(                       /* ä¸»é¢‘æ§åˆ¶æ¥å£ */
+                            E_AMOPENAT_SYS_FREQ freq/* ä¸»é¢‘å€¼ */
                    );
 
 
@@ -417,172 +417,172 @@ UINT16 OPENAT_unicode_to_ascii(UINT8 *pOutBuffer, WCHAR *pInBuffer);
 UINT16 OPENAT_ascii_to_unicode(WCHAR *pOutBuffer, UINT8 *pInBuffer);
 
     
-/*-\NEW\liweiqiang\2013.7.1\[OpenAt]Ôö¼ÓÏµÍ³Ö÷ÆµÉèÖÃ½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.7.1\[OpenAt]å¢åŠ ç³»ç»Ÿä¸»é¢‘è®¾ç½®æ¥å£*/
     /*******************************************
     **              FILE SYSTEM               **
     *******************************************/
-INT32 OPENAT_open_file(                             /* ´ò¿ªÎÄ¼ş½Ó¿Ú *//* Õı³£¾ä±ú·µ»ØÖµ´Ó0¿ªÊ¼£¬Ğ¡ÓÚ0´íÎó·¢Éú */
-/*+\BUG WM-719\maliang\2013.3.21\ÎÄ¼şÏµÍ³½Ó¿ÚºÍ²¥·ÅÒôÆµÎÄ¼ş½Ó¿ÚµÄÎÄ¼şÃû¸ÄÎªunicode little endingÀàĞÍ*/
-                            char* pszFileNameUniLe,/* ÎÄ¼şÈ«Â·¾¶Ãû³Æ unicode little endian*/
-                            UINT32 iFlag,           /* ´ò¿ª±êÖ¾ */
-	                        UINT32 iAttr            /* ÎÄ¼şÊôĞÔ£¬ÔİÊ±²»Ö§³Ö£¬ÇëÌîÈë0 */
+INT32 OPENAT_open_file(                             /* æ‰“å¼€æ–‡ä»¶æ¥å£ *//* æ­£å¸¸å¥æŸ„è¿”å›å€¼ä»0å¼€å§‹ï¼Œå°äº0é”™è¯¯å‘ç”Ÿ */
+/*+\BUG WM-719\maliang\2013.3.21\æ–‡ä»¶ç³»ç»Ÿæ¥å£å’Œæ’­æ”¾éŸ³é¢‘æ–‡ä»¶æ¥å£çš„æ–‡ä»¶åæ”¹ä¸ºunicode little endingç±»å‹*/
+                            char* pszFileNameUniLe,/* æ–‡ä»¶å…¨è·¯å¾„åç§° unicode little endian*/
+                            UINT32 iFlag,           /* æ‰“å¼€æ ‡å¿— */
+	                        UINT32 iAttr            /* æ–‡ä»¶å±æ€§ï¼Œæš‚æ—¶ä¸æ”¯æŒï¼Œè¯·å¡«å…¥0 */
                       );
 
 
 
-INT32 OPENAT_close_file(                            /* ¹Ø±ÕÎÄ¼ş½Ó¿Ú */
-                            INT32 iFd               /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
+INT32 OPENAT_close_file(                            /* å…³é—­æ–‡ä»¶æ¥å£ */
+                            INT32 iFd               /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
                        );
 
 
 
-INT32 OPENAT_read_file(                             /* ¶ÁÈ¡ÎÄ¼ş½Ó¿Ú */
-                            INT32 iFd,              /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
-                            UINT8 *pBuf,            /* Êı¾İ±£´æÖ¸Õë */
-                            UINT32 iLen             /* buf³¤¶È */
+INT32 OPENAT_read_file(                             /* è¯»å–æ–‡ä»¶æ¥å£ */
+                            INT32 iFd,              /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
+                            UINT8 *pBuf,            /* æ•°æ®ä¿å­˜æŒ‡é’ˆ */
+                            UINT32 iLen             /* bufé•¿åº¦ */
                       );
 
 
 
-INT32 OPENAT_write_file(                            /* Ğ´ÈëÎÄ¼ş½Ó¿Ú*/
-                            INT32 iFd,              /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
-                            UINT8 *pBuf,            /* ĞèÒªĞ´ÈëµÄÊı¾İÖ¸Õë */
-                            UINT32 iLen             /* Êı¾İ³¤¶È */
+INT32 OPENAT_write_file(                            /* å†™å…¥æ–‡ä»¶æ¥å£*/
+                            INT32 iFd,              /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
+                            UINT8 *pBuf,            /* éœ€è¦å†™å…¥çš„æ•°æ®æŒ‡é’ˆ */
+                            UINT32 iLen             /* æ•°æ®é•¿åº¦ */
                        );
 
 
 
-INT32 OPENAT_flush_file(                            /* Á¢¼´Ğ´Èëflash*/
-                            INT32 iFd               /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
+INT32 OPENAT_flush_file(                            /* ç«‹å³å†™å…¥flash*/
+                            INT32 iFd               /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
                        );    
 
 
 
-INT32 OPENAT_seek_file(                             /* ÎÄ¼ş¶¨Î»½Ó¿Ú */
-                            INT32 iFd,              /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
-                            INT32 iOffset,          /* Æ«ÒÆÁ¿ */
-                            UINT8 iOrigin           /* Æ«ÒÆÆğÊ¼Î»ÖÃ */
+INT32 OPENAT_seek_file(                             /* æ–‡ä»¶å®šä½æ¥å£ */
+                            INT32 iFd,              /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
+                            INT32 iOffset,          /* åç§»é‡ */
+                            UINT8 iOrigin           /* åç§»èµ·å§‹ä½ç½® */
                       );
 
-INT32 OPENAT_tell_file(                             /* ÎÄ¼ş¶¨Î»½Ó¿Ú */
-                            INT32 iFd              /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
+INT32 OPENAT_tell_file(                             /* æ–‡ä»¶å®šä½æ¥å£ */
+                            INT32 iFd              /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
                       );
 
 INT32 OPENAT_rename_file(char* name, char* new);
 
-INT32 OPENAT_create_file(                           /* ´´½¨ÎÄ¼ş½Ó¿Ú */
-                            char* pszFileNameUniLe,/* ÎÄ¼şÈ«Â·¾¶Ãû³Æ unicode little endian*/
-                            UINT32 iAttr            /* ÎÄ¼şÊôĞÔ£¬ÔİÊ±²»Ö§³Ö£¬ÇëÌîÈë0 */
+INT32 OPENAT_create_file(                           /* åˆ›å»ºæ–‡ä»¶æ¥å£ */
+                            char* pszFileNameUniLe,/* æ–‡ä»¶å…¨è·¯å¾„åç§° unicode little endian*/
+                            UINT32 iAttr            /* æ–‡ä»¶å±æ€§ï¼Œæš‚æ—¶ä¸æ”¯æŒï¼Œè¯·å¡«å…¥0 */
                         );
 UINT32 OPENAT_get_file_size(char* pszFileNameUniLe);
 UINT32 OPENAT_get_file_size_h(int handle);
 
 
-INT32 OPENAT_delete_file(                           /* É¾³ıÎÄ¼ş½Ó¿Ú */
-                            char* pszFileNameUniLe/* ÎÄ¼şÈ«Â·¾¶Ãû³Æ unicode little endian*/
+INT32 OPENAT_delete_file(                           /* åˆ é™¤æ–‡ä»¶æ¥å£ */
+                            char* pszFileNameUniLe/* æ–‡ä»¶å…¨è·¯å¾„åç§° unicode little endian*/
                         );
 
 
 
-INT32 OPENAT_change_dir(                            /* ÇĞ»»µ±Ç°¹¤×÷Ä¿Â¼½Ó¿Ú */
-                            char* pszDirNameUniLe  /* Ä¿Â¼Â·¾¶ unicode little endian */
+INT32 OPENAT_change_dir(                            /* åˆ‡æ¢å½“å‰å·¥ä½œç›®å½•æ¥å£ */
+                            char* pszDirNameUniLe  /* ç›®å½•è·¯å¾„ unicode little endian */
                        );
 
 
 
-INT32 OPENAT_make_dir(                              /* ´´½¨Ä¿Â¼½Ó¿Ú */
-                            char* pszDirNameUniLe, /* Ä¿Â¼Â·¾¶ unicode little endian */
-                            UINT32 iMode            /* Ä¿Â¼ÊôĞÔ£¬ÏêÏ¸Çë²Î¼û E_AMOPENAT_FILE_ATTR */
+INT32 OPENAT_make_dir(                              /* åˆ›å»ºç›®å½•æ¥å£ */
+                            char* pszDirNameUniLe, /* ç›®å½•è·¯å¾„ unicode little endian */
+                            UINT32 iMode            /* ç›®å½•å±æ€§ï¼Œè¯¦ç»†è¯·å‚è§ E_AMOPENAT_FILE_ATTR */
                      );
 
 
 
-INT32 OPENAT_remove_dir(                            /* É¾³ıÄ¿Â¼½Ó¿Ú *//* ¸ÃÄ¿Â¼±ØĞëÎª¿Õ£¬½Ó¿Ú²ÅÄÜ·µ»Ø³É¹¦ */
-                            char* pszDirNameUniLe  /* Ä¿Â¼Â·¾¶ unicode little endian */
+INT32 OPENAT_remove_dir(                            /* åˆ é™¤ç›®å½•æ¥å£ *//* è¯¥ç›®å½•å¿…é¡»ä¸ºç©ºï¼Œæ¥å£æ‰èƒ½è¿”å›æˆåŠŸ */
+                            char* pszDirNameUniLe  /* ç›®å½•è·¯å¾„ unicode little endian */
                        );
 
 
 
-INT32 OPENAT_remove_dir_rec(                        /* µİ¹éÉ¾³ıÄ¿Â¼½Ó¿Ú *//* ¸ÃÄ¿Â¼ÏÂËùÓĞÎÄ¼ş¡¢Ä¿Â¼¶¼»á±»É¾³ı */
-                            char* pszDirNameUniLe  /* Ä¿Â¼Â·¾¶ unicode little endian */
+INT32 OPENAT_remove_dir_rec(                        /* é€’å½’åˆ é™¤ç›®å½•æ¥å£ *//* è¯¥ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶ã€ç›®å½•éƒ½ä¼šè¢«åˆ é™¤ */
+                            char* pszDirNameUniLe  /* ç›®å½•è·¯å¾„ unicode little endian */
                            );
                            
 
-INT32 OPENAT_remove_file_rec(                        /* µİ¹éÉ¾³ıÎÄ¼ş½Ó¿Ú *//* ¸ÃÄ¿Â¼ÏÂËùÓĞÎÄ¼ş¶¼»á±»É¾³ı */
-                            char* pszDirNameUniLe  /* Ä¿Â¼Â·¾¶ unicode little endian */
+INT32 OPENAT_remove_file_rec(                        /* é€’å½’åˆ é™¤æ–‡ä»¶æ¥å£ *//* è¯¥ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶éƒ½ä¼šè¢«åˆ é™¤ */
+                            char* pszDirNameUniLe  /* ç›®å½•è·¯å¾„ unicode little endian */
                            );                          
 
 
 
-INT32 OPENAT_get_current_dir(                       /* »ñÈ¡µ±Ç°Ä¿Â¼½Ó¿Ú */
-                            char* pCurDirUniLe,    /* ´æ´¢Ä¿Â¼ĞÅÏ¢ unicode little endian */
-                            UINT32 uUnicodeSize     /* ´æ´¢Ä¿Â¼ĞÅÏ¢¿Õ¼ä´óĞ¡ */
+INT32 OPENAT_get_current_dir(                       /* è·å–å½“å‰ç›®å½•æ¥å£ */
+                            char* pCurDirUniLe,    /* å­˜å‚¨ç›®å½•ä¿¡æ¯ unicode little endian */
+                            UINT32 uUnicodeSize     /* å­˜å‚¨ç›®å½•ä¿¡æ¯ç©ºé—´å¤§å° */
                             );
 
-INT32 OPENAT_find_open(                       /* ¼ì²éÎÄ¼ş½Ó¿Ú */
-                            char* pszFileNameUniLe/* Ä¿Â¼Â·¾¶»òÎÄ¼şÈ«Â·¾¶ unicode little endian */
-                            );
-
-
-INT32 OPENAT_find_first_file(                       /* ²éÕÒÎÄ¼ş½Ó¿Ú */
-                            char* pszFileNameUniLe,/* Ä¿Â¼Â·¾¶»òÎÄ¼şÈ«Â·¾¶ unicode little endian */
-/*-\BUG WM-719\maliang\2013.3.21\ÎÄ¼şÏµÍ³½Ó¿ÚºÍ²¥·ÅÒôÆµÎÄ¼ş½Ó¿ÚµÄÎÄ¼şÃû¸ÄÎªunicode little endingÀàĞÍ*/
-                            PAMOPENAT_FS_FIND_DATA  pFindData /* ²éÕÒ½á¹ûÊı¾İ */
+INT32 OPENAT_find_open(                       /* æ£€æŸ¥æ–‡ä»¶æ¥å£ */
+                            char* pszFileNameUniLe/* ç›®å½•è·¯å¾„æˆ–æ–‡ä»¶å…¨è·¯å¾„ unicode little endian */
                             );
 
 
+INT32 OPENAT_find_first_file(                       /* æŸ¥æ‰¾æ–‡ä»¶æ¥å£ */
+                            char* pszFileNameUniLe,/* ç›®å½•è·¯å¾„æˆ–æ–‡ä»¶å…¨è·¯å¾„ unicode little endian */
+/*-\BUG WM-719\maliang\2013.3.21\æ–‡ä»¶ç³»ç»Ÿæ¥å£å’Œæ’­æ”¾éŸ³é¢‘æ–‡ä»¶æ¥å£çš„æ–‡ä»¶åæ”¹ä¸ºunicode little endingç±»å‹*/
+                            PAMOPENAT_FS_FIND_DATA  pFindData /* æŸ¥æ‰¾ç»“æœæ•°æ® */
+                            );
 
 
-INT32 OPENAT_find_next_file(                        /* ¼ÌĞø²éÕÒÎÄ¼ş½Ó¿Ú */
-                            INT32 iFd,              /* ²éÕÒÎÄ¼ş¾ä±ú£¬Îª find_first_file ½Ó¿Ú·µ»Ø²ÎÊı */
-                            PAMOPENAT_FS_FIND_DATA  pFindData /* ²éÕÒ½á¹ûÊı¾İ */
+
+
+INT32 OPENAT_find_next_file(                        /* ç»§ç»­æŸ¥æ‰¾æ–‡ä»¶æ¥å£ */
+                            INT32 iFd,              /* æŸ¥æ‰¾æ–‡ä»¶å¥æŸ„ï¼Œä¸º find_first_file æ¥å£è¿”å›å‚æ•° */
+                            PAMOPENAT_FS_FIND_DATA  pFindData /* æŸ¥æ‰¾ç»“æœæ•°æ® */
                            );
 
 
 
 
-INT32 OPENAT_find_close(                            /* ²éÕÒ½áÊø½Ó¿Ú */
-                            INT32 iFd               /* ²éÕÒÎÄ¼ş¾ä±ú£¬Îª find_first_file ½Ó¿Ú·µ»Ø²ÎÊı */
+INT32 OPENAT_find_close(                            /* æŸ¥æ‰¾ç»“æŸæ¥å£ */
+                            INT32 iFd               /* æŸ¥æ‰¾æ–‡ä»¶å¥æŸ„ï¼Œä¸º find_first_file æ¥å£è¿”å›å‚æ•° */
                        );
 
-INT32 OPENAT_ftell(                             /* ÎÄ¼ş¶¨Î»½Ó¿Ú */
-                            INT32 iFd             /* ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄÓĞĞ§²ÎÊı */
+INT32 OPENAT_ftell(                             /* æ–‡ä»¶å®šä½æ¥å£ */
+                            INT32 iFd             /* æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„æœ‰æ•ˆå‚æ•° */
                       );
 
-/*+\NewReq WM-743\maliang\2013.3.28\[OpenAt]Ôö¼Ó½Ó¿Ú»ñÈ¡ÎÄ¼şÏµÍ³ĞÅÏ¢*/
-INT32 OPENAT_get_fs_info(                            /* »ñÈ¡ÎÄ¼şÏµÍ³ĞÅÏ¢½Ó¿Ú */
-                            E_AMOPENAT_FILE_DEVICE_NAME       devName,            /*»ñÈ¡ÄÄ¿édevice nameµÄĞÅÏ¢*/
-                            T_AMOPENAT_FILE_INFO               *fileInfo,                   /*ÎÄ¼şÏµÍ³µÄĞÅÏ¢*/
-                            char  								*path,                  /*ÊÇ·ñ»ñÈ¡SD ¿¨ĞÅÏ¢*/
+/*+\NewReq WM-743\maliang\2013.3.28\[OpenAt]å¢åŠ æ¥å£è·å–æ–‡ä»¶ç³»ç»Ÿä¿¡æ¯*/
+INT32 OPENAT_get_fs_info(                            /* è·å–æ–‡ä»¶ç³»ç»Ÿä¿¡æ¯æ¥å£ */
+                            E_AMOPENAT_FILE_DEVICE_NAME       devName,            /*è·å–å“ªå—device nameçš„ä¿¡æ¯*/
+                            T_AMOPENAT_FILE_INFO               *fileInfo,                   /*æ–‡ä»¶ç³»ç»Ÿçš„ä¿¡æ¯*/
+                            char  								*path,                  /*æ˜¯å¦è·å–SD å¡ä¿¡æ¯*/
 							INT32 type
                        );
 
-/*+\NEW\zhuwangbin\2020.08.08\Ìí¼ÓÎÄ¼şÏµÍ³mount½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.08.08\æ·»åŠ æ–‡ä»¶ç³»ç»Ÿmountæ¥å£*/
 BOOL OPENAT_fs_mount(T_AMOPENAT_USER_FSMOUNT *param);
 BOOL OPENAT_fs_unmount(T_AMOPENAT_USER_FSMOUNT *param);
 BOOL OPENAT_fs_format(T_AMOPENAT_USER_FSMOUNT *param);
 
-/*-\NEW\zhuwangbin\2020.08.08\Ìí¼ÓÎÄ¼şÏµÍ³mount½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.08.08\æ·»åŠ æ–‡ä»¶ç³»ç»Ÿmountæ¥å£*/
 
-/*-\NewReq WM-743\maliang\2013.3.28\[OpenAt]Ôö¼Ó½Ó¿Ú»ñÈ¡ÎÄ¼şÏµÍ³ĞÅÏ¢*/
+/*-\NewReq WM-743\maliang\2013.3.28\[OpenAt]å¢åŠ æ¥å£è·å–æ–‡ä»¶ç³»ç»Ÿä¿¡æ¯*/
     
-    /*+\NewReq\Jack.li\2013.1.17\Ôö¼ÓT¿¨½Ó¿Ú*/
-INT32 OPENAT_init_tflash(                            /* ³õÊ¼»¯T¿¨½Ó¿Ú */
-                            PAMOPENAT_TFLASH_INIT_PARAM pTlashInitParam/* T¿¨³õÊ¼»¯²ÎÊı */
+    /*+\NewReq\Jack.li\2013.1.17\å¢åŠ Tå¡æ¥å£*/
+INT32 OPENAT_init_tflash(                            /* åˆå§‹åŒ–Tå¡æ¥å£ */
+                            PAMOPENAT_TFLASH_INIT_PARAM pTlashInitParam/* Tå¡åˆå§‹åŒ–å‚æ•° */
                        );
 
 
 
-    /*-\NewReq\Jack.li\2013.1.17\Ôö¼ÓT¿¨½Ó¿Ú*/
+    /*-\NewReq\Jack.li\2013.1.17\å¢åŠ Tå¡æ¥å£*/
 
-E_AMOPENAT_MEMD_ERR OPENAT_flash_erase(              /*flash²ÁĞ´ 128K¶ÔÆë*/
+E_AMOPENAT_MEMD_ERR OPENAT_flash_erase(              /*flashæ“¦å†™ 128Kå¯¹é½*/
                             UINT32 startAddr,
                             UINT32 endAddr
                        );
 
 
     
-E_AMOPENAT_MEMD_ERR OPENAT_flash_write(              /*Ğ´flash*/
+E_AMOPENAT_MEMD_ERR OPENAT_flash_write(              /*å†™flash*/
                             UINT32 startAddr,
                             UINT32 size,
                             UINT32* writenSize,
@@ -591,7 +591,7 @@ E_AMOPENAT_MEMD_ERR OPENAT_flash_write(              /*Ğ´flash*/
 
 
 
-E_AMOPENAT_MEMD_ERR OPENAT_flash_read(               /*¶Áflash*/
+E_AMOPENAT_MEMD_ERR OPENAT_flash_read(               /*è¯»flash*/
                             UINT32 startAddr,
                             UINT32 size,
                             UINT32* readSize,
@@ -600,7 +600,7 @@ E_AMOPENAT_MEMD_ERR OPENAT_flash_read(               /*¶Áflash*/
                        
 UINT32 OPENAT_flash_page(void);
 
-/*+\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*+\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/
 BOOL openat_flash_eraseSecurity(UINT8 num);
 
 BOOL openat_flash_writeSecurity(UINT8 num, UINT16 offset, char * data, UINT32 size);
@@ -608,7 +608,7 @@ BOOL openat_flash_writeSecurity(UINT8 num, UINT16 offset, char * data, UINT32 si
 BOOL openat_flash_readSecurity(UINT8 num, UINT16 offset, char * data, UINT32 size);
 
 BOOL openat_flash_lockSecurity(UINT8 num);
-/*-\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*-\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/
 
 E_OPENAT_OTA_RESULT OPENAT_fota_init(void);
 E_OPENAT_OTA_RESULT OPENAT_fota_download(const char* data, UINT32 len, UINT32 total);
@@ -617,210 +617,210 @@ E_OPENAT_OTA_RESULT OPENAT_fota_done(void);
     /*******************************************
     **                 NV                     **
     *******************************************/    
-    /*ÒòÎªÏÂÃæµÄ½Ó¿Ú»áÖ±½Ó²Ù×÷flash£¬»áÒıÆğÏµÍ³×èÈû£¬²»ÒªÔÚÖĞ¶Ï»òÕßÒªÇó±È½Ï¸ßµÄTASKÖĞÔËĞĞ*/    
-INT32 OPENAT_nv_init(                                /*NV ³õÊ¼»¯½Ó¿Ú*/
-                      UINT32 addr1,                  /*NV ´æ·ÅµØÖ·1 4KByteµØÖ·¶ÔÆë ´óĞ¡4KByte*/
-                      UINT32 addr2                   /*NV ´æ·ÅµØÖ·2 4KByteµØÖ·¶ÔÆë ´óĞ¡4KByte*/
+    /*å› ä¸ºä¸‹é¢çš„æ¥å£ä¼šç›´æ¥æ“ä½œflashï¼Œä¼šå¼•èµ·ç³»ç»Ÿé˜»å¡ï¼Œä¸è¦åœ¨ä¸­æ–­æˆ–è€…è¦æ±‚æ¯”è¾ƒé«˜çš„TASKä¸­è¿è¡Œ*/    
+INT32 OPENAT_nv_init(                                /*NV åˆå§‹åŒ–æ¥å£*/
+                      UINT32 addr1,                  /*NV å­˜æ”¾åœ°å€1 4KByteåœ°å€å¯¹é½ å¤§å°4KByte*/
+                      UINT32 addr2                   /*NV å­˜æ”¾åœ°å€2 4KByteåœ°å€å¯¹é½ å¤§å°4KByte*/
                     );
 
 
-INT32 OPENAT_nv_add(                                 /*Ôö¼ÓÒ»¸öNV´æ´¢ÇøÓò*/
-                      UINT32 nv_id,                  /*NV ID Ä¿Ç°Ö»Ö§³Ö0-255*/
-                      UINT32 nv_size                 /*NV ÇøÓò´óĞ¡,µ¥Î»Byte,×î´ó512Byte*/
+INT32 OPENAT_nv_add(                                 /*å¢åŠ ä¸€ä¸ªNVå­˜å‚¨åŒºåŸŸ*/
+                      UINT32 nv_id,                  /*NV ID ç›®å‰åªæ”¯æŒ0-255*/
+                      UINT32 nv_size                 /*NV åŒºåŸŸå¤§å°,å•ä½Byte,æœ€å¤§512Byte*/
                     );
 
 
-INT32 OPENAT_nv_delete(                              /*É¾³ıNV*/
+INT32 OPENAT_nv_delete(                              /*åˆ é™¤NV*/
                       UINT32 nv_id
                       );                 
 
 
-INT32 OPENAT_nv_read(                                /*¶ÁÈ¡NVÄÚÈİ*/
-                     UINT32 nv_id,                   /*NV ID Ä¿Ç°Ö»Ö§³Ö0-255*/
+INT32 OPENAT_nv_read(                                /*è¯»å–NVå†…å®¹*/
+                     UINT32 nv_id,                   /*NV ID ç›®å‰åªæ”¯æŒ0-255*/
                      UINT8* buf,                     /*buf*/
-                     UINT32 bufSize,                 /*bufµÄ´óĞ¡*/
-                     UINT32* readSize                /*Êµ¼Ê¶ÁÈ¡³¤¶È*/
+                     UINT32 bufSize,                 /*bufçš„å¤§å°*/
+                     UINT32* readSize                /*å®é™…è¯»å–é•¿åº¦*/
                     );
 
     
-INT32 OPENAT_nv_write(                               /*Ğ´ÈëNVÄÚÈİ*/
-                      UINT32 nv_id,                  /*NV ID Ä¿Ç°Ö»Ö§³Ö0-255*/
+INT32 OPENAT_nv_write(                               /*å†™å…¥NVå†…å®¹*/
+                      UINT32 nv_id,                  /*NV ID ç›®å‰åªæ”¯æŒ0-255*/
                       UINT8* buf,                    /*buf*/
-                      UINT32 bufSize,                /*bufµÄ´óĞ¡*/
-                      UINT32* writeSize              /*Êµ¼ÊĞ´Èë³¤¶È*/
+                      UINT32 bufSize,                /*bufçš„å¤§å°*/
+                      UINT32* writeSize              /*å®é™…å†™å…¥é•¿åº¦*/
                      );          
     /*******************************************
     **                Hardware                **
     *******************************************/
     /****************************** GPIO ******************************/
 BOOL OPENAT_config_gpio(                          
-                            E_AMOPENAT_GPIO_PORT port,  /* GPIO±àºÅ */
-                            T_AMOPENAT_GPIO_CFG *cfg    /* Êä³ö»òÊäÈë */
+                            E_AMOPENAT_GPIO_PORT port,  /* GPIOç¼–å· */
+                            T_AMOPENAT_GPIO_CFG *cfg    /* è¾“å‡ºæˆ–è¾“å…¥ */
                        );
 
 
     
 BOOL OPENAT_set_gpio(                               
-                            E_AMOPENAT_GPIO_PORT port,  /* GPIO±àºÅ */
+                            E_AMOPENAT_GPIO_PORT port,  /* GPIOç¼–å· */
                             UINT8 value                 /* 0 or 1 */
                     );
 
 
 
-/*+:\NewReq WM-475\brezen\2012.12.14\ĞŞ¸Ägpio½Ó¿Ú */				
+/*+:\NewReq WM-475\brezen\2012.12.14\ä¿®æ”¹gpioæ¥å£ */				
 BOOL OPENAT_read_gpio(                            
-                            E_AMOPENAT_GPIO_PORT port,  /* GPIO±àºÅ */
-                            UINT8* value                /* ½á¹û 0 or 1 */
+                            E_AMOPENAT_GPIO_PORT port,  /* GPIOç¼–å· */
+                            UINT8* value                /* ç»“æœ 0 or 1 */
                       );
-/*-:\NewReq WM-475\brezen\2012.12.14\ĞŞ¸Ägpio½Ó¿Ú */
+/*-:\NewReq WM-475\brezen\2012.12.14\ä¿®æ”¹gpioæ¥å£ */
 
-/*+\BUG WM-720\rufei\2013.3.21\ Ôö¼ÓgpioµÄclose½Ó¿Ú*/
+/*+\BUG WM-720\rufei\2013.3.21\ å¢åŠ gpioçš„closeæ¥å£*/
 BOOL OPENAT_close_gpio(                            
-                            E_AMOPENAT_GPIO_PORT port/* GPIO±àºÅ */
+                            E_AMOPENAT_GPIO_PORT port/* GPIOç¼–å· */
                       );
-/*-\BUG WM-720\rufei\2013.3.21\ Ôö¼ÓgpioµÄclose½Ó¿Ú*/
+/*-\BUG WM-720\rufei\2013.3.21\ å¢åŠ gpioçš„closeæ¥å£*/
 
 bool OPENAT_gpioPulse(E_AMOPENAT_GPIO_PORT port, unsigned high_us, unsigned low_us, unsigned count, unsigned idle);
 
 /****************************** PMD ******************************/
 BOOL OPENAT_init_pmd(     
-                            E_AMOPENAT_PM_CHR_MODE chrMode,     /* ³äµç·½Ê½ */
-/*+\NEW WM-746\rufei\2013.3.30\Ôö¼ÓĞ¾Æ¬IC³äµç*/
-                            T_AMOPENAT_PMD_CFG*    cfg,         /*³äµçÅäÖÃ*/
-/*-\NEW WM-746\rufei\2013.3.30\Ôö¼ÓĞ¾Æ¬IC³äµç*/
-                            PPM_MESSAGE            pPmMessage   /* ÏûÏ¢»Øµ÷º¯Êı */
+                            E_AMOPENAT_PM_CHR_MODE chrMode,     /* å……ç”µæ–¹å¼ */
+/*+\NEW WM-746\rufei\2013.3.30\å¢åŠ èŠ¯ç‰‡ICå……ç”µ*/
+                            T_AMOPENAT_PMD_CFG*    cfg,         /*å……ç”µé…ç½®*/
+/*-\NEW WM-746\rufei\2013.3.30\å¢åŠ èŠ¯ç‰‡ICå……ç”µ*/
+                            PPM_MESSAGE            pPmMessage   /* æ¶ˆæ¯å›è°ƒå‡½æ•° */
                     );
 
 
 
 VOID OPENAT_get_batteryStatus(
-                            T_AMOPENAT_BAT_STATUS* batStatus    /* µç³Ø×´Ì¬ OUT */
+                            T_AMOPENAT_BAT_STATUS* batStatus    /* ç”µæ± çŠ¶æ€ OUT */
                              );
 
 
 
 VOID OPENAT_get_chargerStatus(
-                            T_AMOPENAT_CHARGER_STATUS* chrStatus/* ³äµçÆ÷×´Ì¬ OUT */
+                            T_AMOPENAT_CHARGER_STATUS* chrStatus/* å……ç”µå™¨çŠ¶æ€ OUT */
                              );
 
 
 
-/*+\NEW\RUFEI\2014.2.13\Ôö¼ÓOPENAT²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú*/
+/*+\NEW\RUFEI\2014.2.13\å¢åŠ OPENATæŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£*/
 E_AMOPENAT_CHR_HW_STATUS OPENAT_get_chargerHwStatus(
                             VOID
                             );
 
 
-/*-\NEW\RUFEI\2014.2.13\Ôö¼ÓOPENAT²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú*/
-/*+\TASK\wangyuan\2020.06.28\task_255:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
+/*-\NEW\RUFEI\2014.2.13\å¢åŠ OPENATæŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£*/
+/*+\TASK\wangyuan\2020.06.28\task_255:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
 int OPENAT_get_chg_param(BOOL *battStatus, u16 *battVolt, u8 *battLevel, BOOL *chargerStatus, u8 *chargeState);
-/*-\TASK\wangyuan\2020.06.28\task_255:Ö§³ÖÖĞÔÆĞÅ°², ¼æÈİ2g CSDKµÄ½Ó¿ÚÌí¼Ó*/
-BOOL OPENAT_poweron_system(                                     /* Õı³£¿ª»ú */  
-                            E_AMOPENAT_STARTUP_MODE simStartUpMode,/* ¿ªÆôSIM¿¨·½Ê½ */
-                            E_AMOPENAT_STARTUP_MODE nwStartupMode/* ¿ªÆôĞ­ÒéÕ»·½Ê½ */
+/*-\TASK\wangyuan\2020.06.28\task_255:æ”¯æŒä¸­äº‘ä¿¡å®‰, å…¼å®¹2g CSDKçš„æ¥å£æ·»åŠ */
+BOOL OPENAT_poweron_system(                                     /* æ­£å¸¸å¼€æœº */  
+                            E_AMOPENAT_STARTUP_MODE simStartUpMode,/* å¼€å¯SIMå¡æ–¹å¼ */
+                            E_AMOPENAT_STARTUP_MODE nwStartupMode/* å¼€å¯åè®®æ ˆæ–¹å¼ */
                           );
 
 
 
-VOID OPENAT_poweroff_system(                                    /* Õı³£¹Ø»ú£¬°üÀ¨¹Ø±ÕĞ­ÒéÕ»ºÍ¹©µç */        
+VOID OPENAT_poweroff_system(                                    /* æ­£å¸¸å…³æœºï¼ŒåŒ…æ‹¬å…³é—­åè®®æ ˆå’Œä¾›ç”µ */        
                             VOID
                            );
 
 
 
-BOOL OPENAT_poweron_ldo(                                        /* ´ò¿ªLDO */
+BOOL OPENAT_poweron_ldo(                                        /* æ‰“å¼€LDO */
                             E_AMOPENAT_PM_LDO    ldo,
-                            UINT8                level          /*0-7 0:¹Ø±Õ 1~7µçÑ¹µÈ¼¶*/
+                            UINT8                level          /*0-7 0:å…³é—­ 1~7ç”µå‹ç­‰çº§*/
                        );
 
 
 
-BOOL OPENAT_gpio_disable_pull(                            /* GPIOÅäÖÃ½Ó¿Ú */
-                            E_AMOPENAT_GPIO_PORT port  /* GPIO±àºÅ */
+BOOL OPENAT_gpio_disable_pull(                            /* GPIOé…ç½®æ¥å£ */
+                            E_AMOPENAT_GPIO_PORT port  /* GPIOç¼–å· */
         );
 
-VOID OPENAT_enter_deepsleep(VOID);                                   /* ½øÈëË¯Ãß */
+VOID OPENAT_enter_deepsleep(VOID);                                   /* è¿›å…¥ç¡çœ  */
                       
 
 
-VOID OPENAT_exit_deepsleep(VOID);                                     /* ÍË³öË¯Ãß */
+VOID OPENAT_exit_deepsleep(VOID);                                     /* é€€å‡ºç¡çœ  */
 
 void OPENAT_deepSleepControl(E_AMOPENAT_PMD_M m, BOOL sleep, UINT32 timeout);
 
 
 
-/*+NEW OPEANT-104\RUFEI\2014.6.17\ Ôö¼Ó»ñÈ¡¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
- E_AMOPENAT_POWERON_REASON OPENAT_get_poweronCause (VOID);             /*»ñÈ¡¿ª»úÔ­ÒòÖµ*/
-/*-NEW OPEANT-104\RUFEI\2014.6.17\ Ôö¼Ó»ñÈ¡¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
+/*+NEW OPEANT-104\RUFEI\2014.6.17\ å¢åŠ è·å–å¼€æœºåŸå› å€¼æ¥å£*/
+ E_AMOPENAT_POWERON_REASON OPENAT_get_poweronCause (VOID);             /*è·å–å¼€æœºåŸå› å€¼*/
+/*-NEW OPEANT-104\RUFEI\2014.6.17\ å¢åŠ è·å–å¼€æœºåŸå› å€¼æ¥å£*/
 
 
     /****************************** UART ******************************/
 BOOL OPENAT_config_uart(
-                            E_AMOPENAT_UART_PORT port,          /* UART ±àºÅ */
-                            T_AMOPENAT_UART_PARAM *cfg          /* ³õÊ¼»¯²ÎÊı */
+                            E_AMOPENAT_UART_PORT port,          /* UART ç¼–å· */
+                            T_AMOPENAT_UART_PARAM *cfg          /* åˆå§‹åŒ–å‚æ•° */
                        );
 
 
 
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Ó¹Ø±Õuart½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ å…³é—­uartæ¥å£*/
 BOOL OPENAT_close_uart(
-                            E_AMOPENAT_UART_PORT port           /* UART ±àºÅ */
+                            E_AMOPENAT_UART_PORT port           /* UART ç¼–å· */
                        );
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Ó¹Ø±Õuart½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ å…³é—­uartæ¥å£*/
 
 
 
 
-UINT32 OPENAT_read_uart(                                        /* Êµ¼Ê¶ÁÈ¡³¤¶È */
-                            E_AMOPENAT_UART_PORT port,          /* UART ±àºÅ */
-                            UINT8* buf,                         /* ´æ´¢Êı¾İµØÖ· */
-                            UINT32 bufLen,                      /* ´æ´¢¿Õ¼ä³¤¶È */
-                            UINT32 timeoutMs                    /* ¶ÁÈ¡³¬Ê± ms */
+UINT32 OPENAT_read_uart(                                        /* å®é™…è¯»å–é•¿åº¦ */
+                            E_AMOPENAT_UART_PORT port,          /* UART ç¼–å· */
+                            UINT8* buf,                         /* å­˜å‚¨æ•°æ®åœ°å€ */
+                            UINT32 bufLen,                      /* å­˜å‚¨ç©ºé—´é•¿åº¦ */
+                            UINT32 timeoutMs                    /* è¯»å–è¶…æ—¶ ms */
                        );
 
 
 
-UINT32 OPENAT_write_uart(                                       /* Êµ¼ÊĞ´Èë³¤¶È */
-                            E_AMOPENAT_UART_PORT port,          /* UART ±àºÅ */
-                            UINT8* buf,                         /* Ğ´ÈëÊı¾İµØÖ· */
-                            UINT32 bufLen                       /* Ğ´ÈëÊı¾İ³¤¶È */
+UINT32 OPENAT_write_uart(                                       /* å®é™…å†™å…¥é•¿åº¦ */
+                            E_AMOPENAT_UART_PORT port,          /* UART ç¼–å· */
+                            UINT8* buf,                         /* å†™å…¥æ•°æ®åœ°å€ */
+                            UINT32 bufLen                       /* å†™å…¥æ•°æ®é•¿åº¦ */
                         );
 
-UINT32 OPENAT_write_uart_sync(E_AMOPENAT_UART_PORT port,          /* UART ±àºÅ */
-                           UINT8* buf,                         /* Ğ´ÈëÊı¾İµØÖ· */
-                           UINT32 bufLen                       /* Ğ´ÈëÊı¾İ³¤¶È */
+UINT32 OPENAT_write_uart_sync(E_AMOPENAT_UART_PORT port,          /* UART ç¼–å· */
+                           UINT8* buf,                         /* å†™å…¥æ•°æ®åœ°å€ */
+                           UINT32 bufLen                       /* å†™å…¥æ•°æ®é•¿åº¦ */
                            );
 
 
-/*+\NEW\liweiqiang\2014.4.12\Ôö¼Ó´®¿Ú½ÓÊÕÖĞ¶ÏÊ¹ÄÜ½Ó¿Ú */
+/*+\NEW\liweiqiang\2014.4.12\å¢åŠ ä¸²å£æ¥æ”¶ä¸­æ–­ä½¿èƒ½æ¥å£ */
 BOOL OPENAT_uart_enable_rx_int(
-                            E_AMOPENAT_UART_PORT port,          /* UART ±àºÅ */
-                            BOOL enable                         /* ÊÇ·ñÊ¹ÄÜ */
+                            E_AMOPENAT_UART_PORT port,          /* UART ç¼–å· */
+                            BOOL enable                         /* æ˜¯å¦ä½¿èƒ½ */
                                 );
-/*-\NEW\liweiqiang\2014.4.12\Ôö¼Ó´®¿Ú½ÓÊÕÖĞ¶ÏÊ¹ÄÜ½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.4.12\å¢åŠ ä¸²å£æ¥æ”¶ä¸­æ–­ä½¿èƒ½æ¥å£ */
 
 
 
 
-/*+\NEW\liweiqiang\2013.12.25\Ìí¼Óhost uart·¢ËÍÊı¾İ¹¦ÄÜ */
+/*+\NEW\liweiqiang\2013.12.25\æ·»åŠ host uartå‘é€æ•°æ®åŠŸèƒ½ */
     /****************************** HOST ******************************/
 BOOL OPENAT_host_init(PHOST_MESSAGE hostCallback);
 
 
 
 BOOL OPENAT_host_send_data(uint8 *data, uint32 len);
-/*-\NEW\liweiqiang\2013.12.25\Ìí¼Óhost uart·¢ËÍÊı¾İ¹¦ÄÜ */
+/*-\NEW\liweiqiang\2013.12.25\æ·»åŠ host uartå‘é€æ•°æ®åŠŸèƒ½ */
 
 
 
     /******************************* SPI ******************************/
-/*+\NEW\zhuwangbin\2020.3.7\Ìí¼Óopenat spi½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.3.7\æ·»åŠ openat spiæ¥å£*/
 BOOL OPENAT_OpenSPI( E_AMOPENAT_SPI_PORT port, T_AMOPENAT_SPI_PARAM *cfg);
 UINT32 OPENAT_ReadSPI(E_AMOPENAT_SPI_PORT port, CONST UINT8 * buf, UINT32 bufLen);
 UINT32 OPENAT_WriteSPI(E_AMOPENAT_SPI_PORT port, CONST UINT8 * buf, UINT32 bufLen, BOOLEAN type);
 UINT32 OPENAT_RwSPI(E_AMOPENAT_SPI_PORT port, CONST UINT8* txBuf, CONST UINT8* rxBuf,UINT32 bufLen);
 BOOL OPENAT_CloseSPI( E_AMOPENAT_SPI_PORT port);
-/*-\NEW\zhuwangbin\2020.3.7\Ìí¼Óopenat spi½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.3.7\æ·»åŠ openat spiæ¥å£*/
 
 
 
@@ -830,36 +830,36 @@ BOOL OPENAT_CloseSPI( E_AMOPENAT_SPI_PORT port);
 
 /******************************* I2C ******************************/
 BOOL OPENAT_open_i2c(
-                            E_AMOPENAT_I2C_PORT  port,          /* I2C ±àºÅ */
-                            T_AMOPENAT_I2C_PARAM *param         /* ³õÊ¼»¯²ÎÊı */
+                            E_AMOPENAT_I2C_PORT  port,          /* I2C ç¼–å· */
+                            T_AMOPENAT_I2C_PARAM *param         /* åˆå§‹åŒ–å‚æ•° */
                       );
 
 
 
 
 BOOL OPENAT_close_i2c(
-                            E_AMOPENAT_I2C_PORT  port           /* I2C ±àºÅ */
+                            E_AMOPENAT_I2C_PORT  port           /* I2C ç¼–å· */
                       );
 
 
 
-UINT32 OPENAT_write_i2c(                                        /* Êµ¼ÊĞ´Èë³¤¶È */
-                            E_AMOPENAT_I2C_PORT port,          /* I2C ±àºÅ */
+UINT32 OPENAT_write_i2c(                                        /* å®é™…å†™å…¥é•¿åº¦ */
+                            E_AMOPENAT_I2C_PORT port,          /* I2C ç¼–å· */
                             UINT8 salveAddr,
-                            CONST UINT8 *pRegAddr,              /* I2CÍâÉè¼Ä´æÆ÷µØÖ· */
-                            CONST UINT8* buf,                   /* Ğ´ÈëÊı¾İµØÖ· */
-                            UINT32 bufLen                       /* Ğ´ÈëÊı¾İ³¤¶È */
+                            CONST UINT8 *pRegAddr,              /* I2Cå¤–è®¾å¯„å­˜å™¨åœ°å€ */
+                            CONST UINT8* buf,                   /* å†™å…¥æ•°æ®åœ°å€ */
+                            UINT32 bufLen                       /* å†™å…¥æ•°æ®é•¿åº¦ */
                        );
 
 
 
 
-UINT32 OPENAT_read_i2c(                                         /* Êµ¼Ê¶ÁÈ¡³¤¶È */
-                            E_AMOPENAT_I2C_PORT port,          /* I2C ±àºÅ */
+UINT32 OPENAT_read_i2c(                                         /* å®é™…è¯»å–é•¿åº¦ */
+                            E_AMOPENAT_I2C_PORT port,          /* I2C ç¼–å· */
                             UINT8 slaveAddr, 
-                            CONST UINT8 *pRegAddr,              /* I2CÍâÉè¼Ä´æÆ÷µØÖ· */
-                            UINT8* buf,                         /* ´æ´¢Êı¾İµØÖ· */
-                            UINT32 bufLen                       /* ´æ´¢¿Õ¼ä³¤¶È */
+                            CONST UINT8 *pRegAddr,              /* I2Cå¤–è®¾å¯„å­˜å™¨åœ°å€ */
+                            UINT8* buf,                         /* å­˜å‚¨æ•°æ®åœ°å€ */
+                            UINT32 bufLen                       /* å­˜å‚¨ç©ºé—´é•¿åº¦ */
                       );
 
 
@@ -892,116 +892,116 @@ BOOL  OPENAT_build_rsp_bt
                             U_AMOPENAT_BT_RSP_PARAM* param
                       );   
 
-/*±¾¶Ë×÷ÎªDevAÉè±¸£¬Ö÷¶¯·¢ÆğÁ¬½Ó£¬Á¬½Ó½á¹ûOPENAT_BT_SPP_CONNECT_CNF
-Èç¹û×÷ÎªDevBÉè±¸£¬¼´¶Ô¶ËÖ÷¶¯·¢ÆğÁ¬½Ó£¬ÄÇ¾Í²»ĞèÒªµ÷ÓÃÕâ¸ö½Ó¿Ú£¬
-¶Ô¶ËÁ¬½Óºó»áÊÕµ½OPENAT_BT_SPP_CONNECT_INDÏûÏ¢*/
+/*æœ¬ç«¯ä½œä¸ºDevAè®¾å¤‡ï¼Œä¸»åŠ¨å‘èµ·è¿æ¥ï¼Œè¿æ¥ç»“æœOPENAT_BT_SPP_CONNECT_CNF
+å¦‚æœä½œä¸ºDevBè®¾å¤‡ï¼Œå³å¯¹ç«¯ä¸»åŠ¨å‘èµ·è¿æ¥ï¼Œé‚£å°±ä¸éœ€è¦è°ƒç”¨è¿™ä¸ªæ¥å£ï¼Œ
+å¯¹ç«¯è¿æ¥åä¼šæ”¶åˆ°OPENAT_BT_SPP_CONNECT_INDæ¶ˆæ¯*/
 BOOL  OPENAT_connect_spp                              
                       (
                             T_AMOPENAT_BT_ADDR* addr,
-                            T_AMOPENAT_UART_PARAM* portParam    /*ÔİÊ±²»Ö§³Ö,¿ÉÒÔĞ´NULL£¬Ä¬ÈÏÅäÖÃÎª9600,8(data),1(stop),none(parity)*/
+                            T_AMOPENAT_UART_PARAM* portParam    /*æš‚æ—¶ä¸æ”¯æŒ,å¯ä»¥å†™NULLï¼Œé»˜è®¤é…ç½®ä¸º9600,8(data),1(stop),none(parity)*/
                       );
 
-BOOL  OPENAT_disconnect_spp                                    /*¶Ï¿ªÁ¬½Ó£¬½á¹û OPENAT_BT_SPP_DISCONNECT_CNF*/
+BOOL  OPENAT_disconnect_spp                                    /*æ–­å¼€è¿æ¥ï¼Œç»“æœ OPENAT_BT_SPP_DISCONNECT_CNF*/
                       (
-                            UINT8   port                        /*¶Ë¿ÚºÅ£¬»áÔÚOPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFÖĞÉÏ±¨*/
+                            UINT8   port                        /*ç«¯å£å·ï¼Œä¼šåœ¨OPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFä¸­ä¸ŠæŠ¥*/
                       ); 
 
-INT32  OPENAT_write_spp                                         /*·¢ËÍ½á¹û»áÔÚ»Øµ÷º¯ÊıÀïµÄOPENAT_BT_SPP_SEND_DATA_CNFÊÂ¼şÖĞÉÏ±¨*/
-                                                                /*·µ»ØÖµÎªÊµ¼ÊÖ´ĞĞĞ´ÈëµÄ³¤¶È£¬Èç¹ûÎª0±íÊ¾¸ù±¾Ã»ÓĞÊı¾İ±»·¢ËÍ£¬Ò²Ã»ÓĞ
-                                                                  OPENAT_BT_SPP_SEND_DATA_CNFÊÂ¼şÉÏ±¨*/
+INT32  OPENAT_write_spp                                         /*å‘é€ç»“æœä¼šåœ¨å›è°ƒå‡½æ•°é‡Œçš„OPENAT_BT_SPP_SEND_DATA_CNFäº‹ä»¶ä¸­ä¸ŠæŠ¥*/
+                                                                /*è¿”å›å€¼ä¸ºå®é™…æ‰§è¡Œå†™å…¥çš„é•¿åº¦ï¼Œå¦‚æœä¸º0è¡¨ç¤ºæ ¹æœ¬æ²¡æœ‰æ•°æ®è¢«å‘é€ï¼Œä¹Ÿæ²¡æœ‰
+                                                                  OPENAT_BT_SPP_SEND_DATA_CNFäº‹ä»¶ä¸ŠæŠ¥*/
                       (
-                            UINT8   port,                       /*¶Ë¿ÚºÅ£¬»áÔÚOPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFÖĞÉÏ±¨*/
-                            UINT8*  buf,                        /*²»ÄÜ´«Êä"rls¿ªÍ·µÄ×Ö·û´®£¬·ñÔò»áÈÏÎªÊÇÉèÖÃRFCOMMµÄ×´Ì¬£¬ÀıÈçrls0*/
-                            UINT32  bufLen                      /*Ò»´Î×î¶à´«ÊäT_AMOPENAT_BT_SPP_CONN_IND.maxFrameSize´óĞ¡×Ö½ÚµÄÊı¾İ*/
+                            UINT8   port,                       /*ç«¯å£å·ï¼Œä¼šåœ¨OPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFä¸­ä¸ŠæŠ¥*/
+                            UINT8*  buf,                        /*ä¸èƒ½ä¼ è¾“"rlså¼€å¤´çš„å­—ç¬¦ä¸²ï¼Œå¦åˆ™ä¼šè®¤ä¸ºæ˜¯è®¾ç½®RFCOMMçš„çŠ¶æ€ï¼Œä¾‹å¦‚rls0*/
+                            UINT32  bufLen                      /*ä¸€æ¬¡æœ€å¤šä¼ è¾“T_AMOPENAT_BT_SPP_CONN_IND.maxFrameSizeå¤§å°å­—èŠ‚çš„æ•°æ®*/
                       );
 
 
-INT32  OPENAT_read_spp                                         /*»Øµ÷º¯ÊıÖĞÊÕµ½OPENAT_BT_SPP_DATA_INDÊÂ¼şºó£¬µ÷ÓÃ¸Ã½Ó¿Ú¶ÁÈ¡*/
-                                                                /*·µ»ØÖµÎªÊµ¼Ê¶ÁÈ¡³¤¶È*/
+INT32  OPENAT_read_spp                                         /*å›è°ƒå‡½æ•°ä¸­æ”¶åˆ°OPENAT_BT_SPP_DATA_INDäº‹ä»¶åï¼Œè°ƒç”¨è¯¥æ¥å£è¯»å–*/
+                                                                /*è¿”å›å€¼ä¸ºå®é™…è¯»å–é•¿åº¦*/
                       (
-                            UINT8   port,                       /*¶Ë¿ÚºÅ£¬»áÔÚOPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFÖĞÉÏ±¨*/
+                            UINT8   port,                       /*ç«¯å£å·ï¼Œä¼šåœ¨OPENAT_BT_SPP_CONNECT_IND/OPENAT_BT_SPP_CONNECT_CNFä¸­ä¸ŠæŠ¥*/
                             UINT8*  buf,
                             UINT32  bufLen
                       );   
 
 
 /****************************** AUDIO ******************************/
-BOOL OPENAT_open_tch(VOID);                                       /* ´ò¿ªÓïÒô£¬ÔÚÍ¨»°¿ªÊ¼Ê±µ÷ÓÃ */
+BOOL OPENAT_open_tch(VOID);                                       /* æ‰“å¼€è¯­éŸ³ï¼Œåœ¨é€šè¯å¼€å§‹æ—¶è°ƒç”¨ */
                            
 
 
-BOOL OPENAT_close_tch(VOID);                                         /* ¹Ø±ÕÓïÒô£¬Í¨»°½áÊøÊ±µ÷ÓÃ */
+BOOL OPENAT_close_tch(VOID);                                         /* å…³é—­è¯­éŸ³ï¼Œé€šè¯ç»“æŸæ—¶è°ƒç”¨ */
 
                             
-BOOL OPENAT_play_tone(                                          /* ²¥·ÅTONEÒô½Ó¿Ú */
-                            E_AMOPENAT_TONE_TYPE toneType,      /* TONEÒôÀàĞÍ */
-                            UINT16 duration,                    /* ²¥·ÅÊ±³¤ */
-                            E_AMOPENAT_SPEAKER_GAIN volume      /* ²¥·ÅÒôÁ¿ */
+BOOL OPENAT_play_tone(                                          /* æ’­æ”¾TONEéŸ³æ¥å£ */
+                            E_AMOPENAT_TONE_TYPE toneType,      /* TONEéŸ³ç±»å‹ */
+                            UINT16 duration,                    /* æ’­æ”¾æ—¶é•¿ */
+                            E_AMOPENAT_SPEAKER_GAIN volume      /* æ’­æ”¾éŸ³é‡ */
                      );
 
 
-BOOL OPENAT_stop_tone(VOID);                                          /* Í£Ö¹²¥·ÅTONEÒô½Ó¿Ú */
+BOOL OPENAT_stop_tone(VOID);                                          /* åœæ­¢æ’­æ”¾TONEéŸ³æ¥å£ */
 
 
                             
-BOOL OPENAT_play_dtmf(                                          /* ²¥·ÅDTMFÒô½Ó¿Ú */
-                            E_AMOPENAT_DTMF_TYPE dtmfType,      /* DTMFÀàĞÍ */
-                            UINT16 duration,                    /* ²¥·ÅÊ±³¤ */
-                            E_AMOPENAT_SPEAKER_GAIN volume      /* ²¥·ÅÒôÁ¿ */
+BOOL OPENAT_play_dtmf(                                          /* æ’­æ”¾DTMFéŸ³æ¥å£ */
+                            E_AMOPENAT_DTMF_TYPE dtmfType,      /* DTMFç±»å‹ */
+                            UINT16 duration,                    /* æ’­æ”¾æ—¶é•¿ */
+                            E_AMOPENAT_SPEAKER_GAIN volume      /* æ’­æ”¾éŸ³é‡ */
                      );
 
 
-BOOL OPENAT_stop_dtmf(VOID);                                          /* Í£Ö¹²¥·ÅDTMFÒô½Ó¿Ú */
+BOOL OPENAT_stop_dtmf(VOID);                                          /* åœæ­¢æ’­æ”¾DTMFéŸ³æ¥å£ */
 
 
-/*+\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
+/*+\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
 int OPENAT_streamplayV2(E_AMOPENAT_AUD_PLAY_TYPE playtype,E_AMOPENAT_AUD_FORMAT playformat,AUD_PLAY_CALLBACK_T cb,char* data,int len);
-/*-\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
+/*-\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
 int OPENAT_streamplay(E_AMOPENAT_AUD_FORMAT playformat,AUD_PLAY_CALLBACK_T cb,char* data,int len);
 
                             
-/*+\NewReq WM-584\maliang\2013.2.21\[OpenAt]Ö§³ÖT¿¨²¥·ÅMP3*/
+/*+\NewReq WM-584\maliang\2013.2.21\[OpenAt]æ”¯æŒTå¡æ’­æ”¾MP3*/
 BOOL OPENAT_play_music(T_AMOPENAT_PLAY_PARAM*  playParam);
-/*-\NewReq WM-584\maliang\2013.2.21\[OpenAt]Ö§³ÖT¿¨²¥·ÅMP3*/
+/*-\NewReq WM-584\maliang\2013.2.21\[OpenAt]æ”¯æŒTå¡æ’­æ”¾MP3*/
 
 
-BOOL OPENAT_stop_music(VOID);                                         /* Í£Ö¹ÒôÆµ²¥·Å½Ó¿Ú */
-
-
-                            
-BOOL OPENAT_pause_music(VOID);                                        /* ÔİÍ£ÒôÆµ²¥·Å½Ó¿Ú */
+BOOL OPENAT_stop_music(VOID);                                         /* åœæ­¢éŸ³é¢‘æ’­æ”¾æ¥å£ */
 
 
                             
-BOOL OPENAT_resume_music(VOID);                                      /* Í£Ö¹ÒôÆµ²¥·Å½Ó¿Ú */
+BOOL OPENAT_pause_music(VOID);                                        /* æš‚åœéŸ³é¢‘æ’­æ”¾æ¥å£ */
+
+
+                            
+BOOL OPENAT_resume_music(VOID);                                      /* åœæ­¢éŸ³é¢‘æ’­æ”¾æ¥å£ */
 
                            
-/*+\NewReq WM-710\maliang\2013.3.18\ [OpenAt]Ôö¼Ó½Ó¿ÚÉèÖÃMP3²¥·ÅµÄÒôĞ§*/
-BOOL OPENAT_set_eq(                                       /* ÉèÖÃMP3ÒôĞ§*/
+/*+\NewReq WM-710\maliang\2013.3.18\ [OpenAt]å¢åŠ æ¥å£è®¾ç½®MP3æ’­æ”¾çš„éŸ³æ•ˆ*/
+BOOL OPENAT_set_eq(                                       /* è®¾ç½®MP3éŸ³æ•ˆ*/
                             E_AMOPENAT_AUDIO_SET_EQ setEQ
                           );
-/*-\NewReq WM-710\maliang\2013.3.18\ [OpenAt]Ôö¼Ó½Ó¿ÚÉèÖÃMP3²¥·ÅµÄÒôĞ§*/
+/*-\NewReq WM-710\maliang\2013.3.18\ [OpenAt]å¢åŠ æ¥å£è®¾ç½®MP3æ’­æ”¾çš„éŸ³æ•ˆ*/
 
-BOOL OPENAT_open_mic(VOID);                                           /* ¿ªÆôMIC½Ó¿Ú */
+BOOL OPENAT_open_mic(VOID);                                           /* å¼€å¯MICæ¥å£ */
                             
 
 
-BOOL OPENAT_close_mic(VOID);                                          /* ¹Ø±ÕMIC½Ó¿Ú */
+BOOL OPENAT_close_mic(VOID);                                          /* å…³é—­MICæ¥å£ */
 
                            
-BOOL OPENAT_mute_mic(VOID);                                           /* MIC¾²Òô½Ó¿Ú */
+BOOL OPENAT_mute_mic(VOID);                                           /* MICé™éŸ³æ¥å£ */
 
 
-BOOL OPENAT_unmute_mic(VOID);                                         /* ½â³ıMIC¾²Òô½Ó¿Ú */
+BOOL OPENAT_unmute_mic(VOID);                                         /* è§£é™¤MICé™éŸ³æ¥å£ */
 
                             
-BOOL OPENAT_set_mic_gain(                                       /* ÉèÖÃMICÔöÒæ½Ó¿Ú */
-                            UINT16 micGain                      /* ÉèÖÃMICµÄÔöÒæ£¬×î´óÎª20 */
+BOOL OPENAT_set_mic_gain(                                       /* è®¾ç½®MICå¢ç›Šæ¥å£ */
+                            UINT16 micGain                      /* è®¾ç½®MICçš„å¢ç›Šï¼Œæœ€å¤§ä¸º20 */
                         );
 
 
 
-int OPENAT_audio_record( 									  /* Â¼Òô½Ó¿Ú */
+int OPENAT_audio_record( 									  /* å½•éŸ³æ¥å£ */
 										E_AMOPENAT_RECORD_PARAM* param,
 										AUD_RECORD_CALLBACK_T cb);
 
@@ -1009,84 +1009,84 @@ int OPENAT_audio_record( 									  /* Â¼Òô½Ó¿Ú */
 
 int OPENAT_audio_stop_record(VOID);
 
-BOOL OPENAT_open_speaker(VOID);                                       /* ´ò¿ªÑïÉùÆ÷½Ó¿Ú */
+BOOL OPENAT_open_speaker(VOID);                                       /* æ‰“å¼€æ‰¬å£°å™¨æ¥å£ */
 
 
-BOOL OPENAT_close_speaker(VOID);                                      /* ¹Ø±ÕÑïÉùÆ÷½Ó¿Ú */
+BOOL OPENAT_close_speaker(VOID);                                      /* å…³é—­æ‰¬å£°å™¨æ¥å£ */
 
 
-BOOL OPENAT_mute_speaker(VOID);                                       /* ÑïÉùÆ÷¾²Òô½Ó¿Ú */
+BOOL OPENAT_mute_speaker(VOID);                                       /* æ‰¬å£°å™¨é™éŸ³æ¥å£ */
 
 
-BOOL OPENAT_unmute_speaker(VOID);                                     /* ½â³ıÑïÉùÆ÷¾²Òô½Ó¿Ú */
+BOOL OPENAT_unmute_speaker(VOID);                                     /* è§£é™¤æ‰¬å£°å™¨é™éŸ³æ¥å£ */
 
 
                            
-BOOL OPENAT_set_speaker_gain(                                   /* ÉèÖÃÑïÉùÆ÷µÄÔöÒæ */
-                            E_AMOPENAT_SPEAKER_GAIN speakerGain /* ÉèÖÃÑïÉùÆ÷µÄÔöÒæ */
+BOOL OPENAT_set_speaker_gain(                                   /* è®¾ç½®æ‰¬å£°å™¨çš„å¢ç›Š */
+                            E_AMOPENAT_SPEAKER_GAIN speakerGain /* è®¾ç½®æ‰¬å£°å™¨çš„å¢ç›Š */
                             );
 
 
 
-/*+\bug\wj\2020.5.6\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*+\bug\wj\2020.5.6\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 BOOL OPENAT_set_sph_vol(								   
 						UINT32 vol);
-/*-\bug\wj\2020.5.6\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.08.10\BUG_2801: Ë¼ÌØCSDK Í¨¹ıiot_audio_set_speaker_vol()½Ó¿ÚÉèÖÃÍ¨¹ıÒôÁ¿ÎŞĞ§ AT+CLVL¿ÉÒÔĞŞ¸ÄÍ¨»°ÒôÁ¿*/
+/*-\bug\wj\2020.5.6\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
+/*+\BUG\wangyuan\2020.08.10\BUG_2801: æ€ç‰¹CSDK é€šè¿‡iot_audio_set_speaker_vol()æ¥å£è®¾ç½®é€šè¿‡éŸ³é‡æ— æ•ˆ AT+CLVLå¯ä»¥ä¿®æ”¹é€šè¯éŸ³é‡*/
 UINT32 OPENAT_get_sph_vol(void);
-/*-\BUG\wangyuan\2020.08.10\BUG_2801: Ë¼ÌØCSDK Í¨¹ıiot_audio_set_speaker_vol()½Ó¿ÚÉèÖÃÍ¨¹ıÒôÁ¿ÎŞĞ§ AT+CLVL¿ÉÒÔĞŞ¸ÄÍ¨»°ÒôÁ¿*/
+/*-\BUG\wangyuan\2020.08.10\BUG_2801: æ€ç‰¹CSDK é€šè¿‡iot_audio_set_speaker_vol()æ¥å£è®¾ç½®é€šè¿‡éŸ³é‡æ— æ•ˆ AT+CLVLå¯ä»¥ä¿®æ”¹é€šè¯éŸ³é‡*/
 
-E_AMOPENAT_SPEAKER_GAIN OPENAT_get_speaker_gain(VOID);                /* »ñÈ¡ÑïÉùÆ÷µÄÔöÒæ½Ó¿Ú */
+E_AMOPENAT_SPEAKER_GAIN OPENAT_get_speaker_gain(VOID);                /* è·å–æ‰¬å£°å™¨çš„å¢ç›Šæ¥å£ */
 
 
-/*+\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
-BOOL OPENAT_set_channel(                                        /* ÉèÖÃÒôÆµÍ¨µÀ½Ó¿Ú */
-                            E_AMOPENAT_AUDIO_CHANNEL outputchannel    /* Êä³öÍ¨µÀ */,
-                            E_AMOPENAT_MIC_CHANNEL inputchannel    /* ÊäÈëÍ¨µÀ */
+/*+\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
+BOOL OPENAT_set_channel(                                        /* è®¾ç½®éŸ³é¢‘é€šé“æ¥å£ */
+                            E_AMOPENAT_AUDIO_CHANNEL outputchannel    /* è¾“å‡ºé€šé“ */,
+                            E_AMOPENAT_MIC_CHANNEL inputchannel    /* è¾“å…¥é€šé“ */
                        );
-/*-\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
 
-/*+\BUG\wangyuan\2020.06.08\BUG_2163:CSDKÌá¹©audioÒôÆµ²¥·Å½Ó¿Ú*/
-BOOL OPENAT_set_music_volume(UINT32 vol);		/* ÉèÖÃÒôÆµÒôÁ¿½Ó¿Ú */
+/*+\BUG\wangyuan\2020.06.08\BUG_2163:CSDKæä¾›audioéŸ³é¢‘æ’­æ”¾æ¥å£*/
+BOOL OPENAT_set_music_volume(UINT32 vol);		/* è®¾ç½®éŸ³é¢‘éŸ³é‡æ¥å£ */
 
-UINT32 OPENAT_get_music_volume(void);		/* »ñÈ¡ÒôÆµÒôÁ¿½Ó¿Ú */
+UINT32 OPENAT_get_music_volume(void);		/* è·å–éŸ³é¢‘éŸ³é‡æ¥å£ */
 
 void OPENAT_delete_record(VOID);
-/*-\BUG\wangyuan\2020.06.08\BUG_2163:CSDKÌá¹©audioÒôÆµ²¥·Å½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.06.08\BUG_2163:CSDKæä¾›audioéŸ³é¢‘æ’­æ”¾æ¥å£*/
 
-VOID OPENAT_set_channel_with_same_mic(                          /* ÉèÖÃ¹²ÓÃÍ¬Ò»¸öMICÒôÆµÍ¨µÀ½Ó¿Ú */
-                        E_AMOPENAT_AUDIO_CHANNEL channel_1,     /* Í¨µÀ 1 */
-                        E_AMOPENAT_AUDIO_CHANNEL channel_2      /* Í¨µÀ 2 */
+VOID OPENAT_set_channel_with_same_mic(                          /* è®¾ç½®å…±ç”¨åŒä¸€ä¸ªMICéŸ³é¢‘é€šé“æ¥å£ */
+                        E_AMOPENAT_AUDIO_CHANNEL channel_1,     /* é€šé“ 1 */
+                        E_AMOPENAT_AUDIO_CHANNEL channel_2      /* é€šé“ 2 */
                    );
 
 
 
-/*+\BUG WM-882\rufei\2013.7.18\ÍêÉÆÍ¨µÀÉèÖÃ*/
+/*+\BUG WM-882\rufei\2013.7.18\å®Œå–„é€šé“è®¾ç½®*/
 BOOL set_hw_channel(
-                          E_AMOPENAT_AUDIO_CHANNEL hfChanne,    /*ÊÖ±úÍ¨µÀ*/
-                          E_AMOPENAT_AUDIO_CHANNEL erChanne,    /*¶ú»úÍ¨µÀ*/
-                          E_AMOPENAT_AUDIO_CHANNEL ldChanne    /*ÃâÌáÍ¨µÀ*/
+                          E_AMOPENAT_AUDIO_CHANNEL hfChanne,    /*æ‰‹æŸ„é€šé“*/
+                          E_AMOPENAT_AUDIO_CHANNEL erChanne,    /*è€³æœºé€šé“*/
+                          E_AMOPENAT_AUDIO_CHANNEL ldChanne    /*å…æé€šé“*/
                          );
-/*-\BUG WM-882\rufei\2013.7.18\ÍêÉÆÍ¨µÀÉèÖÃ*/
+/*-\BUG WM-882\rufei\2013.7.18\å®Œå–„é€šé“è®¾ç½®*/
 
-/*+\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 int OPENAT_headPlug(E_OPENAT_AUD_HEADSET_TYPE type);
-/*-\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 
 E_AMOPENAT_AUDIO_CHANNEL OPENAT_get_current_channel(VOID);
 
 
 
-/*+\NewReq WM-711\maliang\2013.3.18\[OpenAt]Ôö¼Ó½Ó¿Ú´ò¿ª»ò¹Ø±ÕÒôÆµ»Ø»·²âÊÔ*/
-/*+\New\lijiaodi\2014.7.30\ĞŞ¸ÄÒôÆµ»Ø»·²âÊÔ½Ó¿Ú£¬Ôö¼ÓIsSpkLevelAdjust¸úSpkLevelÁ½²ÎÊı
-                           Èç¹ûIsSpkLevelAdjustÎªFALSE,spkLevelÎªÄ¬ÈÏµÄÖµ£¬·ñÔòÎªSpkLevelÖ¸¶¨µÄÖµ*/
-BOOL  OPENAT_audio_loopback(BOOL  start,                    /*¿ªÊ¼»òÍ£Ö¹»Ø»·²âÊÔ*/
-                                        E_AMOPENAT_AUDIO_LOOPBACK_TYPE type,   /*»Ø»·²âÊÔµÄÀàĞÍ*/
-                                        BOOL IsSpkLevelAdjust,   /*SPKÉùÒô´óĞ¡ÊÇ·ñ¿ÉÖ¸¶¨*/
-                                        UINT8 SpkLevel);   /*SPKÖ¸¶¨µÄÉùÒô´óĞ¡SpkLevelÈ¡Öµ·¶Î§AUD_SPK_MUTE--AUD_SPK_VOL_7*/
-/*-\New\lijiaodi\2014.7.30\ĞŞ¸ÄÒôÆµ»Ø»·²âÊÔ½Ó¿Ú£¬Ôö¼ÓIsSpkLevelAdjust¸úSpkLevelÁ½²ÎÊı
-                           Èç¹ûIsSpkLevelAdjustÎªFALSE,spkLevelÎªÄ¬ÈÏµÄÖµ£¬·ñÔòÎªSpkLevelÖ¸¶¨µÄÖµ*/
-/*-\NewReq WM-711\maliang\2013.3.18\[OpenAt]Ôö¼Ó½Ó¿Ú´ò¿ª»ò¹Ø±ÕÒôÆµ»Ø»·²âÊÔ*/
+/*+\NewReq WM-711\maliang\2013.3.18\[OpenAt]å¢åŠ æ¥å£æ‰“å¼€æˆ–å…³é—­éŸ³é¢‘å›ç¯æµ‹è¯•*/
+/*+\New\lijiaodi\2014.7.30\ä¿®æ”¹éŸ³é¢‘å›ç¯æµ‹è¯•æ¥å£ï¼Œå¢åŠ IsSpkLevelAdjustè·ŸSpkLevelä¸¤å‚æ•°
+                           å¦‚æœIsSpkLevelAdjustä¸ºFALSE,spkLevelä¸ºé»˜è®¤çš„å€¼ï¼Œå¦åˆ™ä¸ºSpkLevelæŒ‡å®šçš„å€¼*/
+BOOL  OPENAT_audio_loopback(BOOL  start,                    /*å¼€å§‹æˆ–åœæ­¢å›ç¯æµ‹è¯•*/
+                                        E_AMOPENAT_AUDIO_LOOPBACK_TYPE type,   /*å›ç¯æµ‹è¯•çš„ç±»å‹*/
+                                        BOOL IsSpkLevelAdjust,   /*SPKå£°éŸ³å¤§å°æ˜¯å¦å¯æŒ‡å®š*/
+                                        UINT8 SpkLevel);   /*SPKæŒ‡å®šçš„å£°éŸ³å¤§å°SpkLevelå–å€¼èŒƒå›´AUD_SPK_MUTE--AUD_SPK_VOL_7*/
+/*-\New\lijiaodi\2014.7.30\ä¿®æ”¹éŸ³é¢‘å›ç¯æµ‹è¯•æ¥å£ï¼Œå¢åŠ IsSpkLevelAdjustè·ŸSpkLevelä¸¤å‚æ•°
+                           å¦‚æœIsSpkLevelAdjustä¸ºFALSE,spkLevelä¸ºé»˜è®¤çš„å€¼ï¼Œå¦åˆ™ä¸ºSpkLevelæŒ‡å®šçš„å€¼*/
+/*-\NewReq WM-711\maliang\2013.3.18\[OpenAt]å¢åŠ æ¥å£æ‰“å¼€æˆ–å…³é—­éŸ³é¢‘å›ç¯æµ‹è¯•*/
 
 
 
@@ -1096,95 +1096,95 @@ int OPENAT_WritePlayData(char* data, unsigned size);
 
     
 /****************************** ADC ******************************/
-/*+\BUG\wangyuan\2020.06.30\BUG_2424:CSDK-8910 ADC µÄAPI ±àÒë´íÎó*/
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\BUG\wangyuan\2020.06.30\BUG_2424:CSDK-8910 ADC çš„API ç¼–è¯‘é”™è¯¯*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 BOOL OPENAT_InitADC(
-	    E_AMOPENAT_ADC_CHANNEL channel  /* ADC±àºÅ */,
+	    E_AMOPENAT_ADC_CHANNEL channel  /* ADCç¼–å· */,
 	    E_AMOPENAT_ADC_CFG_MODE mode
 	    	);
 
 
 BOOL OPENAT_ReadADC(
-				    E_AMOPENAT_ADC_CHANNEL channel,  /* ADC±àºÅ */
-				    kal_uint32*               adcValue,   /* adcÖµ */
-				    kal_uint32*               voltage    /* µçÑ¹Öµ*/
+				    E_AMOPENAT_ADC_CHANNEL channel,  /* ADCç¼–å· */
+				    kal_uint32*               adcValue,   /* adcå€¼ */
+				    kal_uint32*               voltage    /* ç”µå‹å€¼*/
 				);
 
 BOOL OPENAT_CloseADC(
-    E_AMOPENAT_ADC_CHANNEL channel  /* ADC±àºÅ */
+    E_AMOPENAT_ADC_CHANNEL channel  /* ADCç¼–å· */
 );
 
 BOOL OPENAT_SetScaleAdc(E_AMOPENAT_ADC_CHANNEL channel,
 			E_AMOPENAT_ADC_SCALE scale);
 
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 
-/*-\BUG\wangyuan\2020.06.30\BUG_2424:CSDK-8910 ADC µÄAPI ±àÒë´íÎó*/
+/*-\BUG\wangyuan\2020.06.30\BUG_2424:CSDK-8910 ADC çš„API ç¼–è¯‘é”™è¯¯*/
 
-/*+\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+/*+\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
 bool OPENAT_pwm_open(E_AMOPENAT_PWM_PORT port);
 bool OPENAT_pwm_set(T_AMOPENAT_PWM_CFG *pwm_cfg);
 bool OPENAT_pwm_close(E_AMOPENAT_PWM_PORT port);
-/*-\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+/*-\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
 
 /****************************** LCD ******************************/
-/* MONO */                                                  /* ºÚ°×ÆÁ*/			
-BOOL OPENAT_init_mono_lcd(                                      /* ÆÁÄ»³õÊ¼»¯½Ó¿Ú */
+/* MONO */                                                  /* é»‘ç™½å±*/			
+BOOL OPENAT_init_mono_lcd(                                      /* å±å¹•åˆå§‹åŒ–æ¥å£ */
                             T_AMOPENAT_MONO_LCD_PARAM*  monoLcdParamP
                     );
 
-/*+\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
-BOOL OPENAT_close_mono_lcd(void);/* Lcd¹Ø±Õ½Ó¿Ú */
-/*-\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*+\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
+BOOL OPENAT_close_mono_lcd(void);/* Lcdå…³é—­æ¥å£ */
+/*-\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
 
-VOID OPENAT_send_mono_lcd_command(                              /* ·¢ËÍÃüÁî½Ó¿Ú */
-                            UINT8 cmd                           /* ÃüÁî */
+VOID OPENAT_send_mono_lcd_command(                              /* å‘é€å‘½ä»¤æ¥å£ */
+                            UINT8 cmd                           /* å‘½ä»¤ */
                                  );
 
 
-VOID OPENAT_send_mono_lcd_data(                                 /* ·¢ËÍÊı¾İ½Ó¿Ú */
-                            UINT8 data                          /* Êı¾İ */
+VOID OPENAT_send_mono_lcd_data(                                 /* å‘é€æ•°æ®æ¥å£ */
+                            UINT8 data                          /* æ•°æ® */
                               );
 
 
 
-VOID OPENAT_update_mono_lcd_screen(                             /* ¸üĞÂÆÁÄ»½Ó¿Ú */
-                            T_AMOPENAT_LCD_RECT_T* rect         /* ĞèÒªË¢ĞÂµÄÇøÓò */
+VOID OPENAT_update_mono_lcd_screen(                             /* æ›´æ–°å±å¹•æ¥å£ */
+                            T_AMOPENAT_LCD_RECT_T* rect         /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
                                   );
 
 
-VOID OPENAT_clear_mono_lcd(                                     /* ÇåÆÁ£¬Ò»°ãÓÃÓÚÊµ¼ÊLCD RAM±ÈÏÔÊ¾ÇøÓò´óµÄÇé¿ö */
-                            UINT16 realHeight,                  /* Êµ¼ÊLCD RAM ¸ß¶È */
-                            UINT16 realWidth                    /* Êµ¼ÊLCD RAM ¿í¶È£¬±ØĞëÊÇ4µÄ±¶Êı */
+VOID OPENAT_clear_mono_lcd(                                     /* æ¸…å±ï¼Œä¸€èˆ¬ç”¨äºå®é™…LCD RAMæ¯”æ˜¾ç¤ºåŒºåŸŸå¤§çš„æƒ…å†µ */
+                            UINT16 realHeight,                  /* å®é™…LCD RAM é«˜åº¦ */
+                            UINT16 realWidth                    /* å®é™…LCD RAM å®½åº¦ï¼Œå¿…é¡»æ˜¯4çš„å€æ•° */
                           );
 
 
-/* COLOR */                                                 /* ²ÊÉ«ÆÁ */
-BOOL OPENAT_init_color_lcd(                                     /* ÆÁÄ»³õÊ¼»¯½Ó¿Ú */
-                            T_AMOPENAT_COLOR_LCD_PARAM *param   /* ²ÊÆÁ³õÊ¼»¯²ÎÊı */
+/* COLOR */                                                 /* å½©è‰²å± */
+BOOL OPENAT_init_color_lcd(                                     /* å±å¹•åˆå§‹åŒ–æ¥å£ */
+                            T_AMOPENAT_COLOR_LCD_PARAM *param   /* å½©å±åˆå§‹åŒ–å‚æ•° */
                           );
 
-/*+\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
-BOOL OPENAT_close_color_lcd(void);/* Lcd¹Ø±Õ½Ó¿Ú */
-/*-\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*+\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
+BOOL OPENAT_close_color_lcd(void);/* Lcdå…³é—­æ¥å£ */
+/*-\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
 
-BOOL OPENAT_spiconfig_color_lcd(                     /* ²ÊÆÁSPIÅäÖÃ */
+BOOL OPENAT_spiconfig_color_lcd(                     /* å½©å±SPIé…ç½® */
                         void                    
                         );
 
-VOID OPENAT_send_color_lcd_command(                             /* ·¢ËÍÃüÁî½Ó¿Ú */
-                            UINT8 cmd                           /* ÃüÁî */
+VOID OPENAT_send_color_lcd_command(                             /* å‘é€å‘½ä»¤æ¥å£ */
+                            UINT8 cmd                           /* å‘½ä»¤ */
                                   );
 
 
-VOID OPENAT_send_color_lcd_data(                                /* ·¢ËÍÊı¾İ½Ó¿Ú */
-                            UINT8 data                          /* Êı¾İ */
+VOID OPENAT_send_color_lcd_data(                                /* å‘é€æ•°æ®æ¥å£ */
+                            UINT8 data                          /* æ•°æ® */
                                );
 
 
-VOID OPENAT_update_color_lcd_screen(                            /* ¸üĞÂÆÁÄ»½Ó¿Ú */
-                            T_AMOPENAT_LCD_RECT_T* rect,        /* ĞèÒªË¢ĞÂµÄÇøÓò */
-                            UINT16 *pDisplayBuffer              /* Ë¢ĞÂµÄ»º³åÇø */
+VOID OPENAT_update_color_lcd_screen(                            /* æ›´æ–°å±å¹•æ¥å£ */
+                            T_AMOPENAT_LCD_RECT_T* rect,        /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
+                            UINT16 *pDisplayBuffer              /* åˆ·æ–°çš„ç¼“å†²åŒº */
                                    );
 
 
@@ -1194,66 +1194,66 @@ void OPENAT_layer_flatten(OPENAT_LAYER_INFO* layer1,
 
 
 
-/*+\NEW\Jack.li\2013.2.9\Ôö¼ÓÉãÏñÍ·ÊÓÆµÂ¼ÖÆ½Ó¿Ú */
-BOOL OPENAT_camera_videorecord_start(                           /* ¿ªÊ¼Â¼ÖÆÊÓÆµ */
-                    INT32 iFd                               /* Â¼ÏñÎÄ¼ş¾ä±ú */
+/*+\NEW\Jack.li\2013.2.9\å¢åŠ æ‘„åƒå¤´è§†é¢‘å½•åˆ¶æ¥å£ */
+BOOL OPENAT_camera_videorecord_start(                           /* å¼€å§‹å½•åˆ¶è§†é¢‘ */
+                    INT32 iFd                               /* å½•åƒæ–‡ä»¶å¥æŸ„ */
                     );
 
 
-BOOL OPENAT_camera_videorecord_pause(                           /* ÔİÍ£Â¼ÖÆÊÓÆµ */
+BOOL OPENAT_camera_videorecord_pause(                           /* æš‚åœå½•åˆ¶è§†é¢‘ */
                     void                    
                     );
 
 
-BOOL OPENAT_camera_videorecord_resume(                          /* »Ö¸´Â¼ÖÆÊÓÆµ */
+BOOL OPENAT_camera_videorecord_resume(                          /* æ¢å¤å½•åˆ¶è§†é¢‘ */
                         void                    
                         );
 
 
-BOOL OPENAT_camera_videorecord_stop(                            /* Í£Ö¹Â¼ÖÆÊÓÆµ */
+BOOL OPENAT_camera_videorecord_stop(                            /* åœæ­¢å½•åˆ¶è§†é¢‘ */
                         void                    
                         );
 
 
-/*-\NEW\Jack.li\2013.2.9\Ôö¼ÓÉãÏñÍ·ÊÓÆµÂ¼ÖÆ½Ó¿Ú */
+/*-\NEW\Jack.li\2013.2.9\å¢åŠ æ‘„åƒå¤´è§†é¢‘å½•åˆ¶æ¥å£ */
 
-/*-\NEW\Jack.li\2013.1.28\Ôö¼ÓÉãÏñÍ·Çı¶¯*/
+/*-\NEW\Jack.li\2013.1.28\å¢åŠ æ‘„åƒå¤´é©±åŠ¨*/
 
-/*+\NEW\Jack.li\2013.2.10\Ôö¼ÓÊÓÆµ²¥·Å½Ó¿Ú */
-BOOL OPENAT_video_open(                                         /* ´ò¿ªÊÓÆµ»·¾³ */
-                        T_AMOPENAT_VIDEO_PARAM *param           /* ÊÓÆµ²ÎÊı */
+/*+\NEW\Jack.li\2013.2.10\å¢åŠ è§†é¢‘æ’­æ”¾æ¥å£ */
+BOOL OPENAT_video_open(                                         /* æ‰“å¼€è§†é¢‘ç¯å¢ƒ */
+                        T_AMOPENAT_VIDEO_PARAM *param           /* è§†é¢‘å‚æ•° */
                         );
 
 
-BOOL OPENAT_video_close(                                        /* ¹Ø±ÕÊÓÆµ»·¾³ */
+BOOL OPENAT_video_close(                                        /* å…³é—­è§†é¢‘ç¯å¢ƒ */
                         void
                         );
 
 
-BOOL OPENAT_video_get_info(                                     /* »ñÈ¡ÊÓÆµĞÅÏ¢ */
-                        T_AMOPENAT_VIDEO_INFO *pInfo            /* ÊÓÆµĞÅÏ¢ */
+BOOL OPENAT_video_get_info(                                     /* è·å–è§†é¢‘ä¿¡æ¯ */
+                        T_AMOPENAT_VIDEO_INFO *pInfo            /* è§†é¢‘ä¿¡æ¯ */
                         );
 
 
-BOOL OPENAT_video_play(                                         /* ²¥·Å */
+BOOL OPENAT_video_play(                                         /* æ’­æ”¾ */
                         void
                         );
 
 
-BOOL OPENAT_video_pause(                                        /* ÔİÍ£ */
+BOOL OPENAT_video_pause(                                        /* æš‚åœ */
                         void
                         );
 
 
-BOOL OPENAT_video_resume(                                       /* »Ö¸´ */
+BOOL OPENAT_video_resume(                                       /* æ¢å¤ */
                         void
                         );
 
 
-BOOL OPENAT_video_stop(                                         /* Í£Ö¹ */
+BOOL OPENAT_video_stop(                                         /* åœæ­¢ */
                         void
                         );
-    /*-\NEW\Jack.li\2013.2.10\Ôö¼ÓÊÓÆµ²¥·Å½Ó¿Ú */
+    /*-\NEW\Jack.li\2013.2.10\å¢åŠ è§†é¢‘æ’­æ”¾æ¥å£ */
 
 #if 0 
 void OPENAT_ttsply_Error_Callback(S32 ttsResult);
@@ -1296,21 +1296,21 @@ void OPENAT_SLI3108_init(openat_msg_proc msg_proc);
 typedef enum SLI3108_STATUS_TAG
 {
     SLI3108_STATUS_INVALID,
-    SLI3108_STATUS_LOW,                          /*³¬³ö×îµÍ·§Öµ£¬±íÊ¾Î´Åå´÷*/
-    SLI3108_STATUS_HIGH,                         /*³¬³ö×î¸ß·§Öµ£¬±íÊ¾ÒÑÅå´÷*/
+    SLI3108_STATUS_LOW,                          /*è¶…å‡ºæœ€ä½é˜€å€¼ï¼Œè¡¨ç¤ºæœªä½©æˆ´*/
+    SLI3108_STATUS_HIGH,                         /*è¶…å‡ºæœ€é«˜é˜€å€¼ï¼Œè¡¨ç¤ºå·²ä½©æˆ´*/
 }SLI3108_STATUS; 
 
 
     /* NULL */
     /****************************** KEYPAD ******************************/
-BOOL OPENAT_init_keypad(                                        /* ¼üÅÌ³õÊ¼»¯½Ó¿Ú */
-                            T_AMOPENAT_KEYPAD_CONFIG *pConfig   /* ¼üÅÌÅäÖÃ²ÎÊı */
+BOOL OPENAT_init_keypad(                                        /* é”®ç›˜åˆå§‹åŒ–æ¥å£ */
+                            T_AMOPENAT_KEYPAD_CONFIG *pConfig   /* é”®ç›˜é…ç½®å‚æ•° */
                        );
     
 
     /****************************** TOUCHSCREEN ******************************/
-BOOL OPENAT_init_touchScreen(                                   /* ´¥ÃşÆÁ³õÊ¼»¯½Ó¿Ú */
-                            PTOUCHSCREEN_MESSAGE pTouchScreenMessage /* ´¥ÆÁÏûÏ¢»Øµ÷º¯Êı */
+BOOL OPENAT_init_touchScreen(                                   /* è§¦æ‘¸å±åˆå§‹åŒ–æ¥å£ */
+                            PTOUCHSCREEN_MESSAGE pTouchScreenMessage /* è§¦å±æ¶ˆæ¯å›è°ƒå‡½æ•° */
                             );
     
 
@@ -1323,63 +1323,63 @@ VOID OPENAT_TouchScreen_Sleep_Out(VOID);
 
     
 /******************************** PSAM ***********************************/
-/* ×¢Òâ:::PSAM¿¨½Ó¿ÚÔÚ²Ù×÷Éè±¸Ê±»áµ¼ÖÂµ÷ÓÃÕß±»¹ÒÆğ£¬Ö±µ½Éè±¸ÓĞÏìÓ¦»òÕß2s+³¬Ê± */
-E_AMOPENAT_PSAM_OPER_RESULT OPENAT_open_psam(                   /* ´ò¿ªpsam */
-                            E_AMOPENAT_PSAM_ID id               /* Ó²¼şSIM¿¨½Ó¿Ú */
+/* æ³¨æ„:::PSAMå¡æ¥å£åœ¨æ“ä½œè®¾å¤‡æ—¶ä¼šå¯¼è‡´è°ƒç”¨è€…è¢«æŒ‚èµ·ï¼Œç›´åˆ°è®¾å¤‡æœ‰å“åº”æˆ–è€…2s+è¶…æ—¶ */
+E_AMOPENAT_PSAM_OPER_RESULT OPENAT_open_psam(                   /* æ‰“å¼€psam */
+                            E_AMOPENAT_PSAM_ID id               /* ç¡¬ä»¶SIMå¡æ¥å£ */
                                             );
 
 
-VOID OPENAT_close_psam(                                         /* ¹Ø±Õpsam */
-                            E_AMOPENAT_PSAM_ID id               /* Ó²¼şSIM¿¨½Ó¿Ú */
+VOID OPENAT_close_psam(                                         /* å…³é—­psam */
+                            E_AMOPENAT_PSAM_ID id               /* ç¡¬ä»¶SIMå¡æ¥å£ */
                       );
-	/*  rw_psam½Ó¿ÚÊ¹ÓÃËµÃ÷
-		psam Ö¸Áî°ü
+	/*  rw_psamæ¥å£ä½¿ç”¨è¯´æ˜
+		psam æŒ‡ä»¤åŒ…
 		-------------------------
-	    ´úÂë  |	Öµ
+	    ä»£ç   |	å€¼
 		-------------------------
 		CLA     80
 		INS  	82
 		P1	    00
-		P2	    00»òÃÜÔ¿°æ±¾£¨KID£©
+		P2	    00æˆ–å¯†é’¥ç‰ˆæœ¬ï¼ˆKIDï¼‰
 		Lc	    08
-		DATA	¼ÓÃÜÊı¾İ
+		DATA	åŠ å¯†æ•°æ®
 		-------------------------
 
-	Õë¶ÔĞèÒªDATA²ÎÊıµÄPSAMÖ¸Áî£¬ĞèÒª·Ö²½·¢ËÍ£¬
-	  µÚÒ»²½ ·¢ËÍDATAÖ®Ç°µÄÃüÁî²¿·Ö£¬Í¬Ê±ÉèÖÃrxLen=1£¬stopClock = FALSE
-	  	·µ»ØÖµ¿ÉÄÜÎªIns ¡¢ ~Ins 
-	  		Èç¹û·µ»ØÊÇIns£¬½øÈëµÚÈı²½
-	  		Èç¹û·µ»ØÊÇ~Ins£¬Ôò½øÈëµÚ¶ş²½
-	  µÚ¶ş²½ Èç¹ûDATAÖĞÊ£ÓàµÄÊı¾İ´óÓÚ1¸ö×Ö½Ú£¬·¢ËÍÒ»¸ö×Ö½ÚµÄDATAÊ£ÓàÊı¾İ£¬Í¬Ê±ÉèÖÃrxLen=1£¬stopClock = FALSE£¬
-	        ·ñÔò£¬Ö±½Ó½øÈëµÚÈı²½
-	     ·µ»ØÖµµÄ´¦ÀíºÍµÚÒ»²½·µ»ØÖµ´¦ÀíÒ»ÖÂ
+	é’ˆå¯¹éœ€è¦DATAå‚æ•°çš„PSAMæŒ‡ä»¤ï¼Œéœ€è¦åˆ†æ­¥å‘é€ï¼Œ
+	  ç¬¬ä¸€æ­¥ å‘é€DATAä¹‹å‰çš„å‘½ä»¤éƒ¨åˆ†ï¼ŒåŒæ—¶è®¾ç½®rxLen=1ï¼ŒstopClock = FALSE
+	  	è¿”å›å€¼å¯èƒ½ä¸ºIns ã€ ~Ins 
+	  		å¦‚æœè¿”å›æ˜¯Insï¼Œè¿›å…¥ç¬¬ä¸‰æ­¥
+	  		å¦‚æœè¿”å›æ˜¯~Insï¼Œåˆ™è¿›å…¥ç¬¬äºŒæ­¥
+	  ç¬¬äºŒæ­¥ å¦‚æœDATAä¸­å‰©ä½™çš„æ•°æ®å¤§äº1ä¸ªå­—èŠ‚ï¼Œå‘é€ä¸€ä¸ªå­—èŠ‚çš„DATAå‰©ä½™æ•°æ®ï¼ŒåŒæ—¶è®¾ç½®rxLen=1ï¼ŒstopClock = FALSEï¼Œ
+	        å¦åˆ™ï¼Œç›´æ¥è¿›å…¥ç¬¬ä¸‰æ­¥
+	     è¿”å›å€¼çš„å¤„ç†å’Œç¬¬ä¸€æ­¥è¿”å›å€¼å¤„ç†ä¸€è‡´
 		   
-	  µÚÈı²½·¢ËÍDATAÖĞµÄÊ£ÓàÊı¾İ£¬Í¬Ê±ÉèÖÃstopClock=TRUE,rxLen¸ù¾İĞèÒªÉèÖÃ
+	  ç¬¬ä¸‰æ­¥å‘é€DATAä¸­çš„å‰©ä½™æ•°æ®ï¼ŒåŒæ—¶è®¾ç½®stopClock=TRUE,rxLenæ ¹æ®éœ€è¦è®¾ç½®
 	*/					  
-E_AMOPENAT_PSAM_OPER_RESULT OPENAT_rw_psam(                     /* ´«ÊäÊı¾İ */
-                            E_AMOPENAT_PSAM_ID id,              /* Ó²¼şSIM¿¨½Ó¿Ú */
-                            CONST UINT8*  txBuf,                /* Ğ´»º´æ */
-                            UINT16        txLen,                /* Ğ´»º´æ³¤¶È */
-                            UINT8*        rxBuf,                /* ¶Á»º´æ */
-                            UINT16        rxLen,                /* ¶Á»º´æ³¤¶È */
-                            BOOL          stopClock             /* ÃüÁî·Ö¿ª·¢ËÍÉèÖÃÎªFALSE, ÃüÁîÒ»´Î·¢ËÍ»òÕßÎª·Ö²¼·¢ËÍµÄ×îºóÒ»²½ÉèÖÃÎªTRUE*/  
+E_AMOPENAT_PSAM_OPER_RESULT OPENAT_rw_psam(                     /* ä¼ è¾“æ•°æ® */
+                            E_AMOPENAT_PSAM_ID id,              /* ç¡¬ä»¶SIMå¡æ¥å£ */
+                            CONST UINT8*  txBuf,                /* å†™ç¼“å­˜ */
+                            UINT16        txLen,                /* å†™ç¼“å­˜é•¿åº¦ */
+                            UINT8*        rxBuf,                /* è¯»ç¼“å­˜ */
+                            UINT16        rxLen,                /* è¯»ç¼“å­˜é•¿åº¦ */
+                            BOOL          stopClock             /* å‘½ä»¤åˆ†å¼€å‘é€è®¾ç½®ä¸ºFALSE, å‘½ä»¤ä¸€æ¬¡å‘é€æˆ–è€…ä¸ºåˆ†å¸ƒå‘é€çš„æœ€åä¸€æ­¥è®¾ç½®ä¸ºTRUE*/  
                                           );
 
 
     
-E_AMOPENAT_PSAM_OPER_RESULT OPENAT_reset_psam(                  /* ¸´Î»PSAM */
-                            E_AMOPENAT_PSAM_ID id,              /* Ó²¼şSIM¿¨½Ó¿Ú */
-                            UINT8*      atrBuf,                 /* ATR »º´æ */
-                            UINT16      atrBufLen,              /* ATR »º´æ³¤¶È */
-                            E_AMOPENAT_PSAM_VOLT_CLASS volt     /* ¹¤×÷µçÑ¹ */
+E_AMOPENAT_PSAM_OPER_RESULT OPENAT_reset_psam(                  /* å¤ä½PSAM */
+                            E_AMOPENAT_PSAM_ID id,              /* ç¡¬ä»¶SIMå¡æ¥å£ */
+                            UINT8*      atrBuf,                 /* ATR ç¼“å­˜ */
+                            UINT16      atrBufLen,              /* ATR ç¼“å­˜é•¿åº¦ */
+                            E_AMOPENAT_PSAM_VOLT_CLASS volt     /* å·¥ä½œç”µå‹ */
                                              );
 
 
 
-E_AMOPENAT_PSAM_OPER_RESULT OPENAT_setfd_psam(                  /* ÉèÖÃFÖµºÍDÖµ£¬Ä¬ÈÏF=372 D=1 */
-                            E_AMOPENAT_PSAM_ID id,              /* Ó²¼şSIM¿¨½Ó¿Ú */
-                            UINT16      f,                      /* FÖµ */
-                            UINT8       d                       /* DÖµ */
+E_AMOPENAT_PSAM_OPER_RESULT OPENAT_setfd_psam(                  /* è®¾ç½®Få€¼å’ŒDå€¼ï¼Œé»˜è®¤F=372 D=1 */
+                            E_AMOPENAT_PSAM_ID id,              /* ç¡¬ä»¶SIMå¡æ¥å£ */
+                            UINT16      f,                      /* Få€¼ */
+                            UINT8       d                       /* Då€¼ */
                                              );
 
     /******************************** PWM ***********************************/
@@ -1392,40 +1392,40 @@ BOOL OPENAT_ClosePwm(E_AMOPENAT_PWM_PORT port);
 /*-\NEW\RUFEI\2015.9.8\Add pwm function */
 
     /****************************** FM ******************************/
-BOOL OPENAT_open_fm(											/* ´ò¿ªFM */
-                            T_AMOPENAT_FM_PARAM *fmParam        /* ³õÊ¼»¯Êı¾İ */
+BOOL OPENAT_open_fm(											/* æ‰“å¼€FM */
+                            T_AMOPENAT_FM_PARAM *fmParam        /* åˆå§‹åŒ–æ•°æ® */
                    );
 
 
-BOOL OPENAT_tune_fm(											/* µ÷µ½Ö¸¶¨ÆµÂÊ */
-                            UINT32 frequency                    /* ÆµÂÊ(KHZ) */
+BOOL OPENAT_tune_fm(											/* è°ƒåˆ°æŒ‡å®šé¢‘ç‡ */
+                            UINT32 frequency                    /* é¢‘ç‡(KHZ) */
                    );
 
 
-BOOL OPENAT_seek_fm(											/* ËÑË÷ÏÂÒ»¸öÌ¨ */
-                            BOOL seekDirection					/* TRUE:ÆµÂÊÔö¼ÓµÄ·½Ïò FALSE::ÆµÂÊ¼õĞ¡µÄ·½Ïò */		
+BOOL OPENAT_seek_fm(											/* æœç´¢ä¸‹ä¸€ä¸ªå° */
+                            BOOL seekDirection					/* TRUE:é¢‘ç‡å¢åŠ çš„æ–¹å‘ FALSE::é¢‘ç‡å‡å°çš„æ–¹å‘ */		
                    );
 
 
-BOOL OPENAT_stopseek_fm(										/* Í£Ö¹ËÑË÷ */
+BOOL OPENAT_stopseek_fm(										/* åœæ­¢æœç´¢ */
                             void
                        );
 
 
-BOOL OPENAT_setvol_fm(											/* ÉèÖÃÒôĞ§ */
-                            E_AMOPENAT_FM_VOL_LEVEL volume, 	/* ÉèÖÃÒôÁ¿ */
+BOOL OPENAT_setvol_fm(											/* è®¾ç½®éŸ³æ•ˆ */
+                            E_AMOPENAT_FM_VOL_LEVEL volume, 	/* è®¾ç½®éŸ³é‡ */
                             BOOL bassBoost, 
                             BOOL forceMono
                      );
 
 
 
-BOOL OPENAT_getrssi_fm(											/* »ñÈ¡FMĞÅºÅ */
+BOOL OPENAT_getrssi_fm(											/* è·å–FMä¿¡å· */
                             UINT32* pRssi
                       );
 
 
-BOOL OPENAT_close_fm(											/* ¹Ø±ÕFM */
+BOOL OPENAT_close_fm(											/* å…³é—­FM */
                             void
                     );
 
@@ -1433,62 +1433,62 @@ BOOL OPENAT_close_fm(											/* ¹Ø±ÕFM */
 /*******************************************
 **               AT COMMAND               **
 *******************************************/
-BOOL OPENAT_init_at(                                            /* ĞéÄâATÍ¨Â·³õÊ¼»¯½Ó¿Ú */
-                            PAT_MESSAGE pAtMessage              /* ATÏûÏ¢»Øµ÷º¯Êı */
+BOOL OPENAT_init_at(                                            /* è™šæ‹ŸATé€šè·¯åˆå§‹åŒ–æ¥å£ */
+                            PAT_MESSAGE pAtMessage              /* ATæ¶ˆæ¯å›è°ƒå‡½æ•° */
                    );
 
 
 
-BOOL OPENAT_send_at_command(                                    /* ·¢ËÍATÃüÁî½Ó¿Ú */
-                            UINT8 *pAtCommand,                  /* ATÃüÁî */
-                            UINT16 nLength                      /* ATÃüÁî³¤¶È */
+BOOL OPENAT_send_at_command(                                    /* å‘é€ATå‘½ä»¤æ¥å£ */
+                            UINT8 *pAtCommand,                  /* ATå‘½ä»¤ */
+                            UINT16 nLength                      /* ATå‘½ä»¤é•¿åº¦ */
                            );
 
 
 
-/*+\NEW WM-733\xc\2013.04.19\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì(Ìí¼Óopenat´æÈ¡½Ó¿Ú) */
+/*+\NEW WM-733\xc\2013.04.19\ä¿®æ”¹åŠ å¯†å¡æµç¨‹(æ·»åŠ openatå­˜å–æ¥å£) */
 /*******************************************
-**               ¼ÓÃÜ¿¨ÉèÖÃ               **
+**               åŠ å¯†å¡è®¾ç½®               **
 *******************************************/
-BOOL OPENAT_set_encinfo(                         /* ÉèÖÃÃÜÔ¿ĞÅÏ¢ */
+BOOL OPENAT_set_encinfo(                         /* è®¾ç½®å¯†é’¥ä¿¡æ¯ */
                         UINT8 *encInfo,
                         UINT32 len
               );
 
 
-BOOL OPENAT_get_encinfo(                         /* ¶ÁÈ¡ÃÜÔ¿ĞÅÏ¢ */
+BOOL OPENAT_get_encinfo(                         /* è¯»å–å¯†é’¥ä¿¡æ¯ */
                         UINT8 *encInfo,
                         UINT32 len
               );
 
 
 
-UINT8 OPENAT_get_encresult(                         /* ¶ÁÈ¡¼ÓÃÜĞ£Ñé½á¹û */
+UINT8 OPENAT_get_encresult(                         /* è¯»å–åŠ å¯†æ ¡éªŒç»“æœ */
                         void
               );
 
 
 
-/*+\NEW WM-733\xc\2013.05.06\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì5(Ìí¼Ó»ñÈ¡¿¨ÀàĞÍµÄ½Ó¿Ú) */
-UINT8 OPENAT_get_cardtype(                         /* ¶ÁÈ¡¿¨ÀàĞÍ 0Î´Öª  1¼ÓÃÜ¿¨  2ÆÕÍ¨¿¨  */
+/*+\NEW WM-733\xc\2013.05.06\ä¿®æ”¹åŠ å¯†å¡æµç¨‹5(æ·»åŠ è·å–å¡ç±»å‹çš„æ¥å£) */
+UINT8 OPENAT_get_cardtype(                         /* è¯»å–å¡ç±»å‹ 0æœªçŸ¥  1åŠ å¯†å¡  2æ™®é€šå¡  */
                         void
               );
-/*-\NEW WM-733\xc\2013.05.06\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì5(Ìí¼Ó»ñÈ¡¿¨ÀàĞÍµÄ½Ó¿Ú) */
+/*-\NEW WM-733\xc\2013.05.06\ä¿®æ”¹åŠ å¯†å¡æµç¨‹5(æ·»åŠ è·å–å¡ç±»å‹çš„æ¥å£) */
 
 
-/*+\NEW WM-733\xc\2013.04.23\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì2(ÓÃopenat½Ó¿Ú´úÌæatÉèÖÃÃÜÔ¿ĞÅÏ¢¡£Ìí¼ÓĞÅºÅÁ¿) */
-BOOL OPENAT_set_enc_data_ok(                         /* mmiÖĞ×¼±¸ºÃÃÜÔ¿ĞÅÏ¢ºóÒªÓÃÕâ¸ö·¢³öÍ¨Öª */
+/*+\NEW WM-733\xc\2013.04.23\ä¿®æ”¹åŠ å¯†å¡æµç¨‹2(ç”¨openatæ¥å£ä»£æ›¿atè®¾ç½®å¯†é’¥ä¿¡æ¯ã€‚æ·»åŠ ä¿¡å·é‡) */
+BOOL OPENAT_set_enc_data_ok(                         /* mmiä¸­å‡†å¤‡å¥½å¯†é’¥ä¿¡æ¯åè¦ç”¨è¿™ä¸ªå‘å‡ºé€šçŸ¥ */
                         void
               );
-/*-\NEW WM-733\xc\2013.04.23\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì2(ÓÃopenat½Ó¿Ú´úÌæatÉèÖÃÃÜÔ¿ĞÅÏ¢¡£Ìí¼ÓĞÅºÅÁ¿) */
-/*+\NEW WM-733\xc\2013.04.19\ĞŞ¸Ä¼ÓÃÜ¿¨Á÷³Ì(Ìí¼Óopenat´æÈ¡½Ó¿Ú) */
+/*-\NEW WM-733\xc\2013.04.23\ä¿®æ”¹åŠ å¯†å¡æµç¨‹2(ç”¨openatæ¥å£ä»£æ›¿atè®¾ç½®å¯†é’¥ä¿¡æ¯ã€‚æ·»åŠ ä¿¡å·é‡) */
+/*+\NEW WM-733\xc\2013.04.19\ä¿®æ”¹åŠ å¯†å¡æµç¨‹(æ·»åŠ openatå­˜å–æ¥å£) */
 
 
 
-/*+\NEW\xiongjunqun\2014.04.02\µ÷ÕûTTSµÄ´úÂë*/
-/* delete TTS¸ÄÓÃ·¢ËÍAT Ö¸ÁîµÄĞÎÊ½ */
-/*-\NEW\xiongjunqun\2014.04.02\µ÷ÕûTTSµÄ´úÂë*/
-/*+\NEW AMOPENAT-91 \zhangyang\2013.11.19\Ôö¼ÓUSB HID¹¦ÄÜ*/
+/*+\NEW\xiongjunqun\2014.04.02\è°ƒæ•´TTSçš„ä»£ç */
+/* delete TTSæ”¹ç”¨å‘é€AT æŒ‡ä»¤çš„å½¢å¼ */
+/*-\NEW\xiongjunqun\2014.04.02\è°ƒæ•´TTSçš„ä»£ç */
+/*+\NEW AMOPENAT-91 \zhangyang\2013.11.19\å¢åŠ USB HIDåŠŸèƒ½*/
 void OPENAT_uhid_open(
         void OPENAT_handler(uint8 *, uint32));
 
@@ -1501,10 +1501,10 @@ void OPENAT_uhid_close(
 int32 OPENAT_uhid_write(
         uint8 *data_p, 
         uint32 length);
-/*-\NEW AMOPENAT-91 \zhangyang\2013.11.19\Ôö¼ÓUSB HID¹¦ÄÜ*/
+/*-\NEW AMOPENAT-91 \zhangyang\2013.11.19\å¢åŠ USB HIDåŠŸèƒ½*/
 
 
-/*+\NEW\RUFEI\2014.8.20\Ôö¼Ógps½Ó¿ÚÊµÏÖ*/
+/*+\NEW\RUFEI\2014.8.20\å¢åŠ gpsæ¥å£å®ç°*/
     /*******************************************
     **               RDAGPS                      **
     *******************************************/
@@ -1513,11 +1513,11 @@ BOOL OPENAT_Gps_open(
 
 BOOL OPENAT_Gps_close(
         T_AMOPENAT_RDAGPS_PARAM *cfg);
-/*-\NEW\RUFEI\2014.8.20\Ôö¼Ógps½Ó¿ÚÊµÏÖ*/
+/*-\NEW\RUFEI\2014.8.20\å¢åŠ gpsæ¥å£å®ç°*/
     /*******************************************
     **                 DEBUG                  **
     *******************************************/
-VOID OPENAT_print(                                              /* trace logÊä³ö½Ó¿Ú */
+VOID OPENAT_print(                                              /* trace logè¾“å‡ºæ¥å£ */
                             CHAR * fmt, ...
                  );
 
@@ -1528,25 +1528,25 @@ VOID OPENAT_lua_print(CHAR * fmt, ...);
 VOID OPENAT_openat_dump(char* head, char* hex, UINT32 len);
 
 
-VOID OPENAT_assert(                                             /* ¶ÏÑÔ½Ó¿Ú */
-                            BOOL condition,                     /* Ìõ¼ş */
-                            CHAR *func,                         /* º¯ÊıÃû³Æ */
-                            UINT32 line                         /* ĞĞÊı */
+VOID OPENAT_assert(                                             /* æ–­è¨€æ¥å£ */
+                            BOOL condition,                     /* æ¡ä»¶ */
+                            CHAR *func,                         /* å‡½æ•°åç§° */
+                            UINT32 line                         /* è¡Œæ•° */
                   );
 
 
 
-VOID OPENAT_enable_watchdog(BOOL enable);                            /*´ò¿ª¿´ÃÅ¹·*/
+VOID OPENAT_enable_watchdog(BOOL enable);                            /*æ‰“å¼€çœ‹é—¨ç‹—*/
 
-/*+\NEW\xiongjunqun\2015.06.11\Ôö¼Ófactory½Ó¿Ú¿â*/
+/*+\NEW\xiongjunqun\2015.06.11\å¢åŠ factoryæ¥å£åº“*/
 boolean OPENAT_factory_check_calib(void);
-/*-\NEW\xiongjunqun\2015.06.11\Ôö¼Ófactory½Ó¿Ú¿â*/
+/*-\NEW\xiongjunqun\2015.06.11\å¢åŠ factoryæ¥å£åº“*/
 
 
 void OPENAT_watchdog_restart(void);
-/*+\NEW\brezen\2016.03.03\Ôö¼ÓwatchdogÊ¹ÄÜ½Ó¿Ú*/
+/*+\NEW\brezen\2016.03.03\å¢åŠ watchdogä½¿èƒ½æ¥å£*/
 BOOL OPENAT_watchdog_enable(BOOL enable, UINT16 count);
-/*-\NEW\brezen\2016.03.03\Ôö¼ÓwatchdogÊ¹ÄÜ½Ó¿Ú*/
+/*-\NEW\brezen\2016.03.03\å¢åŠ watchdogä½¿èƒ½æ¥å£*/
 
 
 #ifdef HRD_SENSOR_SUPPORT
@@ -1561,23 +1561,23 @@ INT64 OPENAT_disk_free(int drvtype);
 INT32 OPENAT_disk_volume(int drvtype);
 
 
-/*+\BUG WM-656\lifei\2013.03.07\[OpenAT] ĞŞ¸ÄcustÇøÓò¼ì²éÌõ¼ş*/
+/*+\BUG WM-656\lifei\2013.03.07\[OpenAT] ä¿®æ”¹custåŒºåŸŸæ£€æŸ¥æ¡ä»¶*/
 #define OPENAT_CUST_VTBL_DEFUALT_MAGIC 0x87654321
-/*-\BUG WM-656\lifei\2013.03.07\[OpenAT] ĞŞ¸ÄcustÇøÓò¼ì²éÌõ¼ş*/
+/*-\BUG WM-656\lifei\2013.03.07\[OpenAT] ä¿®æ”¹custåŒºåŸŸæ£€æŸ¥æ¡ä»¶*/
 
 typedef enum E_AMOPENAT_CUST_INIT_RESULT_TAG
 {
-    OPENAT_CUST_INIT_RES_OK,        /* ¿Í»§³ÌĞò³õÊ¼»¯³É¹¦£¬¿ÉÒÔµ÷ÓÃcust_mainº¯Êı */
-    OPENAT_CUST_INIT_RES_ERROR,     /* ¿Í»§³ÌĞò³õÊ¼»¯Ê§°Ü£¬²»»áµ÷ÓÃcust_mainº¯Êı */
+    OPENAT_CUST_INIT_RES_OK,        /* å®¢æˆ·ç¨‹åºåˆå§‹åŒ–æˆåŠŸï¼Œå¯ä»¥è°ƒç”¨cust_mainå‡½æ•° */
+    OPENAT_CUST_INIT_RES_ERROR,     /* å®¢æˆ·ç¨‹åºåˆå§‹åŒ–å¤±è´¥ï¼Œä¸ä¼šè°ƒç”¨cust_mainå‡½æ•° */
     OPENAT_CUST_INIT_RES_MAX
 }E_AMOPENAT_CUST_INIT_RESUL;
 
-/*+\BUG:3874\czm\2021.01.03\AT°æ±¾wifiscanÖ¸Áî£¬Ìí¼ÓÒ»¸ö²ÎÊıÖ§³ÖÒì²½É¨ÃèÄ£Ê½£¬Ä¬ÈÏÎªÍ¬²½*/
+/*+\BUG:3874\czm\2021.01.03\ATç‰ˆæœ¬wifiscanæŒ‡ä»¤ï¼Œæ·»åŠ ä¸€ä¸ªå‚æ•°æ”¯æŒå¼‚æ­¥æ‰«ææ¨¡å¼ï¼Œé»˜è®¤ä¸ºåŒæ­¥*/
 typedef enum{
 	OPENAT_WIFI_SCAN_STOP,
 	OPENAT_WIFI_SCAN_OPEN,
 }openatWifiScanState;
-/*-\BUG:3874\czm\2021.01.03\AT°æ±¾wifiscanÖ¸Áî£¬Ìí¼ÓÒ»¸ö²ÎÊıÖ§³ÖÒì²½É¨ÃèÄ£Ê½£¬Ä¬ÈÏÎªÍ¬²½*/
+/*-\BUG:3874\czm\2021.01.03\ATç‰ˆæœ¬wifiscanæŒ‡ä»¤ï¼Œæ·»åŠ ä¸€ä¸ªå‚æ•°æ”¯æŒå¼‚æ­¥æ‰«ææ¨¡å¼ï¼Œé»˜è®¤ä¸ºåŒæ­¥*/
 
 extern u16 lua_lcd_height;
 extern u16 lua_lcd_width;
@@ -1587,23 +1587,23 @@ extern u16 lua_lcd_width;
 
 BOOL OPENAT_set_trace_port(UINT8 port, UINT8 usb_port_diag_output);
 UINT8 OPENAT_get_trace_port(void);
-/*+\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+/*+\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
 BOOL OPENAT_is_nor_flash(void);
 UINT32 OPENAT_turn_addr(UINT32 addr);
-/*-\NEW\WJ\2018.10.10\È¥µôUSES_NOR_FLASHºê*/
+/*-\NEW\WJ\2018.10.10\å»æ‰USES_NOR_FLASHå®*/
 
-/*+\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*+\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 void OPENAT_rtos_sendok(char *src);
-/*-\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
-/*+\NEW\shenyuanyuan\2019.11.01\¿ª·¢rtos.set_lua_info½Ó¿ÚºÍAT+LUAINFO£¿ÃüÁî*/
+/*-\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
+/*+\NEW\shenyuanyuan\2019.11.01\å¼€å‘rtos.set_lua_infoæ¥å£å’ŒAT+LUAINFOï¼Ÿå‘½ä»¤*/
 void OPENAT_rtos_set_luainfo(char *src);
-/*-\NEW\shenyuanyuan\2019.11.01\¿ª·¢rtos.set_lua_info½Ó¿ÚºÍAT+LUAINFO£¿ÃüÁî*/
-/*+\NEW\WANGJIAN\2019.4.28\Ìí¼Ó¿ª»úÉèÖÃÏàÓ¦Ä£¿é¶ÔÓ¦µÄÆµ¶Î*/
+/*-\NEW\shenyuanyuan\2019.11.01\å¼€å‘rtos.set_lua_infoæ¥å£å’ŒAT+LUAINFOï¼Ÿå‘½ä»¤*/
+/*+\NEW\WANGJIAN\2019.4.28\æ·»åŠ å¼€æœºè®¾ç½®ç›¸åº”æ¨¡å—å¯¹åº”çš„é¢‘æ®µ*/
 int OPENAT_set_band();
-/*-\NEW\WANGJIAN\2019.4.28\Ìí¼Ó¿ª»úÉèÖÃÏàÓ¦Ä£¿é¶ÔÓ¦µÄÆµ¶Î*/
-/*+\NEW\wangyuan\2020.05.07\BUG_1126:Ö§³Öwifi¶¨Î»¹¦ÄÜ*/
+/*-\NEW\WANGJIAN\2019.4.28\æ·»åŠ å¼€æœºè®¾ç½®ç›¸åº”æ¨¡å—å¯¹åº”çš„é¢‘æ®µ*/
+/*+\NEW\wangyuan\2020.05.07\BUG_1126:æ”¯æŒwifiå®šä½åŠŸèƒ½*/
 void OPENAT_get_wifiinfo(OPENAT_wifiScanRequest* wifi_info);
-/*-\NEW\wangyuan\2020.05.07\BUG_1126:Ö§³Öwifi¶¨Î»¹¦ÄÜ*/
+/*-\NEW\wangyuan\2020.05.07\BUG_1126:æ”¯æŒwifiå®šä½åŠŸèƒ½*/
 void OPENAT_get_channel_wifiinfo(OPENAT_wifiScanRequest* wifi_info, uint32 channel);
 
 #ifdef __AM_LUA_TTSPLY_SUPPORT__
@@ -1614,7 +1614,7 @@ BOOL OPENAT_tts_stop();
 #endif
 #endif /* AM_OPENAT_H */
 
-/*+\NEW\zhuwangbin\2020.05.14\Ìí¼Óopenat speex½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.05.14\æ·»åŠ openat speexæ¥å£*/
 BOOL openat_speexEncoderInit(void);
 int  openat_speexEncode(short decoded[], int decoded_size, char *output, int output_size);
 BOOL openat_speexEncoderDestroy(void);
@@ -1622,22 +1622,22 @@ BOOL openat_speexEncoderDestroy(void);
 BOOL openat_speexDecoderInit(void);
 int openat_speexDecoder(char encoded[], int encoded_size, short output[], int output_size);
 BOOL openat_speexDecoderDestroy(void);
-/*-\NEW\zhuwangbin\2020.05.14\Ìí¼Óopenat speex½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.05.14\æ·»åŠ openat speexæ¥å£*/
 
-/*+\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*+\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 BOOL OPENAT_ExPASet(OPENAT_EXPA_T * exPaCtrl);
-/*-\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*-\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 
-/*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 BOOL OPENAT_setpa(OPENAT_SPKPA_TYPE_T type);
 OPENAT_SPKPA_TYPE_T OPENAT_getpa(void);
-/*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
-/*+\BUG\wnagyuan\2020.06.10\BUG_1930:LuaĞèÒªsd¿¨Ä¬ÈÏ¹Ø±Õ,ĞèÒªÊ±ÓÉLua½Å±¾¾ö¶¨¿ªÆôsd¿¨¹¦ÄÜ*/
+/*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
+/*+\BUG\wnagyuan\2020.06.10\BUG_1930:Luaéœ€è¦sdå¡é»˜è®¤å…³é—­,éœ€è¦æ—¶ç”±Luaè„šæœ¬å†³å®šå¼€å¯sdå¡åŠŸèƒ½*/
 BOOL OPENAT_fs_mount_sdcard(void);
 BOOL OPENAT_fs_format_sdcard(void);
 BOOL OPENAT_fs_umount_sdcard(void);
-/*-\BUG\wnagyuan\2020.06.10\BUG_1930:LuaĞèÒªsd¿¨Ä¬ÈÏ¹Ø±Õ,ĞèÒªÊ±ÓÉLua½Å±¾¾ö¶¨¿ªÆôsd¿¨¹¦ÄÜ*/
-/*+\BUG\wangyuan\2020.07.29\BUG_2663:ÆÕĞş£ºÇë²Î¿¼2G CSDK¿ª·¢iot_debug_set_fault_mode½Ó¿Ú*/
+/*-\BUG\wnagyuan\2020.06.10\BUG_1930:Luaéœ€è¦sdå¡é»˜è®¤å…³é—­,éœ€è¦æ—¶ç”±Luaè„šæœ¬å†³å®šå¼€å¯sdå¡åŠŸèƒ½*/
+/*+\BUG\wangyuan\2020.07.29\BUG_2663:æ™®ç„ï¼šè¯·å‚è€ƒ2G CSDKå¼€å‘iot_debug_set_fault_modeæ¥å£*/
 VOID OPENAT_SetFaultMode(E_OPENAT_FAULT_MODE mode);
-/*-\BUG\wangyuan\2020.07.29\BUG_2663:ÆÕĞş£ºÇë²Î¿¼2G CSDK¿ª·¢iot_debug_set_fault_mode½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.07.29\BUG_2663:æ™®ç„ï¼šè¯·å‚è€ƒ2G CSDKå¼€å‘iot_debug_set_fault_modeæ¥å£*/
 

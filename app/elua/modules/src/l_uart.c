@@ -28,9 +28,9 @@ static int uart_setup( lua_State* L )
   unsigned id, databits, parity, stopbits;
   u32 baud, res;
   u32 mode;
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
   u32 txDoneReport;
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
   id = luaL_checkinteger( L, 1 );
   MOD_SORT_ID( id );
   MOD_CHECK_ID( uart, id );
@@ -40,14 +40,14 @@ static int uart_setup( lua_State* L )
   databits = luaL_checkinteger( L, 3 );
   parity = luaL_checkinteger( L, 4 );
   stopbits = luaL_checkinteger( L, 5 );
-  /*+\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
+  /*+\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
   mode = lua_tointeger(L, 6);
   
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
   txDoneReport = lua_tointeger(L, 7);
-  /*-\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
+  /*-\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
   res = platform_uart_setup( id, baud, databits, parity, stopbits, mode, txDoneReport);
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 
   if(res != baud)
   {
@@ -58,8 +58,8 @@ static int uart_setup( lua_State* L )
   return 1;
 }
 
-/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
-/*+\NEW\zhutianhua\2018.12.27 14:53\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
+/*+\NEW\zhutianhua\2018.12.27 14:53\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
 static int uart_set_rs485_oe( lua_State* L )
 {
   u32 id, rs485IO, rs485ValidLevel, rs485DelayTime, res;
@@ -86,10 +86,10 @@ static int uart_set_rs485_oe( lua_State* L )
   lua_pushinteger( L, res );
   return 1;
 }
-/*-\NEW\zhutianhua\2018.12.27 14:53\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+/*-\NEW\zhutianhua\2018.12.27 14:53\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
 
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 // Lua: res = close( id )
 static int uart_close( lua_State* L )
 {
@@ -104,7 +104,7 @@ static int uart_close( lua_State* L )
 
     return 1;
 }
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 
 // Lua: write( id, string1, [string2], ..., [stringn] )
 static int uart_write( lua_State* L )
@@ -290,7 +290,7 @@ static int os_sleep( lua_State *L )
     
     return 0;
 }
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 static int uart_event_config( lua_State *L )
 {
 	int uartId = luaL_checkinteger( L, 1 );
@@ -298,7 +298,7 @@ static int uart_event_config( lua_State *L )
 	platform_uart_config_event(uartId,event);
 	return 0;
 }
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 #ifdef BUILD_SERMUX
 
 #define MAX_VUART_NAME_LEN    6
@@ -332,17 +332,17 @@ static int uart_mt_index( lua_State* L )
 const LUA_REG_TYPE uart_map[] = 
 {
   { LSTRKEY( "setup" ),  LFUNCVAL( uart_setup ) },
-  /*+\NEW\zhutianhua\2018.12.27 14:53\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
+  /*+\NEW\zhutianhua\2018.12.27 14:53\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
   { LSTRKEY( "set_rs485_oe" ),  LFUNCVAL( uart_set_rs485_oe ) },
-  /*-\NEW\zhutianhua\2018.12.27 14:53\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+  /*-\NEW\zhutianhua\2018.12.27 14:53\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
   { LSTRKEY( "close" ),  LFUNCVAL( uart_close ) },
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
   { LSTRKEY( "write" ), LFUNCVAL( uart_write ) },
   { LSTRKEY( "read" ), LFUNCVAL( uart_read ) },
-  /*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+  /*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
   { LSTRKEY( "config" ),  LFUNCVAL( uart_event_config ) },
-  /*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+  /*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
   { LSTRKEY( "getchar" ), LFUNCVAL( uart_getchar ) },
   { LSTRKEY( "set_buffer" ), LFUNCVAL( uart_set_buffer ) },
   { LSTRKEY( "set_flow_control" ), LFUNCVAL( uart_set_flow_control ) },
@@ -376,9 +376,9 @@ LUALIB_API int luaopen_uart( lua_State *L )
   
   MOD_REG_NUMBER( L, "ATC", PLATFORM_UART_ID_ATC );
   
-  /*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+  /*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
   MOD_REG_NUMBER( L, "USB", PLATFORM_PORT_ID_USB );
-  /*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+  /*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
   
   // Add the stop bits and parity constants (for uart.setup)
   MOD_REG_NUMBER( L, "PAR_EVEN", PLATFORM_UART_PARITY_EVEN );

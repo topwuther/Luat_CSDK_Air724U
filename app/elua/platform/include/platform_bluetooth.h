@@ -20,14 +20,14 @@
 
 typedef struct 
 {
-   UINT16 AdvMin;            ///< ×îÐ¡¹ã²¥¼ä¸ô
-   UINT16 AdvMax;            ///< ×î´ó¹ã²¥¼ä¸ô
-   UINT8 AdvType;           ///< ¹ã²¥ÀàÐÍ
-   UINT8 OwnAddrType;       ///< ¹ã²¥±¾µØµØÖ·ÀàÐÍ
-   UINT8 DirectAddrType;    ///< ¶¨ÏòµØÖ·ÀàÐÍ
-   char *DirectAddr;        ///< ¶¨ÏòµØÖ·
-   UINT8 AdvChannMap;       ///< ¹ã²¥channel map,3¸öbit£¬·Ö±ð¶ÔÓ¦37£¬ 38£¬ 39ÐÅµÀ 
-   UINT8 AdvFilter;         ///< ¹ã²¥¹ýÂË²ßÂÔ
+   UINT16 AdvMin;            ///< æœ€å°å¹¿æ’­é—´éš”
+   UINT16 AdvMax;            ///< æœ€å¤§å¹¿æ’­é—´éš”
+   UINT8 AdvType;           ///< å¹¿æ’­ç±»åž‹
+   UINT8 OwnAddrType;       ///< å¹¿æ’­æœ¬åœ°åœ°å€ç±»åž‹
+   UINT8 DirectAddrType;    ///< å®šå‘åœ°å€ç±»åž‹
+   char *DirectAddr;        ///< å®šå‘åœ°å€
+   UINT8 AdvChannMap;       ///< å¹¿æ’­channel map,3ä¸ªbitï¼Œåˆ†åˆ«å¯¹åº”37ï¼Œ 38ï¼Œ 39ä¿¡é“ 
+   UINT8 AdvFilter;         ///< å¹¿æ’­è¿‡æ»¤ç­–ç•¥
 } plat_advparam_t;
 
 typedef struct 
@@ -44,7 +44,7 @@ typedef struct _plat_bt_addr
     UINT8 addr[6];
 } plat_bt_addr;
 
-/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êý¾Ý°üµÄuuidÊôÐÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ÐèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±žæ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 
 typedef struct _plat_ble_recv_buff
 {
@@ -52,18 +52,18 @@ typedef struct _plat_ble_recv_buff
 	UINT16 uuid; ///characteristic
 	UINT8 long_uuid[16];
 	UINT8 len;
-	unsigned char *dataPtr; ///< ·µ»ØµÄÊý¾ÝÖ¸Õë
+	unsigned char *dataPtr; ///< è¿”å›žçš„æ•°æ®æŒ‡é’ˆ
 } plat_ble_recv_buff;
-/*-\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êý¾Ý°üµÄuuidÊôÐÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ÐèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+/*-\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±žæ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 
 BOOL platform_ble_open(u8 mode);
 BOOL platform_ble_close(void);
 BOOL platform_ble_send(u8* data, int len, u16 uuid_c,u16 handle);
 BOOL platform_ble_send_string(u8* data, int len, u8*  uuid_c,u16 handle);
 
-/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓÐÊý¾Ý£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊý¾Ý*/
+/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åŽï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 int platform_ble_recv(plat_ble_recv_buff *data);
-/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓÐÊý¾Ý£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊý¾Ý*/
+/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åŽï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 BOOL platform_ble_set_name(u8* data);
 BOOL platform_ble_set_adv_param(plat_advparam_t *param);

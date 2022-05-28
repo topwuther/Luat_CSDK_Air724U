@@ -272,7 +272,7 @@ static void read_long_string (LexState *ls, SemInfo *seminfo, int sep) {
                                      luaZ_bufflen(ls->buff) - 2*(2 + sep));
 }
 
-/*+\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*+\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 static void esccheck (LexState *ls, int c, const char *msg) {
   if (!c) {
     if (ls->current != EOZ)
@@ -294,7 +294,7 @@ static int readhexaesc (LexState *ls) {
   luaZ_buffremove(ls->buff, 2);  /* remove saved chars from buffer */
   return r;
 }
-/*+\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*+\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 
 static void read_string (LexState *ls, int del, SemInfo *seminfo) {
   save_and_next(ls);
@@ -318,9 +318,9 @@ static void read_string (LexState *ls, int del, SemInfo *seminfo) {
           case 'r': c = '\r'; break;
           case 't': c = '\t'; break;
           case 'v': c = '\v'; break;
-/*+\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*+\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
           case 'x': c = readhexaesc(ls); break;
-/*-\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*-\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
           case '\n':  /* go through */
           case '\r': save(ls, '\n'); inclinenumber(ls); continue;
           case EOZ: continue;  /* will raise an error next loop */

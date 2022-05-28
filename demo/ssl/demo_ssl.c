@@ -1,5 +1,5 @@
 /*
- * Í¨¹ıÁ¬½Ó101.132.154.251 ²âÊÔË«ÏòÈÏÖ¤µÄSSLÎÕÊÖ¹ı³Ì£¬¼°Êı¾İ¼ÓÃÜÊÕ·¢£¬¸Ã·şÎñÆ÷ËæÊ±»á¹Ø±Õ£¬×Ô¼º²âÊÔÊ±±ØĞëÊÇÊ¹ÓÃ×Ô¼ºµÄ·şÎñÆ÷
+ * é€šè¿‡è¿æ¥101.132.154.251 æµ‹è¯•åŒå‘è®¤è¯çš„SSLæ¡æ‰‹è¿‡ç¨‹ï¼ŒåŠæ•°æ®åŠ å¯†æ”¶å‘ï¼Œè¯¥æœåŠ¡å™¨éšæ—¶ä¼šå…³é—­ï¼Œè‡ªå·±æµ‹è¯•æ—¶å¿…é¡»æ˜¯ä½¿ç”¨è‡ªå·±çš„æœåŠ¡å™¨
  */
 #include <stdio.h>
 #include "string.h"
@@ -42,10 +42,10 @@ typedef struct {
 #define SSL_HEAT_TO					20
 static HANDLE hTimer;
 static HANDLE hSocketTask;
-static E_OPENAT_NETWORK_STATE NWState;				//ÍøÂç×´Ì¬
+static E_OPENAT_NETWORK_STATE NWState;				//ç½‘ç»œçŠ¶æ€
 static uint8_t ToFlag = 0;
 
-//´Î¼¶Ö¤Êé
+//æ¬¡çº§è¯ä¹¦
 const char *SymantecClass3SecureServerCA_G4 = "-----BEGIN CERTIFICATE-----\r\n"
 		"MIIEaTCCA1GgAwIBAgILBAAAAAABRE7wQkcwDQYJKoZIhvcNAQELBQAwVzELMAkG\r\n"
 		"A1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jv\r\n"
@@ -72,7 +72,7 @@ const char *SymantecClass3SecureServerCA_G4 = "-----BEGIN CERTIFICATE-----\r\n"
 		"SOlCdjSXVWkkDoPWoC209fN5ikkodBpBocLTJIg1MGCUF7ThBCIxPTsvFwayuJ2G\r\n"
 		"K1pp74P1S8SqtCr4fKGxhZSM9AyHDPSsQPhZSZg=\r\n"
 		"-----END CERTIFICATE-----";
-//²»ÊÇbaiduÊ¹ÓÃµÄ´Î¼¶¸ùÖ¤Êé£¬¿ÉÒÔ¼ÓÔØÕâ¸ö£¬ÑéÖ¤³ÌĞòµÄÈ·È¥¼ì²éÁËÖ¤ÊéÁ´£¬×¢Òâ£¬Ö»¼ÓÔØÕâ¸öÖ¤Êé»áµ¼ÖÂbaiduµÄSSLÎÕÊÖÊ§°Ü
+//ä¸æ˜¯baiduä½¿ç”¨çš„æ¬¡çº§æ ¹è¯ä¹¦ï¼Œå¯ä»¥åŠ è½½è¿™ä¸ªï¼ŒéªŒè¯ç¨‹åºçš„ç¡®å»æ£€æŸ¥äº†è¯ä¹¦é“¾ï¼Œæ³¨æ„ï¼ŒåªåŠ è½½è¿™ä¸ªè¯ä¹¦ä¼šå¯¼è‡´baiduçš„SSLæ¡æ‰‹å¤±è´¥
 const char *SymantecClass3SecureServerSHA256SSLCA = "-----BEGIN CERTIFICATE-----\r\n"
 		"MIIFSTCCBDGgAwIBAgIQaYeUGdnjYnB0nbvlncZoXjANBgkqhkiG9w0BAQsFADCB\r\n"
 		"vTELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL\r\n"
@@ -105,7 +105,7 @@ const char *SymantecClass3SecureServerSHA256SSLCA = "-----BEGIN CERTIFICATE-----
 		"S5tV1tqxkju/w5v5LA==\r\n"
 		"-----END CERTIFICATE-----";
 
-//¸ùÖ¤Êé£¬²âÊÔÓÃ£¬Èç¹ûÊ¹ÓÃ×Ô¼ºµÄ·şÎñÆ÷£¬Çë×ÔĞĞĞŞ¸Ä
+//æ ¹è¯ä¹¦ï¼Œæµ‹è¯•ç”¨ï¼Œå¦‚æœä½¿ç”¨è‡ªå·±çš„æœåŠ¡å™¨ï¼Œè¯·è‡ªè¡Œä¿®æ”¹
 const char *RootCert = "-----BEGIN CERTIFICATE-----\r\n"
 		"MIIDdTCCAl2gAwIBAgILBAAAAAABFUtaw5QwDQYJKoZIhvcNAQEFBQAwVzELMAkG\r\n"
 		"A1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNVBAsTB1Jv\r\n"
@@ -167,12 +167,12 @@ const char *ClientRSAKey = "-----BEGIN RSA PRIVATE KEY-----\r\n"
 #ifdef TEST_URL
 static uint32_t SSL_Gethostbyname(void)
 {
-    //ÓòÃû½âÎö
+    //åŸŸåè§£æ
 	openat_ip_addr_t *IP;
     struct openat_hostent *hostentP = NULL;
     char *ipAddr = NULL;
 
-    //»ñÈ¡ÓòÃûipĞÅÏ¢
+    //è·å–åŸŸåipä¿¡æ¯
     hostentP = gethostbyname(TEST_URL);
 
     if (!hostentP)
@@ -181,7 +181,7 @@ static uint32_t SSL_Gethostbyname(void)
         return 0;
     }
 
-    // ½«ip×ª»»³É×Ö·û´®
+    // å°†ipè½¬æ¢æˆå­—ç¬¦ä¸²
     ipAddr = ipaddr_ntoa((const openat_ip_addr_t *)hostentP->h_addr_list[0]);
 
     DBG_ERROR("gethostbyname %s ip %s", TEST_URL, ipAddr);
@@ -213,8 +213,8 @@ static int32_t Socket_ConnectServer(void)
 	        DBG_ERROR("create tcp socket error");
 	        return -1;
 	    }
-	    // ½¨Á¢TCPÁ´½Ó
-	    memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // ³õÊ¼»¯·şÎñÆ÷µØÖ·
+	    // å»ºç«‹TCPé“¾æ¥
+	    memset(&TCPServerAddr, 0, sizeof(TCPServerAddr)); // åˆå§‹åŒ–æœåŠ¡å™¨åœ°å€
 	    TCPServerAddr.sin_family = OPENAT_AF_INET;
 	    TCPServerAddr.sin_port = htons((unsigned short)TEST_PORT);
 #ifndef TEST_URL
@@ -244,11 +244,11 @@ static int32_t Socket_ConnectServer(void)
 
 
 /**
- * @brief ·¢ËÍSSL·â×°ºÃµÄÊı¾İ£¬Èç¹ûÊ¹ÓÃsocket±à³ÌµÄ£¬¿ÉÒÔÖ±½Ó²Î¿¼£¬Èç¹ûÊ¹ÓÃATÖ¸Áî±à³ÌµÄ£¬ÄÇÃ´ĞèÒª×Ô¼ºÀ´ÊµÏÖ
- * @param Socketfd [in] socket id£¬Èç¹ûÊÇATÖ¸Áî£¬µ¥Â·Á´½Ó£¬´«Èë0£¬²»ÓÃ¹Ü£¬¶àÂ·Á´½ÓµÄ£¬´«ÈëCIPSTARTÊ±ÓÃµÄÍ¨µÀºÅ
- * @param Buf [in] ĞèÒª·¢ËÍÊı¾İµÄÖ¸Õë
- * @param TxLen [in] ĞèÒª·¢ËÍµÄ³¤¶È
- * @return  ·µ»Ø·¢ËÍµÄ³¤¶È£¬ -1±íÊ¾·¢ËÍÊ§°Ü.
+ * @brief å‘é€SSLå°è£…å¥½çš„æ•°æ®ï¼Œå¦‚æœä½¿ç”¨socketç¼–ç¨‹çš„ï¼Œå¯ä»¥ç›´æ¥å‚è€ƒï¼Œå¦‚æœä½¿ç”¨ATæŒ‡ä»¤ç¼–ç¨‹çš„ï¼Œé‚£ä¹ˆéœ€è¦è‡ªå·±æ¥å®ç°
+ * @param Socketfd [in] socket idï¼Œå¦‚æœæ˜¯ATæŒ‡ä»¤ï¼Œå•è·¯é“¾æ¥ï¼Œä¼ å…¥0ï¼Œä¸ç”¨ç®¡ï¼Œå¤šè·¯é“¾æ¥çš„ï¼Œä¼ å…¥CIPSTARTæ—¶ç”¨çš„é€šé“å·
+ * @param Buf [in] éœ€è¦å‘é€æ•°æ®çš„æŒ‡é’ˆ
+ * @param TxLen [in] éœ€è¦å‘é€çš„é•¿åº¦
+ * @return  è¿”å›å‘é€çš„é•¿åº¦ï¼Œ -1è¡¨ç¤ºå‘é€å¤±è´¥.
  */
 static int32_t SSL_SocketTx(int32_t Socketfd, void *Buf, uint16_t TxLen)
 {
@@ -281,11 +281,11 @@ static int32_t SSL_SocketTx(int32_t Socketfd, void *Buf, uint16_t TxLen)
 }
 
 /**
- * @brief ½ÓÊÕSSL·â×°ºÃµÄÊı¾İ£¬Èç¹ûÊ¹ÓÃsocket±à³ÌµÄ£¬¿ÉÒÔÖ±½Ó²Î¿¼£¬Èç¹ûÊ¹ÓÃATÖ¸Áî±à³ÌµÄ£¬ÄÇÃ´ĞèÒª×Ô¼ºÀ´ÊµÏÖ
- * @param Socketfd [in] socket id£¬Èç¹ûÊÇATÖ¸Áî£¬µ¥Â·Á´½Ó£¬´«Èë0£¬²»ÓÃ¹Ü£¬¶àÂ·Á´½ÓµÄ£¬´«ÈëCIPSTARTÊ±ÓÃµÄÍ¨µÀºÅ
- * @param Buf [in] ´æ·Å½ÓÊÕÊı¾İµÄÖ¸Õë
- * @param TxLen [in] ĞèÒª½ÓÊÕµÄ³¤¶È£¬¿ÉÄÜ»á³¬³ö±¾´Î½ÓÊÕµÄ³¤¶È£¬Ã»¹ØÏµ
- * @return  ·µ»Ø½ÓÊÕµÄ³¤¶È£¬ -1±íÊ¾½ÓÊÕÊ§°Ü.
+ * @brief æ¥æ”¶SSLå°è£…å¥½çš„æ•°æ®ï¼Œå¦‚æœä½¿ç”¨socketç¼–ç¨‹çš„ï¼Œå¯ä»¥ç›´æ¥å‚è€ƒï¼Œå¦‚æœä½¿ç”¨ATæŒ‡ä»¤ç¼–ç¨‹çš„ï¼Œé‚£ä¹ˆéœ€è¦è‡ªå·±æ¥å®ç°
+ * @param Socketfd [in] socket idï¼Œå¦‚æœæ˜¯ATæŒ‡ä»¤ï¼Œå•è·¯é“¾æ¥ï¼Œä¼ å…¥0ï¼Œä¸ç”¨ç®¡ï¼Œå¤šè·¯é“¾æ¥çš„ï¼Œä¼ å…¥CIPSTARTæ—¶ç”¨çš„é€šé“å·
+ * @param Buf [in] å­˜æ”¾æ¥æ”¶æ•°æ®çš„æŒ‡é’ˆ
+ * @param TxLen [in] éœ€è¦æ¥æ”¶çš„é•¿åº¦ï¼Œå¯èƒ½ä¼šè¶…å‡ºæœ¬æ¬¡æ¥æ”¶çš„é•¿åº¦ï¼Œæ²¡å…³ç³»
+ * @return  è¿”å›æ¥æ”¶çš„é•¿åº¦ï¼Œ -1è¡¨ç¤ºæ¥æ”¶å¤±è´¥.
  */
 static int32_t SSL_SocketRx(int32_t Socketfd, void *Buf, uint16_t RxLen)
 {
@@ -337,7 +337,7 @@ static void SSL_Task(PVOID pParameter)
 	uint8_t ReConnCnt, Error, Quit;
 	int32_t Ret;
 	int32_t Socketfd = -1;
-	SSL_CTX * SSLCtrl = SSL_CreateCtrl(1); //»º´æ1¸ösession£¬·ñÔòÏÂÃæµÄ´òÓ¡Ö÷KEY»áÊ§°Ü
+	SSL_CTX * SSLCtrl = SSL_CreateCtrl(1); //ç¼“å­˜1ä¸ªsessionï¼Œå¦åˆ™ä¸‹é¢çš„æ‰“å°ä¸»KEYä¼šå¤±è´¥
 	SSL * SSLLink = NULL;
 	ReConnCnt = 0;
 	if (!SSLCtrl)
@@ -353,7 +353,7 @@ static void SSL_Task(PVOID pParameter)
 	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_X509_CACERT, (uint8_t *)SymantecClass3SecureServerCA_G4, strlen(SymantecClass3SecureServerCA_G4), NULL);
 #else
 	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_X509_CACERT, (uint8_t *)RootCert, strlen(RootCert), NULL);
-	//Èç¹ûÊÇË«ÏòÈÏÖ¤µÄ£¬ĞèÒª¼ÓÔØ¿Í»§¶ËµÄÖ¤ÊéºÍË½Ô¿
+	//å¦‚æœæ˜¯åŒå‘è®¤è¯çš„ï¼Œéœ€è¦åŠ è½½å®¢æˆ·ç«¯çš„è¯ä¹¦å’Œç§é’¥
 	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_X509_CERT, (uint8_t *)ClientCert, strlen(ClientCert), NULL);
 	Ret = SSL_LoadKey(SSLCtrl, SSL_OBJ_RSA_KEY, (uint8_t *)ClientRSAKey, strlen(ClientRSAKey), NULL);
 #endif
@@ -365,12 +365,12 @@ static void SSL_Task(PVOID pParameter)
 			SSL_FreeLink(SSLLink);
 			SSLLink = NULL;
 		}
-		iot_os_sleep(5000);	//ÕâÀï×îºÃÊ¹ÓÃtimerÀ´ÑÓ³Ù£¬demo¼ò»¯Ê¹ÓÃ
+		iot_os_sleep(5000);	//è¿™é‡Œæœ€å¥½ä½¿ç”¨timeræ¥å»¶è¿Ÿï¼Œdemoç®€åŒ–ä½¿ç”¨
 
 
-		//ÕâÀïÒ»Ö±¼ì²éÊÇ·ñÁ¬½Ó£¬Èç¹ûÁ¬½Ó²»ÉÏÈ¥£¬¾ÍÖØÆôÄ£×é£¬ÉèÖÃµÄ¶¨Ê±Æ÷£¬¶¨Ê±Ò»¶ÎÊ±¼ä£¬Ó¦¸ÃÊÇ90s×óÓÒ£¬Èç¹û90sÖ®ÄÚÃ»ÓĞ¼¤»îAPN¾ÍÖØÆôÄ£¿é
+		//è¿™é‡Œä¸€ç›´æ£€æŸ¥æ˜¯å¦è¿æ¥ï¼Œå¦‚æœè¿æ¥ä¸ä¸Šå»ï¼Œå°±é‡å¯æ¨¡ç»„ï¼Œè®¾ç½®çš„å®šæ—¶å™¨ï¼Œå®šæ—¶ä¸€æ®µæ—¶é—´ï¼Œåº”è¯¥æ˜¯90så·¦å³ï¼Œå¦‚æœ90sä¹‹å†…æ²¡æœ‰æ¿€æ´»APNå°±é‡å¯æ¨¡å—
 		iot_os_stop_timer(hTimer);
-		iot_os_start_timer(hTimer, 90*1000);//90ÃëÄÚÈç¹ûÃ»ÓĞ¼¤»îAPN£¬ÖØÆôÄ£¿é
+		iot_os_start_timer(hTimer, 90*1000);//90ç§’å†…å¦‚æœæ²¡æœ‰æ¿€æ´»APNï¼Œé‡å¯æ¨¡å—
 		ToFlag = 0;
 		while(NWState != SSL_MSG_NETWORK_LINKED)
 		{
@@ -395,7 +395,7 @@ static void SSL_Task(PVOID pParameter)
 
 			}
 		}
-//  ÕâÒ»²¿·ÖÊÇ¼ì²ésocket ÊÇ·ñÁ¬½ÓÉÏ
+//  è¿™ä¸€éƒ¨åˆ†æ˜¯æ£€æŸ¥socket æ˜¯å¦è¿æ¥ä¸Š
 		iot_os_stop_timer(hTimer);
 		DBG_INFO("start connect server");
 		Socketfd = Socket_ConnectServer();
@@ -415,7 +415,7 @@ static void SSL_Task(PVOID pParameter)
 					iot_os_sleep(5000);
 				}
 			}
-			continue; //Õâ¸öÊÇ×ªµ½ÄÇÀï£¿
+			continue; //è¿™ä¸ªæ˜¯è½¬åˆ°é‚£é‡Œï¼Ÿ
 		}
 
 		DBG_INFO("start ssl handshake");
@@ -441,7 +441,7 @@ static void SSL_Task(PVOID pParameter)
 
 		}
 
-		iot_os_start_timer(hTimer, 1*1000);//1Ãëºó·¢ËÍÒ»´ÎHTTPÇëÇó
+		iot_os_start_timer(hTimer, 1*1000);//1ç§’åå‘é€ä¸€æ¬¡HTTPè¯·æ±‚
 		ToFlag = 0;
 		Error = 0;
 		while(!Error && !Quit)

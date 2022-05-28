@@ -53,7 +53,7 @@ static int bitarray_new( lua_State *L )
     if( lua_isnumber( L, 3 ) )
       fill = luaL_checkinteger( L, 3 );  
   }
-  else if( lua_isstring( L, 1 ) || lua_istable( L, 1 ) /*|| lua_isrotable( L, 1 ) delete by Jack.li ��ʱδ����rotable */ )
+  else if( lua_isstring( L, 1 ) || lua_istable( L, 1 ) /*|| lua_isrotable( L, 1 ) delete by Jack.li ÔÝÊ±Î´¼ÓÈërotable */ )
   {
     // string, [element_size_bits] OR (ro)table, [element_size_bits]
     if( lua_isstring( L, 1 ) )

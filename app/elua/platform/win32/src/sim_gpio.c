@@ -141,9 +141,9 @@ pio_type platform_pio_op( unsigned port_val, pio_type pinmask, int op )
             break;
             
         case PLATFORM_IO_PIN_DIR_OUTPUT:
-        /*+\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+        /*+\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
         case PLATFORM_IO_PIN_DIR_OUTPUT1:
-        /*-\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+        /*-\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
             if(set_dir(port, pin, GPIO_DIR_OUTPUT) == -1) return 0;
             break;
             

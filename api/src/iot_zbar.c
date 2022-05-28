@@ -1,12 +1,12 @@
 #include "am_openat.h"
 #include "iot_zbar.h"
 
-/**½âÎö¶şÎ¬Âë£¬·µ»Ø¾ä±úhandle
-*@param		width:		½âÎöÍ¼Æ¬µÄ¿í¶È
-*@param		height:		½âÎöÍ¼Æ¬µÄ¸ß¶È
-*@param		data:		½âÎöÍ¼Æ¬µÄÊı¾İ
-*@param		size:		½âÎöÍ¼Æ¬Êı¾İ´óĞ¡
-*@return	»ñÈ¡¾ä±úhandle£¬ ²»µÈÓÚ0±íÊ¾½âÎö³É¹¦
+/**è§£æäºŒç»´ç ï¼Œè¿”å›å¥æŸ„handle
+*@param		width:		è§£æå›¾ç‰‡çš„å®½åº¦
+*@param		height:		è§£æå›¾ç‰‡çš„é«˜åº¦
+*@param		data:		è§£æå›¾ç‰‡çš„æ•°æ®
+*@param		size:		è§£æå›¾ç‰‡æ•°æ®å¤§å°
+*@return	è·å–å¥æŸ„handleï¼Œ ä¸ç­‰äº0è¡¨ç¤ºè§£ææˆåŠŸ
 *           
 **/
 int iot_zbar_scannerOpen(int width, int height, int size, unsigned char *data)
@@ -14,37 +14,37 @@ int iot_zbar_scannerOpen(int width, int height, int size, unsigned char *data)
     return IVTBL(zbar_scanner_open)(width, height, size, data);
 }
 
-/**»ñÈ¡½âÎö¶şÎ¬ÂëµÄÊı¾İ
-*@param		handle:		¾ä±ú,ÓÉiot_zbar_scannerOpenÉú³É
-*@param		len:		»ñÈ¡Êı¾İµÄ³¤¶È
-*@return	»ñÈ¡µÄÊı¾İµØÖ·
+/**è·å–è§£æäºŒç»´ç çš„æ•°æ®
+*@param		handle:		å¥æŸ„,ç”±iot_zbar_scannerOpenç”Ÿæˆ
+*@param		len:		è·å–æ•°æ®çš„é•¿åº¦
+*@return	è·å–çš„æ•°æ®åœ°å€
 **/
 char * iot_zbar_getData(int handle, int *len)
 {
     return IVTBL(zbar_get_data)(handle, len);
 }
 
-/**²é¿´ÊÇ·ñ»¹ÓĞÏÂÒ»¸öÊı¾İ
-*@param		handle:		¾ä±ú,ÓÉiot_zbar_scannerOpenÉú³É
-*@return	TRUE:   »¹ÓĞÏÂÒ»¸öÊı¾İ
-*			FALSE:  Ã»ÓĞÏÂÒ»¸öÊı¾İ
+/**æŸ¥çœ‹æ˜¯å¦è¿˜æœ‰ä¸‹ä¸€ä¸ªæ•°æ®
+*@param		handle:		å¥æŸ„,ç”±iot_zbar_scannerOpenç”Ÿæˆ
+*@return	TRUE:   è¿˜æœ‰ä¸‹ä¸€ä¸ªæ•°æ®
+*			FALSE:  æ²¡æœ‰ä¸‹ä¸€ä¸ªæ•°æ®
 **/
 BOOL iot_zbar_findNextData(int handle)
 {
     return IVTBL(zbar_find_nextData)(handle);
 }
 
-/**»ñÈ¡µ±Ç°Êı¾İ±àÂëµÄ¸ñÊ½
-*@param		handle:		¾ä±ú,ÓÉiot_zbar_scannerOpenÉú³É
-*@return	·µ»ØµÄ¸ñÊ½ÀàĞÍ
+/**è·å–å½“å‰æ•°æ®ç¼–ç çš„æ ¼å¼
+*@param		handle:		å¥æŸ„,ç”±iot_zbar_scannerOpenç”Ÿæˆ
+*@return	è¿”å›çš„æ ¼å¼ç±»å‹
 **/
 char * iot_zbar_getType(int handle)
 {
   return IVTBL(zbar_get_type)(handle);
 }
 
-/**ÊÍ·Å¾ä±ú
-*@param		handle:		¾ä±ú,ÓÉiot_zbar_scannerOpenÉú³É
+/**é‡Šæ”¾å¥æŸ„
+*@param		handle:		å¥æŸ„,ç”±iot_zbar_scannerOpenç”Ÿæˆ
 *@return    void	
 **/
 void iot_zbar_scannerClose(int handle)

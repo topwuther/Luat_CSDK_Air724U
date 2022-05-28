@@ -1,4 +1,4 @@
---配置数据管理
+--閰嶇疆鏁版嵁绠＄悊
 module(...,package.seeall)
 local FILENAME="set.ini"
 

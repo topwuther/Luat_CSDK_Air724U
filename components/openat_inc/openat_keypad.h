@@ -1,19 +1,19 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2012.11.24  lifei     ´´½¨ÎÄ¼ş
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2012.11.24  lifei     åˆ›å»ºæ–‡ä»¶
 *********************************************************/
 #ifndef OPENAT_KEYPAD_H
 #define OPENAT_KEYPAD_H
 
-/*+\BUG WM-637\lifei\2013.03.05\[OpenAT] Ôö¼ÓGPIO¼üÅÌ½Ó¿Ú*/
-BOOL OPENAT_InitKeypad(                            /* ¼üÅÌ³õÊ¼»¯½Ó¿Ú */
-    T_AMOPENAT_KEYPAD_CONFIG *pConfig   /* ¼üÅÌÅäÖÃ²ÎÊı */
+/*+\BUG WM-637\lifei\2013.03.05\[OpenAT] å¢åŠ GPIOé”®ç›˜æ¥å£*/
+BOOL OPENAT_InitKeypad(                            /* é”®ç›˜åˆå§‹åŒ–æ¥å£ */
+    T_AMOPENAT_KEYPAD_CONFIG *pConfig   /* é”®ç›˜é…ç½®å‚æ•° */
 );
-/*-\BUG WM-637\lifei\2013.03.05\[OpenAT] Ôö¼ÓGPIO¼üÅÌ½Ó¿Ú*/
+/*-\BUG WM-637\lifei\2013.03.05\[OpenAT] å¢åŠ GPIOé”®ç›˜æ¥å£*/
 
 #endif /* OPENAT_KEYPAD_H */

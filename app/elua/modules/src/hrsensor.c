@@ -8,7 +8,7 @@
  * Date:    2015.11.17
  *
  * Description:
- *          lua.hrsensor hrsensor·ÃÎÊ¿â
+ *          lua.hrsensor hrsensorÂ·ÃƒÃŽÃŠÂ¿Ã¢
  **************************************************************************/
 #ifdef HRD_SENSOR_SUPPORT
 #include <stdlib.h>

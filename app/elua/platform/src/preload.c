@@ -7,7 +7,7 @@
  * Date:    2013/7/1
  *
  * Description:
- *          Ô¤ÖÃÎÄ¼ş½âÎö´¦Àí
+ *          é¢„ç½®æ–‡ä»¶è§£æå¤„ç†
  **************************************************************************/
 
 #include <stdio.h>
@@ -359,10 +359,10 @@ extern const uint32_t enc_code[4];
 static int decode_file(void *buf, size_t size, size_t count, FILE *fp)
 {
 
-    unsigned int act_low_boundary;  /*ÒÔ512¶ÔÆëµÄ¶ÁÈ¡ÎÄ¼şµÄÆğÊ¼Î»ÖÃ*/
-    unsigned int read_count;        /*ĞèÒª´ÓÎÄ¼şÖĞ¶ÁÈ¡µÄ³¤¶È*/
-    unsigned int act_up_boundary;   /*ÒÔ512¶ÔÆëµÄ¶ÁÈ¡ÎÄ¼şµÄ½áÊøÎ»ÖÃ*/
-    unsigned int act_count;         /*¶ÁÈ¡µ½µÄÓĞĞ§Êı¾İ³¤¶È*/
+    unsigned int act_low_boundary;  /*ä»¥512å¯¹é½çš„è¯»å–æ–‡ä»¶çš„èµ·å§‹ä½ç½®*/
+    unsigned int read_count;        /*éœ€è¦ä»æ–‡ä»¶ä¸­è¯»å–çš„é•¿åº¦*/
+    unsigned int act_up_boundary;   /*ä»¥512å¯¹é½çš„è¯»å–æ–‡ä»¶çš„ç»“æŸä½ç½®*/
+    unsigned int act_count;         /*è¯»å–åˆ°çš„æœ‰æ•ˆæ•°æ®é•¿åº¦*/
     unsigned char* temp;
     unsigned int* data = NULL;
     size_t resid;
@@ -380,15 +380,16 @@ static int decode_file(void *buf, size_t size, size_t count, FILE *fp)
 
     act_low_boundary = (offset & 0xFFFFFE00);
     act_up_boundary = ((offset + resid + DEC_BUFF_SIZE - 1) & 0xFFFFFE00);
-    read_count = act_up_boundary - act_low_boundary; 
+    read_count = act_up_boundary - act_low_boundary; 
 
-    /*¶àÉêÇë8¸ö×Ö½ÚµÄÄÚ´æ£¬ÒÔ±£Ö¤ÄÜ4×Ö½Ú¶ÔÆë*/
+
+    /*å¤šç”³è¯·8ä¸ªå­—èŠ‚çš„å†…å­˜ï¼Œä»¥ä¿è¯èƒ½4å­—èŠ‚å¯¹é½*/
     data = (unsigned int*)L_MALLOC(4 + read_count + 4);
     
-    /*±£Ö¤4×Ö½Ú¶ÔÆë*/
+    /*ä¿è¯4å­—èŠ‚å¯¹é½*/
     temp = (unsigned char*)((((unsigned int)data + 3) >> 2) << 2);
 
-    /*°ÑÎÄ¼şÖ¸ÕëÒÆµ½ÒÔ512¶ÔÆëµÄÎ»ÖÃ*/
+    /*æŠŠæ–‡ä»¶æŒ‡é’ˆç§»åˆ°ä»¥512å¯¹é½çš„ä½ç½®*/
     fseek_ext(fp, act_low_boundary, SEEK_SET);
 
     len = ((pItem->nLen - offset) >= read_count) ? read_count : (pItem->nLen - offset);
@@ -400,7 +401,7 @@ static int decode_file(void *buf, size_t size, size_t count, FILE *fp)
     act_count = resid;
     decCount = len / DEC_BUFF_SIZE;
    
-    /*Èç¹ûÃ»ÓĞ¶Áµ½×ã¹»¶àµÄÊı¾İ£¬ÒâÎ¶×Å¿ìµ½ÎÄ¼şµÄÄ©Î²ÁË*/
+    /*å¦‚æœæ²¡æœ‰è¯»åˆ°è¶³å¤Ÿå¤šçš„æ•°æ®ï¼Œæ„å‘³ç€å¿«åˆ°æ–‡ä»¶çš„æœ«å°¾äº†*/
     if(read_count > len)
     {
         real_size = pItem->nLen;
@@ -411,7 +412,7 @@ static int decode_file(void *buf, size_t size, size_t count, FILE *fp)
         }
     }
     
-    /*°ÑÎÄ¼şÖ¸ÕëÒÆµ½ÕæÊµµÄÎ»ÖÃ*/
+    /*æŠŠæ–‡ä»¶æŒ‡é’ˆç§»åˆ°çœŸå®çš„ä½ç½®*/
     fseek_ext(fp, offset + act_count, SEEK_SET);
 
 #ifdef CRYPTO_DEBUG
@@ -591,8 +592,8 @@ char* get_luaenv(const char* string)
 }
 #endif
 
-//²ÎÊı(ĞèÒª½âÑ¹µÄÎÄ¼şÃû£¬½âÑ¹·ÅµÄÎÄ¼şµØ·½)
-/*+\NEW\wangyong\2016.1.28\Ìí¼Ó½âÑ¹ºÏ³ÉµÄ.binÎÄ¼ş*/
+//å‚æ•°(éœ€è¦è§£å‹çš„æ–‡ä»¶åï¼Œè§£å‹æ”¾çš„æ–‡ä»¶åœ°æ–¹)
+/*+\NEW\wangyong\2016.1.28\æ·»åŠ è§£å‹åˆæˆçš„.binæ–‡ä»¶*/
 int parse_compre_bin_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset,char *Decomdfilename)
 {
     char filename[256];
@@ -623,7 +624,7 @@ int parse_compre_bin_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset,char 
 int decompress_file(const char *Comfilename,char *Decomdfilename)
 {
     #define HEAD_MAX_LEN 100
-    #define FILE_MAX_LEN  (250*1024)  /* µ¥¸öÎÄ¼ş×î´óÏŞÖÆ, ÎÄ¼ş×î´óÏŞÖÆ250K */
+    #define FILE_MAX_LEN  (250*1024)  /* å•ä¸ªæ–‡ä»¶æœ€å¤§é™åˆ¶, æ–‡ä»¶æœ€å¤§é™åˆ¶250K */
     FILE *fp = NULL;
     int total_size,res = -1;
     u8 *buff = NULL;
@@ -649,7 +650,7 @@ int decompress_file(const char *Comfilename,char *Decomdfilename)
     
     fread(buff, 1, HEAD_MAX_LEN, fp);
      
-    /* ½âÎöheadInfo */
+    /* è§£æheadInfo */
     res = decodeHeadInfo(buff, &headInfo, &offset);
     if(res != LUADB_ERR_NONE)
     {
@@ -721,14 +722,14 @@ int decompress_file(const char *Comfilename,char *Decomdfilename)
             
             outfilep = fopen(filename, "wb");
             
-			/*Õû¸öÎÄ¼şÒÑ¾­¶ÁÍêÁË*/
+			/*æ•´ä¸ªæ–‡ä»¶å·²ç»è¯»å®Œäº†*/
 			if(readlen - pFileInfo[fileIndex].offset >= pFileInfo[fileIndex].length)
 			{
                 fwrite(&filebuf[pFileInfo[fileIndex].offset], 1, pFileInfo[fileIndex].length, outfilep);
 	            fclose(outfilep);
 
 			}
-			else /*»¹Òª¼ÌĞø¶Á*/
+			else /*è¿˜è¦ç»§ç»­è¯»*/
 			{
 				int length = pFileInfo[fileIndex].length - (readlen - pFileInfo[fileIndex].offset);
                 fwrite(&filebuf[pFileInfo[fileIndex].offset], 1, readlen - pFileInfo[fileIndex].offset, outfilep);
@@ -749,7 +750,7 @@ int decompress_file(const char *Comfilename,char *Decomdfilename)
         }
 
 
-        /* ÎÄ¼şÓÎ±ê»Øµ½ÕæÊµµÄ¶ÁÈ¡Î»ÖÃ, ×îºóÒ»¸öÎÄ¼şÈ·ÊµÓĞµãÀË·Ñ, ¶à×ßÁË¼¸´Î */
+        /* æ–‡ä»¶æ¸¸æ ‡å›åˆ°çœŸå®çš„è¯»å–ä½ç½®, æœ€åä¸€ä¸ªæ–‡ä»¶ç¡®å®æœ‰ç‚¹æµªè´¹, å¤šèµ°äº†å‡ æ¬¡ */
 		if(readlen != FILE_MAX_LEN)
 		{
 		    fseek(fp, offset-readlen, SEEK_END);  
@@ -766,11 +767,11 @@ int decompress_file(const char *Comfilename,char *Decomdfilename)
     return res;
 }
 
-/*-\NEW\wangyong\2016.1.28\Ìí¼Ó½âÑ¹ºÏ³ÉµÄ.binÎÄ¼ş*/
+/*-\NEW\wangyong\2016.1.28\æ·»åŠ è§£å‹åˆæˆçš„.binæ–‡ä»¶*/
 
 
 
-/* ÔİÊ±²»Ö§³ÖÑ¹ËõµÄ×ÊÔ´ÎÄ¼şµÄÔ¶³ÌÉı¼¶ */
+/* æš‚æ—¶ä¸æ”¯æŒå‹ç¼©çš„èµ„æºæ–‡ä»¶çš„è¿œç¨‹å‡çº§ */
 int parse_luadb_update_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset, u32* pos)
 {
     int err = LUADB_ERR_NONE;
@@ -786,7 +787,7 @@ int parse_luadb_update_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset, u3
 
         if(strcmp(&pFileInfo->name[withoutZipLen], ".zip") == 0)
         {
-            /* Ñ¹ËõµÄ½Å±¾ */
+            /* å‹ç¼©çš„è„šæœ¬ */
             if(strncmp(&pFileInfo->name[withoutLuaLen],".lua", 4) == 0 ||
                 strncmp(&pFileInfo->name[withoutLuaLen -1],".luac", 5) == 0)
             {
@@ -806,7 +807,7 @@ int parse_luadb_update_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset, u3
         }
         else
         {
-            /* Ã»ÓĞÑ¹ËõµÄ½Å±¾ */
+            /* æ²¡æœ‰å‹ç¼©çš„è„šæœ¬ */
             if(strncmp(&pFileInfo->name[pFileInfo->nameLen-4],".lua", 4) == 0 ||
                 strncmp(&pFileInfo->name[pFileInfo->nameLen-5],".luac", 5) == 0)
             {                    
@@ -827,7 +828,7 @@ int parse_luadb_update_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset, u3
                     OPENAT_print("[parse_luadb_data]: write file(%s) error!\n", filename);
                     fclose(fout);
                     fout = NULL;
-                    remove(filename); //Ğ´ÎÄ¼şÊ§°Ü,É¾³ıÒÑĞ´µÄÎÄ¼ş.
+                    remove(filename); //å†™æ–‡ä»¶å¤±è´¥,åˆ é™¤å·²å†™çš„æ–‡ä»¶.
                     err = LUADB_ERR_WRITE_FILE;
                     goto exit_err;
                 }
@@ -836,16 +837,16 @@ int parse_luadb_update_file(DbFileInfo *pFileInfo, char* fileBuf, u32 offset, u3
 
             
             }
-            else  /* Ê£ÏÂµÄ¶¼ÊÇ×ÊÔ´ÁË */
+            else  /* å‰©ä¸‹çš„éƒ½æ˜¯èµ„æºäº† */
             {
-                /* Ö±½ÓĞ´flash */
+                /* ç›´æ¥å†™flash */
                 if(OPENAT_flash_write(((unsigned int)_lua_res_section_start + *pos), offset, NULL, fileBuf) != OPENAT_MEMD_ERR_NO)
                 {
                     err = LUADB_ERR_WRITE_CUSTOMER;
                     goto exit_err;
                 }
 
-                /* Ğ´flash³É¹¦, flash µÄÓÎ±ê */
+                /* å†™flashæˆåŠŸ, flash çš„æ¸¸æ ‡ */
                 *pos += offset;
             }
 
@@ -877,7 +878,8 @@ typedef enum LUADB_SECTION_FILE_TYPE_type
 #endif
 
 #define IN_BUFF_SIZE (120*1024)
-#define OUT_BUFF_SIZE (240*1024)
+
+#define OUT_BUFF_SIZE (240*1024)
 
 #define BL_VERSION_LEN 24
 
@@ -922,7 +924,7 @@ int parse_BL_section_file()
 #if 0    
     update_file = BL_UPDATE_CODE_FILE;
     
-    /* ÕâÀïÒ»¶¨´æÔÚ, µ÷ÓÃÕâ¸öº¯ÊıÖ®Ç°ÒÑ¾­ÅĞ¶ÏÁË, ÎªÁË±£³ÖÒ»¸öº¯ÊıÄÚ´ò¿ª¹Ø±ÕÎÄ¼ş */
+    /* è¿™é‡Œä¸€å®šå­˜åœ¨, è°ƒç”¨è¿™ä¸ªå‡½æ•°ä¹‹å‰å·²ç»åˆ¤æ–­äº†, ä¸ºäº†ä¿æŒä¸€ä¸ªå‡½æ•°å†…æ‰“å¼€å…³é—­æ–‡ä»¶ */
     if((fp = fopen(update_file, "rb")) == NULL)
     {
         return LUADB_ERR_NONE;
@@ -1110,7 +1112,7 @@ int parse_luadb_update_section_file(LUADB_SECTION_FILE_TYPE fileType)
 	
     update_file = (fileType == LUADB_SECTION_RES_FILE) ? LUA_UPDATE_RES_FILE : LUA_UPDATE_CODE_FILE;
 
-    /* ÕâÀïÒ»¶¨´æÔÚ, µ÷ÓÃÕâ¸öº¯ÊıÖ®Ç°ÒÑ¾­ÅĞ¶ÏÁË, ÎªÁË±£³ÖÒ»¸öº¯ÊıÄÚ´ò¿ª¹Ø±ÕÎÄ¼ş */
+    /* è¿™é‡Œä¸€å®šå­˜åœ¨, è°ƒç”¨è¿™ä¸ªå‡½æ•°ä¹‹å‰å·²ç»åˆ¤æ–­äº†, ä¸ºäº†ä¿æŒä¸€ä¸ªå‡½æ•°å†…æ‰“å¼€å…³é—­æ–‡ä»¶ */
     if((fp = fopen(update_file, "rb")) == NULL)
     {
         return LUADB_ERR_NONE;
@@ -1390,7 +1392,7 @@ static int decodeFile(const u8 *pData, DbFileInfo *pFileInfo, u32 *pOffset)
     pFileInfo->data = &pData[pos];
     pFileInfo->offset = *pOffset + pos;
 
-    // ¼ÆËãÆ«ÒÆ +ÎÄ¼şÄÚÈİÓëÌî³äÄÚÈİ
+    // è®¡ç®—åç§» +æ–‡ä»¶å†…å®¹ä¸å¡«å……å†…å®¹
     pos += pFileInfo->length;
     *pOffset += pos;
     
@@ -1471,7 +1473,7 @@ static int decodeHeadInfo(const u8 *pData, DbHeadInfo *pHeadInfo, u32 *pOffset)
         goto decode_head_exit;
     }
 
-/*+\NEW\liweiqiang\2013.12.9\È¥µôluadb×î¶à100¸öÎÄ¼şµÄÏŞÖÆ */
+/*+\NEW\liweiqiang\2013.12.9\å»æ‰luadbæœ€å¤š100ä¸ªæ–‡ä»¶çš„é™åˆ¶ */
 #if 0    
     if(pHeadInfo->filecount > 100)
     {
@@ -1479,7 +1481,7 @@ static int decodeHeadInfo(const u8 *pData, DbHeadInfo *pHeadInfo, u32 *pOffset)
         goto decode_head_exit;
     }
 #endif
-/*-\NEW\liweiqiang\2013.12.9\È¥µôluadb×î¶à100¸öÎÄ¼şµÄÏŞÖÆ */
+/*-\NEW\liweiqiang\2013.12.9\å»æ‰luadbæœ€å¤š100ä¸ªæ–‡ä»¶çš„é™åˆ¶ */
 
     *pOffset += pHeadInfo->length;
 

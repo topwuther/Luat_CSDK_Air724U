@@ -7,7 +7,7 @@
  * Date:    2015/1/22
  *
  * Description:
- *          lua.tcpipsock ·ÃÎÊ¿â
+ *          lua.tcpipsock è®¿é—®åº“
  **************************************************************************/
 
 #include <stdlib.h>
@@ -167,21 +167,21 @@ static int l_sock_send(lua_State *L) {
     size_t len      = 0;
     int sock_index;
     char* buf;
-	/*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 	kal_bool res = 0;
-	/*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
     sock_index = luaL_checkinteger(L, 1);
   
     luaL_checktype( L, 2, LUA_TSTRING );
     
     buf = (char*)lua_tolstring( L, 2, &len );
 
-	/*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
  	res = platform_socket_send(sock_index, buf, len);
     lua_pushinteger(L, res);
 	lua_pushinteger(L, res ? OPENAT_SOCKET_SUCCESS:platform_socket_error(sock_index));
     return 2;
-	/*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 }
 
 static int l_sock_close(lua_State *L) {
@@ -202,7 +202,7 @@ static int l_sock_recv(lua_State *L) {
     int ret;
     char* buf;
     int recved_len = 0;
-	/*+\wj\2020.1.22\BUG4307 UDPÊı¾İÊÕ²»È«*/
+	/*+\wj\2020.1.22\BUG4307 UDPæ•°æ®æ”¶ä¸å…¨*/
 	int recv_left = 0;
     sock_index     = luaL_checkinteger(L, 1);
     total_len      = luaL_checkinteger(L, 2);
@@ -268,7 +268,7 @@ static int l_sock_recv(lua_State *L) {
     luaL_pushresult( &b );
 
 
-    /*-\wj\2020.1.22\BUG4307 UDPÊı¾İÊÕ²»È«*/
+    /*-\wj\2020.1.22\BUG4307 UDPæ•°æ®æ”¶ä¸å…¨*/
     return 1;
 } 
 
@@ -281,7 +281,7 @@ static int l_sock_destroy(lua_State *L) {
     return 1;
 }
 
-/*+\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+/*+\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
 static int l_sock_setopt(lua_State *L) {
     int sock_index;
 	int level;
@@ -297,11 +297,11 @@ static int l_sock_setopt(lua_State *L) {
 		optval = luaL_checkinteger(L, 4);
 	}else
 	{
-		/**Ä¿Ç°¶Ô½á¹¹ÌåÀàĞÍµÄ²ÎÊıÉèÖÃÃ»×ö´¦Àí**/
+		/**ç›®å‰å¯¹ç»“æ„ä½“ç±»å‹çš„å‚æ•°è®¾ç½®æ²¡åšå¤„ç†**/
 		setret = -1;
 	}
 
-	/* levelÄ¿Ç°Ö»Ö§³ÖSOL_SOCKET¸ú IPPROTO_TCP   name Ö§³ÖSO_KEEPALIVE£¬TCP_KEEPIDLE£¬TCP_KEEPINTVL£¬TCP_KEEPCNT£¬SO_REUSEADDR */
+	/* levelç›®å‰åªæ”¯æŒSOL_SOCKETè·Ÿ IPPROTO_TCP   name æ”¯æŒSO_KEEPALIVEï¼ŒTCP_KEEPIDLEï¼ŒTCP_KEEPINTVLï¼ŒTCP_KEEPCNTï¼ŒSO_REUSEADDR */
 	if(sock_index < 0 
 		|| (level != OPENAT_SOCKET_SOL_SOCKET && level != OPENAT_SOCKET_IPPROTO_TCP)
 		|| (optname != OPENAT_SOCKET_SO_KEEPALIVE && optname != OPENAT_SOCKET_TCP_KEEPIDLE && optname != OPENAT_SOCKET_TCP_KEEPINTVL 
@@ -318,7 +318,7 @@ static int l_sock_setopt(lua_State *L) {
     lua_pushinteger(L, setret);
     return 1;
 }
-/*-\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+/*-\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
 
 #define MIN_OPT_LEVEL 2
 #include "lrodefs.h"  
@@ -332,9 +332,9 @@ const LUA_REG_TYPE tcpipsock_map[] =
   { LSTRKEY( "sock_close" ),  LFUNCVAL( l_sock_close ) },
   { LSTRKEY( "sock_recv" ),  LFUNCVAL( l_sock_recv ) },
   { LSTRKEY( "sock_destroy" ),  LFUNCVAL( l_sock_destroy ) },
-  /*+\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+  /*+\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
   { LSTRKEY( "sock_setopt" ),  LFUNCVAL( l_sock_setopt ) },
-  /*-\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+  /*-\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
 
  
   { LNILKEY, LNILVAL }
@@ -343,7 +343,7 @@ const LUA_REG_TYPE tcpipsock_map[] =
 LUALIB_API int luaopen_tcpipsock( lua_State *L )
 {
     luaL_register( L, AUXLIB_TCPIPSOCK, tcpipsock_map );
-	/*+\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+	/*+\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
 	MOD_REG_NUMBER(L, "SOL_SOCKET", OPENAT_SOCKET_SOL_SOCKET);
 	MOD_REG_NUMBER(L, "SO_KEEPALIVE", OPENAT_SOCKET_SO_KEEPALIVE);
 	MOD_REG_NUMBER(L, "SO_REUSEADDR", OPENAT_SOCKET_SO_REUSEADDR);
@@ -351,7 +351,7 @@ LUALIB_API int luaopen_tcpipsock( lua_State *L )
 	MOD_REG_NUMBER(L, "TCP_KEEPIDLE", OPENAT_SOCKET_TCP_KEEPIDLE);
 	MOD_REG_NUMBER(L, "TCP_KEEPINTVL", OPENAT_SOCKET_TCP_KEEPINTVL);
 	MOD_REG_NUMBER(L, "TCP_KEEPCNT", OPENAT_SOCKET_TCP_KEEPCNT);
-	/*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 	MOD_REG_NUMBER(L, "ERR_UNKOWN", -1);
 	MOD_REG_NUMBER(L, "ERR_OK", OPENAT_SOCKET_SUCCESS);
 	MOD_REG_NUMBER(L, "ERR_ENOMEM", OPENAT_SOCKET_ENOMEM);
@@ -373,8 +373,8 @@ LUALIB_API int luaopen_tcpipsock( lua_State *L )
 	MOD_REG_NUMBER(L, "ERR_SSL_EHANDESHAK", OPENAT_SOCKET_SSL_EHANDESHAK);
 	MOD_REG_NUMBER(L, "ERR_SSL_EINIT", OPENAT_SOCKET_SSL_EINIT);
 	MOD_REG_NUMBER(L, "ERR_SSL_EINVALID", OPENAT_SOCKET_SSL_EINVALID);
-	/*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
-	/*-\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+	/*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
+	/*-\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
     platform_lua_socket_init();
     return 1;
 }  

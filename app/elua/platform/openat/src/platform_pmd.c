@@ -18,9 +18,9 @@
 #include "lplatform.h"
 #include "platform_pmd.h"
 
-/*+\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbatt»ñÈ¡µÄµçÔ´µçÑ¹Ê¼ÖÕÎª4200*/
+/*+\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbattè·å–çš„ç”µæºç”µå‹å§‹ç»ˆä¸º4200*/
 //#include "drv_charger.h"
-/*-\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbatt»ñÈ¡µÄµçÔ´µçÑ¹Ê¼ÖÕÎª4200*/
+/*-\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbattè·å–çš„ç”µæºç”µå‹å§‹ç»ˆä¸º4200*/
 
 static const E_AMOPENAT_PM_LDO ldo2OpenatLdo[PLATFORM_LDO_QTY] = {
    
@@ -28,36 +28,36 @@ static const E_AMOPENAT_PM_LDO ldo2OpenatLdo[PLATFORM_LDO_QTY] = {
 
    
     OPENAT_LDO_POWER_MMC,
-	/*+\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
+	/*+\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
 	OPENAT_LDO_POWER_VSIM1,
-	/*-\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
+	/*-\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
 
-	/*+\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
+	/*+\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
 	OPENAT_LDO_POWER_VCAMA,
 	OPENAT_LDO_POWER_VCAMD,
-	/*-\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
-	/*+\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
+	/*+\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 	OPENAT_LDO_POWER_VIBR,
-	/*-\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 
-	/*+\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*+\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	OPENAT_LDO_POWER_VBACKLIGHT_R,
 	OPENAT_LDO_POWER_VBACKLIGHT_G,
 	OPENAT_LDO_POWER_VBACKLIGHT_B,
 	OPENAT_LDO_POWER_VBACKLIGHT_W,
-	/*-\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*-\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	
-	/*+\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*+\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 	OPENAT_LDO_POWER_HMICBIAS
-	/*-\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*-\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 };
 
-/*+\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 extern BOOL cust_pmd_init(PlatformPmdCfg *cfg);
 
 static E_OPENAT_CHARGE_CURRENT getOpenatCurrent(u16 current)
 {
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     static const u16 openatCurrentVal[OPENAT_PM_CHARGE_CURRENT_QTY] =
     {
         0,
@@ -82,16 +82,16 @@ static E_OPENAT_CHARGE_CURRENT getOpenatCurrent(u16 current)
         1400,
         1500
     };
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     uint16 i;
 
-    for(i = 1/*OFF²»È¥ÅĞ¶Ï*/; i < OPENAT_PM_CHARGE_CURRENT_QTY; i++)
+    for(i = 1/*OFFä¸å»åˆ¤æ–­*/; i < OPENAT_PM_CHARGE_CURRENT_QTY; i++)
     {
         if(openatCurrentVal[i] == current)
         {
-/*+\BUG WM-1015\rufei\2013.11.19\ ĞŞ¸Älua³äµç¿ØÖÆ*/
+/*+\BUG WM-1015\rufei\2013.11.19\ ä¿®æ”¹luaå……ç”µæ§åˆ¶*/
             return i;
-/*-\BUG WM-1015\rufei\2013.11.19\ ĞŞ¸Älua³äµç¿ØÖÆ*/
+/*-\BUG WM-1015\rufei\2013.11.19\ ä¿®æ”¹luaå……ç”µæ§åˆ¶*/
         }
         else if(openatCurrentVal[i] > current)
         {
@@ -101,7 +101,7 @@ static E_OPENAT_CHARGE_CURRENT getOpenatCurrent(u16 current)
 
     return OPENAT_PM_CHARGE_CURRENT_QTY;
 }
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 static E_OPENAT_PM_VOLT getOpenatVolt(u16 volt)
 {
     static const u16 openatVoltVal[OPENAT_PM_VOLT_QTY] =
@@ -141,7 +141,7 @@ static E_OPENAT_PM_VOLT getOpenatVolt(u16 volt)
     };
     uint16 i;
 
-    for(i = 1/*OFF²»È¥ÅĞ¶Ï*/; i < OPENAT_PM_VOLT_QTY; i++)
+    for(i = 1/*OFFä¸å»åˆ¤æ–­*/; i < OPENAT_PM_VOLT_QTY; i++)
     {
         if(openatVoltVal[i] >= volt)
         {
@@ -151,7 +151,7 @@ static E_OPENAT_PM_VOLT getOpenatVolt(u16 volt)
 
     return OPENAT_PM_VOLT_QTY;
 }
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
 int platform_pmd_init(PlatformPmdCfg *pmdCfg)
 {
@@ -162,7 +162,7 @@ int platform_pmd_init(PlatformPmdCfg *pmdCfg)
             return PLATFORM_ERR; \
         } \
     }while(0)
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
     #define CHECK_VOLTAGE_FILED(fIELD) do{ \
         if(pmdCfg->fIELD != PMD_CFG_INVALID_VALUE && (pmdCfg->fIELD = getOpenatVolt(pmdCfg->fIELD)) == OPENAT_PM_VOLT_QTY) \
         { \
@@ -179,20 +179,20 @@ int platform_pmd_init(PlatformPmdCfg *pmdCfg)
     CHECK_VOLTAGE_FILED(ovLevel);
     CHECK_VOLTAGE_FILED(pvLevel);
     CHECK_VOLTAGE_FILED(poweroffLevel);
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
     return cust_pmd_init(pmdCfg) ? PLATFORM_OK : PLATFORM_ERR;
 }
-/*-\NEW\liweiqiang\2013.9.8\Ôö¼Ópmd.initÉèÖÃ³äµçµçÁ÷½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.9.8\å¢åŠ pmd.initè®¾ç½®å……ç”µç”µæµæ¥å£ */
 
 int platform_ldo_set(PlatformLdoId id, int level)
 {
     if(ldo2OpenatLdo[id] >= OPENAT_LDO_POWER_INVALID){
         return PLATFORM_ERR;
     }
-	/*+\BUG\wangyuan\2020.04.07\ÊÊÅäldoÉèÖÃ½Ó¿Ú*/
+	/*+\BUG\wangyuan\2020.04.07\é€‚é…ldoè®¾ç½®æ¥å£*/
     OPENAT_poweron_ldo(ldo2OpenatLdo[id], level);
-	/*-\BUG\wangyuan\2020.04.07\ÊÊÅäldoÉèÖÃ½Ó¿Ú*/
+	/*-\BUG\wangyuan\2020.04.07\é€‚é…ldoè®¾ç½®æ¥å£*/
     return PLATFORM_OK;
 }
 
@@ -200,19 +200,19 @@ int platform_ldo_set(PlatformLdoId id, int level)
 int platform_pmd_powersave(int sleep_wake)
 {
     if(sleep_wake){
-        /*+\NEW\liweiqiang\2013.10.19\ÉèÖÃ¹¤×÷Ê±Ö÷ÆµÎª208M*/
+        /*+\NEW\liweiqiang\2013.10.19\è®¾ç½®å·¥ä½œæ—¶ä¸»é¢‘ä¸º208M*/
         //IVTBL(sys_request_freq)(OPENAT_SYS_FREQ_32K);
         OPENAT_enter_deepsleep();
     } else {
         OPENAT_exit_deepsleep();
         //IVTBL(sys_request_freq)(OPENAT_SYS_FREQ_208M);
-        /*-\NEW\liweiqiang\2013.10.19\ÉèÖÃ¹¤×÷Ê±Ö÷ÆµÎª208M*/
+        /*-\NEW\liweiqiang\2013.10.19\è®¾ç½®å·¥ä½œæ—¶ä¸»é¢‘ä¸º208M*/
     }
 
     return PLATFORM_OK;
 }
 
-/*+\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*+\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 int platform_pmd_get_charger(void)
 {
     UINT32 chargerStatus;
@@ -220,7 +220,7 @@ int platform_pmd_get_charger(void)
     chargerStatus = IVTBL(get_chargerHwStatus)();
     return chargerStatus == OPENAT_PM_CHR_HW_STATUS_AC_ON ? 1 : 0;
 }
-/*-\NEW\liweiqiang\2014.2.13\Ôö¼Ópmd.charger²éÑ¯³äµçÆ÷×´Ì¬½Ó¿Ú */
+/*-\NEW\liweiqiang\2014.2.13\å¢åŠ pmd.chargeræŸ¥è¯¢å……ç”µå™¨çŠ¶æ€æ¥å£ */
 
 
 
@@ -231,7 +231,7 @@ UINT32 platform_pmd_getChargingCurrent(void)
 
 int platform_pmd_get_chg_param(BOOL *battStatus, u16 *battVolt, u8 *battLevel, BOOL *chargerStatus, u32 *chargeState)
 {	
-	/*+\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbatt»ñÈ¡µÄµçÔ´µçÑ¹Ê¼ÖÕÎª4200*/
+	/*+\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbattè·å–çš„ç”µæºç”µå‹å§‹ç»ˆä¸º4200*/
     uint8 nBcs = 0;
     uint8 nBcl = 0;
 	uint32 nvol = 0;
@@ -252,7 +252,7 @@ int platform_pmd_get_chg_param(BOOL *battStatus, u16 *battVolt, u8 *battLevel, B
 	}
     *battLevel = nBcl;
 	*battVolt = nvol;
-	/*-\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbatt»ñÈ¡µÄµçÔ´µçÑ¹Ê¼ÖÕÎª4200*/
+	/*-\BUG\wangyuan\2020.04.10\BUG_1454: misc.vbattè·å–çš„ç”µæºç”µå‹å§‹ç»ˆä¸º4200*/
     return PLATFORM_OK;
 }
 

@@ -238,9 +238,9 @@
  */
 #define CONFIG_APP_FLASH_ADDRESS 0x60010000
 
-/*+\NEW\zhuwangbin\2020.8.15\兼容1.2V, offset未定义导致CSDK无法升级问题*/
+/*+\NEW\zhuwangbin\2020.8.15\鍏煎1.2V, offset鏈畾涔夊鑷碈SDK鏃犳硶鍗囩骇闂*/
 #define CONFIG_APPIMG_FLASH_OFFSET 0x180000
-/*-\NEW\zhuwangbin\2020.8.15\兼容1.2V, offset未定义导致CSDK无法升级问题*/
+/*-\NEW\zhuwangbin\2020.8.15\鍏煎1.2V, offset鏈畾涔夊鑷碈SDK鏃犳硶鍗囩骇闂*/
 /**
  * reserved NOR flash size for application
  */
@@ -273,13 +273,13 @@
  */
 #define CONFIG_FS_SYS_FLASH_ADDRESS 0x60300000
 
-/*+\NEW\zhuwangbin\2020.8.15\兼容1.2V, offset未定义导致CSDK无法升级问题*/
+/*+\NEW\zhuwangbin\2020.8.15\鍏煎1.2V, offset鏈畾涔夊鑷碈SDK鏃犳硶鍗囩骇闂*/
 #define CONFIG_FS_SYS_FLASH_OFFSET 0x300000
-/*-\NEW\zhuwangbin\2020.8.15\兼容1.2V, offset未定义导致CSDK无法升级问题*/
+/*-\NEW\zhuwangbin\2020.8.15\鍏煎1.2V, offset鏈畾涔夊鑷碈SDK鏃犳硶鍗囩骇闂*/
 
-/*+\new\wangjian\2020.8.24\下载lua固件和lua脚本失败*/
+/*+\new\wangjian\2020.8.24\涓嬭浇lua鍥轰欢鍜宭ua鑴氭湰澶辫触*/
 /* #undef CONFIG_LUA_FLASH_OFFSET */
-/*-\new\wangjian\2020.8.24\下载lua固件和lua脚本失败*/
+/*-\new\wangjian\2020.8.24\涓嬭浇lua鍥轰欢鍜宭ua鑴氭湰澶辫触*/
 /**
  * reserved NOR flash size for system file system
  */

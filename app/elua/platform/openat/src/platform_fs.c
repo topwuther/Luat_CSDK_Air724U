@@ -108,7 +108,8 @@ static off_t platformfs_lseek_r( int fd, off_t off, int whence )
 }
 
 _ssize_t platformfs_get_size_r(const char *path)
-{
+{
+
     return IVTBL(get_file_size(path));
 }
 
@@ -129,7 +130,7 @@ const DM_DEVICE* platform_fs_init(void)
 {
     return &platform_fs_device;
 }
-/*+\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
+/*+\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
 BOOL platform_fs_mount(PLATFORM_FS_MOUNT_PARAM *param)
 {
 	OPENAT_print("platform_fs_mount %s",param->path);
@@ -169,7 +170,7 @@ BOOL platform_fs_unmount(PLATFORM_FS_MOUNT_PARAM *param)
 	return OPENAT_fs_unmount(&mount_param);
 }
 
-/*+\BUG\wangyuan\2020.06.11\½«sdcard¹ÒÔØ¡¢Ğ¶ÔØ¡¢¸ñÊ½»¯²Ù×÷·Åµ½io¿âÖĞ*/
+/*+\BUG\wangyuan\2020.06.11\å°†sdcardæŒ‚è½½ã€å¸è½½ã€æ ¼å¼åŒ–æ“ä½œæ”¾åˆ°ioåº“ä¸­*/
 #ifdef  LUA_SDCARD_SUPPORT
 BOOL platformfs_Mount_sdcard(void)
 {
@@ -186,11 +187,11 @@ BOOL platformfs_Format_sdcard(void)
 	return IVTBL(fs_format_sdcard)();
 }
 #endif
-/*-\BUG\wangyuan\2020.06.11\½«sdcard¹ÒÔØ¡¢Ğ¶ÔØ¡¢¸ñÊ½»¯²Ù×÷·Åµ½io¿âÖĞ*/
-/*-\new\wj\2020.9.1\ÍêÉÆmount£¬unmount£¬format½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.06.11\å°†sdcardæŒ‚è½½ã€å¸è½½ã€æ ¼å¼åŒ–æ“ä½œæ”¾åˆ°ioåº“ä¸­*/
+/*-\new\wj\2020.9.1\å®Œå–„mountï¼Œunmountï¼Œformatæ¥å£*/
 
 
-/*+\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*+\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/
 #define OTP_BLOCK_SIZE (0x400)
 #define OTP_BLOCK_COUNT (2)
 #define OTP_BASE_BLOCK (2)
@@ -199,7 +200,7 @@ BOOL platformfs_otp_erase(UINT16 address, UINT16 size)
 {
 	UINT8 num, cur, end;
 
-	/*ÅĞ¶Ï²ÁµÄµØÖ·ÊÇ·ñ³¬¹ıOTPÇøÓò*/
+	/*åˆ¤æ–­æ“¦çš„åœ°å€æ˜¯å¦è¶…è¿‡OTPåŒºåŸŸ*/
 	if (address > OTP_END)
 	{
 		return FALSE;
@@ -208,10 +209,10 @@ BOOL platformfs_otp_erase(UINT16 address, UINT16 size)
 	cur = address / OTP_BLOCK_SIZE;
 	end = (address + size -1) / OTP_BLOCK_SIZE;
 
-	/*²Áµ±Ç°ÇøÓò*/
+	/*æ“¦å½“å‰åŒºåŸŸ*/
 	openat_flash_eraseSecurity(cur+OTP_BASE_BLOCK);
 
-	/*²ÁÇøÓòÊÇ·ñÔÚ²»Í¬blockÖĞ*/
+	/*æ“¦åŒºåŸŸæ˜¯å¦åœ¨ä¸åŒblockä¸­*/
 	if (cur != end)
 	{
 		openat_flash_eraseSecurity(end+OTP_BASE_BLOCK);
@@ -224,7 +225,7 @@ BOOL platformfs_otp_lock(UINT16 address, UINT16 size)
 {
 	UINT8 num, cur, end;
 
-	/*ÅĞ¶ÏËøµÄµØÖ·ÊÇ·ñ³¬¹ıOTPÇøÓò*/
+	/*åˆ¤æ–­é”çš„åœ°å€æ˜¯å¦è¶…è¿‡OTPåŒºåŸŸ*/
 	if ((address+size-1) > OTP_END)
 	{
 		return FALSE;
@@ -233,10 +234,10 @@ BOOL platformfs_otp_lock(UINT16 address, UINT16 size)
 	cur = address / OTP_BLOCK_SIZE;
 	end = (address + size -1) / OTP_BLOCK_SIZE;
 
-	/*Ëø×¡µ±Ç°ÇøÓò*/
+	/*é”ä½å½“å‰åŒºåŸŸ*/
 	openat_flash_lockSecurity(cur+OTP_BASE_BLOCK);
 
-	/*ËøÇøÓòÊÇ·ñÔÚ²»Í¬blockÖĞ*/
+	/*é”åŒºåŸŸæ˜¯å¦åœ¨ä¸åŒblockä¸­*/
 	if (cur != end)
 	{
 		openat_flash_lockSecurity(end+OTP_BASE_BLOCK);
@@ -251,7 +252,7 @@ BOOL platformfs_otp_write(UINT16 address, char * data, UINT32 size)
 	UINT8 num, cur, end;
 	UINT16 offset,len;
 
-	/*ÅĞ¶ÏĞ´µÄÇøÓòÊÇ·ñ³¬¹ıotpÇøÓò*/
+	/*åˆ¤æ–­å†™çš„åŒºåŸŸæ˜¯å¦è¶…è¿‡otpåŒºåŸŸ*/
 	if ((address + size) > OTP_END)
 	{
 		return FALSE;
@@ -260,7 +261,7 @@ BOOL platformfs_otp_write(UINT16 address, char * data, UINT32 size)
 	cur = address / OTP_BLOCK_SIZE;
 	end = (address + size -1) / OTP_BLOCK_SIZE;
 
-	/*Ğ´ÇøÓòÊÇ·ñÔÚ²»Í¬blockÖĞ*/
+	/*å†™åŒºåŸŸæ˜¯å¦åœ¨ä¸åŒblockä¸­*/
 	if (cur != end)
 	{
 		offset = address % OTP_BLOCK_SIZE;
@@ -269,7 +270,7 @@ BOOL platformfs_otp_write(UINT16 address, char * data, UINT32 size)
 		offset = 0;
 		openat_flash_writeSecurity(end+OTP_BASE_BLOCK, offset, &data[len], size-len);
 	}
-	/*Ğ´ÇøÓòÔÚÒ»¸öBLOCKÖĞ*/
+	/*å†™åŒºåŸŸåœ¨ä¸€ä¸ªBLOCKä¸­*/
 	else 
 	{
 		offset = address % OTP_BLOCK_SIZE;
@@ -284,7 +285,7 @@ BOOL platformfs_otp_read(UINT16 address, char * data, UINT32 size)
 	UINT8 num, cur, end;
 	UINT16 offset,len;
 
-	/*ÅĞ¶Ï¶ÁµÄÇøÓòÊÇ·ñ³¬¹ıotpÇøÓò*/
+	/*åˆ¤æ–­è¯»çš„åŒºåŸŸæ˜¯å¦è¶…è¿‡otpåŒºåŸŸ*/
 	if ((address + size) > OTP_END)
 	{
 		return FALSE;
@@ -293,7 +294,7 @@ BOOL platformfs_otp_read(UINT16 address, char * data, UINT32 size)
 	cur = address / OTP_BLOCK_SIZE;
 	end = (address + size -1) / OTP_BLOCK_SIZE;
 
-	/*¶ÁÇøÓòÊÇ·ñÔÚ²»Í¬blockÖĞ*/
+	/*è¯»åŒºåŸŸæ˜¯å¦åœ¨ä¸åŒblockä¸­*/
 	if (cur != end)
 	{
 		offset = address % OTP_BLOCK_SIZE;
@@ -302,7 +303,7 @@ BOOL platformfs_otp_read(UINT16 address, char * data, UINT32 size)
 		offset = 0;
 		openat_flash_readSecurity(end+OTP_BASE_BLOCK, offset, &data[len], size-len);
 	}
-	/*¶ÁÇøÓòÔÚÒ»¸öBLOCKÖĞ*/
+	/*è¯»åŒºåŸŸåœ¨ä¸€ä¸ªBLOCKä¸­*/
 	else 
 	{
 		offset = address % OTP_BLOCK_SIZE;
@@ -311,5 +312,5 @@ BOOL platformfs_otp_read(UINT16 address, char * data, UINT32 size)
 
 	return TRUE;
 }
-/*-\bug2991\zhuwangbin\2020.06.11\Ôö¼Ólua otp½Ó¿Ú*/
+/*-\bug2991\zhuwangbin\2020.06.11\å¢åŠ lua otpæ¥å£*/
 

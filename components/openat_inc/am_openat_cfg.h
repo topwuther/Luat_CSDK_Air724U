@@ -1,54 +1,54 @@
 /******************************************************************************
 
-                  °æÈ¨ËùÓÐ (C), 2001-2011
+                  ç‰ˆæƒæ‰€æœ‰ (C), 2001-2011
 
  ******************************************************************************
-  ÎÄ ¼þ Ãû   : cfg_pal.h
-  °æ ±¾ ºÅ   : ³õ¸å
-  ×÷    Õß   : brezen
-  Éú³ÉÈÕÆÚ   : 2012Äê12ÔÂ12ÈÕ
-  ×î½üÐÞ¸Ä   :
-  ¹¦ÄÜÃèÊö   : Çý¶¯ÅäÖÃÆ½Ì¨ÊÊÅä
-  º¯ÊýÁÐ±í   :
-  ÐÞ¸ÄÀúÊ·   :
-  1.ÈÕ    ÆÚ   : 2012Äê12ÔÂ12ÈÕ
-    ×÷    Õß   : brezen
-    ÐÞ¸ÄÄÚÈÝ   : ´´½¨ÎÄ¼þ
-  2.ÈÕ    ÆÚ   : 2013Äê03ÔÂ18ÈÕ
-    ×÷    Õß   : rufei
-    ÐÞ¸ÄÄÚÈÝ   : Ôö¼Ópwm¶Ë¿ÚÅäÖÃ
+  æ–‡ ä»¶ å   : cfg_pal.h
+  ç‰ˆ æœ¬ å·   : åˆç¨¿
+  ä½œ    è€…   : brezen
+  ç”Ÿæˆæ—¥æœŸ   : 2012å¹´12æœˆ12æ—¥
+  æœ€è¿‘ä¿®æ”¹   :
+  åŠŸèƒ½æè¿°   : é©±åŠ¨é…ç½®å¹³å°é€‚é…
+  å‡½æ•°åˆ—è¡¨   :
+  ä¿®æ”¹åŽ†å²   :
+  1.æ—¥    æœŸ   : 2012å¹´12æœˆ12æ—¥
+    ä½œ    è€…   : brezen
+    ä¿®æ”¹å†…å®¹   : åˆ›å»ºæ–‡ä»¶
+  2.æ—¥    æœŸ   : 2013å¹´03æœˆ18æ—¥
+    ä½œ    è€…   : rufei
+    ä¿®æ”¹å†…å®¹   : å¢žåŠ pwmç«¯å£é…ç½®
 
 ******************************************************************************/
 
 /*----------------------------------------------*
- * °üº¬Í·ÎÄ¼þ                                   *
+ * åŒ…å«å¤´æ–‡ä»¶                                   *
  *----------------------------------------------*/
 /*----------------------------------------------*
- * Íâ²¿±äÁ¿ËµÃ÷                                 *
- *----------------------------------------------*/
-
-/*----------------------------------------------*
- * Íâ²¿º¯ÊýÔ­ÐÍËµÃ÷                             *
+ * å¤–éƒ¨å˜é‡è¯´æ˜Ž                                 *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * ÄÚ²¿º¯ÊýÔ­ÐÍËµÃ÷                             *
+ * å¤–éƒ¨å‡½æ•°åŽŸåž‹è¯´æ˜Ž                             *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * È«¾Ö±äÁ¿                                     *
+ * å†…éƒ¨å‡½æ•°åŽŸåž‹è¯´æ˜Ž                             *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * Ä£¿é¼¶±äÁ¿                                   *
+ * å…¨å±€å˜é‡                                     *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * ³£Á¿¶¨Òå                                     *
+ * æ¨¡å—çº§å˜é‡                                   *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * ºê¶¨Òå                                       *
+ * å¸¸é‡å®šä¹‰                                     *
+ *----------------------------------------------*/
+
+/*----------------------------------------------*
+ * å®å®šä¹‰                                       *
  *----------------------------------------------*/
 
 #ifndef __CFG_PAL_H__
@@ -80,7 +80,7 @@ typedef  int  DRV_OPER_RESULT;
 
 typedef enum {
   PIN_NULL,
-/*+\zhuwangbin\2018.09.18\Ìí¼Ó¹Ü½Å33-36,67,69,70-78, 80-81*/
+/*+\zhuwangbin\2018.09.18\æ·»åŠ ç®¡è„š33-36,67,69,70-78, 80-81*/
 	PIN_B6_IO33,     //33 FUN0
 	PIN_C5_IO34,     //34 FUN0
 	PIN_F6_IO35,		 //35 FUN0
@@ -104,7 +104,7 @@ typedef enum {
 	//PIN_T2_TDS_PACTRL, //79 FCUN1
 	PIN_P4_TDS_RXON, //80 FUN1
 	PIN_P3_TDS_TXON, //81 FUN1
-/*-\zhuwangbin\2018.09.18\Ìí¼Ó¹Ü½Å33-36,67,69,70-78, 80-81*/
+/*-\zhuwangbin\2018.09.18\æ·»åŠ ç®¡è„š33-36,67,69,70-78, 80-81*/
   PIN_N3_IO58_U2TX, //
   PIN_M3_IO57_U2RX,  //uart2_rx
   PIN_P7_IO59_U2CTS, //uart2_cts
@@ -119,21 +119,21 @@ typedef enum {
   PIN_R5_IO68, //W_DISABLE TDS_DIO1
   PIN_R6_IO63, //AP_READY SSP2_FRM
   PIN_P8_IO62_SPI2TXD, //WAKEUP_IN SSP2_TXD
-  /*+NEW\lijiaodi\2018.08.23\ Ìí¼ÓGPIO26,27,28,23*/  
+  /*+NEW\lijiaodi\2018.08.23\ æ·»åŠ GPIO26,27,28,23*/  
   PIN_D6_IO26,
   PIN_C7_IO27,
   PIN_F7_IO28,
   PIN_F11_IO23_MMC1_CD,
-  /*-NEW\lijiaodi\2018.08.23\ Ìí¼ÓGPIO26,27,28,23*/  
+  /*-NEW\lijiaodi\2018.08.23\ æ·»åŠ GPIO26,27,28,23*/  
 }DRV_CFG_REF_E;
 
 
 typedef enum {
   UART1_PIN_CFG,
   UART2_PIN_CFG,
- /*+:\NewReq-WM-608\brezen\2013.3.1\½«host uart×÷ÎªÆÕÍ¨´®¿ÚÊ¹ÓÃ */ 
+ /*+:\NewReq-WM-608\brezen\2013.3.1\å°†host uartä½œä¸ºæ™®é€šä¸²å£ä½¿ç”¨ */ 
   UART_HOST_PIN_CFG,
- /*-:\NewReq-WM-608\brezen\2013.3.1\½«host uart×÷ÎªÆÕÍ¨´®¿ÚÊ¹ÓÃ */ 
+ /*-:\NewReq-WM-608\brezen\2013.3.1\å°†host uartä½œä¸ºæ™®é€šä¸²å£ä½¿ç”¨ */ 
   UART_MAX_NUM
 }DRV_CFG_PIN_UART_E;
 
@@ -142,23 +142,23 @@ typedef enum {
   SPI2_PIN_CFG,
   SPI_MAX_NUM
 }DRV_CFG_PIN_SPI_E;
-/*+\NEW\AMOPENAT-108\brezen\2014.7.3\Ìí¼ÓI2C1½Ó¿Ú*/
+/*+\NEW\AMOPENAT-108\brezen\2014.7.3\æ·»åŠ I2C1æŽ¥å£*/
 typedef enum {
   I2C1_PIN_CFG,
   I2C2_PIN_CFG,
   I2C3_PIN_CFG,
   I2C_MAX_NUM
 }DRV_CFG_PIN_I2C_E;
-/*-\NEW\AMOPENAT-108\brezen\2014.7.3\Ìí¼ÓI2C1½Ó¿Ú*/
+/*-\NEW\AMOPENAT-108\brezen\2014.7.3\æ·»åŠ I2C1æŽ¥å£*/
 typedef enum {
   KEY_CONFIG_INVALID,
   
   KEY_CONFIG_NONE,
   KEY_ADC_PIN_CFG,
   KEY_MATRIX_PIN_CFG,
-/*+\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*+\NEW WM-718\rufei\2013.3.21\ å¢žåŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
   KEY_GPIO_PIN_CFG,
-/*-\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*-\NEW WM-718\rufei\2013.3.21\ å¢žåŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
   KEY_CONFIG_QTY
 }DRV_CFG_PIN_KEY_MODE_E;
 
@@ -195,7 +195,7 @@ typedef enum {
   
   SPI_CONFIG_NONE,
   
-  /*CLK,DO ÆäËû½Ó¿ÚÓÃgpioÄ£Äâ*/
+  /*CLK,DO å…¶ä»–æŽ¥å£ç”¨gpioæ¨¡æ‹Ÿ*/
   SPI_CONFIG_DATA,
   
   /*CLK,DO,CS*/
@@ -255,12 +255,12 @@ typedef enum{
 
 /*********************************************************
   Function:    DRVCFGAPI_ConfigPin
-  Description: ÅäÖÃpinµÄ¹¦ÄÜ
+  Description: é…ç½®pinçš„åŠŸèƒ½
   Input:
-               1. pinRef  ¹¦ÄÜpin
-               2. pinConfig pinÅäÖÃ²ÎÊý
+               1. pinRef  åŠŸèƒ½pin
+               2. pinConfig piné…ç½®å‚æ•°
   Output:
-  Return:       ÊÇ·ñ³É¹¦
+  Return:       æ˜¯å¦æˆåŠŸ
   Others:
 *********************************************************/
 DRV_OPER_RESULT DRVCFGAPI_ConfigGpio(DRV_CFG_REF_E pinRef);

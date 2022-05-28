@@ -3,13 +3,13 @@
  *
  * Name: list.h
  *
- * Author: Àîì¿ïê
+ * Author: æç‚œé•ª
  * Verison: V0.1
  * Date: 2009.11.30
  *
  * File Description:
  *
- *      ÊµÏÖÍ¨ÓÃÁ´±í
+ *      å®ç°é€šç”¨é“¾è¡¨
  **************************************************************************/
 
 typedef struct list_head_tag
@@ -31,10 +31,10 @@ typedef struct list_head_tag
 #define list_empty(head) (head->next == head)
 
 #if 1
-/* ÎªÌá¸ßÍ¨ÓÃÁ´±íµÄÊ¹ÓÃĞ§ÂÊ,Çë½«list±äÁ¿¶¨ÒåÎª½á¹¹ÌåµÄµÚÒ»¸ö±äÁ¿ */
+/* ä¸ºæé«˜é€šç”¨é“¾è¡¨çš„ä½¿ç”¨æ•ˆç‡,è¯·å°†listå˜é‡å®šä¹‰ä¸ºç»“æ„ä½“çš„ç¬¬ä¸€ä¸ªå˜é‡ */
 #define list_entry(ptr, type, member) ((type*)ptr)
 #else
-/* Ê¹ÓÃ¸Ãºê¶¨Òå,¿ÉÒÔÔÚÊ¹ÓÃÍ¨ÓÃÁ´±íÊ±,Ëæ±ã¶¨ÒålistµÄ±äÁ¿Î»ÖÃ */
+/* ä½¿ç”¨è¯¥å®å®šä¹‰,å¯ä»¥åœ¨ä½¿ç”¨é€šç”¨é“¾è¡¨æ—¶,éšä¾¿å®šä¹‰listçš„å˜é‡ä½ç½® */
 #define list_entry(ptr, type, member) ((type*)((char*)ptr - offsetof(type,member)))
 #endif
 

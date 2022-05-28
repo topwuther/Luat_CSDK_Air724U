@@ -203,9 +203,9 @@ typedef enum osiBootCause
     OSI_BOOTCAUSE_WDG = (1 << 4),        ///< boot by watchdog
     OSI_BOOTCAUSE_PIN_WAKEUP = (1 << 5), ///< boot by wakeup
     OSI_BOOTCAUSE_PSM_WAKEUP = (1 << 6), ///< boot from PSM wakeup
-    /*+\NEW\zhuwangbin\2020.04.04\区分软件重启和reset按键重启*/
+    /*+\NEW\zhuwangbin\2020.04.04\鍖哄垎杞欢閲嶅惎鍜宺eset鎸夐敭閲嶅惎*/
     OSI_BOOTCAUSE_RESET = (1 << 7),   
-    /*-\NEW\zhuwangbin\2020.04.04\区分软件重启和reset按键重启*/
+    /*-\NEW\zhuwangbin\2020.04.04\鍖哄垎杞欢閲嶅惎鍜宺eset鎸夐敭閲嶅惎*/
     OSI_BOOTCAUSE_PANIC = (1 << 9),      ///< boot by panic reset
 } osiBootCause_t;
 
@@ -241,11 +241,11 @@ typedef enum osiBootMode
 typedef enum osiShutdownMode
 {
     OSI_SHUTDOWN_RESET = 0,               ///< normal reset
-/*+\BUG3096\zhuwangbin\2020.9.17\添加关机充电功能*/
+/*+\BUG3096\zhuwangbin\2020.9.17\娣诲姞鍏虫満鍏呯數鍔熻兘*/
 #ifdef AM_LUA_SUPPORT
-    OSI_SHUTDOWN_CHARGER, // 用于关机充电功能
+    OSI_SHUTDOWN_CHARGER, // 鐢ㄤ簬鍏虫満鍏呯數鍔熻兘
 #endif
-/*-\BUG3096\zhuwangbin\2020.9.17\添加关机充电功能*/
+/*-\BUG3096\zhuwangbin\2020.9.17\娣诲姞鍏虫満鍏呯數鍔熻兘*/
     OSI_SHUTDOWN_FORCE_DOWNLOAD = 0x5244, ///< 'RD' reset to force download mode
     OSI_SHUTDOWN_DOWNLOAD = 0x444e,       ///< 'DN' reset to download mode
     OSI_SHUTDOWN_BL_DOWNLOAD = 0x4244,    ///< 'BD' reset to bootloader download mode
@@ -688,11 +688,11 @@ osiThread_t *osiThreadCreate(const char *name, osiThreadEntry_t entry, void *arg
                              uint32_t priority, uint32_t stack_size,
                              uint32_t event_count);
 
-/*+\new\rww\2020.4.14\添加线程创建接口*/
+/*+\new\rww\2020.4.14\娣诲姞绾跨▼鍒涘缓鎺ュ彛*/
 osiThread_t *osiThreadCreateNotSuspendScheduler(const char *name, osiCallback_t func, void *argument,
 										uint32_t priority, uint32_t stack_size,
 										uint32_t event_count);
-/*-\new\rww\2020.4.14\添加线程创建接口*/
+/*-\new\rww\2020.4.14\娣诲姞绾跨▼鍒涘缓鎺ュ彛*/
 
 /**
  * create a thread with specified stack
@@ -1830,9 +1830,9 @@ int64_t osiUpTime(void);
 int64_t osiUpTimeUS(void);
 
 
-/*+\BUG3823\2020.12.8\zhuwangbin\OPENAT_get_system_tick获取的tick时间，改成关机后清零*/
+/*+\BUG3823\2020.12.8\zhuwangbin\OPENAT_get_system_tick鑾峰彇鐨則ick鏃堕棿锛屾敼鎴愬叧鏈哄悗娓呴浂*/
 int64_t osiSystemTick(void);
-/*-\BUG3823\2020.12.8\zhuwangbin\OPENAT_get_system_tick获取的tick时间，改成关机后清零*/
+/*-\BUG3823\2020.12.8\zhuwangbin\OPENAT_get_system_tick鑾峰彇鐨則ick鏃堕棿锛屾敼鎴愬叧鏈哄悗娓呴浂*/
 
 
 /**
@@ -2469,14 +2469,14 @@ bool osiRegisterBlueScreenHandler(osiCallback_t enter, osiCallback_t poll, void 
  * \p info is just a remainder in source code. It won't be used.
  */
 #ifdef CONFIG_KERNEL_ASSERT_ENABLED
-/*+\NEW\zhuwangbin\2020.4.2\添加AT*exinfo指令*/
+/*+\NEW\zhuwangbin\2020.4.2\娣诲姞AT*exinfo鎸囦护*/
 extern void osiPanicInfoFuncLineSet(const char *func, int line);
 
 #define OSI_ASSERT(expect_true, info) OSI_DO_WHILE0(if (!(expect_true)) {osiPanicInfoFuncLineSet(__FUNCTION__,__LINE__);osiPanic();})
 #else
 #define OSI_ASSERT(expect_true, info)
 #endif
-/*-\NEW\zhuwangbin\2020.4.2\添加AT*exinfo指令*/
+/*-\NEW\zhuwangbin\2020.4.2\娣诲姞AT*exinfo鎸囦护*/
 /**
  * busy loop delay
  *

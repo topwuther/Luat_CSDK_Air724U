@@ -54,13 +54,13 @@ int platform_rtos_send(platform_msg_type msg_id, PlatformMsgData* pMsg)
     //OPENAT_print("platform_rtos_send msg end", msg_id);
     return PLATFORM_OK;
 }
-/*+\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*+\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 kal_bool platform_rtos_send_high_priority(platform_msg_type msg_id, PlatformMsgData* pMsg)
 {
     OPENAT_print("platform_rtos_send_high_priority msg %d", msg_id);
     return OPENAT_SendHighPriorityMessage(g_LuaShellTaskHandle, msg_id, pMsg, sizeof(PlatformMsgData));
 }
-/*-\new\wj\2020.11.13\¼æÈİ2G°æ±¾ uart.config¹¦ÄÜ*/
+/*-\new\wj\2020.11.13\å…¼å®¹2Gç‰ˆæœ¬ uart.configåŠŸèƒ½*/
 int platform_rtos_receive(platform_msg_type* msg_id, void **ppMessage, u32 timeout)
 {
     BOOL ret;
@@ -233,9 +233,9 @@ int platform_rtos_start_timer(int timer_id, int milliSecond)
 start_timer_error:
     //OPENAT_release_semaphore(hLuaTimerSem);
 
-/*+\NEW\liweiqiang\2014.7.22\ĞŞÕıÆô¶¯¶¨Ê±Æ÷Ê§°Ü°Ñ¶¨Ê±Æ÷×ÊÔ´ºÄ¾¡µÄÎÊÌâ */
+/*+\NEW\liweiqiang\2014.7.22\ä¿®æ­£å¯åŠ¨å®šæ—¶å™¨å¤±è´¥æŠŠå®šæ—¶å™¨èµ„æºè€—å°½çš„é—®é¢˜ */
     if(OPENAT_INVALID_HANDLE != hTimer)
-/*-\NEW\liweiqiang\2014.7.22\ĞŞÕıÆô¶¯¶¨Ê±Æ÷Ê§°Ü°Ñ¶¨Ê±Æ÷×ÊÔ´ºÄ¾¡µÄÎÊÌâ */
+/*-\NEW\liweiqiang\2014.7.22\ä¿®æ­£å¯åŠ¨å®šæ—¶å™¨å¤±è´¥æŠŠå®šæ—¶å™¨èµ„æºè€—å°½çš„é—®é¢˜ */
     {
         OPENAT_print("[platform_rtos_start_timer] start_timer_error.");
         OPENAT_stop_timer(hTimer);
@@ -296,7 +296,7 @@ int platform_rtos_stop_timer(int timer_id)
 }
 
 
-/*+\NEW\zhuwangbin\2016.5.24\lua³õÊ¼»¯½áÊøÇ°£¬ ÊÇ·ñÓĞ°´¼ü*/
+/*+\NEW\zhuwangbin\2016.5.24\luaåˆå§‹åŒ–ç»“æŸå‰ï¼Œ æ˜¯å¦æœ‰æŒ‰é”®*/
 static kal_bool keypad_is_press_bool = KAL_FALSE;
 static kal_bool g_s_init_end_bool = KAL_FALSE;
 
@@ -320,7 +320,7 @@ void paltform_keypad_record_is_press(void)
 
 
 
-  /*ÅĞ¶ÏshowlogoÊÇ·ñ³õÊ¼»¯½áÊø*/
+  /*åˆ¤æ–­showlogoæ˜¯å¦åˆå§‹åŒ–ç»“æŸ*/
   show_logo_init_end_bool = show_logo_init_is_end();
   
   if (!g_s_init_end_bool)
@@ -329,10 +329,10 @@ void paltform_keypad_record_is_press(void)
 
     OPENAT_print("paltform_keypad_record_is_press comeInCount %d, %d", comeInCount, kal_get_systicks());
     
-    /*lua Î´ ³õÊ¼»¯½áÊø¼ÇÂ¼°´¼ü×´Ì¬*/
+    /*lua æœª åˆå§‹åŒ–ç»“æŸè®°å½•æŒ‰é”®çŠ¶æ€*/
     keypad_is_press_bool = KAL_TRUE;
 
-    /*SHOW logo ³õÊ¼»¯½áÊøµçÁ¿±³¹â*/
+    /*SHOW logo åˆå§‹åŒ–ç»“æŸç”µé‡èƒŒå…‰*/
     if (show_logo_init_end_bool)
       platform_ldo_set(10, 2);
   }
@@ -356,14 +356,14 @@ void platform_keypad_message(T_AMOPENAT_KEYPAD_MESSAGE *pKeypadMessage)
 
     platform_rtos_send(MSG_ID_RTOS_KEYPAD, &msgData);
 }
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 void platform_alarm_message(T_AMOPENAT_ALARM_MESSAGE *pAlarmMessage)
 {
     PlatformMsgData msgData;
     
     platform_rtos_send(MSG_ID_RTOS_ALARM, &msgData);
 }
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
 void platform_touch_message(T_AMOPENAT_TOUCHSCREEN_MESSAGE *pTouchMessage)
 {
@@ -403,7 +403,7 @@ int platform_rtos_init_module(int module, void *pParam)
             OPENAT_init_keypad(&keypadConfig);
         }
         break;
-		/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+		/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     case RTOS_MODULE_ID_ALARM:
         {
              T_AMOPENAT_ALARM_CONFIG  alarmConfig;
@@ -412,7 +412,7 @@ int platform_rtos_init_module(int module, void *pParam)
              OPENAT_InitAlarm(&alarmConfig);
         }
         break;
-		/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+		/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
 #ifdef TOUCH_PANEL_SUPPORT
     case RTOS_MODULE_ID_TOUCH:
@@ -447,18 +447,18 @@ int platform_rtos_init(void)
     return PLATFORM_OK;
 }
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 extern int cust_get_poweron_reason(void);
 extern void cust_poweron_system(void);
-/*+\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*+\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 extern void cust_repoweron_system(void);
-/*-\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*-\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 
 int platform_get_poweron_reason(void)
 {
-    /*+\NEW\zhuth\2014.7.25\ĞŞ¸Ä¿ª»úÔ­ÒòÖµÊµÏÖ*/
+    /*+\NEW\zhuth\2014.7.25\ä¿®æ”¹å¼€æœºåŸå› å€¼å®ç°*/
     return (int)OPENAT_get_poweronCause();
-    /*-\NEW\zhuth\2014.7.25\ĞŞ¸Ä¿ª»úÔ­ÒòÖµÊµÏÖ*/
+    /*-\NEW\zhuth\2014.7.25\ä¿®æ”¹å¼€æœºåŸå› å€¼å®ç°*/
 }
 
 
@@ -475,10 +475,10 @@ void platform_lua_dead_loop(void)
     }
 }
 
-static int poweron_flag = -1;/*-1: Î´ÉèÖÃ 0: ²»Æô¶¯ 1:Æô¶¯*/
-/*+\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+static int poweron_flag = -1;/*-1: æœªè®¾ç½® 0: ä¸å¯åŠ¨ 1:å¯åŠ¨*/
+/*+\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
 static BOOL cust_sys_flag = FALSE; 
-/*-\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+/*-\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
 
 int platform_rtos_poweron(int flag)
 {
@@ -490,15 +490,15 @@ int platform_rtos_poweron(int flag)
     if(1 == poweron_flag)
     {
         cust_poweron_system();
-        /*+\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+        /*+\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
         cust_sys_flag = TRUE;
-        /*-\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+        /*-\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
     }
     
     return PLATFORM_OK;
 }
 
-/*+\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*+\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 int platform_rtos_repoweron(void)
 {
     OPENAT_print("platform_rtos_repoweron");
@@ -508,22 +508,22 @@ int platform_rtos_repoweron(void)
    
     return PLATFORM_OK;
 }
-/*-\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*-\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 
 void platform_poweron_try(void)
 {
-    // Îª¼æÈİ¾É½Å±¾,ÔÚÎ´ÉèÖÃ¿ª»ú±êÖ¾Ê±×Ô¶¯Æô¶¯ÏµÍ³
+    // ä¸ºå…¼å®¹æ—§è„šæœ¬,åœ¨æœªè®¾ç½®å¼€æœºæ ‡å¿—æ—¶è‡ªåŠ¨å¯åŠ¨ç³»ç»Ÿ
     if(-1 == poweron_flag)
     {
         cust_poweron_system();    
-        /*+\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+        /*+\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
         cust_sys_flag = TRUE;
-        /*-\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+        /*-\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
     }
 }
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 
-/*+\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*+\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 #ifdef AM_LUA_SUPPORT
 int platform_rtos_poweroff(int type)
 {
@@ -536,7 +536,7 @@ int platform_rtos_poweroff(int type)
 	}
 	else
     {
-	    /*+\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+	    /*+\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
 	    if((platform_get_poweron_reason() == OPENAT_PM_POWERON_BY_CHARGER)
 	        && !cust_sys_flag)
 	    {
@@ -546,17 +546,17 @@ int platform_rtos_poweroff(int type)
 	    {
 	        OPENAT_poweroff_system();
 	    }
-    	/*-\NEW\zhuth\2014.2.14\³äµç¿ª»ú²¢ÇÒÓÃ»§Ã»ÓĞÆô¶¯Ğ­ÒéÕ»µÄÇé¿öÏÂÊ¹ÓÃshutdown¹Ø»ú£¬ÆäÓàÇé¿öÊ¹ÓÃpoweroff_system¹Ø»ú*/
+    	/*-\NEW\zhuth\2014.2.14\å……ç”µå¼€æœºå¹¶ä¸”ç”¨æˆ·æ²¡æœ‰å¯åŠ¨åè®®æ ˆçš„æƒ…å†µä¸‹ä½¿ç”¨shutdownå…³æœºï¼Œå…¶ä½™æƒ…å†µä½¿ç”¨poweroff_systemå…³æœº*/
 	}
 	
     platform_lua_dead_loop();
     
     return PLATFORM_OK;
 }
-/*+\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*+\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 #endif
 
-/*+\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 int platform_rtos_restart(void)
 {
     OPENAT_print("platform_rtos_restart");
@@ -565,9 +565,9 @@ int platform_rtos_restart(void)
     platform_lua_dead_loop();
     return PLATFORM_OK;
 }
-/*-\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 int platform_rtos_tick(void)
 {
     return OPENAT_get_system_tick();
@@ -576,8 +576,8 @@ int platform_rtos_sms_is_ready(void)
 {
     return TRUE;//srv_sms_is_sms_ready();
 }
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 int platform_rtos_setalarm(void *pParam)
 {
     PlatformSetAlarmParam *platformalarm = (PlatformSetAlarmParam *)pParam;
@@ -593,7 +593,7 @@ int platform_rtos_setalarm(void *pParam)
     
     return ((TRUE == OPENAT_SetAlarm(&pAlarmSet))?PLATFORM_OK:PLATFORM_ERR);
 }
-/*-+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
 static   char   base64_table[]   =       
 {
@@ -647,7 +647,7 @@ char*  platform_base64_encode(const char *str, int length)
     result[i] = '\0';   //   printf("%s/n",result);     
     return result;     
 }    
-/*+\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*+\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 char* platform_base64_decode (const char *src, int length, int* decodedLen) 
 {
   int i = 0;
@@ -745,7 +745,7 @@ char* platform_base64_decode (const char *src, int length, int* decodedLen)
 
   return dec;
 }
-/*-\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*-\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 
 //+panjun,160503,Add an API "rtos.disk_free". 
 long platform_rtos_disk_free(int drvtype)
@@ -758,18 +758,18 @@ int platform_rtos_disk_volume(int drvtype)
    return 0;
 }
 //-panjun,160503,Add an API "rtos.disk_free".
-/*+:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
+/*+:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
 void platform_sim_status_ind(int insert)
 {
   
 }
-/*+:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
-/*+\add\liangjian\2020.06.22\Ôö¼ÓSD ¿¨ÏÔÊ¾·¶Î§*/
+/*+:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
+/*+\add\liangjian\2020.06.22\å¢åŠ SD å¡æ˜¾ç¤ºèŒƒå›´*/
 UINT32 platform_fs_get_free_size(int isSD,unsigned int type)
 {
     T_AMOPENAT_FILE_INFO info = {0};
 	
-	/*+:\NEW\zhuwangbin\2020.8.8\ĞŞ¸ÄÎÄ¼şÏµÍ³µÄĞÅÏ¢µÄ»ñÈ¡*/
+	/*+:\NEW\zhuwangbin\2020.8.8\ä¿®æ”¹æ–‡ä»¶ç³»ç»Ÿçš„ä¿¡æ¯çš„è·å–*/
 	char *path;
 	
 	if (isSD)
@@ -791,17 +791,17 @@ UINT32 platform_fs_get_free_size(int isSD,unsigned int type)
     {
         return 0;
     }
-	/*-:\NEW\zhuwangbin\2020.8.8\ĞŞ¸ÄÎÄ¼şÏµÍ³µÄĞÅÏ¢µÄ»ñÈ¡*/
+	/*-:\NEW\zhuwangbin\2020.8.8\ä¿®æ”¹æ–‡ä»¶ç³»ç»Ÿçš„ä¿¡æ¯çš„è·å–*/
 }
-/*end\NEW\zhutianhua\2017.9.5 31:2\Ôö¼Óget_fs_free_size½Ó¿Ú*/
+/*end\NEW\zhutianhua\2017.9.5 31:2\å¢åŠ get_fs_free_sizeæ¥å£*/
 
-/*+:\NEW\liangjian\2020.6.16\Ôö¼Ó»ñÈ¡ÎÄ¼ş¿Õ¼ä´óĞ¡½Ó¿Ú*/
+/*+:\NEW\liangjian\2020.6.16\å¢åŠ è·å–æ–‡ä»¶ç©ºé—´å¤§å°æ¥å£*/
 
 UINT32 platform_fs_get_total_size(int isSD,unsigned int type)
 {
 	T_AMOPENAT_FILE_INFO info = {0};
 	
-	/*+:\NEW\zhuwangbin\2020.8.8\ĞŞ¸ÄÎÄ¼şÏµÍ³µÄĞÅÏ¢µÄ»ñÈ¡*/
+	/*+:\NEW\zhuwangbin\2020.8.8\ä¿®æ”¹æ–‡ä»¶ç³»ç»Ÿçš„ä¿¡æ¯çš„è·å–*/
 	char *path;
 	
 	if (isSD)
@@ -820,10 +820,10 @@ UINT32 platform_fs_get_total_size(int isSD,unsigned int type)
     {
         return 0;
     }
-	/*-:\NEW\zhuwangbin\2020.8.8\ĞŞ¸ÄÎÄ¼şÏµÍ³µÄĞÅÏ¢µÄ»ñÈ¡*/
+	/*-:\NEW\zhuwangbin\2020.8.8\ä¿®æ”¹æ–‡ä»¶ç³»ç»Ÿçš„ä¿¡æ¯çš„è·å–*/
 }
-/*end\NEW\liangjian\2020.6.16\Ôö¼Ó»ñÈ¡ÎÄ¼ş¿Õ¼ä´óĞ¡½Ó¿Ú*/
-/*-\bug\add\2020.06.22\Ôö¼ÓSD ¿¨ÏÔÊ¾·¶Î§*/
+/*end\NEW\liangjian\2020.6.16\å¢åŠ è·å–æ–‡ä»¶ç©ºé—´å¤§å°æ¥å£*/
+/*-\bug\add\2020.06.22\å¢åŠ SD å¡æ˜¾ç¤ºèŒƒå›´*/
 
 int platform_make_dir(char *pDir, int len)
 {
@@ -934,14 +934,14 @@ u8 platform_rtos_get_trace_port(void)
     return OPENAT_get_trace_port();
 }
 
-/*+\NEW\shenyuanyuan\2020.4.14\Ìí¼Órtos.set_traceÉèÖÃtrace¿ª¹ØºÍ¶Ë¿Ú*/
+/*+\NEW\shenyuanyuan\2020.4.14\æ·»åŠ rtos.set_traceè®¾ç½®traceå¼€å…³å’Œç«¯å£*/
 BOOL platform_rtos_set_trace(u8 print, u8 port)
 {
 	return OPENAT_set_trace(print,port);
 }
-/*-\NEW\shenyuanyuan\2020.4.14\Ìí¼Órtos.set_traceÉèÖÃtrace¿ª¹ØºÍ¶Ë¿Ú*/
+/*-\NEW\shenyuanyuan\2020.4.14\æ·»åŠ rtos.set_traceè®¾ç½®traceå¼€å…³å’Œç«¯å£*/
 
-/*+\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*+\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 int platform_rtos_sendok(char *src)
 {
 #ifdef LUA_TODO
@@ -949,7 +949,7 @@ int platform_rtos_sendok(char *src)
 #endif
    return 0; 
 }
-/*-\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*-\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 
 int platform_rtos_get_fatal_info(char *info, int maxLen)
 {
@@ -967,7 +967,7 @@ int platform_rtos_remove_fatal_info()
 	return 0;
 }
 
-/*+\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
+/*+\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
 BOOL platform_rtos_open_SoftDog(u32 timeout)
 {
    OPENAT_rtos_open_SoftDog(timeout);   
@@ -986,25 +986,25 @@ BOOL platform_rtos_close_SoftDog(void)
 	return 0;
 }
 
-/*-\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+/*-\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
+/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 int platform_rtos_set_luainfo(char *src)
 {
    OPENAT_rtos_set_luainfo(src);   
    return 0; 
 }
-/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
-/*+\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
+/*+\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 void platform_rtos_notify_sim_detect(int simNum,BOOL connect) 
 {
-	/*Ä¿Ç°sim¿¨num¹Ì¶¨Îª1¿¨£¬ºóÃæÔÙÓÅ»¯*/
+	/*ç›®å‰simå¡numå›ºå®šä¸º1å¡ï¼Œåé¢å†ä¼˜åŒ–*/
 	OPENAT_notify_sim_detect(simNum,connect);
 }
 
-/*-\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+/*-\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 
 
-/*+\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+/*+\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 #ifdef AM_LUA_POC_SUPPORT
 BOOL platform_rtos_poc_ota(void)
 {
@@ -1031,9 +1031,9 @@ int platform_rtos_poc_flash_write(UINT32 offset, UINT32 size, UINT8 * buf)
 }
 
 #endif
-/*-\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+/*-\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 
-/*+\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
+/*+\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/
 // typedef struct
 // {
 //     int len;
@@ -1065,4 +1065,4 @@ int platform_rtos_poc_flash_write(UINT32 offset, UINT32 size, UINT8 * buf)
 //         free(td);
 //     }
 // }
-/*-\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
+/*-\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/

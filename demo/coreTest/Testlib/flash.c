@@ -66,8 +66,8 @@ void flashTest(UINT32 begain_addr, UINT32 end_addr)
 {
     s_demo_flash_begain_addr = begain_addr; //0x60320000;
     s_demo_flash_end_addr = end_addr;       //0x60330000
-    demo_flash_getaddr();                   //获取可用空间
-    demo_flash_erase();                     // 擦flash
-    demo_flash_write();                     // 写flash
-    demo_flash_read();                      // 读flash
+    demo_flash_getaddr();                   //鑾峰彇鍙敤绌洪棿
+    demo_flash_erase();                     // 鎿lash
+    demo_flash_write();                     // 鍐檉lash
+    demo_flash_read();                      // 璇籪lash
 }

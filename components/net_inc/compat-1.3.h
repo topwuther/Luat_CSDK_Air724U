@@ -2521,9 +2521,9 @@
 #define xtea_self_test mbedtls_xtea_self_test
 #define xtea_setup mbedtls_xtea_setup
 
-/*+\NEW\lijiaodi\2020.2.3\添加openat ssl接口*/
+/*+\NEW\lijiaodi\2020.2.3\娣诲姞openat ssl鎺ュ彛*/
 #define x509_cert mbedtls_x509_crt
 #define x509_free mbedtls_x509_crt_free
-/*-\NEW\lijiaodi\2020.2.3\添加openat ssl接口*/
+/*-\NEW\lijiaodi\2020.2.3\娣诲姞openat ssl鎺ュ彛*/
 #endif /* compat-1.3.h */
 #endif /* MBEDTLS_DEPRECATED_REMOVED */

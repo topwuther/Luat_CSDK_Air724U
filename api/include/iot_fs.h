@@ -5,36 +5,36 @@
 
 
 /**
- * @defgroup iot_sdk_fs ÎÄ¼şÏµÍ³½Ó¿Ú
+ * @defgroup iot_sdk_fs æ–‡ä»¶ç³»ç»Ÿæ¥å£
  * @{
  */
 	/**@example fs/demo_fs.c
-	* fs½Ó¿ÚÊ¾Àı
+	* fsæ¥å£ç¤ºä¾‹
 	*/ 
 
-/**´ò¿ªÎÄ¼ş
-*@param		pszFileNameUniLe:		ÎÄ¼şÈ«Â·¾¶Ãû³Æ
-*@param		iFlag:		´ò¿ª±êÖ¾ÏêÏ¸Çë²Î¼ûE_AMOPENAT_FILE_OPEN_FLAG
-*@return	INT32: 	    ·µ»ØÎÄ¼ş¾ä±ú
+/**æ‰“å¼€æ–‡ä»¶
+*@param		pszFileNameUniLe:		æ–‡ä»¶å…¨è·¯å¾„åç§°
+*@param		iFlag:		æ‰“å¼€æ ‡å¿—è¯¦ç»†è¯·å‚è§E_AMOPENAT_FILE_OPEN_FLAG
+*@return	INT32: 	    è¿”å›æ–‡ä»¶å¥æŸ„
 **/
 INT32 iot_fs_open_file(                           
                         char* pszFileNameUniLe,
                         UINT32 iFlag         
                   );
 
-/**¹Ø±ÕÎÄ¼ş
-*@param		iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@return	INT32: 	    ·µ»ØÖµĞ¡ÓÚ0Ê§°Ü, ÆäÓà³É¹¦
+/**å…³é—­æ–‡ä»¶
+*@param		iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@return	INT32: 	    è¿”å›å€¼å°äº0å¤±è´¥, å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_close_file(                     
                         INT32 iFd           
                    );
 
-/**¶ÁÈ¡ÎÄ¼ş
-*@param		iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@param		pBuf:		Êı¾İ±£´æÖ¸Õë
-*@param		iLen:		buf³¤¶È
-*@return	INT32: 	    ·µ»Ø¶ÁÈ¡³¤¶È, Ğ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**è¯»å–æ–‡ä»¶
+*@param		iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@param		pBuf:		æ•°æ®ä¿å­˜æŒ‡é’ˆ
+*@param		iLen:		bufé•¿åº¦
+*@return	INT32: 	    è¿”å›è¯»å–é•¿åº¦, å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_read_file(                            
                         INT32 iFd,            
@@ -42,11 +42,11 @@ INT32 iot_fs_read_file(
                         UINT32 iLen            
                   );
 
-/**Ğ´ÈëÎÄ¼ş
-*@param		iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@param		pBuf:		ĞèÒªĞ´ÈëµÄÊı¾İÖ¸Õë
-*@param		iLen:		Êı¾İ³¤¶È
-*@return	INT32: 	    ·µ»ØĞ´Èë³¤¶È, Ğ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**å†™å…¥æ–‡ä»¶
+*@param		iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@param		pBuf:		éœ€è¦å†™å…¥çš„æ•°æ®æŒ‡é’ˆ
+*@param		iLen:		æ•°æ®é•¿åº¦
+*@return	INT32: 	    è¿”å›å†™å…¥é•¿åº¦, å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_write_file(                           
                         INT32 iFd,            
@@ -54,20 +54,20 @@ INT32 iot_fs_write_file(
                         UINT32 iLen             
                    );
 
-/**Á¢¼´Ğ´Èëflash
-*@param		iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@return	INT32: 	    ·µ»ØÁ¢¼´Ğ´Èë³¤¶È, Ğ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**ç«‹å³å†™å…¥flash
+*@param		iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@return	INT32: 	    è¿”å›ç«‹å³å†™å…¥é•¿åº¦, å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_flush_file(                           
                         INT32 iFd              
                    );    
 
-/**ÎÄ¼ş¶¨Î»
-*@note  ²ÎÊıiOffsetµÄº¬ÒåÈ¡¾öÓÚiOriginµÄÖµ.
-*@param		iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@param		iOffset:	Æ«ÒÆÁ¿
-*@param		iOrigin:	²ÎÊıÏêÏ¸Çë²Î¼ûE_AMOPENAT_FILE_SEEK_FLAG
-*@return	INT32: 	    ·µ»ØÎÄ¼şµÄÆ«ÒÆÁ¿
+/**æ–‡ä»¶å®šä½
+*@note  å‚æ•°iOffsetçš„å«ä¹‰å–å†³äºiOriginçš„å€¼.
+*@param		iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@param		iOffset:	åç§»é‡
+*@param		iOrigin:	å‚æ•°è¯¦ç»†è¯·å‚è§E_AMOPENAT_FILE_SEEK_FLAG
+*@return	INT32: 	    è¿”å›æ–‡ä»¶çš„åç§»é‡
 **/
 INT32 iot_fs_seek_file(                           
                         INT32 iFd,            
@@ -75,62 +75,62 @@ INT32 iot_fs_seek_file(
                         UINT8 iOrigin          
                   );
 
-/**´´½¨ÎÄ¼ş
-*@param		pszFileNameUniLe:	ÎÄ¼şÈ«Â·¾¶Ãû³Æ
-*@return	INT32: 	            ·µ»ØÎÄ¼ş¾ä±ú, Ğ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**åˆ›å»ºæ–‡ä»¶
+*@param		pszFileNameUniLe:	æ–‡ä»¶å…¨è·¯å¾„åç§°
+*@return	INT32: 	            è¿”å›æ–‡ä»¶å¥æŸ„, å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_create_file(                          
                         char* pszFileNameUniLe   
                     );
 
-/**É¾³ıÎÄ¼ş
-*@param		pszFileNameUniLe:	ÎÄ¼şÈ«Â·¾¶Ãû³Æ
-*@return	INT32: 	            ·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**åˆ é™¤æ–‡ä»¶
+*@param		pszFileNameUniLe:	æ–‡ä»¶å…¨è·¯å¾„åç§°
+*@return	INT32: 	            è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_delete_file(                          
                         char* pszFileNameUniLe
                     );
 
-/**ÇĞ»»µ±Ç°¹¤×÷Ä¿Â¼
-*@param		pszDirNameUniLe:	Ä¿Â¼Â·¾¶
-*@return	INT32: 	·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**åˆ‡æ¢å½“å‰å·¥ä½œç›®å½•
+*@param		pszDirNameUniLe:	ç›®å½•è·¯å¾„
+*@return	INT32: 	è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_change_dir(                            
                         char* pszDirNameUniLe  
                    );
 
-/**´´½¨Ä¿Â¼
-*@param		pszDirNameUniLe:	Ä¿Â¼Â·¾¶
-*@param		iMode:	            Ä¿Â¼ÊôĞÔ£¬ÏêÏ¸Çë²Î¼ûE_AMOPENAT_FILE_ATTR_TAG
-*@return	INT32: 	·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**åˆ›å»ºç›®å½•
+*@param		pszDirNameUniLe:	ç›®å½•è·¯å¾„
+*@param		iMode:	            ç›®å½•å±æ€§ï¼Œè¯¦ç»†è¯·å‚è§E_AMOPENAT_FILE_ATTR_TAG
+*@return	INT32: 	è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_make_dir(                              
                         char* pszDirNameUniLe, 
                         UINT32 iMode          
                  );
 
-/**É¾³ıÄ¿Â¼
-*@param		pszDirNameUniLe:	Ä¿Â¼Â·¾¶,¸ÃÄ¿Â¼±ØĞëÎª¿Õ£¬½Ó¿Ú²ÅÄÜ·µ»Ø³É¹¦
-*@return	INT32: 	·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**åˆ é™¤ç›®å½•
+*@param		pszDirNameUniLe:	ç›®å½•è·¯å¾„,è¯¥ç›®å½•å¿…é¡»ä¸ºç©ºï¼Œæ¥å£æ‰èƒ½è¿”å›æˆåŠŸ
+*@return	INT32: 	è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_remove_dir(                          
                         char* pszDirNameUniLe  
                    );
 
-/**»ñÈ¡µ±Ç°Â·¾¶
-*@param		pCurDirUniLe:	Ä¿Â¼Â·¾¶
-*@param		uUnicodeSize:	    ´æ´¢Ä¿Â¼ĞÅÏ¢¿Õ¼ä´óĞ¡
-*@return	INT32: 	·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**è·å–å½“å‰è·¯å¾„
+*@param		pCurDirUniLe:	ç›®å½•è·¯å¾„
+*@param		uUnicodeSize:	    å­˜å‚¨ç›®å½•ä¿¡æ¯ç©ºé—´å¤§å°
+*@return	INT32: 	è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_get_current_dir(                    
                         char* pCurDirUniLe,   
                         UINT32 uUnicodeSize   
                         );
 
-/**»ñÈ¡ÎÄ¼şÏµÍ³ĞÅÏ¢
-*@param		path:	ÎÄ¼şÏµÍ³µÄ¸ùÄ¿Â¼
-*@param		fileInfo:	ÎÄ¼şÏµÍ³ĞÅÏ¢
-*@return	INT32 ·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**è·å–æ–‡ä»¶ç³»ç»Ÿä¿¡æ¯
+*@param		path:	æ–‡ä»¶ç³»ç»Ÿçš„æ ¹ç›®å½•
+*@param		fileInfo:	æ–‡ä»¶ç³»ç»Ÿä¿¡æ¯
+*@return	INT32 è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/
 INT32 iot_fs_get_fs_info(                         
                         char       *path,         
@@ -138,59 +138,59 @@ INT32 iot_fs_get_fs_info(
                    );
 
 
-/**»ñÈ¡ÎÄ¼ş´óĞ¡½Ó¿Ú
-*@param	   pszFileNameUniLe:   ÎÄ¼şÈ«Â·¾¶Ãû³Æ
-*@return   UINT32:			   ·µ»ØÎÄ¼şµÄ´óĞ¡
+/**è·å–æ–‡ä»¶å¤§å°æ¥å£
+*@param	   pszFileNameUniLe:   æ–‡ä»¶å…¨è·¯å¾„åç§°
+*@return   UINT32:			   è¿”å›æ–‡ä»¶çš„å¤§å°
 **/
 UINT32 iot_fs_file_size(
                     char* pszFileNameUniLe
                 );
 
-/**´ò¿ª²éÕÒ£¬²¢ÇÒ»ñÈ¡ÎÄ¼ş¼ĞÏÂÎÄ¼şÃû
-*@param		dirName:	Â·¾¶
-*@param     findResult: ¶ÔÓ¦Â·¾¶ÏÂµÄµÚÒ»¸öÎÄ¼ş
-*@return	fileInfo: 	²éÕÒ·µ»ØµÄ¾ä±ú£¬·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**æ‰“å¼€æŸ¥æ‰¾ï¼Œå¹¶ä¸”è·å–æ–‡ä»¶å¤¹ä¸‹æ–‡ä»¶å
+*@param		dirName:	è·¯å¾„
+*@param     findResult: å¯¹åº”è·¯å¾„ä¸‹çš„ç¬¬ä¸€ä¸ªæ–‡ä»¶
+*@return	fileInfo: 	æŸ¥æ‰¾è¿”å›çš„å¥æŸ„ï¼Œè¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/                   
 INT32 iot_fs_find_first(
      char* dirName,
      PAMOPENAT_FS_FIND_DATA findResult
 );
 
-/**»ñÈ¡ÎÄ¼ş¼ĞÏÂÎÄ¼şÃû
-*@param		iFd:  iot_fs_find_first½Ó¿Ú·µ»ØÖµ
-*@param     findResult: ¶ÔÓ¦Â·¾¶ÏÂµÄÎÄ¼ş
-*@return	fileInfo: 	·µ»ØĞ¡ÓÚ0±íÊ¾Ã»ÓĞÊ£ÓàÎÄ¼ş£¬ÆäËûÖµ±íÊ¾»¹ÓĞÎÄ¼ş
+/**è·å–æ–‡ä»¶å¤¹ä¸‹æ–‡ä»¶å
+*@param		iFd:  iot_fs_find_firstæ¥å£è¿”å›å€¼
+*@param     findResult: å¯¹åº”è·¯å¾„ä¸‹çš„æ–‡ä»¶
+*@return	fileInfo: 	è¿”å›å°äº0è¡¨ç¤ºæ²¡æœ‰å‰©ä½™æ–‡ä»¶ï¼Œå…¶ä»–å€¼è¡¨ç¤ºè¿˜æœ‰æ–‡ä»¶
 **/                   
 INT32 iot_fs_find_next(
      INT32 iFd, 
      PAMOPENAT_FS_FIND_DATA findResult
 );
 
-/**¹Ø±Õ²éÕÒ
-*@param		iFd:  iot_fs_find_first½Ó¿Ú·µ»ØÖµ
-*@return	fileInfo: 	·µ»ØÖµĞ¡ÓÚ0±íÊ¾Ê§°Ü,ÆäÓà³É¹¦
+/**å…³é—­æŸ¥æ‰¾
+*@param		iFd:  iot_fs_find_firstæ¥å£è¿”å›å€¼
+*@return	fileInfo: 	è¿”å›å€¼å°äº0è¡¨ç¤ºå¤±è´¥,å…¶ä½™æˆåŠŸ
 **/           
 INT32 iot_fs_find_close(
      INT32 iFd
 );
 
-/**ÎÄ¼ş¶¨Î»½Ó¿Ú
-*@param 	iFd:		ÎÄ¼ş¾ä±ú£¬open_file »ò create_file ·µ»ØµÄ
-*@return	INT32:		·µ»ØÎÄ¼şµÄÆ«ÒÆÁ¿
+/**æ–‡ä»¶å®šä½æ¥å£
+*@param 	iFd:		æ–‡ä»¶å¥æŸ„ï¼Œopen_file æˆ– create_file è¿”å›çš„
+*@return	INT32:		è¿”å›æ–‡ä»¶çš„åç§»é‡
 **/
 INT32 iot_fs_ftell(    
 							INT32 iFd			
 					  );
 
 
-/**mountÓÃ»§×Ô¼ºµÄÎÄ¼şÏµÍ³
-*@param	param  ÎÄ¼şÏµÍ³ÅäÖÃ½á¹¹Ìå
-*@note		path: ÎÄ¼şÏµÍ³¸ùÄ¿Â¼,
-*@note      offset; flash µØÖ·Æ«ÒÆÁ¿
-*@note		size: ÎÄ¼şÏµÍ³´óĞ¡
-*@note		exFlash: ÊÇ·ñÊÇÍâ²¿flash
-*@note		×¢:pathÒÔ/¿ªÍ·,³¤¶ÈĞèÒª´óÓÚµÈÓÚ5 ÀıÈç"/APP1"
-*@note      Ö§³ÖµÄflashĞÍºÅ
+/**mountç”¨æˆ·è‡ªå·±çš„æ–‡ä»¶ç³»ç»Ÿ
+*@param	param  æ–‡ä»¶ç³»ç»Ÿé…ç½®ç»“æ„ä½“
+*@note		path: æ–‡ä»¶ç³»ç»Ÿæ ¹ç›®å½•,
+*@note      offset; flash åœ°å€åç§»é‡
+*@note		size: æ–‡ä»¶ç³»ç»Ÿå¤§å°
+*@note		exFlash: æ˜¯å¦æ˜¯å¤–éƒ¨flash
+*@note		æ³¨:pathä»¥/å¼€å¤´,é•¿åº¦éœ€è¦å¤§äºç­‰äº5 ä¾‹å¦‚"/APP1"
+*@note      æ”¯æŒçš„flashå‹å·
 			XT25W32B	0x16600b
 			XT25W64B	0x17600b
 			XM25QU64A	0x173820
@@ -202,34 +202,34 @@ INT32 iot_fs_ftell(
 			GD25LQ128C	0x1860c8
 			W25Q64JV	0x1740ef
 			GD25Q127C	0x1840c8
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/ 
 BOOL iot_fs_mount(T_AMOPENAT_USER_FSMOUNT * param);
 
-/**unmountÓÃ»§×Ô¼ºµÄÎÄ¼şÏµÍ³
-*@param	param  ÎÄ¼şÏµÍ³ÅäÖÃ½á¹¹Ìå
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+/**unmountç”¨æˆ·è‡ªå·±çš„æ–‡ä»¶ç³»ç»Ÿ
+*@param	param  æ–‡ä»¶ç³»ç»Ÿé…ç½®ç»“æ„ä½“
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/ 
 BOOL iot_fs_unmount(T_AMOPENAT_USER_FSMOUNT * param);
 
-/**unmountÓÃ»§×Ô¼ºµÄÎÄ¼şÏµÍ³
-*@param	param  ÎÄ¼şÏµÍ³ÅäÖÃ½á¹¹Ìå
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+/**unmountç”¨æˆ·è‡ªå·±çš„æ–‡ä»¶ç³»ç»Ÿ
+*@param	param  æ–‡ä»¶ç³»ç»Ÿé…ç½®ç»“æ„ä½“
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/
 BOOL iot_fs_format(T_AMOPENAT_USER_FSMOUNT * param);
 
-/**SDÉÏÃæmount fatÎÄ¼şÏµÍ³
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+/**SDä¸Šé¢mount fatæ–‡ä»¶ç³»ç»Ÿ
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/
 BOOL iot_fs_mount_sdcard(void);
 
-/**umount SDÉÏÃæµÄfatÎÄ¼şÏµÍ³
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+/**umount SDä¸Šé¢çš„fatæ–‡ä»¶ç³»ç»Ÿ
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/
 BOOL iot_fs_umount_sdcard(void);
 
-/**format SDÉÏÃæµÄÎÄ¼şÏµÍ³
-*@return	BOOL: TRUE-³É¹¦ FALSE-Ê§°Ü
+/**format SDä¸Šé¢çš„æ–‡ä»¶ç³»ç»Ÿ
+*@return	BOOL: TRUE-æˆåŠŸ FALSE-å¤±è´¥
 **/
 BOOL iot_fs_format_sdcard(void);
 

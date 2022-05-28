@@ -85,13 +85,13 @@ void log_time(FILE *fp, const char *buf){
                     ts->tm_hour, ts->tm_min, ts->tm_sec);
     newtrace = strstr(buf, "\n") != NULL ? 1 : 0;
 }
-/*+\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*+\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
 extern void platform_lcd_update_period(void);
-/*-\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*-\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
 void elua_vfprintf(FILE *fp, const char *fmt, va_list ap){
-/*+\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*+\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
     platform_lcd_update_period();
-/*-\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*-\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
     if(fp == stdout || fp == stderr){
         vfprintf(stdout, fmt, ap);
         log_time(ftrace, fmt);
@@ -120,9 +120,9 @@ void elua_fprintf(FILE *fp, const char *fmt, ...){
 
 size_t elua_fwrite(const void *buf, size_t size, size_t count, FILE *fp){
     size_t written;
-/*+\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*+\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
     platform_lcd_update_period();
-/*-\NEW\zhy\2014.9.26\cmd´°¿ÚÖĞÖØ¸´Ë¢ĞÂ½çÃæ*/
+/*-\NEW\zhy\2014.9.26\cmdçª—å£ä¸­é‡å¤åˆ·æ–°ç•Œé¢*/
     if(fp == stdout || fp == stderr){
         fwrite(buf, size, count, stdout);
         log_time(ftrace, buf);

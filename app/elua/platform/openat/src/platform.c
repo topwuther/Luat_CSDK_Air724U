@@ -11,10 +11,10 @@
  **************************************************************************/
 #if 1
 #include "assert.h"
-/*+\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+/*+\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
 #include "stdio.h"
 #include "string.h"
-/*-\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+/*-\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
 #include "am_openat.h"
 #include "lplatform.h"
 #include "platform_malloc.h"
@@ -70,7 +70,7 @@ u32 platform_s_timer_op( unsigned id, int op, u32 data )
 // PIO functions
 
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
 static void GpioIntCallback(E_OPENAT_DRV_EVT evt, unsigned int gpioNum,unsigned char state)
 {
     PlatformMsgData msgData;
@@ -85,7 +85,7 @@ static void GpioIntCallback(E_OPENAT_DRV_EVT evt, unsigned int gpioNum,unsigned 
     platform_rtos_send(MSG_ID_RTOS_INT, &msgData);
 
 }
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
 
 
 #define TOTAL_GPIO_PIN_COUNT 56
@@ -97,13 +97,13 @@ void platform_pio_set_debounce(unsigned int debounce)
     sDebounce = debounce;
 }
 
-/*+\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*+\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
 bool platform_gpioPulse(unsigned io, unsigned high_us, unsigned low_us, unsigned count, unsigned idle)
 {
 	extern bool OPENAT_gpioPulse(E_AMOPENAT_GPIO_PORT port, unsigned high_us, unsigned low_us, unsigned count, unsigned idle);
 	return OPENAT_gpioPulse((E_AMOPENAT_GPIO_PORT)io, high_us, low_us, count, idle);
 }
-/*-\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*-\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
 
 pio_type platform_pio_op( unsigned port_group_id, pio_type pinmask, int op )
 {
@@ -121,7 +121,7 @@ pio_type platform_pio_op( unsigned port_group_id, pio_type pinmask, int op )
         {
             switch( op )
             {
-                /*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+                /*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
                 case PLATFORM_IO_PIN_DIR_INT:                    
                     cfg.mode = OPENAT_GPIO_INPUT_INT;
 /*+\NEW\RUFEI\2015.6.26\Modified interrupt handle*/
@@ -131,7 +131,7 @@ pio_type platform_pio_op( unsigned port_group_id, pio_type pinmask, int op )
                     cfg.param.intCfg.intCb = (OPENAT_GPIO_EVT_HANDLE)GpioIntCallback;
                     retval = IVTBL(config_gpio)(realGpio, &cfg);
                     break;
-                /*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+                /*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
                     
                 case PLATFORM_IO_PIN_DIR_INPUT:
                     cfg.mode = OPENAT_GPIO_INPUT;
@@ -157,17 +157,17 @@ pio_type platform_pio_op( unsigned port_group_id, pio_type pinmask, int op )
                 {
                     UINT8 gpioValue = 0xff;
                     retval = IVTBL(read_gpio)(realGpio, &gpioValue);
-                    // ¶ÔÓÚ¶ÁÈ¡²Ù×÷ Ò»´ÎÖ»ÄÜ¶ÁÈ¡Ò»¸öpin
+                    // å¯¹äºè¯»å–æ“ä½œ ä¸€æ¬¡åªèƒ½è¯»å–ä¸€ä¸ªpin
                     return retval == TRUE ? gpioValue : 0xff;
                     break;
                 }
 
-/*+\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
                 case PLATFORM_IO_PIN_CLOSE:
                     retval = IVTBL(close_gpio)(realGpio);
                     break;
-/*-\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
-                /*+\NEW\lijiaodi\2018.08.10\Ìí¼Ó¹Ü½ÅÉÏÏÂÀ­½Ó¿Ú*/	
+/*-\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
+                /*+\NEW\lijiaodi\2018.08.10\æ·»åŠ ç®¡è„šä¸Šä¸‹æ‹‰æ¥å£*/	
                 case PLATFORM_IO_PIN_PULLUP:
                     retval = OPENAT_pin_set_pull(realGpio,1);
                     break;
@@ -177,7 +177,7 @@ pio_type platform_pio_op( unsigned port_group_id, pio_type pinmask, int op )
                 case PLATFORM_IO_PIN_NOPULL:
                     retval = OPENAT_pin_set_pull(realGpio,0);
                     break;
-                /*-\NEW\lijiaodi\2018.08.10\Ìí¼Ó¹Ü½ÅÉÏÏÂÀ­½Ó¿Ú*/	
+                /*-\NEW\lijiaodi\2018.08.10\æ·»åŠ ç®¡è„šä¸Šä¸‹æ‹‰æ¥å£*/	
                 // not support
                 case PLATFORM_IO_PORT_DIR_INPUT:
                 case PLATFORM_IO_PORT_DIR_OUTPUT:
@@ -217,7 +217,7 @@ int platform_cpu_get_global_interrupts()
     return 0;
 }
 
-/*+\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*+\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 void platform_sys_set_max_freq(void)
 {
     
@@ -226,7 +226,7 @@ void platform_sys_set_max_freq(void)
 void platform_sys_set_min_freq(void)
 {
 }
-/*-\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*-\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 
 //console
 void platform_set_console_port( unsigned char id )
@@ -239,14 +239,14 @@ unsigned char platform_get_console_port(void)
     return luaConsolePort;
 }
 
-/*+\NEW\liweiqiang\2013.6.6\Ôö¼Óadc¿â*/
+/*+\NEW\liweiqiang\2013.6.6\å¢åŠ adcåº“*/
 // adc
 int platform_adc_exists( unsigned id ) 
 {
     return id < OPENAT_ADC_QTY;
 }
 /*+\NEW\RUFEI\2015.8.27\Add adc fuction*/
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 int platform_adc_open(unsigned id, unsigned mode, int value)
 {
 	E_AMOPENAT_ADC_SCALE scale;
@@ -273,7 +273,7 @@ int platform_adc_open(unsigned id, unsigned mode, int value)
 	IVTBL(SetScaleAdc)(id, scale);
 	return IVTBL(InitADC)(id, mode) ? PLATFORM_OK : PLATFORM_ERR;
 }
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 
 int platform_adc_close(unsigned id)
 {
@@ -285,18 +285,18 @@ int platform_adc_read(unsigned id, int *adc, int *volt)
     u16 adcVal = 0xFFFF;
     u16 voltage = 0xffff;
     BOOL ret;
-	/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale£¬ ĞŞ¸Äwarning*/
+	/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scaleï¼Œ ä¿®æ”¹warning*/
     ret = IVTBL(ReadADC)(id,(kal_uint32*)&adcVal,(kal_uint32*)&voltage);
-	/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale, ĞŞ¸Äwarning*/
+	/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale, ä¿®æ”¹warning*/
     *adc = voltage/3;
     *volt = voltage;
     return ret ? PLATFORM_OK : PLATFORM_ERR;
 }
 /*-\NEW\RUFEI\2015.8.27\Add adc fuction*/
-/*-\NEW\liweiqiang\2013.6.6\Ôö¼Óadc¿â*/
+/*-\NEW\liweiqiang\2013.6.6\å¢åŠ adcåº“*/
 
 
-/*+\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*+\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 /*+\NEW\RUFEI\2015.9.8\Add pwm function */
 int platform_pwm_open(unsigned id)
 {
@@ -349,6 +349,6 @@ int platform_pwm_set(unsigned id, int param0, int param1)
 	pwmcfg.port = (E_AMOPENAT_PWM_PORT)id;
     return OPENAT_pwm_set(&pwmcfg);
 }
-/*-\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*-\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 /*-\NEW\RUFEI\2015.9.8\Add pwm function */
 #endif

@@ -1,4 +1,4 @@
--- gpio²Ù×÷½Ó¿Ú
+-- gpioæ“ä½œæ¥å£
 require"pins"
 module(...,package.seeall)
 
@@ -19,7 +19,7 @@ function pinset(bval,p)
 
 	if p.ptype ~= nil and p.ptype ~= "GPIO" then print("unknwon pin type:",p.ptype) return end
 
-	local valid = p.valid == 0 and 0 or 1 -- Ä¬ÈÏ¸ßÓĞĞ§
+	local valid = p.valid == 0 and 0 or 1 -- é»˜è®¤é«˜æœ‰æ•ˆ
 	local notvalid = p.valid == 0 and 1 or 0
 	local val = bval == true and valid or notvalid
 
@@ -29,7 +29,7 @@ end
 local function init()
 	for k,v in pairs(pins.def) do
 		if v.init == false then
-			-- ²»×ö³õÊ¼»¯
+			-- ä¸åšåˆå§‹åŒ–
 		elseif v.ptype == nil or v.ptype == "GPIO" then
 			pio.pin.setdir(v.dir or pio.OUTPUT,v.pin)
 			if v.dir == nil or v.dir == pio.OUTPUT then

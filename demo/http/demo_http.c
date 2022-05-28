@@ -194,7 +194,7 @@ void demo_http_init(void)
 { 
   iot_debug_print("[http] demo_http_init");
 
-  //ע������״̬�ص�����
+  //×¢²áÍøÂç×´Ì¬»Øµ÷º¯Êý
   iot_network_set_cb(demo_networkIndCallBack);
 
   g_s_http_task = iot_os_create_task(demo_http_task,

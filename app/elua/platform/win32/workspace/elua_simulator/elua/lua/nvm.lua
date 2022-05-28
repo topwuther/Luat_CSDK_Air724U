@@ -1,5 +1,5 @@
 
---ÅäÖÃÊý¾Ý¹ÜÀí
+--é…ç½®æ•°æ®ç®¡ç†
 module(...,package.seeall)
 local FILENAME="/set.ini"
 
@@ -12,19 +12,19 @@ local default = {
 	callrepeat = 5,
 	ctrler = {0x10000,0x10000,0x10000,0x10000},
 	wdef = {0x10000,0x10000,0x10000,0x10000,0x10000},
-	alarmtext = {"ÄúµÄÆû³µ³µÃÅÕý±»ÈË·Ç·¨´ò¿ª£¬Çë¸Ï½ô´¦Àí",
-				"ÄúµÄÆû³µÎ²ÏäÕý±»ÈË·Ç·¨´ò¿ª£¬Çë¸Ï½ô´¦Àí",
-				"ÄúµÄÆû³µ»òÓÍÏäÕý±»ÈËÇËÔÒ£¬Çë¸Ï½ô´¦Àí",
-				"ÄúµÄÆû³µÓÍÏäÕý±»ÈË´ò¿ª£¬Çë¸Ï½ô´¦Àí",
-				"ÄúµÄÆû³µµç³ØÕý±»ÈË²ð³ý£¬Çë¸Ï½ô´¦Àí",
-				[99]="ÄúµÄÆû³µµç³Ø¶Ïµç£¬Çë¸Ï½ô´¦Àí",},
-	alertdelaytime = 20000, -- È«²¼·ÀÑÓÊ±±¨¾¯
-	incallinterval = 20000,-- À´µç¼ä¸ô
-	incalltimes = 2, -- À´µç´ïµ½´ÎÊýºó·­×ª
-	delayautoalert = 30000,-- ³··ÀºóÑÓÊ±µÈ´ýÊ±¼ä×Ô¶¯²¼·À
-	def2valid = "¿ªÍ¨", -- ÊÇ·ñÆÁ±Î·ÀÇø2
-	def4stat = "¿ªÂ·", -- ÓÐÏß·ÀÇø4´¥·¢×´Ì¬
-	def5stat = "¿ªÂ·", -- ÓÐÏß·ÀÇø5´¥·¢×´Ì¬
+	alarmtext = {"æ‚¨çš„æ±½è½¦è½¦é—¨æ­£è¢«äººéžæ³•æ‰“å¼€ï¼Œè¯·èµ¶ç´§å¤„ç†",
+				"æ‚¨çš„æ±½è½¦å°¾ç®±æ­£è¢«äººéžæ³•æ‰“å¼€ï¼Œè¯·èµ¶ç´§å¤„ç†",
+				"æ‚¨çš„æ±½è½¦æˆ–æ²¹ç®±æ­£è¢«äººæ’¬ç ¸ï¼Œè¯·èµ¶ç´§å¤„ç†",
+				"æ‚¨çš„æ±½è½¦æ²¹ç®±æ­£è¢«äººæ‰“å¼€ï¼Œè¯·èµ¶ç´§å¤„ç†",
+				"æ‚¨çš„æ±½è½¦ç”µæ± æ­£è¢«äººæ‹†é™¤ï¼Œè¯·èµ¶ç´§å¤„ç†",
+				[99]="æ‚¨çš„æ±½è½¦ç”µæ± æ–­ç”µï¼Œè¯·èµ¶ç´§å¤„ç†",},
+	alertdelaytime = 20000, -- å…¨å¸ƒé˜²å»¶æ—¶æŠ¥è­¦
+	incallinterval = 20000,-- æ¥ç”µé—´éš”
+	incalltimes = 2, -- æ¥ç”µè¾¾åˆ°æ¬¡æ•°åŽç¿»è½¬
+	delayautoalert = 30000,-- æ’¤é˜²åŽå»¶æ—¶ç­‰å¾…æ—¶é—´è‡ªåŠ¨å¸ƒé˜²
+	def2valid = "å¼€é€š", -- æ˜¯å¦å±è”½é˜²åŒº2
+	def4stat = "å¼€è·¯", -- æœ‰çº¿é˜²åŒº4è§¦å‘çŠ¶æ€
+	def5stat = "å¼€è·¯", -- æœ‰çº¿é˜²åŒº5è§¦å‘çŠ¶æ€
 }
 
 local paras = default

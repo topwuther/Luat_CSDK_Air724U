@@ -7,7 +7,7 @@
  * Date:    2013/3/26
  *
  * Description:
- *          lua.disp¿â
+ *          lua.dispåº“
   * History:
  *     panjun 2015.05.29 Add an 'ASSERT' for 'disp_putimage'.
  **************************************************************************/
@@ -24,9 +24,9 @@
 #include "platform_camera.h"
 
 static u8 putimage_assert_fail = FALSE;
-/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 extern kal_uint8* workingbuffer;
-/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 
 int checkFiledInt(lua_State *L, int index, const char *key)
 {
@@ -55,7 +55,7 @@ static int optFiledInt(lua_State *L, int index, const char *key, int defval)
     return d;
 }
 
-/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 // disp.new
 static int disp_new(lua_State *L) {
 
@@ -78,22 +78,22 @@ static int disp_new(lua_State *L) {
 
     param.bpp = getFiledInt(L, 1, "bpp");
 
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
-    //16Î»É«²ÊÆÁorºÚ°×ÆÁ
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
+    //16ä½è‰²å½©å±oré»‘ç™½å±
     if(!(param.bpp == 16 || param.bpp == 1 || param.bpp == 24))
     {
         return luaL_error(L, "disp.init: pixel depth must be 16 or 24 or 1!");
     }
 
-    // ²»ÉèÆ«ÒÆÔòÄ¬ÈÏ0
+    // ä¸è®¾åç§»åˆ™é»˜è®¤0
     param.x_offset = getFiledInt(L, 1, "xoffset");
     param.y_offset = getFiledInt(L, 1, "yoffset");
 
     param.camera_preview_no_update_screen= optFiledInt(L, 1, "camera_preview_no_update_screen",0);
 
-    /*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+    /*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
     param.hwfillcolor = optFiledInt(L, 1, "hwfillcolor", -1);
-    /*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+    /*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
 
     platform_disp_new(&param);
 
@@ -115,7 +115,7 @@ static int disp_getframe(lua_State *L) {
 
 	return 2;
 }
-/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 int bpp_test ;
 // disp.init
 static int disp_init(lua_State *L) {
@@ -139,19 +139,19 @@ static int disp_init(lua_State *L) {
     param.bpp = getFiledInt(L, 1, "bpp");
     bpp_test = param.bpp;
     
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
-    //16Î»É«²ÊÆÁorºÚ°×ÆÁ
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
+    //16ä½è‰²å½©å±oré»‘ç™½å±
     if(!(param.bpp == 16 || param.bpp == 1 || param.bpp == 24))
     {
         return luaL_error(L, "disp.init: pixel depth must be 16 or 1!%d", param.bpp); 
     }
     
-    // lcd´«Êä½Ó¿Ú
+    // lcdä¼ è¾“æ¥å£
     param.bus = (PlatformLcdBus)getFiledInt(L, 1, "bus"); // panjun, 2015.04.21, Commit SSD1306's driver code.
 
-    /*+\new\liweiqiang\2014.10.22\lcd²»Í¬½Ó¿ÚĞÅÏ¢¶¨Òå */
-    // ²»Í¬´«Êä½Ó¿Ú¶¨Òå
-/*+\DEL\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
+    /*+\new\liweiqiang\2014.10.22\lcdä¸åŒæ¥å£ä¿¡æ¯å®šä¹‰ */
+    // ä¸åŒä¼ è¾“æ¥å£å®šä¹‰
+/*+\DEL\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
     // if(param.bus == PLATFORM_LCD_BUS_I2C || param.bus == PLATFORM_LCD_BUS_SPI){
     //     lua_getfield(L, 1, "interface");
     //     luaL_checktype(L, -1, LUA_TTABLE);
@@ -169,14 +169,14 @@ static int disp_init(lua_State *L) {
     //         param.lcd_itf.bus_spi.freq = checkFiledInt(L, -1, "freq");
     //     }
     // }
-/*-\DEL\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
-    /*-\new\liweiqiang\2014.10.22\lcd²»Í¬½Ó¿ÚĞÅÏ¢¶¨Òå */    
+/*-\DEL\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
+    /*-\new\liweiqiang\2014.10.22\lcdä¸åŒæ¥å£ä¿¡æ¯å®šä¹‰ */    
 
-    // lcd rst½Å±ØĞë¶¨Òå
+    // lcd rstè„šå¿…é¡»å®šä¹‰
     param.pin_rst = checkFiledInt(L, 1, "pinrst");
-/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
+/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
     param.pin_rs = checkFiledInt(L, 1, "pinrs");
-/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
+/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
     lua_getfield(L, 1, "pincs");
 
     if(lua_type(L,-1) != LUA_TNUMBER)
@@ -184,26 +184,26 @@ static int disp_init(lua_State *L) {
     else
         param.pin_cs = lua_tonumber(L,-1);
 
-    // ²»ÉèÆ«ÒÆÔòÄ¬ÈÏ0
+    // ä¸è®¾åç§»åˆ™é»˜è®¤0
     param.x_offset = getFiledInt(L, 1, "xoffset");
     param.y_offset = getFiledInt(L, 1, "yoffset");
 	
-	/*+\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
+	/*+\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
     param.camera_preview_no_update_screen = optFiledInt(L, 1, "camera_preview_no_update_screen",0);
-	/*-\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
-    /*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+	/*-\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
+    /*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
     param.hwfillcolor = optFiledInt(L, 1, "hwfillcolor", -1);
-    /*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
-/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ,1M */
+    /*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
+/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨,1M */
     param.lcd_itf.bus_spi.freq = optFiledInt(L, 1, "freq", 1000000);
-/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
+/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
 
-      /*+\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
+      /*+\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
     param.Driving = optFiledInt(L, 1, "driving", 0);
-      /*+\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
+      /*+\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
 
 
-    // .initcmd ³õÊ¼»¯Ö¸Áî±í
+    // .initcmd åˆå§‹åŒ–æŒ‡ä»¤è¡¨
     lua_getfield(L, 1, "initcmd");
     luaL_checktype(L, -1, LUA_TTABLE);
     param.tableSize = luaL_getn(L, -1);
@@ -215,9 +215,9 @@ static int disp_init(lua_State *L) {
         param.pLcdCmdTable[cmdTableIndex] = lua_tointeger(L, -1);
         lua_remove(L,-1);
     }
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
+/*+\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
     lua_getfield(L, 1, "sleepcmd");
     if(lua_type(L, -1) == LUA_TTABLE)
     {
@@ -245,19 +245,19 @@ static int disp_init(lua_State *L) {
             lua_remove(L,-1);
         }
     }
-/*-\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
+/*-\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
 
     platform_disp_init(&param);
 
     L_FREE(param.pLcdCmdTable);
 
-    /*+\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
+    /*+\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
     if(param.pLcdSleepCmd)
         L_FREE(param.pLcdSleepCmd);
 
     if(param.pLcdWakeCmd)
         L_FREE(param.pLcdWakeCmd);
-    /*-\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
+    /*-\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
 
     return 0;
 }
@@ -293,13 +293,13 @@ static int disp_puttext(lua_State *L) {
   return 2; 
 }
 
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
 //disp.putimage
 static int disp_putimage(lua_State *L) {
     const char *filename;
-    /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     u16 x, y, left, top, right, bottom;
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     int transcolor,transtype;
 
     ASSERT(putimage_assert_fail==FALSE);
@@ -307,13 +307,13 @@ static int disp_putimage(lua_State *L) {
 
     filename   = luaL_checkstring(L, 1);
     x     = luaL_optint(L, 2, 0);
-/*+\NEW\liweiqiang\2013.11.12\ĞŞÕıÏÔÊ¾Í¼Æ¬y×ø±êÎŞ·¨ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.11.12\ä¿®æ­£æ˜¾ç¤ºå›¾ç‰‡yåæ ‡æ— æ³•è®¾ç½® */
     y     = luaL_optint(L, 3, 0);
-/*-\NEW\liweiqiang\2013.11.12\ĞŞÕıÏÔÊ¾Í¼Æ¬y×ø±êÎŞ·¨ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.11.12\ä¿®æ­£æ˜¾ç¤ºå›¾ç‰‡yåæ ‡æ— æ³•è®¾ç½® */
 
-/*+\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
-    /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
-    transcolor = luaL_optint(L, 4, -1); //Ä¬ÈÏ²»Í¸Ã÷
+/*+\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
+    /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
+    transcolor = luaL_optint(L, 4, -1); //é»˜è®¤ä¸é€æ˜
     left = luaL_optint(L, 5, 0);
     top = luaL_optint(L, 6, 0);
     right = luaL_optint(L, 7, 0);
@@ -322,38 +322,38 @@ static int disp_putimage(lua_State *L) {
 
 
     platform_disp_putimage(filename, x, y, transcolor, left, top, right, bottom,transtype);
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
-/*-\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
+/*-\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
 
     putimage_assert_fail = FALSE;
     
     return 0; 
 }
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
 
 
 
 static int disp_preloadpng(lua_State *L) {
     const char *filename;
-    /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     u16  index;
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 
     filename   = luaL_checkstring(L, 1);
     index     = luaL_optint(L, 2, 0);
    
 
     platform_disp_preload_png_to_layer(filename, index);
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
-/*-\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */    
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
+/*-\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */    
     return 0; 
 }
 
 #ifdef AM_LAYER_SUPPORT
 static int disp_layer_display(lua_State *L) {
-    /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     int layer_id1, layer_id2, layer_id3, x1,y1,x2,y2,x3,y3;
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 
      layer_id1 = luaL_optint(L, 1, -1);
      x1     = luaL_optint(L, 2, 0);
@@ -419,7 +419,7 @@ static int disp_setactivelayer(lua_State *L) {
 
 static int disp_copy_layer(lua_State *L) {  
     int layer_id1, layer_id2, x1,y1;
-    /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     T_AMOPENAT_LCD_RECT_T rect;
      layer_id1 = luaL_optint(L, 1, -1);
      x1     = luaL_optint(L, 2, 0);
@@ -438,7 +438,7 @@ static int disp_copy_layer(lua_State *L) {
 
 #ifdef TOUCH_PANEL_SUPPORT
 
-/*-\NEW\zhuwangbin\2015.2.23\LUA ²Ù×÷Í¼²ãÆ½ÒÆ£¬¸Ä³Éµ×²ã²Ù×÷ */
+/*-\NEW\zhuwangbin\2015.2.23\LUA æ“ä½œå›¾å±‚å¹³ç§»ï¼Œæ”¹æˆåº•å±‚æ“ä½œ */
 static int disp_layer_start_move(lua_State *L) {
   
   int layer_id1, layer_id2, layer_id3, delay_ms, x_inc, y_inc;
@@ -456,10 +456,10 @@ static int disp_layer_start_move(lua_State *L) {
 
   return 0;
 }
-/*-\NEW\zhuwangbin\2015.2.23\LUA ²Ù×÷Í¼²ãÆ½ÒÆ£¬¸Ä³Éµ×²ã²Ù×÷ */
+/*-\NEW\zhuwangbin\2015.2.23\LUA æ“ä½œå›¾å±‚å¹³ç§»ï¼Œæ”¹æˆåº•å±‚æ“ä½œ */
 
 
-/*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+/*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
 static int disp_layer_hang_start(lua_State *L) {
   int layer_id1, layer_id2, layer_id3, y_inc, delay_ms;
   int move_config, lost_dirction;
@@ -510,7 +510,7 @@ static int disp_layer_set_text(lua_State *L)
 {
   int file_id, x, y, color;
   const char *textString;
-  BOOL colorSetBool = FALSE; 	//luaÊÇ·ñÉèÖÃcolor±êÖ¾
+  BOOL colorSetBool = FALSE; 	//luaæ˜¯å¦è®¾ç½®coloræ ‡å¿—
   int total;
 
   total = lua_gettop(L);
@@ -520,7 +520,7 @@ static int disp_layer_set_text(lua_State *L)
   y  = luaL_optint(L, 4, 0);
   color = luaL_optint(L, 5, 0);
 
-	// Ö»ÓĞluaÉèÖÃcolor²ÎÊıÊ±£¬²ÅÉèÖÃ×ÖÌåÑÕÉ«
+	// åªæœ‰luaè®¾ç½®colorå‚æ•°æ—¶ï¼Œæ‰è®¾ç½®å­—ä½“é¢œè‰²
   if (total == 5)
   	colorSetBool = TRUE;
 
@@ -558,7 +558,7 @@ static int disp_layer_set_drawRect(lua_State *L)
 
   return 0;
 }
-/*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+/*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
 #endif
 
 static int disp_playgif(lua_State *L) {
@@ -595,7 +595,7 @@ static int  disp_stopgif(lua_State *L) {
 
 
 
-/*+\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 static int disp_drawrect(lua_State *L)
 {
     int left = luaL_checkinteger(L, 1);
@@ -608,9 +608,9 @@ static int disp_drawrect(lua_State *L)
 
     return 0;
 }
-/*-\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 static int disp_qrcode(lua_State *L)
 {
 	size_t len = 0;
@@ -637,9 +637,9 @@ __end:
 	lua_pushinteger(L, 0);
 	return 1;
 }
-/*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 static int disp_setcolor(lua_State *L)
 {
     int color = luaL_checkinteger(L, 1);
@@ -655,9 +655,9 @@ static int disp_setbkcolor(lua_State *L)
     lua_pushinteger(L, retcolor);
     return 1;
 }
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
 static int disp_loadfont(lua_State *L)
 {
     const char *filename = luaL_checkstring(L, 1);
@@ -675,8 +675,8 @@ static int disp_setfont(lua_State *L)
     lua_pushinteger(L, oldfontid);
     return 1;
 }
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 static int disp_setfontHeight(lua_State *L)
 {
     int height = luaL_checkinteger(L, 1);
@@ -689,9 +689,9 @@ static int disp_getfontHeight(lua_State *L)
     lua_pushinteger(L, platform_disp_getfontHeight());
     return 1;
 }
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 
-/*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+/*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
 static int disp_write(lua_State *L)
 {
     int cmd = luaL_checkinteger(L, 1);
@@ -700,9 +700,9 @@ static int disp_write(lua_State *L)
 	
     return 1;
 }
-/*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+/*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
 
-/*+\NewReq NEW\zhutianhua\2014.11.14\Ôö¼Ódisp.sleep½Ó¿Ú*/
+/*+\NewReq NEW\zhutianhua\2014.11.14\å¢åŠ disp.sleepæ¥å£*/
 extern void platform_lcd_powersave(int sleep_wake);
 static int disp_sleep(lua_State *L) {    
     int sleep = luaL_checkinteger(L,1);
@@ -710,9 +710,9 @@ static int disp_sleep(lua_State *L) {
     platform_lcd_powersave(sleep);
     return 0; 
 }
-/*-\NewReq NEW\zhutianhua\2014.11.14\Ôö¼Ódisp.sleep½Ó¿Ú*/
+/*-\NewReq NEW\zhutianhua\2014.11.14\å¢åŠ disp.sleepæ¥å£*/
 
-/*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
+/*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
 static int disp_get_lcd_info(lua_State *L)
 {
     u16 width, height;
@@ -728,7 +728,7 @@ static int disp_get_lcd_info(lua_State *L)
 
     return 3;
 }
-/*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
+/*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
 
 static int disp_get_layer_info(lua_State *L)
 {
@@ -772,7 +772,7 @@ static int disp_get_image_resolution(lua_State *L)
     lua_pushinteger(L, height);
     return 3;
 }
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #ifdef AM_LUA_CAMERA_SUPPORT
 int disp_camera_preview_open(lua_State *L)
 {
@@ -787,7 +787,7 @@ int disp_camera_preview_open(lua_State *L)
     return 1;
 }
 
-/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 int disp_camera_preview_zoom(lua_State *L)
 {
     int zoom    = luaL_checkinteger(L, 1);
@@ -803,9 +803,9 @@ int disp_camera_preview_rotation(lua_State *L)
     lua_pushboolean(L, platform_camera_preview_rotation(rotation));
     return 1;
 }
-/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 int camera_write_reg(lua_State *L)
 {
 	int nInitCmdSize = 0;
@@ -837,7 +837,7 @@ int camera_write_reg(lua_State *L)
 
 	return 1;
 }
-/*-\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 
 int disp_camera_open(lua_State *L)
 {
@@ -868,7 +868,7 @@ int disp_camera_open(lua_State *L)
     lua_pushboolean(L, platform_camera_poweron(FALSE, nCamType, bZbarScan,bMirror,bJump));
     return 1;
 }
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 int disp_camera_open_ext(lua_State *L)
 {
     int zbar_scan,i2c_addr,sensor_width,sensor_height,id_reg,id_value,spi_mode;
@@ -941,7 +941,7 @@ int disp_camera_open_ext(lua_State *L)
     
     return 1;
 }
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 int disp_camera_close(lua_State *L)
 {
     lua_pushboolean(L, platform_camera_poweroff());
@@ -1013,9 +1013,9 @@ int disp_camera_save_photo(lua_State *L)
 }
 #endif
 
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
-// Èğºã =========================================================================================================================================
-/* ·µ»Ø×Ö·û»ò×Ö·û´®Õ¼ÓÃ×Ö½Ú(byte)¿í¶È */
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
+// ç‘æ’ =========================================================================================================================================
+/* è¿”å›å­—ç¬¦æˆ–å­—ç¬¦ä¸²å ç”¨å­—èŠ‚(byte)å®½åº¦ */
 static int disp_getstringwidth(lua_State *L)
 {
     const char *str;
@@ -1024,9 +1024,9 @@ static int disp_getstringwidth(lua_State *L)
     str = luaL_checkstring(L, 1);
     m   = cast(unsigned char,luaL_checkinteger(L, 2));
     
-    lua_pushinteger(L, disp_getcharwidth(str,m)); // lua_pushinteger±íÊ¾Òª¸øLUA·µ»ØÒ»¸öINTÀàĞÍµÄÖµ
+    lua_pushinteger(L, disp_getcharwidth(str,m)); // lua_pushintegerè¡¨ç¤ºè¦ç»™LUAè¿”å›ä¸€ä¸ªINTç±»å‹çš„å€¼
 
-    return 1; // ±íÊ¾Òª¸øLUA·µ»Ø¶àÉÙ¸öÖµ
+    return 1; // è¡¨ç¤ºè¦ç»™LUAè¿”å›å¤šå°‘ä¸ªå€¼
 }
 //==============================================================================================================================================
 
@@ -1062,50 +1062,50 @@ const LUA_REG_TYPE disp_map[] =
   { LSTRKEY( "close" ),  LFUNCVAL( disp_close ) },
   { LSTRKEY( "clear" ), LFUNCVAL( disp_clear ) },
   { LSTRKEY( "update" ), LFUNCVAL( disp_update ) },
-  /*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+  /*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
   { LSTRKEY( "new" ),	LFUNCVAL( disp_new ) },
   { LSTRKEY( "getframe" ),	LFUNCVAL( disp_getframe ) },
-  /*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+  /*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
   { LSTRKEY( "puttext" ), LFUNCVAL( disp_puttext ) },
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
   { LSTRKEY( "putimage" ), LFUNCVAL( disp_putimage ) },
 
   { LSTRKEY( "playgif" ), LFUNCVAL( disp_playgif) },
 
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
   { LSTRKEY( "stopgif" ), LFUNCVAL( disp_stopgif ) },
 
-/*+\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
   { LSTRKEY( "drawrect" ), LFUNCVAL( disp_drawrect ) },
-/*-\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
   { LSTRKEY( "putqrcode" ), LFUNCVAL( disp_qrcode ) },
-/*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
   { LSTRKEY( "setcolor" ), LFUNCVAL( disp_setcolor ) },
   { LSTRKEY( "setbkcolor" ), LFUNCVAL( disp_setbkcolor ) },
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
   { LSTRKEY( "loadfont" ), LFUNCVAL( disp_loadfont ) },
   { LSTRKEY( "setfont" ), LFUNCVAL( disp_setfont ) },
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
   { LSTRKEY( "setfontheight" ), LFUNCVAL( disp_setfontHeight ) },
   { LSTRKEY( "getfontheight" ), LFUNCVAL( disp_getfontHeight ) },
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
-  /*+\NewReq NEW\zhutianhua\2014.11.14\Ôö¼Ódisp.sleep½Ó¿Ú*/
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
+  /*+\NewReq NEW\zhutianhua\2014.11.14\å¢åŠ disp.sleepæ¥å£*/
   { LSTRKEY( "sleep" ), LFUNCVAL( disp_sleep ) },
-  /*-\NewReq NEW\zhutianhua\2014.11.14\Ôö¼Ódisp.sleep½Ó¿Ú*/
-  /*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
+  /*-\NewReq NEW\zhutianhua\2014.11.14\å¢åŠ disp.sleepæ¥å£*/
+  /*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
   { LSTRKEY( "getlcdinfo" ), LFUNCVAL( disp_get_lcd_info ) },
   { LSTRKEY( "getlayerinfo" ), LFUNCVAL( disp_get_layer_info ) },
-  /*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
-  /*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+  /*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
+  /*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
   { LSTRKEY( "write" ), LFUNCVAL( disp_write ) },
-  /*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+  /*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
 
   { LSTRKEY( "setactlayer" ), LFUNCVAL( disp_set_act_layer) },
   { LSTRKEY( "destroylayer" ), LFUNCVAL( disp_destroy_layer) },
@@ -1120,43 +1120,43 @@ const LUA_REG_TYPE disp_map[] =
   { LSTRKEY( "getimageresolution"), LFUNCVAL( disp_get_image_resolution ) },
 #endif
 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #ifdef AM_LUA_CAMERA_SUPPORT
   { LSTRKEY( "cameraopen" ),     LFUNCVAL( disp_camera_open ) },
   { LSTRKEY( "cameraopen_ext" ),     LFUNCVAL( disp_camera_open_ext ) },
   { LSTRKEY( "cameraclose" ),     LFUNCVAL( disp_camera_close ) },
   { LSTRKEY( "camerapreview" ),  LFUNCVAL( disp_camera_preview_open ) },
-  /*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+  /*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
   { LSTRKEY( "camerapreviewzoom" ),  LFUNCVAL( disp_camera_preview_zoom ) },
   { LSTRKEY( "camerapreviewrotation" ),  LFUNCVAL( disp_camera_preview_rotation ) },
-  /*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+  /*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
   { LSTRKEY( "camerapreviewclose" ),  LFUNCVAL( disp_camera_preview_close ) },
   { LSTRKEY( "cameracapture" ),  LFUNCVAL( disp_camera_capture ) },
   { LSTRKEY( "camerasavephoto" ),  LFUNCVAL( disp_camera_save_photo ) },
   { LSTRKEY( "encodeJpeg" ), LFUNCVAL( encodeJpegBuffer ) },
-   /*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+   /*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
   { LSTRKEY( "camerawritereg" ),     LFUNCVAL( camera_write_reg ) },
-  /*-\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+  /*-\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 #endif
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
-// Èğºã ========================================================================================================================================
-  { LSTRKEY( "getstringwidth"), LFUNCVAL( disp_getstringwidth ) }, // ×¢²áº¯ÊıÖÁLua²ã
+// ç‘æ’ ========================================================================================================================================
+  { LSTRKEY( "getstringwidth"), LFUNCVAL( disp_getstringwidth ) }, // æ³¨å†Œå‡½æ•°è‡³Luaå±‚
 //==============================================================================================================================================
 
 #ifdef TOUCH_PANEL_SUPPORT
-  /*-\NEW\zhuwangbin\2015.2.23\LUA ²Ù×÷Í¼²ãÆ½ÒÆ£¬¸Ä³Éµ×²ã²Ù×÷ */
+  /*-\NEW\zhuwangbin\2015.2.23\LUA æ“ä½œå›¾å±‚å¹³ç§»ï¼Œæ”¹æˆåº•å±‚æ“ä½œ */
   { LSTRKEY( "layermovestart"), LFUNCVAL(disp_layer_start_move) },
-  /*-\NEW\zhuwangbin\2015.2.23\LUA ²Ù×÷Í¼²ãÆ½ÒÆ£¬¸Ä³Éµ×²ã²Ù×÷ */
+  /*-\NEW\zhuwangbin\2015.2.23\LUA æ“ä½œå›¾å±‚å¹³ç§»ï¼Œæ”¹æˆåº•å±‚æ“ä½œ */
 
-  /*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+  /*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
   { LSTRKEY( "layermovehangstart"), LFUNCVAL(disp_layer_hang_start) },
   { LSTRKEY( "layersetpicture"), LFUNCVAL(disp_layer_set_picture) },
   { LSTRKEY( "layersetext"), LFUNCVAL(disp_layer_set_text) },
   { LSTRKEY( "layersetqrcode"), LFUNCVAL(disp_layer_set_RQcode)},
   { LSTRKEY( "layersetdrawrect"), LFUNCVAL(disp_layer_set_drawRect)},
   { LSTRKEY( "layermovehangstop"), LFUNCVAL(disp_layer_hang_stop)},
-  /*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+  /*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
 #endif
 
   { LNILKEY, LNILVAL }
@@ -1168,17 +1168,17 @@ LUALIB_API int luaopen_disp( lua_State *L )
 
   MOD_REG_NUMBER(L, "BUS_SPI4LINE", PLATFORM_LCD_BUS_SPI4LINE);
   MOD_REG_NUMBER(L, "BUS_PARALLEL", PLATFORM_LCD_BUS_PARALLEL);
-/*+\new\liweiqiang\2014.10.22\lcd²»Í¬½Ó¿ÚĞÅÏ¢¶¨Òå */
+/*+\new\liweiqiang\2014.10.22\lcdä¸åŒæ¥å£ä¿¡æ¯å®šä¹‰ */
   MOD_REG_NUMBER(L, "BUS_I2C", PLATFORM_LCD_BUS_I2C);
   MOD_REG_NUMBER(L, "BUS_SPI", PLATFORM_LCD_BUS_SPI);
-/*-\new\liweiqiang\2014.10.22\lcd²»Í¬½Ó¿ÚĞÅÏ¢¶¨Òå */
+/*-\new\liweiqiang\2014.10.22\lcdä¸åŒæ¥å£ä¿¡æ¯å®šä¹‰ */
 
   MOD_REG_NUMBER(L, "BASE_LAYER", BASIC_LAYER_ID);
   MOD_REG_NUMBER(L, "USER_LAYER1", USER_LAYER_1_ID);
   MOD_REG_NUMBER(L, "USER_LAYER2", USER_LAYER_2_ID);
   MOD_REG_NUMBER(L, "INVALID_LAYER", INVALID_LAYER_ID);
 
-/*+\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
   MOD_REG_NUMBER(L, "CAMERA_SPI_MODE_LINE1", PLATFORM_SPI_MODE_MASTER2_1);
   MOD_REG_NUMBER(L, "CAMERA_SPI_MODE_LINE2", PLATFORM_SPI_MODE_MASTER2_2);
   MOD_REG_NUMBER(L, "CAMERA_SPI_MODE_LINE4", PLATFORM_SPI_MODE_MASTER2_4);
@@ -1194,7 +1194,7 @@ LUALIB_API int luaopen_disp( lua_State *L )
   MOD_REG_NUMBER(L, "CAMERA_SPI_OUT_V0_Y0_U0_Y1", PLATFORM_SPI_OUT_V0_Y0_U0_Y1);
   MOD_REG_NUMBER(L, "CAMERA_SPI_OUT_Y1_V0_Y0_U0", PLATFORM_SPI_OUT_Y1_V0_Y0_U0);
   MOD_REG_NUMBER(L, "CAMERA_SPI_OUT_Y1_U0_Y0_V0", PLATFORM_SPI_OUT_Y1_U0_Y0_V0);
-/*-\NEW\zhuwangbin\2020.8.22\ lua°æ±¾µÄcamera¼Ä´æÆ÷ÓÉ½Å±¾ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.22\ luaç‰ˆæœ¬çš„cameraå¯„å­˜å™¨ç”±è„šæœ¬é…ç½®*/
 
   return 1;
 }

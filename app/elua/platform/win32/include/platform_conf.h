@@ -16,7 +16,7 @@
 #include "auxmods.h"
 
 // *****************************************************************************
-// 定义平台要开启的功能
+// 瀹氫箟骞冲彴瑕佸紑鍚殑鍔熻兘
 //#define BUILD_LUA_INT_HANDLERS
 //#define BUILD_C_INT_HANDLERS
 #define USE_PLATFORM_ALLOCATOR
@@ -39,12 +39,12 @@
 
 #define PIO_PIN_ARRAY         {32 /* gpio_num 32 */, 24/* gpo_num 56 */}
 
-//虚拟at命令通道
+//铏氭嫙at鍛戒护閫氶亾
 #define PLATFORM_UART_ID_ATC              0x7f
 
 #define PLATFORM_PORT_ID_DEBUG            0x80
 
-//命令行通道
+//鍛戒护琛岄�氶亾
 #define CON_UART_ID           platform_get_console_port()
 #define CON_UART_SPEED        115200
 #define CON_TIMER_ID          0

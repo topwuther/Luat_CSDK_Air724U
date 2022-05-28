@@ -18,22 +18,22 @@
 
 #include "lauxlib.h"
 #include "lualib.h"
-/*+\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+/*+\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
 #include "auxmods.h"
 #include "am_openat_fs.h"
 #define IO_SDCARD 	0xaa
-/*-\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+/*-\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
 
 #define IO_INPUT	1
 #define IO_OUTPUT	2
 
-/*+\new\liangjian\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+/*+\new\liangjian\2020.06.17\增加目录信息读取方法*/
 #define DIR_IDLE     0
 #define DIR_READY     1
 #define DIR_READING     2
 char  *dirDict;
 int dirState = DIR_IDLE;
-/*-\new\wangyuan\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+/*-\new\wangyuan\2020.06.17\增加目录信息读取方法*/
 
 
 static const char *const fnames[] = {"input", "output"};
@@ -178,7 +178,7 @@ static int io_open (lua_State *L) {
   *pf = fopen(filename, mode);
   return (*pf == NULL) ? pushresult(L, 0, filename) : 1;
 }
-/*+\new\liangjian\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+/*+\new\liangjian\2020.06.17\增加目录信息读取方法*/
 static int io_open_dir (lua_State *L) {
   int iRet; 
   const char *dirname = luaL_checkstring(L, 1);
@@ -250,15 +250,15 @@ static int io_read_dir (lua_State *L) {
 }
 
 static int io_close_dir (lua_State *L) {
-/*+\bug\liangjian\2020.06.22\�޸�close ���޷��ٴ��ٴδ�����*/
+/*+\bug\liangjian\2020.06.22\修改close 后无法再次再次打开问题*/
   OPENAT_find_close(1);
-/*-\bug\liangjian\2020.06.22\�޸�close ���޷��ٴ��ٴδ�����*/
+/*-\bug\liangjian\2020.06.22\修改close 后无法再次再次打开问题*/
   lualibc_free(dirDict);
   dirState = DIR_IDLE;
   lua_pushinteger(L, 1);
   return 1;
 }
-/*-\new\liangjian\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+/*-\new\liangjian\2020.06.17\增加目录信息读取方法*/
 
 
 
@@ -529,8 +529,8 @@ static int io_write (lua_State *L) {
 static int f_write (lua_State *L) {
   return g_write(L, tofile(L), 2);
 }
-/*+\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
-/*+\new\wj\2020.9.1\����mount��unmount��format�ӿ�*/
+/*+\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
+/*+\new\wj\2020.9.1\完善mount，unmount，format接口*/
 static int io_mount(lua_State *L)
 {
 
@@ -652,9 +652,9 @@ static int io_format(lua_State *L)
 
     return 1;
 }
-/*-\new\wj\2020.9.1\����mount��unmount��format�ӿ�*/
-/*-\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
-/*+\bug2991\zhuwangbin\2020.06.11\����lua otp�ӿ�*/
+/*-\new\wj\2020.9.1\完善mount，unmount，format接口*/
+/*-\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
+/*+\bug2991\zhuwangbin\2020.06.11\增加lua otp接口*/
 static int io_otp_write(lua_State *L)
 {
 	int address,data,size;
@@ -712,7 +712,7 @@ static int io_otp_lock(lua_State *L)
 	
 	return 1;
 }
-/*-\bug2991\zhuwangbin\2020.06.11\����lua otp�ӿ�*/
+/*-\bug2991\zhuwangbin\2020.06.11\增加lua otp接口*/
 
 
 
@@ -760,28 +760,28 @@ static const luaL_Reg iolib[] = {
   {"input", io_input},
   {"lines", io_lines},
   {"open", io_open},
-  /*+\new\liangjian\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+  /*+\new\liangjian\2020.06.17\增加目录信息读取方法*/
   {"opendir", io_open_dir},
   {"readdir", io_read_dir},
   {"closedir", io_close_dir},
-  /*-\new\liangjian\2020.06.17\����Ŀ¼��Ϣ��ȡ����*/
+  /*-\new\liangjian\2020.06.17\增加目录信息读取方法*/
   {"output", io_output},
   {"popen", io_popen},
   {"read", io_read},
   {"tmpfile", io_tmpfile},
   {"type", io_type},
   {"write", io_write},
-  /*+\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+  /*+\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
   {"mount", io_mount},
   {"unmount", io_unmount},
   {"format", io_format},
-	/*+\bug2991\zhuwangbin\2020.06.11\����lua otp�ӿ�*/
+	/*+\bug2991\zhuwangbin\2020.06.11\增加lua otp接口*/
 	{"otp_erase", io_otp_erase},
 	{"otp_write", io_otp_write},
 	{"otp_read", io_otp_read},
 	{"otp_lock", io_otp_lock},
-	/*-\bug2991\zhuwangbin\2020.06.11\����lua otp�ӿ�*/
-  /*-\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+	/*-\bug2991\zhuwangbin\2020.06.11\增加lua otp接口*/
+  /*-\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
   {NULL, NULL}
 };
 
@@ -844,14 +844,14 @@ LUALIB_API int luaopen_io (lua_State *L) {
   newfenv(L, io_pclose);  /* create environment for 'popen' */
   lua_setfenv(L, -2);  /* set fenv for 'popen' */
   lua_pop(L, 1);  /* pop 'popen' */
-  /*+\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+  /*+\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
   #ifdef  LUA_SDCARD_SUPPORT
   MOD_REG_NUMBER( L, "SDCARD", IO_SDCARD );
   #endif
   MOD_REG_NUMBER( L, "INTERNAL",E_PLATFROM_FLASH_INTERNAL);
   MOD_REG_NUMBER(L, "EXTERN_PINLCD", E_PLATFROM_FLASH_EXTERN_PINLCD);
   MOD_REG_NUMBER(L,"EXTERN_PINGPIO",E_PLATFROM_FLASH_EXTERN_PINGPIO);
-  /*-\BUG\wangyuan\2020.06.11\��sdcard���ء�ж�ء���ʽ�������ŵ�io����*/
+  /*-\BUG\wangyuan\2020.06.11\将sdcard挂载、卸载、格式化操作放到io库中*/
   return 1;
 }
 #endif

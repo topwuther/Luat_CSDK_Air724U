@@ -62,7 +62,7 @@ static int l_ble_send(lua_State *L)
     return 1;
 }
 
-/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+/*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 static int l_ble_recv(lua_State *L)
 {
 
@@ -75,7 +75,7 @@ static int l_ble_recv(lua_State *L)
     luaL_Buffer b;
     luaL_buffinit(L, &b);
 
-	/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨*/
+	/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥*/
     plat_ble_recv_buff data = {0};
     data.len = maxsize;
     data.dataPtr = malloc(maxsize);
@@ -98,13 +98,13 @@ static int l_ble_recv(lua_State *L)
     free(data.dataPtr);
 
     luaL_pushresult(&uuid);
-	/*-\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨*/
+	/*-\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥*/
     luaL_pushresult(&b);
     lua_pushinteger(L, recvlen);
     return 3;
 }
 
-/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+/*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
 
 static int l_ble_set_name(lua_State *L)
 {

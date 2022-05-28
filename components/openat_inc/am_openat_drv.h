@@ -1,27 +1,27 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: brezen
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2012.09.24  brezen    ´´½¨ÎÄ¼ş
-    V0.2      2012.12.17  brezen    Ìí¼ÓUART²¿·Ö
-    V0.3      2012.12.27  brezen    Ìí¼Ópmd²¿·Ö
-    V0.4      2012.12.27  brezen    Ìí¼Óspi²¿·Ö 
-    V0.5      2013.01.08  brezen    Ìí¼Ó´¥ÃşÆÁÇı¶¯
-    V0.6      2013.01.11  brezen    Ìí¼Óspi²¿·Ö 
-    V0.7      2013.01.15  brezen    ĞŞ¸Älcd frequenceÎªuint32
-    V0.8      2013.01.15  brezen    1¡¢Ìí¼Ógpo 2¡¢Ìí¼Ólcd gpio ²ÎÊı
-    V0.9      2013.01.17  brezen    Ìí¼Óldo
-    V1.0      2013.01.28  brezen    Ìí¼Ópsam
-    V1.1      2013.02.06  Jack.li   Ìí¼Ócamera½Ó¿Ú
-    V1.2      2013.02.09  Jack.li   Ìí¼ÓÊÓÆµÂ¼ÖÆ½Ó¿Ú
-    V1.3      2013.03.01  brezen    Ìí¼Ó´®¿ÚOPENAT_UART_3
-	V1.4      2014.1.17   brezen    Ìí¼ÓÀ¶ÑÀHFP¹¦ÄÜ
-	V1.5      2014.5.22   brezen    Ôö¼ÓÀ¶ÑÀ¹¤³Ì²âÊÔÄ£Ê½
-	V1.6      2014.6.9    brezen    ÉèÖÃÀ¶ÑÀË¯ÃßÄ£Ê½
-	V1.7      2014.6.26   brezen    Ìí¼ÓÀ¶ÑÀspp½Ó¿Ú
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2012.09.24  brezen    åˆ›å»ºæ–‡ä»¶
+    V0.2      2012.12.17  brezen    æ·»åŠ UARTéƒ¨åˆ†
+    V0.3      2012.12.27  brezen    æ·»åŠ pmdéƒ¨åˆ†
+    V0.4      2012.12.27  brezen    æ·»åŠ spiéƒ¨åˆ† 
+    V0.5      2013.01.08  brezen    æ·»åŠ è§¦æ‘¸å±é©±åŠ¨
+    V0.6      2013.01.11  brezen    æ·»åŠ spiéƒ¨åˆ† 
+    V0.7      2013.01.15  brezen    ä¿®æ”¹lcd frequenceä¸ºuint32
+    V0.8      2013.01.15  brezen    1ã€æ·»åŠ gpo 2ã€æ·»åŠ lcd gpio å‚æ•°
+    V0.9      2013.01.17  brezen    æ·»åŠ ldo
+    V1.0      2013.01.28  brezen    æ·»åŠ psam
+    V1.1      2013.02.06  Jack.li   æ·»åŠ cameraæ¥å£
+    V1.2      2013.02.09  Jack.li   æ·»åŠ è§†é¢‘å½•åˆ¶æ¥å£
+    V1.3      2013.03.01  brezen    æ·»åŠ ä¸²å£OPENAT_UART_3
+	V1.4      2014.1.17   brezen    æ·»åŠ è“ç‰™HFPåŠŸèƒ½
+	V1.5      2014.5.22   brezen    å¢åŠ è“ç‰™å·¥ç¨‹æµ‹è¯•æ¨¡å¼
+	V1.6      2014.6.9    brezen    è®¾ç½®è“ç‰™ç¡çœ æ¨¡å¼
+	V1.7      2014.6.26   brezen    æ·»åŠ è“ç‰™sppæ¥å£
 	V1.8      2015.08.27  panjun    Simplify MMI's frame for Video.
 	V1.9      2016.03.26  panjun    Add TTSPLY's API.
 *********************************************************/
@@ -35,11 +35,11 @@ extern "C"{
 #endif
 #endif /* __cplusplus */
 /*----------------------------------------------*
- * °üº¬Í·ÎÄ¼ş                                   *
+ * åŒ…å«å¤´æ–‡ä»¶                                   *
  *----------------------------------------------*/
 #include <am_openat_common.h> 
 /*----------------------------------------------*
- * ºê¶¨Òå                                       *
+ * å®å®šä¹‰                                       *
  *----------------------------------------------*/
 /*+\NEW\RUFEI\2015.8.27\Add adc fuction*/
 #define DEFAULT_VALUE 0xffff
@@ -62,18 +62,18 @@ typedef enum
   OPENAT_DRV_EVT_CHR_PRESENT_IND,
 
   /* battery status */
-  OPENAT_DRV_EVT_BAT_PRESENT_IND, //ÔİÊ±²»Ö§³Ö
+  OPENAT_DRV_EVT_BAT_PRESENT_IND, //æš‚æ—¶ä¸æ”¯æŒ
   OPENAT_DRV_EVT_BAT_LEVEL_IND,
   OPENAT_DRV_EVT_BAT_VOLT_LOW,
-  OPENAT_DRV_EVT_BAT_OVERVOLT,    //ÔİÊ±²»Ö§³Ö
+  OPENAT_DRV_EVT_BAT_OVERVOLT,    //æš‚æ—¶ä¸æ”¯æŒ
 
   /* charging status */
   OPENAT_DRV_EVT_BAT_CHARGING,
   OPENAT_DRV_EVT_BAT_CHR_FULL,
-/*+\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*+\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
   OPENAT_DRV_EVT_BAT_RECHARGING,
   OPENAT_DRV_EVT_BAT_RECHR_FULL,
-/*-\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*-\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
   OPENAT_DRV_EVT_BAT_CHR_STOP,
   OPENAT_DRV_EVT_BAT_CHR_ERR,
 
@@ -90,9 +90,9 @@ typedef enum
   OPENAT_DRV_EVT_VIDEORECORD_FINISH_IND,
 
   /*CAMERA DATA event*/
-  /*+\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
+  /*+\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
   OPENAT_DRV_EVT_CAMERA_DATA_IND,
-  /*-\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
+  /*-\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
   
   /* VIDEO event */
   OPENAT_DRV_EVT_VIDEO_PLAY_FINISH_IND,
@@ -100,13 +100,13 @@ typedef enum
 
   /* UART event */
   OPENAT_DRV_EVT_UART_RX_DATA_IND,
-/*+\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*+\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
   OPENAT_DRV_EVT_UART_TX_DONE_IND,
-/*-\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*-\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
   /* ALARM event */
   OPENAT_DRV_EVT_ALARM_IND,
 
-  /*app ³ÌĞò×Ô¶¯Ğ£Ñé*/
+  /*app ç¨‹åºè‡ªåŠ¨æ ¡éªŒ*/
   OPENAT_SW_AUTO_VERIFY_IND,
   
 }E_OPENAT_DRV_EVT;
@@ -117,8 +117,8 @@ typedef enum
 typedef UINT8 E_AMOPENAT_GPIO_PORT;
 
 /*********************************************
-* ÃèÊö: GPIOÖĞ¶Ï·½Ê½
-* ¹¦ÄÜ: 
+* æè¿°: GPIOä¸­æ–­æ–¹å¼
+* åŠŸèƒ½: 
 *********************************************/
 typedef enum
 {
@@ -132,8 +132,8 @@ typedef enum
 
 
 /*********************************************
-* ÃèÊö: PIN¹¦ÄÜÄ£Ê½
-* ¹¦ÄÜ: 
+* æè¿°: PINåŠŸèƒ½æ¨¡å¼
+* åŠŸèƒ½: 
 *********************************************/
 typedef enum
 {
@@ -144,7 +144,7 @@ typedef enum
   OPENAT_GPIO_MODE_UNKNOWN
 }T_OPENAT_GPIO_MODE;
   
-/*+\BUG\wangyuan\2020.10.13\BUG_3249:8910-CSDK µÄ GPIO ÅäÖÃÉÏÀ­ÏÂÀ­½Ó¿Ú*/
+/*+\BUG\wangyuan\2020.10.13\BUG_3249:8910-CSDK çš„ GPIO é…ç½®ä¸Šæ‹‰ä¸‹æ‹‰æ¥å£*/
 typedef enum
 { 
   OPENAT_GPIO_NO_PULL = 0,
@@ -152,15 +152,15 @@ typedef enum
   OPENAT_GPIO_PULLUP = 2,
   OPENAT_GPIO_PULLMODE_UNKNOWN
 }T_OPENAT_GPIO_PULLMODE;
-/*-\BUG\wangyuan\2020.10.13\BUG_3249:8910-CSDK µÄ GPIO ÅäÖÃÉÏÀ­ÏÂÀ­½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.10.13\BUG_3249:8910-CSDK çš„ GPIO é…ç½®ä¸Šæ‹‰ä¸‹æ‹‰æ¥å£*/
 
-/*+\BUG\AMOPENAT-13\brezen\2013.4.13\ĞŞ¸ÄOpenatºÍÇı¶¯api²ãÊı¾İÀàĞÍÇ¿×ª*/
+/*+\BUG\AMOPENAT-13\brezen\2013.4.13\ä¿®æ”¹Openatå’Œé©±åŠ¨apiå±‚æ•°æ®ç±»å‹å¼ºè½¬*/
 typedef void (*OPENAT_GPIO_EVT_HANDLE)(E_OPENAT_DRV_EVT evt, E_AMOPENAT_GPIO_PORT gpioPort,unsigned char state);
-/*-\BUG\AMOPENAT-13\brezen\2013.4.13\ĞŞ¸ÄOpenatºÍÇı¶¯api²ãÊı¾İÀàĞÍÇ¿×ª*/
+/*-\BUG\AMOPENAT-13\brezen\2013.4.13\ä¿®æ”¹Openatå’Œé©±åŠ¨apiå±‚æ•°æ®ç±»å‹å¼ºè½¬*/
 
 /*********************************************
-* ÃèÊö: GPIOÖĞ¶Ï²ÎÊı
-* ¹¦ÄÜ: 
+* æè¿°: GPIOä¸­æ–­å‚æ•°
+* åŠŸèƒ½: 
 *********************************************/
 typedef struct
 {
@@ -170,16 +170,16 @@ typedef struct
 }T_OPENAT_GPIO_INT_CFG;
 
 /*********************************************
-* ÃèÊö: GPIO²ÎÊı
-* ¹¦ÄÜ: 
+* æè¿°: GPIOå‚æ•°
+* åŠŸèƒ½: 
 *********************************************/
 typedef struct
 {
   unsigned char      defaultState;
   T_OPENAT_GPIO_INT_CFG   intCfg;
-  /*+\BUG\wangyuan\2020.10.23\BUG_3249:8910-CSDK µÄ GPIO ÅäÖÃÉÏÀ­ÏÂÀ­½Ó¿Ú*/
+  /*+\BUG\wangyuan\2020.10.23\BUG_3249:8910-CSDK çš„ GPIO é…ç½®ä¸Šæ‹‰ä¸‹æ‹‰æ¥å£*/
   T_OPENAT_GPIO_PULLMODE  pullState;		/* 0: nopull, 1: pulldown, 2: pullup*/
-  /*-\BUG\wangyuan\2020.10.23\BUG_3249:8910-CSDK µÄ GPIO ÅäÖÃÉÏÀ­ÏÂÀ­½Ó¿Ú*/
+  /*-\BUG\wangyuan\2020.10.23\BUG_3249:8910-CSDK çš„ GPIO é…ç½®ä¸Šæ‹‰ä¸‹æ‹‰æ¥å£*/
 }T_OPENAT_GPIO_PARAM;
 
 typedef struct T_AMOPENAT_GPIO_CFG_TAG
@@ -189,7 +189,7 @@ typedef struct T_AMOPENAT_GPIO_CFG_TAG
     T_OPENAT_GPIO_PARAM   param;
 }T_AMOPENAT_GPIO_CFG;
 
-/*+\NEW \lijiaodi\2018.08.16\Ìí¼ÓGPIOÖĞ¶ÏµÄÈí·À¶¶¹¦ÄÜ*/
+/*+\NEW \lijiaodi\2018.08.16\æ·»åŠ GPIOä¸­æ–­çš„è½¯é˜²æŠ–åŠŸèƒ½*/
 typedef struct  GpioInterruptConfigTag
 {
     T_OPENAT_GPIO_INT_TYPE intType;
@@ -201,21 +201,21 @@ typedef struct GpioIntDebounceTag
 {
     INT16           debouncePrd;
     BOOL         oldLineState;
-/*+:\BUG\AMOPENAT-24\brezen\2013.05.17\GPIO4ÔÚ´òµç»°Ê±³öÏÖÖĞ¶ÏÎŞĞ§ÏÖÏó*/		
+/*+:\BUG\AMOPENAT-24\brezen\2013.05.17\GPIO4åœ¨æ‰“ç”µè¯æ—¶å‡ºç°ä¸­æ–­æ— æ•ˆç°è±¡*/		
     INT16           debounceCount; /*debouncePrd/10*/
-    INT16           checkedCount;  /*ÒÑ¾­·À¶¶µÄ¸öÊı*/
-    INT16           sucCheckCount; /*·À¶¶³É¹¦µÄ¸öÊı*/
+    INT16           checkedCount;  /*å·²ç»é˜²æŠ–çš„ä¸ªæ•°*/
+    INT16           sucCheckCount; /*é˜²æŠ–æˆåŠŸçš„ä¸ªæ•°*/
 
-    INT16           debounceFaildCount; /*·À¶¶Ê§°Ü¼ÇÂ¼£¬µ÷ÊÔÊ¹ÓÃ*/
-    INT16           debounceSuccCount; /*·À¶¶³É¹¦¼ÇÂ¼£¬µ÷ÊÔÊ¹ÓÃ*/
+    INT16           debounceFaildCount; /*é˜²æŠ–å¤±è´¥è®°å½•ï¼Œè°ƒè¯•ä½¿ç”¨*/
+    INT16           debounceSuccCount; /*é˜²æŠ–æˆåŠŸè®°å½•ï¼Œè°ƒè¯•ä½¿ç”¨*/
     INT16           intCount;
 	BOOL            inputState;
     /***************
-    checkedCount  Ã¿´Î·À¶¶++,×î´óÎªdebounceCount*2;
+    checkedCount  æ¯æ¬¡é˜²æŠ–++,æœ€å¤§ä¸ºdebounceCount*2;
     
-    sucCheckCount Èç¹û·À¶¶Ê§°Ü¾Í½«sucCheckÇå0
+    sucCheckCount å¦‚æœé˜²æŠ–å¤±è´¥å°±å°†sucCheckæ¸…0
     ***/
-/*-:\BUG\AMOPENAT-24\brezen\2013.05.17\GPIO4ÔÚ´òµç»°Ê±³öÏÖÖĞ¶ÏÎŞĞ§ÏÖÏó*/	    
+/*-:\BUG\AMOPENAT-24\brezen\2013.05.17\GPIO4åœ¨æ‰“ç”µè¯æ—¶å‡ºç°ä¸­æ–­æ— æ•ˆç°è±¡*/	    
 }GpioIntDebounce;
 
 typedef struct GpioIntTmrInfoTag
@@ -257,7 +257,7 @@ typedef struct pdgpioTimerExpiryTag
     INT32                timerId;
     INT32                userValue;
 }pdgpioTimerExpiry;
-/*-\NEW \lijiaodi\2018.08.16\Ìí¼ÓGPIOÖĞ¶ÏµÄÈí·À¶¶¹¦ÄÜ*/
+/*-\NEW \lijiaodi\2018.08.16\æ·»åŠ GPIOä¸­æ–­çš„è½¯é˜²æŠ–åŠŸèƒ½*/
 
 /*************************************************
 * ADC
@@ -265,7 +265,7 @@ typedef struct pdgpioTimerExpiryTag
 /*+\NEW\RUFEI\2015.8.27\Add adc fuction*/
 typedef enum E_AMOPENAT_ADC_CHANNEL_TAG
 {
-	/*+\NEW\zhuwangbin\2020.2.11\Ìí¼Óopenat adc½Ó¿Ú*/
+	/*+\NEW\zhuwangbin\2020.2.11\æ·»åŠ openat adcæ¥å£*/
     OPENAT_ADC_0,
     OPENAT_ADC_1,
     OPENAT_ADC_2,
@@ -299,10 +299,10 @@ typedef enum E_AMOPENAT_ADC_CHANNEL_TAG
     OPENAT_ADC_30,
     OPENAT_ADC_31,
     OPENAT_ADC_QTY
-    /*-\NEW\zhuwangbin\2020.2.11\Ìí¼Óopenat adc½Ó¿Ú*/
+    /*-\NEW\zhuwangbin\2020.2.11\æ·»åŠ openat adcæ¥å£*/
 }E_AMOPENAT_ADC_CHANNEL;
 
-/*+\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*+\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 typedef enum E_AMOPENAT_ADC_SCALE_TAG
 {
 	OPENAT_ADC_SCALE_DEFAULT, //5v
@@ -312,25 +312,25 @@ typedef enum E_AMOPENAT_ADC_SCALE_TAG
     OPENAT_ADC_SCALE_5V000,
     OPENAT_ADC_SCALE_QTY,
 }E_AMOPENAT_ADC_SCALE;
-/*-\bug3689\zhuwangbin\2020.11.25\adcÌí¼Ó¿ÉÑ¡²ÎÊıscale*/
+/*-\bug3689\zhuwangbin\2020.11.25\adcæ·»åŠ å¯é€‰å‚æ•°scale*/
 
 
 
 typedef enum E_AMOPENAT_ADC_CFG_MODE_TAG
 {
-    OPENAT_ADC_MODE_NULL = 0,/*Ä¬ÈÏÖµ*/
-    OPENAT_ADC_MODE_1 = 1,  /*¸üĞÂ1´Î*/
-    /*ÆäËûÖµ¿ÉÒÔÖ±½ÓÇ¿×ª*/
+    OPENAT_ADC_MODE_NULL = 0,/*é»˜è®¤å€¼*/
+    OPENAT_ADC_MODE_1 = 1,  /*æ›´æ–°1æ¬¡*/
+    /*å…¶ä»–å€¼å¯ä»¥ç›´æ¥å¼ºè½¬*/
 
-    OPENAT_ADC_MODE_MAX = 0xff /*ÓÀ¾Ã¸üĞÂ£¬¶Ô¹¦ºÄÓĞÒ»¶¨Ó°Ïì*/
+    OPENAT_ADC_MODE_MAX = 0xff /*æ°¸ä¹…æ›´æ–°ï¼Œå¯¹åŠŸè€—æœ‰ä¸€å®šå½±å“*/
 }E_AMOPENAT_ADC_CFG_MODE;
 
 typedef enum E_AMOPENAT_ADC_STATUS_TAG
 {
-    OPENAT_ADC_STATUS_NULL, /*Ä¬ÈÏ×´Ì¬*/
-    OPENAT_ADC_STATUS_INIT, /*³õÊ¼»¯*/
-    OPENAT_ADC_STATUS_READING,/*ÒÑ¸üĞÂÖµ£¬ÈÔ¼ÌĞø¸üĞÂ  */ 
-    OPENAT_ADC_STATUS_READ_COMPLETE,/*Íê³É¶ÁÖµ*/
+    OPENAT_ADC_STATUS_NULL, /*é»˜è®¤çŠ¶æ€*/
+    OPENAT_ADC_STATUS_INIT, /*åˆå§‹åŒ–*/
+    OPENAT_ADC_STATUS_READING,/*å·²æ›´æ–°å€¼ï¼Œä»ç»§ç»­æ›´æ–°  */ 
+    OPENAT_ADC_STATUS_READ_COMPLETE,/*å®Œæˆè¯»å€¼*/
     
     OPENAT_ADC_STATUS_QTY
 }E_AMOPENAT_ADC_STATUS;
@@ -351,31 +351,31 @@ typedef struct E_AMOPENAT_ADC_CONTEXT_TAG
 *************************************************/
 typedef enum
 {
-  OPENAT_PM_CHR_BY_DEFAULT, /* ÏµÍ³×Ô¶¯¿ØÖÆ³äµç */
-  OPENAT_PM_CHR_BY_CUST,    /* ÓÃ»§×Ô¼º¿ØÖÆ³äµç */
-/*+\NEW WM-746\rufei\2013.3.30\Ôö¼ÓĞ¾Æ¬IC³äµç*/
+  OPENAT_PM_CHR_BY_DEFAULT, /* ç³»ç»Ÿè‡ªåŠ¨æ§åˆ¶å……ç”µ */
+  OPENAT_PM_CHR_BY_CUST,    /* ç”¨æˆ·è‡ªå·±æ§åˆ¶å……ç”µ */
+/*+\NEW WM-746\rufei\2013.3.30\å¢åŠ èŠ¯ç‰‡ICå……ç”µ*/
   OPENAT_PM_CHR_BY_IC,
-/*-\NEW WM-746\rufei\2013.3.30\Ôö¼ÓĞ¾Æ¬IC³äµç*/
+/*-\NEW WM-746\rufei\2013.3.30\å¢åŠ èŠ¯ç‰‡ICå……ç”µ*/
   OPENAT_PM_CHR_INVALID_MODE
 }E_AMOPENAT_PM_CHR_MODE;
 
-/*+\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
+/*+\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
 typedef enum
 {
   OPENAT_PM_LI_BAT,
   OPENAT_PM_NICD_BAT
 }E_AMOPENAT_BAT_TYPE;
-/*-\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
+/*-\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
 
-/*+\BUG WM-771\rufei\2013.5.20\ÍêÉÆ³äµçÁ÷³Ì*/
+/*+\BUG WM-771\rufei\2013.5.20\å®Œå–„å……ç”µæµç¨‹*/
 typedef enum
 {
     /// Charge is forced OFF
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
-    OPENAT_PM_CHARGER_00MA,  /* ²»Ö§³Ö¸Ã¹¦ÄÜ*/
-    OPENAT_PM_CHARGER_20MA,  /*Ö»ÓÃÓÚ³äÂúµçÁ÷Ê¹ÓÃ*/
-    OPENAT_PM_CHARGER_30MA,  /*Ö»ÓÃÓÚ³äÂúµçÁ÷Ê¹ÓÃ*/
-    OPENAT_PM_CHARGER_40MA,  /*Ö»ÓÃÓÚ³äÂúµçÁ÷Ê¹ÓÃ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
+    OPENAT_PM_CHARGER_00MA,  /* ä¸æ”¯æŒè¯¥åŠŸèƒ½*/
+    OPENAT_PM_CHARGER_20MA,  /*åªç”¨äºå……æ»¡ç”µæµä½¿ç”¨*/
+    OPENAT_PM_CHARGER_30MA,  /*åªç”¨äºå……æ»¡ç”µæµä½¿ç”¨*/
+    OPENAT_PM_CHARGER_40MA,  /*åªç”¨äºå……æ»¡ç”µæµä½¿ç”¨*/
     OPENAT_PM_CHARGER_50MA,
     OPENAT_PM_CHARGER_60MA,
     /// Charge with a  70 mA current
@@ -401,13 +401,13 @@ typedef enum
     OPENAT_PM_CHARGER_1300MA,
     OPENAT_PM_CHARGER_1400MA,
     OPENAT_PM_CHARGER_1500MA,
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
     OPENAT_PM_CHARGE_CURRENT_QTY
 } E_OPENAT_CHARGE_CURRENT;
-/*-\BUG WM-771\rufei\2013.5.20\ÍêÉÆ³äµçÁ÷³Ì*/
+/*-\BUG WM-771\rufei\2013.5.20\å®Œå–„å……ç”µæµç¨‹*/
 
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 typedef enum
 {
     OPENAT_PM_VOLT_00_000V,
@@ -445,52 +445,52 @@ typedef enum
 
     OPENAT_PM_VOLT_QTY
 } E_OPENAT_PM_VOLT;
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
 typedef union T_AMOPENAT_PMD_CFG_TAG
 {
   struct{
-  UINT8 pad;   /*ÎŞÒâÒå£¬Ä¿Ç°²»Ö§³ÖÕâÖÖ³äµç*/
-/*+\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
-  E_AMOPENAT_BAT_TYPE batType; /*±£ÁôÀ©Õ¹Ê¹ÓÃ*/
-  UINT16 batfullLevel;/*±£ÁôÀ©Õ¹Ê¹ÓÃ£¬mv*/
-/*+\BUG WM-771\rufei\2013.5.20\ÍêÉÆ³äµçÁ÷³Ì*/
+  UINT8 pad;   /*æ— æ„ä¹‰ï¼Œç›®å‰ä¸æ”¯æŒè¿™ç§å……ç”µ*/
+/*+\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
+  E_AMOPENAT_BAT_TYPE batType; /*ä¿ç•™æ‰©å±•ä½¿ç”¨*/
+  UINT16 batfullLevel;/*ä¿ç•™æ‰©å±•ä½¿ç”¨ï¼Œmv*/
+/*+\BUG WM-771\rufei\2013.5.20\å®Œå–„å……ç”µæµç¨‹*/
   UINT16 batPreChargLevel;
-/*-\BUG WM-771\rufei\2013.5.20\ÍêÉÆ³äµçÁ÷³Ì*/
-  UINT16 poweronLevel;/*±£ÁôÒÔºóÀ©Õ¹Ê¹ÓÃ£¬mv*/
-  UINT16 poweroffLevel;/*±£ÁôÒÔºóÀ©Õ¹Ê¹ÓÃ£¬mv*/
-/*-\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
-  }cust;/*Ä¿Ç°²»Ö§³ÖÕâÖÖ³äµç*/
+/*-\BUG WM-771\rufei\2013.5.20\å®Œå–„å……ç”µæµç¨‹*/
+  UINT16 poweronLevel;/*ä¿ç•™ä»¥åæ‰©å±•ä½¿ç”¨ï¼Œmv*/
+  UINT16 poweroffLevel;/*ä¿ç•™ä»¥åæ‰©å±•ä½¿ç”¨ï¼Œmv*/
+/*-\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
+  }cust;/*ç›®å‰ä¸æ”¯æŒè¿™ç§å……ç”µ*/
   struct{
-/*+\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
-  BOOL batdetectEnable;/*Ôİ²»Ö§³Ö*/
+/*+\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
+  BOOL batdetectEnable;/*æš‚ä¸æ”¯æŒ*/
 
-  BOOL tempdetectEnable;/*Ôİ²»Ö§³Ö*/
+  BOOL tempdetectEnable;/*æš‚ä¸æ”¯æŒ*/
   UINT16 templowLevel;
   UINT16 temphighLevel;
 
   E_AMOPENAT_BAT_TYPE batType;
 
   BOOL batLevelEnable;
-  E_OPENAT_PM_VOLT ccLevel;/*ºãÁ÷³äµç½×¶Î*/
-  E_OPENAT_PM_VOLT cvLevel;/*ºãÑ¹³äµç½×¶Î£¬³äÂúµçÑ¹µã*/
-  E_OPENAT_PM_VOLT ovLevel;/*³äµçÏŞÖÆµçÑ¹*/
-  E_OPENAT_PM_VOLT pvLevel;/*»Ø³äµçÑ¹*/
+  E_OPENAT_PM_VOLT ccLevel;/*æ’æµå……ç”µé˜¶æ®µ*/
+  E_OPENAT_PM_VOLT cvLevel;/*æ’å‹å……ç”µé˜¶æ®µï¼Œå……æ»¡ç”µå‹ç‚¹*/
+  E_OPENAT_PM_VOLT ovLevel;/*å……ç”µé™åˆ¶ç”µå‹*/
+  E_OPENAT_PM_VOLT pvLevel;/*å›å……ç”µå‹*/
   E_OPENAT_PM_VOLT poweroffLevel;
-  E_AMOPENAT_ADC_CHANNEL batAdc;/*Ôİ²»Ö§³Ö*/
-  E_AMOPENAT_ADC_CHANNEL tempAdc;/*Ôİ²»Ö§³Ö*/
+  E_AMOPENAT_ADC_CHANNEL batAdc;/*æš‚ä¸æ”¯æŒ*/
+  E_AMOPENAT_ADC_CHANNEL tempAdc;/*æš‚ä¸æ”¯æŒ*/
   
   BOOL currentControlEnable;
   E_OPENAT_CHARGE_CURRENT ccCurrent;
-  E_OPENAT_CHARGE_CURRENT fullCurrent;/*µ±²âÁ¿³öÀ´µÄµçÁ÷ÖµĞ¡ÓÚ¸ÃÖµÊ±£¬ÈÏÎª³äÂú*/
-  UINT16 ccOnTime;/*µ¥Î»s,Ôİ²»Ö§³Ö*/
-  UINT16 ccOffTime;/*µ¥Î»s,Ôİ²»Ö§³Ö*/
+  E_OPENAT_CHARGE_CURRENT fullCurrent;/*å½“æµ‹é‡å‡ºæ¥çš„ç”µæµå€¼å°äºè¯¥å€¼æ—¶ï¼Œè®¤ä¸ºå……æ»¡*/
+  UINT16 ccOnTime;/*å•ä½s,æš‚ä¸æ”¯æŒ*/
+  UINT16 ccOffTime;/*å•ä½s,æš‚ä¸æ”¯æŒ*/
     
   BOOL  chargTimeOutEnable;
-  UINT16 TimeOutMinutes; /*³¬Ê±·ÖÖÓÊı*/
+  UINT16 TimeOutMinutes; /*è¶…æ—¶åˆ†é’Ÿæ•°*/
 
-  BOOL disableCharginCall;/*Ôİ²»Ö§³Ö*/
-/*-\NEW\RUFEI\2015.5.8\ÍêÉÆ³äµç¿ØÖÆ*/
+  BOOL disableCharginCall;/*æš‚ä¸æ”¯æŒ*/
+/*-\NEW\RUFEI\2015.5.8\å®Œå–„å……ç”µæ§åˆ¶*/
 
   }deFault;
 }T_AMOPENAT_PMD_CFG;
@@ -535,62 +535,62 @@ typedef enum
 { 
 	OPENAT_LDO_POWER_VLCD,
 	OPENAT_LDO_POWER_MMC,
-	/*+\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
+	/*+\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
 	OPENAT_LDO_POWER_VSIM1,
-	/*-\new\wj\2020.4.14\Ìí¼ÓµçÑ¹ÓòVSIM1¿ØÖÆgpio29£¬30£¬31*/
-	/*+\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
+	/*-\new\wj\2020.4.14\æ·»åŠ ç”µå‹åŸŸVSIM1æ§åˆ¶gpio29ï¼Œ30ï¼Œ31*/
+	/*+\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
 	OPENAT_LDO_POWER_VCAMA,
 	OPENAT_LDO_POWER_VCAMD,
-	/*-\new\shenyuanyuan\2020.5.21\Ä£¿éÎŞVCAMÊä³ö*/
-	/*+\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
+	/*-\new\shenyuanyuan\2020.5.21\æ¨¡å—æ— VCAMè¾“å‡º*/
+	/*+\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
 	OPENAT_LDO_POWER_VIBR,
-	/*-\BUG\wangyuan\2020.08.22\BUG_2883:lua¿ª·¢820GPS¹©µçÒı½ÅÉèÖÃ*/
-	/*+\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*-\BUG\wangyuan\2020.08.22\BUG_2883:luaå¼€å‘820GPSä¾›ç”µå¼•è„šè®¾ç½®*/
+	/*+\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	OPENAT_LDO_POWER_VBACKLIGHT_R,
 	OPENAT_LDO_POWER_VBACKLIGHT_G,
 	OPENAT_LDO_POWER_VBACKLIGHT_B,
 	OPENAT_LDO_POWER_VBACKLIGHT_W,
 	
-	/*-\BUG3154\zhuwangbin\2020.10.10\Ìí¼ÓbacklightÉèÖÃ*/
+	/*-\BUG3154\zhuwangbin\2020.10.10\æ·»åŠ backlightè®¾ç½®*/
 	
-	/*+\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*+\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 	/*
 	*	level:0-15
-	*	0 : ¹Ø±Õ
-	*	1£º2.2V
-	*	2£º2.4V
-	*	3£º2.5V
-	*	4£º2.6V
-	*	5£º2.7V
-	*	6£º2.8V
-	*	7£º2.9V
-	*	8£º3.0V
-	*	´óÓÚ8£º3.0V
+	*	0 : å…³é—­
+	*	1ï¼š2.2V
+	*	2ï¼š2.4V
+	*	3ï¼š2.5V
+	*	4ï¼š2.6V
+	*	5ï¼š2.7V
+	*	6ï¼š2.8V
+	*	7ï¼š2.9V
+	*	8ï¼š3.0V
+	*	å¤§äº8ï¼š3.0V
 	*/
 	OPENAT_LDO_POWER_HMICBIAS,
-	/*-\BUG3753\zhuwangbin\2020.12.4\Ìí¼Óaudio hmic bias ldoÉèÖÃ*/
+	/*-\BUG3753\zhuwangbin\2020.12.4\æ·»åŠ audio hmic bias ldoè®¾ç½®*/
 	
 	OPENAT_LDO_POWER_INVALID
 }E_AMOPENAT_PM_LDO;
 
 typedef struct
 {
-  uint16              batteryTemp;        /* µç³ØÎÂ¶ÈADCÖµ*/
+  uint16              batteryTemp;        /* ç”µæ± æ¸©åº¦ADCå€¼*/
   uint16              batteryVolt;
-/*+\BUG WM-771\rufei\2013.5.22\ÍêÉÆ³äµçÁ÷³Ì3*/
+/*+\BUG WM-771\rufei\2013.5.22\å®Œå–„å……ç”µæµç¨‹3*/
   E_AMOPENAT_ADC_CHANNEL tempChannel;  
   E_AMOPENAT_ADC_CHANNEL batteryChannel;
-/*-\BUG WM-771\rufei\2013.5.22\ÍêÉÆ³äµçÁ÷³Ì3*/
+/*-\BUG WM-771\rufei\2013.5.22\å®Œå–„å……ç”µæµç¨‹3*/
   E_AMOPENAT_BAT_STATUS  batteryState;
 }T_AMOPENAT_BAT_STATUS;
 
 typedef struct
 {
-/*+\BUG WM-771\rufei\2013.5.22\ÍêÉÆ³äµçÁ÷³Ì3*/
+/*+\BUG WM-771\rufei\2013.5.22\å®Œå–„å……ç”µæµç¨‹3*/
   uint16                    chargerVolt;
   E_AMOPENAT_ADC_CHANNEL    chargerChannel;
-/*-\BUG WM-771\rufei\2013.5.22\ÍêÉÆ³äµçÁ÷³Ì3*/
-  E_AMOPENAT_CHARGER_TYPE   chargerType;   /* TODO ÔİÊ±²»Ö§³Ö */
+/*-\BUG WM-771\rufei\2013.5.22\å®Œå–„å……ç”µæµç¨‹3*/
+  E_AMOPENAT_CHARGER_TYPE   chargerType;   /* TODO æš‚æ—¶ä¸æ”¯æŒ */
   E_AMOPENAT_CHARGER_STATUS chargerStatus;
 }T_AMOPENAT_CHARGER_STATUS;
 
@@ -600,72 +600,72 @@ typedef enum
   OPENAT_PM_CHR_STOP_BAT_FULL,
   OPENAT_PM_CHR_STOP_BAT_ERR,
   OPENAT_PM_CHR_STOP_TIMEOUT,
-/*+\BUG WM-771\rufei\2013.8.2\ÍêÉÆ³äµçÁ÷³Ì*/
+/*+\BUG WM-771\rufei\2013.8.2\å®Œå–„å……ç”µæµç¨‹*/
   OPENAT_PM_CHR_STOP_TEMP,
   OPENAT_PM_CHR_STOP_CHARGER_ERR,
-/*-\BUG WM-771\rufei\2013.8.2\ÍêÉÆ³äµçÁ÷³Ì*/
+/*-\BUG WM-771\rufei\2013.8.2\å®Œå–„å……ç”µæµç¨‹*/
   OPENAT_PM_CHR_STOP_NO_CHARGER,
   OPENAT_PM_CHR_STOP_OTER_REASON,
-/*+\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*+\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
   OPENAT_PM_RECHR_STOP_BAT_FULL,
-/*-\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*-\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
   OPENAT_PM_CHR_STOP_INVALID_REASON
 }E_AMOPENAT_CHR_STOP_REASON;
 
 typedef enum
 {
-  OPENAT_PM_POWERON_BY_KEY,     /* °´¼ü¿ª»ú */
-  OPENAT_PM_POWERON_BY_CHARGER, /* ³äµç¿ª»ú */
-  OPENAT_PM_POWERON_BY_ALARM,   /* ÄÖÖÓ¿ª»ú */
-  OPENAT_PM_POWERON_BY_RESET,   /* Èí¼şÖØÆô¿ª»ú */ 
-  OPENAT_PM_POWERON_BY_EXCEPTION, /* Òì³£ÖØÆô */ 
-  OPENAT_PM_POWERON_BY_PIN_RESET, /* reset ¼üÖØÆô */ 
+  OPENAT_PM_POWERON_BY_KEY,     /* æŒ‰é”®å¼€æœº */
+  OPENAT_PM_POWERON_BY_CHARGER, /* å……ç”µå¼€æœº */
+  OPENAT_PM_POWERON_BY_ALARM,   /* é—¹é’Ÿå¼€æœº */
+  OPENAT_PM_POWERON_BY_RESET,   /* è½¯ä»¶é‡å¯å¼€æœº */ 
+  OPENAT_PM_POWERON_BY_EXCEPTION, /* å¼‚å¸¸é‡å¯ */ 
+  OPENAT_PM_POWERON_BY_PIN_RESET, /* reset é”®é‡å¯ */ 
   OPENAT_PM_POWERON_BY_UNKOWN = 0xff
 	
 }E_AMOPENAT_POWERON_REASON;
 
-/*+\NEW\lijiaodi\2019.12.29\task_087:¿ª»úÔ­ÒòÖµµÄ»ñÈ¡ */
+/*+\NEW\lijiaodi\2019.12.29\task_087:å¼€æœºåŸå› å€¼çš„è·å– */
 typedef enum
 {
 	RESET_BY_ERR,
 	RESET_BY_SW,
 	RESET_BY_UNKOWN,
 }reset_cause;
-/*-\NEW\lijiaodi\2019.12.29\task_087:¿ª»úÔ­ÒòÖµµÄ»ñÈ¡ */
+/*-\NEW\lijiaodi\2019.12.29\task_087:å¼€æœºåŸå› å€¼çš„è·å– */
 
 typedef enum
 {
-  OPENAT_PM_STARTUP_MODE_DEFAULT,              /* ÓÉÏµÍ³¾ö¶¨ */
-  OPENAT_PM_STARTUP_MODE_ON,                   /* Ç¿ÖÆ¿ªÆô */
-  OPENAT_PM_STARTUP_MODE_OFF                   /* Ç¿ÖÆ²»¿ªÆô */
+  OPENAT_PM_STARTUP_MODE_DEFAULT,              /* ç”±ç³»ç»Ÿå†³å®š */
+  OPENAT_PM_STARTUP_MODE_ON,                   /* å¼ºåˆ¶å¼€å¯ */
+  OPENAT_PM_STARTUP_MODE_OFF                   /* å¼ºåˆ¶ä¸å¼€å¯ */
 }E_AMOPENAT_STARTUP_MODE;
 
-/*+\NEW\RUFEI\2014.2.13\Ôö¼ÓOPENAT²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú*/
+/*+\NEW\RUFEI\2014.2.13\å¢åŠ OPENATæŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£*/
 typedef enum
 {
     OPENAT_PM_CHR_HW_STATUS_UNKNOWN,
     OPENAT_PM_CHR_HW_STATUS_AC_OFF,
     OPENAT_PM_CHR_HW_STATUS_AC_ON
 }E_AMOPENAT_CHR_HW_STATUS;
-/*-\NEW\RUFEI\2014.2.13\Ôö¼ÓOPENAT²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú*/
+/*-\NEW\RUFEI\2014.2.13\å¢åŠ OPENATæŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£*/
 
 typedef struct 
 {
   E_OPENAT_DRV_EVT evtId;
   union
   {
-/*+\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
+/*+\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
     struct{
     BOOL present;
     }batpresentind,chrpresentind;
     struct{
-    UINT8 pad; /*¿Õ£¬ÎŞÒâÒå*/
+    UINT8 pad; /*ç©ºï¼Œæ— æ„ä¹‰*/
     }chrstartind,chargererrind;
-/*+\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*+\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
     struct{
     UINT8 batteryLevel;  /*0-100 %*/
     }batlevelind,batovervoltind,chargingind,chrfullind,rechargingind,rechrfullind;
-/*-\BUG WM-1016\rufei\2013.11.19\ ĞŞ¸ÄÆ½Ì¨³äµç¿ØÖÆ*/
+/*-\BUG WM-1016\rufei\2013.11.19\ ä¿®æ”¹å¹³å°å……ç”µæ§åˆ¶*/
     struct{
     E_AMOPENAT_CHR_STOP_REASON chrStopReason;
     }chrstopind;
@@ -677,7 +677,7 @@ typedef struct
      BOOL start;  //true :start false:end
      UINT8 mask;  //bit0:sw bit1:key bit2:pw1 bit3:pw2 
     }swAutoVerifyInd;
-/*-\BUG WM-771\rufei\2013.4.11\ÍêÉÆ³äµçÁ÷³Ì*/
+/*-\BUG WM-771\rufei\2013.4.11\å®Œå–„å……ç”µæµç¨‹*/
   }param;
 
 }T_AMOPENAT_PM_MSG;
@@ -689,23 +689,23 @@ typedef void (*PPM_MESSAGE)(T_AMOPENAT_PM_MSG* pmMessage);
 *************************************************/
 typedef enum E_AMOPENAT_KEYPAD_TYPE_TAG
 {
-    OPENAT_KEYPAD_TYPE_MATRIX,      /* ÕóÁĞ¼üÅÌ */
-    OPENAT_KEYPAD_TYPE_ADC,         /* ADC¼üÅÌ */
-    OPENAT_KEYPAD_TYPE_GPIO,        /* GPIO¼üÅÌ */
+    OPENAT_KEYPAD_TYPE_MATRIX,      /* é˜µåˆ—é”®ç›˜ */
+    OPENAT_KEYPAD_TYPE_ADC,         /* ADCé”®ç›˜ */
+    OPENAT_KEYPAD_TYPE_GPIO,        /* GPIOé”®ç›˜ */
     OPENAT_KEYPAD_TYPE_MAX
 }E_AMOPENAT_KEYPAD_TYPE;
 
 #define OPENAT_KEYPAD_ENABLE_DEBOUNCE (1 << ((OPENAT_KEYPAD_TYPE_MAX >> 1) + 1))
 
-/*+\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*+\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
 typedef enum E_AMOPENAT_GPIOKEY_MODE_TAG
 {
-    OPENAT_GPIOKEY_IRQ, /*ÆÕÍ¨Ä£Ê½*/
-    OPENAT_GPIOKEY_ENCRYPT, /*¼ÓÃÜÄ£Ê½*/
+    OPENAT_GPIOKEY_IRQ, /*æ™®é€šæ¨¡å¼*/
+    OPENAT_GPIOKEY_ENCRYPT, /*åŠ å¯†æ¨¡å¼*/
         
     OPENAT_GPIOKEY_MAX
 }E_AMOPENAT_GPIOKEY_MODE;
-/*-\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*-\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
 
 typedef struct T_AMOPENAT_TOUCH_MESSAGE_TAG
 {
@@ -720,20 +720,20 @@ typedef VOID (*TOUCH_MESSAGE)(T_AMOPENAT_TOUCH_MESSAGE *pTouchMessage);
 typedef struct T_AMOPENAT_KEYPAD_MESSAGE_TAG
 {
     UINT8 nType; /**/
-    BOOL bPressed; /* ÊÇ·ñÊÇ°´ÏÂÏûÏ¢ */
+    BOOL bPressed; /* æ˜¯å¦æ˜¯æŒ‰ä¸‹æ¶ˆæ¯ */
     union {
         struct {
             UINT8 r;
             UINT8 c;
         }matrix, gpio;
 
-/*+\NEW OPENAT-771\rufei\2013.8.8\ÉÏ±¨ADC¼üÅÌ²ÉÑùÊı¾İ*/
+/*+\NEW OPENAT-771\rufei\2013.8.8\ä¸ŠæŠ¥ADCé”®ç›˜é‡‡æ ·æ•°æ®*/
         struct{
             UINT16  adcValue;
-            UINT16* adcList; /*ÔÚT_AMOPENAT_KEYPAD_CONFIG ÖĞ´ò¿ªisreportData£¬ÔòĞèÒªfree  adcList*/
+            UINT16* adcList; /*åœ¨T_AMOPENAT_KEYPAD_CONFIG ä¸­æ‰“å¼€isreportDataï¼Œåˆ™éœ€è¦free  adcList*/
             UINT16  adcCount;
         }adc;
-/*-\NEW OPENAT-771\rufei\2013.8.8\ÉÏ±¨ADC¼üÅÌ²ÉÑùÊı¾İ*/
+/*-\NEW OPENAT-771\rufei\2013.8.8\ä¸ŠæŠ¥ADCé”®ç›˜é‡‡æ ·æ•°æ®*/
     }data;
 }T_AMOPENAT_KEYPAD_MESSAGE;
 
@@ -745,25 +745,25 @@ typedef struct T_AMOPENAT_KEYPAD_CONFIG_TAG
     PKEYPAD_MESSAGE pKeypadMessageCallback;
     union {
         struct {
-/*+\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*+\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
             UINT8 keyInMask;
             UINT8 keyOutMask;
-/*-\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*-\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
         }matrix;
-/*+\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*+\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
         struct {
             UINT32 gpioInMask;
             UINT32 gpioOutMask;
             BOOL   gpiofirstcfg;
             E_AMOPENAT_GPIOKEY_MODE mode;
         }gpio;
-/*-\NEW WM-718\rufei\2013.3.21\ Ôö¼Ógpio¼üÅÌ¼ÓÃÜÄ£Ê½*/
+/*-\NEW WM-718\rufei\2013.3.21\ å¢åŠ gpioé”®ç›˜åŠ å¯†æ¨¡å¼*/
 
-/*+\NEW OPENAT-771\rufei\2013.8.8\ÉÏ±¨ADC¼üÅÌ²ÉÑùÊı¾İ*/
+/*+\NEW OPENAT-771\rufei\2013.8.8\ä¸ŠæŠ¥ADCé”®ç›˜é‡‡æ ·æ•°æ®*/
         struct{
-            BOOL isreportData; /*ÔÚ¿ªÆôºó£¬ĞèÔÚ°´¼ü°´ÏÂµÄ´¦ÀíÖĞfree  adcList*/
+            BOOL isreportData; /*åœ¨å¼€å¯åï¼Œéœ€åœ¨æŒ‰é”®æŒ‰ä¸‹çš„å¤„ç†ä¸­free  adcList*/
         }adc;
-/*-\NEW OPENAT-771\rufei\2013.8.8\ÉÏ±¨ADC¼üÅÌ²ÉÑùÊı¾İ*/
+/*-\NEW OPENAT-771\rufei\2013.8.8\ä¸ŠæŠ¥ADCé”®ç›˜é‡‡æ ·æ•°æ®*/
     }config;
 	UINT8 debounceTime;
 }T_AMOPENAT_KEYPAD_CONFIG;
@@ -782,7 +782,7 @@ typedef enum E_AMOPENAT_TOUCHSCREEN_PEN_STATE_TAG
 
 typedef struct T_AMOPENAT_TOUCHSCREEN_MESSAGE_TAG
 {
-    UINT8 penState;  //µ±Ç°´¥Ãş×´Ì¬
+    UINT8 penState;  //å½“å‰è§¦æ‘¸çŠ¶æ€
     UINT16 x;
     UINT16 y;
 }T_AMOPENAT_TOUCHSCREEN_MESSAGE;
@@ -804,7 +804,7 @@ typedef enum
 
 typedef enum
 {
-/*ºóÃæ±ØĞëÒª¸³Öµ£¬·ñÔòÔÚMTKÆ½Ì¨ÉÏ£¬±àÒëÆ÷»á×Ô¶¯°ÑÕâ¸öÃ¶¾ÙÁ¿µÄ³¤¶ÈÉèÖÃÎª2×Ö½Ú*/
+/*åé¢å¿…é¡»è¦èµ‹å€¼ï¼Œå¦åˆ™åœ¨MTKå¹³å°ä¸Šï¼Œç¼–è¯‘å™¨ä¼šè‡ªåŠ¨æŠŠè¿™ä¸ªæšä¸¾é‡çš„é•¿åº¦è®¾ç½®ä¸º2å­—èŠ‚*/
   OPENAT_UART_BAUD_1200 = 1200,
   OPENAT_UART_BAUD_2400 = 2400,
   OPENAT_UART_BAUD_4800 = 4800,
@@ -834,7 +834,7 @@ typedef enum
 
 typedef enum
 {
- /*ÓëMTKÆ½Ì¨µÄ±£³ÖÒ»ÖÂ*/
+ /*ä¸MTKå¹³å°çš„ä¿æŒä¸€è‡´*/
   OPENAT_UART_FLOWCONTROL_NONE = 1,
   OPENAT_UART_FLOWCONTROL_HW,
   OPENAT_UART_FLOWCONTROL_SW,
@@ -863,23 +863,23 @@ typedef struct
   uint32                   stopBits; /*1-2*/
   E_AMOPENAT_UART_PARITY   parity;
   E_AMOPENAT_UART_FLOWCTL  flowControl;
-  PUART_MESSAGE            uartMsgHande; /*´®¿Ú½ÓÊÜµ½Êı¾İÖ÷¶¯ÉÏ±¨¡£¿ÉÒÔÎªNULL£¬¼´Ê¹ÓÃ×èÈû·½Ê½¶ÁÈ¡*/
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+  PUART_MESSAGE            uartMsgHande; /*ä¸²å£æ¥å—åˆ°æ•°æ®ä¸»åŠ¨ä¸ŠæŠ¥ã€‚å¯ä»¥ä¸ºNULLï¼Œå³ä½¿ç”¨é˜»å¡æ–¹å¼è¯»å–*/
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
   BOOL                     txDoneReport;
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 }T_AMOPENAT_UART_PARAM;
 
-/*+\NEW\liweiqiang\2013.12.25\Ìí¼Óhost uart·¢ËÍÊı¾İ¹¦ÄÜ */
+/*+\NEW\liweiqiang\2013.12.25\æ·»åŠ host uartå‘é€æ•°æ®åŠŸèƒ½ */
 /************************************************
 * HOST
 ************************************************/
 typedef void (*PHOST_MESSAGE)(UINT8 *pData, UINT32 length);
-/*-\NEW\liweiqiang\2013.12.25\Ìí¼Óhost uart·¢ËÍÊı¾İ¹¦ÄÜ */
+/*-\NEW\liweiqiang\2013.12.25\æ·»åŠ host uartå‘é€æ•°æ®åŠŸèƒ½ */
 
 /************************************************
 * LCD
 ************************************************/
-/*+\NEW\liweiqiang\2013.3.28\Ôö¼Ó´®¿Ú²ÊÆÁ½Ó¿Ú */
+/*+\NEW\liweiqiang\2013.3.28\å¢åŠ ä¸²å£å½©å±æ¥å£ */
 typedef enum 
 {
     OPENAT_LCD_SPI4LINE,
@@ -887,7 +887,7 @@ typedef enum
 
     OPENAT_LCD_BUS_QTY
 }E_AMOPENAT_LCD_BUS;
-/*-\NEW\liweiqiang\2013.3.28\Ôö¼Ó´®¿Ú²ÊÆÁ½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.3.28\å¢åŠ ä¸²å£å½©å±æ¥å£ */
 
 typedef struct
 {
@@ -906,10 +906,10 @@ typedef struct
 typedef struct OPENAT_LAYER_INFO_TAG
 {
     U8  color_format;
-    T_AMOPENAT_LCD_RECT_T clip_rect;        /* ĞèÒªË¢ĞÂµÄÇøÓò */
-    T_AMOPENAT_LCD_RECT_T disp_rect;        /* ĞèÒªË¢ĞÂµÄÇøÓò */
-    T_AMOPENAT_LCD_RECT_T src_rect;         /* ĞèÒªË¢ĞÂµÄÇøÓò */
-    U8 *buffer;              /* Ë¢ĞÂµÄ»º³åÇø */
+    T_AMOPENAT_LCD_RECT_T clip_rect;        /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
+    T_AMOPENAT_LCD_RECT_T disp_rect;        /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
+    T_AMOPENAT_LCD_RECT_T src_rect;         /* éœ€è¦åˆ·æ–°çš„åŒºåŸŸ */
+    U8 *buffer;              /* åˆ·æ–°çš„ç¼“å†²åŒº */
 }OPENAT_LAYER_INFO;
 
 
@@ -917,19 +917,19 @@ typedef struct
 {
   uint16     height;
   uint16     width;
-  uint16     xoffset;   /* Ë¢ÆÁµÄÆ«ÒÆÁ¿ */
-  uint16     yoffset;   /* Ò»°ãÅäÖÃÎª0»ò0x20£¬ÓÃÀ´°ëÆÁ¶Ôµ÷ÏÔÊ¾Ê±Ê¹ÓÃ */
-  uint32     frequence; /* SPI¹¤×÷ÆµÂÊ */
+  uint16     xoffset;   /* åˆ·å±çš„åç§»é‡ */
+  uint16     yoffset;   /* ä¸€èˆ¬é…ç½®ä¸º0æˆ–0x20ï¼Œç”¨æ¥åŠå±å¯¹è°ƒæ˜¾ç¤ºæ—¶ä½¿ç”¨ */
+  uint32     frequence; /* SPIå·¥ä½œé¢‘ç‡ */
   UINT8*     fameBuffer;
-  E_AMOPENAT_GPIO_PORT   csPort;  /* LCDÆ¬Ñ¡GPIO¿Ú */
-  E_AMOPENAT_GPIO_PORT   rstPort; /* LCD¸´Î»GPIO¿Ú */
+  E_AMOPENAT_GPIO_PORT   csPort;  /* LCDç‰‡é€‰GPIOå£ */
+  E_AMOPENAT_GPIO_PORT   rstPort; /* LCDå¤ä½GPIOå£ */
   
-  /*+\BUG WM-822\WZQ\2013.5.25\¼æÈİ128*128µÄ4¼¶»Ò¶ÈÆÁ*/
+  /*+\BUG WM-822\WZQ\2013.5.25\å…¼å®¹128*128çš„4çº§ç°åº¦å±*/
   uint16     pixelBits;
-  /*-\BUG WM-822\WZQ\2013.5.25\¼æÈİ128*128µÄ4¼¶»Ò¶ÈÆÁ*/
-  /*+\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
-  UINT8       Driving;//lcd_spiµÄÇı¶¯ÄÜÁ¦×î´óÖµÎª15
-  /*-\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
+  /*-\BUG WM-822\WZQ\2013.5.25\å…¼å®¹128*128çš„4çº§ç°åº¦å±*/
+  /*+\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
+  UINT8       Driving;//lcd_spiçš„é©±åŠ¨èƒ½åŠ›æœ€å¤§å€¼ä¸º15
+  /*-\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
 }T_AMOPENAT_MONO_LCD_PARAM;
 
 typedef struct T_AMOPENAT_LCD_REFRESH_REQ_TAG
@@ -953,26 +953,26 @@ typedef struct
 {
     uint16     height;
     uint16     width;
-    PLCD_MESSAGE    msgCallback; // Õë¶Ôcamera ÊÓÆµ¹¦ÄÜµÄË¢ĞÂ»Øµ÷´¦ÀíµÈ
-/*+\NEW\liweiqiang\2013.3.28\Ôö¼Ó´®¿Ú²ÊÆÁ½Ó¿Ú */
+    PLCD_MESSAGE    msgCallback; // é’ˆå¯¹camera è§†é¢‘åŠŸèƒ½çš„åˆ·æ–°å›è°ƒå¤„ç†ç­‰
+/*+\NEW\liweiqiang\2013.3.28\å¢åŠ ä¸²å£å½©å±æ¥å£ */
     E_AMOPENAT_LCD_BUS bus;
     union{
         struct{
-            uint32     frequence; /* SPI¹¤×÷ÆµÂÊ */
-            E_AMOPENAT_GPIO_PORT   csPort;  /* LCDÆ¬Ñ¡GPIO¿Ú */
-            E_AMOPENAT_GPIO_PORT   rstPort; /* LCD¸´Î»GPIO¿Ú */
-            /*+\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
-            UINT8       Driving;//lcd_spiµÄÇı¶¯ÄÜÁ¦×î´óÖµÎª15
-            /*-\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
+            uint32     frequence; /* SPIå·¥ä½œé¢‘ç‡ */
+            E_AMOPENAT_GPIO_PORT   csPort;  /* LCDç‰‡é€‰GPIOå£ */
+            E_AMOPENAT_GPIO_PORT   rstPort; /* LCDå¤ä½GPIOå£ */
+            /*+\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
+            UINT8       Driving;//lcd_spiçš„é©±åŠ¨èƒ½åŠ›æœ€å¤§å€¼ä¸º15
+            /*-\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
         }spi;
-    /*+\NEW\liweiqiang\2013.10.12\Ôö¼Ó²¢¿Ú²ÊÆÁcs,rst¹Ü½ÅÅäÖÃ*/
+    /*+\NEW\liweiqiang\2013.10.12\å¢åŠ å¹¶å£å½©å±cs,rstç®¡è„šé…ç½®*/
         struct{
-            E_AMOPENAT_GPIO_PORT   csPort;  /* LCDÆ¬Ñ¡GPIO¿Ú */
-            E_AMOPENAT_GPIO_PORT   rstPort; /* LCD¸´Î»GPIO¿Ú */
+            E_AMOPENAT_GPIO_PORT   csPort;  /* LCDç‰‡é€‰GPIOå£ */
+            E_AMOPENAT_GPIO_PORT   rstPort; /* LCDå¤ä½GPIOå£ */
         }parallel;
-    /*-\NEW\liweiqiang\2013.10.12\Ôö¼Ó²¢¿Ú²ÊÆÁcs,rst¹Ü½ÅÅäÖÃ*/
+    /*-\NEW\liweiqiang\2013.10.12\å¢åŠ å¹¶å£å½©å±cs,rstç®¡è„šé…ç½®*/
     }lcdItf;
-/*-\NEW\liweiqiang\2013.3.28\Ôö¼Ó´®¿Ú²ÊÆÁ½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.3.28\å¢åŠ ä¸²å£å½©å±æ¥å£ */
 
     uint8 lcd_bpp;
 }T_AMOPENAT_COLOR_LCD_PARAM;
@@ -1071,12 +1071,12 @@ typedef VOID (*PSPI_MESSAGE)(T_AMOPENAT_SPI_MESSAGE* spiMessage);
 typedef struct
 {
   BOOL          fullDuplex;                  /*TRUE: DI/DO FALSE: DO only*/
-  BOOL          cpol;                        /*FALSE: spi_clk idle×´Ì¬Îª0 TRUE: spi_clk idle×´Ì¬Îª 1*/
-  uint8         cpha;                        /*0~1 0:µÚÒ»¸öclkµÄÌø±äÑØ´«ÊäÊı¾İ£¬1:µÚ¶ş¸öclkÌø±äÑØ´«ÊäÊı¾İ ...*/
+  BOOL          cpol;                        /*FALSE: spi_clk idleçŠ¶æ€ä¸º0 TRUE: spi_clk idleçŠ¶æ€ä¸º 1*/
+  uint8         cpha;                        /*0~1 0:ç¬¬ä¸€ä¸ªclkçš„è·³å˜æ²¿ä¼ è¾“æ•°æ®ï¼Œ1:ç¬¬äºŒä¸ªclkè·³å˜æ²¿ä¼ è¾“æ•°æ® ...*/
   uint8         dataBits;                    /*4~32*/
   uint32        clock;                       /*110k~13M*/
-  PSPI_MESSAGE  spiMessage;                  /*ÔİÊ±²»Ö§³Ö*/
-  BOOL          withCS;                      /*CSÒı½ÅÖ§³Ö*/
+  PSPI_MESSAGE  spiMessage;                  /*æš‚æ—¶ä¸æ”¯æŒ*/
+  BOOL          withCS;                      /*CSå¼•è„šæ”¯æŒ*/
 }T_AMOPENAT_SPI_PARAM;
 
 /************************************************
@@ -1084,11 +1084,11 @@ typedef struct
 *************************************************/
 typedef enum E_AMOPENAT_I2C_PORT_TAG
 {
-/*+\NEW\zhuwangbin\2020.2.11\Ìí¼Óopenat i2c½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.2.11\æ·»åŠ openat i2cæ¥å£*/
     OPENAT_I2C_1,
     OPENAT_I2C_2,
     OPENAT_I2C_3,
-/*-\NEW\zhuwangbin\2020.2.11\Ìí¼Óopenat i2c½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.2.11\æ·»åŠ openat i2cæ¥å£*/
     OPENAT_I2C_QTY
 }E_AMOPENAT_I2C_PORT;
 
@@ -1102,12 +1102,12 @@ typedef VOID (*PI2C_MESSAGE)(T_AMOPENAT_I2C_MESSAGE* i2cMessage);
 
 typedef struct
 {
-    uint32          freq;           /*i2c´«ÊäËÙÂÊ 100KHz\400KHz*/
-    //uint8           slaveAddr;      /*i2c´ÓÉè±¸µØÖ· (7bit) ÔÚread writeµÄÊ±ºò´«Èë´ÓÉè±¸µØÖ·*/
-    uint8           regAddrBytes;    /*i2cÍâÉè¼Ä´æÆ÷µØÖ·×Ö½ÚÊı*/ //Ôİ²»Ö§³ÖÇëÉèÖÃÎª0 = 1×Ö½Ú
-    BOOL            noAck;          /*ÊÇ·ñÈ·ÈÏack*/      //Ôİ²»Ö§³ÖÇëÉèÖÃÎªFALSE
-    BOOL            noStop;         /*ÊÇ·ñÈ·ÈÏ·¢Í£Ö¹Î»*/ //Ôİ²»Ö§³ÖÇëÉèÖÃÎªFALSE
-    PI2C_MESSAGE    i2cMessage;     /*ÔİÊ±²»Ö§³Ö*/
+    uint32          freq;           /*i2cä¼ è¾“é€Ÿç‡ 100KHz\400KHz*/
+    //uint8           slaveAddr;      /*i2cä»è®¾å¤‡åœ°å€ (7bit) åœ¨read writeçš„æ—¶å€™ä¼ å…¥ä»è®¾å¤‡åœ°å€*/
+    uint8           regAddrBytes;    /*i2cå¤–è®¾å¯„å­˜å™¨åœ°å€å­—èŠ‚æ•°*/ //æš‚ä¸æ”¯æŒè¯·è®¾ç½®ä¸º0 = 1å­—èŠ‚
+    BOOL            noAck;          /*æ˜¯å¦ç¡®è®¤ack*/      //æš‚ä¸æ”¯æŒè¯·è®¾ç½®ä¸ºFALSE
+    BOOL            noStop;         /*æ˜¯å¦ç¡®è®¤å‘åœæ­¢ä½*/ //æš‚ä¸æ”¯æŒè¯·è®¾ç½®ä¸ºFALSE
+    PI2C_MESSAGE    i2cMessage;     /*æš‚æ—¶ä¸æ”¯æŒ*/
 }T_AMOPENAT_I2C_PARAM;
 
 
@@ -1121,7 +1121,7 @@ typedef struct
 /************************************************
 * camera
 *************************************************/
-#define AMOPENAT_CAMERA_DELAY_CMD 0xffff /* 0xffff±íÊ¾ÕâÌõÕâÊÇÒ»ÌõÑÓÊ±Ö¸Áî */
+#define AMOPENAT_CAMERA_DELAY_CMD 0xffff /* 0xffffè¡¨ç¤ºè¿™æ¡è¿™æ˜¯ä¸€æ¡å»¶æ—¶æŒ‡ä»¤ */
 
 #define AMOPENAT_CAMERA_REG_ADDR_8BITS      (0<<0)
 #define AMOPENAT_CAMERA_REG_ADDR_16BITS     (1<<0)
@@ -1141,7 +1141,7 @@ typedef enum E_AMOPENAT_CAMERA_IMAGE_FORMAT_TAG
     NumOfOpenatCameraImageFormats
 }E_AMOPENAT_CAMERA_IMAGE_FORMAT;
 
-/*+\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
 typedef struct 
 {
     E_AMOPENAT_GPIO_PORT camPdn;
@@ -1179,65 +1179,65 @@ typedef struct
     BOOL isDataChannel;
 }T_AMOPENAT_CAMERA_DATA_PARAM;
 
-/*+\NEW\zhuwangbin\2020.7.11\Ìí¼Ócam spi speedÄ£Ê½ÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.7.11\æ·»åŠ cam spi speedæ¨¡å¼é…ç½®*/
 typedef enum
 {
 	OPENAT_SPI_SPEED_DEFAULT,
-	OPENAT_SPI_SPEED_SDR, /*µ¥±¶ËÙÂÊ*/
-	OPENAT_SPI_SPEED_DDR, /*Ë«±¶ËÙÂÊ*/
-	OPENAT_SPI_SPEED_QDR, /*ËÄ±¶ËÙÂÊ Ôİ²»Ö§³Ö*/
+	OPENAT_SPI_SPEED_SDR, /*å•å€é€Ÿç‡*/
+	OPENAT_SPI_SPEED_DDR, /*åŒå€é€Ÿç‡*/
+	OPENAT_SPI_SPEED_QDR, /*å››å€é€Ÿç‡ æš‚ä¸æ”¯æŒ*/
 }OPENAT_SPI_SPEED_MODE_E;
-/*-\NEW\zhuwangbin\2020.7.11\Ìí¼Ócam spi speedÄ£Ê½ÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.7.11\æ·»åŠ cam spi speedæ¨¡å¼é…ç½®*/
 	
 typedef struct 
 {
   E_OPENAT_DRV_EVT evtId;
   union
   {
-    UINT16 videorecordFinishResult;  //OPENAT_DRV_EVT_VIDEORECORD_FINISH_IND Â¼ÖÆ½á¹ûÉÏ±¨
+    UINT16 videorecordFinishResult;  //OPENAT_DRV_EVT_VIDEORECORD_FINISH_IND å½•åˆ¶ç»“æœä¸ŠæŠ¥
   }param;
 
-  T_AMOPENAT_CAMERA_DATA_PARAM dataParam; // OPENAT_DRV_EVT_CAMERA_DATA_IND cameraÊı¾İÉÏ±¨
+  T_AMOPENAT_CAMERA_DATA_PARAM dataParam; // OPENAT_DRV_EVT_CAMERA_DATA_IND cameraæ•°æ®ä¸ŠæŠ¥
 }T_AMOPENAT_CAMERA_MESSAGE;
-/*-\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
 typedef void (*PCAMERA_MESSAGE)(T_AMOPENAT_CAMERA_MESSAGE *pMsg);
 
 typedef struct T_AMOPENAT_CAMERA_PARAM_TAG
 {
-    /* ÉãÏñÍ·/ÊÓÆµÏûÏ¢´¦Àíº¯Êı */
+    /* æ‘„åƒå¤´/è§†é¢‘æ¶ˆæ¯å¤„ç†å‡½æ•° */
     PCAMERA_MESSAGE messageCallback;
     
-    /* ÉãÏñÍ·I2CÉèÖÃ */
-    E_AMOPENAT_I2C_PORT i2cPort;            /* ÉãÏñÍ·Ê¹ÓÃµÄi2c×ÜÏßid */
-    UINT8       i2cSlaveAddr;               /* ÉãÏñÍ·i2c·ÃÎÊµØÖ· */
-    UINT8       i2cAddrDataBits;            /* ÉãÏñÍ·¼Ä´æÆ÷µØÖ·ÒÔ¼°Êı¾İÎ»Êı */
+    /* æ‘„åƒå¤´I2Cè®¾ç½® */
+    E_AMOPENAT_I2C_PORT i2cPort;            /* æ‘„åƒå¤´ä½¿ç”¨çš„i2cæ€»çº¿id */
+    UINT8       i2cSlaveAddr;               /* æ‘„åƒå¤´i2cè®¿é—®åœ°å€ */
+    UINT8       i2cAddrDataBits;            /* æ‘„åƒå¤´å¯„å­˜å™¨åœ°å€ä»¥åŠæ•°æ®ä½æ•° */
 
-    /* ÉãÏñÍ·Ö÷ÒªĞÅºÅÏßÓĞĞ§¼«ĞÔÅäÖÃ */
-    BOOL        RSTBActiveLow;              /* pin RSTB µÍÓĞĞ§ */
-    BOOL        PWDNActiveLow;              /* pin PWDN µÍÓĞĞ§ */
-    BOOL        VSYNCActiveLow;             /* pin VSYNC µÍÓĞĞ§ */
+    /* æ‘„åƒå¤´ä¸»è¦ä¿¡å·çº¿æœ‰æ•ˆææ€§é…ç½® */
+    BOOL        RSTBActiveLow;              /* pin RSTB ä½æœ‰æ•ˆ */
+    BOOL        PWDNActiveLow;              /* pin PWDN ä½æœ‰æ•ˆ */
+    BOOL        VSYNCActiveLow;             /* pin VSYNC ä½æœ‰æ•ˆ */
 
-    /* ÉãÏñÍ·Í¼Ïñ¿í¸ß */
+    /* æ‘„åƒå¤´å›¾åƒå®½é«˜ */
     UINT16      sensorWidth;
     UINT16      sensorHeight;
 
-    E_AMOPENAT_CAMERA_IMAGE_FORMAT imageFormat; /* ÉãÏñÍ·Í¼Ïñ¸ñÊ½ */
+    E_AMOPENAT_CAMERA_IMAGE_FORMAT imageFormat; /* æ‘„åƒå¤´å›¾åƒæ ¼å¼ */
     
-    PAMOPENAT_CAMERA_REG initRegTable_p;  /* ÉãÏñÍ·³õÊ¼»¯Ö¸Áî±í */
-    UINT16 initRegTableCount;          /* ÉãÏñÍ·³õÊ¼»¯Ö¸ÁîÊı */
+    PAMOPENAT_CAMERA_REG initRegTable_p;  /* æ‘„åƒå¤´åˆå§‹åŒ–æŒ‡ä»¤è¡¨ */
+    UINT16 initRegTableCount;          /* æ‘„åƒå¤´åˆå§‹åŒ–æŒ‡ä»¤æ•° */
 
-    AMOPENAT_CAMERA_REG idReg;          /* ÉãÏñÍ·ID¼Ä´æÆ÷ÓëÖµ */
-/*+\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
+    AMOPENAT_CAMERA_REG idReg;          /* æ‘„åƒå¤´IDå¯„å­˜å™¨ä¸å€¼ */
+/*+\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
     OPENAT_CAMERA_PIN_CONFIG cameraPin;
     UINT8 camClkDiv;
     OPENAT_CAMERA_SPI_MODE_E       spi_mode;
     OPENAT_CAMERA_SPI_YUV_OUT_E  spi_yuv_out;
-    /*+\new\zhuwangbin\2018.9.6\Ö§³Öcamera¸÷ĞĞ¸ôÁĞÊä³öÊ¹ÄÜ*/
+    /*+\new\zhuwangbin\2018.9.6\æ”¯æŒcameraå„è¡Œéš”åˆ—è¾“å‡ºä½¿èƒ½*/
     BOOL jumpEnable;
-    /*-\new\zhuwangbin\2018.9.6\Ö§³Öcamera¸÷ĞĞ¸ôÁĞÊä³öÊ¹ÄÜ*/
+    /*-\new\zhuwangbin\2018.9.6\æ”¯æŒcameraå„è¡Œéš”åˆ—è¾“å‡ºä½¿èƒ½*/
 	OPENAT_SPI_SPEED_MODE_E spi_speed;
-/*-\NEW\zhuwangbin\2020.4.26\Ìí¼Óopenat cam½Ó¿Ú*/
-	UINT16   mClk; //MCLK,µ¥Î»M, Ä¬ÈÏ0Îª24M
+/*-\NEW\zhuwangbin\2020.4.26\æ·»åŠ openat camæ¥å£*/
+	UINT16   mClk; //MCLK,å•ä½M, é»˜è®¤0ä¸º24M
 }T_AMOPENAT_CAMERA_PARAM;
 
 // T_AMOPENAT_CAM_PREVIEW_PARAM.encodeQuality video encoding quality
@@ -1253,15 +1253,15 @@ typedef struct T_AMOPENAT_CAM_PREVIEW_PARAM_TAG
     UINT16      endX;
     UINT16      endY;
 
-    /* ÊÓÆµÂ¼ÖÆµÄ²ÎÊı,ÅÄÕÕÔ¤ÀÀ²»ÓÃÉèÖÃÕâĞ©²ÎÊı */
-    UINT16      recordAudio;  /* ÊÇ·ñÂ¼Òô */
-    UINT16      filesizePermit;  //ÒÔKÎªµ¥Î»
+    /* è§†é¢‘å½•åˆ¶çš„å‚æ•°,æ‹ç…§é¢„è§ˆä¸ç”¨è®¾ç½®è¿™äº›å‚æ•° */
+    UINT16      recordAudio;  /* æ˜¯å¦å½•éŸ³ */
+    UINT16      filesizePermit;  //ä»¥Kä¸ºå•ä½
     UINT16      timePermit;
     UINT16      encodeQuality;
-	/*+\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
-	int 		rotation; //·´×ª½Ç¶ÈÉèÖÃ ÔİÊ±Ö»Ö§³Ö0ºÍ90¶È
-	int 		zoom; //·ÅËõÉèÖÃ, ÕıÊı·Å´ó¸ºÊıËõĞ¡£¬×î´ó4±¶£¬0²»·ÅËõ
-	/*-\NEW\zhuwangbin\2020.7.20\Ìí¼Ócamera ·­×ª·ÅËõ¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
+	int 		rotation; //åè½¬è§’åº¦è®¾ç½® æš‚æ—¶åªæ”¯æŒ0å’Œ90åº¦
+	int 		zoom; //æ”¾ç¼©è®¾ç½®, æ­£æ•°æ”¾å¤§è´Ÿæ•°ç¼©å°ï¼Œæœ€å¤§4å€ï¼Œ0ä¸æ”¾ç¼©
+	/*-\NEW\zhuwangbin\2020.7.20\æ·»åŠ camera ç¿»è½¬æ”¾ç¼©åŠŸèƒ½*/
 }T_AMOPENAT_CAM_PREVIEW_PARAM;
 
 typedef struct T_AMOPENAT_CAM_CAPTURE_PARAM_TAG
@@ -1291,7 +1291,7 @@ typedef struct T_AMOPENAT_VIDEO_MESSAGE_TAG
     union
     {
       UINT32 playFinishResult;
-      UINT32 currentTime;  // ÒÔmsÎªµ¥Î»
+      UINT32 currentTime;  // ä»¥msä¸ºå•ä½
     }param;
 }T_AMOPENAT_VIDEO_MESSAGE;
 
@@ -1306,8 +1306,8 @@ typedef struct T_AMOPENAT_VIDEO_INFO_TAG
 
 typedef struct T_AMOPENAT_VIDEO_PARAM_TAG
 {
-    PVIDEO_MESSAGE                  msgCallback;    /* ÊÓÆµÏûÏ¢»Øµ÷´¦Àí */    
-    INT32                           iFd;            /* ÊÓÆµÎÄ¼ş¾ä±ú */
+    PVIDEO_MESSAGE                  msgCallback;    /* è§†é¢‘æ¶ˆæ¯å›è°ƒå¤„ç† */    
+    INT32                           iFd;            /* è§†é¢‘æ–‡ä»¶å¥æŸ„ */
     E_AMOPENAT_VIDEO_TYPE           videoType;
 }T_AMOPENAT_VIDEO_PARAM;
 
@@ -1335,7 +1335,7 @@ typedef enum
   OPENAT_AUD_TONE_DTMF_END
 }E_AMOPENAT_DTMF_TYPE;
 
-/*+\BUG\wangyuan\2020.06.08\BUG_2163:CSDKÌá¹©audioÒôÆµ²¥·Å½Ó¿Ú*/
+/*+\BUG\wangyuan\2020.06.08\BUG_2163:CSDKæä¾›audioéŸ³é¢‘æ’­æ”¾æ¥å£*/
 typedef enum
 {
   OPENAT_AUD_TONE_DIAL,
@@ -1348,7 +1348,7 @@ typedef enum
   OPENAT_AUD_TONE_RINGING,
   OPENAT_AUD_TONE_END,
 }E_AMOPENAT_TONE_TYPE;
-/*-\BUG\wangyuan\2020.06.08\BUG_2163:CSDKÌá¹©audioÒôÆµ²¥·Å½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.06.08\BUG_2163:CSDKæä¾›audioéŸ³é¢‘æ’­æ”¾æ¥å£*/
 
 typedef enum {
     OPENAT_AUD_SPK_GAIN_MUTE = 0,     /// MUTE
@@ -1359,14 +1359,14 @@ typedef enum {
     OPENAT_AUD_SPK_GAIN_12dB,
     OPENAT_AUD_SPK_GAIN_15dB,
     OPENAT_AUD_SPK_GAIN_18dB,
-    /*+\BUG\wangyuan\2020.08.10\À©³äÑ¡Ïî£¬²»È¥ÉèÖÃÒôÁ¿*/
+    /*+\BUG\wangyuan\2020.08.10\æ‰©å……é€‰é¡¹ï¼Œä¸å»è®¾ç½®éŸ³é‡*/
     OPENAT_AUD_SPK_GAIN_NOT_SET,
-    /*-\BUG\wangyuan\2020.08.10\À©³äÑ¡Ïî£¬²»È¥ÉèÖÃÒôÁ¿*/
+    /*-\BUG\wangyuan\2020.08.10\æ‰©å……é€‰é¡¹ï¼Œä¸å»è®¾ç½®éŸ³é‡*/
     OPENAT_AUD_SPK_GAIN_END,
 }E_AMOPENAT_SPEAKER_GAIN;
 
 
-/*+\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*+\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 typedef enum {
     OPENAT_AUD_SPH_VOL0,
     OPENAT_AUD_SPH_VOL1,
@@ -1377,9 +1377,9 @@ typedef enum {
     OPENAT_AUD_SPH_VOL6,
     NumOfAMOPENATAudSPHVols
 }E_AMOPENAT_AUD_SPH_VOL;
-/*-\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*-\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 
-/*+\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 typedef enum
 {
     OPENAT_AUD_HEADSET_PLUGOUT,
@@ -1387,11 +1387,11 @@ typedef enum
     OPENAT_AUD_HEADSET_INSERT3P,
     OPENAT_AUD_HEADSET_TYPE_QTY
 } E_OPENAT_AUD_HEADSET_TYPE;
-/*-\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*-\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 
 
 
-/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 typedef enum
 {
     OPENAT_AUD_HEADSET_TYPE_UNKNOWN_MIC_TYPE,
@@ -1424,7 +1424,7 @@ typedef struct
 
 
 typedef void (*OPENAT_HEADSET_NOTIFY_CB)(void *ctx, E_OPENAT_AUD_HEADSET_NOTIFY_MSG id, uint32 param);
-/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 
 typedef enum 
 {
@@ -1440,10 +1440,10 @@ typedef enum
     OPENAT_AUD_PLAY_ERR_BAD_FORMAT,	      
     OPENAT_AUD_PLAY_ERR_INVALID_FORMAT,   
     OPENAT_AUD_PLAY_ERR_ERROR,
-	/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
     OPENAT_AUD_SPX_ERR_DATA_LONG,
     OPENAT_AUD_SPX_ERR_DATA_FORMAT,
-	/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 } E_AMOPENAT_PLAY_ERROR;
 
 
@@ -1475,9 +1475,9 @@ typedef enum
     OPENAT_AUD_PLAY_MODE_AAC,
     OPENAT_AUD_PLAY_MODE_WAV,
     OPENAT_AUD_PLAY_MODE_STREAM_PCM, //for TTS stream play
-    /*+\BUG WM-669\lifei\2013.06.09\[OpenAT] Ö§³ÖMIDI²¥·Å*/
+    /*+\BUG WM-669\lifei\2013.06.09\[OpenAT] æ”¯æŒMIDIæ’­æ”¾*/
     OPENAT_AUD_PLAY_MODE_MIDI,
-    /*-\BUG WM-669\lifei\2013.06.09\[OpenAT] Ö§³ÖMIDI²¥·Å*/
+    /*-\BUG WM-669\lifei\2013.06.09\[OpenAT] æ”¯æŒMIDIæ’­æ”¾*/
     OPENAT_AUD_PLAY_MODE_QTY,
 } E_AMOPENAT_PLAY_MODE;
 
@@ -1485,7 +1485,7 @@ typedef enum
 {
     OPENAT_AUDIOHAL_ITF_RECEIVER =0,     
     OPENAT_AUDIOHAL_ITF_EARPIECE,    
-	/*+\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
+	/*+\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
     OPENAT_AUDIOHAL_ITF_LOUDSPEAKER, 
     OPENAT_AUD_CHANNEL_DUMMY_AUX_HANDSET
     #if 0
@@ -1501,10 +1501,10 @@ typedef enum
 	OPENAT_AUDIOHAL_ITF_NONE = 255,         
 	OPENAT_AUD_CHANNEL_DUMMY_AUX_HANDSET,     
 	#endif
-	/*-\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
+	/*-\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
 }E_AMOPENAT_AUDIO_CHANNEL;
 
-/*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 typedef enum
 {
     OPENAT_SPKPA_TYPE_CLASSAB,
@@ -1512,9 +1512,9 @@ typedef enum
     OPENAT_INPUT_TYPE_CLASSK,
     OPENAT_SPKPA_INPUT_TYPE_QTY = 0xFF000000
 } OPENAT_SPKPA_TYPE_T;
-/*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 
-/*+\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*+\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 typedef struct 
 {
 	BOOL enable;
@@ -1523,8 +1523,8 @@ typedef struct
 	UINT16 us;
 	E_AMOPENAT_AUDIO_CHANNEL outDev;
 }OPENAT_EXPA_T;
-/*-\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+/*-\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
+/*+\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
 typedef enum
 {
     OPENAT_AUDEV_INPUT_MAINMIC = 0, ///< main mic
@@ -1533,21 +1533,21 @@ typedef enum
     OPENAT_AUDEV_INPUT_HPMIC_L = 3, ///< headphone mic left
     OPENAT_AUDEV_INPUT_HPMIC_R = 4, ///< headphone mic right
 } E_AMOPENAT_MIC_CHANNEL;
-/*-\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
 
 typedef void (*AUD_PLAY_CALLBACK_T)(E_AMOPENAT_PLAY_ERROR result);
 
 typedef void (*AUD_RECORD_CALLBACK_T)(E_AMOPENAT_RECORD_ERROR result);
 
-/*+\NEW\shenyuanyuan\2019.12.11\Ìí¼ÓMP3²¥·ÅAT+PLAY£¬AT+STOP £¬AT+SOUNDLVLÖ¸Áî*/
+/*+\NEW\shenyuanyuan\2019.12.11\æ·»åŠ MP3æ’­æ”¾AT+PLAYï¼ŒAT+STOP ï¼ŒAT+SOUNDLVLæŒ‡ä»¤*/
 typedef void (*MUSIC_PLAY_CALLBACK_T)(const char *file_name, int ret);
-/*-\NEW\shenyuanyuan\2019.12.11\Ìí¼ÓMP3²¥·ÅAT+PLAY£¬AT+STOP £¬AT+SOUNDLVLÖ¸Áî*/
-/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\BUG\wangyuan\2020.07.31\BUG_2736:CSDK ´óÌÆ¶Ô½²»úĞèÇó Ö§³ÖÁ÷Â¼Òô*/
+/*-\NEW\shenyuanyuan\2019.12.11\æ·»åŠ MP3æ’­æ”¾AT+PLAYï¼ŒAT+STOP ï¼ŒAT+SOUNDLVLæŒ‡ä»¤*/
+/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\BUG\wangyuan\2020.07.31\BUG_2736:CSDK å¤§å”å¯¹è®²æœºéœ€æ±‚ æ”¯æŒæµå½•éŸ³*/
 typedef void (*AUD_STREAM_RECORD_CALLBACK_T)(int ret, char *data, int len);
-/*-\BUG\wangyuan\2020.07.31\BUG_2736:CSDK ´óÌÆ¶Ô½²»úĞèÇó Ö§³ÖÁ÷Â¼Òô*/
-/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
+/*-\BUG\wangyuan\2020.07.31\BUG_2736:CSDK å¤§å”å¯¹è®²æœºéœ€æ±‚ æ”¯æŒæµå½•éŸ³*/
+/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
 typedef enum
 {
     /**
@@ -1555,20 +1555,20 @@ typedef enum
      */
     OPENAT_AUD_PLAY_TYPE_NONE = 0,
     /**
-     * ²¥·Å±¾µØÒôÆµÂ·¾¶¡£
+     * æ’­æ”¾æœ¬åœ°éŸ³é¢‘è·¯å¾„ã€‚
      */
     OPENAT_AUD_PLAY_TYPE_LOCAL,
     /**
-     * ÔÚÓïÒôÍ¨»°ÖĞ²¥·Åµ½¶Ô¶Ë¡£
+     * åœ¨è¯­éŸ³é€šè¯ä¸­æ’­æ”¾åˆ°å¯¹ç«¯ã€‚
      */
     OPENAT_AUD_PLAY_TYPE_VOICE,
     /**
-     * ÔÚpocÄ£Ê½ÏÂ²¥·Å±¾µØÒôÆµÂ·¾¶£¬pocÏûÔë²¥·Å¡£
+     * åœ¨pocæ¨¡å¼ä¸‹æ’­æ”¾æœ¬åœ°éŸ³é¢‘è·¯å¾„ï¼Œpocæ¶ˆå™ªæ’­æ”¾ã€‚
      */
     OPENAT_AUD_PLAY_TYPE_POC,
 }E_AMOPENAT_AUD_PLAY_TYPE;
-/*-\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
-/*+\NewReq WM-702\maliang\2013.3.15\²¥·ÅÒôÆµÎÄ¼şµÄ½Ó¿ÚÔö¼ÓÒ»¸ö²ÎÊı£¬ÓÃÀ´±íÊ¾ÎÄ¼şÀàĞÍ*/
+/*-\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
+/*+\NewReq WM-702\maliang\2013.3.15\æ’­æ”¾éŸ³é¢‘æ–‡ä»¶çš„æ¥å£å¢åŠ ä¸€ä¸ªå‚æ•°ï¼Œç”¨æ¥è¡¨ç¤ºæ–‡ä»¶ç±»å‹*/
 typedef enum E_AMOPENAT_AUD_FORMAT_TAG
 {
     OPENAT_AUD_FORMAT_UNKNOWN, ///< placeholder for unknown format
@@ -1577,34 +1577,34 @@ typedef enum E_AMOPENAT_AUD_FORMAT_TAG
     OPENAT_AUD_FORMAT_MP3,     ///< MP3
     OPENAT_AUD_FORMAT_AMRNB,   ///< AMR-NB
     OPENAT_AUD_FORMAT_AMRWB,   ///< AMR_WB
-	/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
     OPENAT_AUD_FORMAT_SPEEX,
-	/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
-	/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+	/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
+	/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 	OPENAT_AUD_FORMAT_RTMP,
-	/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+	/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
     OPENAT_AUD_FORMAT_QTY,
 }E_AMOPENAT_AUD_FORMAT;
-/*-\NewReq WM-702\maliang\2013.3.15\²¥·ÅÒôÆµÎÄ¼şµÄ½Ó¿ÚÔö¼ÓÒ»¸ö²ÎÊı£¬ÓÃÀ´±íÊ¾ÎÄ¼şÀàĞÍ*/
+/*-\NewReq WM-702\maliang\2013.3.15\æ’­æ”¾éŸ³é¢‘æ–‡ä»¶çš„æ¥å£å¢åŠ ä¸€ä¸ªå‚æ•°ï¼Œç”¨æ¥è¡¨ç¤ºæ–‡ä»¶ç±»å‹*/
 
 typedef enum E_AMOPENAT_RECORD_TYPE_TAG
 {
-    OPENAT_RECORD_TYPE_NONE, ///< ÓÃÓÚÎ´Öª¸ñÊ½µÄÕ¼Î»·û
-    OPENAT_RECORD_TYPE_MIC,     ///´ÓÂó¿Ë·çÂ¼ÖÆ¡£ 
-    OPENAT_RECORD_TYPE_VOICE,  ///Â¼ÖÆÓïÒôÍ¨»°¡£Â¼ÖÆµÄÁ÷ÓëÉÏÏÂĞĞÍ¨µÀ¡£
-    OPENAT_RECORD_TYPE_VOICE_DUAL,     //Â¼ÖÆÓïÒôÍ¨»°¡£Â¼ÖÆµÄÁ÷ÊÇ´øÓĞ·ÖÀëµÄÉÏĞĞÁ´Â·ºÍÏÂĞĞÁ´Â·ĞÅµÀ¡£
-    OPENAT_RECORD_TYPE_DEBUG_DUMP, //PCM×ª´¢£¬½öÓÃÓÚµ÷ÊÔ¡£
-/*+\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
-    OPENAT_RECORD_TYPE_POC,//ÔÚpocÄ£Ê½ÏÂ´ÓÂó¿Ë·çÂ¼ÖÆ¡£
-/*-\ÈÎÎñ\czm\2020.9.20\ÈÎÎñ:439 ´óÌÆPOCÏîÄ¿¿ª·¢:Ìí¼ÓÁ÷Â¼ÒôºÍÁ÷²¥·Å½Ó¿Ú£¬²¢ĞèÒªÖ§³ÖÏû³ıµ×ÔëµÄËã·¨*/
+    OPENAT_RECORD_TYPE_NONE, ///< ç”¨äºæœªçŸ¥æ ¼å¼çš„å ä½ç¬¦
+    OPENAT_RECORD_TYPE_MIC,     ///ä»éº¦å…‹é£å½•åˆ¶ã€‚ 
+    OPENAT_RECORD_TYPE_VOICE,  ///å½•åˆ¶è¯­éŸ³é€šè¯ã€‚å½•åˆ¶çš„æµä¸ä¸Šä¸‹è¡Œé€šé“ã€‚
+    OPENAT_RECORD_TYPE_VOICE_DUAL,     //å½•åˆ¶è¯­éŸ³é€šè¯ã€‚å½•åˆ¶çš„æµæ˜¯å¸¦æœ‰åˆ†ç¦»çš„ä¸Šè¡Œé“¾è·¯å’Œä¸‹è¡Œé“¾è·¯ä¿¡é“ã€‚
+    OPENAT_RECORD_TYPE_DEBUG_DUMP, //PCMè½¬å‚¨ï¼Œä»…ç”¨äºè°ƒè¯•ã€‚
+/*+\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
+    OPENAT_RECORD_TYPE_POC,//åœ¨pocæ¨¡å¼ä¸‹ä»éº¦å…‹é£å½•åˆ¶ã€‚
+/*-\ä»»åŠ¡\czm\2020.9.20\ä»»åŠ¡:439 å¤§å”POCé¡¹ç›®å¼€å‘:æ·»åŠ æµå½•éŸ³å’Œæµæ’­æ”¾æ¥å£ï¼Œå¹¶éœ€è¦æ”¯æŒæ¶ˆé™¤åº•å™ªçš„ç®—æ³•*/
 }E_AMOPENAT_RECORD_TYPE;
 
 typedef enum E_AMOPENAT_RECORD_QUALITY_TAG
 {
-    OPENAT_RECORD_QUALITY_LOW,    ///< ÖÊÁ¿µÍ
-    OPENAT_RECORD_QUALITY_MEDIUM, ///< ÖÊÁ¿µÍ
-    OPENAT_RECORD_QUALITY_HIGH,   ///< ÖÊÁ¿µÍ
-    OPENAT_RECORD_QUALITY_BEST,   ///< ÖÊÁ¿×îºÃ
+    OPENAT_RECORD_QUALITY_LOW,    ///< è´¨é‡ä½
+    OPENAT_RECORD_QUALITY_MEDIUM, ///< è´¨é‡ä½
+    OPENAT_RECORD_QUALITY_HIGH,   ///< è´¨é‡ä½
+    OPENAT_RECORD_QUALITY_BEST,   ///< è´¨é‡æœ€å¥½
 } E_AMOPENAT_RECORD_QUALITY;
 
 typedef enum 
@@ -1615,16 +1615,16 @@ typedef enum
 
 typedef struct
 {
-	char *fileName;//ÉèÖÃ±£´æÎÄ¼şµÄÎÄ¼şÃû¡£Èç¹ûÊ¹ÓÃÊı¾İÁ÷·½Ê½»ñÈ¡Êı¾İ£¬¸ÃÉèÖÃÎŞĞ§
-	int time_sec;//ÉèÖÃÂ¼ÒôµÄ³ÖĞøÊ±¼ä¡£Ê±¼äÒ»µ½¾ÍÍ£Ö¹
-	OpenatRecordMode_t record_mode;//ÉèÖÃÊı¾İµÄ»ñÈ¡·½Ê½
-	E_AMOPENAT_RECORD_QUALITY quality;//ÉèÖÃÂ¼ÒôµÄÖÊÁ¿
-	E_AMOPENAT_RECORD_TYPE type;//ÉèÖÃÂ¼ÒôµÄÀàĞÍ
-	E_AMOPENAT_AUD_FORMAT format;//ÉèÖÃÊı¾İµÄ¸ñÊ½
-	AUD_STREAM_RECORD_CALLBACK_T stream_record_cb;//ÉèÖÃÊı¾İÁ÷»Øµ÷º¯Êı
-	/*+\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
-	int thresholdLength; //Â¼ÒôÊı¾İ´ïµ½Ò»¶¨µÄ³¤¶È¾ÍÉÏ±¨
-	/*-\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	char *fileName;//è®¾ç½®ä¿å­˜æ–‡ä»¶çš„æ–‡ä»¶åã€‚å¦‚æœä½¿ç”¨æ•°æ®æµæ–¹å¼è·å–æ•°æ®ï¼Œè¯¥è®¾ç½®æ— æ•ˆ
+	int time_sec;//è®¾ç½®å½•éŸ³çš„æŒç»­æ—¶é—´ã€‚æ—¶é—´ä¸€åˆ°å°±åœæ­¢
+	OpenatRecordMode_t record_mode;//è®¾ç½®æ•°æ®çš„è·å–æ–¹å¼
+	E_AMOPENAT_RECORD_QUALITY quality;//è®¾ç½®å½•éŸ³çš„è´¨é‡
+	E_AMOPENAT_RECORD_TYPE type;//è®¾ç½®å½•éŸ³çš„ç±»å‹
+	E_AMOPENAT_AUD_FORMAT format;//è®¾ç½®æ•°æ®çš„æ ¼å¼
+	AUD_STREAM_RECORD_CALLBACK_T stream_record_cb;//è®¾ç½®æ•°æ®æµå›è°ƒå‡½æ•°
+	/*+\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
+	int thresholdLength; //å½•éŸ³æ•°æ®è¾¾åˆ°ä¸€å®šçš„é•¿åº¦å°±ä¸ŠæŠ¥
+	/*-\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
 }E_AMOPENAT_RECORD_PARAM;
 
 typedef enum
@@ -1646,27 +1646,27 @@ typedef struct T_AMOPENAT_PLAY_BUFFER_PARAM_TAG
 
 typedef struct T_AMOPENAT_PLAY_FILE_PARAM_TAG
 {
-/*+\BUG WM-719\maliang\2013.3.21\ÎÄ¼şÏµÍ³½Ó¿ÚºÍ²¥·ÅÒôÆµÎÄ¼ş½Ó¿ÚµÄÎÄ¼şÃû¸ÄÎªunicode little endingÀàĞÍ*/
-    char* fileName;        /* ÎÄ¼şÃûÊ¹ÓÃunicode±àÂë little endian·½Ê½±íÊ¾ */
-/*-\BUG WM-719\maliang\2013.3.21\ÎÄ¼şÏµÍ³½Ó¿ÚºÍ²¥·ÅÒôÆµÎÄ¼ş½Ó¿ÚµÄÎÄ¼şÃû¸ÄÎªunicode little endingÀàĞÍ*/
-/*+\NewReq WM-702\maliang\2013.3.15\²¥·ÅÒôÆµÎÄ¼şµÄ½Ó¿ÚÔö¼ÓÒ»¸ö²ÎÊı£¬ÓÃÀ´±íÊ¾ÎÄ¼şÀàĞÍ*/
+/*+\BUG WM-719\maliang\2013.3.21\æ–‡ä»¶ç³»ç»Ÿæ¥å£å’Œæ’­æ”¾éŸ³é¢‘æ–‡ä»¶æ¥å£çš„æ–‡ä»¶åæ”¹ä¸ºunicode little endingç±»å‹*/
+    char* fileName;        /* æ–‡ä»¶åä½¿ç”¨unicodeç¼–ç  little endianæ–¹å¼è¡¨ç¤º */
+/*-\BUG WM-719\maliang\2013.3.21\æ–‡ä»¶ç³»ç»Ÿæ¥å£å’Œæ’­æ”¾éŸ³é¢‘æ–‡ä»¶æ¥å£çš„æ–‡ä»¶åæ”¹ä¸ºunicode little endingç±»å‹*/
+/*+\NewReq WM-702\maliang\2013.3.15\æ’­æ”¾éŸ³é¢‘æ–‡ä»¶çš„æ¥å£å¢åŠ ä¸€ä¸ªå‚æ•°ï¼Œç”¨æ¥è¡¨ç¤ºæ–‡ä»¶ç±»å‹*/
     E_AMOPENAT_AUD_FORMAT  fileFormat;
-/*-\NewReq WM-702\maliang\2013.3.15\²¥·ÅÒôÆµÎÄ¼şµÄ½Ó¿ÚÔö¼ÓÒ»¸ö²ÎÊı£¬ÓÃÀ´±íÊ¾ÎÄ¼şÀàĞÍ*/
+/*-\NewReq WM-702\maliang\2013.3.15\æ’­æ”¾éŸ³é¢‘æ–‡ä»¶çš„æ¥å£å¢åŠ ä¸€ä¸ªå‚æ•°ï¼Œç”¨æ¥è¡¨ç¤ºæ–‡ä»¶ç±»å‹*/
     AUD_PLAY_CALLBACK_T callback;
 }T_AMOPENAT_PLAY_FILE_PARAM;
 
 typedef struct  T_AMOPENAT_PLAY_PARAM_TAG
 {
-      BOOL  playBuffer;/*ÊÇ²¥·Åbuffer»¹ÊÇ²¥·ÅÎÄ¼ş*/
+      BOOL  playBuffer;/*æ˜¯æ’­æ”¾bufferè¿˜æ˜¯æ’­æ”¾æ–‡ä»¶*/
       union
       {
            T_AMOPENAT_PLAY_BUFFER_PARAM       playBufferParam;
            T_AMOPENAT_PLAY_FILE_PARAM        playFileParam;
       };
 }T_AMOPENAT_PLAY_PARAM;
-/*-\NewReq WM-584\maliang\2013.2.21\[OpenAt]Ö§³ÖT¿¨²¥·ÅMP3*/
+/*-\NewReq WM-584\maliang\2013.2.21\[OpenAt]æ”¯æŒTå¡æ’­æ”¾MP3*/
 
-/*+\NewReq WM-710\maliang\2013.3.18\ [OpenAt]Ôö¼Ó½Ó¿ÚÉèÖÃMP3²¥·ÅµÄÒôĞ§*/
+/*+\NewReq WM-710\maliang\2013.3.18\ [OpenAt]å¢åŠ æ¥å£è®¾ç½®MP3æ’­æ”¾çš„éŸ³æ•ˆ*/
 typedef enum  E_AMOPENAT_AUDIO_SET_EQ_TAG
 {
     OPENAT_AUD_EQ_NORMAL,     
@@ -1678,42 +1678,42 @@ typedef enum  E_AMOPENAT_AUDIO_SET_EQ_TAG
     OPENAT_AUD_EQ_POP,
     OPENAT_AUD_EQ_ROCK
 }E_AMOPENAT_AUDIO_SET_EQ;
-/*-\NewReq WM-710\maliang\2013.3.18\ [OpenAt]Ôö¼Ó½Ó¿ÚÉèÖÃMP3²¥·ÅµÄÒôĞ§*/
+/*-\NewReq WM-710\maliang\2013.3.18\ [OpenAt]å¢åŠ æ¥å£è®¾ç½®MP3æ’­æ”¾çš„éŸ³æ•ˆ*/
 
-/*+\NewReq WM-711\maliang\2013.3.18\[OpenAt]Ôö¼Ó½Ó¿Ú´ò¿ª»ò¹Ø±ÕÒôÆµ»Ø»·²âÊÔ*/
+/*+\NewReq WM-711\maliang\2013.3.18\[OpenAt]å¢åŠ æ¥å£æ‰“å¼€æˆ–å…³é—­éŸ³é¢‘å›ç¯æµ‹è¯•*/
 typedef enum  E_AMOPENAT_AUDIO_LOOPBACK_TYPE_TAG
 {
     OPENAT_AUD_LOOPBACK_HANDSET,
     OPENAT_AUD_LOOPBACK_EARPIECE,
     OPENAT_AUD_LOOPBACK_LOUDSPEAKER,
-/*+\NewReq WM-862\maliang\2013.7.2\ Ôö¼Óat+audlb²âÊÔÒôÆµ»Ø»·*/
+/*+\NewReq WM-862\maliang\2013.7.2\ å¢åŠ at+audlbæµ‹è¯•éŸ³é¢‘å›ç¯*/
     OPENAT_AUD_LOOPBACK_AUX_HANDSET,
     OPENAT_AUD_LOOPBACK_AUX_LOUDSPEAKER
-/*-\NewReq WM-862\maliang\2013.7.2\ Ôö¼Óat+audlb²âÊÔÒôÆµ»Ø»·*/
+/*-\NewReq WM-862\maliang\2013.7.2\ å¢åŠ at+audlbæµ‹è¯•éŸ³é¢‘å›ç¯*/
 }E_AMOPENAT_AUDIO_LOOPBACK_TYPE;
-/*-\NewReq WM-711\maliang\2013.3.18\[OpenAt]Ôö¼Ó½Ó¿Ú´ò¿ª»ò¹Ø±ÕÒôÆµ»Ø»·²âÊÔ*/
+/*-\NewReq WM-711\maliang\2013.3.18\[OpenAt]å¢åŠ æ¥å£æ‰“å¼€æˆ–å…³é—­éŸ³é¢‘å›ç¯æµ‹è¯•*/
 
 /*************************************************
 * PSAM
 *************************************************/
 typedef enum
 {
-  OPENAT_PSAM_SUCCESS,                      /*²Ù×÷³É¹¦*/
-  OPENAT_PSAM_ERR_EXTRA_RXATA,              /*½ÓÊÕµ½¶àÓàÊı¾İ*/
-  OPENAT_PSAM_ERR_BAT_ATR,                  /*¸´Î»ATR´íÎó*/
-  OPENAT_PSAM_ERR_RESET_TIMEOUT,            /*¸´Î»Ó¦´ğ³¬Ê±*/
-  OPENAT_PSAM_ERR_PARITY,                   /*Êı¾İÆæÅ¼Ğ£Ñé´íÎó*/
-  OPENAT_PSAM_ERR_WWT_TIMEOUT,              /*Êı¾İ´«ÊäÊ§°Ü*/
-  OPENAT_PSAM_ERR_RCV_TIMEOUT,              /*Êı¾İ½ÓÊÕ³¬Ê±*/
-  OPENAT_PSAM_ERR_INVALID_PARAM,            /*½Ó¿Ú²ÎÊı´íÎó*/
-  OPENAT_PSAM_ERR_DEV_BUSY,                 /*Éè±¸Ã¦*/
-  OPENAT_PSAM_ERR_HW_SWITCH,                /*Ó²¼şÒÑ¾­ÇĞ»»µ½±ğµÄ¿¨ÉÏ·ÃÎÊ*/
-  OPENAT_PSAM_ERR_OTHER                     /*ÆäËû´íÎó*/
+  OPENAT_PSAM_SUCCESS,                      /*æ“ä½œæˆåŠŸ*/
+  OPENAT_PSAM_ERR_EXTRA_RXATA,              /*æ¥æ”¶åˆ°å¤šä½™æ•°æ®*/
+  OPENAT_PSAM_ERR_BAT_ATR,                  /*å¤ä½ATRé”™è¯¯*/
+  OPENAT_PSAM_ERR_RESET_TIMEOUT,            /*å¤ä½åº”ç­”è¶…æ—¶*/
+  OPENAT_PSAM_ERR_PARITY,                   /*æ•°æ®å¥‡å¶æ ¡éªŒé”™è¯¯*/
+  OPENAT_PSAM_ERR_WWT_TIMEOUT,              /*æ•°æ®ä¼ è¾“å¤±è´¥*/
+  OPENAT_PSAM_ERR_RCV_TIMEOUT,              /*æ•°æ®æ¥æ”¶è¶…æ—¶*/
+  OPENAT_PSAM_ERR_INVALID_PARAM,            /*æ¥å£å‚æ•°é”™è¯¯*/
+  OPENAT_PSAM_ERR_DEV_BUSY,                 /*è®¾å¤‡å¿™*/
+  OPENAT_PSAM_ERR_HW_SWITCH,                /*ç¡¬ä»¶å·²ç»åˆ‡æ¢åˆ°åˆ«çš„å¡ä¸Šè®¿é—®*/
+  OPENAT_PSAM_ERR_OTHER                     /*å…¶ä»–é”™è¯¯*/
 }E_AMOPENAT_PSAM_OPER_RESULT;
 typedef enum
 {
-  OPENAT_PSAM_ID_1,                         /* ÀûÓÃSIM0×÷ÎªPSAM¿¨½Ó¿Ú */
-  OPENAT_PSAM_ID_2,                         /* ÀûÓÃSIM2×÷ÎªPSAM¿¨½Ó¿Ú */
+  OPENAT_PSAM_ID_1,                         /* åˆ©ç”¨SIM0ä½œä¸ºPSAMå¡æ¥å£ */
+  OPENAT_PSAM_ID_2,                         /* åˆ©ç”¨SIM2ä½œä¸ºPSAMå¡æ¥å£ */
   OPENAT_PSAM_ID_INVALID
 }E_AMOPENAT_PSAM_ID;
 typedef enum
@@ -1724,11 +1724,11 @@ typedef enum
   OPENAT_PSAM_VOLT_INVALID
 }E_AMOPENAT_PSAM_VOLT_CLASS;
 
-/*+\BUG WM-690\rufei\2013.3.18\AT+SPWMÃ»ÓĞÊµÏÖPWM1ºÍPWM2*/
+/*+\BUG WM-690\rufei\2013.3.18\AT+SPWMæ²¡æœ‰å®ç°PWM1å’ŒPWM2*/
 /*************************************************
 * PWM
 *************************************************/
-/*+\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*+\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 typedef enum
 {
     PWM_LGP_PER_125MS,
@@ -1774,15 +1774,15 @@ typedef enum
 	OPENAT_PWM_INVALID_PARAM
 }E_AMOPENAT_PWM_PORT;
 /*-\NEW\RUFEI\2015.9.8\Add pwm function */
-/*+\BUG\wangyuan\2020.07.29\BUG_2663:ÆÕĞş£ºÇë²Î¿¼2G CSDK¿ª·¢iot_debug_set_fault_mode½Ó¿Ú*/
+/*+\BUG\wangyuan\2020.07.29\BUG_2663:æ™®ç„ï¼šè¯·å‚è€ƒ2G CSDKå¼€å‘iot_debug_set_fault_modeæ¥å£*/
 typedef enum openatFaultModeE
 {
-	/*!< Òì³£ÖØÆô£¬Ä¬ÈÏ×´Ì¬*/
+	/*!< å¼‚å¸¸é‡å¯ï¼Œé»˜è®¤çŠ¶æ€*/
 	OPENAT_FAULT_RESET,
-	/*!< Òì³£µ÷ÊÔÄ£Ê½*/
+	/*!< å¼‚å¸¸è°ƒè¯•æ¨¡å¼*/
 	OPENAT_FAULT_HANG
 }E_OPENAT_FAULT_MODE;
-/*-\BUG\wangyuan\2020.07.29\BUG_2663:ÆÕĞş£ºÇë²Î¿¼2G CSDK¿ª·¢iot_debug_set_fault_mode½Ó¿Ú*/
+/*-\BUG\wangyuan\2020.07.29\BUG_2663:æ™®ç„ï¼šè¯·å‚è€ƒ2G CSDKå¼€å‘iot_debug_set_fault_modeæ¥å£*/
 
 typedef struct
 {
@@ -1793,22 +1793,22 @@ typedef struct
         struct pwm_pwt{
         	UINT16  level;
         	UINT16 freq;
-        }pwt,pwl;/*×¢Òâ:Ê¹ÓÃPWLÊµÏÖ·äÃùÆ÷Ê±£¬freqÊµ¼ÊÓĞĞ§·¶Î§:0-0xff*/
+        }pwt,pwl;/*æ³¨æ„:ä½¿ç”¨PWLå®ç°èœ‚é¸£å™¨æ—¶ï¼Œfreqå®é™…æœ‰æ•ˆèŒƒå›´:0-0xff*/
         struct pwm_lpg{
         	E_OPENAT_PWM_LPG_PERIOD period;
         	E_OPENAT_PWM_LPG_ON     onTime;
         }lpg;
     }cfg;
 }T_AMOPENAT_PWM_CFG;
-/*-\BUG WM-690\rufei\2013.3.18\AT+SPWMÃ»ÓĞÊµÏÖPWM1ºÍPWM2*/
-/*-\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*-\BUG WM-690\rufei\2013.3.18\AT+SPWMæ²¡æœ‰å®ç°PWM1å’ŒPWM2*/
+/*-\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 
 typedef struct T_AMOPENAT_ALARM_MESSAGE_TAG
 {
   E_OPENAT_DRV_EVT evtId;
   union
   {
-    uint16  alarmIndex;/*mtkÖ»ÄÜÖ§³Ö1¸öalram£¬Ä¬ÈÏindexÎª0*/
+    uint16  alarmIndex;/*mtkåªèƒ½æ”¯æŒ1ä¸ªalramï¼Œé»˜è®¤indexä¸º0*/
   }param;  
 }T_AMOPENAT_ALARM_MESSAGE;
 
@@ -1820,7 +1820,7 @@ typedef struct T_AMOPENAT_ALARM_CONFIG_TAG
 }T_AMOPENAT_ALARM_CONFIG;
 
 
-/*+\NewReq WM-725\xiongjunqun\2013.3.25\ [OpenAt]Ôö¼ÓFM½Ó¿Ú*/
+/*+\NewReq WM-725\xiongjunqun\2013.3.25\ [OpenAt]å¢åŠ FMæ¥å£*/
 typedef enum
 {
     /// 87.5-108 MHz    (US/Europe)
@@ -1882,12 +1882,12 @@ typedef struct T_AMOPENAT_FM_PARAM_TAG
     E_AMOPENAT_FM_BAND fmBand;
 	T_AMOPENAT_FM_INIT fmInit;
 }T_AMOPENAT_FM_PARAM;
-/*-\NewReq WM-725\xiongjunqun\2013.3.25\ [OpenAt]Ôö¼ÓFM½Ó¿Ú*/
+/*-\NewReq WM-725\xiongjunqun\2013.3.25\ [OpenAt]å¢åŠ FMæ¥å£*/
 
 
 typedef VOID (*PINBANDINFO_CALLBACK)(void);
 
-/*+\NEW\brezen\2013.12.30\Ìí¼ÓÀ¶ÑÀ½Ó¿Ú*/
+/*+\NEW\brezen\2013.12.30\æ·»åŠ è“ç‰™æ¥å£*/
 #define OPENAT_BT_NAME_MAX_LEN (59)
 #define OPENAT_BT_PB_LENGHT     (20)  
 #define OPENAT_BT_MAX_SDAP_UUID_NO (15)
@@ -1897,7 +1897,7 @@ typedef VOID (*PINBANDINFO_CALLBACK)(void);
 #define OPENAT_BT_SUPPORT_HFP_PROFILE (1<<1)
 #define OPENAT_BT_SUPPORT_PBAP_PROFILE (1<<2)
 
-/*appÖ÷¶¯ÇëÇó*/
+/*appä¸»åŠ¨è¯·æ±‚*/
 typedef enum
 {
   OPENAT_BT_MGR_DISCORY_REQ_CMD,
@@ -1932,7 +1932,7 @@ typedef enum
   
   
 }E_AMOPENAT_BT_CMD;
-/*app¶ÔBTµÄÏàÓ¦*/
+/*appå¯¹BTçš„ç›¸åº”*/
 typedef enum
 {
   OPENAT_BT_MGR_LINK_ACCEPT_RSP,
@@ -1942,7 +1942,7 @@ typedef enum
   
 }E_AMOPENAT_BT_RSP;
 
-/*BTÖ÷¶¯ÉÏ±¨»òÕßBTÏàÓ¦APPÇëÇó*/
+/*BTä¸»åŠ¨ä¸ŠæŠ¥æˆ–è€…BTç›¸åº”APPè¯·æ±‚*/
 typedef enum
 {
   OPENAT_BT_POWER_ON_IND,
@@ -2183,7 +2183,7 @@ typedef struct
 {
 	UINT8	 port;	/* virtual port number*/
 	UINT8        result;
-	UINT16       maxFrameSize; /*Ò»´Î´«Êä×î´ó×Ö½ÚÊı*/
+	UINT16       maxFrameSize; /*ä¸€æ¬¡ä¼ è¾“æœ€å¤§å­—èŠ‚æ•°*/
 	T_AMOPENAT_BT_ADDR addr;
 }T_AMOPENAT_BT_SPP_CONN_IND;
 
@@ -2206,7 +2206,7 @@ typedef struct
 {
 	UINT8	 port;	/* virtual port number*/
 	UINT8         result;  /* This is result field of this returned cnf msg */
-	UINT16        maxFrameSize; /*Ò»´Î´«Êä×î´ó×Ö½ÚÊı*/
+	UINT16        maxFrameSize; /*ä¸€æ¬¡ä¼ è¾“æœ€å¤§å­—èŠ‚æ•°*/
 	T_AMOPENAT_BT_ADDR addr;
 }T_AMOPENAT_BT_SPP_CONN_CNF;
 
@@ -2285,8 +2285,8 @@ typedef union
   struct _mgr_discory_req
   {
     UINT32	                cod;              /**/
-    UINT8	                  inquiry_timeoutms; /*²éÑ¯³¬Ê±*/
-    UINT8	                  inquiry_max_count; /*×î´ó²éÑ¯¸öÊı*/
+    UINT8	                  inquiry_timeoutms; /*æŸ¥è¯¢è¶…æ—¶*/
+    UINT8	                  inquiry_max_count; /*æœ€å¤§æŸ¥è¯¢ä¸ªæ•°*/
     BOOL                  	discovery_with_name;
   }mgrDiscoryReq;
   struct _mgr_discory_cancle
@@ -2389,7 +2389,7 @@ typedef union
   }mgrPinCode;
   
 }U_AMOPENAT_BT_RSP_PARAM;
-/*-\NEW\brezen\2013.12.30\Ìí¼ÓÀ¶ÑÀ½Ó¿Ú*/
+/*-\NEW\brezen\2013.12.30\æ·»åŠ è“ç‰™æ¥å£*/
 
 typedef enum
 {
@@ -2417,7 +2417,7 @@ typedef enum
     
 }E_AMOPENAT_MEMD_ERR;
 
-/*+\NEW\RUFEI\2014.4.4\Ôö¼ÓÍâ²¿¿´ÃÅ¹·ÅäÖÃ½Ó¿Ú*/
+/*+\NEW\RUFEI\2014.4.4\å¢åŠ å¤–éƒ¨çœ‹é—¨ç‹—é…ç½®æ¥å£*/
 #ifdef DSS_CONFIG_EX_WATCH_DOG
 /*CUSTOM*/
 typedef enum
@@ -2435,17 +2435,17 @@ typedef union
     struct _default_mode_cfg
     {
         E_AMOPENAT_GPIO_PORT port;
-        CUSHandle                      handle; /*reset½Ó¿ÚÊ¹ÓÃ*/
+        CUSHandle                      handle; /*resetæ¥å£ä½¿ç”¨*/
     }defaultModeCfg;
     struct _cust_mode_cfg
     {
-        CUSHandle                      handle;/*reset½Ó¿ÚÊ¹ÓÃ*/
+        CUSHandle                      handle;/*resetæ¥å£ä½¿ç”¨*/
     }custModeCfg;
 }U_AMOPENAT_EX_WATCH_DOG_CFG;
 #endif //DSS_CONFIG_EX_WATCH_DOG
-/*-\NEW\RUFEI\2014.4.4\Ôö¼ÓÍâ²¿¿´ÃÅ¹·ÅäÖÃ½Ó¿Ú*/
+/*-\NEW\RUFEI\2014.4.4\å¢åŠ å¤–éƒ¨çœ‹é—¨ç‹—é…ç½®æ¥å£*/
 
-/*+\NEW\RUFEI\2014.8.20\Ôö¼Ógps½Ó¿ÚÊµÏÖ*/
+/*+\NEW\RUFEI\2014.8.20\å¢åŠ gpsæ¥å£å®ç°*/
 typedef struct
 {
     E_AMOPENAT_UART_PORT port;
@@ -2471,7 +2471,7 @@ typedef struct
     T_AMOPENAT_RDAGPS_I2C_CFG    i2c;
     T_AMOPENAT_RDAGPS_GPS_CFG   gps;
 }T_AMOPENAT_RDAGPS_PARAM;
-/*-\NEW\RUFEI\2014.8.20\Ôö¼Ógps½Ó¿ÚÊµÏÖ*/
+/*-\NEW\RUFEI\2014.8.20\å¢åŠ gpsæ¥å£å®ç°*/
 
 /*+\NEW\RUFEI\2015.8.31\Update key init*/
 /*cfg*/
@@ -2622,7 +2622,7 @@ typedef enum
     OPENAT_GPS_UART_GPS_DUMMY = -1
 }T_OPENAT_GPS_CMD;
 
-/*+\NEW \zhuwangbin\2020.01.06\Ìí¼Ó×Ô¶¯¼ì²âÉı¼¶¹¦ÄÜ*/
+/*+\NEW \zhuwangbin\2020.01.06\æ·»åŠ è‡ªåŠ¨æ£€æµ‹å‡çº§åŠŸèƒ½*/
 typedef enum
 {
   OPENAT_UPGRADE_INVALID_URL = 1000,
@@ -2634,7 +2634,7 @@ typedef enum
   OPENAT_UPGRADE_ERROR,
   
 }OPENAT_UPGRADE_ERR;
-/*-\NEW \zhuwangbin\2020.01.06\Ìí¼Ó×Ô¶¯¼ì²âÉı¼¶¹¦ÄÜ*/
+/*-\NEW \zhuwangbin\2020.01.06\æ·»åŠ è‡ªåŠ¨æ£€æµ‹å‡çº§åŠŸèƒ½*/
 
 typedef enum
 {
@@ -2691,7 +2691,7 @@ typedef struct
     E_OPENAT_MODULE_TYPE type;
     E_OPEANT_MODULE_HWVER hw;
 }T_OPENAT_MODULE;
-/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 typedef enum{
 	OPNEAT_RTMP_PLAY_OK,
 	OPNEAT_RTMP_PLAY_ERR,
@@ -2702,13 +2702,13 @@ typedef enum{
 
 
 typedef void (*OPENAT_RTMP_CB)(E_OPENAT_RTMP_RESULT_CODE result_code);
-/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 /*----------------------------------------------*
- * Íâ²¿±äÁ¿ËµÃ÷                                 *
+ * å¤–éƒ¨å˜é‡è¯´æ˜                                 *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * Íâ²¿º¯ÊıÔ­ĞÍËµÃ÷                             *
+ * å¤–éƒ¨å‡½æ•°åŸå‹è¯´æ˜                             *
  *----------------------------------------------*/
 extern void lua_fm_set_loopback(UINT32 on, void* arg );
 
@@ -2737,23 +2737,23 @@ T_OPENAT_MODULE OPENAT_GetModuleType(void);
 
 
 /*----------------------------------------------*
- * ÄÚ²¿º¯ÊıÔ­ĞÍËµÃ÷                             *
+ * å†…éƒ¨å‡½æ•°åŸå‹è¯´æ˜                             *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * È«¾Ö±äÁ¿                                     *
+ * å…¨å±€å˜é‡                                     *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * Ä£¿é¼¶±äÁ¿                                   *
+ * æ¨¡å—çº§å˜é‡                                   *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * ³£Á¿¶¨Òå                                     *
+ * å¸¸é‡å®šä¹‰                                     *
  *----------------------------------------------*/
 
 /*----------------------------------------------*
- * ºê¶¨Òå                                       *
+ * å®å®šä¹‰                                       *
  *----------------------------------------------*/
 
 

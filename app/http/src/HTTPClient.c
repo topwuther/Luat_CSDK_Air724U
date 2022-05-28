@@ -1744,7 +1744,7 @@ static UINT32 HTTPIntrnConnectionOpen (P_HTTP_SESSION pHTTPSession)
             // Create a TCP/IP stream socket
             pHTTPSession->HttpConnection.HttpSocket = socket(OPENAT_AF_INET,	    // Address family 
                 OPENAT_SOCK_STREAM,			                    // Socket type     
-                0);		                        // Protocol ֻ��Ϊ0        
+                0);		                        // Protocol Ö»ÄÜÎª0        
                 TLS_DBGPRT_INFO("pHTTPSession->HttpConnection.HttpSocket=%d\n", pHTTPSession->HttpConnection.HttpSocket);
         }
         

@@ -7,7 +7,7 @@
  * Date:    2013/3/26
  *
  * Description:
- *          platform display ½Ó¿Ú
+ *          platform display æ¥å£
  **************************************************************************/
 
 #ifndef _PLATFORM_DISP_H_
@@ -23,7 +23,7 @@ typedef struct PlatformRectTag
     u16 rby;
 }PlatformRect;
 
-// ÑÕÉ«¶¨Òå RGB(5,6,5)
+// é¢œè‰²å®šä¹‰ RGB(5,6,5)
 #define COLOR_WHITE_16 0xffff
 #define COLOR_BLACK_16 0x0000
 #define COLOR_WHITE_24 0xffffff
@@ -43,15 +43,15 @@ typedef enum PlatformLcdBusTag
     PLATFORM_LCD_BUS_SPI4LINE,
     PLATFORM_LCD_BUS_PARALLEL,
 
-/*+\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c spi½Ó¿Ú */
+/*+\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2c spiæ¥å£ */
     PLATFORM_LCD_BUS_I2C,
     PLATFORM_LCD_BUS_SPI,
-/*-\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c spi½Ó¿Ú */
+/*-\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2c spiæ¥å£ */
     
     PLATFORM_LCD_BUS_QTY,
 }PlatformLcdBus;
 
-/*+\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c spi½Ó¿Ú */
+/*+\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2c spiæ¥å£ */
 typedef union {
     struct {
         int bus_id;
@@ -68,45 +68,45 @@ typedef union {
         int data_addr;
     } bus_i2c;
 } lcd_itf_t;
-/*-\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c spi½Ó¿Ú */
+/*-\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2c spiæ¥å£ */
 
 typedef struct PlatformDispInitParamTag
 {
-    u16 width;  // lcdÉè±¸¿í¶È
-    u16 height; // lcdÉè±¸¸ß¶È
-    u8  bpp; // bits per pixel lcdÉè±¸É«Éî 1:ºÚ°× 16:16Î»É«²ÊÆÁ
+    u16 width;  // lcdè®¾å¤‡å®½åº¦
+    u16 height; // lcdè®¾å¤‡é«˜åº¦
+    u8  bpp; // bits per pixel lcdè®¾å¤‡è‰²æ·± 1:é»‘ç™½ 16:16ä½è‰²å½©å±
     u16 x_offset;
     u16 y_offset;
-    u32 *pLcdCmdTable;    //lcd³õÊ¼»¯Ö¸Áî±í
-    u16 tableSize;         //lcd³õÊ¼»¯Ö¸¶¨±í´óĞ¡
-/*+\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
-    u32 *pLcdSleepCmd;  // lcd sleepÖ¸Áî±í
+    u32 *pLcdCmdTable;    //lcdåˆå§‹åŒ–æŒ‡ä»¤è¡¨
+    u16 tableSize;         //lcdåˆå§‹åŒ–æŒ‡å®šè¡¨å¤§å°
+/*+\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
+    u32 *pLcdSleepCmd;  // lcd sleepæŒ‡ä»¤è¡¨
     u16 sleepCmdSize;
-    u32 *pLcdWakeCmd;   // lcd wakeÖ¸Áî±í
+    u32 *pLcdWakeCmd;   // lcd wakeæŒ‡ä»¤è¡¨
     u16 wakeCmdSize;
-/*-\NEW\liweiqiang\2013.12.18\Ôö¼ÓlcdË¯ÃßÃüÁîÖ§³Ö */
+/*-\NEW\liweiqiang\2013.12.18\å¢åŠ lcdç¡çœ å‘½ä»¤æ”¯æŒ */
     PlatformLcdBus bus;
-/*+\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c½Ó¿Ú */
+/*+\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2cæ¥å£ */
     lcd_itf_t lcd_itf;
-/*-\new\liweiqiang\2014.10.11\Ìí¼Ólcd i2c½Ó¿Ú */
+/*-\new\liweiqiang\2014.10.11\æ·»åŠ lcd i2cæ¥å£ */
     int pin_rst; //reset pin
-    /*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
-    int hwfillcolor; // lcdÎïÀíÌî³äÉ«
-    /*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+    /*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
+    int hwfillcolor; // lcdç‰©ç†å¡«å……è‰²
+    /*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
     int pin_cs; // cs pin
-/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
+/*+\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
     int pin_rs; // rs pin
-/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua ÎŞ·¨Õı³£Ê¹ÓÃ */
-	/*+\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
+/*-\new\czm\2020.9.6\bug:2964 mono_std_spi_st7571.lua æ— æ³•æ­£å¸¸ä½¿ç”¨ */
+	/*+\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
     u8 camera_preview_no_update_screen;
-	/*-\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
+	/*-\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
     u8 *framebuffer;
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
-    /*+\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
-    u8 Driving;//lcd_spiµÄÇı¶¯ÄÜÁ¦×î´óÖµÎª15
-    /*-\BUG:3316\czm\2020.10.16\LCD_SPI Çı¶¯ÄÜÁ¦Èõ£¬Ï£ÍûÄÜÔöÇ¿Çı¶¯ÄÜÁ¦*/  
+    /*+\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
+    u8 Driving;//lcd_spiçš„é©±åŠ¨èƒ½åŠ›æœ€å¤§å€¼ä¸º15
+    /*-\BUG:3316\czm\2020.10.16\LCD_SPI é©±åŠ¨èƒ½åŠ›å¼±ï¼Œå¸Œæœ›èƒ½å¢å¼ºé©±åŠ¨èƒ½åŠ›*/  
 }PlatformDispInitParam;
 
 typedef SLIST_ENTRY(platform_layer) platform_layer_iter_t;
@@ -140,13 +140,13 @@ void platform_disp_update(void);
 
 u16* platform_disp_puttext(const char *string, u16 x, u16 y);
 
-/*+\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
-/*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+/*+\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
+/*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 int platform_disp_putimage(const char *filename, u16 x, u16 y, int transcolor, u16 left, u16 top, u16 right, u16 bottom,int transtype);
-/*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
-/*-\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
+/*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
+/*-\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
 
 void platform_layer_start_move(int layer_id1, int layer_id2,int layer_id3,int delay_ms,int x_inc,int y_inc);
 
@@ -163,29 +163,29 @@ int platform_disp_preload_png_background(const char *filename);
 int platform_disp_move_foreimg(int x1, int y1, int x2, int y2);
 
 
-/*+\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color);
-/*-\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 int platform_disp_setcolor(int color);
 int platform_disp_setbkcolor(int color);
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
 int platform_disp_loadfont(const char *name);
 int platform_disp_setfont(int id);
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 int platform_disp_setfontHeight(int height);
 int platform_disp_getfontHeight(void);
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 /******************************************************************************
 ***func name---- platform_disp_preload_png_to_layer
-***param    ---- filename: Òª×°ÔØµÄPNGÍ¼Æ¬Ãû³Æ
-                 layer_id: Í¼Æ¬×°ÔØµÄÄ¿µÄÍ¼²ãID
-***desc     ---- Ô¤×°ÔØPNGÍ¼Æ¬µ½Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- filename: è¦è£…è½½çš„PNGå›¾ç‰‡åç§°
+                 layer_id: å›¾ç‰‡è£…è½½çš„ç›®çš„å›¾å±‚ID
+***desc     ---- é¢„è£…è½½PNGå›¾ç‰‡åˆ°å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
 ******************************************************************************/
 int platform_disp_preload_png_to_layer(const char *filename, int layer_id);
@@ -196,16 +196,16 @@ int platform_disp_preload_png_to_layer(const char *filename, int layer_id);
 
 /******************************************************************************
 ***func name---- platform_create_user_layer
-***param    ---- layer_id:Òª´´½¨µÄÓÃ»§Í¼²ã
-            -----layer_width:Í¼²ã¿í¶È
-            -----layer_height:Í¼²ã¸ß¶È
-***desc     ---- ´´½¨ÓÃ»§Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- layer_id:è¦åˆ›å»ºçš„ç”¨æˆ·å›¾å±‚
+            -----layer_width:å›¾å±‚å®½åº¦
+            -----layer_height:å›¾å±‚é«˜åº¦
+***desc     ---- åˆ›å»ºç”¨æˆ·å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
------1.ÔÚ´´½¨Ö®Ç°£¬ÇëÈ·±£´ËÍ¼²ã´ÓÎ´±»´´½¨»òÕßÒÑ¾­Ïú»Ù
------2.Ä¿Ç°Ö»Ö§³ÖÁ½¸öÓÃ»§Í¼²ãµÄ´´½¨
------3.»ù´¡²ã²»ÓÃ´´½¨£¬ÏµÍ³×Ô¶¯´´½¨
------4.ÓÃ»§Í¼²ãµÄÄ¬ÈÏ´óĞ¡ÎªÆÁÄ»´óĞ¡£¬Ä¬ÈÏ¸ñÊ½Îª24Î»
+-----1.åœ¨åˆ›å»ºä¹‹å‰ï¼Œè¯·ç¡®ä¿æ­¤å›¾å±‚ä»æœªè¢«åˆ›å»ºæˆ–è€…å·²ç»é”€æ¯
+-----2.ç›®å‰åªæ”¯æŒä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„åˆ›å»º
+-----3.åŸºç¡€å±‚ä¸ç”¨åˆ›å»ºï¼Œç³»ç»Ÿè‡ªåŠ¨åˆ›å»º
+-----4.ç”¨æˆ·å›¾å±‚çš„é»˜è®¤å¤§å°ä¸ºå±å¹•å¤§å°ï¼Œé»˜è®¤æ ¼å¼ä¸º24ä½
 ******************************************************************************/
 int platform_create_user_layer(int layer_id, int start_x, int start_y, int layer_width, int layer_height);
 
@@ -214,12 +214,12 @@ int platform_create_user_layer(int layer_id, int start_x, int start_y, int layer
 
 /******************************************************************************
 ***func name---- platform_destroy_user_layer
-***param    ---- layer_id:ÒªÏú»ÙµÄÓÃ»§Í¼²ã
-***desc     ---- Ïú»ÙÓÃ»§Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- layer_id:è¦é”€æ¯çš„ç”¨æˆ·å›¾å±‚
+***desc     ---- é”€æ¯ç”¨æˆ·å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
------1. layer_idÖ»ÄÜÊÇUSER_LAYER_1_ID»òÕßUSER_LAYER_2_ID
------2. Í¼²ãÊ¹ÓÃÍê³ÉÖ®ºóÓ¦¸Ã¾¡ÔçÊÍ·Å£¬·ñÔò»áÕ¼ÓÃÏµÍ³ÄÚ´æ
+-----1. layer_idåªèƒ½æ˜¯USER_LAYER_1_IDæˆ–è€…USER_LAYER_2_ID
+-----2. å›¾å±‚ä½¿ç”¨å®Œæˆä¹‹ååº”è¯¥å°½æ—©é‡Šæ”¾ï¼Œå¦åˆ™ä¼šå ç”¨ç³»ç»Ÿå†…å­˜
 ******************************************************************************/
 int platform_destroy_user_layer(int layer_id);
 
@@ -227,8 +227,8 @@ int platform_destroy_user_layer(int layer_id);
 
 /******************************************************************************
 ***func name---- platform_set_active_layer
-***param    ---- layer_id:Òª¼¤»îµÄÍ¼²ãID
-***desc     ---- ¼¤»îÍ¼²ã£¬¶ÔLCDµÄËùÓĞ»æÍ¼¶¯×÷¶¼»áÔÚ¼¤»îÍ¼²ãÉÏ½øĞĞ
+***param    ---- layer_id:è¦æ¿€æ´»çš„å›¾å±‚ID
+***desc     ---- æ¿€æ´»å›¾å±‚ï¼Œå¯¹LCDçš„æ‰€æœ‰ç»˜å›¾åŠ¨ä½œéƒ½ä¼šåœ¨æ¿€æ´»å›¾å±‚ä¸Šè¿›è¡Œ
 ***return   ---- NULL
 ***note     
 ******************************************************************************/
@@ -240,8 +240,8 @@ void platform_set_active_layer(int layer_id);
 /******************************************************************************
 ***func name---- platform_swap_user_layer
 ***param    ---- NULL
-***desc     ---- ¶Ô»»Á½¸öÓÃ»§Í¼²ãµÄÄÚÈİ¡£´Ëº¯Êı²»Éæ¼°Í¼²ãµÄÊı¾İ¿½±´£¬Òò´ËËÙ¶ÈºÜ¿ì¡£
-                 ÊÊÓÃÓÚ¶ÔËÙ¶ÈÒªÇó¸ßµÄÇé¿öÏÂ¿ìËÙ½»»»Á½¸öÓÃ»§Í¼²ãµÄÄÚÈİ.
+***desc     ---- å¯¹æ¢ä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„å†…å®¹ã€‚æ­¤å‡½æ•°ä¸æ¶‰åŠå›¾å±‚çš„æ•°æ®æ‹·è´ï¼Œå› æ­¤é€Ÿåº¦å¾ˆå¿«ã€‚
+                 é€‚ç”¨äºå¯¹é€Ÿåº¦è¦æ±‚é«˜çš„æƒ…å†µä¸‹å¿«é€Ÿäº¤æ¢ä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„å†…å®¹.
 ***return   ---- NULL
 ***note     
 ******************************************************************************/
@@ -253,12 +253,12 @@ void platform_swap_user_layer(void);
 
 /******************************************************************************
 ***func name---- platform_copy_layer
-***param    ---- dst_layer_id: ÒªCOPYµÄÄ¿µÄÍ¼²ãµÄID
-            -----display_x:  Ô´Í¼²ãÔÚÄ¿µÄÍ¼²ãÉÏµÄÎ»ÖÃX
-            -----display_y:  Ô´Í¼²ãÔÚÄ¿µÄÍ¼²ãÉÏµÄÎ»ÖÃY
-            ---- src_layer_id: ÒªCOPYµÄÔ´Í¼²ãµÄID
-            -----src_rect:  ĞèÒªCOPYµÄÔ´Í¼²ãµÄÇøÓò
-***desc     ---- Í¼²ãÄÚÈİ¿½±´¡£
+***param    ---- dst_layer_id: è¦COPYçš„ç›®çš„å›¾å±‚çš„ID
+            -----display_x:  æºå›¾å±‚åœ¨ç›®çš„å›¾å±‚ä¸Šçš„ä½ç½®X
+            -----display_y:  æºå›¾å±‚åœ¨ç›®çš„å›¾å±‚ä¸Šçš„ä½ç½®Y
+            ---- src_layer_id: è¦COPYçš„æºå›¾å±‚çš„ID
+            -----src_rect:  éœ€è¦COPYçš„æºå›¾å±‚çš„åŒºåŸŸ
+***desc     ---- å›¾å±‚å†…å®¹æ‹·è´ã€‚
 ***return   ---- NULL
 ***note
 ******************************************************************************/
@@ -273,18 +273,18 @@ void platform_copy_layer(int dst_layer_id,
 
 /******************************************************************************
 ***func name---- platform_copy_to_basic_layer
-***param    ---- layer_id1: ÒªÏÔÊ¾µÄÍ¼²ã1µÄID
-            -----x1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êy.
-            ---- layer_id2: ÒªÏÔÊ¾µÄÍ¼²ã2µÄID
-            -----x2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êy.            
-            ---- layer_id3: ÒªÏÔÊ¾µÄÍ¼²ã3µÄID
-            -----x2:  Ô´Í¼²ã3ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y2:  Ô´Í¼²ã3ÔÚLCDµÄÏÔÊ¾×ù±êy.            
-***desc     -----¶àÍ¼²ãµÄÏÔÊ¾¡£
+***param    ---- layer_id1: è¦æ˜¾ç¤ºçš„å›¾å±‚1çš„ID
+            -----x1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.
+            ---- layer_id2: è¦æ˜¾ç¤ºçš„å›¾å±‚2çš„ID
+            -----x2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.            
+            ---- layer_id3: è¦æ˜¾ç¤ºçš„å›¾å±‚3çš„ID
+            -----x2:  æºå›¾å±‚3åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y2:  æºå›¾å±‚3åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.            
+***desc     -----å¤šå›¾å±‚çš„æ˜¾ç¤ºã€‚
 ***return   ----- NULL
-***note     ----- Èç¹û²»ĞèÒªÏÔÊ¾Ä³¸öÍ¼²ã£¬½«layer_idÖÃÎªINVALID_LAYER_ID¼´¿É
+***note     ----- å¦‚æœä¸éœ€è¦æ˜¾ç¤ºæŸä¸ªå›¾å±‚ï¼Œå°†layer_idç½®ä¸ºINVALID_LAYER_IDå³å¯
 ******************************************************************************/
 void platform_layer_flatten(int layer_id1, int x1, int y1, 
                                   int layer_id2, int x2, int y2,
@@ -294,17 +294,17 @@ void platform_layer_flatten(int layer_id1, int x1, int y1,
 
 int platform_get_png_file_resolution(const char *filename, u32* width, u32* height);
 
-/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 void platform_disp_new(PlatformDispInitParam *pParam);
 
 int platform_disp_get();
-/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #define MAX_LCD_WIDTH_SUPPORT 240
 #define MAX_LCD_HEIGH_SUPPORT 240
 
 #define MAX_LCD_PIXEL_BYTES   3
 #define MAX_LCD_BUFF_SIZE (MAX_LCD_WIDTH_SUPPORT*MAX_LCD_HEIGH_SUPPORT* MAX_LCD_PIXEL_BYTES)
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
 #endif//_PLATFORM_DISP_H_

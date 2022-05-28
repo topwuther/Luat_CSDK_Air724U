@@ -36,12 +36,12 @@ static int _days[] = {
         -1, 30, 58, 89, 119, 150, 180, 211, 242, 272, 303, 333, 364
 };
 
-/* ±±¾©Ê±¼ä UTC+08:00 Î´ÊµÊ©ÏÄÁîÊ± */
+/* åŒ—äº¬æ—¶é—´ UTC+08:00 æœªå®æ–½å¤ä»¤æ—¶ */
 static long _timezone = - 8 * 3600L;    /* UTC+08:00 Time Zone */
 static int _daylight = 0;               /* Daylight Saving Time (DST) in timezone */
 static long _dstbias = -3600L;          /* DST offset in seconds */
 
-#if 0 /* time½Ó¿ÚÒÀÀµ²»Í¬µÄÏµÍ³ÊµÏÖ */
+#if 0 /* timeæ¥å£ä¾èµ–ä¸åŒçš„ç³»ç»Ÿå®ç° */
 time_t lualibc_time(time_t *_timer)
 {
     time_t thetime = 0;
@@ -287,13 +287,13 @@ time_t lualibc_mktime(struct tm *_timeptr)
     return _make_time_t(_timeptr, 1);
 }
 
-char* lualibc_asctime(const struct tm *_tblock)     /* Ôİ²»Ö§³Ö */
+char* lualibc_asctime(const struct tm *_tblock)     /* æš‚ä¸æ”¯æŒ */
 {
     errno = ENOSYS;
     return NULL;
 }
 
-char* lualibc_ctime(const time_t *_time)            /* Ôİ²»Ö§³Ö */
+char* lualibc_ctime(const time_t *_time)            /* æš‚ä¸æ”¯æŒ */
 {
     errno = ENOSYS;
     return NULL;
@@ -301,7 +301,7 @@ char* lualibc_ctime(const time_t *_time)            /* Ôİ²»Ö§³Ö */
 
 static struct tm tb = { 0 };    /* time block */
 
-struct tm* lualibc_gmtime(const time_t *timp)       /* ÒÆÖ²×ÔVC */
+struct tm* lualibc_gmtime(const time_t *timp)       /* ç§»æ¤è‡ªVC */
 {
     long caltim = *timp;            /* calendar time to convert */
     int islpyr = 0;                 /* is-current-year-a-leap-year flag */
@@ -420,7 +420,7 @@ struct tm* lualibc_gmtime(const time_t *timp)       /* ÒÆÖ²×ÔVC */
     return( (struct tm *)ptb );
 }
 
-int _isindst (struct tm *timeptr)    /* DST ÏÄÁîÊ± Ôİ²»Ö§³Ö */
+int _isindst (struct tm *timeptr)    /* DST å¤ä»¤æ—¶ æš‚ä¸æ”¯æŒ */
 {
     if(_daylight == 0)
         return 0;
@@ -429,7 +429,7 @@ int _isindst (struct tm *timeptr)    /* DST ÏÄÁîÊ± Ôİ²»Ö§³Ö */
     return 0;
 }
 
-struct tm* lualibc_localtime(const time_t *ptime)  /* Ä¿Ç°Ğ´ËÀÊ±ÇøÎªGMT+8 ±±¾©Ê±¼ä */
+struct tm* lualibc_localtime(const time_t *ptime)  /* ç›®å‰å†™æ­»æ—¶åŒºä¸ºGMT+8 åŒ—äº¬æ—¶é—´ */
 {
     struct tm *ptm;
     long ltime;
@@ -543,7 +543,7 @@ struct tm* lualibc_localtime(const time_t *ptime)  /* Ä¿Ç°Ğ´ËÀÊ±ÇøÎªGMT+8 ±±¾©Ê±
     return(ptm);
 }
 
-size_t lualibc_strfttime(char *_s, size_t _maxsize, const char *_fmt, const struct tm *_t)  /* Ôİ²»Ö§³Ö */
+size_t lualibc_strfttime(char *_s, size_t _maxsize, const char *_fmt, const struct tm *_t)  /* æš‚ä¸æ”¯æŒ */
 {
     errno = ENOSYS;
     return 0;

@@ -1,19 +1,19 @@
 local msg = {}
 local count = 0
 
--- ³õÊ¼»¯keypad Ê¹ÓÃ¼üÅÌ±ØĞëÏÈ³õÊ¼»¯
+-- åˆå§‹åŒ–keypad ä½¿ç”¨é”®ç›˜å¿…é¡»å…ˆåˆå§‹åŒ–
 rtos.init_module(rtos.MOD_KEYPAD, 0, 0x1f, 0x1f)
 
--- Æô¶¯¶¨Ê±Æ÷
+-- å¯åŠ¨å®šæ—¶å™¨
 rtos.timer_start(1, 1000)
 
 while true do
-    -- ×èÈûµÈ´ı 
+    -- é˜»å¡ç­‰å¾… 
     --msg = rtos.receive(rtos.INF_TIMEOUT)
-    -- ³¬Ê±µÈ´ı
-    msg = rtos.receive(2000) -- receive ÏûÏ¢½Ó¿Ú param1: timeout ÒÔmsÎªµ¥Î»
+    -- è¶…æ—¶ç­‰å¾…
+    msg = rtos.receive(2000) -- receive æ¶ˆæ¯æ¥å£ param1: timeout ä»¥msä¸ºå•ä½
     
-    -- timerÏûÏ¢´¦Àí 
+    -- timeræ¶ˆæ¯å¤„ç† 
     if(msg.id == rtos.MSG_TIMER) then  
     
         print("timer id: " .. msg.timer_id)
@@ -26,7 +26,7 @@ while true do
            -- nothing to do, just for test
         end
     
-    -- uart/atcÏûÏ¢ Í¨¹ımsg.uart_idÇø·Ö
+    -- uart/atcæ¶ˆæ¯ é€šè¿‡msg.uart_idåŒºåˆ†
     elseif msg.id == rtos.MSG_UART_RXDATA then 
     
         repeat
@@ -34,20 +34,20 @@ while true do
             print(s)
         until string.len(s) == 0
     
-    -- °´¼üÏûÏ¢´¦Àí Ä¿Ç°ÓĞ3¸ö²ÎÊı ×´Ì¬ÓëĞĞÁĞÖµ pressed row col
+    -- æŒ‰é”®æ¶ˆæ¯å¤„ç† ç›®å‰æœ‰3ä¸ªå‚æ•° çŠ¶æ€ä¸è¡Œåˆ—å€¼ pressed row col
     elseif msg.id == rtos.MSG_KEYPAD then
     
         print(msg.pressed)
         print("key_matrix_row:" .. msg.key_matrix_row)
         print("key_matrix_col:" .. msg.key_matrix_col)
         
-    -- µÈ´ıÏûÏ¢³¬Ê±, ×èÈûµÈ´ıÎŞĞè¹Ø×¢¸ÃÏûÏ¢
+    -- ç­‰å¾…æ¶ˆæ¯è¶…æ—¶, é˜»å¡ç­‰å¾…æ— éœ€å…³æ³¨è¯¥æ¶ˆæ¯
     elseif msg.id == rtos.WAIT_MSG_TIMEOUT then
     
         count = count+1
         print("rtos receive msg timeout count:" .. count)
                 
-    -- ÆäËûÏûÏ¢
+    -- å…¶ä»–æ¶ˆæ¯
     else
         print("rtos.receive: msg id(" .. msg.id .. ")")
     end

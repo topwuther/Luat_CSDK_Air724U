@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: Jack.li
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2013.1.28   Jack.li     ´´½¨ÎÄ¼ş
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2013.1.28   Jack.li     åˆ›å»ºæ–‡ä»¶
 *********************************************************/
 #ifndef OPENAT_CAMERA_H
 #define OPENAT_CAMERA_H
@@ -18,20 +18,20 @@ BOOL OPENAT_CameraPreviewOpen(T_AMOPENAT_CAM_PREVIEW_PARAM *previewParam);
 BOOL OPENAT_CameraPreviewClose(void);
 BOOL OPENAT_CameraCapture(T_AMOPENAT_CAM_CAPTURE_PARAM *captureParam);
 BOOL OPENAT_CameraSavePhoto(INT32 iFd);
-/*+\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
+/*+\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
 BOOL OPENAT_CameraLcdUpdateEnable(BOOL lcdUpdateEnable);
-/*-\bug2406\zhuwangbin\2020.6.28\ÉãÏñÍ·É¨ÃèÔ¤ÀÀÊ±£¬ÒªÖ§³ÖÅäÖÃÊÇ·ñË¢ÆÁÏÔÊ¾¹¦ÄÜ */
+/*-\bug2406\zhuwangbin\2020.6.28\æ‘„åƒå¤´æ‰«æé¢„è§ˆæ—¶ï¼Œè¦æ”¯æŒé…ç½®æ˜¯å¦åˆ·å±æ˜¾ç¤ºåŠŸèƒ½ */
 
-/*+\NEW\Jack.li\2013.2.9\Ôö¼ÓÉãÏñÍ·ÊÓÆµÂ¼ÖÆ½Ó¿Ú */
+/*+\NEW\Jack.li\2013.2.9\å¢åŠ æ‘„åƒå¤´è§†é¢‘å½•åˆ¶æ¥å£ */
 BOOL OPENAT_CameraVideoRecordStart(INT32 iFd);
 BOOL OPENAT_CameraVideoRecordPause(void);
 BOOL OPENAT_CameraVideoRecordResume(void);
 BOOL OPENAT_CameraVideoRecordStop(void);
-/*-\NEW\Jack.li\2013.2.9\Ôö¼ÓÉãÏñÍ·ÊÓÆµÂ¼ÖÆ½Ó¿Ú */
+/*-\NEW\Jack.li\2013.2.9\å¢åŠ æ‘„åƒå¤´è§†é¢‘å½•åˆ¶æ¥å£ */
 
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 BOOL OPENAT_CameraWriteReg(PAMOPENAT_CAMERA_REG initRegTable_p, int len);
-/*+\NEW\zhuwangbin\2020.7.14\Ìí¼Ócamera sensorĞ´¼Ä´æÆ÷½Ó¿Ú*/
+/*+\NEW\zhuwangbin\2020.7.14\æ·»åŠ camera sensorå†™å¯„å­˜å™¨æ¥å£*/
 
 BOOL OPENAT_CameraLedSet(UINT8 level);
 

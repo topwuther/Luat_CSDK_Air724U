@@ -6,10 +6,10 @@
 
 #define OLED_I2C_ADDRESS 0x3C
 #define OLED_I2C_PORT OPENAT_I2C_2
-#define OLED_CMD 0  //Ğ´ÃüÁî
-#define OLED_DATA 1 //Ğ´Êı¾İ
+#define OLED_CMD 0  //å†™å‘½ä»¤
+#define OLED_DATA 1 //å†™æ•°æ®
 
-//OLED¿ØÖÆÓÃº¯Êı
+//OLEDæ§åˆ¶ç”¨å‡½æ•°
 void OLED_WR_Byte(uint8_t dat, uint8_t cmd);
 void OLED_Display_On(void);
 void OLED_Display_Off(void);

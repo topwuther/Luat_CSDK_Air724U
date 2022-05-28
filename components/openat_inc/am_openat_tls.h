@@ -120,13 +120,13 @@ typedef struct
 {
     int32   *ciphersuite;
     u8   ignore_local_time;//0: care about tiem check for certification; 1:ignore tiem check for certification
-    u8   randbytes[MAX_SET_RANDBYTES*2+1]; //Ëæ»úÊıÎª32×Ö½Ú
-    u8   premaster[MAX_SET_PREMASTER*2+1]; //premasterÎª48×Ö½Ú
+    u8   randbytes[MAX_SET_RANDBYTES*2+1]; //éšæœºæ•°ä¸º32å­—èŠ‚
+    u8   premaster[MAX_SET_PREMASTER*2+1]; //premasterä¸º48å­—èŠ‚
     char *caPath;
     u8 ssl_version;
-	/*+\NEW\WJ\2019.1.28\Ìí¼ÓÈÏÖ¤·½Ê½*/
-    u8 verify_mode; //0£º¸ùÖ¤ÊéÈÏÖ¤ 1£ºÆäËûÖ¤ÊéÈÏÖ¤
-	/*-\NEW\WJ\2019.1.28\Ìí¼ÓÈÏÖ¤·½Ê½*/
+	/*+\NEW\WJ\2019.1.28\æ·»åŠ è®¤è¯æ–¹å¼*/
+    u8 verify_mode; //0ï¼šæ ¹è¯ä¹¦è®¤è¯ 1ï¼šå…¶ä»–è¯ä¹¦è®¤è¯
+	/*-\NEW\WJ\2019.1.28\æ·»åŠ è®¤è¯æ–¹å¼*/
 }openat_tls_ssl_cfg;
 
 typedef struct tls_socaddr_struct_s  openat_tls_socaddr_struct;

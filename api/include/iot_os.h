@@ -10,26 +10,26 @@
 
 
 /**
- * @defgroup iot_sdk_os ²Ù×÷ÏµÍ³½Ó¿Ú
+ * @defgroup iot_sdk_os æ“ä½œç³»ç»Ÿæ¥å£
  * @{
  */
 
 /**
- * @defgroup Ïß³Ì½Ó¿Úº¯ÊıÀàĞÍ Ïß³Ì½Ó¿Úº¯Êı
+ * @defgroup çº¿ç¨‹æ¥å£å‡½æ•°ç±»å‹ çº¿ç¨‹æ¥å£å‡½æ•°
  * @{
  */
 /**@example os/demo_os.c
-* os½Ó¿ÚÊ¾Àı
+* osæ¥å£ç¤ºä¾‹
 */ 
-/**´´½¨Ïß³Ì
-*@note  nPriorityÖµµÄ·µ»ØÔÚ0-20, ÖµÔ½´óÓÅÏÈ¼¶Ô½µÍ
-*@param	pTaskEntry:		Ïß³ÌÖ÷º¯Êı
-*@param	pParameter:		×÷Îª²ÎÊı´«µİ¸øÏß³ÌÖ÷º¯Êı
-*@param	nStackSize: 	Ïß³ÌÕ»´óĞ¡
-*@param	nPriority: 		Ïß³ÌÓÅÏÈ¼¶£¬¸Ã²ÎÊıÔ½´ó£¬Ïß³ÌÓÅÏÈ¼¶Ô½µÍ
-*@param nCreationFlags: Ïß³ÌÆô¶¯±ê¼Ç£¬ Çë²Î¿¼E_AMOPENAT_OS_CREATION_FLAG
-*@param pTaskName: 		Ïß³ÌÃû³Æ
-*@return	HANDLE: 	´´½¨³É¹¦·µ»ØÏß³Ì¾ä±ú
+/**åˆ›å»ºçº¿ç¨‹
+*@note  nPriorityå€¼çš„è¿”å›åœ¨0-20, å€¼è¶Šå¤§ä¼˜å…ˆçº§è¶Šä½
+*@param	pTaskEntry:		çº¿ç¨‹ä¸»å‡½æ•°
+*@param	pParameter:		ä½œä¸ºå‚æ•°ä¼ é€’ç»™çº¿ç¨‹ä¸»å‡½æ•°
+*@param	nStackSize: 	çº¿ç¨‹æ ˆå¤§å°
+*@param	nPriority: 		çº¿ç¨‹ä¼˜å…ˆçº§ï¼Œè¯¥å‚æ•°è¶Šå¤§ï¼Œçº¿ç¨‹ä¼˜å…ˆçº§è¶Šä½
+*@param nCreationFlags: çº¿ç¨‹å¯åŠ¨æ ‡è®°ï¼Œ è¯·å‚è€ƒE_AMOPENAT_OS_CREATION_FLAG
+*@param pTaskName: 		çº¿ç¨‹åç§°
+*@return	HANDLE: 	åˆ›å»ºæˆåŠŸè¿”å›çº¿ç¨‹å¥æŸ„
 **/
 HANDLE iot_os_create_task(                         
                             PTASK_MAIN pTaskEntry,  
@@ -41,46 +41,46 @@ HANDLE iot_os_create_task(
 						);
 
 
-/**É¾³ıÏß³Ì
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@return	TURE:		É¾³ıÏß³Ì³É¹¦
-*			FALSE: 		É¾³ıÏß³ÌÊ§°Ü
+/**åˆ é™¤çº¿ç¨‹
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@return	TURE:		åˆ é™¤çº¿ç¨‹æˆåŠŸ
+*			FALSE: 		åˆ é™¤çº¿ç¨‹å¤±è´¥
 **/	
 BOOL iot_os_delete_task(                           
                         HANDLE hTask        
                    );	
 
-/**¹ÒÆğÏß³Ì
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@return	TURE: 		¹ÒÆğÏß³Ì³É¹¦
-*			FALSE  : 	¹ÒÆğÏß³ÌÊ§°Ü
+/**æŒ‚èµ·çº¿ç¨‹
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@return	TURE: 		æŒ‚èµ·çº¿ç¨‹æˆåŠŸ
+*			FALSE  : 	æŒ‚èµ·çº¿ç¨‹å¤±è´¥
 **/
 BOOL iot_os_suspend_task(                        
                             HANDLE hTask           
                         );
 
-/**»Ö¸´Ïß³Ì
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@return	TURE: 		»Ö¸´Ïß³Ì³É¹¦
-*			FALSE  : 	»Ö¸´Ïß³ÌÊ§°Ü
+/**æ¢å¤çº¿ç¨‹
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@return	TURE: 		æ¢å¤çº¿ç¨‹æˆåŠŸ
+*			FALSE  : 	æ¢å¤çº¿ç¨‹å¤±è´¥
 **/
 BOOL iot_os_resume_task(                         
                         HANDLE hTask         
                    );
 
-/**»ñÈ¡µ±Ç°Ïß³Ì
-*@return	HANDLE:		·µ»Øµ±Ç°Ïß³Ì¾ä±ú
+/**è·å–å½“å‰çº¿ç¨‹
+*@return	HANDLE:		è¿”å›å½“å‰çº¿ç¨‹å¥æŸ„
 *
 **/				   
 HANDLE iot_os_current_task(                
                             VOID
                           );	
 
-/**»ñÈ¡µ±Ç°Ïß³Ì´´½¨ĞÅÏ¢
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@param		pTaskInfo:		Ïß³ÌĞÅÏ¢´æ´¢½Ó¿Ú
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**è·å–å½“å‰çº¿ç¨‹åˆ›å»ºä¿¡æ¯
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@param		pTaskInfo:		çº¿ç¨‹ä¿¡æ¯å­˜å‚¨æ¥å£
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/
 BOOL iot_os_get_task_info(                        
                             HANDLE hTask,           
@@ -89,59 +89,59 @@ BOOL iot_os_get_task_info(
 /** @}*/ 
 
 /**
- * @defgroup ÏûÏ¢½Ó¿Úº¯ÊıÀàĞÍ ÏûÏ¢½Ó¿Úº¯Êı
+ * @defgroup æ¶ˆæ¯æ¥å£å‡½æ•°ç±»å‹ æ¶ˆæ¯æ¥å£å‡½æ•°
  * @{
  */
 
-/**»ñÈ¡Ïß³ÌÏûÏ¢
-*@note »á×èÈû
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@param		ppMessage:	´æ´¢ÏûÏ¢Ö¸Õë
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**è·å–çº¿ç¨‹æ¶ˆæ¯
+*@note ä¼šé˜»å¡
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@param		ppMessage:	å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/
 BOOL iot_os_wait_message(                         
 						HANDLE hTask,          
 						PVOID* ppMessage      
 					);
 					
-/**·¢ËÍÏß³ÌÏûÏ¢
-*@note Ìí¼Óµ½ÏûÏ¢¶ÓÁĞÎ²²¿
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@param		pMessage:	´æ´¢ÏûÏ¢Ö¸Õë
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**å‘é€çº¿ç¨‹æ¶ˆæ¯
+*@note æ·»åŠ åˆ°æ¶ˆæ¯é˜Ÿåˆ—å°¾éƒ¨
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@param		pMessage:	å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/					
 BOOL iot_os_send_message(                         
 						HANDLE hTask,          
 						PVOID pMessage         
 					);
 
-/**¼ì²âÏûÏ¢¶ÓÁĞÖĞÊÇ·ñÓĞÏûÏ¢
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**æ£€æµ‹æ¶ˆæ¯é˜Ÿåˆ—ä¸­æ˜¯å¦æœ‰æ¶ˆæ¯
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/								  
 BOOL iot_os_available_message(                   
 						HANDLE hTask       
 						 );
 
-/**·¢ËÍ¸ßÓÅÏÈ¼¶Ïß³ÌÏûÏ¢
-*@note      Ìí¼Óµ½ÏûÏ¢¶ÓÁĞÍ·²¿
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@param		pMessage:	´æ´¢ÏûÏ¢Ö¸Õë
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**å‘é€é«˜ä¼˜å…ˆçº§çº¿ç¨‹æ¶ˆæ¯
+*@note      æ·»åŠ åˆ°æ¶ˆæ¯é˜Ÿåˆ—å¤´éƒ¨
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@param		pMessage:	å­˜å‚¨æ¶ˆæ¯æŒ‡é’ˆ
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/
 BOOL iot_os_send_high_priority_message(          
                         HANDLE hTask,          
                         PVOID pMessage         
                                   );
 
-/**¼ì²âÏûÏ¢¶ÓÁĞÖĞÊÇ·ñÓĞÏûÏ¢
-*@param		hTask:		Ïß³Ì¾ä±ú
-*@return	TURE: 		³É¹¦
-*			FALSE  : 	Ê§°Ü
+/**æ£€æµ‹æ¶ˆæ¯é˜Ÿåˆ—ä¸­æ˜¯å¦æœ‰æ¶ˆæ¯
+*@param		hTask:		çº¿ç¨‹å¥æŸ„
+*@return	TURE: 		æˆåŠŸ
+*			FALSE  : 	å¤±è´¥
 **/
 BOOL iot_os_available_message(                     
                         HANDLE hTask           
@@ -150,19 +150,19 @@ BOOL iot_os_available_message(
 /** @}*/ 
 
 /**
- * @defgroup Ê±¼ä¶¨Ê±Æ÷½Ó¿Úº¯ÊıÀàĞÍ Ê±¼ä¶¨Ê±Æ÷½Ó¿Úº¯Êı
+ * @defgroup æ—¶é—´å®šæ—¶å™¨æ¥å£å‡½æ•°ç±»å‹ æ—¶é—´å®šæ—¶å™¨æ¥å£å‡½æ•°
  * @{
  */
 
 /**@example timer/demo_timer.c
-* timer½Ó¿ÚÊ¾Àı
+* timeræ¥å£ç¤ºä¾‹
 */ 
 
 
-/**´´½¨¶¨Ê±Æ÷
-*@param		pFunc:			¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı
-*@param		pParameter:		×÷Îª²ÎÊı´«µİ¸ø¶¨Ê±Æ÷µ½Ê±´¦Àíº¯Êı
-*@return	HANDLE: 		·µ»Ø¶¨Ê±Æ÷¾ä±ú
+/**åˆ›å»ºå®šæ—¶å™¨
+*@param		pFunc:			å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•°
+*@param		pParameter:		ä½œä¸ºå‚æ•°ä¼ é€’ç»™å®šæ—¶å™¨åˆ°æ—¶å¤„ç†å‡½æ•°
+*@return	HANDLE: 		è¿”å›å®šæ—¶å™¨å¥æŸ„
 *			
 **/	
 HANDLE iot_os_create_timer(                         
@@ -170,58 +170,58 @@ HANDLE iot_os_create_timer(
 						PVOID pParameter       
 					  );
 					  
-/**Æô¶¯¶¨Ê±Æ÷
-*@param		hTimer:				¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ
-*@param		nMillisecondes:		¶¨Ê±Æ÷Ê±¼ä
-*@return	TURE: 				³É¹¦
-*			FALSE  : 			Ê§°Ü
+/**å¯åŠ¨å®šæ—¶å™¨
+*@param		hTimer:				å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼
+*@param		nMillisecondes:		å®šæ—¶å™¨æ—¶é—´
+*@return	TURE: 				æˆåŠŸ
+*			FALSE  : 			å¤±è´¥
 **/								  
-BOOL iot_os_start_timer(                            /* Æô¶¯¶¨Ê±Æ÷½Ó¿Ú */
-						HANDLE hTimer,          /* ¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ */
+BOOL iot_os_start_timer(                            /* å¯åŠ¨å®šæ—¶å™¨æ¥å£ */
+						HANDLE hTimer,          /* å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼ */
 						UINT32 nMillisecondes   /*  */
 				   );
 				   
-/**Í£Ö¹¶¨Ê±Æ÷
-*@param		hTimer:				¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ
-*@return	TURE: 				³É¹¦
-*			FALSE  : 			Ê§°Ü
+/**åœæ­¢å®šæ—¶å™¨
+*@param		hTimer:				å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼
+*@return	TURE: 				æˆåŠŸ
+*			FALSE  : 			å¤±è´¥
 **/						   
 BOOL iot_os_stop_timer(                             
 						HANDLE hTimer   
 				  );
 				  
-/**É¾³ı¶¨Ê±Æ÷
-*@param		hTimer:				¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ
-*@return	TURE: 				³É¹¦
-*			FALSE  : 			Ê§°Ü
+/**åˆ é™¤å®šæ—¶å™¨
+*@param		hTimer:				å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼
+*@return	TURE: 				æˆåŠŸ
+*			FALSE  : 			å¤±è´¥
 **/					  
 BOOL iot_os_delete_timer(                           
 						HANDLE hTimer           
 					);
 					
-/**¼ì²é¶¨Ê±Æ÷ÊÇ·ñÒÑ¾­Æô¶¯
-*@param		hTimer:				¶¨Ê±Æ÷¾ä±ú£¬create_timer½Ó¿Ú·µ»ØÖµ
-*@return	TURE: 				³É¹¦
-*			FALSE  : 			Ê§°Ü
+/**æ£€æŸ¥å®šæ—¶å™¨æ˜¯å¦å·²ç»å¯åŠ¨
+*@param		hTimer:				å®šæ—¶å™¨å¥æŸ„ï¼Œcreate_timeræ¥å£è¿”å›å€¼
+*@return	TURE: 				æˆåŠŸ
+*			FALSE  : 			å¤±è´¥
 **/					
 BOOL iot_os_available_timer(            
 						HANDLE hTimer          
 					   );
 					   
 					   
-/**»ñÈ¡ÏµÍ³Ê±¼ä
-*@param		pDatetime:		´æ´¢Ê±¼äÖ¸Õë
-*@return	TURE: 			³É¹¦
-*			FALSE  : 		Ê§°Ü
+/**è·å–ç³»ç»Ÿæ—¶é—´
+*@param		pDatetime:		å­˜å‚¨æ—¶é—´æŒ‡é’ˆ
+*@return	TURE: 			æˆåŠŸ
+*			FALSE  : 		å¤±è´¥
 **/	
 BOOL iot_os_get_system_datetime(                  
 						T_AMOPENAT_SYSTEM_DATETIME* pDatetime
 					   );
 					   
-/**ÉèÖÃÏµÍ³Ê±¼ä
-*@param		pDatetime:		´æ´¢Ê±¼äÖ¸Õë
-*@return	TURE: 			³É¹¦
-*			FALSE  : 		Ê§°Ü
+/**è®¾ç½®ç³»ç»Ÿæ—¶é—´
+*@param		pDatetime:		å­˜å‚¨æ—¶é—´æŒ‡é’ˆ
+*@return	TURE: 			æˆåŠŸ
+*			FALSE  : 		å¤±è´¥
 **/						   
 BOOL iot_os_set_system_datetime(                    
 						T_AMOPENAT_SYSTEM_DATETIME* pDatetime
@@ -229,26 +229,26 @@ BOOL iot_os_set_system_datetime(
 /** @}*/  
 
 /**
- * @defgroup ÄÖÖÓ½Ó¿Úº¯ÊıÀàĞÍ ÄÖÖÓ½Ó¿Úº¯Êı
+ * @defgroup é—¹é’Ÿæ¥å£å‡½æ•°ç±»å‹ é—¹é’Ÿæ¥å£å‡½æ•°
  * @{
  */
 /**@example demo_alarm/src/demo_alarm.c
-* alarm½Ó¿ÚÊ¾Àı
+* alarmæ¥å£ç¤ºä¾‹
 */
 
-/**ÄÖÖÓ³õÊ¼»¯½Ó¿Ú
-*@param		pConfig:		ÄÖÖÓÅäÖÃ²ÎÊı
-*@return	TURE: 			³É¹¦
-*			FALSE: 		    Ê§°Ü
+/**é—¹é’Ÿåˆå§‹åŒ–æ¥å£
+*@param		pConfig:		é—¹é’Ÿé…ç½®å‚æ•°
+*@return	TURE: 			æˆåŠŸ
+*			FALSE: 		    å¤±è´¥
 **/
 BOOL iot_os_init_alarm(                                      
                         T_AMOPENAT_ALARM_CONFIG *pConfig  
                    ); 
 
-/**ÄÖÖÓÉèÖÃ/É¾³ı½Ó¿Ú
-*@param		pAlarmSet:		ÄÖÖÓÉèÖÃ²ÎÊı
-*@return	TURE: 			³É¹¦
-*			FALSE: 		    Ê§°Ü
+/**é—¹é’Ÿè®¾ç½®/åˆ é™¤æ¥å£
+*@param		pAlarmSet:		é—¹é’Ÿè®¾ç½®å‚æ•°
+*@return	TURE: 			æˆåŠŸ
+*			FALSE: 		    å¤±è´¥
 **/
 BOOL iot_os_set_alarm(                                        
                         T_AMOPENAT_ALARM_PARAM *pAlarmSet    
@@ -256,64 +256,64 @@ BOOL iot_os_set_alarm(
 /** @}*/ 
 
 /**
- * @defgroup ÁÙ½ç×ÊÔ´½Ó¿Úº¯ÊıÀàĞÍ ÁÙ½ç×ÊÔ´½Ó¿Úº¯Êı
+ * @defgroup ä¸´ç•Œèµ„æºæ¥å£å‡½æ•°ç±»å‹ ä¸´ç•Œèµ„æºæ¥å£å‡½æ•°
  * @{
  */
  
-/**½øÈëÁÙ½ç×ÊÔ´Çø½Ó¿Ú£¬¹Ø±ÕËùÓĞÖĞ¶Ï
-*@return	HANDLE:    ·µ»ØÁÙ½ç×ÊÔ´Çø¾ä±ú£¬
+/**è¿›å…¥ä¸´ç•Œèµ„æºåŒºæ¥å£ï¼Œå…³é—­æ‰€æœ‰ä¸­æ–­
+*@return	HANDLE:    è¿”å›ä¸´ç•Œèµ„æºåŒºå¥æŸ„ï¼Œ
 **/
 HANDLE iot_os_enter_critical_section(               
                         VOID
                                 );
 
-/**ÍË³öÁÙ½ç×ÊÔ´Çø½Ó¿Ú£¬¿ªÆôÖĞ¶Ï
-*@param		hSection:		ÁÙ½ç×ÊÔ´Çø¾ä±ú
+/**é€€å‡ºä¸´ç•Œèµ„æºåŒºæ¥å£ï¼Œå¼€å¯ä¸­æ–­
+*@param		hSection:		ä¸´ç•Œèµ„æºåŒºå¥æŸ„
 **/
 VOID iot_os_exit_critical_section(             
                         HANDLE hSection        
                              );
  
-/**´´½¨ĞÅºÅÁ¿½Ó¿Ú
-*@param		nInitCount:		ĞÅºÅÁ¿ÊıÁ¿
-*@return	HANDLE: 	    ·µ»ØĞÅºÅÁ¿¾ä±ú
+/**åˆ›å»ºä¿¡å·é‡æ¥å£
+*@param		nInitCount:		ä¿¡å·é‡æ•°é‡
+*@return	HANDLE: 	    è¿”å›ä¿¡å·é‡å¥æŸ„
 **/
 HANDLE iot_os_create_semaphore(                     
                         UINT32 nInitCount       
                           );
 
-/**É¾³ıĞÅºÅÁ¿½Ó¿Ú
-*@param		hSem:		ĞÅºÅÁ¿¾ä±ú
-*@return	TURE: 		³É¹¦
-*			FALSE: 		Ê§°Ü
+/**åˆ é™¤ä¿¡å·é‡æ¥å£
+*@param		hSem:		ä¿¡å·é‡å¥æŸ„
+*@return	TURE: 		æˆåŠŸ
+*			FALSE: 		å¤±è´¥
 **/
 BOOL iot_os_delete_semaphore(                       
                         HANDLE hSem            
                         );
 
-/**µÈ´ıĞÅºÅÁ¿½Ó¿Ú
-*@param		hSem:		ĞÅºÅÁ¿¾ä±ú
-*@param		nTimeOut:   µÈ´ıĞÅºÅÁ¿³¬Ê±Ê±¼ä£¬if nTimeOut < 5ms, means forever
-*@return	TURE: 		³É¹¦
-*			FALSE: 		Ê§°Ü
+/**ç­‰å¾…ä¿¡å·é‡æ¥å£
+*@param		hSem:		ä¿¡å·é‡å¥æŸ„
+*@param		nTimeOut:   ç­‰å¾…ä¿¡å·é‡è¶…æ—¶æ—¶é—´ï¼Œif nTimeOut < 5ms, means forever
+*@return	TURE: 		æˆåŠŸ
+*			FALSE: 		å¤±è´¥
 **/
 BOOL iot_os_wait_semaphore(                        
                         HANDLE hSem,           
                         UINT32 nTimeOut         
                       );
 
-/**ÊÍ·ÅĞÅºÅÁ¿½Ó¿Ú
-*@param		hSem:		ĞÅºÅÁ¿¾ä±ú
-*@return	TURE: 		³É¹¦
-*			FALSE: 		Ê§°Ü
+/**é‡Šæ”¾ä¿¡å·é‡æ¥å£
+*@param		hSem:		ä¿¡å·é‡å¥æŸ„
+*@return	TURE: 		æˆåŠŸ
+*			FALSE: 		å¤±è´¥
 **/
 BOOL iot_os_release_semaphore(
                         HANDLE hSem            
                          );
 
-/**»ñÈ¡ÏûºÄÁ¿Öµ
-*@param		hSem:		 ĞÅºÅÁ¿¾ä±ú
-*@return	nInitCount:  ĞÅºÅÁ¿µÄ¸öÊı
+/**è·å–æ¶ˆè€—é‡å€¼
+*@param		hSem:		 ä¿¡å·é‡å¥æŸ„
+*@return	nInitCount:  ä¿¡å·é‡çš„ä¸ªæ•°
 **/
 UINT32 iot_os_get_semaphore_value           
                         (
@@ -323,38 +323,38 @@ UINT32 iot_os_get_semaphore_value
 
 
 /**
- * @defgroup ÄÚ´æ½Ó¿Úº¯ÊıÀàĞÍ ÄÚ´æ½Ó¿Úº¯Êı
+ * @defgroup å†…å­˜æ¥å£å‡½æ•°ç±»å‹ å†…å­˜æ¥å£å‡½æ•°
  * @{
  */
 
-/**ÄÚ´æÉêÇë½Ó¿Úmalloc
-*@param		nSize:		 ÉêÇëµÄÄÚ´æ´óĞ¡
-*@return	PVOID:       ÄÚ´æÖ¸Õë
+/**å†…å­˜ç”³è¯·æ¥å£malloc
+*@param		nSize:		 ç”³è¯·çš„å†…å­˜å¤§å°
+*@return	PVOID:       å†…å­˜æŒ‡é’ˆ
 **/
 PVOID iot_os_malloc(                              
                         UINT32 nSize           
                );
 
-/**ÄÚ´æÉêÇë½Ó¿Úrealloc
-*@param		pMemory:	     ÄÚ´æÖ¸Õë£¬malloc½Ó¿Ú·µ»ØÖµ
-*@param		nSize:	     ÉêÇëµÄÄÚ´æ´óĞ¡
-*@return	PVOID:       ÄÚ´æÖ¸Õë
+/**å†…å­˜ç”³è¯·æ¥å£realloc
+*@param		pMemory:	     å†…å­˜æŒ‡é’ˆï¼Œmallocæ¥å£è¿”å›å€¼
+*@param		nSize:	     ç”³è¯·çš„å†…å­˜å¤§å°
+*@return	PVOID:       å†…å­˜æŒ‡é’ˆ
 **/
 PVOID iot_os_realloc(                               
                         PVOID pMemory,          
                         UINT32 nSize       
                 );
 
-/**ÄÚ´æÊÍ·Å½Ó¿Ú
-*@param		pMemory:	     ÄÚ´æÖ¸Õë£¬malloc½Ó¿Ú·µ»ØÖµ
+/**å†…å­˜é‡Šæ”¾æ¥å£
+*@param		pMemory:	     å†…å­˜æŒ‡é’ˆï¼Œmallocæ¥å£è¿”å›å€¼
 **/
 VOID iot_os_free(                                  
                         PVOID pMemory     
             );
 
-/**»ñÈ¡¶Ñ¿Õ¼ä´óĞ¡
-*@param		total:	     ×Ü¹²´óĞ¡
-*@param   used:        ÒÑ¾­Ê¹ÓÃ
+/**è·å–å †ç©ºé—´å¤§å°
+*@param		total:	     æ€»å…±å¤§å°
+*@param   used:        å·²ç»ä½¿ç”¨
 **/
 VOID iot_os_mem_used(                                  
                         UINT32* total,
@@ -364,72 +364,72 @@ VOID iot_os_mem_used(
 /** @}*/ 
 
 /**
- * @defgroup ÆäËû½Ó¿Úº¯ÊıÀàĞÍ ÆäËû½Ó¿Úº¯Êı
+ * @defgroup å…¶ä»–æ¥å£å‡½æ•°ç±»å‹ å…¶ä»–æ¥å£å‡½æ•°
  * @{
  */
 
-/**ÏµÍ³Ë¯Ãß½Ó¿Ú
-*@param		nMillisecondes:	     Ë¯ÃßÊ±¼ä
-*@return	TURE: 		³É¹¦
-*			FALSE: 		Ê§°Ü
+/**ç³»ç»Ÿç¡çœ æ¥å£
+*@param		nMillisecondes:	     ç¡çœ æ—¶é—´
+*@return	TURE: 		æˆåŠŸ
+*			FALSE: 		å¤±è´¥
 **/
 BOOL iot_os_sleep(                              
                         UINT32 nMillisecondes   
              );
 
-/**»ñÈ¡ÏµÍ³tick½Ó¿Ú
-*@return	tick_num:   ·µ»ØÏµÍ³Ê±¼ätickÖµ
+/**è·å–ç³»ç»Ÿtickæ¥å£
+*@return	tick_num:   è¿”å›ç³»ç»Ÿæ—¶é—´tickå€¼
 **/
 UINT64 iot_os_get_system_tick(                    
                         VOID
                          );
 
-/**»ñÈ¡Ëæ»úÊı½Ó¿Ú
-*@return	rand_num:   ·µ»ØËæ»úÊı
+/**è·å–éšæœºæ•°æ¥å£
+*@return	rand_num:   è¿”å›éšæœºæ•°
 **/
 UINT32 iot_os_rand(                              
                         VOID
               );
 
-/**ÉèÖÃËæ»úÊıÖÖ×Ó½Ó¿Ú
-*@param		seed:	     Ëæ»úÊıÖÖ×Ó
+/**è®¾ç½®éšæœºæ•°ç§å­æ¥å£
+*@param		seed:	     éšæœºæ•°ç§å­
 **/
 VOID iot_os_srand(                                  
                         UINT32 seed            
              );
 
-/**¹Ø»ú½Ó¿Ú
+/**å…³æœºæ¥å£
 **/
 VOID iot_os_shut_down(                            
                         VOID
                  );
 
-/**ÖØÆô½Ó¿Ú
+/**é‡å¯æ¥å£
 **/
 VOID iot_os_restart(                              
                         VOID
                );
 
-/**ÉèÖÃtrace´òÓ¡¿Ú
+/**è®¾ç½®traceæ‰“å°å£
 *@param		port:		0: uart1
                         1: uart2
                         2: uart3
                         3: usb modem
-                        4: usb AP & UART Host¿Ú×¥log(Ä¬ÈÏ)
-*@return	TURE: 			³É¹¦
-*			FALSE  : 		Ê§°Ü
+                        4: usb AP & UART Hostå£æŠ“log(é»˜è®¤)
+*@return	TURE: 			æˆåŠŸ
+*			FALSE  : 		å¤±è´¥
 **/
 BOOL iot_os_set_trace_port(UINT8 port);
 
 
-/**»ñÈ¡wifiscan²ÎÊı½Ó¿Ú
-*@param		wifi_info:	wifiscan²ÎÊı     
+/**è·å–wifiscanå‚æ•°æ¥å£
+*@param		wifi_info:	wifiscanå‚æ•°     
 **/
 VOID iot_wifi_scan(OPENAT_wifiScanRequest* wifi_info);
 
 /** @}*/ 
 
-/** @}*/  //Ä£¿é½áÎ²
+/** @}*/  //æ¨¡å—ç»“å°¾
 
 
 #endif

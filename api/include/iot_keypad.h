@@ -4,19 +4,19 @@
 #include "iot_os.h"
 
 /**
- * @ingroup iot_sdk_device ÍâÉè½Ó¿Ú
+ * @ingroup iot_sdk_device å¤–è®¾æ¥å£
  * @{
  */
 /**
- * @defgroup iot_sdk_keypad °´¼ü½Ó¿Ú
+ * @defgroup iot_sdk_keypad æŒ‰é”®æ¥å£
  * @{
  */
 
 
-/**¼üÅÌ³õÊ¼»¯ 
-*@param		pConfig: ¼üÅÌÅäÖÃ²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**é”®ç›˜åˆå§‹åŒ– 
+*@param		pConfig: é”®ç›˜é…ç½®å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_keypad_init(                         
                         T_AMOPENAT_KEYPAD_CONFIG *pConfig

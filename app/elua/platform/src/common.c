@@ -55,9 +55,9 @@ void cmn_platform_init()
     if(CON_UART_ID < SERMUX_SERVICE_ID_FIRST)
     {
         // Setup console UART
-		/*+\NEW\zhuwangbin\2018.8.31\添加参数判断是否上报UART TXDONE*/
+		/*+\NEW\zhuwangbin\2018.8.31\娣诲姞鍙傛暟鍒ゆ柇鏄惁涓婃姤UART TXDONE*/
         platform_uart_setup( CON_UART_ID, CON_UART_SPEED, 8, PLATFORM_UART_PARITY_NONE, PLATFORM_UART_STOPBITS_1, 1, FALSE);  
-        /*-\NEW\zhuwangbin\2018.8.31\添加参数判断是否上报UART TXDONE*/
+        /*-\NEW\zhuwangbin\2018.8.31\娣诲姞鍙傛暟鍒ゆ柇鏄惁涓婃姤UART TXDONE*/
 		//platform_uart_set_flow_control( CON_UART_ID, CON_FLOW_TYPE );
         //platform_uart_set_buffer( CON_UART_ID, CON_BUF_SIZE );
     }

@@ -7,16 +7,16 @@
  * Date:    2013/5/10
  *
  * Description:
- *          lzma压缩文件接口,target端仅含解压缩源码
+ *          lzma鍘嬬缉鏂囦欢鎺ュ彛,target绔粎鍚В鍘嬬缉婧愮爜
  **************************************************************************/
 
 #ifndef _LZMA_LIB_H_
 #define _LZMA_LIB_H_
 
-/*+\NEW\2013.7.11\liweiqiang\增加lzma解压buf到文件的接口*/
+/*+\NEW\2013.7.11\liweiqiang\澧炲姞lzma瑙ｅ帇buf鍒版枃浠剁殑鎺ュ彛*/
 int LzmaDecodeBufToFile(const unsigned char *inbuff, const unsigned int inlen,
                         const char *outfile);
-/*-\NEW\2013.7.11\liweiqiang\增加lzma解压buf到文件的接口*/
+/*-\NEW\2013.7.11\liweiqiang\澧炲姞lzma瑙ｅ帇buf鍒版枃浠剁殑鎺ュ彛*/
 
 int LzmaUncompressFile(const char *infile, const char *outfile);
 

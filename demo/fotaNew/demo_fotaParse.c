@@ -94,7 +94,7 @@ static otaResult_t _otaDownloadProcess(const char* data, unsigned int len, unsig
 		fdInx = OTA_APP_FILE;
 	}
 
-	/*Ğ´ÎÄ¼şµÄµÚÒ»°üÊı¾İ*/
+	/*å†™æ–‡ä»¶çš„ç¬¬ä¸€åŒ…æ•°æ®*/
 	if (gOtaCtx.file[fdInx].state == OTA_INIT)
 	{
 		if (fdInx == OTA_CODE_FILE)
@@ -133,7 +133,7 @@ static otaResult_t _otaDownloadProcess(const char* data, unsigned int len, unsig
 			iot_fs_close_file(fd);
 		}
 	}
-	/*Ê£ÓàµÄÊı¾İ*/
+	/*å‰©ä½™çš„æ•°æ®*/
 	else if (gOtaCtx.file[fdInx].state == OTA_PROCESS)
 	{
 		fd = gOtaCtx.file[fdInx].fd;
@@ -145,7 +145,7 @@ static otaResult_t _otaDownloadProcess(const char* data, unsigned int len, unsig
 			_otaStateSet(fdInx, OTA_END);
 		}
 	}
-	/*Õı³£²»»áµ½ÕâÀï*/
+	/*æ­£å¸¸ä¸ä¼šåˆ°è¿™é‡Œ*/
 	else
 	{
 		_otaStateSet(fdInx, OTA_ERROR_FBF_ERROR);
@@ -163,7 +163,7 @@ static otaResult_t _otaDownloadDone(void)
 
 	_ota_ls("fota");
 	
-	/**coreºÍapp ÓĞÒ»¸ö×´Ì¬²»¶Ô¾Í²»×¼Éı¼¶**/
+	/**coreå’Œapp æœ‰ä¸€ä¸ªçŠ¶æ€ä¸å¯¹å°±ä¸å‡†å‡çº§**/
 	if (appState == OTA_PROCESS || appState < 0 || 
 			CoreState == OTA_PROCESS || CoreState < 0)
 	{
@@ -225,7 +225,7 @@ otaResult_t otaProcess(char* data, unsigned int len, unsigned int total)
 		return OTA_ERROR_VERIFY_ERROR;
 	}
 
-	/*1. ¼ì²âÍ·ĞÅÏ¢headĞÅÏ¢*/
+	/*1. æ£€æµ‹å¤´ä¿¡æ¯headä¿¡æ¯*/
 	if (g_s_otaCtx.head.readLen < OTA_HEAD_LEN)
 	{
 		temp = g_s_otaCtx.head.head;
@@ -264,7 +264,7 @@ otaResult_t otaProcess(char* data, unsigned int len, unsigned int total)
 
 /*file Check*/
 OTA_CHECK:
-	/*2. ¼ì²âfile ĞÅÏ¢*/
+	/*2. æ£€æµ‹file ä¿¡æ¯*/
 	remain = end - cur;
 	if (remain == 0)
 		return OTA_SUCCESS;
@@ -315,7 +315,7 @@ OTA_CHECK:
 	}
 	
 
-	/*3. Ğ´Êı¾İ*/
+	/*3. å†™æ•°æ®*/
 	remain = end - cur;
 	if (remain)
 	{
@@ -375,7 +375,7 @@ OTA_CHECK:
 	
 	return OTA_SUCCESS;
 }
-/*\-NEW\zhuwangbin\2020.2.5\Ìí¼Ó¶ş´Î¿ª·¢Ô¶³ÌÉı¼¶*/
+/*\-NEW\zhuwangbin\2020.2.5\æ·»åŠ äºŒæ¬¡å¼€å‘è¿œç¨‹å‡çº§*/
 otaResult_t otaDone(void)
 {
 	return _otaDownloadDone();

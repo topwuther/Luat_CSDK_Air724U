@@ -7,7 +7,7 @@
  * Date:    2013/7/15
  *
  * Description:
- *          ×Ö·û±àÂë×ª»»
+ *          å­—ç¬¦ç¼–ç è½¬æ¢
  **************************************************************************/
 
 #include <string.h>
@@ -24,17 +24,17 @@ typedef struct builtin_iconv_map_tag
 static const builtin_iconv_map iconv_map[] =
 {
     {"ucs2",    "gb2312",   iconv_ucs2_to_gb2312},
-/*+\NEW\liweiqiang\2013.11.26\ÍêÉÆgb2312<->ucs2(ucs2be)±àÂë×ª»»*/
+/*+\NEW\liweiqiang\2013.11.26\å®Œå–„gb2312<->ucs2(ucs2be)ç¼–ç è½¬æ¢*/
     {"ucs2be",  "gb2312",   iconv_ucs2be_to_gb2312},
     {"gb2312",  "ucs2",     iconv_gb2312_to_ucs2},
     {"gb2312",  "ucs2be",   iconv_gb2312_to_ucs2be},
-/*-\NEW\liweiqiang\2013.11.26\ÍêÉÆgb2312<->ucs2(ucs2be)±àÂë×ª»»*/
-/*+\NEW\liweiqiang\2013.7.19\Ôö¼Óutf8<->ucs2,ucs2be±àÂë×ª»»*/
+/*-\NEW\liweiqiang\2013.11.26\å®Œå–„gb2312<->ucs2(ucs2be)ç¼–ç è½¬æ¢*/
+/*+\NEW\liweiqiang\2013.7.19\å¢åŠ utf8<->ucs2,ucs2beç¼–ç è½¬æ¢*/
     {"utf8",    "ucs2",     iconv_utf8_to_ucs2},
     {"utf8",    "ucs2be",   iconv_utf8_to_ucs2be},
     {"ucs2",    "utf8",     iconv_ucs2_to_utf8},
     {"ucs2be",    "utf8",     iconv_ucs2be_to_utf8},
-/*-\NEW\liweiqiang\2013.7.19\Ôö¼Óutf8<->ucs2,ucs2be±àÂë×ª»»*/
+/*-\NEW\liweiqiang\2013.7.19\å¢åŠ utf8<->ucs2,ucs2beç¼–ç è½¬æ¢*/
 };
 
 iconv_t iconv_open (const char *__tocode, const char *__fromcode)

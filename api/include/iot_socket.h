@@ -404,46 +404,46 @@ int ip6addr_aton(const char *cp, ip6_addr_t *addr);
 int ip4addr_aton(const char *cp, ip4_addr_t *addr);
 
 /**
- * @defgroup iot_sdk_socket socket½Ó¿Ú
+ * @defgroup iot_sdk_socket socketæ¥å£
  * @{
  */
 /**@example socket/demo_socket.c
-* socket½Ó¿ÚÊ¾Àı
+* socketæ¥å£ç¤ºä¾‹
 */
-/**´´½¨socket
-*@param		domain:		½öÖ§³ÖAF_INET (IPV4 ÍøÂçĞ­Òé)
-@param		type:		Ö§³ÖSOCK_STREAM/SOCK_DGRAM£¬·Ö±ğ±íÊ¾TCP¡¢UDPÁ¬½Ó
-@param		protocol:   ½öÖ§³Ö0
+/**åˆ›å»ºsocket
+*@param		domain:		ä»…æ”¯æŒAF_INET (IPV4 ç½‘ç»œåè®®)
+@param		type:		æ”¯æŒSOCK_STREAM/SOCK_DGRAMï¼Œåˆ†åˆ«è¡¨ç¤ºTCPã€UDPè¿æ¥
+@param		protocol:   ä»…æ”¯æŒ0
 
 
-*@return	>=0: 	    socketÃèÊö·û£¬ÓÃÓÚºóĞø²Ù×÷
-*           <0:         ´´½¨socketÊ§°Ü
-*@note      ´´½¨µÄsocket²»ÓÃºóĞèÒªÓÃclose½«Æä¹Ø±Õ
+*@return	>=0: 	    socketæè¿°ç¬¦ï¼Œç”¨äºåç»­æ“ä½œ
+*           <0:         åˆ›å»ºsocketå¤±è´¥
+*@note      åˆ›å»ºçš„socketä¸ç”¨åéœ€è¦ç”¨closeå°†å…¶å…³é—­
 **/
 
 int socket(int domain, int type, int protocol);
-/**»ñÈ¡ÓòÃû¶ÔÓ¦µÄIPµØÖ·
-*@param		name:		ÓòÃû£¬ÀıÈç:www.airm2m.com/www.baidu.com
-*@return	struct hostent ½á¹¹Ìå: ¸Ã½á¹¹Ìå°üº¬ÁËÒ»¸öDNSÓòÃû½âÎöºóµÄipµØÖ·
-*           NULL:  ÓòÃû½âÎöÊ§°Ü
+/**è·å–åŸŸåå¯¹åº”çš„IPåœ°å€
+*@param		name:		åŸŸåï¼Œä¾‹å¦‚:www.airm2m.com/www.baidu.com
+*@return	struct hostent ç»“æ„ä½“: è¯¥ç»“æ„ä½“åŒ…å«äº†ä¸€ä¸ªDNSåŸŸåè§£æåçš„ipåœ°å€
+*           NULL:  åŸŸåè§£æå¤±è´¥
 **/                       
 struct hostent* gethostbyname(const char *name);
-/**¹Ø±Õsocket
-*@param		fd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-*@return	0:  ±íÊ¾³É¹¦
-            -1  ±íÊ¾ÓĞ´íÎó
+/**å…³é—­socket
+*@param		fd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            -1  è¡¨ç¤ºæœ‰é”™è¯¯
 *           
 **/                          
 int close (int fd);
-/**ÉèÖÃsocketµÄÊôĞÔ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      level: Ö§³ÖSOL_SOCKET/IPPROTO_TCP
-@param      optname:  SOL_SOCKET¶ÔÓ¦optnameÎª SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
-                      IPPROTO_TCP¶ÔÓ¦optnameÎª SO_TCP_SACKDISABLE/SO_TCP_NODELAY
+/**è®¾ç½®socketçš„å±æ€§
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      level: æ”¯æŒSOL_SOCKET/IPPROTO_TCP
+@param      optname:  SOL_SOCKETå¯¹åº”optnameä¸º SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
+                      IPPROTO_TCPå¯¹åº”optnameä¸º SO_TCP_SACKDISABLE/SO_TCP_NODELAY
 @param      optval_p:
 @param      optlen:
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 *
 **/          
 
@@ -452,15 +452,15 @@ int setsockopt(int socketfd,
                         int optname,
                         void *optval_p, 
                         openat_socklen_t optlen);
-/**»ñÈ¡socketµÄÊôĞÔ
-*@param   socketfd: µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      level: Ö§³ÖSOL_SOCKET/IPPROTO_TCP
-@param      optname:  SOL_SOCKET¶ÔÓ¦optnameÎª SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
-                      IPPROTO_TCP¶ÔÓ¦optnameÎª SO_TCP_SACKDISABLE/SO_TCP_NODELAY
+/**è·å–socketçš„å±æ€§
+*@param   socketfd: è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      level: æ”¯æŒSOL_SOCKET/IPPROTO_TCP
+@param      optname:  SOL_SOCKETå¯¹åº”optnameä¸º SO_DEBUG/SO_OOBINLINE/SO_SNDTIMEO/SO_RCVTIMEO/SO_RCVBUF/SO_SNDBUF
+                      IPPROTO_TCPå¯¹åº”optnameä¸º SO_TCP_SACKDISABLE/SO_TCP_NODELAY
 @param      optval_p:
 @param      optlen_p:
-*@return  0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+*@return  0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 *
 **/          
 
@@ -469,100 +469,100 @@ int getsockopt(int socketfd,
                         int optname,
                         void *optval_p, 
                         openat_socklen_t* optlen_p);
-/**ÉèÖÃsocketµÄ±¾µØ¶Ë¿ÚºÍipµØÖ·£¬Ò»°ãÕë¶Ô·şÎñÆ÷´úÂëĞèÒªÉèÖÃ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      my_addr:   ipµØÖ·ºÍ¶Ë¿Ú£¬ipÒ»°ãÉèÖÃINADDR_ANY
-@param      addrlen:  µØÖ·³¤¶È
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+/**è®¾ç½®socketçš„æœ¬åœ°ç«¯å£å’Œipåœ°å€ï¼Œä¸€èˆ¬é’ˆå¯¹æœåŠ¡å™¨ä»£ç éœ€è¦è®¾ç½®
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      my_addr:   ipåœ°å€å’Œç«¯å£ï¼Œipä¸€èˆ¬è®¾ç½®INADDR_ANY
+@param      addrlen:  åœ°å€é•¿åº¦
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 *           
 **/                         
 int bind(int socketfd, 
                       const struct openat_sockaddr *my_addr, 
                       openat_socklen_t addrlen);
-/**½¨Á¢ºÍ·şÎñÆ÷¶ËµÄÁ¬½Ó
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      addr:   Ö¸¶¨·şÎñÆ÷µØÖ·ºÍ¶Ë¿Ú
+/**å»ºç«‹å’ŒæœåŠ¡å™¨ç«¯çš„è¿æ¥
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      addr:   æŒ‡å®šæœåŠ¡å™¨åœ°å€å’Œç«¯å£
 @param      addrlen:  sizeof(struct openat_sockaddr)
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 *           
 **/                                      
 int connect(int socketfd, const struct openat_sockaddr *addr, openat_socklen_t addrlen);
-/**¼àÌısocketÁ¬½Ó£¬Ò»°ãÓÃ×÷·şÎñÆ÷¼àÌı¿Í»§¶ËµÄÁ¬½Ó
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
+/**ç›‘å¬socketè¿æ¥ï¼Œä¸€èˆ¬ç”¨ä½œæœåŠ¡å™¨ç›‘å¬å®¢æˆ·ç«¯çš„è¿æ¥
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
 @param      backlog:   0
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 *           
 **/                             
 int listen(int socketfd, 
                        int backlog);
-/**µÈ´ıÁ¬½Ó£¬Ò»°ãÓÃÓÚlistenÖ®ºóµÈ´ı¿Í»§¶ËµÄÁ¬½Ó
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      addr:   ·µ»Ø¿Í»§¶ËipµØÖ·ºÍ¶Ë¿Ú
-@param      addrlen: ·µ»ØµØÖ·³¤¶È
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
-*@note      º¯Êı»áÒ»Ö±×èÈû£¬ÖªµÀÓĞ¿Í»§¶ËÁ¬½Ó           
+/**ç­‰å¾…è¿æ¥ï¼Œä¸€èˆ¬ç”¨äºlistenä¹‹åç­‰å¾…å®¢æˆ·ç«¯çš„è¿æ¥
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      addr:   è¿”å›å®¢æˆ·ç«¯ipåœ°å€å’Œç«¯å£
+@param      addrlen: è¿”å›åœ°å€é•¿åº¦
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
+*@note      å‡½æ•°ä¼šä¸€ç›´é˜»å¡ï¼ŒçŸ¥é“æœ‰å®¢æˆ·ç«¯è¿æ¥           
 **/                             
 int accept(int socketfd, 
                         struct openat_sockaddr *addr, 
                         openat_socklen_t *addrlen);
-/**½ÓÊÕÊı¾İ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      buf:   ÓÃÓÚ´æ·ÅÊı¾İµÄ»º´æ
-@param      len:   bufµÄ³¤¶È
-@param      flags: ½öÖ§³ÖMSG_DONTWAIT/MSG_PEEK/MSG_OOB£¬¿ÉÒÔÍ¨¹ı»òÀ´Ö¸¶¨¶à¸ö±êÖ¾£¬Ò»°ãÎª0
+/**æ¥æ”¶æ•°æ®
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      buf:   ç”¨äºå­˜æ”¾æ•°æ®çš„ç¼“å­˜
+@param      len:   bufçš„é•¿åº¦
+@param      flags: ä»…æ”¯æŒMSG_DONTWAIT/MSG_PEEK/MSG_OOBï¼Œå¯ä»¥é€šè¿‡æˆ–æ¥æŒ‡å®šå¤šä¸ªæ ‡å¿—ï¼Œä¸€èˆ¬ä¸º0
 
-*@return	>0:  ½ÓÊÕµ½µÄÊı¾İ³¤¶È
-            =0:  ¶Ô·½ÒÑ¾­¶Ï¿ªÁ¬½Ó
-            <0:  ¶ÁÈ¡´íÎó
-*@note      µ±flagsÃ»ÓĞÉèÖÃMSG_DONTWAIT£¬¸Ãº¯Êı»á×èÈû£¬Ö±µ½ÓĞÊı¾İ»òÕß¶ÁÈ¡³¬Ê±
+*@return	>0:  æ¥æ”¶åˆ°çš„æ•°æ®é•¿åº¦
+            =0:  å¯¹æ–¹å·²ç»æ–­å¼€è¿æ¥
+            <0:  è¯»å–é”™è¯¯
+*@note      å½“flagsæ²¡æœ‰è®¾ç½®MSG_DONTWAITï¼Œè¯¥å‡½æ•°ä¼šé˜»å¡ï¼Œç›´åˆ°æœ‰æ•°æ®æˆ–è€…è¯»å–è¶…æ—¶
 **/                                        
 int recv(int socketfd, 
                       void *buf, 
                       size_t len,
                       int flags);
-/**½ÓÊÕÖ¸¶¨ipµØÖ··¢ËÍÀ´µÄÊı¾İ£¬Ò»°ãÓÃÓÚUDPÊÕÈ¡Êı¾İ
-*@param		sockfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      buf:   ÓÃÓÚ´æ·ÅÊı¾İµÄ»º´æ
-@param      len:   bufµÄ³¤¶È
-@param      flags: ½öÖ§³Ö0
-@param      src_addr: ipµØÖ·ºÍ¶Ë¿Ú
+/**æ¥æ”¶æŒ‡å®šipåœ°å€å‘é€æ¥çš„æ•°æ®ï¼Œä¸€èˆ¬ç”¨äºUDPæ”¶å–æ•°æ®
+*@param		sockfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      buf:   ç”¨äºå­˜æ”¾æ•°æ®çš„ç¼“å­˜
+@param      len:   bufçš„é•¿åº¦
+@param      flags: ä»…æ”¯æŒ0
+@param      src_addr: ipåœ°å€å’Œç«¯å£
 @param      addrlen: sizeof(struct openat_sockaddr)
 
-*@return	>0: Êµ¼ÊÊÕµ½µÄÊı¾İ³¤¶È
-            =0:  ¶Ô·½ÒÑ¾­¶Ï¿ªÁ¬½Ó
-            <0:  ¶ÁÈ¡´íÎó
+*@return	>0: å®é™…æ”¶åˆ°çš„æ•°æ®é•¿åº¦
+            =0:  å¯¹æ–¹å·²ç»æ–­å¼€è¿æ¥
+            <0:  è¯»å–é”™è¯¯
 **/   
 
 int recvfrom(int sockfd, void *buf, size_t len, int flags,
                     struct openat_sockaddr *src_addr, openat_socklen_t *addrlen);
-/**·¢ËÍÊı¾İ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      msg:   Êı¾İÄÚÈİ
-@param      len:   Êı¾İ³¤¶È
-@param      flags: ½öÖ§³ÖMSG_DONTWAIT/MSG_OOB£¬¿ÉÒÔÍ¨¹ı»òÀ´Ö¸¶¨¶à¸ö±êÖ¾£¬Ò»°ãÎª0
+/**å‘é€æ•°æ®
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      msg:   æ•°æ®å†…å®¹
+@param      len:   æ•°æ®é•¿åº¦
+@param      flags: ä»…æ”¯æŒMSG_DONTWAIT/MSG_OOBï¼Œå¯ä»¥é€šè¿‡æˆ–æ¥æŒ‡å®šå¤šä¸ªæ ‡å¿—ï¼Œä¸€èˆ¬ä¸º0
 
-*@return	>=0:  Êµ¼Ê·¢ËÍµÄ³¤¶È
-            <0: ·¢ËÍ´íÎó
+*@return	>=0:  å®é™…å‘é€çš„é•¿åº¦
+            <0: å‘é€é”™è¯¯
 **/   
 
 int send(int socketfd,
                       const void *msg,
                       size_t len,
                       int flags);
-/**·¢ËÍÊı¾İµ½Ö¸¶¨ipµØÖ·£¬Ò»°ãÓÃÓÚudp·¢ËÍÊı¾İ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      buf:   Êı¾İÄÚÈİ
-@param      len:   Êı¾İ³¤¶È
-@param      flags: ½öÖ§³Ö0
-@param      to_p: Ö¸¶¨ipµØÖ·ºÍ¶Ë¿ÚºÅ
+/**å‘é€æ•°æ®åˆ°æŒ‡å®šipåœ°å€ï¼Œä¸€èˆ¬ç”¨äºudpå‘é€æ•°æ®
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      buf:   æ•°æ®å†…å®¹
+@param      len:   æ•°æ®é•¿åº¦
+@param      flags: ä»…æ”¯æŒ0
+@param      to_p: æŒ‡å®šipåœ°å€å’Œç«¯å£å·
 @param      tolen: sizeof(struct openat_sockaddr)
 
-*@return	>=0:  Êµ¼Ê·¢ËÍµÄ³¤¶È
-            <0:  ·¢ËÍ´íÎó
+*@return	>=0:  å®é™…å‘é€çš„é•¿åº¦
+            <0:  å‘é€é”™è¯¯
 **/                        
 int sendto(int socketfd,
                         const void *buf,
@@ -570,15 +570,15 @@ int sendto(int socketfd,
                         int flags,
                         const struct openat_sockaddr *to_p, 
                         openat_socklen_t tolen);
-/**×èÈû·½Ê½µÈ´ısocketÁ¬½ÓµÄ×´Ì¬
-*@param		maxfdp1:	×î´ósocketfd+1
-@param      readset:   ¶ÁÈ¡¼¯ºÏ£¬¿ÉÒÔÎªNULL
-@param      writeset:  Ğ´¼¯ºÏ£¬¿ÉÒÔÎªNULL
-@param      exceptset: Òì³£¼¯ºÏ£¬¿ÉÒÔÎªNULL
-@param      timeout: ³¬Ê±Ê±¼ä
+/**é˜»å¡æ–¹å¼ç­‰å¾…socketè¿æ¥çš„çŠ¶æ€
+*@param		maxfdp1:	æœ€å¤§socketfd+1
+@param      readset:   è¯»å–é›†åˆï¼Œå¯ä»¥ä¸ºNULL
+@param      writeset:  å†™é›†åˆï¼Œå¯ä»¥ä¸ºNULL
+@param      exceptset: å¼‚å¸¸é›†åˆï¼Œå¯ä»¥ä¸ºNULL
+@param      timeout: è¶…æ—¶æ—¶é—´
 
-*@return	0:   µÈ´ı³¬Ê±
-            >0:  readset+writeset+exceptsetµÄ¼¯ºÏ¸öÊı
+*@return	0:   ç­‰å¾…è¶…æ—¶
+            >0:  readset+writeset+exceptsetçš„é›†åˆä¸ªæ•°
             <0  -1
 **/                 
 int select(int maxfdp1, 
@@ -587,120 +587,120 @@ int select(int maxfdp1,
                         openat_fd_set *exceptset,
                         struct openat_timeval *timeout);
 
-/**»ñÈ¡socketµÄ´íÎóÖµ
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-*@return	[EBADF µ½ ENO_RECOVERY]
+/**è·å–socketçš„é”™è¯¯å€¼
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+*@return	[EBADF åˆ° ENO_RECOVERY]
 **/                                       
 int socket_errno(int socketfd);
 
-/**Éè±¸Çı¶¯³ÌĞòÖĞÉè±¸¿ØÖÆ½Ó¿Ú
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      cmd:   	Ö¸Áî£¬ÈçÄ³Ò»¸öÃüÁî¶ÔÓ¦Çı¶¯²ãµÄÄ³Ò»¸ö¹¦ÄÜ
-@param      argp:   ¿É±ä²ÎÊı£¬¸úÃüÁîÓĞ¹Ø£¬´«µİ½øÈëÇı¶¯²ãµÄ²ÎÊı»òÕßÊÇ½ÓÊÕÊı¾İµÄ»º´æ
-*@return	>=0:  Êµ¼Ê·¢ËÍµÄ³¤¶È
-            <0:  ·¢ËÍ´íÎó
+/**è®¾å¤‡é©±åŠ¨ç¨‹åºä¸­è®¾å¤‡æ§åˆ¶æ¥å£
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      cmd:   	æŒ‡ä»¤ï¼Œå¦‚æŸä¸€ä¸ªå‘½ä»¤å¯¹åº”é©±åŠ¨å±‚çš„æŸä¸€ä¸ªåŠŸèƒ½
+@param      argp:   å¯å˜å‚æ•°ï¼Œè·Ÿå‘½ä»¤æœ‰å…³ï¼Œä¼ é€’è¿›å…¥é©±åŠ¨å±‚çš„å‚æ•°æˆ–è€…æ˜¯æ¥æ”¶æ•°æ®çš„ç¼“å­˜
+*@return	>=0:  å®é™…å‘é€çš„é•¿åº¦
+            <0:  å‘é€é”™è¯¯
 **/
 int	ioctl(int socketfd, long cmd, void *argp);
 
-/**¸ù¾İÎÄ¼şÃèÊö·ûÀ´²Ù×÷ÎÄ¼şµÄÌØĞÔ½Ó¿Ú
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-*@param      cmd:   	Ö¸Áî£¬ÈçÄ³Ò»¸öÃüÁî¶ÔÓ¦Çı¶¯²ãµÄÄ³Ò»¸ö¹¦ÄÜ
-*@param      val:   ¹©ÃüÁîÊ¹ÓÃµÄ²ÎÊı
-*@return	>=0:  Êµ¼Ê·¢ËÍµÄ³¤¶È
-            <0:  ·¢ËÍ´íÎó
+/**æ ¹æ®æ–‡ä»¶æè¿°ç¬¦æ¥æ“ä½œæ–‡ä»¶çš„ç‰¹æ€§æ¥å£
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+*@param      cmd:   	æŒ‡ä»¤ï¼Œå¦‚æŸä¸€ä¸ªå‘½ä»¤å¯¹åº”é©±åŠ¨å±‚çš„æŸä¸€ä¸ªåŠŸèƒ½
+*@param      val:   ä¾›å‘½ä»¤ä½¿ç”¨çš„å‚æ•°
+*@return	>=0:  å®é™…å‘é€çš„é•¿åº¦
+            <0:  å‘é€é”™è¯¯
 **/
 int	fcntl(int socketfd, int cmd, int val);
 
-/**»ñÈ¡Ò»¸öÃèÊö·ûµÄÃû×Ö
-*@param		socketfd:	µ÷ÓÃsocket½Ó¿Ú·µ»ØµÄsocketÃèÊö·û
-@param      name:   	ÃèÊö·ûµÄÃû×Ö
-@param      namelen:   	ÃèÊö·ûµÄÃû×Ö³¤¶È
-*@return	0:  ±íÊ¾³É¹¦
-            <0  ±íÊ¾ÓĞ´íÎó
+/**è·å–ä¸€ä¸ªæè¿°ç¬¦çš„åå­—
+*@param		socketfd:	è°ƒç”¨socketæ¥å£è¿”å›çš„socketæè¿°ç¬¦
+@param      name:   	æè¿°ç¬¦çš„åå­—
+@param      namelen:   	æè¿°ç¬¦çš„åå­—é•¿åº¦
+*@return	0:  è¡¨ç¤ºæˆåŠŸ
+            <0  è¡¨ç¤ºæœ‰é”™è¯¯
 **/
 int getsockname (int socketfd, struct openat_sockaddr *name, openat_socklen_t *namelen);
 
-/**Ö÷»úÃûµ½µØÖ·½âÎö
-*@param		nodename:	Ò»¸öÖ÷»úÃû»òÕßµØÖ·´®
-@param      servname:   ·şÎñÃû¿ÉÒÔÊÇÊ®½øÖÆµÄ¶Ë¿ÚºÅ£¬Ò²¿ÉÒÔÊÇÒÑ¶¨ÒåµÄ·şÎñÃû³Æ
-@param      hints:   	¿ÉÒÔÊÇÒ»¸ö¿ÕÖ¸Õë£¬Ò²¿ÉÒÔÊÇÒ»¸öÖ¸ÏòÄ³¸öopenat_addrinfo½á¹¹ÌåµÄÖ¸Õë
-@param      res: 		Í¨¹ıresÖ¸Õë²ÎÊı·µ»ØÒ»¸öÖ¸Ïòopenat_addrinfo½á¹¹ÌåÁ´±íµÄÖ¸Õë
+/**ä¸»æœºååˆ°åœ°å€è§£æ
+*@param		nodename:	ä¸€ä¸ªä¸»æœºåæˆ–è€…åœ°å€ä¸²
+@param      servname:   æœåŠ¡åå¯ä»¥æ˜¯åè¿›åˆ¶çš„ç«¯å£å·ï¼Œä¹Ÿå¯ä»¥æ˜¯å·²å®šä¹‰çš„æœåŠ¡åç§°
+@param      hints:   	å¯ä»¥æ˜¯ä¸€ä¸ªç©ºæŒ‡é’ˆï¼Œä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªæŒ‡å‘æŸä¸ªopenat_addrinfoç»“æ„ä½“çš„æŒ‡é’ˆ
+@param      res: 		é€šè¿‡resæŒ‡é’ˆå‚æ•°è¿”å›ä¸€ä¸ªæŒ‡å‘openat_addrinfoç»“æ„ä½“é“¾è¡¨çš„æŒ‡é’ˆ
 
-*@return	>=0:  Êµ¼Ê·¢ËÍµÄ³¤¶È
-            <0:  ·¢ËÍ´íÎó
-*@note      ½ö½öÖ§³ÖIPv4£¬ÇÒ²»ÔÊĞíµ÷ÓÃÕßÖ¸¶¨ËùĞèµØÖ·ÀàĞÍµÄÈÎºÎĞÅÏ¢£¬
-			·µ»ØµÄ½á¹¹Ö»°üº¬ÁËÓÃÓÚ´æ´¢IPv4µØÖ·µÄ¿Õ¼ä
+*@return	>=0:  å®é™…å‘é€çš„é•¿åº¦
+            <0:  å‘é€é”™è¯¯
+*@note      ä»…ä»…æ”¯æŒIPv4ï¼Œä¸”ä¸å…è®¸è°ƒç”¨è€…æŒ‡å®šæ‰€éœ€åœ°å€ç±»å‹çš„ä»»ä½•ä¿¡æ¯ï¼Œ
+			è¿”å›çš„ç»“æ„åªåŒ…å«äº†ç”¨äºå­˜å‚¨IPv4åœ°å€çš„ç©ºé—´
 **/
 int getaddrinfo(const char *nodename,
        const char *servname,
        const struct openat_addrinfo *hints,
        struct openat_addrinfo **res);
 
-/**´æ´¢¿Õ¼äÍ¨¹ıµ÷ÓÃfreeaddrinfo ·µ»¹¸øÏµÍ³
-*@param		ai:	Ö¸ÏòÓÉgetaddrinfo·µ»ØµÄµÚÒ»¸öopenat_addrinfo½á¹¹
+/**å­˜å‚¨ç©ºé—´é€šè¿‡è°ƒç”¨freeaddrinfo è¿”è¿˜ç»™ç³»ç»Ÿ
+*@param		ai:	æŒ‡å‘ç”±getaddrinfoè¿”å›çš„ç¬¬ä¸€ä¸ªopenat_addrinfoç»“æ„
 *
 **/
 void freeaddrinfo(struct openat_addrinfo *ai);
 
-/**½«IPµØÖ·ÓÉ¡°µã·ÖÊ®½øÖÆ¡±×ª»»¡°¶ş½øÖÆÕûÊı¡±
-*@param		af: µØÖ·´Ø
-*@param		src: Ô´µØÖ·
-*@param		dst: ½ÓÊÕ×ª»»ºóµÄÊı¾İ
-*@param		size: »º´æÇødstµÄ´óĞ¡
-*@return	>0: ³É¹¦
-            <=0: Ê§°Ü
+/**å°†IPåœ°å€ç”±â€œç‚¹åˆ†åè¿›åˆ¶â€è½¬æ¢â€œäºŒè¿›åˆ¶æ•´æ•°â€
+*@param		af: åœ°å€ç°‡
+*@param		src: æºåœ°å€
+*@param		dst: æ¥æ”¶è½¬æ¢åçš„æ•°æ®
+*@param		size: ç¼“å­˜åŒºdstçš„å¤§å°
+*@return	>0: æˆåŠŸ
+            <=0: å¤±è´¥
 **/ 
 #define inet_ntop(af,src,dst,size) \
     (((af) == AF_INET6) ? ip6addr_ntoa_r((const ip6_addr_t*)(src),(dst),(size)) \
      : (((af) == AF_INET) ? ip4addr_ntoa_r((const ip4_addr_t*)(src),(dst),(size)) : NULL))
 
-/**½«IPµØÖ·ÓÉ¡°¶ş½øÖÆÕûÊı¡±×ª»»¡°µã·ÖÊ®½øÖÆ¡±
-*@param 	af: µØÖ·´Ø
-*@param 	src: Ô´µØÖ·
-*@param 	dst: ½ÓÊÕ×ª»»ºóµÄÊı¾İ
-*@return	>0: ³É¹¦
-			<=0: Ê§°Ü
+/**å°†IPåœ°å€ç”±â€œäºŒè¿›åˆ¶æ•´æ•°â€è½¬æ¢â€œç‚¹åˆ†åè¿›åˆ¶â€
+*@param 	af: åœ°å€ç°‡
+*@param 	src: æºåœ°å€
+*@param 	dst: æ¥æ”¶è½¬æ¢åçš„æ•°æ®
+*@return	>0: æˆåŠŸ
+			<=0: å¤±è´¥
 **/ 
 #define inet_pton(af,src,dst) \
     (((af) == AF_INET6) ? ip6addr_aton((src),(ip6_addr_t*)(dst)) \
      : (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0))
 
 
-/**±¾µØ×Ö½ÚË³Ğò×ª»¯ÎªÍøÂç×Ö½ÚË³Ğò(16bits)
-*@param		n: ±¾µØ×Ö½ÚÊéĞòÊı¾İ
-*@return	ÍøÂç×Ö½ÚË³ĞòÊı¾İ
+/**æœ¬åœ°å­—èŠ‚é¡ºåºè½¬åŒ–ä¸ºç½‘ç»œå­—èŠ‚é¡ºåº(16bits)
+*@param		n: æœ¬åœ°å­—èŠ‚ä¹¦åºæ•°æ®
+*@return	ç½‘ç»œå­—èŠ‚é¡ºåºæ•°æ®
 **/                 
 #define htons(n) 				((n & 0xff) << 8) | ((n & 0xff00) >> 8)
-/**±¾µØ×Ö½ÚË³Ğò×ª»¯ÎªÍøÂç×Ö½ÚË³Ğò(32bits)
-*@param		n: ±¾µØ×Ö½ÚÊéĞòÊı¾İ
-*@return	ÍøÂç×Ö½ÚË³ĞòÊı¾İ
+/**æœ¬åœ°å­—èŠ‚é¡ºåºè½¬åŒ–ä¸ºç½‘ç»œå­—èŠ‚é¡ºåº(32bits)
+*@param		n: æœ¬åœ°å­—èŠ‚ä¹¦åºæ•°æ®
+*@return	ç½‘ç»œå­—èŠ‚é¡ºåºæ•°æ®
 **/           
 #define htonl(n) 				((n & 0xff) << 24) |\
                                     ((n & 0xff00) << 8) |\
                                 ((n & 0xff0000UL) >> 8) |\
                                     ((n & 0xff000000UL) >> 24)
-/**ÍøÂç×Ö½ÚË³Ğò×ª»¯Îª±¾µØ×Ö½ÚË³Ğò(16bits)
-*@param		n: ÍøÂç×Ö½ÚË³Ğò
-*@return	±¾µØ×Ö½ÚË³Ğò
+/**ç½‘ç»œå­—èŠ‚é¡ºåºè½¬åŒ–ä¸ºæœ¬åœ°å­—èŠ‚é¡ºåº(16bits)
+*@param		n: ç½‘ç»œå­—èŠ‚é¡ºåº
+*@return	æœ¬åœ°å­—èŠ‚é¡ºåº
 **/                                           
 #define ntohs(n) 				htons(n)
-/**ÍøÂç×Ö½ÚË³Ğò×ª»¯Îª±¾µØ×Ö½ÚË³Ğò(32bits)
-*@param		n: ÍøÂç×Ö½ÚË³Ğò
-*@return	±¾µØ×Ö½ÚË³Ğò
+/**ç½‘ç»œå­—èŠ‚é¡ºåºè½¬åŒ–ä¸ºæœ¬åœ°å­—èŠ‚é¡ºåº(32bits)
+*@param		n: ç½‘ç»œå­—èŠ‚é¡ºåº
+*@return	æœ¬åœ°å­—èŠ‚é¡ºåº
 **/
 #define ntohl(n) 				htonl(n)
 
-/**½«ipµØÖ·×Ö·û´®×ªÎªÊıÖµ£¬×ª»¯ºóµÄÊıÖµÎªÍøÂç×Ö½ÚË³Ğò
-*@param		cp: ipµØÖ·×Ö·û´®£¬ÀıÈç"192.168.1.1"
-*@param		addr: struct in_addr ·µ»ØµÄipµØÖ·ÊıÖµ
-*@return    1: ³É¹¦
-            0: Ê§°Ü
+/**å°†ipåœ°å€å­—ç¬¦ä¸²è½¬ä¸ºæ•°å€¼ï¼Œè½¬åŒ–åçš„æ•°å€¼ä¸ºç½‘ç»œå­—èŠ‚é¡ºåº
+*@param		cp: ipåœ°å€å­—ç¬¦ä¸²ï¼Œä¾‹å¦‚"192.168.1.1"
+*@param		addr: struct in_addr è¿”å›çš„ipåœ°å€æ•°å€¼
+*@return    1: æˆåŠŸ
+            0: å¤±è´¥
 **/ 
 #define inet_aton(cp, addr)   ipaddr_aton(cp, (openat_ip_addr_t*)addr)
 
-/**½«ipµØÖ·ÊıÖµ(ÍøÂç×Ö½ÚË³Ğò)£¬×ª»¯ÎªipµØÖ·×Ö·û´®
-*@param		addr: struct in_addr ipµØÖ·ÊıÖµ
-*@return	ipµØÖ·×Ö·û´®
+/**å°†ipåœ°å€æ•°å€¼(ç½‘ç»œå­—èŠ‚é¡ºåº)ï¼Œè½¬åŒ–ä¸ºipåœ°å€å­—ç¬¦ä¸²
+*@param		addr: struct in_addr ipåœ°å€æ•°å€¼
+*@return	ipåœ°å€å­—ç¬¦ä¸²
 **/ 
 #define inet_ntoa(addr)       ipaddr_ntoa((openat_ip_addr_t*)&(addr))
 

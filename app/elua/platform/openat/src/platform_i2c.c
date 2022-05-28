@@ -10,20 +10,20 @@ static const E_AMOPENAT_I2C_PORT i2cIdMap[OPENAT_I2C_QTY] =
     OPENAT_I2C_1, //id = 0
     OPENAT_I2C_2, //id = 1
     OPENAT_I2C_3,
-/*+\BUG3555\zhuwangbin\2020.11.11\ĞŞ¸ÄI2C1ºÍI2C3²»ÄÜÓÃµÄÎÊÌâ,id 1,2,3¶ÔÓ¦I2C1,2,3*/
+/*+\BUG3555\zhuwangbin\2020.11.11\ä¿®æ”¹I2C1å’ŒI2C3ä¸èƒ½ç”¨çš„é—®é¢˜,id 1,2,3å¯¹åº”I2C1,2,3*/
 	OPENAT_I2C_QTY
-/*-\BUG3555\zhuwangbin\2020.11.11\ĞŞ¸ÄI2C1ºÍI2C3²»ÄÜÓÃµÄÎÊÌâ,id 1,2,3¶ÔÓ¦I2C1,2,3*/
+/*-\BUG3555\zhuwangbin\2020.11.11\ä¿®æ”¹I2C1å’ŒI2C3ä¸èƒ½ç”¨çš„é—®é¢˜,id 1,2,3å¯¹åº”I2C1,2,3*/
 };
 
 static u16 i2cSlaveAddr[OPENAT_I2C_QTY];
 
 static u16 gpioi2cSlaveAddr[OPENAT_I2C_QTY];
 
-/*-\NEW\zhuwangbin\2016.4.6\¼æÈİ²»Í¬°æ±¾µÄg_sensor, Ìí¼Ó»ñÈ¡Éè±¸idºÍÉè±¸µØÖ·½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2016.4.6\å…¼å®¹ä¸åŒç‰ˆæœ¬çš„g_sensor, æ·»åŠ è·å–è®¾å¤‡idå’Œè®¾å¤‡åœ°å€æ¥å£*/
 /*
-A13	00111101b	01000100b£¨SLI3108£©
-A14/A15	00111011b	01000100b£¨SLI3108£©
-A14/A15	00111011b	00111101b£¨PA22401001)
+A13	00111101b	01000100bï¼ˆSLI3108ï¼‰
+A14/A15	00111011b	01000100bï¼ˆSLI3108ï¼‰
+A14/A15	00111011b	00111101bï¼ˆPA22401001)
 */
 
 
@@ -39,7 +39,7 @@ void platform_i2c_gSensorParam_get(u8 id, u8 *slave_addr, u8 *slave_id)
 {
   u8 pRegAddr;
 
-  /*°æ±¾A13  ĞÍºÅLIS2DS12*/
+  /*ç‰ˆæœ¬A13  å‹å·LIS2DS12*/
   pRegAddr = PLATFORM_G_SENSOR_LIS2DS12_ID_REG;
   *slave_addr = PLATFORM_A13_SLAVE_ADDR;
   IVTBL(read_i2c)(i2cIdMap[id], *slave_addr, &pRegAddr, slave_id, 1);
@@ -50,7 +50,7 @@ void platform_i2c_gSensorParam_get(u8 id, u8 *slave_addr, u8 *slave_id)
     return;
   }
   
-  /*°æ±¾A14  ĞÍºÅLIS2DS12*/
+  /*ç‰ˆæœ¬A14  å‹å·LIS2DS12*/
   pRegAddr = PLATFORM_G_SENSOR_LIS2DS12_ID_REG;
   *slave_addr = PLATFORM_A14_SLAVE_ADDR;
   IVTBL(read_i2c)(i2cIdMap[id], *slave_addr, &pRegAddr, slave_id, 1);
@@ -61,7 +61,7 @@ void platform_i2c_gSensorParam_get(u8 id, u8 *slave_addr, u8 *slave_id)
     return;
   }
 
-  /*°æ±¾A15 ĞÍºÅSLI3108*/
+  /*ç‰ˆæœ¬A15 å‹å·SLI3108*/
   
   pRegAddr = PLATFORM_G_SENSOR_SLI3108_REG;
   *slave_addr = PLATFORM_A15_SLAVE_ADDR;
@@ -73,7 +73,7 @@ void platform_i2c_gSensorParam_get(u8 id, u8 *slave_addr, u8 *slave_id)
     return;
   }
 
-  /*°æ±¾A15 ĞÍºÅÆäËû*/
+  /*ç‰ˆæœ¬A15 å‹å·å…¶ä»–*/
   *slave_id = 0;
   *slave_addr = PLATFORM_A15_SLAVE_ADDR;
     
@@ -81,14 +81,14 @@ void platform_i2c_gSensorParam_get(u8 id, u8 *slave_addr, u8 *slave_id)
    
   return;
 }
-/*-\NEW\zhuwangbin\2016.4.6\¼æÈİ²»Í¬°æ±¾µÄg_sensor, Ìí¼Ó»ñÈ¡Éè±¸idºÍÉè±¸µØÖ·½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2016.4.6\å…¼å®¹ä¸åŒç‰ˆæœ¬çš„g_sensor, æ·»åŠ è·å–è®¾å¤‡idå’Œè®¾å¤‡åœ°å€æ¥å£*/
 
 int platform_i2c_exists( unsigned id ) 
 {
-/*+\BUG3555\zhuwangbin\2020.11.11\ĞŞ¸ÄI2C1ºÍI2C3²»ÄÜÓÃµÄÎÊÌâ,id 1,2,3¶ÔÓ¦I2C1,2,3*/
-    if((id > OPENAT_I2C_QTY) || id == 0) // ½öÖ§³ÖI2C 2
+/*+\BUG3555\zhuwangbin\2020.11.11\ä¿®æ”¹I2C1å’ŒI2C3ä¸èƒ½ç”¨çš„é—®é¢˜,id 1,2,3å¯¹åº”I2C1,2,3*/
+    if((id > OPENAT_I2C_QTY) || id == 0) // ä»…æ”¯æŒI2C 2
         return PLATFORM_ERR;
-/*-\BUG3555\zhuwangbin\2020.11.11\ĞŞ¸ÄI2C1ºÍI2C3²»ÄÜÓÃµÄÎÊÌâ,id 1,2,3¶ÔÓ¦I2C1,2,3*/
+/*-\BUG3555\zhuwangbin\2020.11.11\ä¿®æ”¹I2C1å’ŒI2C3ä¸èƒ½ç”¨çš„é—®é¢˜,id 1,2,3å¯¹åº”I2C1,2,3*/
     return PLATFORM_OK;
 }
 
@@ -106,21 +106,21 @@ int platform_i2c_setup( unsigned id, PlatformI2CParam *pParam )
     
     return ret ? pParam->speed : 0;
 }
-/*+\NEW\WANGJIAN\2019.4.10\·â×°i2c.close½Ó¿Ú*/
+/*+\NEW\WANGJIAN\2019.4.10\å°è£…i2c.closeæ¥å£*/
 int platform_i2c_close( unsigned id )
 {
     return IVTBL(close_i2c)(i2cIdMap[id]);
 }
-/*-\NEW\WANGJIAN\2019.4.10\·â×°i2c.close½Ó¿Ú*/
+/*-\NEW\WANGJIAN\2019.4.10\å°è£…i2c.closeæ¥å£*/
 
 int platform_i2c_send_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, const u8 *buf, u32 len )
 {
-    // Èç¹û´«ÊäµÄ´ÓµØÖ·Îª¿Õ ÔòÊ¹ÓÃÔ¤ÉèµÄ´ÓµØÖ·
+    // å¦‚æœä¼ è¾“çš„ä»åœ°å€ä¸ºç©º åˆ™ä½¿ç”¨é¢„è®¾çš„ä»åœ°å€
     if(slave_addr == I2C_NULL_SLAVE_ADDR) {
         slave_addr = i2cSlaveAddr[id];
     }
 
-    // Èç¹û´ÓµØÖ·Îª¿Õ,Ôò·µ»Ø´«ÊäÊ§°Ü
+    // å¦‚æœä»åœ°å€ä¸ºç©º,åˆ™è¿”å›ä¼ è¾“å¤±è´¥
     if(slave_addr == I2C_NULL_SLAVE_ADDR){
         return 0;
     }
@@ -130,12 +130,12 @@ int platform_i2c_send_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, con
 
 int platform_i2c_recv_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, u8 *buf, u32 len  )
 {
-    // Èç¹û´«ÊäµÄ´ÓµØÖ·Îª¿Õ ÔòÊ¹ÓÃÔ¤ÉèµÄ´ÓµØÖ·
+    // å¦‚æœä¼ è¾“çš„ä»åœ°å€ä¸ºç©º åˆ™ä½¿ç”¨é¢„è®¾çš„ä»åœ°å€
     if(slave_addr == I2C_NULL_SLAVE_ADDR) {
         slave_addr = i2cSlaveAddr[id];
     }
 
-    // Èç¹û´ÓµØÖ·Îª¿Õ,Ôò·µ»Ø´«ÊäÊ§°Ü
+    // å¦‚æœä»åœ°å€ä¸ºç©º,åˆ™è¿”å›ä¼ è¾“å¤±è´¥
     if(slave_addr == I2C_NULL_SLAVE_ADDR){
         return 0;
     }
@@ -147,12 +147,12 @@ int platform_i2c_recv_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, u8 
 #ifdef LUA_GPIO_I2C
 int platform_gpio_i2c_send_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, const u8 *buf, u32 len )
 {
-    // Èç¹û´«ÊäµÄ´ÓµØÖ·Îª¿Õ ÔòÊ¹ÓÃÔ¤ÉèµÄ´ÓµØÖ·
+    // å¦‚æœä¼ è¾“çš„ä»åœ°å€ä¸ºç©º åˆ™ä½¿ç”¨é¢„è®¾çš„ä»åœ°å€
     if(slave_addr == I2C_NULL_SLAVE_ADDR) {
         slave_addr = gpioi2cSlaveAddr[id];
     }
 
-    // Èç¹û´ÓµØÖ·Îª¿Õ,Ôò·µ»Ø´«ÊäÊ§°Ü
+    // å¦‚æœä»åœ°å€ä¸ºç©º,åˆ™è¿”å›ä¼ è¾“å¤±è´¥
     if(slave_addr == I2C_NULL_SLAVE_ADDR){
         return 0;
     }
@@ -162,12 +162,12 @@ int platform_gpio_i2c_send_data( unsigned id, u16 slave_addr, const u8 *pRegAddr
 
 int platform_gpio_i2c_recv_data( unsigned id, u16 slave_addr, const u8 *pRegAddr, u8 *buf, u32 len  )
 {
-    // Èç¹û´«ÊäµÄ´ÓµØÖ·Îª¿Õ ÔòÊ¹ÓÃÔ¤ÉèµÄ´ÓµØÖ·
+    // å¦‚æœä¼ è¾“çš„ä»åœ°å€ä¸ºç©º åˆ™ä½¿ç”¨é¢„è®¾çš„ä»åœ°å€
     if(slave_addr == I2C_NULL_SLAVE_ADDR) {
         slave_addr = gpioi2cSlaveAddr[id];
     }
 
-    // Èç¹û´ÓµØÖ·Îª¿Õ,Ôò·µ»Ø´«ÊäÊ§°Ü
+    // å¦‚æœä»åœ°å€ä¸ºç©º,åˆ™è¿”å›ä¼ è¾“å¤±è´¥
     if(slave_addr == I2C_NULL_SLAVE_ADDR){
         return 0;
     }

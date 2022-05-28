@@ -1,4 +1,4 @@
--- Ò£¿ØÆ÷
+-- é¥æ§å™¨
 
 require"sys"
 require"common"
@@ -7,7 +7,7 @@ require"defense"
 local sbyte = string.byte
 module(...,package.seeall)
 
--- ÊÂ¼ş·À¶¶: ¼ä¸ôÊ±¼ä¡¢´ÎÊı
+-- äº‹ä»¶é˜²æŠ–: é—´éš”æ—¶é—´ã€æ¬¡æ•°
 local EVT_DEBOUNCE_INTERVAL=150
 local EVT_DEBOUNCE_TIMES=3
 
@@ -75,7 +75,7 @@ local function procevt(evt)
 	evts[evt]()
 end
 
--- Ò£¿ØÆ÷Ñ§Ï°
+-- é¥æ§å™¨å­¦ä¹ 
 local learning = false
 function enterlearn()
 	learning = true
@@ -108,7 +108,7 @@ local function parse(s)
 		if debounces ~= EVT_DEBOUNCE_TIMES then
 			return
 		else
-			-- Ö»ÔÚ´ïµ½·À¶¶´ÎÊıÊ±´¦ÀíÒ»´ÎÊÂ¼ş,ºóÃæÁ¬ĞøµÄÊÂ¼şÅĞ¶¨ÎªÁ¬Ğø´¥·¢²»´¦Àí
+			-- åªåœ¨è¾¾åˆ°é˜²æŠ–æ¬¡æ•°æ—¶å¤„ç†ä¸€æ¬¡äº‹ä»¶,åé¢è¿ç»­çš„äº‹ä»¶åˆ¤å®šä¸ºè¿ç»­è§¦å‘ä¸å¤„ç†
 		end
 	else
 		lastevt = s
@@ -123,18 +123,18 @@ local function parse(s)
 		return
 	end
 
-	-- ±à³Ì×´Ì¬ÏÂ²»ÔÊĞíÊ¹ÓÃÒ£¿ØÆ÷
+	-- ç¼–ç¨‹çŠ¶æ€ä¸‹ä¸å…è®¸ä½¿ç”¨é¥æ§å™¨
 	if access.inprogram() == true then
 		print("programing cannot use controller")
 		return
 	end
 
 	local devid = sbyte(s,1)*256+sbyte(s,2)
-	local evtid = sbyte(s,3)%16 -- eventÖ»È¡µÍ4Î»
+	local evtid = sbyte(s,3)%16 -- eventåªå–ä½4ä½
 
 	if nvm.validctrler(devid) == true then
 		procevt(evtid)
-	else --if evtid == EVT_WDEF then Îª¼æÈİĞÂ¾É½ÓÊÕ°å,ÔİÊ±²»Æ¥ÅäÊı¾İ
+	else --if evtid == EVT_WDEF then ä¸ºå…¼å®¹æ–°æ—§æ¥æ”¶æ¿,æš‚æ—¶ä¸åŒ¹é…æ•°æ®
 		local wdefid = nvm.checkwdef(devid)
 		if wdefid then
 			defense.wdeftrig(wdefid)

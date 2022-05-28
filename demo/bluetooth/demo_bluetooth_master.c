@@ -41,7 +41,7 @@ typedef struct ble_report_info
     UINT8 uuid_flag;
 } ble_report_info_t;
 
-UINT16 connect_handle = 0xff;//Á¬½Ó¾ä±ú
+UINT16 connect_handle = 0xff;//è¿æ¥å¥æŸ„
 
 static void AppConvertBinToHex(
     UINT8 *bin_ptr, // in: the binary format string
@@ -99,9 +99,9 @@ void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 			if((result->len != 0) && (result->dataPtr != NULL))
 			{
                 msg->len  =  result->len;
-                msg->uuid_flag  =  result->uuid_flag;//1:128Î»uuid 0:16Î»uuid
-                msg->uuid  =  result->uuid;//16Î»uuid
-                memcpy(msg->long_uuid, result->long_uuid, sizeof(result->long_uuid));//128Î»uuid
+                msg->uuid_flag  =  result->uuid_flag;//1:128ä½uuid 0:16ä½uuid
+                msg->uuid  =  result->uuid;//16ä½uuid
+                memcpy(msg->long_uuid, result->long_uuid, sizeof(result->long_uuid));//128ä½uuid
                 memset(msg->bleRcvBuffer,0,sizeof(msg->bleRcvBuffer));
 				memcpy(msg->bleRcvBuffer, result->dataPtr,result->len);  
                 iot_os_send_message(ble_test_handle,msg);
@@ -126,24 +126,24 @@ void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 		    break;
         case OPENAT_BLE_SET_SCAN_REPORT:
             ble_scanInfo = (ble_scan_report_info *)result->dataPtr;
-            iot_debug_print("[bluetooth]bt scan name %s",ble_scanInfo->name);//À¶ÑÀÃû³Æ
-            iot_debug_print("[bluetooth]bt scan rssi %d",(int8)ble_scanInfo->rssi);//ĞÅºÅÇ¿¶È
+            iot_debug_print("[bluetooth]bt scan name %s",ble_scanInfo->name);//è“ç‰™åç§°
+            iot_debug_print("[bluetooth]bt scan rssi %d",(int8)ble_scanInfo->rssi);//ä¿¡å·å¼ºåº¦
             sprintf(scanaddr, "%02x:%02x:%02x:%02x:%02x:%02x", ble_scanInfo->bdAddress.addr[0], ble_scanInfo->bdAddress.addr[1], ble_scanInfo->bdAddress.addr[2], ble_scanInfo->bdAddress.addr[3], ble_scanInfo->bdAddress.addr[4], ble_scanInfo->bdAddress.addr[5]);
-            iot_debug_print("[bluetooth]bt scan addr %s",scanaddr);//À¶ÑÀµØÖ·
-            iot_debug_print("[bluetooth]bt scan addr_type %d",ble_scanInfo->addr_type);//µØÖ·ÖÖÀà
+            iot_debug_print("[bluetooth]bt scan addr %s",scanaddr);//è“ç‰™åœ°å€
+            iot_debug_print("[bluetooth]bt scan addr_type %d",ble_scanInfo->addr_type);//åœ°å€ç§ç±»
 
             AppConvertBinToHex(ble_scanInfo->manu_data,ble_scanInfo->manu_len,manu_data);
             manu_data[ble_scanInfo->manu_len*2] = '\0';
-            iot_debug_print("[bluetooth]bt scan manu_data %s",manu_data);//³§ÉÌÊı¾İ
+            iot_debug_print("[bluetooth]bt scan manu_data %s",manu_data);//å‚å•†æ•°æ®
             AppConvertBinToHex(ble_scanInfo->raw_data,ble_scanInfo->data_length,raw_data);
             raw_data[ble_scanInfo->data_length*2] = '\0';
-            iot_debug_print("[bluetooth]bt scan raw_data %s",raw_data);//¹ã²¥Ô­Ê¼Êı¾İ
+            iot_debug_print("[bluetooth]bt scan raw_data %s",raw_data);//å¹¿æ’­åŸå§‹æ•°æ®
             
-            if(memcmp(ble_scanInfo->name,"Luat_Air724UG",strlen("Luat_Air724UG")) == 0) //Á¬½ÓµÄÀ¶ÑÀÃû³Æ
+            if(memcmp(ble_scanInfo->name,"Luat_Air724UG",strlen("Luat_Air724UG")) == 0) //è¿æ¥çš„è“ç‰™åç§°
             {
                 param.advEnable = 0;
-                iot_ble_iotctl(0,BLE_SET_SCAN_ENABLE,param);//¹Ø±ÕÉ¨Ãè
-                iot_ble_connect(scanaddr,ble_scanInfo->addr_type);//Á¬½ÓÀ¶ÑÀ
+                iot_ble_iotctl(0,BLE_SET_SCAN_ENABLE,param);//å…³é—­æ‰«æ
+                iot_ble_connect(scanaddr,ble_scanInfo->addr_type);//è¿æ¥è“ç‰™
             }
             iot_os_free(msg);
 		    break;
@@ -152,7 +152,7 @@ void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
             iot_os_free(msg);
             break;
         case OPENAT_BLE_FIND_CHARACTERISTIC_UUID_IND:
-            if(result->uuid_flag == UUID_SHORT)//1:128Î»uuid 0:16Î»uuid
+            if(result->uuid_flag == UUID_SHORT)//1:128ä½uuid 0:16ä½uuid
             {
                 iot_debug_print("[bluetooth]bt characteriatic uuid %x",result->uuid);
             }
@@ -171,7 +171,7 @@ void bluetooth_callback(T_OPENAT_BLE_EVENT_PARAM *result)
 BOOL ble_poweron(VOID)
 {
     iot_debug_print("[bluetooth]bt poweron");
-    iot_bt_open(BLE_MASTER);//´ò¿ªÀ¶ÑÀ
+    iot_bt_open(BLE_MASTER);//æ‰“å¼€è“ç‰™
     return TRUE;
 }
 
@@ -183,20 +183,20 @@ BOOL scan(VOID)
     ble_report_info_t *msg = NULL;
     UINT8 connect_addr_type = 0;
     char connect_scanaddr[20] = {0};
-    //T_OPENAT_BLE_SCAN_PARAM scanparam = {1,0x30,0x06,0,0};//¹ã²¥²ÎÊı
+    //T_OPENAT_BLE_SCAN_PARAM scanparam = {1,0x30,0x06,0,0};//å¹¿æ’­å‚æ•°
     iot_debug_print("[bluetooth]bt scan");
     param2.advEnable = 1;
 /*
     param1.scanparam = iot_os_malloc(sizeof(T_OPENAT_BLE_SCAN_PARAM));
     memcpy(param1.scanparam,&scanparam,sizeof(T_OPENAT_BLE_SCAN_PARAM));
-    iot_ble_iotctl(0,BLE_SET_SCAN_PARAM,param1);//ÉèÖÃ¹ã²¥²ÎÊı
+    iot_ble_iotctl(0,BLE_SET_SCAN_PARAM,param1);//è®¾ç½®å¹¿æ’­å‚æ•°
     if(param1.scanparam != NULL)
         iot_os_free(param1.scanparam);
     param1.scanparam = NULL;
 */
-    iot_ble_iotctl(0,BLE_SET_SCAN_ENABLE,param2);//´ò¿ªÉ¨Ãè
+    iot_ble_iotctl(0,BLE_SET_SCAN_ENABLE,param2);//æ‰“å¼€æ‰«æ
     iot_os_wait_message(ble_test_handle,&msg);
-    if(msg->eventid != OPENAT_BLE_SET_SCAN_ENABLE)//µÈ´ıÉ¨ÃèÊ¹ÄÜ³É¹¦
+    if(msg->eventid != OPENAT_BLE_SET_SCAN_ENABLE)//ç­‰å¾…æ‰«æä½¿èƒ½æˆåŠŸ
     {
         if(msg != NULL)
             iot_os_free(msg);
@@ -231,17 +231,17 @@ BOOL ble_data_trans(VOID)
     //UINT8 uuid_c[16] = {0x9F, 0x9F, 0x00, 0xC1, 0x58, 0xBD, 0x32, 0xB6, 0x9E, 0x4C, 0x21, 0x9C, 0xC9, 0xD6, 0xF8, 0xBE};
     iot_debug_print("[bluetooth]bt data trans");
     
-    /*Á¬½Ó³É¹¦£¬·¢ÏÖ°üº¬µÄ·şÎñ¼°ÌØÕ÷£¬²¢´ò¿ªÍ¨Öª*/
-    iot_ble_iotctl(connect_handle,BLE_FIND_SERVICE,param1);//·¢ÏÖ·şÎñ
+    /*è¿æ¥æˆåŠŸï¼Œå‘ç°åŒ…å«çš„æœåŠ¡åŠç‰¹å¾ï¼Œå¹¶æ‰“å¼€é€šçŸ¥*/
+    iot_ble_iotctl(connect_handle,BLE_FIND_SERVICE,param1);//å‘ç°æœåŠ¡
     
     param2.uuid = iot_os_malloc(sizeof(T_OPENAT_BLE_UUID));
     memcpy(param2.uuid,&uuid_s,sizeof(T_OPENAT_BLE_UUID));
-    iot_ble_iotctl(connect_handle,BLE_FIND_CHARACTERISTIC,param2);//·¢ÏÖ·şÎñÄÚµÄÌØÕ÷
+    iot_ble_iotctl(connect_handle,BLE_FIND_CHARACTERISTIC,param2);//å‘ç°æœåŠ¡å†…çš„ç‰¹å¾
     if(param2.uuid != NULL)
         iot_os_free(param2.uuid);
     param2.uuid = NULL;
     iot_os_wait_message(ble_test_handle,&msg);
-    if(msg->eventid != OPENAT_BLE_FIND_CHARACTERISTIC_IND)//µÈ´ı·¢ÏÖÌØÕ÷³É¹¦
+    if(msg->eventid != OPENAT_BLE_FIND_CHARACTERISTIC_IND)//ç­‰å¾…å‘ç°ç‰¹å¾æˆåŠŸ
     {
         if(msg != NULL)
             iot_os_free(msg);
@@ -253,7 +253,7 @@ BOOL ble_data_trans(VOID)
     msg = NULL;
     param3.uuid = iot_os_malloc(sizeof(T_OPENAT_BLE_UUID));
     memcpy(param3.uuid,&uuid_c,sizeof(T_OPENAT_BLE_UUID));
-    iot_ble_iotctl(connect_handle,BLE_OPEN_NOTIFICATION,param3);//´ò¿ªÍ¨Öª
+    iot_ble_iotctl(connect_handle,BLE_OPEN_NOTIFICATION,param3);//æ‰“å¼€é€šçŸ¥
     if(param3.uuid != NULL)
         iot_os_free(param3.uuid);
     param3.uuid = NULL;
@@ -261,7 +261,7 @@ BOOL ble_data_trans(VOID)
     {
         iot_ble_write(connect_handle,uuid,"1234567890",strlen("1234567890"));
         iot_os_sleep(500);
-        iot_os_wait_message(ble_test_handle,&msg);//µÈ´ı½ÓÊÕµ½Êı¾İ
+        iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…æ¥æ”¶åˆ°æ•°æ®
         if(msg->eventid == OPENAT_BLE_RECV_DATA)
         {
             bleRcvBuffer = iot_os_malloc(BLE_MAX_DATA_COUNT*2+1);
@@ -285,21 +285,21 @@ BOOL ble_data_trans(VOID)
 VOID ble_test(VOID)
 {
     ble_report_info_t *msg = NULL;
-    //1.  ´ò¿ªÀ¶ÑÀ
+    //1.  æ‰“å¼€è“ç‰™
     ble_poweron();
-    iot_os_wait_message(ble_test_handle,&msg);//µÈ´ıÀ¶ÑÀ´ò¿ª
+    iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…è“ç‰™æ‰“å¼€
     if(msg->eventid == OPENAT_BT_ME_ON_CNF)
     {
         if(msg != NULL)
             iot_os_free(msg);
         msg = NULL;
-        //2.É¨ÃèÀ¶ÑÀ
+        //2.æ‰«æè“ç‰™
         scan();
-        iot_os_wait_message(ble_test_handle,&msg);//µÈ´ıÁ¬½Ó³É¹¦
+        iot_os_wait_message(ble_test_handle,&msg);//ç­‰å¾…è¿æ¥æˆåŠŸ
         if(msg->eventid == OPENAT_BLE_CONNECT)
         { 
-            //3. Êı¾İ´«Êä
-            connect_handle = msg->handle;//Á¬½Ó¾ä±ú
+            //3. æ•°æ®ä¼ è¾“
+            connect_handle = msg->handle;//è¿æ¥å¥æŸ„
             if(msg != NULL)
                 iot_os_free(msg);
             msg = NULL;

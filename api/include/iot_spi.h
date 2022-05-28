@@ -4,30 +4,30 @@
 #include "iot_os.h"
 
 /**
- * @ingroup iot_sdk_device ÍâÉè½Ó¿Ú
+ * @ingroup iot_sdk_device å¤–è®¾æ¥å£
  * @{
  */
 /**
- * @defgroup iot_sdk_spi spi½Ó¿Ú
+ * @defgroup iot_sdk_spi spiæ¥å£
  * @{
  */
 
-/**ÅäÖÃspi
-*@param		port:		SPI ±àºÅ
-*@param		cfg:		³õÊ¼»¯²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**é…ç½®spi
+*@param		port:		SPI ç¼–å·
+*@param		cfg:		åˆå§‹åŒ–å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_spi_open(
                         E_AMOPENAT_SPI_PORT  port,         
                         T_AMOPENAT_SPI_PARAM *cfg        
                   );
 
-/**¶ÁÈ¡spiÊı¾İ
-*@param		port:		SPI ±àºÅ
-*@param		buf:		´æ´¢Êı¾İµØÖ·
-*@param		bufLen:		´æ´¢¿Õ¼ä³¤¶È
-*@return	UINT32: 	Êµ¼Ê¶ÁÈ¡³¤¶È
+/**è¯»å–spiæ•°æ®
+*@param		port:		SPI ç¼–å·
+*@param		buf:		å­˜å‚¨æ•°æ®åœ°å€
+*@param		bufLen:		å­˜å‚¨ç©ºé—´é•¿åº¦
+*@return	UINT32: 	å®é™…è¯»å–é•¿åº¦
 **/
 UINT32 iot_spi_read(                                       
                         E_AMOPENAT_SPI_PORT port,         
@@ -35,11 +35,11 @@ UINT32 iot_spi_read(
                         UINT32 bufLen                      
                   );
 
-/**Ğ´ÈëspiÊı¾İ
-*@param		port:		SPI ±àºÅ
-*@param		buf:		Ğ´ÈëÊı¾İµØÖ·
-*@param		bufLen:		Ğ´ÈëÊı¾İ³¤¶È
-*@return	UINT32: 	Êµ¼ÊĞ´Èë³¤¶È
+/**å†™å…¥spiæ•°æ®
+*@param		port:		SPI ç¼–å·
+*@param		buf:		å†™å…¥æ•°æ®åœ°å€
+*@param		bufLen:		å†™å…¥æ•°æ®é•¿åº¦
+*@return	UINT32: 	å®é™…å†™å…¥é•¿åº¦
 **/
 UINT32 iot_spi_write(                                       
                         E_AMOPENAT_SPI_PORT port,        
@@ -47,13 +47,13 @@ UINT32 iot_spi_write(
                         UINT32 bufLen                      
                    );
 
-/**spiÈ«Ë«¹¤¶ÁĞ´
-*@note      È«Ë«¹¤·½Ê½¶ÁĞ´£¬¶ÁĞ´³¤¶ÈÏàÍ¬
-*@param		port:		SPI ±àºÅ
-*@param		txBuf:		Ğ´»º³å
-*@param		rxBuf:		¶Á»º³å
-*@param		len:		¶ÁĞ´³¤¶È
-*@return	UINT32: 	Êµ¼ÊĞ´Èë³¤¶È
+/**spiå…¨åŒå·¥è¯»å†™
+*@note      å…¨åŒå·¥æ–¹å¼è¯»å†™ï¼Œè¯»å†™é•¿åº¦ç›¸åŒ
+*@param		port:		SPI ç¼–å·
+*@param		txBuf:		å†™ç¼“å†²
+*@param		rxBuf:		è¯»ç¼“å†²
+*@param		len:		è¯»å†™é•¿åº¦
+*@return	UINT32: 	å®é™…å†™å…¥é•¿åº¦
 **/
 UINT32 iot_spi_rw(                                       
                         E_AMOPENAT_SPI_PORT port,         
@@ -62,10 +62,10 @@ UINT32 iot_spi_rw(
                         UINT32 len                          
                 );
 
-/**¹Ø±Õspi
-*@param		port:		SPI ±àºÅ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å…³é—­spi
+*@param		port:		SPI ç¼–å·
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_spi_close(
                         E_AMOPENAT_SPI_PORT  port

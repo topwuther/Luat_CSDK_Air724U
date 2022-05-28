@@ -12,15 +12,15 @@
 
 typedef enum
 {
-    /*!< ÍøÂç¶Ï¿ª ±íÊ¾GPRSÍøÂç²»¿ÉÓÃ£¬ÎŞ·¨½øĞĞÊı¾İÁ¬½Ó£¬ÓĞ¿ÉÄÜ¿ÉÒÔ´òµç»°*/
+    /*!< ç½‘ç»œæ–­å¼€ è¡¨ç¤ºGPRSç½‘ç»œä¸å¯ç”¨ï¼Œæ— æ³•è¿›è¡Œæ•°æ®è¿æ¥ï¼Œæœ‰å¯èƒ½å¯ä»¥æ‰“ç”µè¯*/
 	OPENAT_NETWORK_DISCONNECT            		= 0x00,
-    /*!< ÍøÂçÒÑÁ¬½Ó ±íÊ¾GPRSÍøÂç¿ÉÓÃ£¬¿ÉÒÔ½øĞĞÁ´Â·¼¤»î*/
+    /*!< ç½‘ç»œå·²è¿æ¥ è¡¨ç¤ºGPRSç½‘ç»œå¯ç”¨ï¼Œå¯ä»¥è¿›è¡Œé“¾è·¯æ¿€æ´»*/
 	OPENAT_NETWORK_READY,
-	/*!< Á´Â·ÕıÔÚ¼¤»î */
+	/*!< é“¾è·¯æ­£åœ¨æ¿€æ´» */
 	OPENAT_NETWORK_LINKING,
-    /*!< Á´Â·ÒÑ¾­¼¤»î PDPÒÑ¾­¼¤»î£¬¿ÉÒÔÍ¨¹ısocket½Ó¿Ú½¨Á¢Êı¾İÁ¬½Ó*/
+    /*!< é“¾è·¯å·²ç»æ¿€æ´» PDPå·²ç»æ¿€æ´»ï¼Œå¯ä»¥é€šè¿‡socketæ¥å£å»ºç«‹æ•°æ®è¿æ¥*/
 	OPENAT_NETWORK_LINKED,
-	/*!< Á´Â·ÕıÔÚÈ¥¼¤»î */
+	/*!< é“¾è·¯æ­£åœ¨å»æ¿€æ´» */
 	OPENAT_NETWORK_GOING_DOWN,
 }E_OPENAT_NETWORK_STATE;
 
@@ -30,21 +30,21 @@ typedef VOID(*F_OPENAT_NETWORK_IND_CB)(E_OPENAT_NETWORK_STATE state);
 
 typedef enum
 {
-    /*!< sim¿¨×´Ì¬Î´Öª*/
+    /*!< simå¡çŠ¶æ€æœªçŸ¥*/
 	OPENAT_NETWORK_UNKNOWN=0,
-    /*!< sim¿¨×´Ì¬ÓĞĞ§*/
+    /*!< simå¡çŠ¶æ€æœ‰æ•ˆ*/
 	OPENAT_NETWORK_TRUE,
-    /*!< SIMÎ´²åÈë»òPINÂëÎ´½âËø*/
+    /*!< SIMæœªæ’å…¥æˆ–PINç æœªè§£é”*/
 	OPENAT_NETWORK_FALSE=255,
 }E_OPENAT_SIM_STATE;
 
 typedef struct
 {
-	/*!< ÍøÂç×´Ì¬ */
+	/*!< ç½‘ç»œçŠ¶æ€ */
 	E_OPENAT_NETWORK_STATE state;
-	/*!< ÍøÂçĞÅºÅ£º0-31 (ÖµÔ½´ó£¬ĞÅºÅÔ½ºÃ) */
+	/*!< ç½‘ç»œä¿¡å·ï¼š0-31 (å€¼è¶Šå¤§ï¼Œä¿¡å·è¶Šå¥½) */
 	UINT8 csq;
-	/*!< SIM¿¨×´Ì¬ */
+	/*!< SIMå¡çŠ¶æ€ */
 	E_OPENAT_SIM_STATE  simpresent;
 }T_OPENAT_NETWORK_STATUS;
 
@@ -59,39 +59,39 @@ typedef struct
 
 
 /**
- * @defgroup iot_sdk_network ÍøÂç½Ó¿Ú
+ * @defgroup iot_sdk_network ç½‘ç»œæ¥å£
  * @{
  */
-/**»ñÈ¡ÍøÂç×´Ì¬
-*@param     status:   ·µ»ØÍøÂç×´Ì¬
-*@return    TRUE:    ³É¹¦
-            FLASE:   Ê§°Ü            
+/**è·å–ç½‘ç»œçŠ¶æ€
+*@param     status:   è¿”å›ç½‘ç»œçŠ¶æ€
+*@return    TRUE:    æˆåŠŸ
+            FLASE:   å¤±è´¥            
 **/                                
 BOOL iot_network_get_status (
                             T_OPENAT_NETWORK_STATUS* status
                             );
-/**ÉèÖÃÍøÂç×´Ì¬»Øµ÷º¯Êı
-*@param     indCb:   »Øµ÷º¯Êı
-*@return    TRUE:    ³É¹¦
-            FLASE:   Ê§°Ü
+/**è®¾ç½®ç½‘ç»œçŠ¶æ€å›è°ƒå‡½æ•°
+*@param     indCb:   å›è°ƒå‡½æ•°
+*@return    TRUE:    æˆåŠŸ
+            FLASE:   å¤±è´¥
 **/                            
 BOOL iot_network_set_cb(F_OPENAT_NETWORK_IND_CB indCb);
-/**½¨Á¢ÍøÂçÁ¬½Ó£¬Êµ¼ÊÎªpdp¼¤»îÁ÷³Ì
-*@param     connectParam:  ÍøÂçÁ¬½Ó²ÎÊı£¬ĞèÒªÉèÖÃAPN£¬username£¬passwrdĞÅÏ¢
-*@return    TRUE:    ³É¹¦
-            FLASE:   Ê§°Ü
-@note      ¸Ãº¯ÊıÎªÒì²½º¯Êı£¬·µ»Øºó²»´ú±íÍøÂçÁ¬½Ó¾Í³É¹¦ÁË£¬indCb»áÍ¨ÖªÉÏ²ãÓ¦ÓÃÍøÂçÁ¬½ÓÊÇ·ñ³É¹¦£¬Á¬½Ó³É¹¦ºó»á½øÈëOPENAT_NETWORK_LINKED×´Ì¬
-           ´´½¨socketÁ¬½ÓÖ®Ç°±ØĞëÒª½¨Á¢ÍøÂçÁ¬½Ó
-           ½¨Á¢Á¬½ÓÖ®Ç°µÄ×´Ì¬ĞèÒªÎªOPENAT_NETWORK_READY×´Ì¬£¬·ñÔò»áÁ¬½ÓÊ§°Ü
+/**å»ºç«‹ç½‘ç»œè¿æ¥ï¼Œå®é™…ä¸ºpdpæ¿€æ´»æµç¨‹
+*@param     connectParam:  ç½‘ç»œè¿æ¥å‚æ•°ï¼Œéœ€è¦è®¾ç½®APNï¼Œusernameï¼Œpasswrdä¿¡æ¯
+*@return    TRUE:    æˆåŠŸ
+            FLASE:   å¤±è´¥
+@note      è¯¥å‡½æ•°ä¸ºå¼‚æ­¥å‡½æ•°ï¼Œè¿”å›åä¸ä»£è¡¨ç½‘ç»œè¿æ¥å°±æˆåŠŸäº†ï¼ŒindCbä¼šé€šçŸ¥ä¸Šå±‚åº”ç”¨ç½‘ç»œè¿æ¥æ˜¯å¦æˆåŠŸï¼Œè¿æ¥æˆåŠŸåä¼šè¿›å…¥OPENAT_NETWORK_LINKEDçŠ¶æ€
+           åˆ›å»ºsocketè¿æ¥ä¹‹å‰å¿…é¡»è¦å»ºç«‹ç½‘ç»œè¿æ¥
+           å»ºç«‹è¿æ¥ä¹‹å‰çš„çŠ¶æ€éœ€è¦ä¸ºOPENAT_NETWORK_READYçŠ¶æ€ï¼Œå¦åˆ™ä¼šè¿æ¥å¤±è´¥
 **/                          
 BOOL iot_network_connect(T_OPENAT_NETWORK_CONNECT* connectParam);
-/**¶Ï¿ªÍøÂçÁ¬½Ó£¬Êµ¼ÊÎªpdpÈ¥¼¤»î
-*@param     flymode:   ÔİÊ±²»Ö§³Ö£¬ÉèÖÃÎªFLASE
-*@return    TRUE:    ³É¹¦
-            FLASE:   Ê§°Ü
-@note      ¸Ãº¯ÊıÎªÒì²½º¯Êı£¬·µ»Øºó²»´ú±íÍøÂçÁ¬½ÓÁ¢¼´¾Í¶Ï¿ªÁË£¬indCb»áÍ¨ÖªÉÏ²ãÓ¦ÓÃ
-           Á¬½Ó¶Ï¿ªºóÍøÂç×´Ì¬»á»Øµ½OPENAT_NETWORK_READY×´Ì¬
-           ´ËÇ°´´½¨socketÁ¬½ÓÒ²»áÊ§Ğ§£¬ĞèÒªcloseµô
+/**æ–­å¼€ç½‘ç»œè¿æ¥ï¼Œå®é™…ä¸ºpdpå»æ¿€æ´»
+*@param     flymode:   æš‚æ—¶ä¸æ”¯æŒï¼Œè®¾ç½®ä¸ºFLASE
+*@return    TRUE:    æˆåŠŸ
+            FLASE:   å¤±è´¥
+@note      è¯¥å‡½æ•°ä¸ºå¼‚æ­¥å‡½æ•°ï¼Œè¿”å›åä¸ä»£è¡¨ç½‘ç»œè¿æ¥ç«‹å³å°±æ–­å¼€äº†ï¼ŒindCbä¼šé€šçŸ¥ä¸Šå±‚åº”ç”¨
+           è¿æ¥æ–­å¼€åç½‘ç»œçŠ¶æ€ä¼šå›åˆ°OPENAT_NETWORK_READYçŠ¶æ€
+           æ­¤å‰åˆ›å»ºsocketè¿æ¥ä¹Ÿä¼šå¤±æ•ˆï¼Œéœ€è¦closeæ‰
 **/                                        
 BOOL iot_network_disconnect(BOOL flymode);
 

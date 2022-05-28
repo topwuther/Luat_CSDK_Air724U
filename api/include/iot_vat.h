@@ -12,20 +12,20 @@
 #define AT_CMD_END "\x0d\x0a"
 #define AT_CMD_CR  '\x0d'
 #define AT_CMD_LF  '\x0a'
-#define STR_TO_INT(x) 	(x-'0') 					/*Êı×ÖµÄchar×ª»»Îªint*/
+#define STR_TO_INT(x) 	(x-'0') 					/*æ•°å­—çš„charè½¬æ¢ä¸ºint*/
 
 
 typedef enum
 {
     AT_RSP_ERROR = -1,
     AT_RSP_WAIT= 0, 
-    AT_RSP_CONTINUE = 1,                        /* ¼ÌĞøÖ´ĞĞÏÂÒ»ÌõAT¶ÓÁĞÀïµÄÃüÁî */
-    AT_RSP_PAUSE= 2,                            /* ÔİÍ£Ö´ĞĞAT¶ÓÁĞÃüÁî */
-    AT_RSP_FINISH = 3,                          /* Í£Ö¹Ö´ĞĞAT¶ÓÁĞÃüÁî */
+    AT_RSP_CONTINUE = 1,                        /* ç»§ç»­æ‰§è¡Œä¸‹ä¸€æ¡ATé˜Ÿåˆ—é‡Œçš„å‘½ä»¤ */
+    AT_RSP_PAUSE= 2,                            /* æš‚åœæ‰§è¡ŒATé˜Ÿåˆ—å‘½ä»¤ */
+    AT_RSP_FINISH = 3,                          /* åœæ­¢æ‰§è¡ŒATé˜Ÿåˆ—å‘½ä»¤ */
 
-    AT_RSP_FUN_OVER = 4,                        /* ¹¦ÄÜÄ£¿é»¯ATÃüÁî×éÖ´ĞĞÍê±Ï£¬¿ÉÒÔ°Ñ±¾´ÎÔËĞĞµÄ¹¦ÄÜÇå³ı */
+    AT_RSP_FUN_OVER = 4,                        /* åŠŸèƒ½æ¨¡å—åŒ–ATå‘½ä»¤ç»„æ‰§è¡Œå®Œæ¯•ï¼Œå¯ä»¥æŠŠæœ¬æ¬¡è¿è¡Œçš„åŠŸèƒ½æ¸…é™¤ */
     AT_RSP_STEP_MIN = 10,
-    AT_RSP_STEP = 20,                           /* ¼ÌĞøÖ´ĞĞ±¾ÌõATÃüÁî */
+    AT_RSP_STEP = 20,                           /* ç»§ç»­æ‰§è¡Œæœ¬æ¡ATå‘½ä»¤ */
     AT_RSP_STEP_MAX = 30,
 
 }AtCmdRsp;
@@ -36,9 +36,9 @@ typedef VOID (*ResultNotifyCb)(BOOL result);
 
 typedef struct AtCmdEntityTag
 {
-    char* p_atCmdStr;				/*ATÃüÁî×Ö·û´®*/
-    u16 cmdLen;					/*ATÃüÁî³¤¶È*/
-    AtCmdRspCB p_atCmdCallBack;	/*ATÃüÁî»Øµ÷º¯Êı*/
+    char* p_atCmdStr;				/*ATå‘½ä»¤å­—ç¬¦ä¸²*/
+    u16 cmdLen;					/*ATå‘½ä»¤é•¿åº¦*/
+    AtCmdRspCB p_atCmdCallBack;	/*ATå‘½ä»¤å›è°ƒå‡½æ•°*/
 }AtCmdEntity;
 
 typedef struct UrcEntityTag
@@ -63,30 +63,30 @@ typedef struct _gsmloc_cellinfo
 }gsmloc_cellinfo;
 
 /**
- * @defgroup iot_sdk_sys ÏµÍ³½Ó¿Ú
+ * @defgroup iot_sdk_sys ç³»ç»Ÿæ¥å£
  * @{
  */
 /**@example vat/demo_vat.c
-* vat½Ó¿ÚÊ¾Àı
+* vatæ¥å£ç¤ºä¾‹
 */ 
-/**ÓÃÀ´ÉèÖÃĞéÄâATÍ¨µÀµÄ»Øµ÷º¯Êı
-*@param		vatHandle:  ĞéÄâATÖ÷¶¯ÉÏ±¨»òÕßATÃüÁî½á¹û·µ»ØµÄ»Øµ÷º¯Êı
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
+/**ç”¨æ¥è®¾ç½®è™šæ‹ŸATé€šé“çš„å›è°ƒå‡½æ•°
+*@param		vatHandle:  è™šæ‹ŸATä¸»åŠ¨ä¸ŠæŠ¥æˆ–è€…ATå‘½ä»¤ç»“æœè¿”å›çš„å›è°ƒå‡½æ•°
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
 **/
 BOOL iot_vat_init(PAT_MESSAGE vatHandle);
 
-/**ÓÃÀ´·¢ËÍATÃüÁî
-*@param		cmdStr:  ATÃüÁî×Ö·û´®
-*@param   	cmdLen:  ATÃüÁî³¤¶È
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
-*@note      ×¢Òâ£¬ATÃüÁî×Ö·û´®cmdStrÖĞĞèÒª°üº¬"\r\n"»òÕß"\r"½áÎ²
+/**ç”¨æ¥å‘é€ATå‘½ä»¤
+*@param		cmdStr:  ATå‘½ä»¤å­—ç¬¦ä¸²
+*@param   	cmdLen:  ATå‘½ä»¤é•¿åº¦
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
+*@note      æ³¨æ„ï¼ŒATå‘½ä»¤å­—ç¬¦ä¸²cmdSträ¸­éœ€è¦åŒ…å«"\r\n"æˆ–è€…"\r"ç»“å°¾
 **/
 BOOL iot_vat_send_cmd(UINT8* cmdStr, UINT16 cmdLen);
 
-/**ÓÃÀ´ÅúÁ¿·¢ËÍATÃüÁî
-*@param		cmd:  ATÃüÁî²ÎÊı
-*@param   	cmd_count:  ATÃüÁî¸öÊı
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
+/**ç”¨æ¥æ‰¹é‡å‘é€ATå‘½ä»¤
+*@param		cmd:  ATå‘½ä»¤å‚æ•°
+*@param   	cmd_count:  ATå‘½ä»¤ä¸ªæ•°
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
 **/
 BOOL iot_vat_push_cmd(AtCmdEntity cmd[],u8 cmd_count);
 

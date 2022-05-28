@@ -24,9 +24,9 @@ VOID timer1_handle(void *pParameter);
 
 VOID demo_timer_create(VOID)
 {
-    /* ×¢: ´´½¨¶¨Ê±Æ÷ 
-    *      pFunc¿ÉÒÔÉèÖÃµÄ»Øµ÷º¯Êı¿ÉÒÔ²»Í¬, 
-    *      pParameter ¿ÉÒÔ´«NULL
+    /* æ³¨: åˆ›å»ºå®šæ—¶å™¨ 
+    *      pFuncå¯ä»¥è®¾ç½®çš„å›è°ƒå‡½æ•°å¯ä»¥ä¸åŒ, 
+    *      pParameter å¯ä»¥ä¼ NULL
     */     
     timer_print("[timer] create timer1");
     g_demo_timer1 = iot_os_create_timer(timer1_handle, (PVOID)&g_timer1Param);
@@ -70,7 +70,7 @@ VOID timer1_handle(void *pParameter)
 
     timer_print("[timer] name %s, count %d ", timerParam->timer_name, timerParam->count);
 
-    // 4.¶¨Ê±Æ÷1ºÍ¶¨Ê±Æ÷2¸÷ÖØ¸´5´Î,Í£Ö¹²¢É¾³ı¶¨Ê±Æ÷
+    // 4.å®šæ—¶å™¨1å’Œå®šæ—¶å™¨2å„é‡å¤5æ¬¡,åœæ­¢å¹¶åˆ é™¤å®šæ—¶å™¨
     if (timerParam->count < 5) 
     {
         timerParam->count++;
@@ -86,10 +86,10 @@ VOID timer1_handle(void *pParameter)
 
 void demo_timer_init(void)
 {
-    //1. ´´½¨¶¨Ê±Æ÷1ºÍ¶¨Ê±Æ÷2
+    //1. åˆ›å»ºå®šæ—¶å™¨1å’Œå®šæ—¶å™¨2
     demo_timer_create();
 
-    //2. ¿ªÆô¶¨Ê±Æ÷1ºÍ¶¨Ê±Æ÷2
+    //2. å¼€å¯å®šæ—¶å™¨1å’Œå®šæ—¶å™¨2
     demo_timer_start();
 }
 

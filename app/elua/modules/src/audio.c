@@ -47,10 +47,10 @@ static PlatformAudioFormat l_getFileFormat(const char *filename)
 }
 static int l_audio_play_file(lua_State *L) {
     const char *name = luaL_checkstring(L,1);
-	/*+\NEW\lijiaodi\2020.4.09\Í¨¹ı²¥bufferµÄ·½Ê½²¥·Å*/
+	/*+\NEW\lijiaodi\2020.4.09\é€šè¿‡æ’­bufferçš„æ–¹å¼æ’­æ”¾*/
     AudioPlayParam param;
 	PlatformAudioFormat format;
-	/*+\bug\wj\2020.5.27\²¥·Å²»ÁË´óÎÄ¼şÎÊÌâ*/
+	/*+\bug\wj\2020.5.27\æ’­æ”¾ä¸äº†å¤§æ–‡ä»¶é—®é¢˜*/
 	u8 * playBuffer;
 	FILE *file;
 	int len = 0;
@@ -108,10 +108,10 @@ static int l_audio_play_file(lua_State *L) {
 	    param.u.buffer.loop = FALSE;
 	}
     lua_pushboolean(L, platform_audio_play(&param) == PLATFORM_OK);
-	/*-\bug\wj\2020.5.27\²¥·Å²»ÁË´óÎÄ¼şÎÊÌâ*/
+	/*-\bug\wj\2020.5.27\æ’­æ”¾ä¸äº†å¤§æ–‡ä»¶é—®é¢˜*/
 	if(param.isBuffer)
 		platform_free(playBuffer);
-	/*-\NEW\lijiaodi\2020.4.09\Í¨¹ı²¥bufferµÄ·½Ê½²¥·Å*/
+	/*-\NEW\lijiaodi\2020.4.09\é€šè¿‡æ’­bufferçš„æ–¹å¼æ’­æ”¾*/
     return 1;
 }
 
@@ -136,15 +136,15 @@ static int l_audio_stop(lua_State *L) {
     return 0;
 }
 
-/*+\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+/*+\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
 static int l_audio_set_channel(lua_State *L) {
-	/*+\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+	/*+\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
     u32 outchannel = luaL_checkinteger(L,1);
 	u32 inchannel = luaL_optinteger(L,2,0xff);
     u32 res;
     
     res = platform_audio_set_channel(outchannel, inchannel);
-	/*-\BUG\wangyuan\2020.11.27\BUG_3634£ºÔÚLuat°æ±¾ÉÏ¿ª·¢¡°ÉèÖÃmicÊäÈëÍ¨µÀ¡±µÄ½Ó¿Ú*/
+	/*-\BUG\wangyuan\2020.11.27\BUG_3634ï¼šåœ¨Luatç‰ˆæœ¬ä¸Šå¼€å‘â€œè®¾ç½®micè¾“å…¥é€šé“â€çš„æ¥å£*/
     lua_pushinteger(L, res);
     
     return 1;
@@ -154,15 +154,15 @@ static int l_audio_set_vol(lua_State *L) {
     u32 vol = luaL_checkinteger(L,1);
     u32 res;
 
-/*+\NEW\xiongjunqun\2015.05.28\ĞŞ¸ÄÎŞ·¨ÇĞ»»µ½ÌıÍ²Ä£Ê½ÎÊÌâ*/	
+/*+\NEW\xiongjunqun\2015.05.28\ä¿®æ”¹æ— æ³•åˆ‡æ¢åˆ°å¬ç­’æ¨¡å¼é—®é¢˜*/	
     //platform_audio_set_channel(PLATFORM_AUD_CHANNEL_LOUDSPEAKER);
-/*-\NEW\xiongjunqun\2015.05.28\ĞŞ¸ÄÎŞ·¨ÇĞ»»µ½ÌıÍ²Ä£Ê½ÎÊÌâ*/
+/*-\NEW\xiongjunqun\2015.05.28\ä¿®æ”¹æ— æ³•åˆ‡æ¢åˆ°å¬ç­’æ¨¡å¼é—®é¢˜*/
     res = platform_audio_set_vol(vol);
     lua_pushinteger(L, res);
     
     return 1;
 }
-/*+\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*+\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 static int l_audio_set_sph_vol(lua_State *L) {
     u32 vol = luaL_checkinteger(L,1);
     u32 res;
@@ -172,7 +172,7 @@ static int l_audio_set_sph_vol(lua_State *L) {
     
     return 1;
 }
-/*-\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/
+/*-\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/
 
 static int l_audio_speaker_set_vol(lua_State *L) {
     u32 vol = luaL_checkinteger(L,1);
@@ -207,17 +207,17 @@ static int l_audio_set_loopback(lua_State *L) {
     
     return 1;
 }
-/*-\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+/*-\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
 
 static int l_audio_record(lua_State *L) {
     size_t  len      = 0;
     char* file_name      = (char*)luaL_checklstring(L, 1, &len);
     int     time_sec        = luaL_checkinteger(L, 2);
     int    quality        =  luaL_optint(L, 3, 0);
-	/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 	PlatformAudioRecordType 	type 		= luaL_optint(L, 4, 0);
 	PlatformAudioFormat 	format 		= luaL_optint(L, 5, 0);
-	/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
     int res = platform_audio_record(file_name,time_sec,quality,type,format);
     lua_pushinteger(L, res);
     
@@ -230,10 +230,10 @@ static int l_audio_stream_record(lua_State *L) {
     int    quality        =  luaL_optint(L, 2, 0);
 	int 	type 		= luaL_optint(L, 3, 0);
 	int 	format 		= luaL_optint(L, 4, 0);
-	/*+\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*+\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
 	int 	length 		= luaL_optint(L, 5, 0);
     int res = platform_audio_stream_record(time_sec,quality,type,format, length);
-	/*-\bug2241\zhuwangbin\2020.6.20\Á÷Â¼Òô¿ÉÅäÖÃ»Øµ÷³¤¶È·§Öµ*/
+	/*-\bug2241\zhuwangbin\2020.6.20\æµå½•éŸ³å¯é…ç½®å›è°ƒé•¿åº¦é˜€å€¼*/
     lua_pushinteger(L, res);
     
     return 1;
@@ -307,32 +307,32 @@ static int l_audio_streamplay(lua_State *L) {
 
 	format = luaL_checkinteger(L, 1);
     data = luaL_checklstring(L, 2, &len);
-	/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 	PlatformAudioPlayType type = luaL_optint(L, 3 ,PLATFORM_AUD_PLAY_TYPE_LOCAL);
 
     lua_pushinteger(L, platform_audio_streamplay(type,format,data,len));
-	/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
     return 1;
 }
 
 
 
-/*+\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
+/*+\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
 static int l_audio_get_stream_remain_dataLen(lua_State *L)
 {
 	lua_pushinteger(L, platform_audio_getStreamRemainDataLen());
     return 1;
 }
-/*-\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
-/*+\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
+/*-\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
+/*+\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
 static int l_audio_start_voice(lua_State *L)
 {
 	lua_pushboolean(L, platform_audio_start_voice());
 	return 1;
 }
-/*-\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
+/*-\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
 
-/*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 static int l_audio_setpa(lua_State *L) {
     PlatformSpkPaType type;
 
@@ -347,9 +347,9 @@ static int l_audio_getpa(lua_State *L) {
     lua_pushinteger(L, platform_getpa());
     return 1;
 }
-/*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+/*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 
-/*+\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*+\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 static int l_audio_setexpa(lua_State *L) {
 	int enable=1, gpio, count = 3, us = 2, outDev;
 	
@@ -383,9 +383,9 @@ static int l_audio_setexpa(lua_State *L) {
     lua_pushinteger(L, platform_setexpa(enable, gpio, count, us, outDev));
     return 1;
 }
-/*-\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+/*-\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
 
-/*+\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+/*+\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
 static int l_audio_headPlug(lua_State *L) {
 	int type;
 	
@@ -394,8 +394,8 @@ static int l_audio_headPlug(lua_State *L) {
     lua_pushinteger(L, platform_headPlug(type));
     return 1;
 }
-/*-\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
-/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*-\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
+/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 static int l_audio_headsetInit(lua_State *L)
 {
 	int autoControl;
@@ -404,8 +404,8 @@ static int l_audio_headsetInit(lua_State *L)
 
 	return 1;
 }
-/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
-/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
+/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 static int l_audio_rtmp_open(lua_State *L)
 {
 	char *data = NULL;
@@ -421,7 +421,7 @@ static int l_audio_rtmp_close(lua_State *L)
 	lua_pushboolean(L, platform_rtmp_close());
 	return 1;
 }
-/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 #define MIN_OPT_LEVEL 2
 #include "lrodefs.h"  
 
@@ -429,47 +429,47 @@ static int l_audio_rtmp_close(lua_State *L)
 const LUA_REG_TYPE audiocore_map[] =
 { 
   { LSTRKEY( "play" ),  LFUNCVAL( l_audio_play_file ) },
-  /*+\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
+  /*+\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
   { LSTRKEY( "streamremain" ),  LFUNCVAL( l_audio_get_stream_remain_dataLen ) },
-  /*-\bug\wj\2020.5.14\Á÷²¥·ÅÎÊÌâPCMÎŞÉÏ±¨£¬Á÷Ê½²¥·ÅÊÇÍ¬²½×èÈû½Ó¿Ú²»ºÏÊÊ*/
+  /*-\bug\wj\2020.5.14\æµæ’­æ”¾é—®é¢˜PCMæ— ä¸ŠæŠ¥ï¼Œæµå¼æ’­æ”¾æ˜¯åŒæ­¥é˜»å¡æ¥å£ä¸åˆé€‚*/
   { LSTRKEY( "playdata" ),  LFUNCVAL( l_audio_play_data ) },
   { LSTRKEY( "streamplay" ),  LFUNCVAL( l_audio_streamplay ) },
   { LSTRKEY( "stop" ),  LFUNCVAL( l_audio_stop ) },
-  /*+\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+  /*+\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
   { LSTRKEY( "setchannel" ),  LFUNCVAL( l_audio_set_channel ) },
   { LSTRKEY( "setvol" ),  LFUNCVAL( l_audio_set_vol ) },
-/*+\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/  
+/*+\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/  
   { LSTRKEY( "setsphvol" ),  LFUNCVAL( l_audio_set_sph_vol ) },
-/*-\NEW\xiongjunqun\2015.05.28\Ôö¼ÓÍ¨»°ÖĞµ÷½ÚÒôÁ¿½Ó¿Ú*/  
+/*-\NEW\xiongjunqun\2015.05.28\å¢åŠ é€šè¯ä¸­è°ƒèŠ‚éŸ³é‡æ¥å£*/  
   { LSTRKEY( "setspeakervol" ),  LFUNCVAL( l_audio_speaker_set_vol ) },
   { LSTRKEY( "setmicvol" ),  LFUNCVAL( l_audio_set_mic_vol ) },
   { LSTRKEY( "setloopback" ),  LFUNCVAL( l_audio_set_loopback ) },
-  /*-\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+  /*-\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
   { LSTRKEY( "record" ),  LFUNCVAL( l_audio_record) },
   {	LSTRKEY( "streamrecord" ),  LFUNCVAL(l_audio_stream_record)},
   { LSTRKEY( "stoprecord" ),  LFUNCVAL( l_audio_stop_record)},
   { LSTRKEY( "deleterecord" ),  LFUNCVAL( l_audio_delete_record) },
   { LSTRKEY( "streamrecordread" ),  LFUNCVAL( l_audio_stream_record_recv)},
-  /*+\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
+  /*+\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
   { LSTRKEY( "startvoice" ),  LFUNCVAL(l_audio_start_voice)},
-  /*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+  /*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
   { LSTRKEY( "setpa" ),  LFUNCVAL(l_audio_setpa)},
    { LSTRKEY( "getpa" ),  LFUNCVAL(l_audio_getpa)},
-   /*+\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
+   /*+\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
    { LSTRKEY( "pa" ),  LFUNCVAL(l_audio_setexpa)},
-   /*-\bug2767\zhuwangbin\2020.8.5\Ìí¼ÓÍâ²¿paÉèÖÃ½Ó¿Ú*/
-   /*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
-  /*-\new\wj\2020.5.29\Í¨»°Ç°¿ÉÒÔ²¥·ÅÒôÆµ£¬½ÓÍ¨ºó»¹¿ÉÒÔÕı³£Í¨»°*/
-	/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+   /*-\bug2767\zhuwangbin\2020.8.5\æ·»åŠ å¤–éƒ¨paè®¾ç½®æ¥å£*/
+   /*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
+  /*-\new\wj\2020.5.29\é€šè¯å‰å¯ä»¥æ’­æ”¾éŸ³é¢‘ï¼Œæ¥é€šåè¿˜å¯ä»¥æ­£å¸¸é€šè¯*/
+	/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 	{ LSTRKEY( "rtmpopen" ),  LFUNCVAL(l_audio_rtmp_open)},
 	{ LSTRKEY( "rtmpclose" ),  LFUNCVAL(l_audio_rtmp_close)},
-	/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
-  /*+\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
+	/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
+  /*+\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
   { LSTRKEY( "head_plug" ),  LFUNCVAL(l_audio_headPlug)},
-  /*-\NEW\zhuwangbin\2020.8.11\Ìí¼Ó¶ú»ú²å°ÎÅäÖÃ*/
-  /*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+  /*-\NEW\zhuwangbin\2020.8.11\æ·»åŠ è€³æœºæ’æ‹”é…ç½®*/
+  /*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
   { LSTRKEY( "headsetinit" ),  LFUNCVAL(l_audio_headsetInit)},
-  /*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+  /*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
   { LNILKEY, LNILVAL }
 };
 
@@ -480,12 +480,12 @@ LUALIB_API int luaopen_audiocore( lua_State *L )
     MOD_REG_NUMBER(L, "AMR", PLATFORM_AUD_AMRNB);
     MOD_REG_NUMBER(L, "MP3", PLATFORM_AUD_MP3);
     MOD_REG_NUMBER(L, "PCM", PLATFORM_AUD_PCM);
-	/*+\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	/*+\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
 	MOD_REG_NUMBER(L, "SPX", PLATFORM_AUD_SPEEX);
-	/*-\NEW\zhuwangbin\2020.05.15\Ôö¼Óspeex¸ñÊ½µÄÂ¼ÒôºÍ²¥·Å*/
+	/*-\NEW\zhuwangbin\2020.05.15\å¢åŠ speexæ ¼å¼çš„å½•éŸ³å’Œæ’­æ”¾*/
     MOD_REG_NUMBER(L, "WAV", PLATFORM_AUD_WAV);
 
-	/*+\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*+\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
     MOD_REG_NUMBER(L, "PLAY_LOCAL", PLATFORM_AUD_PLAY_TYPE_LOCAL);
     MOD_REG_NUMBER(L, "PLAY_VOLTE", PLATFORM_AUD_PLAY_TYPE_VOICE);
     MOD_REG_NUMBER(L, "PLAY_POC", PLATFORM_AUD_PLAY_TYPE_POC);
@@ -495,19 +495,19 @@ LUALIB_API int luaopen_audiocore( lua_State *L )
     MOD_REG_NUMBER(L, "RECORE_VOICE", PLATFORM_AUD_RECORD_TYPE_VOICE);
     MOD_REG_NUMBER(L, "RECORE_VOICE_DUAL", PLATFORM_AUD_RECORD_TYPE_VOICE_DUAL);
     MOD_REG_NUMBER(L, "RECORE_POC", PLATFORM_AUD_RECORD_TYPE_POC);
-	/*-\NEW\czm\2020.11.13\bug:3271ºÏ²¢Õ¹Èñ½µÔëËã·¨µ½Í¨ÓÃ°æ±¾*/
+	/*-\NEW\czm\2020.11.13\bug:3271åˆå¹¶å±•é”é™å™ªç®—æ³•åˆ°é€šç”¨ç‰ˆæœ¬*/
 
     //MOD_REG_NUMBER(L, "MIDI", PLATFORM_AUD_MIDI);
-	/*+\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
+	/*+\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
 	MOD_REG_NUMBER(L, "CLASS_AB", PLATFORM_SPKPA_TYPE_CLASSAB);
 	MOD_REG_NUMBER(L, "CLASS_D", PLATFORM_INPUT_TYPE_CLASSD);
-	/*-\new\zhuwangbin\2020.6.2\Ìí¼ÓÒôÆµ¹¦·ÅÀàĞÍÉèÖÃ½Ó¿Ú*/
-    /*+\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+	/*-\new\zhuwangbin\2020.6.2\æ·»åŠ éŸ³é¢‘åŠŸæ”¾ç±»å‹è®¾ç½®æ¥å£*/
+    /*+\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
     #define REG_AUD_CHANNEL(CHANNEL) MOD_REG_NUMBER(L, #CHANNEL, PLATFORM_AUD_CHANNEL_##CHANNEL)
     REG_AUD_CHANNEL(HANDSET);
     REG_AUD_CHANNEL(EARPIECE);
     REG_AUD_CHANNEL(LOUDSPEAKER);
-	/*+\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
+	/*+\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
 	#if 0
     REG_AUD_CHANNEL(BLUETOOTH);
     REG_AUD_CHANNEL(FM);
@@ -521,7 +521,7 @@ LUALIB_API int luaopen_audiocore( lua_State *L )
     REG_AUD_CHANNEL(DUMMY_LOUDSPEAKER);    
     REG_AUD_CHANNEL(DUMMY_AUX_LOUDSPEAKER);
 	#endif
-	/*-\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
+	/*-\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
     #define REG_AUD_VOL(VOL) MOD_REG_NUMBER(L, #VOL, PLATFORM_AUD_##VOL)
     REG_AUD_VOL(VOL0);
     REG_AUD_VOL(VOL1);
@@ -554,13 +554,13 @@ LUALIB_API int luaopen_audiocore( lua_State *L )
     REG_AUD_LOOPBACK(LOOPBACK_HANDSET);
     REG_AUD_LOOPBACK(LOOPBACK_EARPIECE);
     REG_AUD_LOOPBACK(LOOPBACK_LOUDSPEAKER);
-	/*+\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
+	/*+\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
 	#if 0
     REG_AUD_LOOPBACK(LOOPBACK_AUX_HANDSET);
     REG_AUD_LOOPBACK(LOOPBACK_AUX_LOUDSPEAKER);
 	#endif
-	/*-\new\wj\2020.4.22\Ö§³ÖÒôÆµÍ¨µÀÇĞ»»½Ó¿Ú*/
-    /*-\NEW\zhuth\2014.7.25\ĞÂÔöÉèÖÃÒôÆµÍ¨µÀºÍÒôÁ¿µÄÍ¬²½½Ó¿Ú*/
+	/*-\new\wj\2020.4.22\æ”¯æŒéŸ³é¢‘é€šé“åˆ‡æ¢æ¥å£*/
+    /*-\NEW\zhuth\2014.7.25\æ–°å¢è®¾ç½®éŸ³é¢‘é€šé“å’ŒéŸ³é‡çš„åŒæ­¥æ¥å£*/
 	
     return 1;
 }  

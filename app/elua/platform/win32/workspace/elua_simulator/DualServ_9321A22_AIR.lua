@@ -151,7 +151,7 @@ function IsSleep()
 end
 
 local function UpdateA1Len()
-	--±£Ö¤µÚÒ»´Î¿ª»ú5·ÖÖÓ²Å½øÈëĞİÃß
+	--ä¿è¯ç¬¬ä¸€æ¬¡å¼€æœº5åˆ†é’Ÿæ‰è¿›å…¥ä¼‘çœ 
 	if c.gen > 300 then
 		t.ST = air.batSleep
 	else
@@ -411,7 +411,7 @@ function startlink(server,port,protocol,listener)
 		login = false,
 		CurTr = 0,
 		valid = true,
-		sendq = {}, --·¢ËÍ¶ÓÁĞ
+		sendq = {}, --å‘é€é˜Ÿåˆ—
 	}
 
 	Lib.linklist[id] = link
@@ -1622,10 +1622,10 @@ local function ZipLog()
 end
 
 --[[
-Èç¹ûÊä³öµÄÎÄ¼ş´óÓÚ100K£¬»òÕß³¬¹ıÁË10·ÖÖÓ£¬ ¾Í°ÑlogÑ¹Ëõµ½ÎÄ¼şÖĞ£¬Í¬Ê±°ÑlogÎÄ¼şÇå³ı¡£
-logÑ¹ËõÎÄ¼şÃû³Æ£ºzlogxxx.zip, ÆäÖĞxxxÎªĞòºÅ£¬×î´óÖ§³Ö100¸öÎÄ¼ş
-·ÇÑ¹ËõÎÄ¼şµÄÃû³Æ:log.txt
-¼ÇÂ¼Ñ¹ËõÎÄ¼şÊıÁ¿ºÍµ±Ç°ĞòºÅ
+å¦‚æœè¾“å‡ºçš„æ–‡ä»¶å¤§äº100Kï¼Œæˆ–è€…è¶…è¿‡äº†10åˆ†é’Ÿï¼Œ å°±æŠŠlogå‹ç¼©åˆ°æ–‡ä»¶ä¸­ï¼ŒåŒæ—¶æŠŠlogæ–‡ä»¶æ¸…é™¤ã€‚
+logå‹ç¼©æ–‡ä»¶åç§°ï¼šzlogxxx.zip, å…¶ä¸­xxxä¸ºåºå·ï¼Œæœ€å¤§æ”¯æŒ100ä¸ªæ–‡ä»¶
+éå‹ç¼©æ–‡ä»¶çš„åç§°:log.txt
+è®°å½•å‹ç¼©æ–‡ä»¶æ•°é‡å’Œå½“å‰åºå·
 ]]
 
 local function SaveLog(s)
@@ -1944,7 +1944,7 @@ local function ChgDeal(cur, income)
 	elseif cur and not income then
 		bat.lost = c.gen
 		p.statechg = true
-		--µÚÒ»´Î±äÎªÃ»ÓĞÍâµç£¬Ó¦¸Ã»½ĞÑÒ»´Î£¬Ó¦¶Ô¼ôÏß¸æ¾¯
+		--ç¬¬ä¸€æ¬¡å˜ä¸ºæ²¡æœ‰å¤–ç”µï¼Œåº”è¯¥å”¤é†’ä¸€æ¬¡ï¼Œåº”å¯¹å‰ªçº¿å‘Šè­¦
 		if IsSleep() then
 			SysWakeup(3,"E")
 		end
@@ -2687,14 +2687,14 @@ end
 
 local function CheckGuard()
 	local t1 = c.gen - ACC.cs
-	if ACC.s == 0 and t1 >= 0 and t1 < 3 and p.guard == "ON" then   --µã»ğ
+	if ACC.s == 0 and t1 >= 0 and t1 < 3 and p.guard == "ON" then   --ç‚¹ç«
 		p.guard = "OFF"
 		p.statechg = true
 		ClearGuardInfo()
 		AirGuard()
 		PushAir("A2")
 		vprint("guard off")
-	elseif ACC.s == 1 and (c.gen - ACC.cs) >= cP["ACCLT"] and p.guard == "OFF"	then  --Ï¨»ğ
+	elseif ACC.s == 1 and (c.gen - ACC.cs) >= cP["ACCLT"] and p.guard == "OFF"	then  --ç†„ç«
 		InitGuardInfo()
 		p.guard = "ON"
 		p.statechg = true
@@ -3202,8 +3202,8 @@ local function InitIO()
 	IO.batchg = pio.P0_1
 	IO.pmd =
 	{
-		battFullLevel = 4250, -- A9321³äÂúµçÑ¹4.25v
-		battRechargeLevel = 3700, -- »Ø³äµçÑ¹4.1V
+		battFullLevel = 4250, -- A9321å……æ»¡ç”µå‹4.25v
+		battRechargeLevel = 3700, -- å›å……ç”µå‹4.1V
 		currentFirst = 150,
 		battlevelFirst = 4150,
 		currentSecond = 50,
@@ -3255,8 +3255,8 @@ local function AirDebug()
 end
 
 --[[
-Èç¹ûµ½ÁËĞÑÀ´µÄÊ±¼ä£¬Ê×ÏÈ´ò¿ªGPS£¬ËÑË÷¶¨Î»£¬µÃµ½ÓĞĞ§µÄ¾­Î³¶ÈÖ®ºó£¬²¢ÇÒµ½ÁËGpsOnÊ±¼äÖ®ºó£¬ÔÙÉÏ±¨£¬Í¬Ê±¹Ø±ÕGPS
-Èç¹û²»ÊÇË¯Ãß×´Ì¬£¬µ½Ê±¼ä¾ÍÖ±½ÓÉÏ±¨
+å¦‚æœåˆ°äº†é†’æ¥çš„æ—¶é—´ï¼Œé¦–å…ˆæ‰“å¼€GPSï¼Œæœç´¢å®šä½ï¼Œå¾—åˆ°æœ‰æ•ˆçš„ç»çº¬åº¦ä¹‹åï¼Œå¹¶ä¸”åˆ°äº†GpsOnæ—¶é—´ä¹‹åï¼Œå†ä¸ŠæŠ¥ï¼ŒåŒæ—¶å…³é—­GPS
+å¦‚æœä¸æ˜¯ç¡çœ çŠ¶æ€ï¼Œåˆ°æ—¶é—´å°±ç›´æ¥ä¸ŠæŠ¥
 ]]
 local function HeartTime()
 	if TermStateEqu("CLOSE") then

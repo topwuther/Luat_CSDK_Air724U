@@ -2,11 +2,11 @@
 #include "hal_config.h"
 
 
-/**»ñÈ¡flash¿ÉÓÃµÄµØÖ·¿Õ¼ä£¬·µ»ØµÄµØÖ·ÓÃÀ´´«Èëiot_flash_erase¡¢iot_flash_write¡¢iot_flash_readµÈ½Ó¿Ú¡£
-*@param		addrout:	·µ»Ø¿ÉÓÃflashµØÖ·
-*@param		lenout:	·µ»Ø¿ÉÓÃflash³¤¶È£¬µ¥Î»Îª×Ö½Ú
-*@return	E_AMOPENAT_MEMD_ERR: 	³É¹¦:OPENAT_MEMD_ERR_NO, ÆäÓàÊ§°Ü
-*@note      ¸Ã½Ó¿Ú·µ»ØµÄµØÖ·ÊÇ64KB¶ÔÆë ·µ»ØµÄµØÖ·¿Õ¼ä¸ù¾İµ±Ç°³ÌĞò´óĞ¡À´È·¶¨¡£
+/**è·å–flashå¯ç”¨çš„åœ°å€ç©ºé—´ï¼Œè¿”å›çš„åœ°å€ç”¨æ¥ä¼ å…¥iot_flash_eraseã€iot_flash_writeã€iot_flash_readç­‰æ¥å£ã€‚
+*@param		addrout:	è¿”å›å¯ç”¨flashåœ°å€
+*@param		lenout:	è¿”å›å¯ç”¨flashé•¿åº¦ï¼Œå•ä½ä¸ºå­—èŠ‚
+*@return	E_AMOPENAT_MEMD_ERR: 	æˆåŠŸ:OPENAT_MEMD_ERR_NO, å…¶ä½™å¤±è´¥
+*@note      è¯¥æ¥å£è¿”å›çš„åœ°å€æ˜¯64KBå¯¹é½ è¿”å›çš„åœ°å€ç©ºé—´æ ¹æ®å½“å‰ç¨‹åºå¤§å°æ¥ç¡®å®šã€‚
 **/
 VOID iot_flash_getaddr(    
                     UINT32* addrout,
@@ -26,10 +26,10 @@ VOID iot_flash_getaddr(
     }
 }
 
-/**flash²Á 
-*@param		startAddr:		²ÁĞ´µØÖ· 64K¶ÔÆë
-*@param		endAddr:		²ÁĞ´½áÊøµØÖ·
-*@return	E_AMOPENAT_MEMD_ERR: 	³É¹¦:OPENAT_MEMD_ERR_NO, ÆäÓàÊ§°Ü
+/**flashæ“¦ 
+*@param		startAddr:		æ“¦å†™åœ°å€ 64Kå¯¹é½
+*@param		endAddr:		æ“¦å†™ç»“æŸåœ°å€
+*@return	E_AMOPENAT_MEMD_ERR: 	æˆåŠŸ:OPENAT_MEMD_ERR_NO, å…¶ä½™å¤±è´¥
 **/
 E_AMOPENAT_MEMD_ERR iot_flash_erase(             
                         UINT32 startAddr,
@@ -39,12 +39,12 @@ E_AMOPENAT_MEMD_ERR iot_flash_erase(
     return OPENAT_flash_erase(startAddr, endAddr);
 }
 
-/**flashĞ´ 
-*@param		startAddr:		Ğ´µØÖ· 
-*@param		size:		    Ğ´Êı¾İ´óĞ¡
-*@param		writenSize:		Ğ´Êı¾İÀàĞÍ´óĞ¡
-*@param		buf:		    Ğ´Êı¾İÖ¸Õë
-*@return	E_AMOPENAT_MEMD_ERR: 	³É¹¦:OPENAT_MEMD_ERR_NO, ÆäÓàÊ§°Ü
+/**flashå†™ 
+*@param		startAddr:		å†™åœ°å€ 
+*@param		size:		    å†™æ•°æ®å¤§å°
+*@param		writenSize:		å†™æ•°æ®ç±»å‹å¤§å°
+*@param		buf:		    å†™æ•°æ®æŒ‡é’ˆ
+*@return	E_AMOPENAT_MEMD_ERR: 	æˆåŠŸ:OPENAT_MEMD_ERR_NO, å…¶ä½™å¤±è´¥
 **/
 E_AMOPENAT_MEMD_ERR iot_flash_write(             
                         UINT32 startAddr,
@@ -56,12 +56,12 @@ E_AMOPENAT_MEMD_ERR iot_flash_write(
     return OPENAT_flash_write(startAddr, size, writenSize, buf);
 }
 
-/**flash¶Á
-*@param		startAddr:		¶ÁµØÖ· 
-*@param		size:		    ¶ÁÊı¾İ´óĞ¡
-*@param		readSize:		¶ÁÊı¾İÀàĞÍ´óĞ¡
-*@param		buf:		    ¶ÁÊı¾İÖ¸Õë
-*@return	E_AMOPENAT_MEMD_ERR: 	³É¹¦:OPENAT_MEMD_ERR_NO, ÆäÓàÊ§°Ü
+/**flashè¯»
+*@param		startAddr:		è¯»åœ°å€ 
+*@param		size:		    è¯»æ•°æ®å¤§å°
+*@param		readSize:		è¯»æ•°æ®ç±»å‹å¤§å°
+*@param		buf:		    è¯»æ•°æ®æŒ‡é’ˆ
+*@return	E_AMOPENAT_MEMD_ERR: 	æˆåŠŸ:OPENAT_MEMD_ERR_NO, å…¶ä½™å¤±è´¥
 **/
 E_AMOPENAT_MEMD_ERR iot_flash_read(               
                         UINT32 startAddr,

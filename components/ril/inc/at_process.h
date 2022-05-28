@@ -5,10 +5,10 @@
 #include "am_openat_vat.h"
 
 
-//ATÃüÁîÁ÷³Ì
-//1, Ö÷¶¯·¢ËÍATÖ¸Áî
-//2, ¶ÁÈ¡ATÖ¸Áî½á¹û
-//3, ¼ÙÉèATÖ¸ÁîÄ¬ÈÏ¶¼ÊÇÒÔOK»òÕßERROR½áÎ²
+//ATå‘½ä»¤æµç¨‹
+//1, ä¸»åŠ¨å‘é€ATæŒ‡ä»¤
+//2, è¯»å–ATæŒ‡ä»¤ç»“æœ
+//3, å‡è®¾ATæŒ‡ä»¤é»˜è®¤éƒ½æ˜¯ä»¥OKæˆ–è€…ERRORç»“å°¾
 //read at result thread
 #define AT_SUCCESS       0
 
@@ -67,29 +67,29 @@ typedef void (*ATUnsolSMSHandler)(const int sms_index);
 
 /*********************************************************
   Function:    ril_set_cb
-  Description: ×¢²áiot_vat_init»Øµ÷º¯Êı
+  Description: æ³¨å†Œiot_vat_initå›è°ƒå‡½æ•°
   Input:
-        pAtMessage:iot_vat_init»Øµ÷º¯Êı
+        pAtMessage:iot_vat_initå›è°ƒå‡½æ•°
 
 *********************************************************/
 void ril_set_cb(PAT_MESSAGE pAtMessage);
 
 /*********************************************************
   Function:    at_init
-  Description: ³õÊ¼»¯
+  Description: åˆå§‹åŒ–
   Input:
 
   Output:
   Return:      
-  Others:  1£¬³õÊ¼»¯¶ÁÏß³Ì
-           2£¬³õÊ¼»¯µÈ´ıĞÅºÅÁ¿
-           3£¬³õÊ¼»¯ÏµÍ³±äÁ¿
+  Others:  1ï¼Œåˆå§‹åŒ–è¯»çº¿ç¨‹
+           2ï¼Œåˆå§‹åŒ–ç­‰å¾…ä¿¡å·é‡
+           3ï¼Œåˆå§‹åŒ–ç³»ç»Ÿå˜é‡
 *********************************************************/
 
 void at_init(void);
 /*********************************************************
   Function:    at_regNetStatusCb
-  Description: ³õÊ¼»¯
+  Description: åˆå§‹åŒ–
   Input:
 
   Output:
@@ -101,7 +101,7 @@ void at_regNetStatusCb(void (*netStatusCb)(int));
 
 /*********************************************************
   Function:    at_send_command_singleline
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -114,7 +114,7 @@ int at_send_command_singleline (const char *command,
                                  ATResponse **pp_outResponse);
 /*********************************************************
   Function:    at_send_command_numeric
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -127,7 +127,7 @@ int at_send_command_numeric (const char *command,
                                  
 /*********************************************************
   Function:    at_send_command_multiline
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -141,7 +141,7 @@ int at_send_command_multiline (const char *command,
                                  
 /*********************************************************
   Function:    at_send_command_sms
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -155,7 +155,7 @@ int at_send_command_sms (const char *command,
 
 /*********************************************************
   Function:    at_send_command
-  Description: ·¢ËÍATÖ¸Áî£¬²»µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œä¸ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -167,7 +167,7 @@ int at_send_command (const char *command, ATResponse **pp_outResponse);
 
 /*********************************************************
   Function:    at_response_free
-  Description: ÊÍ·Å½á¹û
+  Description: é‡Šæ”¾ç»“æœ
   Input:
 
   Output:

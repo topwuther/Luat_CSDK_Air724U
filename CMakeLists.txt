@@ -98,9 +98,9 @@ if(DEFINED ENV{AM_MODEL})
 		include_directories(${core_bin_dir}/memd)
         set(csdk_target Air720U_${CORE_VER}_CSDK_BT_TTS_demo_${CSDK_PRO})
 		set(APP_IMG_NAME "8915DM_cat1_CSDK_BT_TTS")
-		#/*+\new\czm\2020.9.21\bug:3136  �°��������� CSDK ���� �ڴ�ʣ��ռ� �ü��� 5M���ҵİ汾*/
+		#/*+\new\czm\2020.9.21\bug:3136  新案（板牙） CSDK 需求 内存剩余空间 裁剪到 5M左右的版本*/
         set(UIS8915DM_cus_name "cat1_UIS8915DM_BB_RF_SS_NoVolte_cus")
-		#/*-\new\czm\2020.9.21\bug:3136  �°��������� CSDK ���� �ڴ�ʣ��ռ� �ü��� 5M���ҵİ汾*/
+		#/*-\new\czm\2020.9.21\bug:3136  新案（板牙） CSDK 需求 内存剩余空间 裁剪到 5M左右的版本*/
 	elseif((${AM_MODEL} STREQUAL  "iot_SDK_720U_BT_TTS_VOLTE"))
 		message("core/iot_SDK_720U_BT_TTS_VOLTE")
 		set(core_type 2)
@@ -115,9 +115,9 @@ if(DEFINED ENV{AM_MODEL})
 		include_directories(${core_bin_dir}/memd)
         set(csdk_target Air720U_${CORE_VER}_CSDK_BT_TTS_VOLTE_demo_${CSDK_PRO})
 		set(APP_IMG_NAME "8915DM_cat1_CSDK_BT_TTS_VOLTE")
-		#/*+\new\czm\2020.9.21\bug:3136  �°��������� CSDK ���� �ڴ�ʣ��ռ� �ü��� 5M���ҵİ汾*/
+		#/*+\new\czm\2020.9.21\bug:3136  新案（板牙） CSDK 需求 内存剩余空间 裁剪到 5M左右的版本*/
         set(UIS8915DM_cus_name "cat1_UIS8915DM_BB_RF_SS_cus")
-		#/*-\new\czm\2020.9.21\bug:3136  �°��������� CSDK ���� �ڴ�ʣ��ռ� �ü��� 5M���ҵİ汾*/
+		#/*-\new\czm\2020.9.21\bug:3136  新案（板牙） CSDK 需求 内存剩余空间 裁剪到 5M左右的版本*/
 	else()
 		message(FATAL_ERROR "AM_MODEL: ${AM_MODEL} != iot_SDK_720U or iot_SDK_720U_BT_TTS or iot_SDK_720U_BT_TTS_VOLTE")
 	endif()

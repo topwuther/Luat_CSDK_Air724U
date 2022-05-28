@@ -49,9 +49,9 @@ typedef	struct __sFILE {
     //int	_r;		/* read space left for getc() */
     //int	_w;		/* write space left for putc() */
     short	_flags;		/* flags, below; this FILE is free if 0 */
-    /*+\liulean\2015.1.28\½«ÎÄ¼ş¾ä±ú¸Ä³É32Î»£¬·ñÔò·Å²»ÏÂ*/
+    /*+\liulean\2015.1.28\å°†æ–‡ä»¶å¥æŸ„æ”¹æˆ32ä½ï¼Œå¦åˆ™æ”¾ä¸ä¸‹*/
     int	_file;		/* fileno, if Unix descriptor, else -1 */
-    /*-\liulean\2015.1.28\½«ÎÄ¼ş¾ä±ú¸Ä³É32Î»£¬·ñÔò·Å²»ÏÂ*/
+    /*-\liulean\2015.1.28\å°†æ–‡ä»¶å¥æŸ„æ”¹æˆ32ä½ï¼Œå¦åˆ™æ”¾ä¸ä¸‹*/
     //struct	__sbuf _bf;	/* the buffer (at least 1 byte, if !NULL) */
     //int	_lbfsize;	/* 0 or -_bf._size, for inline putc */
     
@@ -238,11 +238,11 @@ long lualibc_ftell(FILE *);
 #define setvbuf lualibc_setvbuf
 int lualibc_setvbuf(FILE *, char *, int, size_t);
 
-/*+\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 #undef remove
 #define remove lualibc_remove
 int lualibc_remove(const char *);
-/*-\NEW\liweiqiang\2013.5.11\Ôö¼Óremove½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.5.11\å¢åŠ removeæ¥å£*/
 
 #undef rename
 #define rename lualibc_rename

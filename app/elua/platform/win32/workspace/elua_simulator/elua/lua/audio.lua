@@ -17,7 +17,7 @@ local speakervol,audiochannel,microphonemode,microphonevol
 local tmp1,tmp2
 local tmpchannel,tmpspeakervol
 
--- dtmf¼ì²â ²ÎÊı: Ê¹ÄÜ,[ÁéÃô¶È Ä¬ÈÏ2 ×îÁéÃôÎª1]
+-- dtmfæ£€æµ‹ å‚æ•°: ä½¿èƒ½,[çµæ•åº¦ é»˜è®¤2 æœ€çµæ•ä¸º1]
 function dtmfdetect(enable,sens)
 	if enable == true then
 		if sens == 1 then
@@ -43,7 +43,7 @@ function senddtmf(str,playtime,intvl)
 end
 
 -- text = "123" = 310032003300
--- path = "net" ·¢¸øÍøÂç  "speaker" ±¾µØ²¥·Å
+-- path = "net" å‘ç»™ç½‘ç»œ  "speaker" æœ¬åœ°æ’­æ”¾
 function playtts(text,path)
 	local action = path == "net" and 4 or 2
 
@@ -55,7 +55,7 @@ function stoptts()
 	req("AT+QTTS=3")
 end
 
--- Í¨»°ÖĞ·¢ËÍÉùÒôµ½¶Ô¶Ë,±ØĞëÊÇ12.2K AMR¸ñÊ½
+-- é€šè¯ä¸­å‘é€å£°éŸ³åˆ°å¯¹ç«¯,å¿…é¡»æ˜¯12.2K AMRæ ¼å¼
 function transvoice(data,loop)
 	local f = io.open("/RecDir/rec000","wb")
 
@@ -64,9 +64,9 @@ function transvoice(data,loop)
 		return false
 	end
 
-	-- ÓĞÎÄ¼şÍ·²¢ÇÒÊÇ12.2KÖ¡
+	-- æœ‰æ–‡ä»¶å¤´å¹¶ä¸”æ˜¯12.2Kå¸§
 	if string.sub(data,1,7) == "#!AMR\010\060" then
-	-- ÎŞÎÄ¼şÍ·ÇÒÊÇ12.2KÖ¡
+	-- æ— æ–‡ä»¶å¤´ä¸”æ˜¯12.2Kå¸§
 	elseif string.byte(data,1) == 0x3C then
 		f:write("#!AMR\010")
 	else
@@ -81,7 +81,7 @@ function transvoice(data,loop)
 	return true
 end
 
--- ÒôÆµ²¥·Å½Ó¿Ú
+-- éŸ³é¢‘æ’­æ”¾æ¥å£
 function play(name)
 	return audio.play(name)
 end

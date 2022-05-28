@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2012.12.14  lifei     ´´½¨ÎÄ¼ş
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2012.12.14  lifei     åˆ›å»ºæ–‡ä»¶
 *********************************************************/
 #ifndef AM_OPENAT_SYSTEM_H
 #define AM_OPENAT_SYSTEM_H
@@ -26,8 +26,8 @@
 
 typedef enum E_AMOPENAT_OS_CREATION_FLAG_TAG
 {
-    OPENAT_OS_CREATE_DEFAULT = 0,   /* Ïß³Ì´´½¨ºó£¬Á¢¼´Æô¶¯ */
-    OPENAT_OS_CREATE_SUSPENDED = 1, /* Ïß³Ì´´½¨ºó£¬ÏÈ¹ÒÆğ */
+    OPENAT_OS_CREATE_DEFAULT = 0,   /* çº¿ç¨‹åˆ›å»ºåï¼Œç«‹å³å¯åŠ¨ */
+    OPENAT_OS_CREATE_SUSPENDED = 1, /* çº¿ç¨‹åˆ›å»ºåï¼Œå…ˆæŒ‚èµ· */
 }E_AMOPENAT_OS_CREATION_FLAG;
 
 typedef struct T_AMOPENAT_TASK_INFO_TAG
@@ -37,7 +37,7 @@ typedef struct T_AMOPENAT_TASK_INFO_TAG
     CONST UINT8 *pName;
 }T_AMOPENAT_TASK_INFO;
 
-/*+\NEW\liweiqiang\2013.7.1\[OpenAt]Ôö¼ÓÏµÍ³Ö÷ÆµÉèÖÃ½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.7.1\[OpenAt]å¢åŠ ç³»ç»Ÿä¸»é¢‘è®¾ç½®æ¥å£*/
 typedef enum E_AMOPENAT_SYS_FREQ_TAG
 {
     OPENAT_SYS_FREQ_32K    = 32768,
@@ -52,7 +52,7 @@ typedef enum E_AMOPENAT_SYS_FREQ_TAG
     OPENAT_SYS_FREQ_250M   = 249600000,
     OPENAT_SYS_FREQ_312M   = 312000000,
 }E_AMOPENAT_SYS_FREQ;
-/*-\NEW\liweiqiang\2013.7.1\[OpenAt]Ôö¼ÓÏµÍ³Ö÷ÆµÉèÖÃ½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.7.1\[OpenAt]å¢åŠ ç³»ç»Ÿä¸»é¢‘è®¾ç½®æ¥å£*/
 
 /****************************** TIME ******************************/
 typedef struct T_AMOPENAT_SYSTEM_DATETIME_TAG
@@ -69,11 +69,11 @@ typedef struct T_AMOPENAT_SYSTEM_DATETIME_TAG
 
 typedef struct
 {
-  //uint8               alarmIndex;  /*Ö»ÄÜÉèÖÃ1¸ö*/
+  //uint8               alarmIndex;  /*åªèƒ½è®¾ç½®1ä¸ª*/
   bool                alarmOn; /* 1 set,0 clear*/
-/*+\NEW\RUFEI\2015.3.9\Ìá½»ÄÖÖÓÏûÏ¢*/
-  //E_AMOPENAT_ALARM_RECURRENT     alarmRecurrent;/*Ö»Ö§³Ö1¸öÄÖÖÓ*/
-/*-\NEW\RUFEI\2015.3.9\Ìá½»ÄÖÖÓÏûÏ¢*/
+/*+\NEW\RUFEI\2015.3.9\æäº¤é—¹é’Ÿæ¶ˆæ¯*/
+  //E_AMOPENAT_ALARM_RECURRENT     alarmRecurrent;/*åªæ”¯æŒ1ä¸ªé—¹é’Ÿ*/
+/*-\NEW\RUFEI\2015.3.9\æäº¤é—¹é’Ÿæ¶ˆæ¯*/
   T_AMOPENAT_SYSTEM_DATETIME alarmTime;
 }T_AMOPENAT_ALARM_PARAM;
 
@@ -82,12 +82,12 @@ typedef struct
 
 typedef struct T_AMOPENAT_TIMER_PARAMETER_TAG
 {
-    HANDLE hTimer;      /* create_timer ½Ó¿Ú·µ»ØµÄ HANDLE */
-    UINT32 period;      /* start_timer ½Ó¿Ú´«ÈëµÄ nMillisecondes */
-    PVOID  pParameter;  /* create_timer ½Ó¿Ú´«ÈëµÄ pParameter */
+    HANDLE hTimer;      /* create_timer æ¥å£è¿”å›çš„ HANDLE */
+    UINT32 period;      /* start_timer æ¥å£ä¼ å…¥çš„ nMillisecondes */
+    PVOID  pParameter;  /* create_timer æ¥å£ä¼ å…¥çš„ pParameter */
 }T_AMOPENAT_TIMER_PARAMETER;
 
-/* ¶¨Ê±Æ÷µ½Ê±»Øµ÷º¯Êı£¬²ÎÊı pParameter ÎªÕ»±äÁ¿Ö¸Õë£¬¿Í»§³ÌĞòÖĞ²»ĞèÒªÊÍ·Å¸ÃÖ¸Õë */
+/* å®šæ—¶å™¨åˆ°æ—¶å›è°ƒå‡½æ•°ï¼Œå‚æ•° pParameter ä¸ºæ ˆå˜é‡æŒ‡é’ˆï¼Œå®¢æˆ·ç¨‹åºä¸­ä¸éœ€è¦é‡Šæ”¾è¯¥æŒ‡é’ˆ */
 typedef VOID (*PTIMER_EXPFUNC)(VOID *pParameter);
 
 typedef VOID (*PMINUTE_TICKFUNC)(VOID);

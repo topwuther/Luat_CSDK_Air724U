@@ -51,7 +51,7 @@ clock_t lualibc_clock(void);
 
 #undef  difftime
 #define difftime    lualibc_difftime
-//double lualibc_difftime(time_t _time2, time_t _time1); // ±ê×¼¶¨Òå ÔÚ±¾ÏµÍ³ÖĞ²Ã¼ôÎªtime_t·µ»ØÖµ ¼´longĞÍ
+//double lualibc_difftime(time_t _time2, time_t _time1); // æ ‡å‡†å®šä¹‰ åœ¨æœ¬ç³»ç»Ÿä¸­è£å‰ªä¸ºtime_tè¿”å›å€¼ å³longå‹
 time_t lualibc_difftime(time_t _time2, time_t _time1);
 
 #undef  mktime

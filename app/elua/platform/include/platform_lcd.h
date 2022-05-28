@@ -7,7 +7,7 @@
  * Date:    2013/3/26
  *
  * Description:
- *          platform lcd ½Ó¿Ú
+ *          platform lcd æ¥å£
  **************************************************************************/
 
 #ifndef _PLATFORM_LCD_H_
@@ -16,9 +16,9 @@
 #include "platform_disp.h"
 
 void platform_lcd_init(const PlatformDispInitParam *pParam);
-/*+\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*+\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
 void platform_lcd_close(void);
-/*+\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*+\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
 void platform_lcd_update(PlatformRect *pRect, u8 *buffer);
 
 #endif//_PLATFORM_LCD_H_

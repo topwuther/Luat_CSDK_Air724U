@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
 static int i2c_gSensorParam_get(lua_State *L)
 {
   unsigned int id = luaL_checkinteger( L, 1 );
@@ -26,7 +26,7 @@ static int i2c_gSensorParam_get(lua_State *L)
   lua_pushinteger( L, slave_id);
   return 2;
 }
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
 
 // Lua: speed = i2c.setup( id, speed, slaveaddr )
 static int i2c_setup( lua_State *L )
@@ -41,9 +41,9 @@ static int i2c_setup( lua_State *L )
     }
 
     MOD_CHECK_ID( i2c, id );
-/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
     lua_pushinteger( L, platform_i2c_setup( id, &i2cParam ) );
     return 1;
 }
@@ -65,9 +65,9 @@ static int i2c_write( lua_State *L )
     regAddr = (u8)luaL_checkinteger(L, arg_index++);
 
     MOD_CHECK_ID( i2c, id );
-	/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-	/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
     switch(lua_type(L, arg_index))
     {
     case LUA_TNUMBER:
@@ -136,9 +136,9 @@ static int i2c_read( lua_State *L )
     size = (u32)luaL_checkinteger( L, arg_index++ );
 
     MOD_CHECK_ID( i2c, id );
-	/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-	/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
     if( size == 0 )
         return 0;
     
@@ -165,9 +165,9 @@ static int i2c_send( lua_State *L )
     u32 wrote = 0;
     
     MOD_CHECK_ID( i2c, id );
-	/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-	/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
     switch(lua_type(L, arg_index))
     {
     case LUA_TNUMBER:
@@ -229,9 +229,9 @@ static int i2c_recv( lua_State *L )
     size = (u32)luaL_checkinteger( L, arg_index++ );
 
     MOD_CHECK_ID( i2c, id );
-	/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-	/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
     if( size == 0 )
         return 0;
     
@@ -254,12 +254,12 @@ static int i2c_close( lua_State *L )
     unsigned id = luaL_checkinteger( L, 1 );
 
     MOD_CHECK_ID( i2c, id );
-	/*+\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
+	/*+\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
 	id = id - 1;
-	/*-\BUG3555\zhuwangbin\2020.11.11\�޸�I2C1��I2C3�����õ�����,id 1,2,3��ӦI2C1,2,3*/
-    /*+\NEW\WANGJIAN\2019.4.10\��i2c.close�ӿ�*/
+	/*-\BUG3555\zhuwangbin\2020.11.11\修改I2C1和I2C3不能用的问题,id 1,2,3对应I2C1,2,3*/
+    /*+\NEW\WANGJIAN\2019.4.10\打开i2c.close接口*/
     lua_pushinteger( L, platform_i2c_close( id ) );
-    /*-\NEW\WANGJIAN\2019.4.10\��i2c.close�ӿ�*/
+    /*-\NEW\WANGJIAN\2019.4.10\打开i2c.close接口*/
 
     return 1;
 }
@@ -274,13 +274,13 @@ const LUA_REG_TYPE i2c_map[] =
   { LSTRKEY( "read" ), LFUNCVAL( i2c_read ) },
   { LSTRKEY( "send" ), LFUNCVAL( i2c_send ) },
   { LSTRKEY( "recv" ), LFUNCVAL( i2c_recv ) },
-  /*+\NEW\WANGJIAN\2019.4.10\��i2c.close�ӿ�*/
+  /*+\NEW\WANGJIAN\2019.4.10\打开i2c.close接口*/
   { LSTRKEY( "close" ), LFUNCVAL( i2c_close ) },
-  /*-\NEW\WANGJIAN\2019.4.10\��i2c.close�ӿ�*/
+  /*-\NEW\WANGJIAN\2019.4.10\打开i2c.close接口*/
 
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
   { LSTRKEY( "gsensorParam_get" ),  LFUNCVAL( i2c_gSensorParam_get ) },
-/*-\NEW\zhuwangbin\2016.4.6\���ݲ�ͬ�汾��g_sensor, ���ӻ�ȡ�豸id���豸��ַ�ӿ�*/
+/*-\NEW\zhuwangbin\2016.4.6\兼容不同版本的g_sensor, 添加获取设备id和设备地址接口*/
   
 #if LUA_OPTIMIZE_MEMORY > 0
   { LSTRKEY( "FAST" ), LNUMVAL( PLATFORM_I2C_SPEED_FAST ) },

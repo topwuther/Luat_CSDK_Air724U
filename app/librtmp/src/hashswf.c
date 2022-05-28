@@ -103,7 +103,7 @@ HTTP_get(struct HTTP_ctx *http, const char *url, HTTP_read_callback *cb)
 #ifdef CRYPTO
       ssl = 1;
       port = 443;
-	  /*×¢ÊÍ£¬mbedtlsÓÃ²»ÉÏ*/
+	  /*æ³¨é‡Šï¼Œmbedtlsç”¨ä¸ä¸Š*/
       // (!RTMP_TLS_ctx)
 	 //MP_TLS_Init();
 #else
@@ -287,7 +287,7 @@ leave:
 
 #define CHUNK	16384
 
-/*Ôİ²»Ö§³ÖSWF×¢ÊÍµô*/
+/*æš‚ä¸æ”¯æŒSWFæ³¨é‡Šæ‰*/
 #if 0
 struct info
 {
@@ -455,7 +455,7 @@ int
 RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
 	     int age)
 {
-	/*ÓÃ²»µ½SWF×¢ÊÍµô*/
+	/*ç”¨ä¸åˆ°SWFæ³¨é‡Šæ‰*/
 	return -1;   
 	#if 0
   FILE *f = NULL;

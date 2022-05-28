@@ -1476,7 +1476,7 @@ int basic_read(SSL *ssl, uint8_t **in_data)
             }
             else /* no client renegotiation allowed */
             {
-            	//注意，启动双向认证时，有些服务器会在握手完成后，重新协商握手，并在此过程中要求发送客户端证书
+            	//娉ㄦ剰锛屽惎鍔ㄥ弻鍚戣璇佹椂锛屾湁浜涙湇鍔″櫒浼氬湪鎻℃墜瀹屾垚鍚庯紝閲嶆柊鍗忓晢鎻℃墜锛屽苟鍦ㄦ杩囩▼涓姹傚彂閫佸鎴风璇佷功
             	if (buf[0] == HS_HELLO_REQUEST)
             	{
             		ret = do_handshake(ssl, buf, read_len);

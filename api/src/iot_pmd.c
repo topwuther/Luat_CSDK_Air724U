@@ -3,12 +3,12 @@
 
 /****************************** PMD ******************************/
 
-/**³äµç³õÊ¼»¯
-*@param		chrMode:		³äµç·½Ê½
-*@param		cfg:		    ÅäÖÃĞÅÏ¢
-*@param		pPmMessage:		ÏûÏ¢»Øµ÷º¯Êı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å……ç”µåˆå§‹åŒ–
+*@param		chrMode:		å……ç”µæ–¹å¼
+*@param		cfg:		    é…ç½®ä¿¡æ¯
+*@param		pPmMessage:		æ¶ˆæ¯å›è°ƒå‡½æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_pmd_init(     
                     E_AMOPENAT_PM_CHR_MODE chrMode,    
@@ -19,8 +19,8 @@ BOOL iot_pmd_init(
     return OPENAT_init_pmd(chrMode, cfg, pPmMessage);
 }
 
-/**»ñÈ¡µç³Ø×´Ì¬
-*@param		batStatus:		µç³Ø×´Ì¬
+/**è·å–ç”µæ± çŠ¶æ€
+*@param		batStatus:		ç”µæ± çŠ¶æ€
 **/
 VOID iot_pmd_get_batteryStatus(
                     T_AMOPENAT_BAT_STATUS* batStatus    
@@ -29,8 +29,8 @@ VOID iot_pmd_get_batteryStatus(
     IVTBL(get_batteryStatus)(batStatus);    
 }
 
-/**»ñÈ¡³äµçÆ÷×´Ì¬
-*@param		chrStatus:		³äµçÆ÷×´Ì¬
+/**è·å–å……ç”µå™¨çŠ¶æ€
+*@param		chrStatus:		å……ç”µå™¨çŠ¶æ€
 **/
 VOID iot_pmd_get_chargerStatus(
                     T_AMOPENAT_CHARGER_STATUS* chrStatus
@@ -39,8 +39,8 @@ VOID iot_pmd_get_chargerStatus(
     IVTBL(get_chargerStatus)(chrStatus); 
 }
 
-/**²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú
-*@return	E_AMOPENAT_CHR_HW_STATUS: ³äµçÆ÷HW×´Ì¬½Ó¿Ú
+/**æŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£
+*@return	E_AMOPENAT_CHR_HW_STATUS: å……ç”µå™¨HWçŠ¶æ€æ¥å£
 **/
 E_AMOPENAT_CHR_HW_STATUS iot_pmd_get_chargerHwStatus(
                     VOID
@@ -49,24 +49,24 @@ E_AMOPENAT_CHR_HW_STATUS iot_pmd_get_chargerHwStatus(
     return IVTBL(get_chargerHwStatus)();
 }
 
-/**²éÑ¯³äµçÆ÷HW×´Ì¬½Ó¿Ú
-*@param		battStatus:		    µç³Ø×´Ì¬
-*@param		battVolt:		    µçÑ¹Öµ
-*@param		battLevel:		    µçÑ¹µÈ¼¶
-*@param		chargerStatus:		³äµçÆ÷×´Ì¬
-*@param		chargeState:		³äµç×´Ì¬
-*@return	int:  ·µ»Ø0³É¹¦ÆäÓàÊ§°Ü
+/**æŸ¥è¯¢å……ç”µå™¨HWçŠ¶æ€æ¥å£
+*@param		battStatus:		    ç”µæ± çŠ¶æ€
+*@param		battVolt:		    ç”µå‹å€¼
+*@param		battLevel:		    ç”µå‹ç­‰çº§
+*@param		chargerStatus:		å……ç”µå™¨çŠ¶æ€
+*@param		chargeState:		å……ç”µçŠ¶æ€
+*@return	int:  è¿”å›0æˆåŠŸå…¶ä½™å¤±è´¥
 **/
 int iot_pmd_get_chg_param(BOOL *battStatus, u16 *battVolt, u8 *battLevel, BOOL *chargerStatus, u8 *chargeState)
 {
     return IVTBL(get_chg_param)(battStatus, battVolt, battLevel, chargerStatus, chargeState);
 }
 
-/**Õı³£¿ª»ú
-*@param		simStartUpMode:		¿ªÆôSIM¿¨·½Ê½
-*@param		nwStartupMode:		¿ªÆôĞ­ÒéÕ»·½Ê½
-*@return	TRUE: 	            ³É¹¦
-*           FALSE:              Ê§°Ü
+/**æ­£å¸¸å¼€æœº
+*@param		simStartUpMode:		å¼€å¯SIMå¡æ–¹å¼
+*@param		nwStartupMode:		å¼€å¯åè®®æ ˆæ–¹å¼
+*@return	TRUE: 	            æˆåŠŸ
+*           FALSE:              å¤±è´¥
 **/
 BOOL iot_pmd_poweron_system(        
                     E_AMOPENAT_STARTUP_MODE simStartUpMode,
@@ -76,8 +76,8 @@ BOOL iot_pmd_poweron_system(
     return OPENAT_poweron_system(simStartUpMode, nwStartupMode);
 }
 
-/**Õı³£¹Ø»ú
-*@note Õı³£¹Ø»ú °üÀ¨¹Ø±ÕĞ­ÒéÕ»ºÍ¹©µç
+/**æ­£å¸¸å…³æœº
+*@note æ­£å¸¸å…³æœº åŒ…æ‹¬å…³é—­åè®®æ ˆå’Œä¾›ç”µ
 **/
 VOID iot_pmd_poweroff_system(void)           
 
@@ -85,11 +85,11 @@ VOID iot_pmd_poweroff_system(void)
     OPENAT_poweroff_system();
 }
 
-/**´ò¿ªLDO
-*@param		ldo:		    ldoÍ¨µÀ
-*@param		level:		    0-7 0:¹Ø±Õ 1~7µçÑ¹µÈ¼¶
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‰“å¼€LDO
+*@param		ldo:		    ldoé€šé“
+*@param		level:		    0-7 0:å…³é—­ 1~7ç”µå‹ç­‰çº§
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_pmd_poweron_ldo(                   
                     E_AMOPENAT_PM_LDO    ldo,
@@ -99,22 +99,22 @@ BOOL iot_pmd_poweron_ldo(
     return OPENAT_poweron_ldo(ldo, level);
 }
 
-/**½øÈëË¯Ãß
+/**è¿›å…¥ç¡çœ 
 **/
 VOID iot_pmd_enter_deepsleep(VOID) 
 {
     OPENAT_enter_deepsleep();
 }
 
-/**ÍË³öË¯Ãß
+/**é€€å‡ºç¡çœ 
 **/
 VOID iot_pmd_exit_deepsleep(VOID)
 {
     OPENAT_exit_deepsleep();
 }
 
-/**»ñÈ¡¿ª»úÔ­ÒòÖµ
-*@return	E_AMOPENAT_POWERON_REASON: 	   ·µ»Ø¿ª»úÔ­ÒòÖµ
+/**è·å–å¼€æœºåŸå› å€¼
+*@return	E_AMOPENAT_POWERON_REASON: 	   è¿”å›å¼€æœºåŸå› å€¼
 **/
 E_AMOPENAT_POWERON_REASON iot_pmd_get_poweronCasue (void)
 {

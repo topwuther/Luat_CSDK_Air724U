@@ -10,7 +10,7 @@
 static void demo_oled(PVOID pParameter)
 {
 
-    if (OLED_Init() == FALSE) //³õÊ¼»¯OLED
+    if (OLED_Init() == FALSE) //åˆå§‹åŒ–OLED
     {
         while (1)
         {
@@ -26,9 +26,9 @@ static void demo_oled(PVOID pParameter)
     uint8 t = 0;
     while (1)
     {
-        OLED_ShowChar(36, 52, t, 12, 1); //ÏÔÊ¾ASCII×Ö·û
-        OLED_ShowNum(94, 52, t, 3, 12);  //ÏÔÊ¾ASCII×Ö·ûµÄÂëÖµ
-        OLED_Refresh_Gram();             //¸üĞÂÏÔÊ¾µ½OLED
+        OLED_ShowChar(36, 52, t, 12, 1); //æ˜¾ç¤ºASCIIå­—ç¬¦
+        OLED_ShowNum(94, 52, t, 3, 12);  //æ˜¾ç¤ºASCIIå­—ç¬¦çš„ç å€¼
+        OLED_Refresh_Gram();             //æ›´æ–°æ˜¾ç¤ºåˆ°OLED
         t++;
         iot_os_sleep(1000);
         iot_debug_print("[oled]demo_oled run!");

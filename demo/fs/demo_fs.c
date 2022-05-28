@@ -28,13 +28,13 @@ BOOL demo_fs_create(char* file)
 
     fd = iot_fs_open_file(file, FS_O_RDONLY);
 
-    if (fd >= 0) //DEMO_FS_FILE_PATHÎÄ¼ş´æÔÚ
+    if (fd >= 0) //DEMO_FS_FILE_PATHæ–‡ä»¶å­˜åœ¨
     {
         iot_fs_close_file(fd);
         return FALSE;
     }
     
-    // ´´½¨ÎÄ¼şDEMO_FS_FILE_PATH
+    // åˆ›å»ºæ–‡ä»¶DEMO_FS_FILE_PATH
     iot_fs_create_file(file);
 
     fs_print("[fs] create demo_file");
@@ -88,30 +88,30 @@ VOID demo_fs_write(char* file)
 
 VOID demo_fs_init(VOID)
 {
-    //ÎÄ¼ş²»´æ, ´´½¨³É¹¦, Ğ´Êı¾İ¶ÁÊı¾İ
+    //æ–‡ä»¶ä¸å­˜, åˆ›å»ºæˆåŠŸ, å†™æ•°æ®è¯»æ•°æ®
     if (demo_fs_create(DEMO_FS_FILE_PATH))  
     {
-        demo_fs_write(DEMO_FS_FILE_PATH); // Ğ´ÎÄ¼ş
-        demo_fs_read(DEMO_FS_FILE_PATH); // ¶ÁÎÄ¼ş
+        demo_fs_write(DEMO_FS_FILE_PATH); // å†™æ–‡ä»¶
+        demo_fs_read(DEMO_FS_FILE_PATH); // è¯»æ–‡ä»¶
     }
-    //ÎÄ¼ş´æÔÚÖ±½Ó¶Á,
+    //æ–‡ä»¶å­˜åœ¨ç›´æ¥è¯»,
     else
     {
-        demo_fs_read(DEMO_FS_FILE_PATH); // ¶ÁÎÄ¼ş
+        demo_fs_read(DEMO_FS_FILE_PATH); // è¯»æ–‡ä»¶
     }
 	
 	
-	/*SDcardÄ¿Â¼*/
-	//ÎÄ¼ş²»´æ, ´´½¨³É¹¦, Ğ´Êı¾İ¶ÁÊı¾İ
+	/*SDcardç›®å½•*/
+	//æ–‡ä»¶ä¸å­˜, åˆ›å»ºæˆåŠŸ, å†™æ•°æ®è¯»æ•°æ®
     if (demo_fs_create(DEMO_FS_FILE_PATH_SDCARD))  
     {
-        demo_fs_write(DEMO_FS_FILE_PATH_SDCARD); // Ğ´ÎÄ¼ş
-        demo_fs_read(DEMO_FS_FILE_PATH_SDCARD); // ¶ÁÎÄ¼ş
+        demo_fs_write(DEMO_FS_FILE_PATH_SDCARD); // å†™æ–‡ä»¶
+        demo_fs_read(DEMO_FS_FILE_PATH_SDCARD); // è¯»æ–‡ä»¶
     }
-    //ÎÄ¼ş´æÔÚÖ±½Ó¶Á,
+    //æ–‡ä»¶å­˜åœ¨ç›´æ¥è¯»,
     else
     {
-        demo_fs_read(DEMO_FS_FILE_PATH_SDCARD); // ¶ÁÎÄ¼ş
+        demo_fs_read(DEMO_FS_FILE_PATH_SDCARD); // è¯»æ–‡ä»¶
     }
 }
 
@@ -186,18 +186,18 @@ static void demo_fs_ls(char *dirName)
 static void demo_mountExternFlash(void)
 {
 	/*
-		ÒÔÆÕÈ½P25Q64H£¬ 8MflashÎªÀı
+		ä»¥æ™®å†‰P25Q64Hï¼Œ 8Mflashä¸ºä¾‹
 	*/
 	BOOL ret;
 	T_AMOPENAT_USER_FSMOUNT param;
 	T_AMOPENAT_FILE_INFO fileInfo;
 
-	/*¸´ÓÃlcdµÄpin½Å£¬ĞèÒª´ò¿ªlcdµÄldo*/
+	/*å¤ç”¨lcdçš„pinè„šï¼Œéœ€è¦æ‰“å¼€lcdçš„ldo*/
 	iot_pmd_poweron_ldo(OPENAT_LDO_POWER_VLCD, 15);
 
 	iot_os_sleep(100);
 	
-	/*0-4M´´½¨ÎÄ¼şÏµÍ³ /ext1 */
+	/*0-4Måˆ›å»ºæ–‡ä»¶ç³»ç»Ÿ /ext1 */
 	param.exFlash = E_AMOPENAT_FLASH_EXTERN_PINLCD;
 	param.offset = 0;
 	param.size = 0x400000;
@@ -231,7 +231,7 @@ static void demo_mountExternFlash(void)
 	fs_print("[fs] %s path %s, ret %d, mem Info (%d,%d)", __FUNCTION__, param.path, ret, fileInfo.totalSize, fileInfo.usedSize);
 	
 
-	/*4-8M´´½¨ÎÄ¼şÏµÍ³ /ext2 */
+	/*4-8Måˆ›å»ºæ–‡ä»¶ç³»ç»Ÿ /ext2 */
 	param.exFlash = E_AMOPENAT_FLASH_EXTERN_PINLCD;
 	param.offset = 0x400000;
 	param.size = 0x400000;
@@ -268,13 +268,13 @@ static void demo_mountExternFlash(void)
 static void demo_mountAppFlash(void)
 {
 	/*
-		Ó¦ÓÃ¿Õ¼äÓĞÊ£ÓàÊ±£¬ ¿ÉÒÔmount³ÉÎÄ¼şÏµÍ³¹ÜÀí
+		åº”ç”¨ç©ºé—´æœ‰å‰©ä½™æ—¶ï¼Œ å¯ä»¥mountæˆæ–‡ä»¶ç³»ç»Ÿç®¡ç†
 	*/
 	BOOL ret;
 	T_AMOPENAT_USER_FSMOUNT param;
 	T_AMOPENAT_FILE_INFO fileInfo;
 		
-	/*0x260000-0X2A0000´´½¨ÎÄ¼şÏµÍ³ /ext1 */
+	/*0x260000-0X2A0000åˆ›å»ºæ–‡ä»¶ç³»ç»Ÿ /ext1 */
 	param.exFlash = E_AMOPENAT_FLASH_INTERNAL;
 	param.offset = 0x260000;
 	param.size = 0x40000;
@@ -308,7 +308,7 @@ static void demo_mountAppFlash(void)
 	fs_print("[fs] %s path %s, ret %d, mem Info (%d,%d)", __FUNCTION__, param.path, ret, fileInfo.totalSize, fileInfo.usedSize);
 	
 
-	/*0x2a0000-0x2E0000´´½¨ÎÄ¼şÏµÍ³ /ext2 */
+	/*0x2a0000-0x2E0000åˆ›å»ºæ–‡ä»¶ç³»ç»Ÿ /ext2 */
 	param.exFlash = E_AMOPENAT_FLASH_INTERNAL;
 	param.offset = 0x2a0000;
 	param.size = 0x40000;
@@ -346,27 +346,27 @@ static void demo_mountAppFlash(void)
 
 int appimg_enter(void *param)
 {    
-    //¿ª»úÁ¢¿ÌÊ¹ÓÃÎÄ¼şÏµÍ³£¬»á¿´²»µ½´òÓ¡ĞÅÏ¢
+    //å¼€æœºç«‹åˆ»ä½¿ç”¨æ–‡ä»¶ç³»ç»Ÿï¼Œä¼šçœ‹ä¸åˆ°æ‰“å°ä¿¡æ¯
     INT32 ret;
 	
 	iot_os_sleep(1000);
     fs_print("[fs] appimg_enter");	
 	
-	/*ÏÔÊ¾Ô¤ÖÃÎÄ¼şsffs_file.txt*/
+	/*æ˜¾ç¤ºé¢„ç½®æ–‡ä»¶sffs_file.txt*/
 	demo_fs_ls("/");
 	demo_fs_ls("/sdcard0");
 
-	/*ÏÔÊ¾Ô¤ÖÃÎÄ¼şsffs_dir/sub_sffs_file.txt*/
+	/*æ˜¾ç¤ºé¢„ç½®æ–‡ä»¶sffs_dir/sub_sffs_file.txt*/
 	demo_fs_ls("/sffs_dir");
 	
     demo_fs_init();
 	
-	/*´´½¨²âÊÔÄ¿Â¼ºÍÎÄ¼ş*/
+	/*åˆ›å»ºæµ‹è¯•ç›®å½•å’Œæ–‡ä»¶*/
 	demo_fs_createDir();
 
-	/*LS¸ùÄ¿Â¼*/
+	/*LSæ ¹ç›®å½•*/
 	demo_fs_ls("/");
-	/*LS SDcardÄ¿Â¼*/
+	/*LS SDcardç›®å½•*/
 	demo_fs_ls("/sdcard0");
 	/*LS dir_1*/
 	demo_fs_ls("dir_1");
@@ -381,20 +381,20 @@ int appimg_enter(void *param)
 	/*LS dir_2/subdir_2*/
 	demo_fs_ls("dir_2/subdir_2");
 
-	/*µ±Ç°Â·¾¶ÉèÖÃÎªdir_2/subdir_2*/
+	/*å½“å‰è·¯å¾„è®¾ç½®ä¸ºdir_2/subdir_2*/
 	iot_fs_change_dir("dir_2/subdir_2");
 
-	/*ÔÚµ±Ç°Ä¿Â¼ÏÂÃæ´´½¨change_subdir*/
+	/*åœ¨å½“å‰ç›®å½•ä¸‹é¢åˆ›å»ºchange_subdir*/
 	ret = iot_fs_create_file("change_subdir_2");
 	iot_fs_write_file(ret, (UINT8 *)"change_subdir_2", strlen("change_subdir_2"));
 	iot_fs_close_file(ret);
 	/*LS dir_2/subdir_2*/
 	demo_fs_ls("./");
 	
-	/*APP Ê£ÓàÇøÓòmount³ÉÎÄ¼şÏµÍ³*/
+	/*APP å‰©ä½™åŒºåŸŸmountæˆæ–‡ä»¶ç³»ç»Ÿ*/
 	demo_mountAppFlash();
 
-	/*Íâ¹ÒflashÉÏÃæmountÎÄ¼şÏµÍ³*/
+	/*å¤–æŒ‚flashä¸Šé¢mountæ–‡ä»¶ç³»ç»Ÿ*/
 	demo_mountExternFlash();
 	return 0;
 }

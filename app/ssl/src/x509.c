@@ -723,7 +723,7 @@ int x509_verifyEx(const CA_CERT_CTX *ca_cert_ctx, const X509_CTX *cert,
         ctx = next_cert->rsa_ctx->bi_ctx;
         mod = next_cert->rsa_ctx->m;
         expn = next_cert->rsa_ctx->e;
-        //ÿ�ζ���Ҫ���һ��֤�飬��Ϊ�п��ܼ����˴μ���֤��
+        //每次都需要检查一下证书，因为有可能加载了次级根证书
     	if (ca_cert_ctx != NULL)
 		{
     		i = 0;

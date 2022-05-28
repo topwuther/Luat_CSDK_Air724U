@@ -22,27 +22,27 @@
 #include "platform_disp.h"
 #include "platform_lcd.h"
 #include "LzmaLib.h"
-/*+\NEW\zhuth\2014.2.16\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+/*+\NEW\zhuth\2014.2.16\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
 #ifdef AM_LPNG_SUPPORT
 #include "elua_png.h"
 #endif
-/*-\NEW\zhuth\2014.2.16\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+/*-\NEW\zhuth\2014.2.16\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
 #ifdef LUA_LVGL_SUPPORT
 #include "lvgl.h"
 #endif
 
 //#include "us_timer.h"
 //#include "qrencode.h"
-// ¼òÌåÖĞÎÄ°æ(GB2312) Ó¢ÎÄ°æ(UTF-8×ªUnicode)
+// ç®€ä½“ä¸­æ–‡ç‰ˆ(GB2312) è‹±æ–‡ç‰ˆ(UTF-8è½¬Unicode)
 #define ON  1  
 #define OFF 0 
 
 #define MAX_FONTS       10
 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 //#define MAX_LCD_WIDTH_SUPPORT 240
 //#define MAX_LCD_HEIGH_SUPPORT 240
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
 #define MAX_LAYER_SUPPORT 3
 #define MAX_USER_LAYER_SUPPORT 2
@@ -57,9 +57,9 @@
 #define ASC_FONT_WIDTH  (20)
 #define ASC_FONT_HEIGHT (40)
 #define ASC_FONT_FILE_NAME "font_40.dat"
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #define PINYIN_FONT_FILE_NAME "font_pinyin_40.dat"
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #ifdef FONT_HZ_COMPRESS
 #define HZ_FONT_ZIP_FILE_NAME "fonthz_40.zip.dat"
 #else
@@ -114,13 +114,13 @@
 #ifdef FONT_HZ_COMPRESS
 #define HZ_FONT_ZIP_FILE_NAME "fonthz.zip.dat"
 #else
-/*+\BUG\wangyuan\2020.04.15\BUG_1542:UIÆÁÄ»×ÖÌå¸ü¸ÄÎª2gÒ»ÑùµÄ±ê×¼µãÕó×ÖÌå*/
+/*+\BUG\wangyuan\2020.04.15\BUG_1542:UIå±å¹•å­—ä½“æ›´æ”¹ä¸º2gä¸€æ ·çš„æ ‡å‡†ç‚¹é˜µå­—ä½“*/
 #if defined(AM_FONTHZ_TWO_LEVEL_SUPPORT)
 #define HZ_FONT_FILE_NAME "fonthzTwoLevel.dat"
 #else
 #define HZ_FONT_FILE_NAME "fonthz.dat"
 #endif
-/*-\BUG\wangyuan\2020.04.15\BUG_1542:UIÆÁÄ»×ÖÌå¸ü¸ÄÎª2gÒ»ÑùµÄ±ê×¼µãÕó×ÖÌå*/
+/*-\BUG\wangyuan\2020.04.15\BUG_1542:UIå±å¹•å­—ä½“æ›´æ”¹ä¸º2gä¸€æ ·çš„æ ‡å‡†ç‚¹é˜µå­—ä½“*/
 #define HZ_EXT_FONT_FILE_NAME "fonthzext.dat"
 #endif
 
@@ -130,29 +130,29 @@
 
 #define HZ_FONT_SIZE FONT_SIZE(HZ_FONT_WIDTH, HZ_FONT_HEIGHT)
 #define ASC_FONT_SIZE FONT_SIZE(ASC_FONT_WIDTH, ASC_FONT_HEIGHT)
-// Èğºãfonts ==============================================================================================================
+// ç‘æ’fonts ==============================================================================================================
 typedef struct gui_font_header{
-    unsigned char  magic[4];   //'U'('S', 'M'), 'F', 'L', X---Unicode(Simple or MBCS) Font Library, X: ±íÊ¾°æ±¾ºÅ. ·Ö¸ßµÍ4Î»¡£Èç 0x12±íÊ¾ Ver 1.2
-    unsigned char  nSection; // ¹²·Ö¼¸¶ÎÊı¾İ¡£
+    unsigned char  magic[4];   //'U'('S', 'M'), 'F', 'L', X---Unicode(Simple or MBCS) Font Library, X: è¡¨ç¤ºç‰ˆæœ¬å·. åˆ†é«˜ä½4ä½ã€‚å¦‚ 0x12è¡¨ç¤º Ver 1.2
+    unsigned char  nSection; // å…±åˆ†å‡ æ®µæ•°æ®ã€‚
     unsigned char  YSize;    /* height of font  */     
-    unsigned short wCpFlag;    // codepageflag:  bit0~bit13 Ã¿¸öbit·Ö±ğ´ú±íÒ»¸öCodePage ±êÖ¾£¬Èç¹ûÊÇ1£¬Ôò±íÊ¾µ±Ç°CodePage ±»Ñ¡¶¨£¬·ñÔòÎª·ÇÑ¡¶¨¡£
-    unsigned short nTotalChars;  // ×ÜµÄ×Ö·ûÊı
-    unsigned char  ScanMode;   // É¨ÃèÄ£Ê½
+    unsigned short wCpFlag;    // codepageflag:  bit0~bit13 æ¯ä¸ªbitåˆ†åˆ«ä»£è¡¨ä¸€ä¸ªCodePage æ ‡å¿—ï¼Œå¦‚æœæ˜¯1ï¼Œåˆ™è¡¨ç¤ºå½“å‰CodePage è¢«é€‰å®šï¼Œå¦åˆ™ä¸ºéé€‰å®šã€‚
+    unsigned short nTotalChars;  // æ€»çš„å­—ç¬¦æ•°
+    unsigned char  ScanMode;   // æ‰«ææ¨¡å¼
 }GUI_FONT_HEADER;
 
 typedef struct gui_font_section{
-    unsigned short first;  // µ±Ç°¶ÎµÚÒ»¸ö×Ö·û
-    unsigned short last;   // µ±Ç°¶Î×îºóÒ»¸ö×Ö·û
-    unsigned short startIndex; // ¼ÇÂ¼µ±Ç°¶ÎµÚÒ»¸ö×Ö·ûµÄÆğÊ¼Î»ÖÃ£¨¼´Ë÷ÒıÖµ£©
+    unsigned short first;  // å½“å‰æ®µç¬¬ä¸€ä¸ªå­—ç¬¦
+    unsigned short last;   // å½“å‰æ®µæœ€åä¸€ä¸ªå­—ç¬¦
+    unsigned short startIndex; // è®°å½•å½“å‰æ®µç¬¬ä¸€ä¸ªå­—ç¬¦çš„èµ·å§‹ä½ç½®ï¼ˆå³ç´¢å¼•å€¼ï¼‰
 }GUI_FONT_SECTION;
 
 typedef struct gui_font_index{
-    unsigned char width;  // ¼ÇÂ¼µ±Ç°×Ö·ûÏñËØ¿í¶È
-    unsigned int  offset;  // ¼ÇÂ¼µ±Ç°×Ö·ûµãÕóÊı¾İµÄÆğÊ¼µØÖ·£¨¼´Æ«ÒÆÖµ£©
+    unsigned char width;  // è®°å½•å½“å‰å­—ç¬¦åƒç´ å®½åº¦
+    unsigned int  offset;  // è®°å½•å½“å‰å­—ç¬¦ç‚¹é˜µæ•°æ®çš„èµ·å§‹åœ°å€ï¼ˆå³åç§»å€¼ï¼‰
 }GUI_FONT_INDEX;
 
 #if VERSION_CHINESE == ON
-//****************** ÎÄ¼şÍ·header info *****************
+//****************** æ–‡ä»¶å¤´header info *****************
 static GUI_FONT_HEADER fontHeader_CJK = {
     'M', 'F', 'L', 0x11,     // magic
     0,         // section number
@@ -171,12 +171,12 @@ static GUI_FONT_HEADER fontHeader_Latin = {
     0,         // scan mode 
 };
 
-//****************** ¼ìË÷±íindex ***********************
+//****************** æ£€ç´¢è¡¨index ***********************
 static const GUI_FONT_INDEX fonts_index_Latin[256]= {
     #include "rh_gb2312_fonts_index_latin.dat"
 };
 
-//****************** µãÕóĞÅÏ¢data **********************
+//****************** ç‚¹é˜µä¿¡æ¯data **********************
 static const unsigned char fonts_data_CJK[]= {
     #include "rh_gb2312_fonts_data_cjk.dat"
 };
@@ -186,7 +186,7 @@ static const unsigned char fonts_data_Latin[]= {
 };
 
 #elif VERSION_ENGLISH == ON
-//****************** ÎÄ¼şÍ·header info *****************
+//****************** æ–‡ä»¶å¤´header info *****************
 static GUI_FONT_HEADER fontHeader = {
 	'U', 'F', 'L', 0x11,     // magic
 	1,         // section number
@@ -196,37 +196,37 @@ static GUI_FONT_HEADER fontHeader = {
 	0,         // scan mode 
 };
 
-//****************** ¶ÎĞÅÏ¢sections ********************
+//****************** æ®µä¿¡æ¯sections ********************
 static GUI_FONT_SECTION fonts_sections[1] = {
 		0x0020, 0xffe5, 0x0,
 };
 
-//****************** ¼ìË÷±íindex ***********************
+//****************** æ£€ç´¢è¡¨index ***********************
 static const GUI_FONT_INDEX fonts_index[65478]= {
     #include "rh_unicode_fonts_index.dat"
 };
 
-//****************** µãÕóĞÅÏ¢data **********************
+//****************** ç‚¹é˜µä¿¡æ¯data **********************
 static const unsigned char fonts_data[]= {
     #include "rh_unicode_fonts_data.dat"
 };
 #endif
 
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
-// 1bitÎ»Í¼Êı¾İ×éÖ¯·½Ê½Í¬win32 1bit bmp
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
+// 1bitä½å›¾æ•°æ®ç»„ç»‡æ–¹å¼åŒwin32 1bit bmp
 typedef struct DispBitmapTag
 {
     u16 width;
     u16 height;
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
-    u16 orgWidth; //Ö§³Ö×ÖÌåËõ·Å
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
+    u16 orgWidth; //æ”¯æŒå­—ä½“ç¼©æ”¾
     u16 orgHeight;
     float zoomRatio;
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
     u8 bpp;
     const u8 *data;
 }DispBitmap;
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
 typedef struct FontInfoTag
 {
@@ -241,7 +241,7 @@ typedef struct FontInfoTag
 static const u8 blankChar[HZ_FONT_SIZE] = {0};
 
 // font 
-// ËÎÌå16 ascii 0x20~0x7e
+// å®‹ä½“16 ascii 0x20~0x7e
 static const u8 sansFont16Data[]=
 {
     #include ASC_FONT_FILE_NAME
@@ -257,7 +257,7 @@ static const FontInfo sansFont16 =
     sansFont16Data,
 };
 
-// ºº×ÖËÎÌå16
+// æ±‰å­—å®‹ä½“16
 #if defined(FONT_HZ_COMPRESS)
 static const u8 sansHzFont16DataZip[] =
 {
@@ -271,31 +271,31 @@ static const u8 sansHzFont16Data[] =
     #include HZ_FONT_FILE_NAME
 };
 
-/*+\NEW\liweiqiang\2013.12.18\Ôö¼ÓÖĞÎÄ±êµã·ûºÅµÄÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.12.18\å¢åŠ ä¸­æ–‡æ ‡ç‚¹ç¬¦å·çš„æ˜¾ç¤ºæ”¯æŒ */
 static const u8 sansHzFont16ExtData[] = 
 {
     #include HZ_EXT_FONT_FILE_NAME
 };
-//[B0A1,F7FE] ²»°üº¬D7FA-D7FE
-/*°´ÄÚÂëÓÉĞ¡µ½´óÅÅÁĞ*/
+//[B0A1,F7FE] ä¸åŒ…å«D7FA-D7FE
+/*æŒ‰å†…ç ç”±å°åˆ°å¤§æ’åˆ—*/
 static const u16 sansHzFont16ExtOffset[] =
 {
-//"¡¢¡£¡ª¡­¡®¡¯¡°¡±¡²¡³¡´¡µ¡¶¡·¡¸¡¹¡º¡»¡¾¡¿£¡£¨£©£¬£­£®£º£»£¿àÅ"
+//"ã€ã€‚â€•â€¦â€˜â€™â€œâ€ã€”ã€•ã€ˆã€‰ã€Šã€‹ã€Œã€ã€ã€ã€ã€‘ï¼ï¼ˆï¼‰ï¼Œï¼ï¼ï¼šï¼›ï¼Ÿå—¯"
     0xA1A2,0xA1A3,0xA1AA,0xA1AD,0xA1AE,0xA1AF,0xA1B0,0xA1B1,
     0xA1B2,0xA1B3,0xA1B4,0xA1B5,0xA1B6,0xA1B7,0xA1B8,0xA1B9,
     0xA1BA,0xA1BB,0xA1BE,0xA1BF,0xA3A1,0xA3A8,0xA3A9,0xA3AC,
     0xA3AD,0xA3AE,0xA3BA,0xA3BB,0xA3BF,0xE0C5
 };
 
-/*-\NEW\liweiqiang\2013.12.18\Ôö¼ÓÖĞÎÄ±êµã·ûºÅµÄÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.12.18\å¢åŠ ä¸­æ–‡æ ‡ç‚¹ç¬¦å·çš„æ˜¾ç¤ºæ”¯æŒ */
 
 #ifdef __PROJECT_AM_WATCHER__
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 static const u8 sansHzFontPinyiData[] =
 {
     #include PINYIN_FONT_FILE_NAME
 };
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #endif
 #endif
 
@@ -310,7 +310,7 @@ static FontInfo sansHzFont16 =
 };
 
 #ifdef __PROJECT_AM_WATCHER__
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 static FontInfo sansHzFontPinyin =
 {
     ASC_FONT_WIDTH,
@@ -320,35 +320,35 @@ static FontInfo sansHzFontPinyin =
     0xa8bf,
     NULL
 };
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #endif
 
 static FontInfo dispFonts[MAX_FONTS];
 static u8 curr_font_id = 0;
 static FontInfo *dispHzFont;
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
-//¸ù¾İ×ÖÌå¸ß¶ÈÀ´È·ÈÏËõ·Å±ÈÀı
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
+//æ ¹æ®å­—ä½“é«˜åº¦æ¥ç¡®è®¤ç¼©æ”¾æ¯”ä¾‹
 static u16 g_s_fontZoomSize = HZ_FONT_HEIGHT;
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
-// ±³¾°É«ÓëÏÔÊ¾ÑÕÉ«
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
+// èƒŒæ™¯è‰²ä¸æ˜¾ç¤ºé¢œè‰²
 static int disp_bkcolor = COLOR_WHITE_1;
 static int disp_color = COLOR_BLACK_1;
-/*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
-static int lcd_hwfillcolor = COLOR_BLACK_1;// lcdÎïÀíÌî³äÉ«Éè¶¨,Ä¿Ç°Ö»Ö§³ÖºÚ°×ÆÁ,´æÔÚºÚµ×°××ÖµÄÆÁÒ²´æÔÚ°×µ×ºÚ×ÖµÄÆÁ
-/*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
+static int lcd_hwfillcolor = COLOR_BLACK_1;// lcdç‰©ç†å¡«å……è‰²è®¾å®š,ç›®å‰åªæ”¯æŒé»‘ç™½å±,å­˜åœ¨é»‘åº•ç™½å­—çš„å±ä¹Ÿå­˜åœ¨ç™½åº•é»‘å­—çš„å±
+/*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
 
-// lcd Éè±¸²ÎÊı
+// lcd è®¾å¤‡å‚æ•°
 u16 lua_lcd_height;
 u16 lua_lcd_width;
 u8 lua_lcd_bpp;
 
 PlatformLcdBus lcd_bus;
 
-// ÏÔÊ¾»º³åÇø
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+// æ˜¾ç¤ºç¼“å†²åŒº
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 //#define MAX_LCD_PIXEL_BYTES   3
 //#define MAX_LCD_BUFF_SIZE (MAX_LCD_WIDTH_SUPPORT*MAX_LCD_HEIGH_SUPPORT* MAX_LCD_PIXEL_BYTES)
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 #ifdef __MTK_TARGET__
     #pragma arm section zidata = "DYNAMICCACHEABLEZI_NC"
 #endif
@@ -356,9 +356,9 @@ PlatformLcdBus lcd_bus;
 kal_uint8 framebuffer[MAX_LCD_BUFF_SIZE];
 
 kal_uint8* workingbuffer = framebuffer;
-/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 int frameBufferSize = 0;
-/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 #ifdef __MTK_TARGET__
     #pragma arm section zidata
 #endif 
@@ -460,9 +460,9 @@ static void fontInit(void)
 #endif
 
 #ifdef __PROJECT_AM_WATCHER__
-    /*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+    /*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
     sansHzFontPinyin.data = sansHzFontPinyiData;
-    /*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+    /*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #endif
     
     memset(dispFonts, 0, sizeof(dispFonts));
@@ -476,7 +476,7 @@ static void fontInit(void)
 
 void platform_disp_init(PlatformDispInitParam *pParam)
 {
-    // Ö»Ö§³Ö16Î»É«ÆÁÄ»»òÕßºÚ°×ÆÁ
+    // åªæ”¯æŒ16ä½è‰²å±å¹•æˆ–è€…é»‘ç™½å±
     ASSERT(pParam->bpp == 16 || pParam->bpp == 1 || pParam->bpp == 24);
 
 	static platform_layer_t default_layer;
@@ -496,16 +496,16 @@ void platform_disp_init(PlatformDispInitParam *pParam)
         default_layer.height = pParam->height;
     }
 
-    // ·ÖÅäÏÔÊ¾»º³åÇø
+    // åˆ†é…æ˜¾ç¤ºç¼“å†²åŒº
 #if 0
     framebuffer = L_MALLOC(lua_lcd_width*lua_lcd_height*lua_lcd_bpp/8);
 #endif
     
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
     pParam->framebuffer = workingbuffer;
     default_layer.buf = (void *)workingbuffer;
 	default_layer.update = update_default_layer;
-/*+\czm\2020.9.11\initÖ»³õÊ¼»¯Ò»´ÎÍ¼²ã*/
+/*+\czm\2020.9.11\initåªåˆå§‹åŒ–ä¸€æ¬¡å›¾å±‚*/
     static bool disp_init_one = FALSE;
     if(disp_init_one == FALSE)
     {
@@ -514,28 +514,28 @@ void platform_disp_init(PlatformDispInitParam *pParam)
         disp_init_one = TRUE;
     }
     platform_disp_set_act_layer(0);
-/*-\czm\2020.9.11\initÖ»³õÊ¼»¯Ò»´ÎÍ¼²ã*/
-	/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*-\czm\2020.9.11\initåªåˆå§‹åŒ–ä¸€æ¬¡å›¾å±‚*/
+	/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 	frameBufferSize = lua_lcd_width*lua_lcd_height*lua_lcd_bpp/8;
-	/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+	/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 	
 	lcd_bus = pParam->bus;
 
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\bug0\zhy\2014.10.14\ºÚ°×ÆÁÄ¬ÈÏÎª ºÚµ×°×ÆÁ*/
+/*+\bug0\zhy\2014.10.14\é»‘ç™½å±é»˜è®¤ä¸º é»‘åº•ç™½å±*/
     if(lua_lcd_bpp == 1)
     {
         disp_bkcolor = COLOR_WHITE_1;
         disp_color = COLOR_BLACK_1;
 
-/*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
         if(pParam->hwfillcolor != -1){
             lcd_hwfillcolor = pParam->hwfillcolor;
             if(lcd_hwfillcolor > COLOR_WHITE_1)
                 lcd_hwfillcolor = COLOR_WHITE_1;
         }
-/*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
     }
     else if(lua_lcd_bpp == 16)
     {
@@ -546,11 +546,11 @@ void platform_disp_init(PlatformDispInitParam *pParam)
     {
         disp_bkcolor = COLOR_WHITE_24;
         disp_color = COLOR_BLACK_24;
-    }/*-\bug0\zhy\2014.10.14\ºÚ°×ÆÁÄ¬ÈÏÎª ºÚµ×°×ÆÁ*/
+    }/*-\bug0\zhy\2014.10.14\é»‘ç™½å±é»˜è®¤ä¸º é»‘åº•ç™½å±*/
 
     fontInit();
 
-    // ³õÊ¼»¯lcdÉè±¸
+    // åˆå§‹åŒ–lcdè®¾å¤‡
     platform_lcd_init(pParam);
 
     layer_info[BASIC_LAYER_ID].buffer = workingbuffer;
@@ -571,32 +571,32 @@ void platform_disp_init(PlatformDispInitParam *pParam)
 
 void platform_disp_close(void)
 {
-/*+\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*+\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
     // if(framebuffer != NULL)
     // {
     //     L_FREE(framebuffer);
     // }
 
     platform_lcd_close();
-/*-\bug2958\czm\2020.9.1\disp.close() Ö®ºóÔÙÖ´ĞĞdisp.init ÎŞÌáÊ¾Ö±½ÓÖØÆô*/
+/*-\bug2958\czm\2020.9.1\disp.close() ä¹‹åå†æ‰§è¡Œdisp.init æ— æç¤ºç›´æ¥é‡å¯*/
 }
 
 void platform_disp_clear(void)
 {
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
     if(lua_lcd_bpp == 1)
     {
-/*+\bug0\zhy\2014.10.14\ºÚ°×ÆÁÉèÖÃ±³¾°É«ĞŞ¸Ä*/
-/*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
-        if(disp_bkcolor^lcd_hwfillcolor) // ÓëÌî³äÉ«²»Ò»Ñù¾Í²»Ìî³ä
-/*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*+\bug0\zhy\2014.10.14\é»‘ç™½å±è®¾ç½®èƒŒæ™¯è‰²ä¿®æ”¹*/
+/*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
+        if(disp_bkcolor^lcd_hwfillcolor) // ä¸å¡«å……è‰²ä¸ä¸€æ ·å°±ä¸å¡«å……
+/*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
             memset(workingbuffer, 0x00, lua_lcd_width*lua_lcd_height*lua_lcd_bpp/8);
-        else // ÓëÌî³äÉ«Ò»ÖÂ¾ÍÌî³ä
+        else // ä¸å¡«å……è‰²ä¸€è‡´å°±å¡«å……
             memset(workingbuffer, 0xFF, lua_lcd_width*lua_lcd_height*lua_lcd_bpp/8);
-/*-\bug0\zhy\2014.10.14\ºÚ°×ÆÁÉèÖÃ±³¾°É«ĞŞ¸Ä*/
+/*-\bug0\zhy\2014.10.14\é»‘ç™½å±è®¾ç½®èƒŒæ™¯è‰²ä¿®æ”¹*/
     }
     else if(lua_lcd_bpp == 16)
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
     {
         u16 *pPixel16;
         u16 row,col;
@@ -630,10 +630,10 @@ void platform_disp_clear(void)
     }
 }
 
-/*+\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*+\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 void platform_disp_new(PlatformDispInitParam *pParam)
 {
-    // Ö»Ö§³Ö16Î»É«ÆÁÄ»»òÕßºÚ°×ÆÁ
+    // åªæ”¯æŒ16ä½è‰²å±å¹•æˆ–è€…é»‘ç™½å±
     ASSERT(pParam->bpp == 16 || pParam->bpp == 24 || pParam->bpp == 1);
 
 	lua_lcd_bpp = pParam->bpp;
@@ -649,7 +649,7 @@ void platform_disp_new(PlatformDispInitParam *pParam)
     
 
 #ifndef AM_LAYER_SUPPORT
-    // ·ÖÅäÏÔÊ¾»º³åÇø
+    // åˆ†é…æ˜¾ç¤ºç¼“å†²åŒº
     //framebuffer = (u8*)((u32)malloc(lcd_width*lcd_height*lcd_bpp/8) | 0xa0000000);
     frameBufferSize = lua_lcd_width*lua_lcd_height*lua_lcd_bpp/8;
 #endif
@@ -659,21 +659,21 @@ void platform_disp_new(PlatformDispInitParam *pParam)
 		platform_assert(__FUNCTION__, __LINE__);
 	}
 
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
     pParam->framebuffer = workingbuffer;
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\bug0\zhy\2014.10.14\ºÚ°×ÆÁÄ¬ÈÏÎª ºÚµ×°×ÆÁ*/
+/*+\bug0\zhy\2014.10.14\é»‘ç™½å±é»˜è®¤ä¸º é»‘åº•ç™½å±*/
     if(lua_lcd_bpp == 1)
     {
         disp_bkcolor = COLOR_WHITE_1;
         disp_color = COLOR_BLACK_1;
 
-/*+\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*+\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
         if(pParam->hwfillcolor != -1){
             lcd_hwfillcolor = pParam->hwfillcolor;
         }
-/*-\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*-\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
     }
     else if(lua_lcd_bpp == 16)
     {
@@ -684,11 +684,11 @@ void platform_disp_new(PlatformDispInitParam *pParam)
     {
         disp_bkcolor = COLOR_WHITE_24;
         disp_color = COLOR_BLACK_24;
-    }/*-\bug0\zhy\2014.10.14\ºÚ°×ÆÁÄ¬ÈÏÎª ºÚµ×°×ÆÁ*/
+    }/*-\bug0\zhy\2014.10.14\é»‘ç™½å±é»˜è®¤ä¸º é»‘åº•ç™½å±*/
 
     fontInit();
 
-    // ³õÊ¼»¯lcdÉè±¸
+    // åˆå§‹åŒ–lcdè®¾å¤‡
     //platform_lcd_init(pParam);
 }
 
@@ -697,7 +697,7 @@ int platform_disp_get()
     //buf = framebuffer;
 	return frameBufferSize;
 }
-/*-\BUG2739\lijiaodi\2020.08.06\Ìí¼Ódisp.new disp.getframe½Ó¿Ú\*/ 
+/*-\BUG2739\lijiaodi\2020.08.06\æ·»åŠ disp.new disp.getframeæ¥å£\*/ 
 
 void platform_disp_update(void)
 {
@@ -711,12 +711,12 @@ void platform_disp_update(void)
     platform_disp_refr_act_layer(&rect);
 }
 
-/*+\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*+\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 static void disp_bitmap_bpp1(const DispBitmap *pBitmap, u16 startX, u16 startY)
 {
     u16 bx,by,x,y,page,bwbytes;
     u16 endX, endY;
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
     u16 srcbx, srcby;
 
     if(pBitmap->bpp != 1)
@@ -738,8 +738,8 @@ static void disp_bitmap_bpp1(const DispBitmap *pBitmap, u16 startX, u16 startY)
         {
             srcby = pBitmap->zoomRatio*by;
             page = y/8;
-/*+\bug0\zhy\2014.10.14\ºÚ°×ÆÁÉèÖÃÇ°¾°É«ĞŞ¸Ä*/
-            if((disp_color^lcd_hwfillcolor) == 0) /*\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+/*+\bug0\zhy\2014.10.14\é»‘ç™½å±è®¾ç½®å‰æ™¯è‰²ä¿®æ”¹*/
+            if((disp_color^lcd_hwfillcolor) == 0) /*\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
             {
                         if(pBitmap->data[bwbytes*srcby+srcbx/8]&(0x80>>(srcbx%8)))
                         {
@@ -753,7 +753,7 @@ static void disp_bitmap_bpp1(const DispBitmap *pBitmap, u16 startX, u16 startY)
             else
             {
                         if(pBitmap->data[bwbytes*srcby+srcbx/8]&(0x80>>(srcbx%8)))
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  						
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  						
                         {
                              workingbuffer[page*lua_lcd_width+x] &= ~(1<<(y%8));
                         }
@@ -762,7 +762,7 @@ static void disp_bitmap_bpp1(const DispBitmap *pBitmap, u16 startX, u16 startY)
                             //framebuffer[page*lcd_width+x] |= 1<<(y%8);
                         }
             }
-/*-\bug0\zhy\2014.10.14\ºÚ°×ÆÁÉèÖÃÇ°¾°É«ĞŞ¸Ä*/
+/*-\bug0\zhy\2014.10.14\é»‘ç™½å±è®¾ç½®å‰æ™¯è‰²ä¿®æ”¹*/
         }
     }
 }
@@ -772,7 +772,7 @@ static void disp_1bitbmp_bpp16(const DispBitmap *pBitmap, u16 startX, u16 startY
     u16 bx,by,x,y,bwbytes;
     u16 endX, endY;
     u16 *buffer16 = (u16*)workingbuffer;
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
     u16 srcbx, srcby;
 
     ASSERT(pBitmap->bpp == 1);
@@ -791,25 +791,25 @@ static void disp_1bitbmp_bpp16(const DispBitmap *pBitmap, u16 startX, u16 startY
             srcby = pBitmap->zoomRatio*by;
             if(pBitmap->data[bwbytes*srcby+srcbx/8]&(0x80>>(srcbx%8)))
             {
-                //Ìî³äÑÕÉ«
+                //å¡«å……é¢œè‰²
                 buffer16[y*lua_lcd_width + x] = disp_color;
             }
             else
             {
-                //Ìî³ä±³¾°É«
-                // Ö±½Óµş¼ÓÏÔÊ¾,Ôİ²»Ö§³Ö±³¾°É«ÉèÖÃ
+                //å¡«å……èƒŒæ™¯è‰²
+                // ç›´æ¥å åŠ æ˜¾ç¤º,æš‚ä¸æ”¯æŒèƒŒæ™¯è‰²è®¾ç½®
                 //buffer16[y*lcd_width + x] = disp_bkcolor;
             }
         }
     }
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
 }
 static void disp_1bitbmp_bpp24(const DispBitmap *pBitmap, u16 startX, u16 startY)
 {
     u16 bx,by,x,y,bwbytes;
     u16 endX, endY;
     u8 *buffer24 = (u8*)workingbuffer;
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
     u16 srcbx,srcby;
 
     ASSERT(pBitmap->bpp == 1);
@@ -827,21 +827,21 @@ static void disp_1bitbmp_bpp24(const DispBitmap *pBitmap, u16 startX, u16 startY
             srcby = pBitmap->zoomRatio*by;
             if(pBitmap->data[bwbytes*srcby+srcbx/8]&(0x80>>(srcbx%8)))
             {
-                //Ìî³äÑÕÉ«
+                //å¡«å……é¢œè‰²
                 memcpy(&buffer24[(y*lua_lcd_width + x) * 3], &disp_color, 3);
             }
             else
             {
-                //Ìî³ä±³¾°É«
-                // Ö±½Óµş¼ÓÏÔÊ¾,Ôİ²»Ö§³Ö±³¾°É«ÉèÖÃ
+                //å¡«å……èƒŒæ™¯è‰²
+                // ç›´æ¥å åŠ æ˜¾ç¤º,æš‚ä¸æ”¯æŒèƒŒæ™¯è‰²è®¾ç½®
                 //buffer16[y*lcd_width + x] = disp_bkcolor;
             }
         }
     }
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
 }
 
-/*-\NEW\2013.4.10\Ôö¼ÓºÚ°×ÆÁÏÔÊ¾Ö§³Ö */
+/*-\NEW\2013.4.10\å¢åŠ é»‘ç™½å±æ˜¾ç¤ºæ”¯æŒ */
 
 static void getFontBitmap(DispBitmap *pBitmap, u16 charcode)
 {
@@ -871,7 +871,7 @@ static void getFontBitmap(DispBitmap *pBitmap, u16 charcode)
 }
 
 #ifdef __PROJECT_AM_WATCHER__
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 static void getPinyinFontBitmap(DispBitmap *pBitmap, u16 charcode)
 {
     const FontInfo *pInfo = &sansHzFontPinyin;
@@ -898,7 +898,7 @@ static void getPinyinFontBitmap(DispBitmap *pBitmap, u16 charcode)
         pBitmap->data = blankChar;
     }
 }
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í*/  
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½*/  
 #endif
 
 static void getHzBitmap(DispBitmap *pBitmap, u16 charcode)
@@ -921,21 +921,21 @@ static void getHzBitmap(DispBitmap *pBitmap, u16 charcode)
             byte2 >= 0xA1 && byte2 <= 0xFE)
         {
             index = (byte1 - 0xB0)*(0xFE - 0xA1 + 1) + byte2 - 0xA1;
-			/*+\BUG\wangyuan\2020.07.24\BUG_2657£ºui×Ö¿â´íÎ»£¬ÏÔÊ¾³öÀ´µÄÎÄ×Ö²»ÕıÈ·*/
+			/*+\BUG\wangyuan\2020.07.24\BUG_2657ï¼šuiå­—åº“é”™ä½ï¼Œæ˜¾ç¤ºå‡ºæ¥çš„æ–‡å­—ä¸æ­£ç¡®*/
 			#if 0
             if(byte1 > 0xD7)
             {
-                index -= 5; /*D7FA-D7FE Õâ5¸öÊÇ¿ÕµÄ*/
+                index -= 5; /*D7FA-D7FE è¿™5ä¸ªæ˜¯ç©ºçš„*/
             }
             #endif
-			/*-\BUG\wangyuan\2020.07.24\BUG_2657£ºui×Ö¿â´íÎ»£¬ÏÔÊ¾³öÀ´µÄÎÄ×Ö²»ÕıÈ·*/
+			/*-\BUG\wangyuan\2020.07.24\BUG_2657ï¼šuiå­—åº“é”™ä½ï¼Œæ˜¾ç¤ºå‡ºæ¥çš„æ–‡å­—ä¸æ­£ç¡®*/
             pBitmap->data = pInfo->data + index*pInfo->size;
         }
         else
         {
             pBitmap->data = blankChar;
 
-        /*+\NEW\liweiqiang\2013.12.18\Ôö¼ÓÖĞÎÄ±êµã·ûºÅµÄÏÔÊ¾Ö§³Ö */
+        /*+\NEW\liweiqiang\2013.12.18\å¢åŠ ä¸­æ–‡æ ‡ç‚¹ç¬¦å·çš„æ˜¾ç¤ºæ”¯æŒ */
             for(index = 0; index < sizeof(sansHzFont16ExtOffset)/sizeof(u16); index++)
             {
                 if(charcode < sansHzFont16ExtOffset[index])
@@ -949,7 +949,7 @@ static void getHzBitmap(DispBitmap *pBitmap, u16 charcode)
                     break;
                 }
             }
-        /*-\NEW\liweiqiang\2013.12.18\Ôö¼ÓÖĞÎÄ±êµã·ûºÅµÄÏÔÊ¾Ö§³Ö */
+        /*-\NEW\liweiqiang\2013.12.18\å¢åŠ ä¸­æ–‡æ ‡ç‚¹ç¬¦å·çš„æ˜¾ç¤ºæ”¯æŒ */
         }
     }
     else
@@ -961,7 +961,7 @@ static void getHzBitmap(DispBitmap *pBitmap, u16 charcode)
 static void getCharBitmap(DispBitmap *pBitmap, u16 charcode)
 {
 #ifdef __PROJECT_AM_WATCHER__
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í£¬Ê¹ÓÃµ¥¶À×Ö¿â*/  
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½ï¼Œä½¿ç”¨å•ç‹¬å­—åº“*/  
     if(charcode >= 0xa8a1 && charcode <= 0xa8bf)    
 	{        //pinyin
         getPinyinFontBitmap(pBitmap, charcode);
@@ -969,7 +969,7 @@ static void getCharBitmap(DispBitmap *pBitmap, u16 charcode)
     else
 #endif
         if(charcode >= 0x80A0)
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í£¬Ê¹ÓÃµ¥¶À×Ö¿â*/  	
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½ï¼Œä½¿ç”¨å•ç‹¬å­—åº“*/  	
     {
         getHzBitmap(pBitmap, charcode);
     }
@@ -977,17 +977,17 @@ static void getCharBitmap(DispBitmap *pBitmap, u16 charcode)
     {
         getFontBitmap(pBitmap, charcode);
     }
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/
     pBitmap->orgHeight = pBitmap->height;
     pBitmap->orgWidth  = pBitmap->width;
     pBitmap->zoomRatio = (float)pBitmap->height/g_s_fontZoomSize;
 
     pBitmap->height = g_s_fontZoomSize;
     pBitmap->width = (u16)((float)pBitmap->width/pBitmap->zoomRatio);
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/      
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/      
 }
 
-#if 0 // Çå³ı¾ØĞÎÇø½Ó¿Ú
+#if 0 // æ¸…é™¤çŸ©å½¢åŒºæ¥å£
 static void disp_clear_rect(int ltx, int lty, int rbx, int rby)
 {
     u16 *buffer16 = (u16*)framebuffer;
@@ -1004,22 +1004,22 @@ static void disp_clear_rect(int ltx, int lty, int rbx, int rby)
 }
 #endif
 
-// Èğºãfonts ==============================================================================================================
+// ç‘æ’fonts ==============================================================================================================
 
-/************************************* »ñÈ¡×Ö·ûµãÕóĞÅÏ¢ **************************/
+/************************************* è·å–å­—ç¬¦ç‚¹é˜µä¿¡æ¯ **************************/
 #if VERSION_CHINESE == ON
-/* »ñÈ¡GB2312×Ö·ûµãÕóĞÅÏ¢ */
+/* è·å–GB2312å­—ç¬¦ç‚¹é˜µä¿¡æ¯ */
 static u32 rh_getGB2312Index(u16 gb2312code)
 {
     u32 index = -1;
-    u8 region = (gb2312code >> 8) & 0xFF; // ÇøÂë
-    u8 posit = gb2312code & 0xFF; // Î»Âë
+    u8 region = (gb2312code >> 8) & 0xFF; // åŒºç 
+    u8 posit = gb2312code & 0xFF; // ä½ç 
     if((region >= 0xA1 && region <= 0xFE) && (posit >= 0xA1 && posit <= 0xFE))
     //if((region >= 0xB0 && region <= 0xF7) && (posit >= 0xA1 && posit <= 0xFE))
     {
         index = (region - 0xA1) * (0xFE - 0xA1 + 1) + posit - 0xA1;
         //index = (region - 0xB0) * (0xFE - 0xA1 + 1) + posit - 0xA1;
-        //if(region > 0xD7) index -= 5; // D7FA-D7FE Õâ5¸öÊÇ¿ÕµÄ
+        //if(region > 0xD7) index -= 5; // D7FA-D7FE è¿™5ä¸ªæ˜¯ç©ºçš„
         //index = sizeof(GUI_FONT_HEADER) + index * (32/8*32);
         index *= 128;
         //index *= (((32) + 7) / 8 * (32));
@@ -1028,48 +1028,48 @@ static u32 rh_getGB2312Index(u16 gb2312code)
 }
 static void rh_getGB2312Bitmap(DispBitmap *pBitmap, u16 gb2312code)
 {
-    if(gb2312code >= 0xA0A0) // GB2312µÄÖµ´óÓÚ0xA0A0
+    if(gb2312code >= 0xA0A0) // GB2312çš„å€¼å¤§äº0xA0A0
     {
         const GUI_FONT_HEADER *pHeader_CJK = &fontHeader_CJK;
-        pBitmap->bpp = 1; // ×ÖÏñËØÉî¶È
-        pBitmap->width = pHeader_CJK->YSize; // ×Ö¿í
-        pBitmap->height = pHeader_CJK->YSize; // ×Ö¸ß
-        pBitmap->data = &fonts_data_CJK[rh_getGB2312Index(gb2312code)]; // ×ÖµãÕó
+        pBitmap->bpp = 1; // å­—åƒç´ æ·±åº¦
+        pBitmap->width = pHeader_CJK->YSize; // å­—å®½
+        pBitmap->height = pHeader_CJK->YSize; // å­—é«˜
+        pBitmap->data = &fonts_data_CJK[rh_getGB2312Index(gb2312code)]; // å­—ç‚¹é˜µ
     }
     else
     {
         const GUI_FONT_HEADER *pHeader_Latin = &fontHeader_Latin;
         const GUI_FONT_INDEX *pIndex_Latin = &fonts_index_Latin[0];
-        pBitmap->bpp = 1; // ×ÖÏñËØÉî¶È
-        pBitmap->width = (pIndex_Latin+gb2312code)->width; // ×Ö¿í
-        pBitmap->height = pHeader_Latin->YSize; // ×Ö¸ß
-        pBitmap->data = &fonts_data_Latin[(pIndex_Latin+gb2312code)->offset]; // ×ÖµãÕó
+        pBitmap->bpp = 1; // å­—åƒç´ æ·±åº¦
+        pBitmap->width = (pIndex_Latin+gb2312code)->width; // å­—å®½
+        pBitmap->height = pHeader_Latin->YSize; // å­—é«˜
+        pBitmap->data = &fonts_data_Latin[(pIndex_Latin+gb2312code)->offset]; // å­—ç‚¹é˜µ
     }
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
-    //ÔİÊ±²»´¦ÀíËõ·Å
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
+    //æš‚æ—¶ä¸å¤„ç†ç¼©æ”¾
     pBitmap->orgHeight = pBitmap->height;
     pBitmap->orgWidth = pBitmap->width;
     pBitmap->zoomRatio = 1;
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
 }
 #elif VERSION_ENGLISH == ON
-/* »ñÈ¡Unicode×Ö·ûµãÕóĞÅÏ¢ */
+/* è·å–Unicodeå­—ç¬¦ç‚¹é˜µä¿¡æ¯ */
 static void rh_getUnicodeBitmap(DispBitmap *pBitmap, unsigned long unicode)
 {
     //const GUI_FONT_HEADER *pHeader = unicode_header;
     const GUI_FONT_HEADER *pHeader = &fontHeader;
     const GUI_FONT_INDEX *pIndex = &fonts_index[0];
     //const GUI_FONT_INDEX *pIndex = &unicode_index[0];
-    pBitmap->bpp = 1; // ×ÖÏñËØÉî¶È
-    pBitmap->width = (pIndex+unicode)->width; // ×Ö¿í
-    pBitmap->height = pHeader->YSize; // ×Ö¸ß
-    pBitmap->data = &fonts_data[(pIndex+unicode)->offset]; // ×ÖµãÕó
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
-    //ÔİÊ±²»´¦ÀíËõ·Å
+    pBitmap->bpp = 1; // å­—åƒç´ æ·±åº¦
+    pBitmap->width = (pIndex+unicode)->width; // å­—å®½
+    pBitmap->height = pHeader->YSize; // å­—é«˜
+    pBitmap->data = &fonts_data[(pIndex+unicode)->offset]; // å­—ç‚¹é˜µ
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
+    //æš‚æ—¶ä¸å¤„ç†ç¼©æ”¾
     pBitmap->orgHeight = pBitmap->height;
     pBitmap->orgWidth = pBitmap->width;
     pBitmap->zoomRatio = 1;
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  	
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  	
 }
 #endif
 
@@ -1078,37 +1078,37 @@ static void rh_getUnicodeBitmap(DispBitmap *pBitmap, unsigned long unicode)
 /*************************************************************************************/
 
 /*****************************************************************************
- * ¹¦ÄÜ:
- *    ½«Ò»¸ö×Ö·ûµÄUTF8±àÂë×ª»»³ÉUnicode(UCS-2ºÍUCS-4)±àÂë.
- * ²ÎÊı:
- *    pInput Ö¸ÏòÊäÈë»º³åÇø, ÒÔUTF-8±àÂë
- *    Unic   Ö¸ÏòÊä³ö»º³åÇø, Æä±£´æµÄÊı¾İ¼´ÊÇUnicode±àÂëÖµ, ÀàĞÍÎªunsigned long.
- * ·µ»ØÖµ:
- *    ³É¹¦Ôò·µ»Ø¸Ã×Ö·ûµÄUTF8±àÂëËùÕ¼ÓÃµÄ×Ö½ÚÊı; Ê§°ÜÔò·µ»Ø0.
- * ×¢Òâ:
- *    UTF8Ã»ÓĞ×Ö½ÚĞòÎÊÌâ, µ«ÊÇUnicodeÓĞ×Ö½ÚĞòÒªÇó;
- *    ×Ö½ÚĞò·ÖÎª´ó¶Ë(Big Endian)ºÍĞ¡¶Ë(Little Endian)Á½ÖÖ;
- *    ÔÚIntel´¦ÀíÆ÷ÖĞ²ÉÓÃĞ¡¶Ë·¨±íÊ¾, ÔÚ´Ë²ÉÓÃĞ¡¶Ë·¨±íÊ¾. (µÍµØÖ·´æµÍÎ»)
+ * åŠŸèƒ½:
+ *    å°†ä¸€ä¸ªå­—ç¬¦çš„UTF8ç¼–ç è½¬æ¢æˆUnicode(UCS-2å’ŒUCS-4)ç¼–ç .
+ * å‚æ•°:
+ *    pInput æŒ‡å‘è¾“å…¥ç¼“å†²åŒº, ä»¥UTF-8ç¼–ç 
+ *    Unic   æŒ‡å‘è¾“å‡ºç¼“å†²åŒº, å…¶ä¿å­˜çš„æ•°æ®å³æ˜¯Unicodeç¼–ç å€¼, ç±»å‹ä¸ºunsigned long.
+ * è¿”å›å€¼:
+ *    æˆåŠŸåˆ™è¿”å›è¯¥å­—ç¬¦çš„UTF8ç¼–ç æ‰€å ç”¨çš„å­—èŠ‚æ•°; å¤±è´¥åˆ™è¿”å›0.
+ * æ³¨æ„:
+ *    UTF8æ²¡æœ‰å­—èŠ‚åºé—®é¢˜, ä½†æ˜¯Unicodeæœ‰å­—èŠ‚åºè¦æ±‚;
+ *    å­—èŠ‚åºåˆ†ä¸ºå¤§ç«¯(Big Endian)å’Œå°ç«¯(Little Endian)ä¸¤ç§;
+ *    åœ¨Intelå¤„ç†å™¨ä¸­é‡‡ç”¨å°ç«¯æ³•è¡¨ç¤º, åœ¨æ­¤é‡‡ç”¨å°ç«¯æ³•è¡¨ç¤º. (ä½åœ°å€å­˜ä½ä½)
  ****************************************************************************/
 static int rh_getUTF8Size(const unsigned char pInput)
 {
     unsigned char c = pInput;
-    if(c< 0x80) return 0;// 0xxxxxxx ·µ»Ø0
-    if(c>=0x80 && c<0xC0) return -1;// 10xxxxxx ²»´æÔÚ
-    if(c>=0xC0 && c<0xE0) return 2;// 110xxxxx ·µ»Ø2
-    if(c>=0xE0 && c<0xF0) return 3;// 1110xxxx ·µ»Ø3
-    if(c>=0xF0 && c<0xF8) return 4;// 11110xxx ·µ»Ø4
-    if(c>=0xF8 && c<0xFC) return 5;// 111110xx ·µ»Ø5
-    if(c>=0xFC) return 6;// 1111110x ·µ»Ø6
+    if(c< 0x80) return 0;// 0xxxxxxx è¿”å›0
+    if(c>=0x80 && c<0xC0) return -1;// 10xxxxxx ä¸å­˜åœ¨
+    if(c>=0xC0 && c<0xE0) return 2;// 110xxxxx è¿”å›2
+    if(c>=0xE0 && c<0xF0) return 3;// 1110xxxx è¿”å›3
+    if(c>=0xF0 && c<0xF8) return 4;// 11110xxx è¿”å›4
+    if(c>=0xF8 && c<0xFC) return 5;// 111110xx è¿”å›5
+    if(c>=0xFC) return 6;// 1111110x è¿”å›6
 }
 static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *Unic)
 {
     //assert(pInput != NULL && Unic != NULL);
-    // b1 ±íÊ¾UTF-8±àÂëµÄpInputÖĞµÄ¸ß×Ö½Ú, b2 ±íÊ¾´Î¸ß×Ö½Ú, ...
+    // b1 è¡¨ç¤ºUTF-8ç¼–ç çš„pInputä¸­çš„é«˜å­—èŠ‚, b2 è¡¨ç¤ºæ¬¡é«˜å­—èŠ‚, ...
     char b1, b2, b3, b4, b5, b6;
     int utfbytes = rh_getUTF8Size(*pInput);
     unsigned char *pOutput = (unsigned char *) Unic;
-    *Unic = 0x0; // °Ñ *Unic ³õÊ¼»¯ÎªÈ«Áã
+    *Unic = 0x0; // æŠŠ *Unic åˆå§‹åŒ–ä¸ºå…¨é›¶
 
     switch ( utfbytes )
     {
@@ -1121,7 +1121,7 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             b2 = *(pInput + 1); //  (b2 & 0xC0) != 0x80 
             if ( (b2 & 0xC0) != 0x80 )
 			{
-				*pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+				*pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
                 return 1;
             }
 			*pOutput     = (b1 << 6) + (b2 & 0x3F);
@@ -1133,7 +1133,7 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             b3 = *(pInput + 2);
             if ( ((b2 & 0xC0) != 0x80) || ((b3 & 0xC0) != 0x80) )
 			{
-				*pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+				*pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
                 return 1;
             }
             *pOutput     = (b2 << 6) + (b3 & 0x3F);
@@ -1146,7 +1146,7 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             b4 = *(pInput + 3);
             if ( ((b2 & 0xC0) != 0x80) || ((b3 & 0xC0) != 0x80) || ((b4 & 0xC0) != 0x80) )
 			{
-				*pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+				*pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
                 return 1;
             }
             *pOutput     = (b3 << 6) + (b4 & 0x3F);
@@ -1161,7 +1161,7 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             b5 = *(pInput + 4);
             if ( ((b2 & 0xC0) != 0x80) || ((b3 & 0xC0) != 0x80) || ((b4 & 0xC0) != 0x80) || ((b5 & 0xC0) != 0x80) )
 			{
-				*pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+				*pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
                 return 1;
             }
             *pOutput     = (b4 << 6) + (b5 & 0x3F);
@@ -1178,7 +1178,7 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             b6 = *(pInput + 5);
             if ( ((b2 & 0xC0) != 0x80) || ((b3 & 0xC0) != 0x80) || ((b4 & 0xC0) != 0x80) || ((b5 & 0xC0) != 0x80) || ((b6 & 0xC0) != 0x80) )
 			{
-				*pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+				*pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
                 return 1;
             }
             *pOutput     = (b5 << 6) + (b6 & 0x3F);
@@ -1187,14 +1187,14 @@ static int rh_convertUTF8toUnicode(const unsigned char *pInput, unsigned long *U
             *(pOutput+3) = ((b1 << 6) & 0x40) + (b2 & 0x3F);
             break;
         default:
-            *pOutput = 63; // ÎŞ·¨½âÎöµÄ×Ö·ûÓÃ ? ´úÌæÏÔÊ¾
+            *pOutput = 63; // æ— æ³•è§£æçš„å­—ç¬¦ç”¨ ? ä»£æ›¿æ˜¾ç¤º
             utfbytes = 1;
             break;
     }
     return utfbytes;
 }
 
-/* GB2312×ªUnicode
+/* GB2312è½¬Unicode
 static int UnicodeBinarySearch(unsigned int key,const unsigned int lookup_table[][2],unsigned int start,unsigned int end)
 {
    while(start <= end)
@@ -1225,7 +1225,7 @@ static unsigned int GetUnicodeByGB2312(unsigned int gb2312)
    return 0;
 }
 */
-/**************************** »ñÈ¡×Ö·û»ò×Ö·û´®¿í¶È£¨·µ»Ø¿í¶ÈÊµ¼ÊÕ¼ÓÃµÄÏñËØ£© ******************************/
+/**************************** è·å–å­—ç¬¦æˆ–å­—ç¬¦ä¸²å®½åº¦ï¼ˆè¿”å›å®½åº¦å®é™…å ç”¨çš„åƒç´ ï¼‰ ******************************/
 /*
 static unsigned char rh_CharWidthToBytes(unsigned char num)
 {
@@ -1243,16 +1243,16 @@ static unsigned char rh_CharWidthToBytes(unsigned char num)
 #if VERSION_CHINESE == ON
 static unsigned char rh_getGB2312Width(u16 gb2312code)
 {
-    if(gb2312code >= 0xA0A0) // GB2312ÖĞÎÄµÄÖµ´óÓÚ0xA0A0
+    if(gb2312code >= 0xA0A0) // GB2312ä¸­æ–‡çš„å€¼å¤§äº0xA0A0
     {
         const GUI_FONT_HEADER *pHeader_CJK = &fontHeader_CJK;
-        //return rh_CharWidthToBytes(pHeader_CJK->YSize); // ×Ö¿í
+        //return rh_CharWidthToBytes(pHeader_CJK->YSize); // å­—å®½
         return pHeader_CJK->YSize;
     }
     else
     {
         const GUI_FONT_INDEX *pIndex_Latin = &fonts_index_Latin[0];
-        //return rh_CharWidthToBytes((pIndex_Latin+gb2312code)->width); // ×Ö¿í
+        //return rh_CharWidthToBytes((pIndex_Latin+gb2312code)->width); // å­—å®½
         return (pIndex_Latin+gb2312code)->width;
     }
 }
@@ -1260,25 +1260,25 @@ static unsigned char rh_getGB2312Width(u16 gb2312code)
 static unsigned char rh_getUnicodeWidth(unsigned long unicode)
 {
     const GUI_FONT_INDEX *pIndex = &fonts_index[0];
-    //return rh_CharWidthToBytes((pIndex+unicode)->width); // ×Ö¿í
+    //return rh_CharWidthToBytes((pIndex+unicode)->width); // å­—å®½
     return (pIndex+unicode)->width;
 }
 #endif
 u16 disp_getcharwidth(const char *string, u8 mode)
 {
     int i;
-    int len = strlen(string); // ×Ü×Ö½Ú³¤¶È
+    int len = strlen(string); // æ€»å­—èŠ‚é•¿åº¦
     u16 rst = 0;
-    const u8 *pText = (const u8 *)string; // ´ıÏÔÊ¾µÄÎÄ×Ö
+    const u8 *pText = (const u8 *)string; // å¾…æ˜¾ç¤ºçš„æ–‡å­—
     u16 rh_GB2312code;
     unsigned long rh_unicode;
 
-    for(i = 0; i < len; ) // Öğ×Ö·û
+    for(i = 0; i < len; ) // é€å­—ç¬¦
     {
 #if VERSION_CHINESE == ON
         if(pText[i]&0x80)
         {
-            if(pText[i+1]&0x80) // GB2312¼òÖĞ
+            if(pText[i+1]&0x80) // GB2312ç®€ä¸­
             {
                 rh_GB2312code = pText[i]<<8 | pText[i+1];
                 i += 2;
@@ -1297,7 +1297,7 @@ u16 disp_getcharwidth(const char *string, u8 mode)
         rst += rh_getGB2312Width(rh_GB2312code);
 #elif VERSION_ENGLISH == ON
         i = i + rh_convertUTF8toUnicode(&pText[i],&rh_unicode);
-        rh_unicode -= 0x20; // ASCIIÇ°32¸ö¿ØÖÆÂëÆ«ÒÆ
+        rh_unicode -= 0x20; // ASCIIå‰32ä¸ªæ§åˆ¶ç åç§»
         rst += rh_getUnicodeWidth(rh_unicode);
 #endif
     }
@@ -1305,7 +1305,7 @@ u16 disp_getcharwidth(const char *string, u8 mode)
     return rst;
 }
 /***************************************************************************/
-// ÏÔÊ¾ÎÄ×Ö
+// æ˜¾ç¤ºæ–‡å­—
 
 #ifdef __PROJECT_RUIHENG_WATCHER__
 u16* platform_disp_puttext(const char *string, u16 x, u16 y)
@@ -1313,19 +1313,19 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
     int i;
     DispBitmap bitmap;
     u16 display_x, display_y;
-    int len = strlen(string); // ×Ü×Ö½Ú³¤¶È
-    const u8 *pText = (const u8 *)string; // ´ıÏÔÊ¾µÄÎÄ×Ö
+    int len = strlen(string); // æ€»å­—èŠ‚é•¿åº¦
+    const u8 *pText = (const u8 *)string; // å¾…æ˜¾ç¤ºçš„æ–‡å­—
     u16 rh_GB2312code, cutlr=0, offset[2]={0};
     unsigned long rh_unicode; //
 
-    // ÏÔÊ¾×ø±ê³ö½ç
+    // æ˜¾ç¤ºåæ ‡å‡ºç•Œ
     if(x >= lua_lcd_width)  x = 0;
     if(y >= lua_lcd_height) y = 0;
 
-    for(i = 0; i < len; ) // Öğ×Ö·ûÏÔÊ¾
+    for(i = 0; i < len; ) // é€å­—ç¬¦æ˜¾ç¤º
     {
         /*
-          »»ĞĞ´¦Àí
+          æ¢è¡Œå¤„ç†
           0x0D -- '\r'
           0x0A -- '\n'
         */
@@ -1345,12 +1345,12 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
             }
         }
         cutlr=0;
-        /* ¶ÁÈ¡×Ö·ûÊı¾İ */
+        /* è¯»å–å­—ç¬¦æ•°æ® */
 #if VERSION_CHINESE == ON
         /* GB2312 */
         if(pText[i]&0x80)
         {
-            if(pText[i+1]&0x80) // GB2312¼òÌåÖĞÎÄ
+            if(pText[i+1]&0x80) // GB2312ç®€ä½“ä¸­æ–‡
             {
                 rh_GB2312code = pText[i]<<8 | pText[i+1];
                 i += 2;
@@ -1372,13 +1372,13 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
         //mmi_chset_convert(MMI_CHSET_GB2312,MMI_CHSET_UCS2,(char *)(&rh_GB2312code),(char *)(&rh_unicode),sizeof(&rh_unicode));
         //rh_unicode = GetUnicodeByGB2312(rh_GB2312code);
 #elif VERSION_ENGLISH == ON
-        /* UTF-8×ªUnicode */
+        /* UTF-8è½¬Unicode */
         //mmi_chset_convert(MMI_CHSET_UTF8,MMI_CHSET_UCS2,(char *)(&pText[i]),(char *)(&rh_unicode),sizeof(&rh_unicode));
         i = i + rh_convertUTF8toUnicode(&pText[i],&rh_unicode);
-        rh_unicode -= 0x20; // ASCIIÇ°32¸ö¿ØÖÆÂëÆ«ÒÆ
+        rh_unicode -= 0x20; // ASCIIå‰32ä¸ªæ§åˆ¶ç åç§»
         rh_getUnicodeBitmap(&bitmap,rh_unicode);
 #endif
-        /* ÎÄ×ÖÏÔÊ¾×ø±ê´¦Àí */
+        /* æ–‡å­—æ˜¾ç¤ºåæ ‡å¤„ç† */
         display_x = x;
         display_y = y;
         if(lua_lcd_bpp == 1)
@@ -1396,14 +1396,14 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
             display_y += bitmap.height;
             display_x = 0;        
         }
-        /* ¸ù¾İÏñËØÉî¶ÈÏÔÊ¾ÎÄ×Ö */
+        /* æ ¹æ®åƒç´ æ·±åº¦æ˜¾ç¤ºæ–‡å­— */
         if(lua_lcd_bpp == 1)
         	disp_bitmap_bpp1(&bitmap, display_x, display_y);
         else if(lua_lcd_bpp == 16)
         	disp_1bitbmp_bpp16(&bitmap, display_x, display_y);
         else if(lua_lcd_bpp == 24)
         	disp_1bitbmp_bpp24(&bitmap, display_x, display_y);
-        /* ×ø±ê¸üĞÂ */
+        /* åæ ‡æ›´æ–° */
         x = display_x;
         y = display_y;
 
@@ -1420,7 +1420,7 @@ next_line:
         x = 0;
 
 next_char:
-        // ×Ô¶¯»ØÏÔ
+        // è‡ªåŠ¨å›æ˜¾
         if( y >= lua_lcd_height)
         {
             y = 0;
@@ -1472,11 +1472,11 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
               { goto next_line; }
         }
         cutlr=0;
-/*+NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í£¬Ê¹ÓÃµ¥¶À×Ö¿â*/          
+/*+NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½ï¼Œä½¿ç”¨å•ç‹¬å­—åº“*/          
         if(pText[i] > 0x81)
         {
             if(1)//(pText[i+1]&0x80)
-/*-NEW\brezen\2016.05.18\Æ´ÒôºÍassicÂëÍ¬¿í£¬Ê¹ÓÃµ¥¶À×Ö¿â*/  			
+/*-NEW\brezen\2016.05.18\æ‹¼éŸ³å’Œassicç åŒå®½ï¼Œä½¿ç”¨å•ç‹¬å­—åº“*/  			
             {
                 // gb2312 chinese char
                 charcode = pText[i]<<8 | pText[i+1];
@@ -1535,12 +1535,12 @@ u16* platform_disp_puttext(const char *string, u16 x, u16 y)
            goto next_char;
         }
 next_line:   
-        // ×Ô¶¯»»ĞĞÏÔÊ¾
+        // è‡ªåŠ¨æ¢è¡Œæ˜¾ç¤º
         y += bitmap.height;
         x = 0;
       
 next_char:
-        //×Ô¶¯»ØÏÔ
+        //è‡ªåŠ¨å›æ˜¾
         if( y >= lua_lcd_height) {
             y = 0;
             break;
@@ -1553,7 +1553,7 @@ next_char:
 
 #endif
 
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
 /*	Support for BMP files		*/
 #ifdef WIN32
 #define __attribute__(x)
@@ -1592,10 +1592,10 @@ typedef struct _bitmap_info_header
 #define RGB24ToRGB16(r,g,b) (((r&0x00f8)<<8)|((g&0x00fc)<<3)|((b&0xf8)>>3))
 #define RGB16ToRGB24(rgb16) (( ((rgb16>>8)&0x00f8)<<16)|( ((rgb16>>3)&0x00fc)<<8)|((rgb16<<3)&0x00f8))
 
-/*+\NEW\liweiqiang\2013.12.6\Ö§³Öbpp16µÄbmpÏÔÊ¾ */
-/*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+/*+\NEW\liweiqiang\2013.12.6\æ”¯æŒbpp16çš„bmpæ˜¾ç¤º */
+/*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int left, int top, int right, int bottom, T_AMOPENAT_IMAGE_INFO *info)
-/*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+/*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 {
     bitmap_file_header *p_fileHeader = (bitmap_file_header *)bitmap_buffer;
     bitmap_info_header *p_infoHeader = (bitmap_info_header *)(bitmap_buffer+sizeof(bitmap_file_header));
@@ -1606,7 +1606,7 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
     u16 bitmapRowBytes;
     u16 rgb16;
     u16 real_width;
-/*+\NEW\liweiqiang\2013.11.12\ĞŞÕıÏÔÊ¾Í¼Æ¬x,y×ø±êÎŞ·¨ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.11.12\ä¿®æ­£æ˜¾ç¤ºå›¾ç‰‡x,yåæ ‡æ— æ³•è®¾ç½® */
     int bitmapRowIndex,bmpColIndex;       
     u32 data_index;
 
@@ -1616,7 +1616,7 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
 
 	if (!info)
 	{
-    	/*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    	/*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
     	if((left > right) || (top > bottom))
     	{
         	printf("put_bmp_buffer: rect error\n");
@@ -1636,7 +1636,7 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
         	height = MIN(bottom - top + 1 + y, lua_lcd_height); 
         	real_width = MIN(right - left + 1, lua_lcd_width);
     	}
-    	/*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+    	/*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 	}
 	else
 	{
@@ -1659,9 +1659,9 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
 
     data_buf = bitmap_buffer + p_fileHeader->bitmap_offset;
     
-    bitmapRowBytes = ((p_infoHeader->width*bmp_bpp + 31)&~31)>>3; //4×Ö½Ú¶ÔÆë
+    bitmapRowBytes = ((p_infoHeader->width*bmp_bpp + 31)&~31)>>3; //4å­—èŠ‚å¯¹é½
     
-    /*+\new\liweiqiang\2014.9.9\Ôö¼ÓºÚ°×imageÔÚºÚ°×ÆÁÉÏµÄÏÔÊ¾½Ó¿Ú */
+    /*+\new\liweiqiang\2014.9.9\å¢åŠ é»‘ç™½imageåœ¨é»‘ç™½å±ä¸Šçš„æ˜¾ç¤ºæ¥å£ */
     if (lua_lcd_bpp == 1 && bmp_bpp == 1)
     {
         int page;
@@ -1672,19 +1672,19 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
         if (p_infoHeader->number_of_planes == 1)
         {
             const u8 *fill_plate_p = bitmap_buffer \
-                + sizeof(bitmap_file_header) /* Ìø¹ıÎÄ¼şÍ· */ \
-                + sizeof(bitmap_info_header) /* Ìø¹ıĞÅÏ¢Í· */ \
-                + 4 /* Ìø¹ı0ÖµµÄµ÷É«°åĞÅÏ¢ */;
+                + sizeof(bitmap_file_header) /* è·³è¿‡æ–‡ä»¶å¤´ */ \
+                + sizeof(bitmap_info_header) /* è·³è¿‡ä¿¡æ¯å¤´ */ \
+                + 4 /* è·³è¿‡0å€¼çš„è°ƒè‰²æ¿ä¿¡æ¯ */;
 
             if(fill_plate_p[0] == 0xff && fill_plate_p[1] == 0xff && fill_plate_p[2] == 0xff){
-                // 1Öµµ÷É«°åÈç¹ûÊÇÈ«ff ±íÊ¾°×É« ÆäËûÖµ¶¼ÅĞ¶¨ÎªºÚÉ«
+                // 1å€¼è°ƒè‰²æ¿å¦‚æœæ˜¯å…¨ff è¡¨ç¤ºç™½è‰² å…¶ä»–å€¼éƒ½åˆ¤å®šä¸ºé»‘è‰²
                 bmpfill = 1;
             } else {
                 bmpfill = 0;
             }
         }
 
-        // lcdµÄÌî³äÉ«ÓëÎ»Í¼Ìî³äÉ«µÄÒ»ÖÂ½á¹û
+        // lcdçš„å¡«å……è‰²ä¸ä½å›¾å¡«å……è‰²çš„ä¸€è‡´ç»“æœ
         finalfill = ((lcdfill^bmpfill) == 0) ? 0x80 : 0x00;
 
         for(rowIndex = y, bitmapRowIndex = p_infoHeader->height - top - 1; 
@@ -1695,10 +1695,10 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
 
             for(colIndex = x, bmpColIndex = left; colIndex < width; colIndex++, bmpColIndex++)
             {
-                /* Èç¹û¸ÃµãÎªĞèÒªÌî³ä ²¢ÇÒÎ»Í¼Ìî³äÉ«ÓëlcdÌî³äÉ«Ò»ÖÂ ÔòÌî³ä */
+                /* å¦‚æœè¯¥ç‚¹ä¸ºéœ€è¦å¡«å…… å¹¶ä¸”ä½å›¾å¡«å……è‰²ä¸lcdå¡«å……è‰²ä¸€è‡´ åˆ™å¡«å…… */
                 if(0 == ((data_buf[bitmapRowBytes*bitmapRowIndex+bmpColIndex/8]&(0x80>>(bmpColIndex%8)))^(finalfill>>(bmpColIndex%8))))
                     workingbuffer[page*lua_lcd_width+colIndex] |= 1<<(rowIndex%8);
-                /* ·ñÔò²»Ìî³ä */
+                /* å¦åˆ™ä¸å¡«å…… */
                 else
                     workingbuffer[page*lua_lcd_width+colIndex] &= ~(1<<(rowIndex%8));
             }
@@ -1713,17 +1713,17 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
         printf("put_bmp_buffer: bmp not support bpp %d\n", bmp_bpp);
         return PLATFORM_ERR;
     }
-    /*-\new\liweiqiang\2014.9.9\Ôö¼ÓºÚ°×imageÔÚºÚ°×ÆÁÉÏµÄÏÔÊ¾½Ó¿Ú */
+    /*-\new\liweiqiang\2014.9.9\å¢åŠ é»‘ç™½imageåœ¨é»‘ç™½å±ä¸Šçš„æ˜¾ç¤ºæ¥å£ */
 
     if(lua_lcd_bpp == 16)
     {
-        /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+        /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
         for(rowIndex = y, bitmapRowIndex = p_infoHeader->height - top - 1; 
             rowIndex < height && bitmapRowIndex >= p_infoHeader->height - bottom - 1;
             rowIndex++, bitmapRowIndex--)
         {
             for(colIndex = x, bmpColIndex = left; colIndex < width; colIndex++, bmpColIndex++)
-        /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+        /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
             {
                 data_index = bitmapRowIndex*bitmapRowBytes + bmpColIndex*bmp_bpp/8;
 
@@ -1732,7 +1732,7 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
                     data_r = data_buf[data_index+2];
                     data_g = data_buf[data_index+1];
                     data_b = data_buf[data_index];
-                    /*+\NEW\liweiqiang\2013.11.12\°×É«ÇøÓòÍ¸Ã÷ÏÔÊ¾ */
+                    /*+\NEW\liweiqiang\2013.11.12\ç™½è‰²åŒºåŸŸé€æ˜æ˜¾ç¤º */
                     rgb16 = RGB24ToRGB16(data_r,data_g,data_b);
                 }
                 else
@@ -1740,13 +1740,13 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
                     rgb16 = *(u16*)&data_buf[data_index];
                 }
 
-    /*+\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
+    /*+\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
                 if(-1 == transcolor || rgb16 != transcolor)
-    /*-\NEW\liweiqiang\2013.12.6\Ôö¼ÓÍ¼Æ¬Í¸Ã÷É«ÉèÖÃ */
+    /*-\NEW\liweiqiang\2013.12.6\å¢åŠ å›¾ç‰‡é€æ˜è‰²è®¾ç½® */
                 {
                     buffer16[rowIndex*lcd_width+colIndex] = rgb16;
                 }
-                /*-\NEW\liweiqiang\2013.11.12\°×É«ÇøÓòÍ¸Ã÷ÏÔÊ¾ */
+                /*-\NEW\liweiqiang\2013.11.12\ç™½è‰²åŒºåŸŸé€æ˜æ˜¾ç¤º */
             }
         }
     }
@@ -1762,11 +1762,11 @@ int put_bmp_file_buff(const u8 *bitmap_buffer, int x, int y, int transcolor, int
         }
         
     }
-/*-\NEW\liweiqiang\2013.11.12\ĞŞÕıÏÔÊ¾Í¼Æ¬y×ø±êÎŞ·¨ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.11.12\ä¿®æ­£æ˜¾ç¤ºå›¾ç‰‡yåæ ‡æ— æ³•è®¾ç½® */
 
     return PLATFORM_OK;
 }
-/*-\NEW\liweiqiang\2013.12.6\Ö§³Öbpp16µÄbmpÏÔÊ¾ */
+/*-\NEW\liweiqiang\2013.12.6\æ”¯æŒbpp16çš„bmpæ˜¾ç¤º */
 
 void put_qr_code_buff(unsigned char* buff, int width, int dispHeight)
 {
@@ -1970,7 +1970,7 @@ int platform_get_png_file_resolution(const char *filename, png_uint_32* width, p
 }
 #endif
 
-/*+\NEW\zhuth\2014.2.14\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+/*+\NEW\zhuth\2014.2.14\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
 #ifdef AM_LPNG_SUPPORT
 int put_png_file_buff(const char *filename, int x, int y, int transcolor, int left, int top, int right, int bottom, int transtype, const char *dstFileName, T_AMOPENAT_IMAGE_INFO *info)
 {
@@ -1997,9 +1997,9 @@ int put_png_file_buff(const char *filename, int x, int y, int transcolor, int le
     u32 rgb888;
     u8 *buffer24 = (u8*)workingbuffer;
     u32 layer_width = lua_lcd_width;
-	/*+\BUG\wangyuan\2020.07.23\BUG_2562:ui·Ö±æÂÊÉèÖÃÎª320»áÖØÆô*/
+	/*+\BUG\wangyuan\2020.07.23\BUG_2562:uiåˆ†è¾¨ç‡è®¾ç½®ä¸º320ä¼šé‡å¯*/
 	u32 layer_height = lua_lcd_height;
-	/*-\BUG\wangyuan\2020.07.23\BUG_2562:ui·Ö±æÂÊÉèÖÃÎª320»áÖØÆô*/
+	/*-\BUG\wangyuan\2020.07.23\BUG_2562:uiåˆ†è¾¨ç‡è®¾ç½®ä¸º320ä¼šé‡å¯*/
     u16 temp;
 
     FILE *file = NULL;
@@ -2149,10 +2149,10 @@ int put_png_file_buff(const char *filename, int x, int y, int transcolor, int le
 
             if(lua_lcd_bpp == 16 || dstFileName)
             {
-            	/*+\BUG\wangyuan\2020.08.19\BUG_2877:dispÏÔÊ¾bug*/
+            	/*+\BUG\wangyuan\2020.08.19\BUG_2877:dispæ˜¾ç¤ºbug*/
 				if(((y+row_idx-top)*layer_width+(x+tmp_idx-left)) >= (MAX_LCD_BUFF_SIZE/2))
 					break;
-				/*-\BUG\wangyuan\2020.08.19\BUG_2877:dispÏÔÊ¾bug*/
+				/*-\BUG\wangyuan\2020.08.19\BUG_2877:dispæ˜¾ç¤ºbug*/
                 fr = row_buf[tmp_idx*channel + 2];
                 fg = row_buf[tmp_idx*channel + 1];
                 fb = row_buf[tmp_idx*channel + 0];
@@ -2163,9 +2163,9 @@ int put_png_file_buff(const char *filename, int x, int y, int transcolor, int le
                 {
                     if(channel==4 && !dstFileName)
                     {
-                        //0:Õı³£´¦ÀíÈ«Í¸£¬·ÇÈ«Í¸µÄµ±×ö²»Í¸Ã÷´¦Àí
-                        //1:Õı³£´¦ÀíËùÓĞÍ¸Ã÷¶È
-                        //2:Õı³£´¦ÀíÈ«Í¸£¬·ÇÈ«Í¸µÄµ±³ÉÓëtranscolorÏàÍ¬µÄÍ¸Ã÷¶È´¦Àí
+                        //0:æ­£å¸¸å¤„ç†å…¨é€ï¼Œéå…¨é€çš„å½“åšä¸é€æ˜å¤„ç†
+                        //1:æ­£å¸¸å¤„ç†æ‰€æœ‰é€æ˜åº¦
+                        //2:æ­£å¸¸å¤„ç†å…¨é€ï¼Œéå…¨é€çš„å½“æˆä¸transcolorç›¸åŒçš„é€æ˜åº¦å¤„ç†
                         if((transtype==0 && data_alpha==0)
                             || (transtype==1)
                             || (transtype==2)
@@ -2252,9 +2252,9 @@ int put_png_file_buff(const char *filename, int x, int y, int transcolor, int le
 
                 if(channel==4)
                 {
-                    //0:Õı³£´¦ÀíÈ«Í¸£¬·ÇÈ«Í¸µÄµ±×ö²»Í¸Ã÷´¦Àí
-                    //1:Õı³£´¦ÀíËùÓĞÍ¸Ã÷¶È
-                    //2:Õı³£´¦ÀíÈ«Í¸£¬·ÇÈ«Í¸µÄµ±³ÉÓëtranscolorÏàÍ¬µÄÍ¸Ã÷¶È´¦Àí
+                    //0:æ­£å¸¸å¤„ç†å…¨é€ï¼Œéå…¨é€çš„å½“åšä¸é€æ˜å¤„ç†
+                    //1:æ­£å¸¸å¤„ç†æ‰€æœ‰é€æ˜åº¦
+                    //2:æ­£å¸¸å¤„ç†å…¨é€ï¼Œéå…¨é€çš„å½“æˆä¸transcolorç›¸åŒçš„é€æ˜åº¦å¤„ç†
                     if(data_alpha == 0xff)
                     {
                         buffer24[((y+row_idx-top)*layer_width+(x+tmp_idx-left))*3 + 2] = fr;// dstrgb888 >> 16;
@@ -2327,9 +2327,9 @@ exit_fnc:
     return PLATFORM_OK;
 }
 #endif
-/*-\NEW\zhuth\2014.2.14\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+/*-\NEW\zhuth\2014.2.14\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
 #ifdef AM_JPG_SUPPORT
-/*+\NEW\zhuwangbin\2020.3.25\Ìí¼ÓjpgÎÄ¼şµÄ½âÂëºÍÏÔÊ¾*/
+/*+\NEW\zhuwangbin\2020.3.25\æ·»åŠ jpgæ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º*/
 static int put_jpg_file_buff(const char *filename, int x, int y, int transcolor, int left, int top, int right, int bottom)
 {
 	T_AMOPENAT_IMAGE_INFO imageinfo;
@@ -2338,7 +2338,7 @@ static int put_jpg_file_buff(const char *filename, int x, int y, int transcolor,
 	u16* buffer = (u16*)workingbuffer;
 	u8 *buff;
 
-	/**1. »ñÈ¡Í¼Æ¬Êı¾İ**/
+	/**1. è·å–å›¾ç‰‡æ•°æ®**/
 	fp = fopen(filename, "rb");
 
     if(NULL == fp)
@@ -2361,10 +2361,10 @@ static int put_jpg_file_buff(const char *filename, int x, int y, int transcolor,
     fread(buff, 1, len, fp);
     fclose(fp);
 
-	/**2. jpeg½âÎö**/
+	/**2. jpegè§£æ**/
 	if (OPENAT_ImgsDecodeJpeg(buff, len, &imageinfo) >= 0)
 	{
-		/**3. Ìî³ä½âÎöºóµÄÊı¾İ**/
+		/**3. å¡«å……è§£æåçš„æ•°æ®**/
 		int startPos;
         int i;
         int j;
@@ -2387,26 +2387,26 @@ static int put_jpg_file_buff(const char *filename, int x, int y, int transcolor,
 	        y++;
 	    }
 
-		/**4. ÊÍ·Å. jpeg½âÎöbuff**/
+		/**4. é‡Šæ”¾. jpegè§£æbuff**/
 		OPENAT_ImgsFreeJpegDecodedata(&imageinfo);
 	}
 
 	L_FREE(buff);
     return PLATFORM_OK;
 }
-/*-\NEW\zhuwangbin\2020.3.25\Ìí¼ÓjpgÎÄ¼şµÄ½âÂëºÍÏÔÊ¾*/
+/*-\NEW\zhuwangbin\2020.3.25\æ·»åŠ jpgæ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º*/
 #endif
 
-/*+\bug NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+/*+\bug NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 int platform_disp_putimage(const char *filename, u16 x, u16 y, int transcolor, u16 left, u16 top, u16 right, u16 bottom,int transtype)
-/*-\bug NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+/*-\bug NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
 {
     u8 *buff;
     FILE *fp;
     u32 len;
     int result;
 
-    /*+\NEW\zhuth\2014.2.16\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+    /*+\NEW\zhuth\2014.2.16\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
     if(strstr(filename, ".bmp") || strstr(filename, ".BMP"))
     {
         fp = fopen(filename, "rb");
@@ -2431,9 +2431,9 @@ int platform_disp_putimage(const char *filename, u16 x, u16 y, int transcolor, u
         fread(buff, 1, len, fp);
         fclose(fp);
     
-        /*+\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+        /*+\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
         result = put_bmp_file_buff(buff, x, y, transcolor, left, top, right, bottom, NULL);
-        /*-\NewReq NEW\zhutianhua\2013.12.24\ÏÔÊ¾Í¼Æ¬µÄÖ¸¶¨ÇøÓò*/
+        /*-\NewReq NEW\zhutianhua\2013.12.24\æ˜¾ç¤ºå›¾ç‰‡çš„æŒ‡å®šåŒºåŸŸ*/
         L_FREE(buff);
     }
     #ifdef AM_LPNG_SUPPORT
@@ -2443,23 +2443,23 @@ int platform_disp_putimage(const char *filename, u16 x, u16 y, int transcolor, u
     }
     #endif
 	#ifdef AM_JPG_SUPPORT
-	/*+\NEW\zhuwangbin\2020.3.25\Ìí¼ÓjpgÎÄ¼şµÄ½âÂëºÍÏÔÊ¾*/
+	/*+\NEW\zhuwangbin\2020.3.25\æ·»åŠ jpgæ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º*/
 	else if(strstr(filename, ".jpg") || strstr(filename, ".JPG"))
     {
         result = put_jpg_file_buff(filename, x, y, transcolor, left, top, right, bottom);
     }
-	/*-\NEW\zhuwangbin\2020.3.25\Ìí¼ÓjpgÎÄ¼şµÄ½âÂëºÍÏÔÊ¾*/
+	/*-\NEW\zhuwangbin\2020.3.25\æ·»åŠ jpgæ–‡ä»¶çš„è§£ç å’Œæ˜¾ç¤º*/
 	#endif
     else
     {
         printf("[putimage]:only support bmp and png!\n");
         return PLATFORM_ERR;
     }   
-    /*-\NEW\zhuth\2014.2.16\Ö§³ÖpngÍ¼Æ¬µÄÏÔÊ¾*/
+    /*-\NEW\zhuth\2014.2.16\æ”¯æŒpngå›¾ç‰‡çš„æ˜¾ç¤º*/
 
     return result;
 }
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼ÓBMPÍ¼Æ¬ÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ BMPå›¾ç‰‡æ˜¾ç¤ºæ”¯æŒ */
 
 
 
@@ -2586,7 +2586,7 @@ void platform_disp_playgif(const char* gif_file_name, int x, int y,  int times)
 #endif
 
 
-/*+\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*+\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
 {
     int i,j;
@@ -2607,7 +2607,7 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
 
         if(-1 == color)
         {
-            //»­¾ØĞÎ¿ò
+            //ç”»çŸ©å½¢æ¡†
             int height = y2 - y1;
             int pixels = height*lua_lcd_width;
             
@@ -2628,7 +2628,7 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
         }
         else
         {
-            //ÒÔÌî³äÉ«Ìî³ä¾ØĞÎ
+            //ä»¥å¡«å……è‰²å¡«å……çŸ©å½¢
             buf16 += y1*lua_lcd_width;
 
             for(j = y1; j <= y2; j++)
@@ -2647,7 +2647,7 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
 
         if(-1 == color)
         {
-            //»­¾ØĞÎ¿ò
+            //ç”»çŸ©å½¢æ¡†
             int height = y2 - y1;
             int pixels = height*lua_lcd_width*3;
             
@@ -2668,7 +2668,7 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
         }
         else
         {
-            //ÒÔÌî³äÉ«Ìî³ä¾ØĞÎ
+            //ä»¥å¡«å……è‰²å¡«å……çŸ©å½¢
             buf24 += y1*lua_lcd_width*3;
 
             for(j = y1; j <= y2; j++)
@@ -2681,14 +2681,14 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
             }
         }
     }
-/*+\bug0\zhy\2014.10.15\ºÚ°×ÆÁÌí¼Ó*/
+/*+\bug0\zhy\2014.10.15\é»‘ç™½å±æ·»åŠ */
     else if(lua_lcd_bpp == 1)
     {
         if(color == COLOR_BLACK_1 || color == COLOR_WHITE_1)
         {
             u16 x,y,page;
             
-            if((color^lcd_hwfillcolor) == 0) /*\new\liweiqiang\2014.10.21\Ôö¼Ó²»Í¬ºÚ°×ÆÁÌî³äÉ«´¦Àí */
+            if((color^lcd_hwfillcolor) == 0) /*\new\liweiqiang\2014.10.21\å¢åŠ ä¸åŒé»‘ç™½å±å¡«å……è‰²å¤„ç† */
             {
 
                 for(x = x1; x < x2; x++)
@@ -2717,19 +2717,19 @@ int platform_disp_drawrect(int x1, int y1, int x2, int y2, int color)
             printf("[platform_disp_drawrect]: lcd_bpp = 1,color must be balck or white\n");
         }
     }
-/*-\bug0\zhy\2014.10.15\ºÚ°×ÆÁÌí¼Ó*/
+/*-\bug0\zhy\2014.10.15\é»‘ç™½å±æ·»åŠ */
     else
     {
-        // Ôİ²»Ö§³ÖÆäËûÆÁ
+        // æš‚ä¸æ”¯æŒå…¶ä»–å±
         printf("[platform_disp_drawrect]: not support bpp %d\n", lua_lcd_bpp);
         return PLATFORM_ERR;
     }
 
     return PLATFORM_OK;
 }
-/*-\NEW\liweiqiang\2013.12.7\Ôö¼Ó¾ØĞÎÏÔÊ¾Ö§³Ö */
+/*-\NEW\liweiqiang\2013.12.7\å¢åŠ çŸ©å½¢æ˜¾ç¤ºæ”¯æŒ */
 
-/*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 int platform_disp_qrcode(u8 *data, u16 w, u16 disp_w, u16 start_x, u16 start_y)
 {
 	int i, j;
@@ -2813,9 +2813,9 @@ __error:
 	write_len = 0;
 	return write_len;
 }
-/*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 int platform_disp_setcolor(int color)
 {
     int old_color = disp_color;
@@ -2829,9 +2829,9 @@ int platform_disp_setbkcolor(int color)
     disp_bkcolor = color;
     return old_color;
 }
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼ÓÇ°¾°É«\±³¾°É«ÉèÖÃ */
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ å‰æ™¯è‰²\èƒŒæ™¯è‰²è®¾ç½® */
 
-/*+\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
+/*+\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
 #ifdef WIN32 
 #pragma pack(push,pack1,1)
 #endif
@@ -2907,7 +2907,7 @@ int platform_disp_loadfont(const char *name)
 
     if(fileInfo_p->type != 0)
     {
-        // Ö»Ö§³ÖÁ¬Ğø×Ö·û·½Ê½µÄ×Ö¿â
+        // åªæ”¯æŒè¿ç»­å­—ç¬¦æ–¹å¼çš„å­—åº“
         retcode = -2;
         goto load_font_error;
     }
@@ -2964,9 +2964,9 @@ int platform_disp_setfont(int id)
 {
     int old_font_id;
 
-    /*+\NEW\liweiqiang\2013.12.10\ĞŞÕı¸º×ÖÌåidµ¼ÖÂ»¨ÆÁ */
+    /*+\NEW\liweiqiang\2013.12.10\ä¿®æ­£è´Ÿå­—ä½“idå¯¼è‡´èŠ±å± */
     if(id < 0 || id >= MAX_FONTS || NULL == dispFonts[id].data)
-    /*-\NEW\liweiqiang\2013.12.10\ĞŞÕı¸º×ÖÌåidµ¼ÖÂ»¨ÆÁ */
+    /*-\NEW\liweiqiang\2013.12.10\ä¿®æ­£è´Ÿå­—ä½“idå¯¼è‡´èŠ±å± */
     {
         printf("[platform_disp_setfont]: error font id\n");
         return -1;
@@ -2979,7 +2979,7 @@ int platform_disp_setfont(int id)
 #endif
     return old_font_id;
 }
-/*+NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*+NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 int platform_disp_setfontHeight(int height)
 {
     if(height < 10 || height > 60)
@@ -2997,31 +2997,31 @@ int platform_disp_getfontHeight(void)
 {
     return g_s_fontZoomSize;
 }
-/*-NEW\brezen\2016.05.13\×ÖÌåËõ·Å*/  
+/*-NEW\brezen\2016.05.13\å­—ä½“ç¼©æ”¾*/  
 
-/*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+/*+\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
 int platform_disp_wrire(int cmd)
 {
 	platform_lcd_wrire(cmd);
 }
-/*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\Ìí¼Ódisp.write()½Ó¿Ú£¬½â¾öË¢ÆÁ²»Õı³£µÄÎÊÌâ*/
+/*-\BUG\shenyuanyuan\2020.06.02\BUG_1983\æ·»åŠ disp.write()æ¥å£ï¼Œè§£å†³åˆ·å±ä¸æ­£å¸¸çš„é—®é¢˜*/
 
-/*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
+/*+\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
 void platform_get_lcd_info(u16 *pWidth, u16 *pHeight, u8 *pBpp)
 {
     *pWidth = lua_lcd_width;
     *pHeight = lua_lcd_height;
     *pBpp = lua_lcd_bpp;
 }
-/*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\disp¿âÃ»ÓĞÍêÈ«¼æÈİ2GµÄdisp¿â*/
+/*-\BUG\shenyuanyuan\2020.04.09\BUG_1459\dispåº“æ²¡æœ‰å®Œå…¨å…¼å®¹2Gçš„dispåº“*/
 
 #ifdef AM_LAYER_SUPPORT
 /******************************************************************************
 ***func name---- platform_disp_preload_png_to_layer
-***param    ---- filename: Òª×°ÔØµÄPNGÍ¼Æ¬Ãû³Æ
-                 layer_id: Í¼Æ¬×°ÔØµÄÄ¿µÄÍ¼²ãID
-***desc     ---- Ô¤×°ÔØPNGÍ¼Æ¬µ½Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- filename: è¦è£…è½½çš„PNGå›¾ç‰‡åç§°
+                 layer_id: å›¾ç‰‡è£…è½½çš„ç›®çš„å›¾å±‚ID
+***desc     ---- é¢„è£…è½½PNGå›¾ç‰‡åˆ°å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
 ******************************************************************************/
 int platform_disp_preload_png_to_layer(const char *filename, int layer_id)
@@ -3055,16 +3055,16 @@ int platform_disp_preload_png_to_layer(const char *filename, int layer_id)
 
 /******************************************************************************
 ***func name---- platform_create_user_layer
-***param    ---- layer_id:Òª´´½¨µÄÓÃ»§Í¼²ã
-            -----layer_width:Í¼²ã¿í¶È
-            -----layer_height:Í¼²ã¸ß¶È
-***desc     ---- ´´½¨ÓÃ»§Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- layer_id:è¦åˆ›å»ºçš„ç”¨æˆ·å›¾å±‚
+            -----layer_width:å›¾å±‚å®½åº¦
+            -----layer_height:å›¾å±‚é«˜åº¦
+***desc     ---- åˆ›å»ºç”¨æˆ·å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
------1.ÔÚ´´½¨Ö®Ç°£¬ÇëÈ·±£´ËÍ¼²ã´ÓÎ´±»´´½¨»òÕßÒÑ¾­Ïú»Ù
------2.Ä¿Ç°Ö»Ö§³ÖÁ½¸öÓÃ»§Í¼²ãµÄ´´½¨
------3.»ù´¡²ã²»ÓÃ´´½¨£¬ÏµÍ³×Ô¶¯´´½¨
------4.ÓÃ»§Í¼²ãµÄÄ¬ÈÏ´óĞ¡ÎªÆÁÄ»´óĞ¡£¬Ä¬ÈÏ¸ñÊ½Îª24Î»
+-----1.åœ¨åˆ›å»ºä¹‹å‰ï¼Œè¯·ç¡®ä¿æ­¤å›¾å±‚ä»æœªè¢«åˆ›å»ºæˆ–è€…å·²ç»é”€æ¯
+-----2.ç›®å‰åªæ”¯æŒä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„åˆ›å»º
+-----3.åŸºç¡€å±‚ä¸ç”¨åˆ›å»ºï¼Œç³»ç»Ÿè‡ªåŠ¨åˆ›å»º
+-----4.ç”¨æˆ·å›¾å±‚çš„é»˜è®¤å¤§å°ä¸ºå±å¹•å¤§å°ï¼Œé»˜è®¤æ ¼å¼ä¸º24ä½
 ******************************************************************************/
 int platform_create_user_layer(int layer_id, int start_x, int start_y, int layer_width, int layer_height)
 {
@@ -3112,12 +3112,12 @@ int platform_create_user_layer(int layer_id, int start_x, int start_y, int layer
 
 /******************************************************************************
 ***func name---- platform_destroy_user_layer
-***param    ---- layer_id:ÒªÏú»ÙµÄÓÃ»§Í¼²ã
-***desc     ---- Ïú»ÙÓÃ»§Í¼²ã
-***return   ---- ÊÇ·ñ³É¹¦
+***param    ---- layer_id:è¦é”€æ¯çš„ç”¨æˆ·å›¾å±‚
+***desc     ---- é”€æ¯ç”¨æˆ·å›¾å±‚
+***return   ---- æ˜¯å¦æˆåŠŸ
 ***note     
------1. layer_idÖ»ÄÜÊÇUSER_LAYER_1_ID»òÕßUSER_LAYER_2_ID
------2. Í¼²ãÊ¹ÓÃÍê³ÉÖ®ºóÓ¦¸Ã¾¡ÔçÊÍ·Å£¬·ñÔò»áÕ¼ÓÃÏµÍ³ÄÚ´æ
+-----1. layer_idåªèƒ½æ˜¯USER_LAYER_1_IDæˆ–è€…USER_LAYER_2_ID
+-----2. å›¾å±‚ä½¿ç”¨å®Œæˆä¹‹ååº”è¯¥å°½æ—©é‡Šæ”¾ï¼Œå¦åˆ™ä¼šå ç”¨ç³»ç»Ÿå†…å­˜
 ******************************************************************************/
 int platform_destroy_user_layer(int layer_id)
 {
@@ -3135,7 +3135,7 @@ int platform_destroy_user_layer(int layer_id)
     return PLATFORM_OK;
 }
 
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 kal_bool platform_create_user_layer_check(int layer_id, int count)
 {
 	    if (layer_info[layer_id].buffer == NULL)
@@ -3146,12 +3146,12 @@ kal_bool platform_create_user_layer_check(int layer_id, int count)
 
 		return KAL_TRUE;
 }
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 
 /******************************************************************************
 ***func name---- platform_set_active_layer
-***param    ---- layer_id:Òª¼¤»îµÄÍ¼²ãID
-***desc     ---- ¼¤»îÍ¼²ã£¬¶ÔLCDµÄËùÓĞ»æÍ¼¶¯×÷¶¼»áÔÚ¼¤»îÍ¼²ãÉÏ½øĞĞ
+***param    ---- layer_id:è¦æ¿€æ´»çš„å›¾å±‚ID
+***desc     ---- æ¿€æ´»å›¾å±‚ï¼Œå¯¹LCDçš„æ‰€æœ‰ç»˜å›¾åŠ¨ä½œéƒ½ä¼šåœ¨æ¿€æ´»å›¾å±‚ä¸Šè¿›è¡Œ
 ***return   ---- NULL
 ***note     
 ******************************************************************************/
@@ -3160,21 +3160,21 @@ void platform_set_active_layer(int layer_id)
     active_layer_id = layer_id;
     workingbuffer = layer_info[layer_id].buffer;
 
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 	if (workingbuffer ==  NULL)
 	{
 		OPENAT_print("platform_set_active_layer workingbuffer == null");
 		OPENAT_Delayms(2000);
 	}
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 }
 
 
 /******************************************************************************
 ***func name---- platform_swap_user_layer
 ***param    ---- NULL
-***desc     ---- ¶Ô»»Á½¸öÓÃ»§Í¼²ãµÄÄÚÈİ¡£´Ëº¯Êı²»Éæ¼°Í¼²ãµÄÊı¾İ¿½±´£¬Òò´ËËÙ¶ÈºÜ¿ì¡£
-                 ÊÊÓÃÓÚ¶ÔËÙ¶ÈÒªÇó¸ßµÄÇé¿öÏÂ¿ìËÙ½»»»Á½¸öÓÃ»§Í¼²ãµÄÄÚÈİ.
+***desc     ---- å¯¹æ¢ä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„å†…å®¹ã€‚æ­¤å‡½æ•°ä¸æ¶‰åŠå›¾å±‚çš„æ•°æ®æ‹·è´ï¼Œå› æ­¤é€Ÿåº¦å¾ˆå¿«ã€‚
+                 é€‚ç”¨äºå¯¹é€Ÿåº¦è¦æ±‚é«˜çš„æƒ…å†µä¸‹å¿«é€Ÿäº¤æ¢ä¸¤ä¸ªç”¨æˆ·å›¾å±‚çš„å†…å®¹.
 ***return   ---- NULL
 ***note     
 ******************************************************************************/
@@ -3193,26 +3193,26 @@ void platform_swap_user_layer(void)
                         layer_info[USER_LAYER_1_ID].buffer;
     }
 
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 	if (workingbuffer ==  NULL)
 	{
 		OPENAT_print("platform_swap_user_layer workingbuffer == null");
 		OPENAT_Delayms(2000);
 	}
-/*-\NEW\zhuwangbin\2016.7.14\lua Ìí¼Ótp »­ÆÁËÀ»úµ÷ÊÔ*/
+/*-\NEW\zhuwangbin\2016.7.14\lua æ·»åŠ tp ç”»å±æ­»æœºè°ƒè¯•*/
 }
 
 
 
 /******************************************************************************
 ***func name---- platform_copy_to_basic_layer
-***param    ---- src_layer_id1: ÒªCOPYµÄÔ´Í¼²ã1µÄID
-            -----x1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êy.
-            ---- src_layer_id2: ÒªCOPYµÄÔ´Í¼²ã2µÄID
-            -----x2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êy.            
-***desc     ---- ½«ÓÃ»§Í¼²ãµÄÄÚÈİCOPYÖÁ»ù´¡Í¼²ã¡£
+***param    ---- src_layer_id1: è¦COPYçš„æºå›¾å±‚1çš„ID
+            -----x1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.
+            ---- src_layer_id2: è¦COPYçš„æºå›¾å±‚2çš„ID
+            -----x2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.            
+***desc     ---- å°†ç”¨æˆ·å›¾å±‚çš„å†…å®¹COPYè‡³åŸºç¡€å›¾å±‚ã€‚
 ***return   ---- NULL
 ***note
 ******************************************************************************/
@@ -3301,18 +3301,18 @@ void platform_copy_layer(int dst_layer_id,
 
 /******************************************************************************
 ***func name---- platform_layer_flatten
-***param    ---- layer_id1: ÒªÏÔÊ¾µÄÍ¼²ã1µÄID
-            -----x1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y1:  Ô´Í¼²ã1ÔÚLCDµÄÏÔÊ¾×ù±êy.
-            ---- layer_id2: ÒªÏÔÊ¾µÄÍ¼²ã2µÄID
-            -----x2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y2:  Ô´Í¼²ã2ÔÚLCDµÄÏÔÊ¾×ù±êy.            
-            ---- layer_id3: ÒªÏÔÊ¾µÄÍ¼²ã3µÄID
-            -----x2:  Ô´Í¼²ã3ÔÚLCDµÄÏÔÊ¾×ù±êX.
-            -----y2:  Ô´Í¼²ã3ÔÚLCDµÄÏÔÊ¾×ù±êy.            
-***desc     -----¶àÍ¼²ãµÄÏÔÊ¾¡£
+***param    ---- layer_id1: è¦æ˜¾ç¤ºçš„å›¾å±‚1çš„ID
+            -----x1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y1:  æºå›¾å±‚1åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.
+            ---- layer_id2: è¦æ˜¾ç¤ºçš„å›¾å±‚2çš„ID
+            -----x2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y2:  æºå›¾å±‚2åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.            
+            ---- layer_id3: è¦æ˜¾ç¤ºçš„å›¾å±‚3çš„ID
+            -----x2:  æºå›¾å±‚3åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡X.
+            -----y2:  æºå›¾å±‚3åœ¨LCDçš„æ˜¾ç¤ºåº§æ ‡y.            
+***desc     -----å¤šå›¾å±‚çš„æ˜¾ç¤ºã€‚
 ***return   ----- NULL
-***note     ----- Èç¹û²»ĞèÒªÏÔÊ¾Ä³¸öÍ¼²ã£¬½«layer_idÖÃÎªINVALID_LAYER_ID¼´¿É
+***note     ----- å¦‚æœä¸éœ€è¦æ˜¾ç¤ºæŸä¸ªå›¾å±‚ï¼Œå°†layer_idç½®ä¸ºINVALID_LAYER_IDå³å¯
 ******************************************************************************/
 void platform_layer_flatten(int layer_id1, int x1, int y1, 
                                   int layer_id2, int x2, int y2,
@@ -3361,18 +3361,18 @@ void platform_layer_flatten(int layer_id1, int x1, int y1,
         layer_info[layer_id[i]].src_rect.rbX = clip_width - 1;
         layer_info[layer_id[i]].src_rect.rbY = clip_height - 1;
 
-        /*Èç¹ûÆğÊ¼µã³¬¹ıÁËÆÁÄ»µÄ×î´ó³ß´ç£¬ÄÇÃ´Õâ¸öÍ¼²ã¾ÍÍêÈ«ÎŞ·¨ÏÔÊ¾ */
+        /*å¦‚æœèµ·å§‹ç‚¹è¶…è¿‡äº†å±å¹•çš„æœ€å¤§å°ºå¯¸ï¼Œé‚£ä¹ˆè¿™ä¸ªå›¾å±‚å°±å®Œå…¨æ— æ³•æ˜¾ç¤º */
         if(layer_info[layer_id[i]].disp_rect.ltY >= (short)lua_lcd_height || 
             layer_info[layer_id[i]].disp_rect.ltX >= (short)lua_lcd_width)
         {
             continue;
         }
 
-        /*Èç¹ûÆğÊ¼Î»ÖÃÔÚÆÁÄ»ÉÏ·½*/
+        /*å¦‚æœèµ·å§‹ä½ç½®åœ¨å±å¹•ä¸Šæ–¹*/
         if(layer_info[layer_id[i]].disp_rect.ltY < layer_info[layer_id[i]].clip_rect.ltY)
         {
-           layer_info[layer_id[i]].disp_rect.ltY = layer_info[layer_id[i]].clip_rect.ltY;   /*ÉèÖÃÏÔÊ¾µÄÆğÊ¼Î»ÖÃÎª0*/
-           layer_info[layer_id[i]].src_rect.ltY  =  - y[i]; /*ÉèÖÃbufferµÄÆğÊ¼Î»ÖÃÎª0 - y*/
+           layer_info[layer_id[i]].disp_rect.ltY = layer_info[layer_id[i]].clip_rect.ltY;   /*è®¾ç½®æ˜¾ç¤ºçš„èµ·å§‹ä½ç½®ä¸º0*/
+           layer_info[layer_id[i]].src_rect.ltY  =  - y[i]; /*è®¾ç½®bufferçš„èµ·å§‹ä½ç½®ä¸º0 - y*/
         }
 
         if(layer_info[layer_id[i]].disp_rect.rbY > layer_info[layer_id[i]].clip_rect.rbY)
@@ -3429,10 +3429,10 @@ void platform_layer_flatten(int layer_id1, int x1, int y1,
     OPENAT_print("platform_layer_flatten end %d", ust_get_current_time() - begin);
 }
 
-/*-\NEW\liweiqiang\2013.12.9\Ôö¼Ó·ÇÖĞÎÄ×ÖÌåÉèÖÃ */
+/*-\NEW\liweiqiang\2013.12.9\å¢åŠ éä¸­æ–‡å­—ä½“è®¾ç½® */
 
 
-/*-\NEW\zhuwangbin\2015.2.23\½«lua¿ØÖÆ½çÃæµÄÇĞ»»ÒÆµ½µ×²ã´¦Àí*/
+/*-\NEW\zhuwangbin\2015.2.23\å°†luaæ§åˆ¶ç•Œé¢çš„åˆ‡æ¢ç§»åˆ°åº•å±‚å¤„ç†*/
 void platform_layer_start_move(int layer_id1, 
                                   int layer_id2,
                                   int layer_id3,
@@ -3447,9 +3447,9 @@ void platform_layer_start_move(int layer_id1,
                                  x_inc,
                                  y_inc);
 }
-/*-\NEW\zhuwangbin\2015.2.23\½«lua¿ØÖÆ½çÃæµÄÇĞ»»ÒÆµ½µ×²ã´¦Àí*/
+/*-\NEW\zhuwangbin\2015.2.23\å°†luaæ§åˆ¶ç•Œé¢çš„åˆ‡æ¢ç§»åˆ°åº•å±‚å¤„ç†*/
 
-/*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+/*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
 
 void platform_layer_hang_QRcode(const unsigned char *url_string, int length, int disp_height)
 {
@@ -3476,7 +3476,7 @@ void platform_layer_hang_stop(void)
 }
 #endif
 #endif
-/*-\NEW\zhuwangbin\2015.2.26\lua Í¼²ãĞüÍ£¸Äµ½µ×²ã×ö*/
+/*-\NEW\zhuwangbin\2015.2.26\lua å›¾å±‚æ‚¬åœæ”¹åˆ°åº•å±‚åš*/
 
 #ifdef LUA_LVGL_SUPPORT
 

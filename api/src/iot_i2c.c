@@ -1,10 +1,10 @@
 #include "iot_i2c.h"
 
-/**¿ª´òi2c
-*@param		port:		I2C ±àºÅ
-*@param		param:		³õÊ¼»¯²ÎÊı
-*@return	TRUE:       ³É¹¦
-*	        FALSE:      Ê§°Ü
+/**å¼€æ‰“i2c
+*@param		port:		I2C ç¼–å·
+*@param		param:		åˆå§‹åŒ–å‚æ•°
+*@return	TRUE:       æˆåŠŸ
+*	        FALSE:      å¤±è´¥
 **/
 BOOL iot_i2c_open(
                         E_AMOPENAT_I2C_PORT  port,         
@@ -14,10 +14,10 @@ BOOL iot_i2c_open(
     return OPENAT_open_i2c(port, param);
 }
 
-/**¹Ø±Õi2c
-*@param		port:		I2C ±àºÅ
-*@return	TRUE:       ³É¹¦
-*	        FALSE:      Ê§°Ü
+/**å…³é—­i2c
+*@param		port:		I2C ç¼–å·
+*@return	TRUE:       æˆåŠŸ
+*	        FALSE:      å¤±è´¥
 **/
 BOOL iot_i2c_close(
                         E_AMOPENAT_I2C_PORT  port          
@@ -26,13 +26,13 @@ BOOL iot_i2c_close(
     return OPENAT_close_i2c(port);
 }
 
-/**Ğ´Èëi2cÊı¾İ
-*@param		port:		    I2C ±àºÅ
-*@param		salveAddr:		´ÓÉè±¸µØÖ·
-*@param		pRegAddr:		¼Ä´æÆ÷µØÖ·
-*@param		buf:		    Ğ´ÈëÊı¾İµØÖ·
-*@param		bufLen:		    Ğ´ÈëÊı¾İ³¤¶È
-*@return	UINT32:         Êµ¼ÊĞ´Èë³¤¶È
+/**å†™å…¥i2cæ•°æ®
+*@param		port:		    I2C ç¼–å·
+*@param		salveAddr:		ä»è®¾å¤‡åœ°å€
+*@param		pRegAddr:		å¯„å­˜å™¨åœ°å€
+*@param		buf:		    å†™å…¥æ•°æ®åœ°å€
+*@param		bufLen:		    å†™å…¥æ•°æ®é•¿åº¦
+*@return	UINT32:         å®é™…å†™å…¥é•¿åº¦
 **/
 UINT32 iot_i2c_write(                                 
                         E_AMOPENAT_I2C_PORT port,       
@@ -46,13 +46,13 @@ UINT32 iot_i2c_write(
     return OPENAT_write_i2c(port, psalveAddr, pRegAddr, buf, bufLen);
 }
 
-/**¶ÁÈ¡i2cÊı¾İ
-*@param		port:		    I2C ±àºÅ
-*@param		slaveAddr:		´ÓÉè±¸µØÖ·
-*@param		pRegAddr:		¼Ä´æÆ÷µØÖ·
-*@param		buf:		    ´æ´¢Êı¾İµØÖ·
-*@param		bufLen:		    ´æ´¢¿Õ¼ä³¤¶È
-*@return	UINT32:         Êµ¼Ê¶ÁÈ¡³¤¶È
+/**è¯»å–i2cæ•°æ®
+*@param		port:		    I2C ç¼–å·
+*@param		slaveAddr:		ä»è®¾å¤‡åœ°å€
+*@param		pRegAddr:		å¯„å­˜å™¨åœ°å€
+*@param		buf:		    å­˜å‚¨æ•°æ®åœ°å€
+*@param		bufLen:		    å­˜å‚¨ç©ºé—´é•¿åº¦
+*@return	UINT32:         å®é™…è¯»å–é•¿åº¦
 **/
 UINT32 iot_i2c_read(                                        
                         E_AMOPENAT_I2C_PORT port,        

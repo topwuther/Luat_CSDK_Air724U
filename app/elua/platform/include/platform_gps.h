@@ -7,7 +7,7 @@
  * Date:    2014/8/6
  *
  * Description:
- *          platform gpscore �ӿ�
+ *          platform gpscore ½Ó¿Ú
  **************************************************************************/
 
 #ifndef _PLATFORM_GPS_H_

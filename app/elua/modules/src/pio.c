@@ -14,9 +14,9 @@
 // PIO public constants
 #define PIO_DIR_OUTPUT      0
 #define PIO_DIR_INPUT       1
-/*+\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+/*+\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
 #define PIO_DIR_OUTPUT1 2
-/*-\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+/*-\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
 
 // PIO private constants
 #define PIO_PORT_OP         0
@@ -102,13 +102,13 @@ static int pio_gen_setdir( lua_State *L, int optype )
     op = optype == PIO_PIN_OP ? PLATFORM_IO_PIN_DIR_INPUT : PLATFORM_IO_PORT_DIR_INPUT;
   else if( op == PIO_DIR_OUTPUT )
     op = optype == PIO_PIN_OP ? PLATFORM_IO_PIN_DIR_OUTPUT : PLATFORM_IO_PORT_DIR_OUTPUT;
-  /*+\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+  /*+\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
   else if( op == PIO_DIR_OUTPUT1 )
     op = optype == PIO_PIN_OP ? PLATFORM_IO_PIN_DIR_OUTPUT1 : PLATFORM_IO_PORT_DIR_OUTPUT;
-  /*-\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   else if(!(optype == PIO_PIN_OP && op == PLATFORM_IO_PIN_DIR_INT))
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
     return luaL_error( L, "invalid direction" );
   if( optype == PIO_PIN_OP )
     pioh_set_pins( L, 2, op );
@@ -145,7 +145,7 @@ static int pio_gen_setval( lua_State *L, int optype, pio_type val, int stackidx 
 
 // ****************************************************************************
 // Pin operations
-/*+\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
 static int pio_pin_close( lua_State *L)
 {
     int total = lua_gettop( L );
@@ -171,9 +171,9 @@ static int pio_pin_close( lua_State *L)
                 return luaL_error( L, "invalid PIO operation" );
     return 0;
 }
-/*-\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
 
-/*+\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*+\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
 static int pio_pin_gpioPulse( lua_State *L)
 {
     unsigned int 	io   = luaL_checkinteger(L, 1);
@@ -184,7 +184,7 @@ static int pio_pin_gpioPulse( lua_State *L)
 
     return platform_gpioPulse(io, high_us, low_us, count, idle);
 }
-/*-\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*-\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
 
 // Lua: pio.pin.setdir( pio.INPUT | pio.OUTPUT, pin1, pin2, ..., pinn )
 static int pio_pin_setdir( lua_State *L )
@@ -389,12 +389,12 @@ static const LUA_REG_TYPE pio_pin_map[] =
   { LSTRKEY( "sethigh" ), LFUNCVAL( pio_pin_sethigh ) },
   { LSTRKEY( "setlow" ), LFUNCVAL( pio_pin_setlow ) },
   { LSTRKEY( "getval" ), LFUNCVAL( pio_pin_getval ) },
-/*+\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
   { LSTRKEY( "close" ), LFUNCVAL ( pio_pin_close ) },
-/*-\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
-/*+\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*-\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
+/*+\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
   { LSTRKEY( "plus" ), LFUNCVAL ( pio_pin_gpioPulse ) },
-/*-\NEW\zhuwangbin\2020.6.7\Í¨¹ıgpioÉèÖÃ·½²¨*/
+/*-\NEW\zhuwangbin\2020.6.7\é€šè¿‡gpioè®¾ç½®æ–¹æ³¢*/
 
   { LNILKEY, LNILVAL }
 };
@@ -442,12 +442,12 @@ LUALIB_API int luaopen_pio( lua_State *L )
   // Set constants for direction/pullups
   MOD_REG_NUMBER( L, "INPUT", PIO_DIR_INPUT );
   MOD_REG_NUMBER( L, "OUTPUT", PIO_DIR_OUTPUT );
-  /*+\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+  /*+\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
   MOD_REG_NUMBER( L, "OUTPUT1", PIO_DIR_OUTPUT1 );
-  /*-\NewReq Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NewReq å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   MOD_REG_NUMBER( L, "INT", PLATFORM_IO_PIN_DIR_INT );
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   MOD_REG_NUMBER( L, "PULLUP", PLATFORM_IO_PIN_PULLUP );
   MOD_REG_NUMBER( L, "PULLDOWN", PLATFORM_IO_PIN_PULLDOWN );
   MOD_REG_NUMBER( L, "NOPULL", PLATFORM_IO_PIN_NOPULL );

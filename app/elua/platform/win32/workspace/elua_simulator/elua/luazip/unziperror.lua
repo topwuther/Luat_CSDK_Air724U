@@ -151,7 +151,7 @@ function IsSleep()
 end
 
 local function UpdateA1Len()
-	--±£Ö¤µÚÒ»´Î¿ª»ú5·ÖÖÓ²Å½øÈëĞİÃß
+	--ä¿è¯ç¬¬ä¸€æ¬¡å¼€æœº5åˆ†é’Ÿæ‰è¿›å…¥ä¼‘çœ 
 	if c.gen > 300 then
 		t.ST = air.batSleep
 	else
@@ -411,7 +411,7 @@ function startlink(server,port,protocol,listener)
 		login = false,
 		CurTr = 0,
 		valid = true,
-		sendq = {}, --·¢ËÍ¶ÓÁĞ
+		sendq = {}, --å‘é€é˜Ÿåˆ—
 	}
 
 	Lib.linklist[id] = link

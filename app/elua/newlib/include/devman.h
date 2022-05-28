@@ -21,11 +21,11 @@
 // Even if a file descriptor is an 'int', newlib treats it as a short, so we need to stuff
 // everything into 16 bits. Actually 15, since negative fd's are actually error indications
 
-/*+\liulean\2015.1.28\½«ÎÄ¼ş¾ä±ú¸Ä³É32Î»£¬·ñÔò·Å²»ÏÂ*/
+/*+\liulean\2015.1.28\å°†æ–‡ä»¶å¥æŸ„æ”¹æˆ32ä½ï¼Œå¦åˆ™æ”¾ä¸ä¸‹*/
 #define DM_MAKE_DESC( devid, fd ) ( ( ( devid ) << ( 31 - DM_MAX_DEVICES_BITS ) ) | ( fd ) )
 #define DM_GET_DEVID( desc )      ( ( desc ) >> ( 31 - DM_MAX_DEVICES_BITS ) )
 #define DM_GET_FD( desc )         ( ( desc ) & ( ( 31 << ( 31 - DM_MAX_DEVICES_BITS ) ) - 1 ) )
-/*-\liulean\2015.1.28\½«ÎÄ¼ş¾ä±ú¸Ä³É32Î»£¬·ñÔò·Å²»ÏÂ*/
+/*-\liulean\2015.1.28\å°†æ–‡ä»¶å¥æŸ„æ”¹æˆ32ä½ï¼Œå¦åˆ™æ”¾ä¸ä¸‹*/
 
 // STDIO file number
 #define DM_STDIN_NUM              0

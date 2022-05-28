@@ -1,5 +1,5 @@
 
--- gpio ÅäÖÃ
+-- gpio é…ç½®
 require"sys"
 module(...,package.seeall)
 
@@ -11,7 +11,7 @@ local function getcharger()
 end
 
 local function setled2(bval,p)
-	local valid = p.valid == 0 and 0 or 1 -- Ä¬ÈÏ¸ßÓĞĞ§
+	local valid = p.valid == 0 and 0 or 1 -- é»˜è®¤é«˜æœ‰æ•ˆ
 	local notvalid = p.valid == 0 and 1 or 0
 	p.val = bval == true and valid or notvalid
 

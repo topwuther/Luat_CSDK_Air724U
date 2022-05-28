@@ -103,9 +103,9 @@ void main(int argc, char *argv[])
     //FILE *fstderr = fopen("stderr.log","wb+");
     ftrace = fopen("trace.log","wb");
 
-    freopen("CONIN$", "r+t", stdin); // ÖØ¶¨Ïò STDIN
-    //freopen("CONOUT$", "w+t", stdout); // ÖØ¶¨ÏòSTDOUT
-    //freopen("CONERR$", "w+t", ferr); // ÖØ¶¨ÏòSTDERR
+    freopen("CONIN$", "r+t", stdin); // é‡å®šå‘ STDIN
+    //freopen("CONOUT$", "w+t", stdout); // é‡å®šå‘STDOUT
+    //freopen("CONERR$", "w+t", ferr); // é‡å®šå‘STDERR
     //freopen("CON$","w+t", fstderr);
     freopen("CONOUT$", "w+t", stdout);
     //fprintf(stderr, "test std err!\n");
@@ -200,7 +200,7 @@ void main(int argc, char *argv[])
 
     platform_uart_init();
 
-    // ´´½¨ºóÌ¨¹ÜÀíÏß³Ì
+    // åˆ›å»ºåå°ç®¡ç†çº¿ç¨‹
     hDaemonThread = CreateThread(NULL , 
                                 10*1024, 
                                 (LPTHREAD_START_ROUTINE)daemon_thread_entry,
@@ -208,7 +208,7 @@ void main(int argc, char *argv[])
                                 0,
                                 &daemonThreadId);
 
-    // ´´½¨Ä£ÄâÈÎÎñÏß³Ì
+    // åˆ›å»ºæ¨¡æ‹Ÿä»»åŠ¡çº¿ç¨‹
     hWinSimuThread = CreateThread(NULL , 
                                 10*1024, 
                                 (LPTHREAD_START_ROUTINE)winSimuMain,
@@ -216,7 +216,7 @@ void main(int argc, char *argv[])
                                 0,
                                 &winSimuThreadId);
     
-    // lua½Å±¾Ö´ĞĞÏß³Ì
+    // luaè„šæœ¬æ‰§è¡Œçº¿ç¨‹
     hLuaShellThread = CreateThread(NULL,
                                 16*1024, 
                                 (LPTHREAD_START_ROUTINE)lua_shell_entry,

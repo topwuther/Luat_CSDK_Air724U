@@ -54,18 +54,18 @@ enum
   PLATFORM_IO_PIN_GET,
   PLATFORM_IO_PIN_DIR_INPUT,
   PLATFORM_IO_PIN_DIR_OUTPUT,
-  /*+\NEW\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
+  /*+\NEW\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
   PLATFORM_IO_PIN_DIR_OUTPUT1,
-  /*-\NEW\zhutianhua\2014.10.22\Ôö¼ÓGPIOÊä³öÅäÖÃ1£¬Ä¬ÈÏÀ­¸ß*/
-  /*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NEW\zhutianhua\2014.10.22\å¢åŠ GPIOè¾“å‡ºé…ç½®1ï¼Œé»˜è®¤æ‹‰é«˜*/
+  /*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   PLATFORM_IO_PIN_DIR_INT, 
-  /*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+  /*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
   PLATFORM_IO_PIN_PULLUP,
   PLATFORM_IO_PIN_PULLDOWN,
   PLATFORM_IO_PIN_NOPULL,
-/*+\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
   PLATFORM_IO_PIN_CLOSE,
-/*-\NEW\liweiqiang\2013.4.11\Ôö¼Ópio.pin.close½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.11\å¢åŠ pio.pin.closeæ¥å£*/
   // Port operations
   PLATFORM_IO_PORT_SET_VALUE,
   PLATFORM_IO_PORT_GET_VALUE,
@@ -157,26 +157,26 @@ enum
 
 // The platform UART functions
 int platform_uart_exists( unsigned id );
-/*+\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
-/*+\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
+/*+\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
+/*+\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
 u32 platform_uart_setup( unsigned id, u32 baud, int databits, int parity, int stopbits, u32 mode, u32 txDoneReport);
-/*-\NEW\zhuwangbin\2018.8.31\Ìí¼Ó²ÎÊıÅĞ¶ÏÊÇ·ñÉÏ±¨UART TXDONE*/
-/*-\NEW\liweiqiang\2013.4.22\Ôö¼ÓuartÏûÏ¢ÌáÊ¾»òÕßÂÖÑ¯¶ÁÈ¡Êı¾İÑ¡Ôñ */
-/*+\NEW\zhutianhua\2018.12.27 14:56\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
+/*-\NEW\zhuwangbin\2018.8.31\æ·»åŠ å‚æ•°åˆ¤æ–­æ˜¯å¦ä¸ŠæŠ¥UART TXDONE*/
+/*-\NEW\liweiqiang\2013.4.22\å¢åŠ uartæ¶ˆæ¯æç¤ºæˆ–è€…è½®è¯¢è¯»å–æ•°æ®é€‰æ‹© */
+/*+\NEW\zhutianhua\2018.12.27 14:56\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+/*+\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
 u32 platform_uart_setup_rs485_oe(unsigned id, u32 rs485IO, u32 rs485ValidLevel, u32 rs485DelayTime);
-/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeÌí¼Ó¿ÉÑ¡²ÎÊı,ÓÃÀ´ÅäÖÃ485ÑÓ³ÙÊ±¼ä*/
-/*-\NEW\zhutianhua\2018.12.27 14:56\ĞÂÔöuart.set_rs485_oe½Ó¿Ú£¬¿ÉÅäÖÃrs485 ioÊ¹ÄÜ*/
-/*+\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\bug4024\zhuwangbin\2020.12.25\uart.set_rs485_oeæ·»åŠ å¯é€‰å‚æ•°,ç”¨æ¥é…ç½®485å»¶è¿Ÿæ—¶é—´*/
+/*-\NEW\zhutianhua\2018.12.27 14:56\æ–°å¢uart.set_rs485_oeæ¥å£ï¼Œå¯é…ç½®rs485 ioä½¿èƒ½*/
+/*+\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 u32 platform_uart_close( unsigned id );
-/*-\NEW\liweiqiang\2013.4.20\Ôö¼Óuart.close½Ó¿Ú */
+/*-\NEW\liweiqiang\2013.4.20\å¢åŠ uart.closeæ¥å£ */
 int platform_uart_set_buffer( unsigned id, unsigned size );
 u32 platform_uart_send( unsigned id, u8 data );
 u32 platform_s_uart_send( unsigned id, u8 data );
-/*+\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
+/*+\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
 u32 platform_uart_send_buff( unsigned id, const u8 *buff, u16 len );
 u32 platform_s_uart_send_buff( unsigned id, const u8 *buff, u16 len );
-/*-\NEW\liweiqiang\2013.4.7\ĞŞ¸ÄuartÊı¾İ·¢ËÍÎªbuffer·½Ê½ */
+/*-\NEW\liweiqiang\2013.4.7\ä¿®æ”¹uartæ•°æ®å‘é€ä¸ºbufferæ–¹å¼ */
 int platform_uart_recv( unsigned id, unsigned timer_id, s32 timeout );
 int platform_s_uart_recv( unsigned id, s32 timeout );
 int platform_uart_set_flow_control( unsigned id, int type );

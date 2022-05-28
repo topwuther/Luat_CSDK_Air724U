@@ -33,7 +33,7 @@ typedef struct Mbuffer {
 #define luaZ_sizebuffer(buff)	((buff)->buffsize)
 #define luaZ_bufflen(buff)	((buff)->n)
 
-#define luaZ_buffremove(buff,i)	((buff)->n -= (i)) /*\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+#define luaZ_buffremove(buff,i)	((buff)->n -= (i)) /*\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 #define luaZ_resetbuffer(buff) ((buff)->n = 0)
 
 

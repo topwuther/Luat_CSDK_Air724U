@@ -33,9 +33,9 @@
 #define LOG_TAG_CFW OSI_MAKE_LOG_TAG('C', 'F', 'W', ' ')
 #define LOG_TAG_UNIT_TEST OSI_MAKE_LOG_TAG('U', 'T', 'S', 'T')
 #define LOG_TAG_AUDIO OSI_MAKE_LOG_TAG('A', 'U', 'D', 'I')
-/*+NEW\2020.1.15\lijiaodi\添加openat打印*/
+/*+NEW\2020.1.15\lijiaodi\娣诲姞openat鎵撳嵃*/
 #define LOG_TAG_OPENAT OSI_MAKE_LOG_TAG('O', 'P', 'E', 'N')
-/*-NEW\2020.1.15\lijiaodi\添加openat打印*/
+/*-NEW\2020.1.15\lijiaodi\娣诲姞openat鎵撳嵃*/
 #define LOG_TAG_BT OSI_MAKE_LOG_TAG('B', 'T', ' ', ' ')
 
 void osiTracePrintf(unsigned tag, const char *fmt, ...);

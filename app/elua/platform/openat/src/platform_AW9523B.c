@@ -15,7 +15,7 @@ void platform_AW9523B_display( u8 num1, u8 num2, u8 num3)
 #if 0
 int platform_gpio_i2c_recv_data(u16 slave_addr, const u8 *pRegAddr, u8 *buf, u32 len  )
 {
-    // Èç¹û´ÓµØÖ·Îª¿Õ,Ôò·µ»Ø´«ÊäÊ§°Ü
+    // å¦‚æœä»åœ°å€ä¸ºç©º,åˆ™è¿”å›ä¼ è¾“å¤±è´¥
     if(slave_addr == I2C_NULL_SLAVE_ADDR){
         return 0;
     }

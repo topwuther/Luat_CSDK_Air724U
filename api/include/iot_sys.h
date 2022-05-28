@@ -5,59 +5,59 @@
 #include "openat_ota.h"
 
 /**
- * @defgroup iot_sdk_fota Ô¶³ÌÉı¼¶½Ó¿Ú
+ * @defgroup iot_sdk_fota è¿œç¨‹å‡çº§æ¥å£
  * @{
  */
 	/**@example fota/demo_fota.c
-	* OTA½Ó¿ÚÊ¾Àı
+	* OTAæ¥å£ç¤ºä¾‹
 	*/ 
 
 
-/**Ô¶³ÌÉı¼¶³õÊ¼»¯
-*@return	0:   ±íÊ¾³É¹¦
-*           <0£º  ±íÊ¾ÓĞ´íÎó
+/**è¿œç¨‹å‡çº§åˆå§‹åŒ–
+*@return	0:   è¡¨ç¤ºæˆåŠŸ
+*           <0ï¼š  è¡¨ç¤ºæœ‰é”™è¯¯
 **/
 E_OPENAT_OTA_RESULT iot_fota_init(void);
 
-/**Ô¶³ÌÉı¼¶ÏÂÔØ
-*@param		data:				ÏÂÔØ¹Ì¼ş°üÊı¾İ
-*@param		len:				ÏÂÔØ¹Ì¼ş°ü³¤¶È
-*@param		total:				¹Ì¼ş°ü×Ü´óĞ¡
-*@return	0:   ±íÊ¾³É¹¦
-*           <0£º  ±íÊ¾ÓĞ´íÎó
+/**è¿œç¨‹å‡çº§ä¸‹è½½
+*@param		data:				ä¸‹è½½å›ºä»¶åŒ…æ•°æ®
+*@param		len:				ä¸‹è½½å›ºä»¶åŒ…é•¿åº¦
+*@param		total:				å›ºä»¶åŒ…æ€»å¤§å°
+*@return	0:   è¡¨ç¤ºæˆåŠŸ
+*           <0ï¼š  è¡¨ç¤ºæœ‰é”™è¯¯
 **/
 E_OPENAT_OTA_RESULT iot_fota_download(const char* data, UINT32 len, UINT32 total);
 
-/**Ô¶³ÌÉı¼¶
-*@return	0:   ±íÊ¾³É¹¦
-*           <0£º  ±íÊ¾ÓĞ´íÎó
+/**è¿œç¨‹å‡çº§
+*@return	0:   è¡¨ç¤ºæˆåŠŸ
+*           <0ï¼š  è¡¨ç¤ºæœ‰é”™è¯¯
 **/
 E_OPENAT_OTA_RESULT iot_fota_done(void);
 
-/**otaÉèÖÃnew coreµÄÎÄ¼ş£¬ÓÃÀ´¸æÖªµ×²ãĞèÒª´ÓÎÄ¼ş¶ÁÈ¡Éı¼¶ĞÂµÄ³ÌĞò
-*@param		newCoreFile:		ĞÂ³ÌĞòÎÄ¼ş 
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
-*×¢£ºnewCoreFileÎÄ¼ş±ØĞë±£´æÔÚ/fotaÎÄ¼ş¼ĞÏÂ,ÀıÈçnewCoreFile Îª "/fota/core.img"
+/**otaè®¾ç½®new coreçš„æ–‡ä»¶ï¼Œç”¨æ¥å‘ŠçŸ¥åº•å±‚éœ€è¦ä»æ–‡ä»¶è¯»å–å‡çº§æ–°çš„ç¨‹åº
+*@param		newCoreFile:		æ–°ç¨‹åºæ–‡ä»¶ 
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
+*æ³¨ï¼šnewCoreFileæ–‡ä»¶å¿…é¡»ä¿å­˜åœ¨/fotaæ–‡ä»¶å¤¹ä¸‹,ä¾‹å¦‚newCoreFile ä¸º "/fota/core.img"
 **/
 BOOL iot_ota_newcore(              
                     CONST char* newCoreFile
                );
 
 
-/**otaÉèÖÃnew appµÄÎÄ¼ş£¬ÓÃÀ´¸æÖªµ×²ãĞèÒª´ÓÎÄ¼ş¶ÁÈ¡Éı¼¶ĞÂµÄ³ÌĞò
-*@param		newAPPFile:		ĞÂ³ÌĞòÎÄ¼ş 
-*@return	TRUE: ³É¹¦   FALSE: Ê§°Ü
-*×¢£ºnewAPPFileÎÄ¼ş±ØĞë±£´æÔÚ/fotaÎÄ¼ş¼ĞÏÂ,ÀıÈçnewAPPFile Îª "/fota/app.img"
+/**otaè®¾ç½®new appçš„æ–‡ä»¶ï¼Œç”¨æ¥å‘ŠçŸ¥åº•å±‚éœ€è¦ä»æ–‡ä»¶è¯»å–å‡çº§æ–°çš„ç¨‹åº
+*@param		newAPPFile:		æ–°ç¨‹åºæ–‡ä»¶ 
+*@return	TRUE: æˆåŠŸ   FALSE: å¤±è´¥
+*æ³¨ï¼šnewAPPFileæ–‡ä»¶å¿…é¡»ä¿å­˜åœ¨/fotaæ–‡ä»¶å¤¹ä¸‹,ä¾‹å¦‚newAPPFile ä¸º "/fota/app.img"
 **/
 BOOL iot_ota_newapp(              
                     CONST char* newAPPFile
                );
 
 
-/**½«charÀàĞÍ×ª»»ÎªWCHAR£¬½á¹ûÓÃÀ´×÷Îªiot_fs_open_fileµÈ½Ó¿ÚµÄÎÄ¼şÃû²ÎÊı
-*@param     dst:        ×ª»»Êä³ö½á¹û
-*@param     src:        µÈ´ı×ª»»µÄ×Ö·û´®
-*@return    ·µ»ØdstÊ×µØÖ·
+/**å°†charç±»å‹è½¬æ¢ä¸ºWCHARï¼Œç»“æœç”¨æ¥ä½œä¸ºiot_fs_open_fileç­‰æ¥å£çš„æ–‡ä»¶åå‚æ•°
+*@param     dst:        è½¬æ¢è¾“å‡ºç»“æœ
+*@param     src:        ç­‰å¾…è½¬æ¢çš„å­—ç¬¦ä¸²
+*@return    è¿”å›dsté¦–åœ°å€
 **/ 
 WCHAR* iot_strtows(WCHAR* dst, const char* src);
 

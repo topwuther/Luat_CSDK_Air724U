@@ -11,59 +11,59 @@
 #include "platform_rtos.h"
 #include "platform_factory.h"
 
-/*+\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+/*+\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
 #if defined(AM_LZMA_SUPPORT)
 #include "lzmalib.h"
 #endif
-/*-\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+/*-\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
 
 #include "preload.h"
 
-/*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
-/*+\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
+/*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
+/*+\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
 #define LUA_ENTRY_FILENAME "main.lua"
 #define LUA_ENTRY_FILE "/lua/" LUA_ENTRY_FILENAME
-/*-\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
+/*-\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
 
 #define LUAC_ENTRY_FILENAME "main.luac"
 #define LUAC_ENTRY_FILE "/lua/" LUAC_ENTRY_FILENAME
 #define LUAE_ENTRY_FILENAME "main.luae"
 #define LUAE_ENTRY_FILE "/lua/" LUAE_ENTRY_FILENAME
 
-/*+\NEW\liulean\2015.8.5\½â¾ö²úÏß¸ÅÂÊĞÔMP3²¥·ÅÎŞÉùÒôµÄÎÊÌâ*/
+/*+\NEW\liulean\2015.8.5\è§£å†³äº§çº¿æ¦‚ç‡æ€§MP3æ’­æ”¾æ— å£°éŸ³çš„é—®é¢˜*/
 #define LUA_CHECK_INTEGRITY_FILE "/integrity.bin"
 #define LUA_INTEGRITY_FLAG 0xABCD8765
-/*-\NEW\liulean\2015.8.5\½â¾ö²úÏß¸ÅÂÊĞÔMP3²¥·ÅÎŞÉùÒôµÄÎÊÌâ*/
+/*-\NEW\liulean\2015.8.5\è§£å†³äº§çº¿æ¦‚ç‡æ€§MP3æ’­æ”¾æ— å£°éŸ³çš„é—®é¢˜*/
 
-/*+\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+/*+\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
 #define LUA_ENTRY_FILE_ZIP "/luazip/" LUA_ENTRY_FILENAME ".zip"
-/*-\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+/*-\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
 #define LUAC_ENTRY_FILE_ZIP "/luazip/" LUAC_ENTRY_FILENAME ".zip"
 #define LUAE_ENTRY_FILE_ZIP "/luazip/" LUAE_ENTRY_FILENAME ".zip"
-/*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
 
 #define LUA_CFG_FILENAME "amcfg.ini"
 #define LUA_CFG_FILE "/lua/"LUA_CFG_FILENAME
 
 
 
-/*+\LIULEAN\2015.1.26\ÎªLUA½Å±¾·ÖÅäÒ»¿é¹Ì¶¨µÄFLASHÇøÓò*/
-/*CUSTOMER_FILE_OFFSETÎªCUSTOMER_GFHµÄ³¤¶È*/
+/*+\LIULEAN\2015.1.26\ä¸ºLUAè„šæœ¬åˆ†é…ä¸€å—å›ºå®šçš„FLASHåŒºåŸŸ*/
+/*CUSTOMER_FILE_OFFSETä¸ºCUSTOMER_GFHçš„é•¿åº¦*/
 char* _lua_script_section_start = NULL;//[LUA_SCRIPT_SIZE -CUSTOMER_FILE_OFFSET ];
-/*-\LIULEAN\2015.1.26\ÎªLUA½Å±¾·ÖÅäÒ»¿é¹Ì¶¨µÄFLASHÇøÓò*/
+/*-\LIULEAN\2015.1.26\ä¸ºLUAè„šæœ¬åˆ†é…ä¸€å—å›ºå®šçš„FLASHåŒºåŸŸ*/
 
 
 
-/*+\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+/*+\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
 void LuaDeleteMainFile(void)
 {
     remove(LUA_ENTRY_FILE);
     remove(LUAC_ENTRY_FILENAME);
     remove(LUAE_ENTRY_FILENAME);
 }
-/*-\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+/*-\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
 
-/*+\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*+\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
 int file_exist(const char *name)
 {
     FILE *fp;
@@ -74,7 +74,7 @@ int file_exist(const char *name)
     return TRUE;
 }
 
-/*-\NEW\liweiqiang\2013.10.25\lua½Å±¾Í³Ò»·ÅÔÚluaÄ¿Â¼ÏÂ,Ô¤ÖÃµÄ·ÇluaÎÄ¼şÍ³Ò»·ÅÔÚldataÎÄ¼şÏÂ */
+/*-\NEW\liweiqiang\2013.10.25\luaè„šæœ¬ç»Ÿä¸€æ”¾åœ¨luaç›®å½•ä¸‹,é¢„ç½®çš„éluaæ–‡ä»¶ç»Ÿä¸€æ”¾åœ¨ldataæ–‡ä»¶ä¸‹ */
 
 static void load_luadbToBuf(char* buf, UINT32 srcAddr, UINT32 size)
 {
@@ -139,7 +139,7 @@ static int load_updatebin(FILE* updateFp, UINT32 dest, UINT32 maxLen)
 
 
 
-/*+\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
+/*+\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
 static int load_luadb(void)
 {
 #define LUA_UPDATE_FILE "/luazip/update.bin"
@@ -159,7 +159,7 @@ static int load_luadb(void)
     u8* filebuf;
 
         
-    /* Ô¶³ÌÉı¼¶ÎÄ¼şÊÇ·ñ´æÔÚ */
+    /* è¿œç¨‹å‡çº§æ–‡ä»¶æ˜¯å¦å­˜åœ¨ */
     if((fp = fopen(LUA_UPDATE_FILE, "rb")) != NULL)
     {
       OPENAT_print("lua load update bin...\n", result);
@@ -182,16 +182,16 @@ static int load_luadb(void)
 
     OPENAT_print("lua load luabin reuslt = %d\n", result);
 end:
-    /*+\NEW\zhuth\2014.8.14\¿ª»úÈç¹û³É¹¦Ö´ĞĞÁËËùÓĞµÄĞ´ÎÄ¼ş¶¯×÷£¬ÔòÖØÆô*/
+    /*+\NEW\zhuth\2014.8.14\å¼€æœºå¦‚æœæˆåŠŸæ‰§è¡Œäº†æ‰€æœ‰çš„å†™æ–‡ä»¶åŠ¨ä½œï¼Œåˆ™é‡å¯*/
     if(restart1 || restart2)
     {
         platform_rtos_restart();
     }
-    /*-\NEW\zhuth\2014.8.14\¿ª»úÈç¹û³É¹¦Ö´ĞĞÁËËùÓĞµÄĞ´ÎÄ¼ş¶¯×÷£¬ÔòÖØÆô*/
+    /*-\NEW\zhuth\2014.8.14\å¼€æœºå¦‚æœæˆåŠŸæ‰§è¡Œäº†æ‰€æœ‰çš„å†™æ–‡ä»¶åŠ¨ä½œï¼Œåˆ™é‡å¯*/
     
     return result;
 }
-/*-\NEW\liweiqiang\2013.11.28\luadb·½Ê½Ô¶³ÌÉı¼¶Ö§³Ö */
+/*-\NEW\liweiqiang\2013.11.28\luadbæ–¹å¼è¿œç¨‹å‡çº§æ”¯æŒ */
 
 #ifdef MUXUSE_DLMALLOC_MEMORY_AS_LUA_SCRIPT_LOAD
 BOOL bScriptLoaded;
@@ -199,7 +199,7 @@ BOOL bScriptLoaded;
 
 int LuaAppTask(void)
 {    
-/*+\NEW\2013.7.11\liweiqiang\Ôö¼ÓluadbÔ¤ÖÃÎÄ¼ş´¦Àí*/
+/*+\NEW\2013.7.11\liweiqiang\å¢åŠ luadbé¢„ç½®æ–‡ä»¶å¤„ç†*/
     int argc;
     char **argv;
     BOOL existScript = TRUE;
@@ -208,7 +208,7 @@ int LuaAppTask(void)
     int dbret;
     UINT32 offset = 0;
     E_AMOPENAT_MEMD_ERR err = OPENAT_MEMD_ERR_NO;
-    char trace_port = 0; //Ä¬ÈÏUART1
+    char trace_port = 0; //é»˜è®¤UART1
 
     u32 len;
     char* _lua_script = NULL;
@@ -223,7 +223,7 @@ int LuaAppTask(void)
         NULL
     };
 #endif    
-/*+\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
+/*+\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
     static const char *argv_script_file[] =
     {
         "lua",
@@ -263,18 +263,18 @@ int LuaAppTask(void)
     _lua_script = _lua_script_section_start;
 
 
-/*-\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
+/*-\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
     OPENAT_print("LuaAppTask enter 1111");
 
 
-	/*+\liulean\2015.1.29\½â¾öLUA½Å±¾´òÓ¡Óï¾äÎŞĞ§µÄÎÊÌâ*/
+	/*+\liulean\2015.1.29\è§£å†³LUAè„šæœ¬æ‰“å°è¯­å¥æ— æ•ˆçš„é—®é¢˜*/
 	/************************************************************************************
-	 ÕâÀï²»ÄÜÓÃ_lua_script_section_start,·ñÔò»áµ¼ÖÂ±àÒëÆ÷ÓÅ»¯£¬Ê¹elseÓï¾äÖĞµÄ´úÂëÓÀÔ¶²»Ö´ĞĞ£¬
-	 Ò²¾ÍÎŞ·¨ÉèÖÃdebug¿Ú£¬LUAµÄprintº¯Êı¾Í»á´òÓ¡²»³öÈÎºÎ¶«Î÷
+	 è¿™é‡Œä¸èƒ½ç”¨_lua_script_section_start,å¦åˆ™ä¼šå¯¼è‡´ç¼–è¯‘å™¨ä¼˜åŒ–ï¼Œä½¿elseè¯­å¥ä¸­çš„ä»£ç æ°¸è¿œä¸æ‰§è¡Œï¼Œ
+	 ä¹Ÿå°±æ— æ³•è®¾ç½®debugå£ï¼ŒLUAçš„printå‡½æ•°å°±ä¼šæ‰“å°ä¸å‡ºä»»ä½•ä¸œè¥¿
 	 ************************************************************************************/
     
     if(_lua_script[0] == 0xff || _lua_script[0] == '\0')  
-	/*-\liulean\2015.1.29\½â¾öLUA½Å±¾´òÓ¡Óï¾äÎŞĞ§µÄÎÊÌâ*/
+	/*-\liulean\2015.1.29\è§£å†³LUAè„šæœ¬æ‰“å°è¯­å¥æ— æ•ˆçš„é—®é¢˜*/
 	{
         argc = sizeof(argv_null)/sizeof(argv_null[0]);
         argv = (char **)argv_null;
@@ -283,12 +283,12 @@ int LuaAppTask(void)
     }
     else
     {
-        //´æÔÚÔ¤ÖÃ½Å±¾Ê±Ê¹ÓÃdebug¿Ú×÷ÎªÃüÁîĞĞÊä³ö
+        //å­˜åœ¨é¢„ç½®è„šæœ¬æ—¶ä½¿ç”¨debugå£ä½œä¸ºå‘½ä»¤è¡Œè¾“å‡º
         platform_set_console_port(PLATFORM_PORT_ID_DEBUG);
     }
 
 
-    //³õÊ¼»¯Éè±¸ stdio\fs\...
+    //åˆå§‹åŒ–è®¾å¤‡ stdio\fs\...
     if(platform_init() != PLATFORM_OK)
     {
         ASSERT(0);
@@ -296,7 +296,7 @@ int LuaAppTask(void)
 
     lua_dm_init();
 
-    // ×¢²áÆ½Ì¨ÎÄ¼şÏµÍ³½Ó¿Ú
+    // æ³¨å†Œå¹³å°æ–‡ä»¶ç³»ç»Ÿæ¥å£
     dm_register(platform_fs_init());
    
     dbret = load_luadb();
@@ -306,15 +306,15 @@ int LuaAppTask(void)
         existLuaDB = TRUE;
     }
 
-/*+\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
+/*+\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
     if(existScript || existLuaDB)
     {
         BOOL exitZipFile = FALSE;
         char* zipFileName;
         char* enterFile;
-    /*+\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+    /*+\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
     #if defined(AM_LZMA_SUPPORT)
-        // ±£Áô¾ÉµÄÎÄ¼şÉı¼¶·½Ê½,ÒÔ¼æÈİ¾É°æ±¾
+        // ä¿ç•™æ—§çš„æ–‡ä»¶å‡çº§æ–¹å¼,ä»¥å…¼å®¹æ—§ç‰ˆæœ¬
         if(file_exist(LUA_ENTRY_FILE_ZIP) == TRUE)
         {
             exitZipFile = TRUE;
@@ -335,20 +335,20 @@ int LuaAppTask(void)
         }
         if(exitZipFile)
         {
-            // Ö»ÓĞÔÚ´æÔÚÉı¼¶°üÎÄ¼şµÄÇé¿öÏÂ²Å´¦Àí½âÑ¹
+            // åªæœ‰åœ¨å­˜åœ¨å‡çº§åŒ…æ–‡ä»¶çš„æƒ…å†µä¸‹æ‰å¤„ç†è§£å‹
             int lzmaret = 0;    
             if((lzmaret = LzmaUncompressFile(zipFileName, enterFile)) == 0)
             {
-                /*+\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
-                // ½âÑ¹Ëõ³É¹¦,É¾³ıÑ¹ËõÎÄ¼ş
-                /*+\NEW\zhuth\2014.8.11\Éı¼¶°ü½âÑ¹Ëõ³É¹¦ºó£¬É¾³ıÉı¼¶°ü£¬²¢ÇÒÖØÆô*/
+                /*+\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
+                // è§£å‹ç¼©æˆåŠŸ,åˆ é™¤å‹ç¼©æ–‡ä»¶
+                /*+\NEW\zhuth\2014.8.11\å‡çº§åŒ…è§£å‹ç¼©æˆåŠŸåï¼Œåˆ é™¤å‡çº§åŒ…ï¼Œå¹¶ä¸”é‡å¯*/
                 remove(zipFileName);
-                /*-\NEW\zhuth\2014.8.11\Éı¼¶°ü½âÑ¹Ëõ³É¹¦ºó£¬É¾³ıÉı¼¶°ü£¬²¢ÇÒÖØÆô*/
-                /*-\NEW\rufei\2013.9.13\´¦ÀíluaÎÄ¼ş¿ÉÄÜ±»ÆÆ»µµ¼ÖÂ³ÖĞøÖØÆôÎÊÌâ*/
+                /*-\NEW\zhuth\2014.8.11\å‡çº§åŒ…è§£å‹ç¼©æˆåŠŸåï¼Œåˆ é™¤å‡çº§åŒ…ï¼Œå¹¶ä¸”é‡å¯*/
+                /*-\NEW\rufei\2013.9.13\å¤„ç†luaæ–‡ä»¶å¯èƒ½è¢«ç ´åå¯¼è‡´æŒç»­é‡å¯é—®é¢˜*/
                 OPENAT_print("uncompress zip file success!\n", lzmaret);
-                /*+\NEW\zhuth\2014.8.11\Éı¼¶°ü½âÑ¹Ëõ³É¹¦ºó£¬É¾³ıÉı¼¶°ü£¬²¢ÇÒÖØÆô*/
+                /*+\NEW\zhuth\2014.8.11\å‡çº§åŒ…è§£å‹ç¼©æˆåŠŸåï¼Œåˆ é™¤å‡çº§åŒ…ï¼Œå¹¶ä¸”é‡å¯*/
                 platform_rtos_restart();
-                /*-\NEW\zhuth\2014.8.11\Éı¼¶°ü½âÑ¹Ëõ³É¹¦ºó£¬É¾³ıÉı¼¶°ü£¬²¢ÇÒÖØÆô*/
+                /*-\NEW\zhuth\2014.8.11\å‡çº§åŒ…è§£å‹ç¼©æˆåŠŸåï¼Œåˆ é™¤å‡çº§åŒ…ï¼Œå¹¶ä¸”é‡å¯*/
             }
             else
             {
@@ -356,7 +356,7 @@ int LuaAppTask(void)
             }
         }
     #endif   
-    /*-\NEW\liweiqiang\2013.5.11\¿ª»ú×Ô½âÑ¹luazipÄ¿Â¼ÏÂÎÄ¼şÖ§³Ö,Ñ¹ËõËã·¨lzma*/
+    /*-\NEW\liweiqiang\2013.5.11\å¼€æœºè‡ªè§£å‹luazipç›®å½•ä¸‹æ–‡ä»¶æ”¯æŒ,å‹ç¼©ç®—æ³•lzma*/
 
         if(file_exist(LUA_CFG_FILE) == TRUE)
         {
@@ -369,12 +369,12 @@ int LuaAppTask(void)
         	  trace_port = 0;
         	}
 
-			/*+\NEW\shenyuanyuan\2020.4.16\ĞŞ¸Ä¹¤¾ßÉèÖÃµÄUSB TRACE¿ÚºÍÄÚ²¿URAT3¿Ú³åÍ»ÎÊÌâ*/
+			/*+\NEW\shenyuanyuan\2020.4.16\ä¿®æ”¹å·¥å…·è®¾ç½®çš„USB TRACEå£å’Œå†…éƒ¨URAT3å£å†²çªé—®é¢˜*/
 			if(trace_port == 2)
 			{
 				trace_port = 3;	
 			}
-			/*-\NEW\shenyuanyuan\2020.4.16\ĞŞ¸Ä¹¤¾ßÉèÖÃµÄUSB TRACE¿ÚºÍÄÚ²¿URAT3¿Ú³åÍ»ÎÊÌâ*/
+			/*-\NEW\shenyuanyuan\2020.4.16\ä¿®æ”¹å·¥å…·è®¾ç½®çš„USB TRACEå£å’Œå†…éƒ¨URAT3å£å†²çªé—®é¢˜*/
         }
         platform_rtos_set_trace_port(trace_port,0);
 
@@ -422,7 +422,7 @@ int LuaAppTask(void)
         }      
         else if(existLuaDB)
         {
-            // Èô´ÓÔ¤ÖÃÊı¾İÎŞ·¨½âÎö³öÎÄ¼şÔòÎŞ·¨´ÓÔ¤ÖÃ½Å±¾ÔËĞĞ
+            // è‹¥ä»é¢„ç½®æ•°æ®æ— æ³•è§£æå‡ºæ–‡ä»¶åˆ™æ— æ³•ä»é¢„ç½®è„šæœ¬è¿è¡Œ
             OPENAT_print("[lua]: luadb parse ret %d\n", dbret);
             argc = sizeof(argv_null)/sizeof(argv_null[0]);
             argv = (char **)argv_null;
@@ -437,8 +437,8 @@ int LuaAppTask(void)
 #endif            
         }
     }
-/*-\NEW\liweqiang\2013.5.8\ÔÚÎÄ¼şÏµÍ³´æÔÚmain.luaÎÄ¼şÊ±Æô¶¯Ê±×Ô¶¯¼ÓÔØÎÄ¼şÏµÍ³ÎÄ¼ş*/
-/*-\NEW\2013.7.11\liweiqiang\Ôö¼ÓluadbÔ¤ÖÃÎÄ¼ş´¦Àí*/
+/*-\NEW\liweqiang\2013.5.8\åœ¨æ–‡ä»¶ç³»ç»Ÿå­˜åœ¨main.luaæ–‡ä»¶æ—¶å¯åŠ¨æ—¶è‡ªåŠ¨åŠ è½½æ–‡ä»¶ç³»ç»Ÿæ–‡ä»¶*/
+/*-\NEW\2013.7.11\liweiqiang\å¢åŠ luadbé¢„ç½®æ–‡ä»¶å¤„ç†*/
      printf("LuaAppTask enter 777777 :%d\n",OPENAT_get_system_tick());
      OPENAT_print("lua run lua script...\n");
      

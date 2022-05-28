@@ -24,11 +24,11 @@
 #include "ltable.h"
 #include "ltm.h"
 
-/*+\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*+\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
 #if defined(USE_DLMALLOC_AS_LUA_ALLOCF)
 #include "dlmalloc.h"
 #endif
-/*-\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*-\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
 
 #define state_size(x)	(sizeof(x) + LUAI_EXTRASPACE)
 #define fromstate(l)	(cast(lu_byte *, (l)) - LUAI_EXTRASPACE)
@@ -201,12 +201,12 @@ static void callallgcTM (lua_State *L, void *ud) {
   luaC_callGCTM(L);  /* call GC metamethods for all udata */
 }
 
-/*+ jack.li 2012.10.30 增加lua中断处理支持 */
+/*+ jack.li 2012.10.30 澧炲姞lua涓柇澶勭悊鏀寔 */
 // BogdanM: modified for eLua interrupt support
 extern lua_State *luaL_newstate (void);
 static lua_State *lua_crtstate;
 
-/*+\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*+\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
 static int panic (lua_State *L) {
     (void)L;  /* to avoid warnings */
     fprintf(stderr, "PANIC: unprotected error in call to Lua API (%s)\n",
@@ -229,10 +229,10 @@ void *lua_dlalloc(void *ud, void *ptr, size_t osize, size_t nsize)
         return dlrealloc(ptr, nsize);   
 }
 #endif
-/*-\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*-\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
 
 lua_State *lua_open(void) {
-/*+\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*+\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
 #if defined(USE_DLMALLOC_AS_LUA_ALLOCF)
   lua_State *L = lua_newstate(lua_dlalloc, NULL);
   if (L) lua_atpanic(L, &panic);
@@ -240,14 +240,14 @@ lua_State *lua_open(void) {
 #else
   lua_crtstate = luaL_newstate(); 
 #endif  
-/*-\NEW\liweiqiang\2013.5.4\使用dlmalloc作为lua的内存分配器*/
+/*-\NEW\liweiqiang\2013.5.4\浣跨敤dlmalloc浣滀负lua鐨勫唴瀛樺垎閰嶅櫒*/
   return lua_crtstate;
 }
 
 lua_State *lua_getstate(void) {
   return lua_crtstate;
 }
-/*- jack.li 2012.10.30 增加lua中断处理支持 */
+/*- jack.li 2012.10.30 澧炲姞lua涓柇澶勭悊鏀寔 */
 
 
 LUA_API void lua_close (lua_State *L) {

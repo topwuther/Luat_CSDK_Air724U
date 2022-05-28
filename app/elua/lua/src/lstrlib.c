@@ -450,9 +450,9 @@ static const char *lmemfind (const char *s1, size_t l1,
     const char *init;  /* to search for a `*s2' inside `s1' */
     l2--;  /* 1st char will be checked by `memchr' */
     l1 = l1-l2;  /* `s2' cannot be found after that */
-    /*+\NEW\liweiqiang\2014.7.21\¼æÈİRDAÆ½Ì¨·Ç±êmemcharµÄÎÊÌâ */
+    /*+\NEW\liweiqiang\2014.7.21\å…¼å®¹RDAå¹³å°éæ ‡memcharçš„é—®é¢˜ */
     while (l1 > 0 && (init = (const char *)memchr(s1, (unsigned char)*s2, l1)) != NULL) {
-    /*-\NEW\liweiqiang\2014.7.21\¼æÈİRDAÆ½Ì¨·Ç±êmemcharµÄÎÊÌâ */
+    /*-\NEW\liweiqiang\2014.7.21\å…¼å®¹RDAå¹³å°éæ ‡memcharçš„é—®é¢˜ */
       init++;   /* 1st char is already checked */
       if (memcmp(init, s2+1, l2) == 0)
         return init-1;

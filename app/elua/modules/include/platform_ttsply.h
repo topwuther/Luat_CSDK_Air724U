@@ -27,11 +27,11 @@ typedef struct tagTtsPlyParam
     u8      wav_format;
     u8      eng_mode;
 }ttsPlyParam;
-/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 typedef enum 
 {
-	PLATFORM_TTS_MSG_ERROR,	//TTS´íÎóÏûÏ¢
-	PLATFORM_TTS_MSG_STATUS	//TTS×´Ì¬ÏûÏ¢
+	PLATFORM_TTS_MSG_ERROR,	//TTSé”™è¯¯æ¶ˆæ¯
+	PLATFORM_TTS_MSG_STATUS	//TTSçŠ¶æ€æ¶ˆæ¯
 }PLATFORM_TTS_MSG;
 
 typedef struct tagTtsPly
@@ -47,6 +47,6 @@ int platform_ttsply_setParam(u16 plyParam, u16 value);
 int platform_ttsply_play(ttsPly *param);
 //int platform_ttsply_pause(void);
 int platform_ttsply_stop(void);
-/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 #endif  //__PLATFORM_TTSPLY_H__
 

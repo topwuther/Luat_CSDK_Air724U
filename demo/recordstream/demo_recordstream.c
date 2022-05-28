@@ -18,12 +18,12 @@ BOOL demo_recordstream_fs_init(char* file)
 
     fd = iot_fs_open_file(file, FS_O_RDONLY);
 
-    if (fd >= 0) //FILE_NAMEÎÄ¼ş´æÔÚ£¬¾ÍÉ¾³ıÖØĞÂ´´½¨
+    if (fd >= 0) //FILE_NAMEæ–‡ä»¶å­˜åœ¨ï¼Œå°±åˆ é™¤é‡æ–°åˆ›å»º
     {
         iot_fs_delete_file(file);
     }
     
-    // ´´½¨ÎÄ¼şFILE_NAME
+    // åˆ›å»ºæ–‡ä»¶FILE_NAME
     iot_fs_create_file(file);
 
     recordstream_print("[recordstream] create FILE_NAME");
@@ -64,11 +64,11 @@ static VOID demo_time_handle(T_AMOPENAT_TIMER_PARAMETER *pParameter)
     T_AMOPENAT_PLAY_PARAM playParam;
     BOOL err;
 
-    //6. ¹Ø±ÕÂ¼Òô
+    //6. å…³é—­å½•éŸ³
     err = iot_audio_rec_stop();
     recordstream_print("[recordstream] AUDREC stop BOOL %d", err);
 
-    //7. ²¥·ÅÂ¼Òô  
+    //7. æ’­æ”¾å½•éŸ³  
     playParam.playBuffer = FALSE;
     playParam.playFileParam.callback = demo_paly_handle;
     playParam.playFileParam.fileFormat = OPENAT_AUD_FORMAT_AMRNB;
@@ -82,7 +82,7 @@ static VOID demo_time_handle(T_AMOPENAT_TIMER_PARAMETER *pParameter)
 
 static VOID demo_audio_set_channel(VOID)
 {
-    // ÉèÖÃÍ¨µÀ
+    // è®¾ç½®é€šé“
     switch(DEMO_RECORD_CH)
     {
         case OPENAT_AUDIOHAL_ITF_EARPIECE:
@@ -97,7 +97,8 @@ static VOID demo_audio_set_channel(VOID)
             break;   
     }
 
-    recordstream_print("[recordstream] demo_audio_set_channel channel %d", DEMO_RECORD_CH);
+    recordstream_print("[recordstream] demo_audio_set_channel channel %d", DEMO_RECORD_CH);
+
 }
 
 static void demo_audio_rec_handle(E_AMOPENAT_RECORD_ERROR result)
@@ -108,7 +109,7 @@ static void demo_audio_rec_handle(E_AMOPENAT_RECORD_ERROR result)
 static void audio_stream_record_cb(int event,char* data,int len)
 {
 	recordstream_print("[recordstream]audio_stream_record_cb event: %d, len: %d", event, len);
-	//½«Á÷Â¼ÒôÊı¾İĞ´µ½ÎÄ¼şFILE_NAME
+	//å°†æµå½•éŸ³æ•°æ®å†™åˆ°æ–‡ä»¶FILE_NAME
 	demo_recordstream_fs_write(FILE_NAME, data, len);	
 }
 
@@ -130,7 +131,7 @@ static VOID demo_audRecStreamStart(VOID)
 
 VOID demo_audRecStopTimer(VOID)
 {
-    // ¶¨Ê±5ÃëÖÓÍ£Ö¹Â¼Òô
+    // å®šæ—¶5ç§’é’Ÿåœæ­¢å½•éŸ³
     g_demo_timer2 = iot_os_create_timer((PTIMER_EXPFUNC)demo_time_handle, NULL);
     iot_os_start_timer(g_demo_timer2, DEMO_RECSTREAM_TIMER_TIMEOUT);
 }
@@ -138,13 +139,13 @@ VOID demo_audRecStopTimer(VOID)
 
 VOID demo_audio_init(T_AMOPENAT_TIMER_PARAMETER *pParameter)
 {
-    // 1.ÉèÖÃÍ¨µÀºÍÉùÒô
+    // 1.è®¾ç½®é€šé“å’Œå£°éŸ³
     demo_audio_set_channel();
 
-    //2.  ¿ªÊ¼Â¼Òô
+    //2.  å¼€å§‹å½•éŸ³
     demo_audRecStreamStart();
 
-    //3. ÉèÖÃ¶¨Ê±¹Ø±ÕÂ¼Òô, ²¢²¥·ÅÂ¼Òô
+    //3. è®¾ç½®å®šæ—¶å…³é—­å½•éŸ³, å¹¶æ’­æ”¾å½•éŸ³
     demo_audRecStopTimer();
 }
 
@@ -152,9 +153,9 @@ int appimg_enter(void *param)
 {    
     recordstream_print("[recordstream] appimg_enter");
 	
-	iot_debug_set_fault_mode(OPENAT_FAULT_HANG);//ÉèÖÃdebugÄ£Ê½
+	iot_debug_set_fault_mode(OPENAT_FAULT_HANG);//è®¾ç½®debugæ¨¡å¼
 
-	//´´½¨Â¼ÒôÎÄ¼şFILE_NAME
+	//åˆ›å»ºå½•éŸ³æ–‡ä»¶FILE_NAME
 	demo_recordstream_fs_init(FILE_NAME);
 
 	g_demo_timer1 = iot_os_create_timer((PTIMER_EXPFUNC)demo_audio_init, NULL);

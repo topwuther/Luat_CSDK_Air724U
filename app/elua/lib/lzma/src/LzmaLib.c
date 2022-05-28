@@ -7,7 +7,7 @@
  * Date:    2013/5/10
  *
  * Description:
- *          lzmaÑ¹ËõÎÄ¼ş½Ó¿Ú,target¶Ë½öº¬½âÑ¹ËõÔ´Âë
+ *          lzmaå‹ç¼©æ–‡ä»¶æ¥å£,targetç«¯ä»…å«è§£å‹ç¼©æºç 
  **************************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -174,10 +174,10 @@ int LzmaUncompressFile(const char *infile, const char *outfile)
   return res;
 }
 #else
-/*+\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*+\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 extern void platform_sys_set_max_freq(void);
 extern void platform_sys_set_min_freq(void);
-/*-\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*-\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 
 #define LZMA_HEAD_SIZE (LZMA_PROPS_SIZE + 8/*unpack size*/)
 
@@ -194,7 +194,7 @@ static SRes DecodeToBuf(Byte *dstBuf, const Byte *srcBuf, SizeT srcLen, SizeT un
   RINOK(LUA_LzmaDec_Allocate(&state, srcBuf, LZMA_PROPS_SIZE, &g_Alloc));
   LUA_LzmaDec_Init(&state);
 
-/*+\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*+\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
 #ifndef WIN32
   platform_sys_set_max_freq();
 #endif
@@ -202,10 +202,10 @@ static SRes DecodeToBuf(Byte *dstBuf, const Byte *srcBuf, SizeT srcLen, SizeT un
 #ifndef WIN32
   platform_sys_set_min_freq();
 #endif
-/*-\NEW\liweiqiang\2013.7.1\×÷³¤Ê±¼äÔËËãÊ±×Ô¶¯µ÷½ÚÖ÷Æµ¼Ó¿ìÔËËãËÙ¶È*/
+/*-\NEW\liweiqiang\2013.7.1\ä½œé•¿æ—¶é—´è¿ç®—æ—¶è‡ªåŠ¨è°ƒèŠ‚ä¸»é¢‘åŠ å¿«è¿ç®—é€Ÿåº¦*/
   unpackSize -= outProcessed;
 
-/*+\NEW\liweiqiang\2013.5.16\ĞŞÕı²»ÍêÕûµÄ½âÑ¹ÎÄ¼ş²»»á±¨´íµÄÎÊÌâ */
+/*+\NEW\liweiqiang\2013.5.16\ä¿®æ­£ä¸å®Œæ•´çš„è§£å‹æ–‡ä»¶ä¸ä¼šæŠ¥é”™çš„é—®é¢˜ */
   if (thereIsSize)
   {
     res = unpackSize == 0 ? SZ_OK : SZ_ERROR_INPUT_EOF;
@@ -215,7 +215,7 @@ static SRes DecodeToBuf(Byte *dstBuf, const Byte *srcBuf, SizeT srcLen, SizeT un
   {
     goto decode_exit;
   }
-/*-\NEW\liweiqiang\2013.5.16\ĞŞÕı²»ÍêÕûµÄ½âÑ¹ÎÄ¼ş²»»á±¨´íµÄÎÊÌâ */
+/*-\NEW\liweiqiang\2013.5.16\ä¿®æ­£ä¸å®Œæ•´çš„è§£å‹æ–‡ä»¶ä¸ä¼šæŠ¥é”™çš„é—®é¢˜ */
   
   if (inProcessed == 0 && outProcessed == 0)
   {
@@ -283,7 +283,7 @@ uncompress_b2b_exit:
     return ret;
 }
 
-/*+\NEW\2013.7.11\liweiqiang\Ôö¼Ólzma½âÑ¹bufµ½ÎÄ¼şµÄ½Ó¿Ú*/
+/*+\NEW\2013.7.11\liweiqiang\å¢åŠ lzmaè§£å‹bufåˆ°æ–‡ä»¶çš„æ¥å£*/
 int LzmaDecodeBufToFile(const unsigned char *inbuff, const unsigned int inlen,
                        const char *outfile)
 {
@@ -325,9 +325,9 @@ int LzmaDecodeBufToFile(const unsigned char *inbuff, const unsigned int inlen,
         goto uncompress_b2f_exit;
     }
 
-/*+\NEW\liweiqiang\2013.10.24\ĞŞÕı¶ş½øÖÆÎÄ¼ş½âÑ¹Òì³£ */
+/*+\NEW\liweiqiang\2013.10.24\ä¿®æ­£äºŒè¿›åˆ¶æ–‡ä»¶è§£å‹å¼‚å¸¸ */
     fout = fopen(outfile, "wb");
-/*-\NEW\liweiqiang\2013.10.24\ĞŞÕı¶ş½øÖÆÎÄ¼ş½âÑ¹Òì³£ */
+/*-\NEW\liweiqiang\2013.10.24\ä¿®æ­£äºŒè¿›åˆ¶æ–‡ä»¶è§£å‹å¼‚å¸¸ */
     if(!fout)
     {
         printf("[LzmaUncompressFile]:out file(%s) open failed!\n", outfile);
@@ -340,7 +340,7 @@ int LzmaDecodeBufToFile(const unsigned char *inbuff, const unsigned int inlen,
         printf("[LzmaUncompressFile]: write file error!\n");
         fclose(fout);
         fout = NULL;
-        remove(outfile); //Ğ´ÎÄ¼şÊ§°Ü,É¾³ıÒÑĞ´µÄÎÄ¼ş.
+        remove(outfile); //å†™æ–‡ä»¶å¤±è´¥,åˆ é™¤å·²å†™çš„æ–‡ä»¶.
         ret = SZ_ERROR_FAIL;
         goto uncompress_b2f_exit;
     }
@@ -356,7 +356,7 @@ uncompress_b2f_exit:
     
     return ret;
 }
-/*-\NEW\2013.7.11\liweiqiang\Ôö¼Ólzma½âÑ¹bufµ½ÎÄ¼şµÄ½Ó¿Ú*/
+/*-\NEW\2013.7.11\liweiqiang\å¢åŠ lzmaè§£å‹bufåˆ°æ–‡ä»¶çš„æ¥å£*/
 
 int LzmaUncompressFile(const char *infile, const char *outfile)
 {
@@ -380,15 +380,15 @@ int LzmaUncompressFile(const char *infile, const char *outfile)
     fseek(fin, 0, SEEK_END);
     inlen = ftell(fin);
 
-/*+\NEW\liweiqiang\2013.5.16\ĞŞÕı²»ÍêÕûµÄ½âÑ¹ÎÄ¼ş²»»á±¨´íµÄÎÊÌâ */
-    // ÎÄ¼ş³¤¶È±ØĞë´óÓÚÍ·ĞÅÏ¢µÄ³¤¶È
+/*+\NEW\liweiqiang\2013.5.16\ä¿®æ­£ä¸å®Œæ•´çš„è§£å‹æ–‡ä»¶ä¸ä¼šæŠ¥é”™çš„é—®é¢˜ */
+    // æ–‡ä»¶é•¿åº¦å¿…é¡»å¤§äºå¤´ä¿¡æ¯çš„é•¿åº¦
     if(inlen <= LZMA_HEAD_SIZE)
     {
         printf("[LzmaUncompressFile]: infile len(%d) too short!\n", inlen);
         ret = SZ_ERROR_INPUT_EOF;
         goto uncompress_exit;
     }
-/*-\NEW\liweiqiang\2013.5.16\ĞŞÕı²»ÍêÕûµÄ½âÑ¹ÎÄ¼ş²»»á±¨´íµÄÎÊÌâ */
+/*-\NEW\liweiqiang\2013.5.16\ä¿®æ­£ä¸å®Œæ•´çš„è§£å‹æ–‡ä»¶ä¸ä¼šæŠ¥é”™çš„é—®é¢˜ */
     
     fseek(fin, 0, SEEK_SET);
     inbuff = SzAlloc(NULL, inlen);
@@ -432,9 +432,9 @@ int LzmaUncompressFile(const char *infile, const char *outfile)
         goto uncompress_exit;
     }
 
-/*+\NEW\liweiqiang\2013.10.24\ĞŞÕı¶ş½øÖÆÎÄ¼ş½âÑ¹Òì³£ */
+/*+\NEW\liweiqiang\2013.10.24\ä¿®æ­£äºŒè¿›åˆ¶æ–‡ä»¶è§£å‹å¼‚å¸¸ */
     fout = fopen(outfile, "wb");
-/*-\NEW\liweiqiang\2013.10.24\ĞŞÕı¶ş½øÖÆÎÄ¼ş½âÑ¹Òì³£ */
+/*-\NEW\liweiqiang\2013.10.24\ä¿®æ­£äºŒè¿›åˆ¶æ–‡ä»¶è§£å‹å¼‚å¸¸ */
     if(!fout)
     {
         printf("[LzmaUncompressFile]:out file(%s) open failed!\n", outfile);
@@ -447,7 +447,7 @@ int LzmaUncompressFile(const char *infile, const char *outfile)
         printf("[LzmaUncompressFile]: write file error!\n");
         fclose(fout);
         fout = NULL;
-        remove(outfile); //Ğ´ÎÄ¼şÊ§°Ü,É¾³ıÒÑĞ´µÄÎÄ¼ş.
+        remove(outfile); //å†™æ–‡ä»¶å¤±è´¥,åˆ é™¤å·²å†™çš„æ–‡ä»¶.
         ret = SZ_ERROR_FAIL;
         goto uncompress_exit;
     }
@@ -515,9 +515,9 @@ int LzmaDecodeStream(const unsigned char *inbuff,
 	res = LUA_LzmaDec_DecodeToBuf(&lzmaDecState, pOutBuf, outProcessed,
 		inbuff, inProcessed, finishMode, &status);
 
-		/*+wzq\2014.10.30\Ñ¹Ëõ×îºó»á¶àÒ»¸ö×Ö·û*/
+		/*+wzq\2014.10.30\å‹ç¼©æœ€åä¼šå¤šä¸€ä¸ªå­—ç¬¦*/
 		lzmaUnpackSize -= *outProcessed;
-		/*-wzq\2014.10.30\Ñ¹Ëõ×îºó»á¶àÒ»¸ö×Ö·û*/
+		/*-wzq\2014.10.30\å‹ç¼©æœ€åä¼šå¤šä¸€ä¸ªå­—ç¬¦*/
 
   return res;
 

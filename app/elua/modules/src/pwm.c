@@ -7,7 +7,7 @@
  * Date:    2013/6/6
  *
  * Description:
- *          lua.pwm pwm·ÃÎÊ¿â
+ *          lua.pwm pwmè®¿é—®åº“
  **************************************************************************/
 
 #include <stdlib.h>
@@ -45,17 +45,17 @@ static int pwm_close(lua_State *L) {
 }
 /*-\NEW\RUFEI\2015.8.27\Add adc fuction*/
 // adc.read(id)
-/*+\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*+\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 static int pwm_set(lua_State *L) {    
     int id = luaL_checkinteger(L,1);
     int param0 = luaL_checkinteger(L, 2);
     int param1 = luaL_checkinteger(L, 3);
-    /*+\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+    /*+\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
 	lua_pushinteger(L, platform_pwm_set(id, param0, param1));
-	/*-\bug3708\zhuwangbin\2020.11.26\ÓÅ»¯pwm´úÂë*/
+	/*-\bug3708\zhuwangbin\2020.11.26\ä¼˜åŒ–pwmä»£ç */
     return 1; 
 }
-/*-\bug\wj\2020.4.30\luaÌí¼Ópwm½Ó¿Ú*/
+/*-\bug\wj\2020.4.30\luaæ·»åŠ pwmæ¥å£*/
 
 #include "lrodefs.h"  
 

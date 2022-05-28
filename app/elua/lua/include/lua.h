@@ -284,11 +284,11 @@ LUA_API void lua_setallocf (lua_State *L, lua_Alloc f, void *ud);
 ** compatibility macros and functions
 */
 
-/*+ jack.li 2012.10.30 增加lua中断处理支持 */
+/*+ jack.li 2012.10.30 澧炲姞lua涓柇澶勭悊鏀寔 */
 //#define lua_open()	luaL_newstate()
 lua_State* lua_open(void);
 lua_State* lua_getstate(void);
-/*- jack.li 2012.10.30 增加lua中断处理支持 */
+/*- jack.li 2012.10.30 澧炲姞lua涓柇澶勭悊鏀寔 */
 
 #define lua_getregistry(L)	lua_pushvalue(L, LUA_REGISTRYINDEX)
 

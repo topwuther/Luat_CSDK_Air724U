@@ -577,13 +577,13 @@ int lwip_ioctl(int s, long cmd, void *argp);
 int lwip_fcntl(int s, int cmd, int val);
 struct netif* lwip_getDefaultNetif();
 
-/*+\NEW\zhuwangbin\2020.06.5\添加善理poc平台*/
+/*+\NEW\zhuwangbin\2020.06.5\娣诲姞鍠勭悊poc骞冲彴*/
 #ifdef CONFIG_POC_SUPPORT
 int lwip_getErrNo(void);
 #endif
-/*-\NEW\zhuwangbin\2020.06.5\添加善理poc平台*/
+/*-\NEW\zhuwangbin\2020.06.5\娣诲姞鍠勭悊poc骞冲彴*/
 
-/*+NEW\lijiaodi\2020.09.18\BUG3104 添加AT+TCPUSERPARAM*/ 
+/*+NEW\lijiaodi\2020.09.18\BUG3104 娣诲姞AT+TCPUSERPARAM*/ 
 void lwip_set_tcp_rto_update_flag(int flag);
 
 
@@ -605,7 +605,7 @@ void lwip_set_tcp_rto_update_value(u32_t value);
 
 
 u32_t lwip_get_tcp_rto_update_value(void);
-/*-NEW\lijiaodi\2020.09.18\BUG3104 添加AT+TCPUSERPARAM*/ 
+/*-NEW\lijiaodi\2020.09.18\BUG3104 娣诲姞AT+TCPUSERPARAM*/ 
 #if LWIP_COMPAT_SOCKETS
 #if LWIP_COMPAT_SOCKETS != 2
 /** @ingroup socket */

@@ -52,12 +52,12 @@ static const u8 CRCLoTable[] = {
 
 
 typedef struct{
-const char *name;   //²ÎÊıÄ£ĞÍ
-u16 crc16_polynomial;   //¶àÏîÊ½
-u16 initial_value;  //³õÊ¼Öµ
-u16 finally_data;  //½á¹ûÒì»òÖµ
-BOOL input_reverse; //ÊäÈëÊı¾İ·´×ª
-BOOL output_reverse; //Êä³öÊı¾İ·´×ª
+const char *name;   //å‚æ•°æ¨¡å‹
+u16 crc16_polynomial;   //å¤šé¡¹å¼
+u16 initial_value;  //åˆå§‹å€¼
+u16 finally_data;  //ç»“æœå¼‚æˆ–å€¼
+BOOL input_reverse; //è¾“å…¥æ•°æ®åè½¬
+BOOL output_reverse; //è¾“å‡ºæ•°æ®åè½¬
 } crc16method;
 
 const static crc16method crc16method_table[] = 
@@ -169,7 +169,7 @@ u16 calcCRC16(const u8 *data, const char *cmd, int length, u16 poly, u16 initial
 extern u32 vds_crc32_table[];
 //u32 *CRC32_table = vds_crc32_table;
 u32 *CRC32_table = {
-    /*-new\rww\2020.4.30\lua tts float¿Õ¼ä²»×ã*/
+    /*-new\rww\2020.4.30\lua tts floatç©ºé—´ä¸è¶³*/
     0x00000000L, 0x77073096L, 0xee0e612cL, 0x990951baL,
     0x076dc419L, 0x706af48fL, 0xe963a535L, 0x9e6495a3L,
     0x0edb8832L, 0x79dcb8a4L, 0xe0d5e91eL, 0x97d2d988L,
@@ -236,7 +236,7 @@ u32 *CRC32_table = {
     0xb40bbe37L, 0xc30c8ea1L, 0x5a05df1bL, 0x2d02ef8dL};
 
 //----------------------------------------------------------
-//ÊäÈë²ÎÊı1ĞèÒªĞ£ÑéµÄÊı×éÖ¸Õë£¬Êı¾İ³¤¶È
+//è¾“å…¥å‚æ•°1éœ€è¦æ ¡éªŒçš„æ•°ç»„æŒ‡é’ˆï¼Œæ•°æ®é•¿åº¦
 u32 calcCRC32(const u8* buf, u32 len)
 {
     u32 CRC32_data = 0xFFFFFFFF;

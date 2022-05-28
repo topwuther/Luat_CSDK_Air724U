@@ -1,11 +1,11 @@
 
 #include "string.h"
 #include "assert.h"
-/*+\NEW\zhuwangbin\2019.12.10\添加lua 编译不过*/
+/*+\NEW\zhuwangbin\2019.12.10\娣诲姞lua 缂栬瘧涓嶈繃*/
 #include "lplatform.h"
 #include "platform_malloc.h"
 #include "platform_rtos.h"
-/*-\NEW\zhuwangbin\2019.12.10\添加lua 编译不过*/
+/*-\NEW\zhuwangbin\2019.12.10\娣诲姞lua 缂栬瘧涓嶈繃*/
 #include "am_openat.h"
 
 void* platform_malloc1( size_t size, const char* fun, UINT32 line)

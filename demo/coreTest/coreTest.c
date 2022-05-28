@@ -37,9 +37,9 @@ int appimg_enter(void *param)
 		iot_debug_print("[hello]coreTest wait network");
 		iot_os_sleep(500);
 	}
-	//¹Ø±Õ¿´ÃÅ¹·£¬ËÀ»ú²»»áÖØÆô¡£Ä¬ÈÏ´ò¿ª
+	//å…³é—­çœ‹é—¨ç‹—ï¼Œæ­»æœºä¸ä¼šé‡å¯ã€‚é»˜è®¤æ‰“å¼€
 	iot_debug_set_fault_mode(OPENAT_FAULT_HANG);
-	//´ò¿ªµ÷ÊÔĞÅÏ¢£¬Ä¬ÈÏ¹Ø±Õ
+	//æ‰“å¼€è°ƒè¯•ä¿¡æ¯ï¼Œé»˜è®¤å…³é—­
 	iot_vat_send_cmd("AT^TRACECTRL=0,1,1\r\n", sizeof("AT^TRACECTRL=0,1,1\r\n"));
 	iot_debug_print("[hello]coreTest appimg_enter");
 	while (1)
@@ -51,10 +51,10 @@ int appimg_enter(void *param)
 		fortest(datetimeTest, 1, 200);
 		fortest(fsTest, 1, 200, "/fs.test");
 
-		//fortest(ftpTest, 0, 1000); //ÖØ¸´²âÊÔ±ØËÀ»ú
+		//fortest(ftpTest, 0, 1000); //é‡å¤æµ‹è¯•å¿…æ­»æœº
 
 		//fortest(gsmlocTest, 1, 200);
-		//fortest(httpTest, 1, 200); //ÓĞ´íÎóĞÅÏ¢
+		//fortest(httpTest, 1, 200); //æœ‰é”™è¯¯ä¿¡æ¯
 		//fortest(pwdTest, 1, 200);
 		fortest(RilTest, 1, 200);
 

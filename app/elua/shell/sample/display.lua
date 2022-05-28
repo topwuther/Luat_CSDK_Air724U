@@ -86,27 +86,27 @@ local lcd_param ={
   height = 128,
   bpp = 16, -- bits per pixel 16bit color lcd or 1bit mono lcd
   yoffset = 32, -- 160-128=32
-  bus = disp.BUS_SPI4LINE, -- support disp.BUS_SPI4LINE or disp.PARALLEL Ä¬ÈÏspi4line
+  bus = disp.BUS_SPI4LINE, -- support disp.BUS_SPI4LINE or disp.PARALLEL é»˜è®¤spi4line
   pinrst = pio.P0_16, -- lcd reset pin
 }
 
--- »½ĞÑÏµÍ³´ò¿ªldo
+-- å”¤é†’ç³»ç»Ÿæ‰“å¼€ldo
 pmd.deepsleep(0)
 pmd.ldoset(1, pmd.LDO_KEYPAD, pmd.LDO_LCD)
 
--- ³õÊ¼»¯ÏÔÊ¾½Ó¿Ú
+-- åˆå§‹åŒ–æ˜¾ç¤ºæ¥å£
 disp.init(lcd_param, lcd_init_cmd)
 
-disp.clear() -- Çå³ı»º³åÇøµÄÊı¾İ,²»»áË¢ĞÂ
-disp.puttext("hello,lcd!overflow,1234567890",0,48) -- just write to ram cache ±ØĞëÔÚupdateÖ®ºó²Å»áË¢³öÀ´
+disp.clear() -- æ¸…é™¤ç¼“å†²åŒºçš„æ•°æ®,ä¸ä¼šåˆ·æ–°
+disp.puttext("hello,lcd!overflow,1234567890",0,48) -- just write to ram cache å¿…é¡»åœ¨updateä¹‹åæ‰ä¼šåˆ·å‡ºæ¥
 disp.update()
 
--- ¹Ø±ÕÏÔÊ¾½Ó¿Ú Õı³£µÄ²úÆ·Ò»°ãÊ¹ÓÃ²»ĞèÒª¹Ø±Õ Ò»Ö±µ½ÏµÍ³¹Ø»ú
+-- å…³é—­æ˜¾ç¤ºæ¥å£ æ­£å¸¸çš„äº§å“ä¸€èˆ¬ä½¿ç”¨ä¸éœ€è¦å…³é—­ ä¸€ç›´åˆ°ç³»ç»Ÿå…³æœº
 disp.close()
 
--- ĞİÃß10Ãë
+-- ä¼‘çœ 10ç§’
 rtos.sleep(10000)
 
--- ¹Ø±Õldo Õû¸öÏµÍ³½øÈëË¯Ãß
+-- å…³é—­ldo æ•´ä¸ªç³»ç»Ÿè¿›å…¥ç¡çœ 
 pmd.ldoset(0, pmd.LDO_KEYPAD, pmd.LDO_LCD)
 pmd.deepsleep(1)

@@ -31,9 +31,9 @@ int appimg_enter(void *param)
 	E_AMOPENAT_PM_CHR_MODE pmdmode;
               
     memset(&pmdcfg, 0, sizeof(T_AMOPENAT_PMD_CFG));
-    /*Ä£¿éÄÚÖÃ³äµç·½°¸*/
+    /*æ¨¡å—å†…ç½®å……ç”µæ–¹æ¡ˆ*/
     pmdmode = OPENAT_PM_CHR_BY_DEFAULT;
-    /*ºÍÓ²¼şÉè¼ÆÓĞ¹Ø*/
+    /*å’Œç¡¬ä»¶è®¾è®¡æœ‰å…³*/
     pmdcfg.deFault.batdetectEnable = TRUE; 
     pmdcfg.deFault.tempdetectEnable = FALSE;
     pmdcfg.deFault.templowLevel = 0;

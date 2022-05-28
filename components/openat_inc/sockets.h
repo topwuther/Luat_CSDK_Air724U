@@ -169,7 +169,7 @@ typedef enum
     CFW_SNTP_READY
 } sntp_status_t;
 
-/*\+new\lijiaodi\2020.2.12\添加socket的app type\*/
+/*\+new\lijiaodi\2020.2.12\娣诲姞socket鐨刟pp type\*/
 typedef enum
 {
 	CFW_SOCKET_APP_NONE,
@@ -185,7 +185,7 @@ typedef enum
 } dns_app_type_t;
 
 
-/*\-new\lijiaodi\2020.2.12\添加socket的app type\*/
+/*\-new\lijiaodi\2020.2.12\娣诲姞socket鐨刟pp type\*/
 
 void CFW_SetPppSendFun(bool (*sendCallBack)(uint8_t *pData, uint16_t uDataSize, uint8_t nDLCI));
 void CFW_SetGetSimCidFun(void (*get_simid_cid)(uint8_t *pSimId, uint8_t *pCid, uint8_t nDLCI));

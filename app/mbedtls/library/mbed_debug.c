@@ -49,11 +49,11 @@
 #endif
 
 #define DEBUG_BUF_SIZE      512
-/*+\NEW\WJ\2020.2.21\ÉèÅäSSL debug½Ó¿Ú£¬Ê¹ÓÃdebug_threshold´ò¿ª´òÓ¡µÈ¼¶£¬0Îª¹Ø±Õ*/
+/*+\NEW\WJ\2020.2.21\è®¾é…SSL debugæ¥å£ï¼Œä½¿ç”¨debug_thresholdæ‰“å¼€æ‰“å°ç­‰çº§ï¼Œ0ä¸ºå…³é—­*/
 static int debug_threshold = 0;
 #undef mbedtls_snprintf
 #define mbedtls_snprintf snprintf
-/*-\NEW\WJ\2020.2.21\ÉèÅäSSL debug½Ó¿Ú£¬Ê¹ÓÃdebug_threshold´ò¿ª´òÓ¡µÈ¼¶£¬0Îª¹Ø±Õ*/
+/*-\NEW\WJ\2020.2.21\è®¾é…SSL debugæ¥å£ï¼Œä½¿ç”¨debug_thresholdæ‰“å¼€æ‰“å°ç­‰çº§ï¼Œ0ä¸ºå…³é—­*/
 void mbedtls_debug_set_threshold( int threshold )
 {
     debug_threshold = threshold;

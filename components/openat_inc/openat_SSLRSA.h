@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: brezen
-  Description: AMOPENAT ø™∑≈∆ΩÃ®
+  Description: AMOPENAT ÂºÄÊîæÂπ≥Âè∞
   Others:
   History: 
-    Version£∫ Date:       Author:   Modification:
-    V0.1      2012.12.24  brezen     ¥¥Ω®Œƒº˛
+    VersionÔºö Date:       Author:   Modification:
+    V0.1      2012.12.24  brezen     ÂàõÂª∫Êñá‰ª∂
 *********************************************************/
 #ifndef OPENAT_SSLRSA_H
 #define OPENAT_SSLRSA_H

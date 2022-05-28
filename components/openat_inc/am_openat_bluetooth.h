@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: liangjian
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2020.09.05  liangjain     ´´½¨ÎÄ¼ş
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2020.09.05  liangjain     åˆ›å»ºæ–‡ä»¶
 *********************************************************/
 #ifndef AM_OPENAT_BULETOOTH_H
 #define AM_OPENAT_BULETOOTH_H
@@ -21,9 +21,9 @@
 typedef struct 
 {
     unsigned char id;         ///< event identifier
-    char state;               ///< ·µ»Ø×´Ì¬
-    UINT8 len;                ///< ·µ»ØµÄÊı¾İ³¤¶È
-    unsigned char * dataPtr;  ///< ·µ»ØµÄÊı¾İÖ¸Õë
+    char state;               ///< è¿”å›çŠ¶æ€
+    UINT8 len;                ///< è¿”å›çš„æ•°æ®é•¿åº¦
+    unsigned char * dataPtr;  ///< è¿”å›çš„æ•°æ®æŒ‡é’ˆ
     UINT16 uuid;   
     UINT16 handle;
     UINT8 long_uuid[16];
@@ -32,69 +32,69 @@ typedef struct
 
 typedef struct 
 {
-   UINT16 AdvMin;            ///< ×îĞ¡¹ã²¥¼ä¸ô
-   UINT16 AdvMax;            ///< ×î´ó¹ã²¥¼ä¸ô
-   UINT8 AdvType;           ///< ¹ã²¥ÀàĞÍ
-   UINT8 OwnAddrType;       ///< ¹ã²¥±¾µØµØÖ·ÀàĞÍ
-   UINT8 DirectAddrType;    ///< ¶¨ÏòµØÖ·ÀàĞÍ
-   char *DirectAddr;        ///< ¶¨ÏòµØÖ·
-   UINT8 AdvChannMap;       ///< ¹ã²¥channel map,3¸öbit£¬·Ö±ğ¶ÔÓ¦37£¬ 38£¬ 39ĞÅµÀ 
-   UINT8 AdvFilter;         ///< ¹ã²¥¹ıÂË²ßÂÔ
+   UINT16 AdvMin;            ///< æœ€å°å¹¿æ’­é—´éš”
+   UINT16 AdvMax;            ///< æœ€å¤§å¹¿æ’­é—´éš”
+   UINT8 AdvType;           ///< å¹¿æ’­ç±»å‹
+   UINT8 OwnAddrType;       ///< å¹¿æ’­æœ¬åœ°åœ°å€ç±»å‹
+   UINT8 DirectAddrType;    ///< å®šå‘åœ°å€ç±»å‹
+   char *DirectAddr;        ///< å®šå‘åœ°å€
+   UINT8 AdvChannMap;       ///< å¹¿æ’­channel map,3ä¸ªbitï¼Œåˆ†åˆ«å¯¹åº”37ï¼Œ 38ï¼Œ 39ä¿¡é“ 
+   UINT8 AdvFilter;         ///< å¹¿æ’­è¿‡æ»¤ç­–ç•¥
 }T_OPENAT_BLE_ADV_PARAM;
 
 typedef struct 
 {
-    UINT8 scanType;        //  É¨ÃèÀàĞÍ   
-    UINT16 scanInterval;   //  É¨Ãè¼ä¸ô
-    UINT16 scanWindow;     //  É¨Ãè´°¿Ú
-    UINT8 filterPolicy;    //  É¨Ãè¹ıÂË²ßÂÔ
-    UINT8 own_addr_type;   //  ±¾µØµØÖ·ÀàĞÍ
+    UINT8 scanType;        //  æ‰«æç±»å‹   
+    UINT16 scanInterval;   //  æ‰«æé—´éš”
+    UINT16 scanWindow;     //  æ‰«æçª—å£
+    UINT8 filterPolicy;    //  æ‰«æè¿‡æ»¤ç­–ç•¥
+    UINT8 own_addr_type;   //  æœ¬åœ°åœ°å€ç±»å‹
 } T_OPENAT_BLE_SCAN_PARAM;
 
 typedef enum
 {
-    BLE_SET_NAME = 0x01,    ///< ÉèÖÃBLE ¹ã²¥Ãû³Æ
-    BLE_SET_ADV_PARAM,		///< ÉèÖÃBLE ¹ã²¥¹ã²¥²ÎÊı
-    BLE_SET_ADV_DATA,		///< ÉèÖÃBLE ¹ã²¥¹ã²¥°üÊı¾İ
-    BLE_SET_SCANRSP_DATA,	///< ÉèÖÃBLE ¹ã²¥ÏìÓ¦°üÊı¾İ
-	BLE_SET_ADV_ENABLE,		///< ÊÇ·ñÊ¹ÄÜ¹ã²¥
-	BLE_SET_SCAN_ENABLE,		///< ÊÇ·ñÊ¹ÄÜÉ¨Ãè
-	BLE_READ_STATE,			///< ¶ÁBLE ÊÇ·ñÊ¹ÄÜ
-    BLE_ADD_SERVICE,        ///< Ìí¼Ó·şÎñ
-    BLE_ADD_CHARACTERISTIC, ///< Ìí¼ÓÌØÕ÷
-    BLE_ADD_DESCRIPTOR,     ///< Ìí¼ÓÃèÊö
-    BLE_FIND_SERVICE,       ///< ·¢ÏÖ·şÎñ
-    BLE_FIND_CHARACTERISTIC,///< ·¢ÏÖÌØÕ÷
-    BLE_OPEN_NOTIFICATION,  ///< ´ò¿ªÍ¨Öª
-    BLE_CLOSE_NOTIFICATION,  ///< ¹Ø±ÕÍ¨Öª
-    BLE_GET_ADDR,           ///< »ñÈ¡À¶ÑÀMACµØÖ·
-    BLE_SET_BEACON_DATA,     ///< ÉèÖÃbeaconÊı¾İ
-    BLE_SET_SCAN_PARAM,		///< ÉèÖÃBLEÉ¨Ãè²ÎÊı
-    BT_GET_ADDR,           ///< »ñÈ¡À¶ÑÀMACµØÖ·
-    BT_READ_STATE,			///< ¶ÁBT ÊÇ·ñÊ¹ÄÜ
-    BT_SET_NAME,           ///< ÉèÖÃBTÃû³Æ
-    BT_SET_VISIBILITY,      ///< ÉèÖÃBT¿É¼ûĞÔ
-    BT_SET_HFP_VOL,      ///< ÉèÖÃhfpµÄÒôÁ¿
-    BT_HFP_CALL_REJECT,  ///< HFP¾Ü¾øÀ´µç
-    BT_HFP_CALL_ANSWER,  ///< HFP½ÓÌıÀ´µç
-    BT_HFP_CALL_HANGUP,  ///< HFP¹Ò¶ÏÀ´µç
-    BT_HFP_CALL_REDIAL,  ///< HFPÖØ²¦
-    BT_HFP_CALL_DIAL,  ///< HFP²¦ºÅ
-    BT_SET_AVRCP_VOL,  ///< ÉèÖÃAVRCPµÄÒôÁ¿
-    BT_SET_AVRCP_SONGS,    ///< AVRCPµÄ¸èÇú¿ØÖÆ
+    BLE_SET_NAME = 0x01,    ///< è®¾ç½®BLE å¹¿æ’­åç§°
+    BLE_SET_ADV_PARAM,		///< è®¾ç½®BLE å¹¿æ’­å¹¿æ’­å‚æ•°
+    BLE_SET_ADV_DATA,		///< è®¾ç½®BLE å¹¿æ’­å¹¿æ’­åŒ…æ•°æ®
+    BLE_SET_SCANRSP_DATA,	///< è®¾ç½®BLE å¹¿æ’­å“åº”åŒ…æ•°æ®
+	BLE_SET_ADV_ENABLE,		///< æ˜¯å¦ä½¿èƒ½å¹¿æ’­
+	BLE_SET_SCAN_ENABLE,		///< æ˜¯å¦ä½¿èƒ½æ‰«æ
+	BLE_READ_STATE,			///< è¯»BLE æ˜¯å¦ä½¿èƒ½
+    BLE_ADD_SERVICE,        ///< æ·»åŠ æœåŠ¡
+    BLE_ADD_CHARACTERISTIC, ///< æ·»åŠ ç‰¹å¾
+    BLE_ADD_DESCRIPTOR,     ///< æ·»åŠ æè¿°
+    BLE_FIND_SERVICE,       ///< å‘ç°æœåŠ¡
+    BLE_FIND_CHARACTERISTIC,///< å‘ç°ç‰¹å¾
+    BLE_OPEN_NOTIFICATION,  ///< æ‰“å¼€é€šçŸ¥
+    BLE_CLOSE_NOTIFICATION,  ///< å…³é—­é€šçŸ¥
+    BLE_GET_ADDR,           ///< è·å–è“ç‰™MACåœ°å€
+    BLE_SET_BEACON_DATA,     ///< è®¾ç½®beaconæ•°æ®
+    BLE_SET_SCAN_PARAM,		///< è®¾ç½®BLEæ‰«æå‚æ•°
+    BT_GET_ADDR,           ///< è·å–è“ç‰™MACåœ°å€
+    BT_READ_STATE,			///< è¯»BT æ˜¯å¦ä½¿èƒ½
+    BT_SET_NAME,           ///< è®¾ç½®BTåç§°
+    BT_SET_VISIBILITY,      ///< è®¾ç½®BTå¯è§æ€§
+    BT_SET_HFP_VOL,      ///< è®¾ç½®hfpçš„éŸ³é‡
+    BT_HFP_CALL_REJECT,  ///< HFPæ‹’ç»æ¥ç”µ
+    BT_HFP_CALL_ANSWER,  ///< HFPæ¥å¬æ¥ç”µ
+    BT_HFP_CALL_HANGUP,  ///< HFPæŒ‚æ–­æ¥ç”µ
+    BT_HFP_CALL_REDIAL,  ///< HFPé‡æ‹¨
+    BT_HFP_CALL_DIAL,  ///< HFPæ‹¨å·
+    BT_SET_AVRCP_VOL,  ///< è®¾ç½®AVRCPçš„éŸ³é‡
+    BT_SET_AVRCP_SONGS,    ///< AVRCPçš„æ­Œæ›²æ§åˆ¶
 } E_OPENAT_BT_CMD;
 
 typedef enum
 {
-    BLE_SLAVE = 0,    ///< ÉèÖÃBLE´ÓÄ£Ê½
-    BLE_MASTER,	      ///< ÉèÖÃBLEÖ÷Ä£Ê½
-    BT_CLASSIC,	          ///< ÉèÖÃ¾­µäÀ¶ÑÀ
+    BLE_SLAVE = 0,    ///< è®¾ç½®BLEä»æ¨¡å¼
+    BLE_MASTER,	      ///< è®¾ç½®BLEä¸»æ¨¡å¼
+    BT_CLASSIC,	          ///< è®¾ç½®ç»å…¸è“ç‰™
 } E_OPENAT_BT_MODE;
 
 typedef enum
 {
-    UUID_SHORT = 0,    // 16Î»uuid
-    UUID_LONG,	       // 128Î»uuid
+    UUID_SHORT = 0,    // 16ä½uuid
+    UUID_LONG,	       // 128ä½uuid
 } E_OPENAT_BLE_UUID_FLAG;
 
 typedef struct 
@@ -109,15 +109,15 @@ typedef struct
 typedef struct 
 {
     T_OPENAT_BLE_UUID uuid;
-    UINT8   attvalue;//ÊôĞÔÖµ
-    UINT16  permisssion;//È¨ÏŞ
+    UINT8   attvalue;//å±æ€§å€¼
+    UINT16  permisssion;//æƒé™
 }T_OPENAT_BLE_CHARACTERISTIC_PARAM;
 
 typedef struct 
 {
     T_OPENAT_BLE_UUID uuid;
-    UINT8   value[255];//ÊôĞÔ
-    UINT16  configurationBits;//ÊôĞÔ
+    UINT8   value[255];//å±æ€§
+    UINT16  configurationBits;//å±æ€§
 }T_OPENAT_BLE_DESCRIPTOR_PARAM;
 
 typedef struct 
@@ -142,16 +142,16 @@ typedef enum
 } E_OPENAT_BT_AVRCP_STATE;
 
 typedef union {
-    T_OPENAT_BLE_ADV_PARAM  *advparam;   ///< ÉèÖÃBLE ¹ã²¥²ÎÊı
-    T_OPENAT_BLE_SCAN_PARAM  *scanparam;   ///< ÉèÖÃBLE É¨Ãè²ÎÊı
-    T_OPENAT_BLE_ADV_DATA   *advdata;    ///< ¹ã²¥°üÊı¾İ¡¢ÏìÓ¦°üÊı¾İ
-    UINT8 	*data;    ///< ÉèÖÃBLE ¹ã²¥Ãû³Æ¡¢»ñÈ¡À¶ÑÀMACµØÖ·¡¢ÉèÖÃBTÃû³Æ¡¢hfpºô½Ğ²¦ºÅ
-    UINT8       advEnable;          ///< ÊÇ·ñÊ¹ÄÜ¹ã²¥¡¢Ê¹ÄÜÉ¨Ãè¡¢ÉèÖÃBT¿É¼ûĞÔ¡¢ÉèÖÃhfpÒôÁ¿¡¢ÉèÖÃavrcpÒôÁ¿
-    T_OPENAT_BLE_UUID  *uuid;   ///< Ìí¼Ó·şÎñ¡¢·¢ÏÖÌØÕ÷¡¢´ò¿ªÍ¨Öª¡¢¹Ø±ÕÍ¨Öª
-    T_OPENAT_BLE_CHARACTERISTIC_PARAM  *characteristicparam;   ///< Ìí¼ÓÌØÕ÷
-    T_OPENAT_BLE_DESCRIPTOR_PARAM   *descriptorparam;   ///< Ìí¼ÓÃèÊö
-    T_OPENAT_BLE_BEACON_DATA   *beacondata;   ///< ÉèÖÃbeaconÊı¾İ
-    E_OPENAT_BT_AVRCP_STATE state; ///< ÉèÖÃBTµÄ¸èÇú²¥·Å×´Ì¬
+    T_OPENAT_BLE_ADV_PARAM  *advparam;   ///< è®¾ç½®BLE å¹¿æ’­å‚æ•°
+    T_OPENAT_BLE_SCAN_PARAM  *scanparam;   ///< è®¾ç½®BLE æ‰«æå‚æ•°
+    T_OPENAT_BLE_ADV_DATA   *advdata;    ///< å¹¿æ’­åŒ…æ•°æ®ã€å“åº”åŒ…æ•°æ®
+    UINT8 	*data;    ///< è®¾ç½®BLE å¹¿æ’­åç§°ã€è·å–è“ç‰™MACåœ°å€ã€è®¾ç½®BTåç§°ã€hfpå‘¼å«æ‹¨å·
+    UINT8       advEnable;          ///< æ˜¯å¦ä½¿èƒ½å¹¿æ’­ã€ä½¿èƒ½æ‰«æã€è®¾ç½®BTå¯è§æ€§ã€è®¾ç½®hfpéŸ³é‡ã€è®¾ç½®avrcpéŸ³é‡
+    T_OPENAT_BLE_UUID  *uuid;   ///< æ·»åŠ æœåŠ¡ã€å‘ç°ç‰¹å¾ã€æ‰“å¼€é€šçŸ¥ã€å…³é—­é€šçŸ¥
+    T_OPENAT_BLE_CHARACTERISTIC_PARAM  *characteristicparam;   ///< æ·»åŠ ç‰¹å¾
+    T_OPENAT_BLE_DESCRIPTOR_PARAM   *descriptorparam;   ///< æ·»åŠ æè¿°
+    T_OPENAT_BLE_BEACON_DATA   *beacondata;   ///< è®¾ç½®beaconæ•°æ®
+    E_OPENAT_BT_AVRCP_STATE state; ///< è®¾ç½®BTçš„æ­Œæ›²æ’­æ”¾çŠ¶æ€
 }U_OPENAT_BT_IOTCTL_PARAM;
 
 typedef enum{

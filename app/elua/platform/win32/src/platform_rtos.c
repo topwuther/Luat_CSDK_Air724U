@@ -56,7 +56,7 @@ int platform_rtos_receive(void **ppMessage, u32 timeout)
         win_start_timer(RTOS_WAIT_MSG_TIMER_ID, timeout);
     }
 
-    /* µÚÒ»´Îµ÷ÓÃ¸Ã½Ó¿Ú²ÅÔÊĞíÆäËûÏß³Ì·¢ËÍÏûÏ¢ */
+    /* ç¬¬ä¸€æ¬¡è°ƒç”¨è¯¥æ¥å£æ‰å…è®¸å…¶ä»–çº¿ç¨‹å‘é€æ¶ˆæ¯ */
     if(!startRtosSimulator)
     {
         startRtosSimulator = TRUE;
@@ -202,7 +202,7 @@ void platform_free(void *p)
     L_FREE(p);
 }
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 int platform_get_poweron_reason(void)
 {
     return PLATFORM_POWERON_KEY;
@@ -217,4 +217,4 @@ void platform_poweron_try(void)
 {
 
 }
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */

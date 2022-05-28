@@ -10,9 +10,9 @@ int demo_hello_Debug_num = 0;
 static void demo_hello_Debug(PVOID pParameter)
 {
     iot_debug_print("[debug]demo_hello_Debug");
-    //¹Ø±Õ¿´ÃÅ¹·£¬ËÀ»ú²»»áÖØÆô¡£Ä¬ÈÏ´ò¿ª
+    //å…³é—­çœ‹é—¨ç‹—ï¼Œæ­»æœºä¸ä¼šé‡å¯ã€‚é»˜è®¤æ‰“å¼€
     iot_debug_set_fault_mode(OPENAT_FAULT_HANG);
-    //´ò¿ªµ÷ÊÔĞÅÏ¢£¬Ä¬ÈÏ¹Ø±Õ
+    //æ‰“å¼€è°ƒè¯•ä¿¡æ¯ï¼Œé»˜è®¤å…³é—­
     iot_vat_send_cmd("AT^TRACECTRL=0,1,1\r\n", sizeof("AT^TRACECTRL=0,1,1\r\n"));
 
     volatile int n = 0;

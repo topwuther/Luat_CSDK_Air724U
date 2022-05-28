@@ -4,60 +4,60 @@
 #include "iot_os.h"
 
 /**
- * @defgroup iot_sdk_device ÍâÉè½Ó¿Ú
+ * @defgroup iot_sdk_device å¤–è®¾æ¥å£
  * @{
  */
 	/**@example zbar/demo_zbar_camera.c
-	* camera½Ó¿ÚÊ¾Àı
+	* cameraæ¥å£ç¤ºä¾‹
 	*/ 
 
 /**
- * @defgroup iot_sdk_camera ÉãÏñÍ·½Ó¿Ú
+ * @defgroup iot_sdk_camera æ‘„åƒå¤´æ¥å£
  * @{
  */
 
-/**ÉãÏñÍ·³õÊ¼»¯
-*@param		cameraParam:		³õÊ¼»¯²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‘„åƒå¤´åˆå§‹åŒ–
+*@param		cameraParam:		åˆå§‹åŒ–å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_init(T_AMOPENAT_CAMERA_PARAM *cameraParam);
 
-/**´ò¿ªÉãÏñÍ·
-*@param		videoMode:		ÊÇ·ñÊÓÆµÄ£Ê½
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‰“å¼€æ‘„åƒå¤´
+*@param		videoMode:		æ˜¯å¦è§†é¢‘æ¨¡å¼
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_poweron(BOOL videoMode);  
-/**¹Ø±ÕÉãÏñÍ·
-*@return  TRUE:       ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å…³é—­æ‘„åƒå¤´
+*@return  TRUE:       æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_poweroff(void); 
-/**¿ªÊ¼Ô¤ÀÀ
-*@param  previewParam:       Ô¤ÀÀ²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å¼€å§‹é¢„è§ˆ
+*@param  previewParam:       é¢„è§ˆå‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_preview_open(T_AMOPENAT_CAM_PREVIEW_PARAM *previewParam);
-/**ÍË³öÔ¤ÀÀ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**é€€å‡ºé¢„è§ˆ
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_preview_close(void);
-/**ÅÄÕÕ
-*@param  fileName:      ±£´æÍ¼Æ¬µÄÎÄ¼şÃû
-*@param  captureParam:       Ô¤ÀÀ²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‹ç…§
+*@param  fileName:      ä¿å­˜å›¾ç‰‡çš„æ–‡ä»¶å
+*@param  captureParam:       é¢„è§ˆå‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_capture(char *fileName, T_AMOPENAT_CAM_CAPTURE_PARAM *captureParam);
 
-/**ÉèÖÃcamera¼Ä´æÆ÷
-*@param  initRegTable_p: cam¼Ä´æÆ÷±í
-*@param  len:   cam¼Ä´æÆ÷³¤¶È
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è®¾ç½®cameraå¯„å­˜å™¨
+*@param  initRegTable_p: camå¯„å­˜å™¨è¡¨
+*@param  len:   camå¯„å­˜å™¨é•¿åº¦
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_camera_WriteReg(PAMOPENAT_CAMERA_REG initRegTable_p, int len);
 

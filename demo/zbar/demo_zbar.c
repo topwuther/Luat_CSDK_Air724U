@@ -17,7 +17,7 @@
 static HANDLE g_s_zbar_task;
 unsigned char *gScannerBuff = NULL;
 
-/*ÌáÈ¡yuvÊı¾İÖĞµÄy*/
+/*æå–yuvæ•°æ®ä¸­çš„y*/
 static unsigned char * zbar_scannerY(unsigned char *data)
 {
 	unsigned char *src = data,*end = data + (CAM_SENSOR_WIDTH * CAM_SENSOR_HEIGHT *2);
@@ -33,34 +33,34 @@ static unsigned char * zbar_scannerY(unsigned char *data)
     return gScannerBuff;
 }
 
-/*½âÎö¶şÎ¬ÂëÖĞµÄÊı¾İ*/
+/*è§£æäºŒç»´ç ä¸­çš„æ•°æ®*/
 static void zbar_scannerRun(int width, int height, int size, unsigned char *dataInput)
 {
 	int len;
 	char *data;
 	
-	//´´½¨¾ä±ú£¬ handle != 0 ±íÊ¾½âÂë³É¹¦
+	//åˆ›å»ºå¥æŸ„ï¼Œ handle != 0 è¡¨ç¤ºè§£ç æˆåŠŸ
 	int handle = iot_zbar_scannerOpen(width, height, size, dataInput);
     
 	if (handle)
 	{
 		do
 		{        
-			// ½âÂë³É¹¦»ñÈ¡¶şÎ¬ÂëĞÅÏ¢
+			// è§£ç æˆåŠŸè·å–äºŒç»´ç ä¿¡æ¯
 			data = iot_zbar_getData(handle, &len);
 			data[len] = 0;
 
 			iot_debug_print("[zbar] zbar_scanner_run come in handle_data %s", data);
 
-		 // ÅĞ¶ÏÊÇ·ñÓĞÏÂÒ»¸öÊı¾İ
+		 // åˆ¤æ–­æ˜¯å¦æœ‰ä¸‹ä¸€ä¸ªæ•°æ®
 		}while(iot_zbar_findNextData(handle) > 0);
 
-		// ÊÍ·Å¾ä±ú
+		// é‡Šæ”¾å¥æŸ„
 		iot_zbar_scannerClose(handle);
 	}
 }
 
-/*Ô¤ÀÀ»Øµ÷º¯Êı, »ñÈ¡Ô¤ÀÀÊı¾İ*/
+/*é¢„è§ˆå›è°ƒå‡½æ•°, è·å–é¢„è§ˆæ•°æ®*/
 void camera_evevt_callback(T_AMOPENAT_CAMERA_MESSAGE *pMsg)
 {
 
@@ -69,7 +69,7 @@ void camera_evevt_callback(T_AMOPENAT_CAMERA_MESSAGE *pMsg)
     {
         case OPENAT_DRV_EVT_CAMERA_DATA_IND:
         {
-            // »ñÈ¡cameraµÃµ½µÄÊı¾İ£¬ ·¢ËÍµ½zbartask È¥½âÎö
+            // è·å–cameraå¾—åˆ°çš„æ•°æ®ï¼Œ å‘é€åˆ°zbartask å»è§£æ
             zbar_scannerRun(CAM_SENSOR_WIDTH, CAM_SENSOR_HEIGHT,CAM_SENSOR_HEIGHT*CAM_SENSOR_WIDTH, zbar_scannerY((unsigned char *)pMsg->dataParam.data));
             break;
         }

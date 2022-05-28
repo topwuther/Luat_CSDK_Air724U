@@ -77,7 +77,7 @@ ril.regrsp("+CMGR",rsp)
 ril.regrsp("+CMGD",rsp)
 ril.regrsp("+CMGS",rsp)
 
---Ä¬ÈÏÉÏ±¨ĞÂ¶ÌĞÅ´æ´¢Î»ÖÃ
+--é»˜è®¤ä¸ŠæŠ¥æ–°çŸ­ä¿¡å­˜å‚¨ä½ç½®
 --req("AT+CNMI=2,1")
---Ê¹ÓÃtextÄ£Ê½·¢ËÍ
+--ä½¿ç”¨textæ¨¡å¼å‘é€
 req("AT+CMGF=1")

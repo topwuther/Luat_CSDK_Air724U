@@ -37,7 +37,7 @@ typedef struct SmsEntityQueueTag
     u8 last;                                    
     u8 funFirst;                                
     u8 funLast;                                 
-	char tNewSms[SMS_QUEUE_COUNT];				/*¶ÌĞÅ±àºÅ*/
+	char tNewSms[SMS_QUEUE_COUNT];				/*çŸ­ä¿¡ç¼–å·*/
 }SmsEntityQueue;
 
 static HANDLE demo_readsms_task;
@@ -368,11 +368,11 @@ gb2312_to_ucs2_exit:
 }
 
    
-// 7-bit½âÂë
-// src: Ô´±àÂë´®Ö¸Õë
-// dst: Ä¿±ê×Ö·û´®Ö¸Õë
-// size: Ô´±àÂë´®³¤¶È
-// ·µ»Ø: Ä¿±ê×Ö·û´®³¤¶È
+// 7-bitè§£ç 
+// src: æºç¼–ç ä¸²æŒ‡é’ˆ
+// dst: ç›®æ ‡å­—ç¬¦ä¸²æŒ‡é’ˆ
+// size: æºç¼–ç ä¸²é•¿åº¦
+// è¿”å›: ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
 static u16 gsmDecode7bit(u8 inPaddingBits, u8 *pInBuf, u8 *pOutBuf, u16 inLen)
 {
 	u16 inIdx, outIdx;
@@ -409,17 +409,17 @@ static u16 gsmDecode7bit(u8 inPaddingBits, u8 *pInBuf, u8 *pOutBuf, u16 inLen)
 }
 
 
-// ¿É´òÓ¡×Ö·û´®×ª»»Îª×Ö½ÚÊı¾İ
-// Èç£º"C8329BFD0E01" --> {0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01}
-// pSrc: Ô´×Ö·û´®Ö¸Õë
-// pDst: Ä¿±êÊı¾İÖ¸Õë
-// nSrcLength: Ô´×Ö·û´®³¤¶È
-// ·µ»Ø: Ä¿±êÊı¾İ³¤¶È
+// å¯æ‰“å°å­—ç¬¦ä¸²è½¬æ¢ä¸ºå­—èŠ‚æ•°æ®
+// å¦‚ï¼š"C8329BFD0E01" --> {0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01}
+// pSrc: æºå­—ç¬¦ä¸²æŒ‡é’ˆ
+// pDst: ç›®æ ‡æ•°æ®æŒ‡é’ˆ
+// nSrcLength: æºå­—ç¬¦ä¸²é•¿åº¦
+// è¿”å›: ç›®æ ‡æ•°æ®é•¿åº¦
 static int gsmString2Bytes(const char* pSrc, unsigned char* pDst, int nSrcLength)
 {
     for(int i=0; i<nSrcLength; i+=2)
     {
-        // Êä³ö¸ß4Î»
+        // è¾“å‡ºé«˜4ä½
         if(*pSrc>='0' && *pSrc<='9')
         {
             *pDst = (*pSrc - '0') << 4;
@@ -431,7 +431,7 @@ static int gsmString2Bytes(const char* pSrc, unsigned char* pDst, int nSrcLength
    
         pSrc++;
    
-        // Êä³öµÍ4Î»
+        // è¾“å‡ºä½4ä½
         if(*pSrc>='0' && *pSrc<='9')
         {
             *pDst |= *pSrc - '0';
@@ -444,108 +444,108 @@ static int gsmString2Bytes(const char* pSrc, unsigned char* pDst, int nSrcLength
         pDst++;
     }
    
-    // ·µ»ØÄ¿±êÊı¾İ³¤¶È
+    // è¿”å›ç›®æ ‡æ•°æ®é•¿åº¦
     return nSrcLength / 2;
 }
    
-// ×Ö½ÚÊı¾İ×ª»»Îª¿É´òÓ¡×Ö·û´®
-// Èç£º{0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01} --> "C8329BFD0E01"
-// pSrc: Ô´Êı¾İÖ¸Õë
-// pDst: Ä¿±ê×Ö·û´®Ö¸Õë
-// nSrcLength: Ô´Êı¾İ³¤¶È
-// ·µ»Ø: Ä¿±ê×Ö·û´®³¤¶È
+// å­—èŠ‚æ•°æ®è½¬æ¢ä¸ºå¯æ‰“å°å­—ç¬¦ä¸²
+// å¦‚ï¼š{0xC8, 0x32, 0x9B, 0xFD, 0x0E, 0x01} --> "C8329BFD0E01"
+// pSrc: æºæ•°æ®æŒ‡é’ˆ
+// pDst: ç›®æ ‡å­—ç¬¦ä¸²æŒ‡é’ˆ
+// nSrcLength: æºæ•°æ®é•¿åº¦
+// è¿”å›: ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
 static int gsmBytes2String(const unsigned char* pSrc, char* pDst, int nSrcLength)
 {
-    const char tab[]="0123456789ABCDEF";    // 0x0-0xfµÄ×Ö·û²éÕÒ±í
+    const char tab[]="0123456789ABCDEF";    // 0x0-0xfçš„å­—ç¬¦æŸ¥æ‰¾è¡¨
    
     for(int i=0; i<nSrcLength; i++)
     {
-        // Êä³öµÍ4Î»
+        // è¾“å‡ºä½4ä½
         *pDst++ = tab[*pSrc >> 4];
    
-        // Êä³ö¸ß4Î»
+        // è¾“å‡ºé«˜4ä½
         *pDst++ = tab[*pSrc & 0x0f];
    
         pSrc++;
     }
    
-    // Êä³ö×Ö·û´®¼Ó¸ö½áÊø·û
+    // è¾“å‡ºå­—ç¬¦ä¸²åŠ ä¸ªç»“æŸç¬¦
     *pDst = '\0';
    
-    // ·µ»ØÄ¿±ê×Ö·û´®³¤¶È
+    // è¿”å›ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
     return nSrcLength * 2;
 }
 
 
-// Õı³£Ë³ĞòµÄ×Ö·û´®×ª»»ÎªÁ½Á½µßµ¹µÄ×Ö·û´®£¬Èô³¤¶ÈÎªÆæÊı£¬²¹'F'´Õ³ÉÅ¼Êı
-// Èç£º"8613851872468" --> "683158812764F8"
-// pSrc: Ô´×Ö·û´®Ö¸Õë
-// pDst: Ä¿±ê×Ö·û´®Ö¸Õë
-// nSrcLength: Ô´×Ö·û´®³¤¶È
-// ·µ»Ø: Ä¿±ê×Ö·û´®³¤¶È
+// æ­£å¸¸é¡ºåºçš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºä¸¤ä¸¤é¢ å€’çš„å­—ç¬¦ä¸²ï¼Œè‹¥é•¿åº¦ä¸ºå¥‡æ•°ï¼Œè¡¥'F'å‡‘æˆå¶æ•°
+// å¦‚ï¼š"8613851872468" --> "683158812764F8"
+// pSrc: æºå­—ç¬¦ä¸²æŒ‡é’ˆ
+// pDst: ç›®æ ‡å­—ç¬¦ä¸²æŒ‡é’ˆ
+// nSrcLength: æºå­—ç¬¦ä¸²é•¿åº¦
+// è¿”å›: ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
 static int gsmInvertNumbers(const char* pSrc, char* pDst, int nSrcLength)
 {
-    int nDstLength;   // Ä¿±ê×Ö·û´®³¤¶È
-    char ch;           // ÓÃÓÚ±£´æÒ»¸ö×Ö·û
+    int nDstLength;   // ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
+    char ch;           // ç”¨äºä¿å­˜ä¸€ä¸ªå­—ç¬¦
    
-    // ¸´ÖÆ´®³¤¶È
+    // å¤åˆ¶ä¸²é•¿åº¦
     nDstLength = nSrcLength;
    
-    // Á½Á½µßµ¹
+    // ä¸¤ä¸¤é¢ å€’
     for(int i=0; i<nSrcLength;i+=2)
     {
-        ch = *pSrc++;        // ±£´æÏÈ³öÏÖµÄ×Ö·û
-        *pDst++ = *pSrc++;   // ¸´ÖÆºó³öÏÖµÄ×Ö·û
-        *pDst++ = ch;        // ¸´ÖÆÏÈ³öÏÖµÄ×Ö·û
+        ch = *pSrc++;        // ä¿å­˜å…ˆå‡ºç°çš„å­—ç¬¦
+        *pDst++ = *pSrc++;   // å¤åˆ¶åå‡ºç°çš„å­—ç¬¦
+        *pDst++ = ch;        // å¤åˆ¶å…ˆå‡ºç°çš„å­—ç¬¦
     }
    
-    // Ô´´®³¤¶ÈÊÇÆæÊıÂğ£¿
+    // æºä¸²é•¿åº¦æ˜¯å¥‡æ•°å—ï¼Ÿ
     if(nSrcLength & 1)
     {
-        *(pDst-2) = 'F';     // ²¹'F'
-        nDstLength++;        // Ä¿±ê´®³¤¶È¼Ó1
+        *(pDst-2) = 'F';     // è¡¥'F'
+        nDstLength++;        // ç›®æ ‡ä¸²é•¿åº¦åŠ 1
     }
    
-    // Êä³ö×Ö·û´®¼Ó¸ö½áÊø·û
+    // è¾“å‡ºå­—ç¬¦ä¸²åŠ ä¸ªç»“æŸç¬¦
     *pDst = '\0';
    
-    // ·µ»ØÄ¿±ê×Ö·û´®³¤¶È
+    // è¿”å›ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
     return nDstLength;
 }
    
-// Á½Á½µßµ¹µÄ×Ö·û´®×ª»»ÎªÕı³£Ë³ĞòµÄ×Ö·û´®
-// Èç£º"683158812764F8" --> "8613851872468"
-// pSrc: Ô´×Ö·û´®Ö¸Õë
-// pDst: Ä¿±ê×Ö·û´®Ö¸Õë
-// nSrcLength: Ô´×Ö·û´®³¤¶È
-// ·µ»Ø: Ä¿±ê×Ö·û´®³¤¶È
+// ä¸¤ä¸¤é¢ å€’çš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ­£å¸¸é¡ºåºçš„å­—ç¬¦ä¸²
+// å¦‚ï¼š"683158812764F8" --> "8613851872468"
+// pSrc: æºå­—ç¬¦ä¸²æŒ‡é’ˆ
+// pDst: ç›®æ ‡å­—ç¬¦ä¸²æŒ‡é’ˆ
+// nSrcLength: æºå­—ç¬¦ä¸²é•¿åº¦
+// è¿”å›: ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
 static int gsmSerializeNumbers(const char* pSrc, char* pDst, int nSrcLength)
 {
-    int nDstLength;   // Ä¿±ê×Ö·û´®³¤¶È
-    char ch;          // ÓÃÓÚ±£´æÒ»¸ö×Ö·û
+    int nDstLength;   // ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
+    char ch;          // ç”¨äºä¿å­˜ä¸€ä¸ªå­—ç¬¦
    
-    // ¸´ÖÆ´®³¤¶È
+    // å¤åˆ¶ä¸²é•¿åº¦
     nDstLength = nSrcLength;
    
-    // Á½Á½µßµ¹
+    // ä¸¤ä¸¤é¢ å€’
     for(int i=0; i<nSrcLength;i+=2)
     {
-        ch = *pSrc++;        // ±£´æÏÈ³öÏÖµÄ×Ö·û
-        *pDst++ = *pSrc++;   // ¸´ÖÆºó³öÏÖµÄ×Ö·û
-        *pDst++ = ch;        // ¸´ÖÆÏÈ³öÏÖµÄ×Ö·û
+        ch = *pSrc++;        // ä¿å­˜å…ˆå‡ºç°çš„å­—ç¬¦
+        *pDst++ = *pSrc++;   // å¤åˆ¶åå‡ºç°çš„å­—ç¬¦
+        *pDst++ = ch;        // å¤åˆ¶å…ˆå‡ºç°çš„å­—ç¬¦
     }
 	
-    // ×îºóµÄ×Ö·ûÊÇ'F'Âğ£¿
+    // æœ€åçš„å­—ç¬¦æ˜¯'F'å—ï¼Ÿ
     if(*(pDst-1) == 'F')
     {
         pDst--;
-        nDstLength--;        // Ä¿±ê×Ö·û´®³¤¶È¼õ1
+        nDstLength--;        // ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦å‡1
     }
    
-    // Êä³ö×Ö·û´®¼Ó¸ö½áÊø·û
+    // è¾“å‡ºå­—ç¬¦ä¸²åŠ ä¸ªç»“æŸç¬¦
     *pDst = '\0';
    
-    // ·µ»ØÄ¿±ê×Ö·û´®³¤¶È
+    // è¿”å›ç›®æ ‡å­—ç¬¦ä¸²é•¿åº¦
     return nDstLength;
 }
 
@@ -578,11 +578,11 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 		OPENAT_free(data);
 		return FALSE;
 	}
-	/*--PDUÊı¾İ£¬²»°üÀ¨¶ÌĞÅÏ¢ÖĞĞÄºÅÂë*/
+	/*--PDUæ•°æ®ï¼Œä¸åŒ…æ‹¬çŸ­ä¿¡æ¯ä¸­å¿ƒå·ç */
 	strcpy(ppdu, pdu+((strlen(pdu)/2-pdulen)*2));
 
 	gsmString2Bytes(ppdu, buf, 2);
-	/*--PDU¶ÌĞÅÊ××Ö½ÚµÄ¸ß4Î»,µÚ6Î»ÎªÊı¾İ±¨Í·±êÖ¾Î»*/
+	/*--PDUçŸ­ä¿¡é¦–å­—èŠ‚çš„é«˜4ä½,ç¬¬6ä½ä¸ºæ•°æ®æŠ¥å¤´æ ‡å¿—ä½*/
 	fo = buf[0];
 	if(fo & 0x40)
 	{
@@ -595,7 +595,7 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 	}
 
 	gsmString2Bytes(ppdu+2, _addlen, 2);
-	/*-»Ø¸´µØÖ·Êı×Ö¸öÊı*/
+	/*-å›å¤åœ°å€æ•°å­—ä¸ªæ•°*/
 	addlen = _addlen[0];
 	addlen = ((addlen%2==0)?(addlen):(addlen+1));
 	offset = offset + addlen;
@@ -611,15 +611,15 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 	gsmSerializeNumbers(out,SmsInfo.num,addlen);
 
 	gsmString2Bytes(ppdu+offset+6, buf, 2);
-	/*--Ğ­Òé±êÊ¶ (TP-PID)*/
+	/*--åè®®æ ‡è¯† (TP-PID)*/
 	flag = buf[0];
 	offset = offset + 2;
 	gsmString2Bytes(ppdu+offset+6, buf, 2);
-	/*--ÓÃ»§ĞÅÏ¢±àÂë·½Ê½ Dcs=8£¬±íÊ¾¶ÌĞÅ´æ·ÅµÄ¸ñÊ½ÎªUCS2±àÂë*/
+	/*--ç”¨æˆ·ä¿¡æ¯ç¼–ç æ–¹å¼ Dcs=8ï¼Œè¡¨ç¤ºçŸ­ä¿¡å­˜æ”¾çš„æ ¼å¼ä¸ºUCS2ç¼–ç */
 	dcs = buf[0];
 	offset = offset + 2;
 	strncpy(out, ppdu+offset+6, 14);
-	/*--Ê±Çø7¸ö×Ö½Ú*/
+	/*--æ—¶åŒº7ä¸ªå­—èŠ‚*/
 	gsmSerializeNumbers(out,tz,14);
 	smslib_print("[smslib]gsmDecodePdu tz: %s, offset: %d", tz, offset);
 	sprintf(SmsInfo.datetime, "%c%c/%c%c/%c%c,%c%c:%c%c:%c%c+%c%c",
@@ -628,11 +628,11 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 	
 	offset = offset + 14;
 	gsmString2Bytes(ppdu+offset+6, buf, 2);
-	/*--¶ÌĞÅÎÄ±¾³¤¶È*/
+	/*--çŸ­ä¿¡æ–‡æœ¬é•¿åº¦*/
 	txtlen = buf[0];
 	offset = offset + 2;
 	strcpy(data, ppdu+offset+6);
-	/*--¶ÌĞÅÎÄ±¾*/
+	/*--çŸ­ä¿¡æ–‡æœ¬*/
 	buflen = gsmString2Bytes(data, buf, strlen(data));
 	u8 paddingBits = 0;
 	u8 new_udhl = 0;
@@ -645,7 +645,7 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 			idx = buf[5];
 			SmsInfo.isn = isn;
 			SmsInfo.total = total;
-			/*--È¥µô±¨Í·6¸ö×Ö½Ú*/
+			/*--å»æ‰æŠ¥å¤´6ä¸ªå­—èŠ‚*/
 			udhl = 6;
 		}
 		else if(buf[2] == 4)
@@ -655,7 +655,7 @@ bool gsmDecodePdu(char* pdu, int pdulen)
 			idx = buf[6];
 			SmsInfo.isn = isn;
 			SmsInfo.total = total;
-			/*--È¥µô±¨Í·7¸ö×Ö½Ú*/
+			/*--å»æ‰æŠ¥å¤´7ä¸ªå­—èŠ‚*/
 			udhl = 7;
 		}
 		if (udhl % 7) 
@@ -915,7 +915,7 @@ static void sms_read()
 			}
 			else
 			{
-				/*³¤¶ÌĞÅ´¦Àí*/
+				/*é•¿çŸ­ä¿¡å¤„ç†*/
 				longsmsmerge(err);
 				timerSMSParam.status = err;
 				iot_os_start_timer(smstimer, 60000);
@@ -947,7 +947,7 @@ static void _unsolSMSHandler(const int sms_index)
 
 bool sms_init(void)
 {
-	/*¼ì²âµÈ´ıSMS READYÉÏ±¨*/
+	/*æ£€æµ‹ç­‰å¾…SMS READYä¸ŠæŠ¥*/
 	check_smsready();
 
 	int err;
@@ -1056,7 +1056,7 @@ BOOL sms_send(char* num, char* data)
 			char len_mul = 0x8C;
 			if(i == (pducnt-1))
 				len_mul = _pdatalen-((pducnt-1)*134) + 6;
-			//udhi:6Î»Ğ­ÒéÍ·¸ñÊ½
+			//udhi:6ä½åè®®å¤´æ ¼å¼
 			sprintf(udhi, "050003%02X%02X%02X", isn, pducnt+1, i+1);
 			smslib_print("sms udhi:%s ", udhi);
 			gsmInvertNumbers(pnum, ppnum, pnumlen);

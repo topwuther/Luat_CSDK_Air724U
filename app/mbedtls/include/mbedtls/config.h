@@ -3102,9 +3102,9 @@
  *            on it, and considering stronger message digests instead.
  *
  */
-/*+\BUG\wj\2020.2.19\调试SSL中加入SHA1否则证书验证不过*/
+/*+\BUG\wj\2020.2.19\璋冭瘯SSL涓姞鍏HA1鍚﹀垯璇佷功楠岃瘉涓嶈繃*/
 #define MBEDTLS_TLS_DEFAULT_ALLOW_SHA1_IN_CERTIFICATES
-/*-\BUG\wj\2020.2.19\调试SSL中加入SHA1否则证书验证不过*/
+/*-\BUG\wj\2020.2.19\璋冭瘯SSL涓姞鍏HA1鍚﹀垯璇佷功楠岃瘉涓嶈繃*/
 /**
  * Allow SHA-1 in the default TLS configuration for TLS 1.2 handshake
  * signature and ciphersuite selection. Without this build-time option, SHA-1

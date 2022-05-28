@@ -13,16 +13,16 @@ VOID demo_gpio_handle (E_OPENAT_DRV_EVT evt,
 {
     UINT8 status;
 
-    // ÅĞ¶ÏÊÇgpioÖĞ¶Ï
+    // åˆ¤æ–­æ˜¯gpioä¸­æ–­
     if (OPENAT_DRV_EVT_GPIO_INT_IND == evt)
     {
-        // ÅĞ¶Ï´¥·¢ÖĞ¶ÏµÄ¹Ü½Å
+        // åˆ¤æ–­è§¦å‘ä¸­æ–­çš„ç®¡è„š
         if (DEMO_GPIO_7 == gpioPort)
         {   
-            // ´¥·¢µçÆ½µÄ×´Ì¬
+            // è§¦å‘ç”µå¹³çš„çŠ¶æ€
             gpio_print("[gpio] input handle gpio %d, state %d", gpioPort, state);
 
-            // ¶Áµ±Ç°gpio×´Ì¬, 1:¸ßµçÆ½ 0:µÍµçÆ½
+            // è¯»å½“å‰gpioçŠ¶æ€, 1:é«˜ç”µå¹³ 0:ä½ç”µå¹³
             iot_gpio_read(gpioPort, &status);
             gpio_print("[gpio] input handle gpio %d, status %d", gpioPort, state);
             
@@ -38,11 +38,11 @@ VOID demo_gpio_input(VOID)
     
     memset(&input_cfg, 0, sizeof(T_AMOPENAT_GPIO_CFG));
     
-    input_cfg.mode = OPENAT_GPIO_INPUT_INT; //ÅäÖÃÊäÈëÖĞ¶Ï
+    input_cfg.mode = OPENAT_GPIO_INPUT_INT; //é…ç½®è¾“å…¥ä¸­æ–­
     input_cfg.param.defaultState = FALSE;    
-    input_cfg.param.intCfg.debounce = 50;  //·À¶¶50ms
-    input_cfg.param.intCfg.intType = OPENAT_GPIO_INT_BOTH_EDGE; //ÖĞ¶Ï´¥·¢·½Ê½Ë«±ßÑØ
-    input_cfg.param.intCfg.intCb = demo_gpio_handle; //ÖĞ¶Ï´¦Àíº¯Êı
+    input_cfg.param.intCfg.debounce = 50;  //é˜²æŠ–50ms
+    input_cfg.param.intCfg.intType = OPENAT_GPIO_INT_BOTH_EDGE; //ä¸­æ–­è§¦å‘æ–¹å¼åŒè¾¹æ²¿
+    input_cfg.param.intCfg.intCb = demo_gpio_handle; //ä¸­æ–­å¤„ç†å‡½æ•°
     err = iot_gpio_open(DEMO_GPIO_7, &input_cfg);
 
     if (!err)
@@ -58,23 +58,23 @@ VOID demo_gpio_output(VOID)
     
     memset(&output_cfg, 0, sizeof(T_AMOPENAT_GPIO_CFG));
     
-    output_cfg.mode = OPENAT_GPIO_OUTPUT; //ÅäÖÃÊä³ö
-    output_cfg.param.defaultState = FALSE; // Ä¬ÈÏµÍµçÆ½
+    output_cfg.mode = OPENAT_GPIO_OUTPUT; //é…ç½®è¾“å‡º
+    output_cfg.param.defaultState = FALSE; // é»˜è®¤ä½ç”µå¹³
 
     err = iot_gpio_open(DEMO_GPIO_9, &output_cfg);
 
     if (!err)
         return;
         
-    iot_gpio_set(DEMO_GPIO_9, TRUE); //ÉèÖÃÎª¸ßµçÆ½
+    iot_gpio_set(DEMO_GPIO_9, TRUE); //è®¾ç½®ä¸ºé«˜ç”µå¹³
     
     gpio_print("[gpio] set gpio9 output");
 }
 
 VOID demo_gpio_init(VOID)
 {
-    demo_gpio_output(); //ÅäÖÃgpio8ÎªÊä³ö
-    demo_gpio_input(); //ÅäÖÃgpio9ÎªÊäÈë
+    demo_gpio_output(); //é…ç½®gpio8ä¸ºè¾“å‡º
+    demo_gpio_input(); //é…ç½®gpio9ä¸ºè¾“å…¥
 }
 
 int appimg_enter(void *param)

@@ -18,12 +18,12 @@ typedef HANDLE		PAL_SEMAPHORE_ID;
 #define ssize_t		int
 #endif
 
-/* RIL PAL����ֵ */
+/* RIL PAL层结果值 */
 #define PAL_RIL_SUCCESS			0
 
 #define PAL_RIL_ERROR			1
 
-/* ��ַ����4�ֽڶ��� */
+/* 地址对齐4字节对齐 */
 #define PAD_SIZE(l)							(((l)+3)&~3)
 
 

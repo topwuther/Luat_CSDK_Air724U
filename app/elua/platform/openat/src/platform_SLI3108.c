@@ -29,7 +29,7 @@ void platform_SLI3108_set_work_mode(kal_bool factory_mode)
     OPENAT_SLI3108_set_mode(factory_mode);
 }
 
-/*-\NEW\zhuwangbin\2016.4.13\Ìí¼Ó¾àÀë´«¸ĞÆ÷open ºÍ close ½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2016.4.13\æ·»åŠ è·ç¦»ä¼ æ„Ÿå™¨open å’Œ close æ¥å£*/
 void platform_SLI3108_open(void)
 {
   OPENAT_SLI3108_open();
@@ -39,6 +39,6 @@ void platform_SLI3108_close(void)
 {
   OPENAT_SLI3108_close();
 }
-/*-\NEW\zhuwangbin\2016.4.13\Ìí¼Ó¾àÀë´«¸ĞÆ÷open ºÍ close ½Ó¿Ú*/
+/*-\NEW\zhuwangbin\2016.4.13\æ·»åŠ è·ç¦»ä¼ æ„Ÿå™¨open å’Œ close æ¥å£*/
 
 #endif

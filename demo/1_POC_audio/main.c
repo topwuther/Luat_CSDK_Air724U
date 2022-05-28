@@ -26,7 +26,7 @@ void audio_streamplay_handle(E_AMOPENAT_PLAY_ERROR result)
 void audio_stream_record_cb(int ret, char *data, int len)
 {
     //iot_debug_print("[poc-audio] audio_stream_record_cb ret:%d len:%d", ret, len);
-    memcpy(audiobuf + recvbufsize, data, len); //Á÷Êı¾İ×ª´æ
+    memcpy(audiobuf + recvbufsize, data, len); //æµæ•°æ®è½¬å­˜
     recvbufsize += len;
 }
 
@@ -35,12 +35,12 @@ void poc_audio_stream_record()
     recvbufsize = 0;
     iot_debug_print("[poc-audio] poc_audio_stream_record start ");
     E_AMOPENAT_RECORD_PARAM param;
-    param.record_mode = OPENAT_RECORD_STREAM; //Ê¹ÓÃÁ÷Â¼Òô·½Ê½
+    param.record_mode = OPENAT_RECORD_STREAM; //ä½¿ç”¨æµå½•éŸ³æ–¹å¼
     param.quality = OPENAT_RECORD_QUALITY_MEDIUM;
-    param.type = OPENAT_RECORD_TYPE_POC;  //Ö»ÓĞÑ¡ÔñPOCÀàĞÍ²Å¾ßÓĞÏûÔë¹¦ÄÜ
-    param.format = OPENAT_AUD_FORMAT_PCM; //pocÏûÔëÖ»ÄÜÊ¹ÓÃPCM¸ñÊ½
+    param.type = OPENAT_RECORD_TYPE_POC;  //åªæœ‰é€‰æ‹©POCç±»å‹æ‰å…·æœ‰æ¶ˆå™ªåŠŸèƒ½
+    param.format = OPENAT_AUD_FORMAT_PCM; //pocæ¶ˆå™ªåªèƒ½ä½¿ç”¨PCMæ ¼å¼
     param.time_sec = 0;
-    param.stream_record_cb = audio_stream_record_cb; //Á÷Êı¾İ»Øµ÷º¯Êı
+    param.stream_record_cb = audio_stream_record_cb; //æµæ•°æ®å›è°ƒå‡½æ•°
     iot_audio_rec_start(&param, audio_rec_handle);
 }
 
@@ -48,41 +48,41 @@ void poc_audio_test(PVOID pParameter)
 {
     iot_debug_set_fault_mode(OPENAT_FAULT_HANG);
 
-    //´ò¿ªµ÷ÊÔĞÅÏ¢£¬Ä¬ÈÏ¹Ø±Õ
+    //æ‰“å¼€è°ƒè¯•ä¿¡æ¯ï¼Œé»˜è®¤å…³é—­
     iot_vat_send_cmd((UINT8 *)"AT^TRACECTRL=0,1,1\r\n", sizeof("AT^TRACECTRL=0,1,1\r\n"));
 
-    //GPIO15ÉèÖÃÎª¸ß£¬ÆôÓÃÍâ²¿¹¦·Å
+    //GPIO15è®¾ç½®ä¸ºé«˜ï¼Œå¯ç”¨å¤–éƒ¨åŠŸæ”¾
     T_AMOPENAT_GPIO_CFG output_cfg = {0};
-    output_cfg.mode = OPENAT_GPIO_OUTPUT; //ÅäÖÃÊä³ö
-    output_cfg.param.defaultState = 1;    // Ä¬ÈÏ¸ßµçÆ½
-    // gpio0³õÊ¼»¯
+    output_cfg.mode = OPENAT_GPIO_OUTPUT; //é…ç½®è¾“å‡º
+    output_cfg.param.defaultState = 1;    // é»˜è®¤é«˜ç”µå¹³
+    // gpio0åˆå§‹åŒ–
     iot_gpio_open(15, &output_cfg);
-    iot_audio_set_speaker_vol(90);                       //ÉèÖÃÒôÁ¿
-    iot_audio_set_channel(OPENAT_AUDIOHAL_ITF_RECEIVER); //ÉèÖÃ²¥·ÅÍ¨µÀ
+    iot_audio_set_speaker_vol(90);                       //è®¾ç½®éŸ³é‡
+    iot_audio_set_channel(OPENAT_AUDIOHAL_ITF_RECEIVER); //è®¾ç½®æ’­æ”¾é€šé“
     HANDLE g_demo_timer1 = iot_os_create_timer((PTIMER_EXPFUNC)poc_audio_stream_record, NULL);
-    //½«GPIO0ÉèÖÃÎª¸ßµçÆ½
+    //å°†GPIO0è®¾ç½®ä¸ºé«˜ç”µå¹³
     while (1)
     {
-        iot_gpio_set(15, 0); //Â¼ÒôÊ±¹Ø±Õ¹¦·Å£¬±ÜÃâÔëÒô
-        // 1¡¢1sºóÆô¶¯Á÷Â¼Òô
+        iot_gpio_set(15, 0); //å½•éŸ³æ—¶å…³é—­åŠŸæ”¾ï¼Œé¿å…å™ªéŸ³
+        // 1ã€1såå¯åŠ¨æµå½•éŸ³
         iot_os_start_timer(g_demo_timer1, 1000);
-        iot_os_sleep(5 * 1000); //5sºó¹Ø±ÕÂ¼Òô
-        //2¡¢¹Ø±ÕÂ¼Òô
+        iot_os_sleep(5 * 1000); //5såå…³é—­å½•éŸ³
+        //2ã€å…³é—­å½•éŸ³
         iot_audio_rec_stop();
-        //3¡¢Á÷²¥·ÅÂ¼Òô
+        //3ã€æµæ’­æ”¾å½•éŸ³
         iot_debug_print("[poc-audio] recvbufsize: %d", recvbufsize);
-        iot_gpio_set(15, 1); //ÉèÖÃÎª¸ßµçÆ½,´ò¿ªÍâ²¿¹¦·Å
+        iot_gpio_set(15, 1); //è®¾ç½®ä¸ºé«˜ç”µå¹³,æ‰“å¼€å¤–éƒ¨åŠŸæ”¾
         int plen = 0;
         while (plen <= recvbufsize)
         {
-            //ÏûÔë×¨ÓÃ£¬Á÷²¥·Å½Ó¿Ú£¬PCM¸ñÊ½Ò»´Î×î¶à²¥·Å4096×Ö½Ú
+            //æ¶ˆå™ªä¸“ç”¨ï¼Œæµæ’­æ”¾æ¥å£ï¼ŒPCMæ ¼å¼ä¸€æ¬¡æœ€å¤šæ’­æ”¾4096å­—èŠ‚
             int len = iot_audio_streamplayV2(OPENAT_AUD_PLAY_TYPE_POC, OPENAT_AUD_FORMAT_PCM, audio_streamplay_handle, audiobuf + plen, recvbufsize / 15);
             plen += len;
             iot_debug_print("[poc-audio] iot_audio_streamplay len: %d plen:%d", len, plen);
-            iot_os_sleep(280); //×Ô¼º¿ØÖÆÊ±¼ä£¬Á÷²¥·Å½Ó¿Ú²»ÊÇ×èÈû½Ó¿Ú¡£
+            iot_os_sleep(280); //è‡ªå·±æ§åˆ¶æ—¶é—´ï¼Œæµæ’­æ”¾æ¥å£ä¸æ˜¯é˜»å¡æ¥å£ã€‚
         }
         iot_debug_print("[poc-audio] iot_audio_streamplay over");
-        //4¡¢Í£Ö¹²¥·Å
+        //4ã€åœæ­¢æ’­æ”¾
         iot_audio_stop_music();
     }
     return 0;
@@ -92,14 +92,14 @@ void poc_audio_test(PVOID pParameter)
 int appimg_enter(void *param)
 {
     iot_debug_print("[hello]appimg_enter");
-    //¹Ø±Õ¿´ÃÅ¹·£¬ËÀ»ú²»»áÖØÆô¡£Ä¬ÈÏ´ò¿ª
+    //å…³é—­çœ‹é—¨ç‹—ï¼Œæ­»æœºä¸ä¼šé‡å¯ã€‚é»˜è®¤æ‰“å¼€
     iot_debug_set_fault_mode(OPENAT_FAULT_HANG);
     iot_os_sleep(100);
-    //ÉèÖÃkeypad,µÚ3ĞĞ,µÚ2ÁĞÎªÎïÀíÇ¿ÖÆÏÂÔØ°´¼ü£¨OK°´¼ü£©¡£¿ª»úÊ±°´ÏÂ¸Ã°´¼ü»á½øÈëÏÂÔØÄ£Ê½
-    //pocÏîÄ¿Ã»Òı³öboot°´¼ü£¬±ØĞëµ÷ÓÃÒ»´ÎÉèÖÃkeypad½øÈëÏÂÔØÄ£Ê½£¬·ñÔò±ä×©ºóÖ»ÄÜ²ğ»úÁË¡£
+    //è®¾ç½®keypad,ç¬¬3è¡Œ,ç¬¬2åˆ—ä¸ºç‰©ç†å¼ºåˆ¶ä¸‹è½½æŒ‰é”®ï¼ˆOKæŒ‰é”®ï¼‰ã€‚å¼€æœºæ—¶æŒ‰ä¸‹è¯¥æŒ‰é”®ä¼šè¿›å…¥ä¸‹è½½æ¨¡å¼
+    //pocé¡¹ç›®æ²¡å¼•å‡ºbootæŒ‰é”®ï¼Œå¿…é¡»è°ƒç”¨ä¸€æ¬¡è®¾ç½®keypadè¿›å…¥ä¸‹è½½æ¨¡å¼ï¼Œå¦åˆ™å˜ç –ååªèƒ½æ‹†æœºäº†ã€‚
     iot_vat_send_cmd("AT*DOWNLOAD=2,3,2\r\n", sizeof("AT*DOWNLOAD=2,3,2\r\n"));
     iot_os_sleep(100);
-    //´ò¿ªµ÷ÊÔĞÅÏ¢£¬Ä¬ÈÏ¹Ø±Õ
+    //æ‰“å¼€è°ƒè¯•ä¿¡æ¯ï¼Œé»˜è®¤å…³é—­
     iot_vat_send_cmd("AT^TRACECTRL=0,1,2\r\n", sizeof("AT^TRACECTRL=0,1,2\r\n"));
     iot_os_sleep(100);
 

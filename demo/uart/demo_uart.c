@@ -38,8 +38,8 @@ VOID uart_msg_send(HANDLE hTask, TASK_MSG_ID id, VOID *param, UINT32 len)
     iot_os_send_message(hTask, msg);
 }
 
-//ÖĞ¶Ï·½Ê½¶Á´®¿Ú1Êı¾İ
-//×¢: ÖĞ¶ÏÖĞÓĞ¸´ÔÓµÄÂß¼­,Òª·¢ËÍÏûÏ¢µ½taskÖĞ´¦Àí
+//ä¸­æ–­æ–¹å¼è¯»ä¸²å£1æ•°æ®
+//æ³¨: ä¸­æ–­ä¸­æœ‰å¤æ‚çš„é€»è¾‘,è¦å‘é€æ¶ˆæ¯åˆ°taskä¸­å¤„ç†
 void uart_recv_handle(T_AMOPENAT_UART_MESSAGE* evt)
 {
 	INT8 *recv_buff = NULL;
@@ -87,15 +87,15 @@ VOID uart_open(VOID)
     T_AMOPENAT_UART_PARAM uartCfg;
     
     memset(&uartCfg, 0, sizeof(T_AMOPENAT_UART_PARAM));
-    uartCfg.baud = OPENAT_UART_BAUD_115200; //²¨ÌØÂÊ
-    uartCfg.dataBits = 8;   //Êı¾İÎ»
-    uartCfg.stopBits = 1; // Í£Ö¹Î»
-    uartCfg.parity = OPENAT_UART_NO_PARITY; // ÎŞĞ£Ñé
-    uartCfg.flowControl = OPENAT_UART_FLOWCONTROL_NONE; //ÎŞÁ÷¿Ø
-    uartCfg.txDoneReport = TRUE; // ÉèÖÃTURE¿ÉÒÔÔÚ»Øµ÷º¯ÊıÖĞÊÕµ½OPENAT_DRV_EVT_UART_TX_DONE_IND
-    uartCfg.uartMsgHande = uart_recv_handle; //»Øµ÷º¯Êı
+    uartCfg.baud = OPENAT_UART_BAUD_115200; //æ³¢ç‰¹ç‡
+    uartCfg.dataBits = 8;   //æ•°æ®ä½
+    uartCfg.stopBits = 1; // åœæ­¢ä½
+    uartCfg.parity = OPENAT_UART_NO_PARITY; // æ— æ ¡éªŒ
+    uartCfg.flowControl = OPENAT_UART_FLOWCONTROL_NONE; //æ— æµæ§
+    uartCfg.txDoneReport = TRUE; // è®¾ç½®TUREå¯ä»¥åœ¨å›è°ƒå‡½æ•°ä¸­æ”¶åˆ°OPENAT_DRV_EVT_UART_TX_DONE_IND
+    uartCfg.uartMsgHande = uart_recv_handle; //å›è°ƒå‡½æ•°
 
-    // ÅäÖÃuart1 Ê¹ÓÃÖĞ¶Ï·½Ê½¶ÁÊı¾İ
+    // é…ç½®uart1 ä½¿ç”¨ä¸­æ–­æ–¹å¼è¯»æ•°æ®
     err = iot_uart_open(UART_PORT2, &uartCfg);
 	iot_debug_print("[uart] uart_open_2 err: %d", err);
 
@@ -114,7 +114,7 @@ VOID uart_close(VOID)
 
 VOID uart_init(VOID)
 {   
-    uart_open(); // ´ò¿ª´®¿Ú1ºÍ´®¿Ú2 (´®¿Ú1ÖĞ¶Ï·½Ê½¶ÁÊı¾İ, ´®¿Ú2ÂÖÑµ·½Ê½¶ÁÊı¾İ)
+    uart_open(); // æ‰“å¼€ä¸²å£1å’Œä¸²å£2 (ä¸²å£1ä¸­æ–­æ–¹å¼è¯»æ•°æ®, ä¸²å£2è½®è®­æ–¹å¼è¯»æ•°æ®)
 }
 
 static VOID uart_task_main(PVOID pParameter)
@@ -144,7 +144,7 @@ static VOID uart_task_main(PVOID pParameter)
 	        msg = NULL;
 			iot_debug_print("[uart] uart_task_main_2 uart free");
 	    }
-		uart_write(); //´®¿Ú2 Ğ´Êı¾İ
+		uart_write(); //ä¸²å£2 å†™æ•°æ®
 	}
 }
 

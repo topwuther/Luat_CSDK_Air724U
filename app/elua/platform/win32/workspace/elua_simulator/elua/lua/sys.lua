@@ -12,13 +12,13 @@ local type = base.type
 local pairs = base.pairs
 local assert = base.assert
 
--- Ë¢ĞÂ´¦Àí
+-- åˆ·æ–°å¤„ç†
 local refreshflag = false
 function refresh()
 	refreshflag = true
 end
 
--- ¶¨Ê±Æ÷¹ÜÀí,×Ô¶¯·ÖÅä¶¨Ê±Æ÷id
+-- å®šæ—¶å™¨ç®¡ç†,è‡ªåŠ¨åˆ†é…å®šæ—¶å™¨id
 local uniquetid = 0
 local tpool = {}
 local para = {}
@@ -63,11 +63,11 @@ function timer_stop(val)
 	end
 end
 
--- ³õÊ¼»¯
+-- åˆå§‹åŒ–
 function init(mode)
 	uart.setup(uart.ATC,0,0,uart.PAR_NONE,uart.STOP_1)
 	print("poweron reason:",rtos.poweron_reason())
-	-- Ä£Ê½1:³äµç¿ª»ú²»Æô¶¯gsm
+	-- æ¨¡å¼1:å……ç”µå¼€æœºä¸å¯åŠ¨gsm
 	if mode == 1 then
 		if rtos.poweron_reason() == rtos.POWERON_CHARGER then
 			rtos.poweron(0)
@@ -75,17 +75,17 @@ function init(mode)
 	end
 end
 
--- Æô¶¯gsm
+-- å¯åŠ¨gsm
 function poweron()
 	rtos.poweron(1)
 end
 
---Ó¦ÓÃÏûÏ¢·Ö·¢,ÏûÏ¢Í¨Öª
+--åº”ç”¨æ¶ˆæ¯åˆ†å‘,æ¶ˆæ¯é€šçŸ¥
 local apps = {}
 
--- Ö§³ÖÁ½ÖÖ·½Ê½×¢²á:
--- 1. app´¦Àí±í
--- 2. ´¦Àíº¯Êı,id1,id2,...,idn
+-- æ”¯æŒä¸¤ç§æ–¹å¼æ³¨å†Œ:
+-- 1. appå¤„ç†è¡¨
+-- 2. å¤„ç†å‡½æ•°,id1,id2,...,idn
 function regapp(...)
 	local app = arg[1]
 
@@ -104,7 +104,7 @@ function deregapp(id)
 end
 
 local function addapp(app)
-	-- ²åÈëÎ²²¿
+	-- æ’å…¥å°¾éƒ¨
 	table.insert(apps,#apps+1,app)
 end
 
@@ -133,7 +133,7 @@ local function callapp(msg)
 		local app
 		for i=#apps,1,-1 do
 			app = apps[i]
-			if app.procer then --º¯Êı×¢²á·½Ê½µÄapp,´øidÍ¨Öª
+			if app.procer then --å‡½æ•°æ³¨å†Œæ–¹å¼çš„app,å¸¦idé€šçŸ¥
 				for _,v in ipairs(app) do
 					if v == id then
 						if app.procer(unpack(msg)) ~= true then
@@ -141,7 +141,7 @@ local function callapp(msg)
 						end
 					end
 				end
-			elseif app[id] then -- ´¦Àí±í·½Ê½µÄapp,²»´øidÍ¨Öª
+			elseif app[id] then -- å¤„ç†è¡¨æ–¹å¼çš„app,ä¸å¸¦idé€šçŸ¥
 				if app[id](unpack(msg,2,#msg)) ~= true then
 					return
 				end
@@ -150,7 +150,7 @@ local function callapp(msg)
 	end
 end
 
---ÄÚ²¿ÏûÏ¢¶ÓÁĞ
+--å†…éƒ¨æ¶ˆæ¯é˜Ÿåˆ—
 local qmsg = {}
 
 function dispatch(...)
@@ -185,7 +185,7 @@ local function runqmsg()
 	end
 end
 
--- ÏûÏ¢´¦Àí
+-- æ¶ˆæ¯å¤„ç†
 local handlers = {}
 base.setmetatable(handlers,{__index = function() return function() end end,})
 
@@ -211,7 +211,7 @@ function run()
 			timerfnc(msg.timer_id)
 		elseif msg.id == rtos.MSG_UART_RXDATA and msg.uart_id == uart.ATC then
 			handlers.atc()
-		else -- Í¨¹ıÏûÏ¢id×¢²á
+		else -- é€šè¿‡æ¶ˆæ¯idæ³¨å†Œ
 			if msg.id == rtos.MSG_UART_RXDATA then
 				if uartprocs[msg.uart_id] ~= nil then
 					uartprocs[msg.uart_id]()

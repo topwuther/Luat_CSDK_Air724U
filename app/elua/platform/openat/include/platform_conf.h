@@ -16,17 +16,17 @@
 #include "auxmods.h"
 
 // *****************************************************************************
-// ¶¨ÒåÆ½Ì¨Òª¿ªÆôµÄ¹¦ÄÜ
+// å®šä¹‰å¹³å°è¦å¼€å¯çš„åŠŸèƒ½
 #define BUILD_LUA_INT_HANDLERS
 #define BUILD_C_INT_HANDLERS
 
-/*+\NEW\liweiqiang\2013.12.6\¶ÔÓÚ³¬¹ı500KµÄdlÄÚ´æ³Ø,ÄÇÃ´Î±libcµÄmalloc´Ódlmalloc·ÖÅä */
+/*+\NEW\liweiqiang\2013.12.6\å¯¹äºè¶…è¿‡500Kçš„dlå†…å­˜æ± ,é‚£ä¹ˆä¼ªlibcçš„mallocä»dlmallocåˆ†é… */
 #if DLMALLOC_DEFAULT_GRANULARITY > (200*1024)
 #define USE_DLMALLOC_ALLOCATOR
 #else
 #define USE_PLATFORM_ALLOCATOR
 #endif
-/*-\NEW\liweiqiang\2013.12.6\¶ÔÓÚ³¬¹ı500KµÄdlÄÚ´æ³Ø,ÄÇÃ´Î±libcµÄmalloc´Ódlmalloc·ÖÅä */
+/*-\NEW\liweiqiang\2013.12.6\å¯¹äºè¶…è¿‡500Kçš„dlå†…å­˜æ± ,é‚£ä¹ˆä¼ªlibcçš„mallocä»dlmallocåˆ†é… */
 
 // *****************************************************************************
 // Configuration data
@@ -37,7 +37,7 @@
 // Number of resources (0 if not available/not implemented)
 #define NUM_PIO               3 // port 0:gpio0-31; port 1:gpio32-gpio55; port 2: gpio ex;
 #define NUM_SPI               0
-#define NUM_UART              4 //Êµ¼ÊÖ»ÓĞ2¸öÎïÀí´®¿Ú id0-¼æÈİ¾É°æ±¾Îªuart2 id1-uart1 id2-uart2 id3-hostuart
+#define NUM_UART              4 //å®é™…åªæœ‰2ä¸ªç‰©ç†ä¸²å£ id0-å…¼å®¹æ—§ç‰ˆæœ¬ä¸ºuart2 id1-uart1 id2-uart2 id3-hostuart
 #define NUM_TIMER             2
 #define NUM_PWM               0
 #define NUM_ADC               8
@@ -47,17 +47,17 @@
 #define PIO_PIN_EX            9 /*gpio ex 0~6,7,8*/
 #define PIO_PIN_ARRAY         {32 /* gpio_num 32 */, 32/* gpio_num 56 */, 32}
 
-//ĞéÄâatÃüÁîÍ¨µÀ
+//è™šæ‹Ÿatå‘½ä»¤é€šé“
 #define PLATFORM_UART_ID_ATC              0x7f
 
-//host uart debugÍ¨µÀ
+//host uart debugé€šé“
 #define PLATFORM_PORT_ID_DEBUG            0x80
 
-/*+\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*+\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 #define PLATFORM_PORT_ID_USB              0x81
-/*-\NEW\shenyuanyuan\2019.5.8\½«lua°æ±¾µÄusb AT¿Ú¸ÄÎªlua½Å±¾¿É¿ØÖÆµÄÆÕÍ¨Êı¾İ´«Êä¿Ú */
+/*-\NEW\shenyuanyuan\2019.5.8\å°†luaç‰ˆæœ¬çš„usb ATå£æ”¹ä¸ºluaè„šæœ¬å¯æ§åˆ¶çš„æ™®é€šæ•°æ®ä¼ è¾“å£ */
 
-//ÃüÁîĞĞÍ¨µÀ
+//å‘½ä»¤è¡Œé€šé“
 #define CON_UART_ID           (platform_get_console_port())
 #define CON_UART_SPEED        115200
 #define CON_TIMER_ID          0
@@ -65,21 +65,21 @@
 // PIO prefix ('0' for P0, P1, ... or 'A' for PA, PB, ...)
 #define PIO_PREFIX            '0'
 
-/*+\NEW\liweiqiang\2013.7.16\Ôö¼Óiconv×Ö·û±àÂë×ª»»¿â */
+/*+\NEW\liweiqiang\2013.7.16\å¢åŠ iconvå­—ç¬¦ç¼–ç è½¬æ¢åº“ */
 #ifdef LUA_ICONV_LIB
 #define ICONV_LINE   _ROM( AUXLIB_ICONV, luaopen_iconv, iconv_map )
 #else
 #define ICONV_LINE   
 #endif
-/*-\NEW\liweiqiang\2013.7.16\Ôö¼Óiconv×Ö·û±àÂë×ª»»¿â */
+/*-\NEW\liweiqiang\2013.7.16\å¢åŠ iconvå­—ç¬¦ç¼–ç è½¬æ¢åº“ */
 
-/*+\NEW\liweiqiang\2014.2.9\Ôö¼Ózlib¿â */
+/*+\NEW\liweiqiang\2014.2.9\å¢åŠ zlibåº“ */
 #ifdef LUA_ZLIB_LIB
 #define ZLIB_LINE   _ROM( AUXLIB_ZLIB, luaopen_zlib, zlib_map )
 #else
 #define ZLIB_LINE
 #endif
-/*-\NEW\liweiqiang\2014.2.9\Ôö¼Ózlib¿â */
+/*-\NEW\liweiqiang\2014.2.9\å¢åŠ zlibåº“ */
 
 #ifdef LUA_LVGL_SUPPORT
 #define LVGL_LIB_LINE   _ROM( AUXLIB_LVGL, luaopen_lvgl, NULL )
@@ -87,13 +87,13 @@
 #define LVGL_LIB_LINE
 #endif
 
-/*+\NEW\liweiqiang, panjun\2015.04.21\AM002_LUA²»Ö§³ÖÏÔÊ¾½Ó¿Ú */
+/*+\NEW\liweiqiang, panjun\2015.04.21\AM002_LUAä¸æ”¯æŒæ˜¾ç¤ºæ¥å£ */
 #ifdef LUA_DISP_LIB
 #define DISP_LIB_LINE   _ROM( AUXLIB_DISP, luaopen_disp, disp_map )
 #else
 #define DISP_LIB_LINE
 #endif
-/*-\NEW\liweiqiang, panjun\2015.04.21\AM002_LUA²»Ö§³ÖÏÔÊ¾½Ó¿Ú */
+/*-\NEW\liweiqiang, panjun\2015.04.21\AM002_LUAä¸æ”¯æŒæ˜¾ç¤ºæ¥å£ */
 
 #define JSON_LIB_LINE   _ROM( AUXLIB_JSON, luaopen_cjson, json_map )
 
@@ -115,13 +115,13 @@
 #define PBC_LIB_LINE
 #endif
 
-/*+\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*+\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 #ifdef LUA_QRENCODE_SUPPORT
 #define QRENCODE_LIB_LINE	_ROM( AUXLIB_QRENCODE, luaopen_qr_encode, qr_encode_map )	 
 #else
 #define QRENCODE_LIB_LINE
 #endif
-/*-\NEW\shenyuanyuan\2020.3.31\¿ª·¢ÒÆÖ²dispµÄ¶şÎ¬ÂëÏÔÊ¾½Ó¿Ú */
+/*-\NEW\shenyuanyuan\2020.3.31\å¼€å‘ç§»æ¤dispçš„äºŒç»´ç æ˜¾ç¤ºæ¥å£ */
 
 #if defined(LUA_WIFISCAN_SUPPORT)
 #define WIFI_LIB_LINE	_ROM( AUXLIB_WIFI, luaopen_wificore, wifi_map)	 
@@ -140,13 +140,13 @@
 #else
 #define GPS_LIB_LINE
 #endif
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 #ifdef LUA_BLUETOOTH_LIB
 #define BLUETOOTH_LIB_LINE _ROM( AUXLIB_BLUETOOTH, luaopen_bluetooth, bluetooth_map ) 
 #else
 #define BLUETOOTH_LIB_LINE
 #endif
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 
 
 #define LUA_PLATFORM_LIBS_ROM \

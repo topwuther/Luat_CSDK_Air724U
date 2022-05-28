@@ -7,7 +7,7 @@
  * Date:    2015/1/19
  *
  * Description:
- *          TCPIP SOCKET½Ó¿Ú
+ *          TCPIP SOCKETæ¥å£
  **************************************************************************/
 #include "cs_types.h"
 #include "cycle_queue.h"
@@ -34,22 +34,22 @@
 
 #define LUA_MAX_RECV_IND_LEN 2*1024
 
-#define DELAY_CLOSE_IND_TIME 500  //ÑÓ³ÙÖ÷¶¯ÉÏ±¨µÄÊ±¼ä£¬µ¥Î»ºÁÃë
+#define DELAY_CLOSE_IND_TIME 500  //å»¶è¿Ÿä¸»åŠ¨ä¸ŠæŠ¥çš„æ—¶é—´ï¼Œå•ä½æ¯«ç§’
 //#define LUA_SOCKET_TEST
-/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 typedef enum {
     PLATFORM_CONN_INIT = 0 << 0, 
     PLATFORM_CONN_CONNECTING = 1 << 0, 
     PLATFORM_CONN_CONNECTED= 1 << 1,
     PLATFORM_CONN_CLOSE = 1 << 2
 } platform_conn_status_enum;
-/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/	
+/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/	
 
 typedef struct
 {
@@ -59,34 +59,34 @@ typedef struct
     struct openSocketAddrSin sock_addr;
     kal_char    addr[MAX_SOCK_ADDR_LEN + 1];
     int        sock_id;
-    /*+\Bug 183\zhutianhua\2018.12.18 15:56\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+    /*+\Bug 183\zhutianhua\2018.12.18 15:56\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
     BOOL remoteCloseDelayed;
     HANDLE remoteCloseDelayTimerId;
-    /*-\Bug 183\zhutianhua\2018.12.18 15:56\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
-    /*+\Bug 271\zhutianhua\2019.1.24 17:46\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
+    /*-\Bug 183\zhutianhua\2018.12.18 15:56\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
+    /*+\Bug 271\zhutianhua\2019.1.24 17:46\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
     kal_uint32 totalSendLen;
     kal_uint32 sentLen;
-    /*-\Bug 271\zhutianhua\2019.1.24 17:46\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
-	/*+\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+    /*-\Bug 271\zhutianhua\2019.1.24 17:46\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
+	/*+\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 	int   ssl_ctx_id;
-	/*-\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	platform_conn_status_enum conn_status;
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	mthl_socket_cert soc_cert;
 	CycleQueue sslRxQ;
-	/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
-	kal_uint32 reqLen;  /*Í¨ÖªÉÏ²ã×¼±¸Òª½ÓÊÕµÄÊı¾İ³¤¶È*/
-	kal_uint32 buffLen;  /*Ê£Óà»¹Ã»ÓĞÍ¨ÖªÉÏ²ã´¦ÀíµÄ´ı½ÓÊÕµÄÊı¾İ³¤¶È*/
-	/*-\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+	/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
+	kal_uint32 reqLen;  /*é€šçŸ¥ä¸Šå±‚å‡†å¤‡è¦æ¥æ”¶çš„æ•°æ®é•¿åº¦*/
+	kal_uint32 buffLen;  /*å‰©ä½™è¿˜æ²¡æœ‰é€šçŸ¥ä¸Šå±‚å¤„ç†çš„å¾…æ¥æ”¶çš„æ•°æ®é•¿åº¦*/
+	/*-\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 }lua_socket_info_struct;
-/*+\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*+\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 typedef struct
 {
     kal_int8        sock_id;       /* Socket id to handle this notification. */
@@ -95,7 +95,7 @@ typedef struct
     kal_int32       error;         /* Error code. */
     kal_int32       detail_cause;  /* Detail error cause. */
 } platform_tls_evt_ind_struct;
-/*-\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*-\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 
 typedef struct
 {
@@ -104,17 +104,17 @@ typedef struct
     kal_char  password[CUSTOM_DTCNT_PROF_MAX_PW_LEN+1];         /* Password for a Data Account (ASCII) (MAX: CUSTOM_DTCNT_PROF_MAX_PW_LEN) */
     lua_socket_info_struct socket_info[LUA_MAX_SOCKET_SUPPORT];
 }lua_socket_context_struct;
-//socket·¢ËÍÒ»²¿·ÖÊı¾İºóÊ£ÓàµÈ´ı·¢ËÍµÄÊı¾İ
-/*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+//socketå‘é€ä¸€éƒ¨åˆ†æ•°æ®åå‰©ä½™ç­‰å¾…å‘é€çš„æ•°æ®
+/*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 typedef struct
 {
    UINT32 readySendLen;
    UINT32 alreadySendLen;
    CycleQueue sbufQueue;
 }socketRemainBuf;
-/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 
-/*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+/*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 #ifndef NUM_SOCKETS
 #define NUM_SOCKETS 10
 #endif
@@ -124,7 +124,7 @@ void platform_socket_conn(lua_socket_info_struct* lua_socket_info);
 kal_bool platform_socket_close(kal_uint8 socket_index);
 
 //static mthl_socket_cert g_s_cert;
-/*+\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*+\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 void platform_ssl_notify_process(
                                  kal_int8 s,
                                  openat_tls_event_enum event,
@@ -134,8 +134,8 @@ void platform_ssl_notify_process(
 
 static HANDLE g_s_tlsTask;
 #define PLATFORM_MSG_TLS    (1)
-/*-\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
-/*+\wangjian\2019.12.18\sslÏÂÔØ´óÎÄ¼ş´æÔÚÏß³Ì¼äÁÙ½çÇøÎÊÌâ£¬ÓÃĞÅºÅÁ¿×öÁÙ½çÇø±£»¤*/
+/*-\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
+/*+\wangjian\2019.12.18\sslä¸‹è½½å¤§æ–‡ä»¶å­˜åœ¨çº¿ç¨‹é—´ä¸´ç•ŒåŒºé—®é¢˜ï¼Œç”¨ä¿¡å·é‡åšä¸´ç•ŒåŒºä¿æŠ¤*/
 static HANDLE ssl_semaphore_Ref = NULL;
 VOID platformSslSemaphoreAcquire()
 {
@@ -156,7 +156,7 @@ VOID platformSslSemaphoreRelease()
 		platform_assert(__FUNCTION__,__LINE__);
 	}
 }
-/*-\wangjian\2019.12.18\sslÏÂÔØ´óÎÄ¼ş´æÔÚÏß³Ì¼äÁÙ½çÇøÎÊÌâ£¬ÓÃĞÅºÅÁ¿×öÁÙ½çÇø±£»¤*/
+/*-\wangjian\2019.12.18\sslä¸‹è½½å¤§æ–‡ä»¶å­˜åœ¨çº¿ç¨‹é—´ä¸´ç•ŒåŒºé—®é¢˜ï¼Œç”¨ä¿¡å·é‡åšä¸´ç•ŒåŒºä¿æŠ¤*/
 
 socketRemainBuf *openatGetRemainBuf(UINT8 soc_id)
 {
@@ -182,7 +182,7 @@ void openatFreeRemainBuf(UINT8 soc_id)
     OPENAT_free(remainBuf->sbufQueue.buf);
     remainBuf->sbufQueue.buf = NULL;
 }
-/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 
 extern void setfieldInt(lua_State *L, const char *key, int value);
 
@@ -195,16 +195,16 @@ static UINT8 platformGetFreeSocket(void)
 
   for(i = 0; i < LUA_MAX_SOCKET_SUPPORT; i++)
   {
-/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
     if(lua_socket_context.socket_info[i].sock_id == LUA_INVALID_SOKCET_ID
 		&& lua_socket_context.socket_info[i].conn_status == PLATFORM_CONN_INIT)
-/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
     {
       break;
     }
@@ -249,10 +249,10 @@ static lua_socket_info_struct* platform_socket_ctx(int s)
   return NULL;
 }
 
-/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 static lua_socket_info_struct* platform_socket_ctx_ext(int s,platform_conn_status_enum status)
 {
   UINT8 i;
@@ -265,10 +265,10 @@ static lua_socket_info_struct* platform_socket_ctx_ext(int s,platform_conn_statu
   }
   return NULL;
 }
-/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 
 static void platform_socket_connectCnf(lua_socket_info_struct* sock, BOOL success)
 {
@@ -282,7 +282,7 @@ static void platform_socket_recvInd(lua_socket_info_struct* sock, INT32 len)
 {
   PlatformMsgData msg;
   msg.socketRecvInd.socket_index = platform_socket_index(sock);
-  	/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+  	/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
   //OPENAT_print("%s wjwj index = %d,len=%d,reqLen = %d,buffLen=%d",__FUNCTION__,msg.socketRecvInd.socket_index,len,sock->reqLen,sock->buffLen);
   HANDLE cr = OPENAT_enter_critical_section();
   if(sock->reqLen == 0)
@@ -319,7 +319,7 @@ static void platform_socket_recvInd(lua_socket_info_struct* sock, INT32 len)
 			sock->buffLen += len;
 		OPENAT_exit_critical_section(cr);
   }
-  	/*-\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+  	/*-\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 }
 
 static void platform_socket_closeCnf(lua_socket_info_struct* sock)
@@ -345,7 +345,7 @@ static void platform_socket_sendCnf(lua_socket_info_struct* sock, BOOL result, U
   int ret;
   char *readBuf = NULL;
   INT32 readLen;
-  /*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+  /*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
   OPENAT_print("%s,%d,%d,%d,%d,%d,%d",__FUNCTION__,result,len,sock->sentLen,sock->totalSendLen,sbuf->alreadySendLen,
                     sbuf->readySendLen);
   if(sock->sock_type == SOC_SOCK_STREAM)
@@ -378,9 +378,9 @@ static void platform_socket_sendCnf(lua_socket_info_struct* sock, BOOL result, U
            }
            if(ret<0)
            {
-           		/*+\bug\wj\2020.3.11\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©Çé¿ö*/
+           		/*+\bug\wj\2020.3.11\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼æƒ…å†µ*/
            		OPENAT_free(readBuf);
-				/*-\bug\wj\2020.3.11\ĞŞ¸ÄÒ»´¦ÄÚ´æĞ¹Â©Çé¿ö*/
+				/*-\bug\wj\2020.3.11\ä¿®æ”¹ä¸€å¤„å†…å­˜æ³„æ¼æƒ…å†µ*/
                 platform_socket_sendCnf(sock, FALSE, 0);
            }
            else
@@ -390,14 +390,14 @@ static void platform_socket_sendCnf(lua_socket_info_struct* sock, BOOL result, U
         }
       }
   }
-  /*+\Bug 271\zhutianhua\2019.1.25 14:8\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
+  /*+\Bug 271\zhutianhua\2019.1.25 14:8\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
   else if(sock->sock_type == SOC_SOCK_STREAM_SSL)
   {
       if(result)
       {
-	  	/*+\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+	  	/*+\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
           //sock->sentLen += len;
-		  /*+\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+		  /*+\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
           if(sock->sentLen >= sock->totalSendLen)
           {
               msg.socketSendCnf.socket_index  = platform_socket_index(sock);
@@ -414,7 +414,7 @@ static void platform_socket_sendCnf(lua_socket_info_struct* sock, BOOL result, U
           platform_rtos_send(MSG_ID_APP_MTHL_SOCK_SEND_CNF, &msg);
       }
   }
-  /*-\Bug 271\zhutianhua\2019.1.25 14:8\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
+  /*-\Bug 271\zhutianhua\2019.1.25 14:8\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
   else
   {
     msg.socketSendCnf.socket_index  = platform_socket_index(sock);
@@ -422,9 +422,9 @@ static void platform_socket_sendCnf(lua_socket_info_struct* sock, BOOL result, U
     msg.socketSendCnf.result = result;
     platform_rtos_send(MSG_ID_APP_MTHL_SOCK_SEND_CNF, &msg);
   }
-  /*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+  /*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 }
-/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 static platform_socket_sendAckCnf(lua_socket_info_struct* sock, UINT32 len)
 {
     UINT8 socketId = platform_socket_index(sock);
@@ -445,9 +445,9 @@ static platform_socket_sendAckCnf(lua_socket_info_struct* sock, UINT32 len)
         }
     }
 }
-/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 
-/*+\Bug 183\zhutianhua\2018.12.19 11:11\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+/*+\Bug 183\zhutianhua\2018.12.19 11:11\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
 static void platform_socket_stop_remote_close_delay_timer(lua_socket_info_struct* sock)
 {
     OPENAT_print("%s sock=%x, remoteCloseDelayed=%d", __FUNCTION__, sock, sock ? sock->remoteCloseDelayed : 0);
@@ -461,15 +461,15 @@ static void platform_socket_stop_remote_close_delay_timer(lua_socket_info_struct
 
 void platform_socket_remote_close_delay_timer_cb(UINT32 param)
 {
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
     lua_socket_info_struct* sock = platform_socket_ctx_ext(param,PLATFORM_CONN_CONNECTED);
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 
     OPENAT_print("%s sock=%x, remoteCloseDelayed=%d", __FUNCTION__, sock, sock ? sock->remoteCloseDelayed : 0);
 
@@ -479,20 +479,20 @@ void platform_socket_remote_close_delay_timer_cb(UINT32 param)
         platform_socket_closeInd(sock);
     }
 }
-/*-\Bug 183\zhutianhua\2018.12.19 11:11\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+/*-\Bug 183\zhutianhua\2018.12.19 11:11\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
 
 static void platform_socket_cb(int s, openSocketEvent evt, int err, char* data, int len)
 {
   	OPENAT_print("%s got socket %d evt %d err %d dataLen = %d", __FUNCTION__, s, evt, err, len);
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
   	lua_socket_info_struct* sock = platform_socket_ctx_ext(s,(PLATFORM_CONN_CONNECTING | PLATFORM_CONN_CONNECTED));
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 
   	ASSERT(sock != NULL);
   	switch(evt)
@@ -523,7 +523,7 @@ static void platform_socket_cb(int s, openSocketEvent evt, int err, char* data, 
       		platform_socket_closeCnf(sock);
       	break;
     	case SOC_EVT_CLOSE_IND:
-      /*+\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+      /*+\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
 		sock->remoteCloseDelayTimerId = OPENAT_create_timerTask(platform_socket_remote_close_delay_timer_cb,s);
 		if(sock->remoteCloseDelayTimerId)
       	{
@@ -544,7 +544,7 @@ static void platform_socket_cb(int s, openSocketEvent evt, int err, char* data, 
           	OPENAT_print("%s SOC_EVT_CLOSE_IND OSATimerCreate fail", __FUNCTION__);
           	platform_socket_closeInd(sock);
       	}
-      /*-\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+      /*-\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
       	break;
 
     	case SOC_EVT_WRITE:
@@ -561,7 +561,7 @@ static void platform_socket_cb(int s, openSocketEvent evt, int err, char* data, 
   }
 }
 
-/*+\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*+\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 #ifdef LUA_SOCKET_SSL_SUPPORT
 static void platform_tls_task_entry(void* p)
 {
@@ -584,7 +584,7 @@ static void platform_tls_task_entry(void* p)
   }
 }
 #endif
-/*-\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*-\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 
 
 void platform_lua_socket_init(void)
@@ -595,12 +595,12 @@ void platform_lua_socket_init(void)
     for(i = 0; i < LUA_MAX_SOCKET_SUPPORT; i++)
     {
         lua_socket_context.socket_info[i].sock_id = LUA_INVALID_SOKCET_ID;
-		/*+\bug\wj\2020.4.5\SSL³õ´Î½¨Á¢»áÁ¬½ÓËÀ»úÎÊÌâ*/
+		/*+\bug\wj\2020.4.5\SSLåˆæ¬¡å»ºç«‹ä¼šè¿æ¥æ­»æœºé—®é¢˜*/
 		lua_socket_context.socket_info[i].sslRxQ.buf = NULL;
-		/*-\bug\wj\2020.4.5\SSL³õ´Î½¨Á¢»áÁ¬½ÓËÀ»úÎÊÌâ*/
+		/*-\bug\wj\2020.4.5\SSLåˆæ¬¡å»ºç«‹ä¼šè¿æ¥æ­»æœºé—®é¢˜*/
     }
     OPENAT_socket_init();
-	/*+\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+	/*+\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 	#ifdef LUA_SOCKET_SSL_SUPPORT
 	OPENAT_create_task(&g_s_tlsTask, 
           platform_tls_task_entry,
@@ -611,7 +611,7 @@ void platform_lua_socket_init(void)
           OPENAT_OS_CREATE_DEFAULT, 
           20, 
           "TLSTask");
-	/*-\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+	/*-\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 	
 	openat_tls_init();
 	#endif
@@ -688,7 +688,7 @@ kal_bool platform_deactivate_pdp(void)
   return OPENAT_deactivate_pdp();
 }
 
-/*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+/*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 kal_int32 platform_socket_error(kal_uint8 socket_index)
 {
 	lua_socket_info_struct* sock = &lua_socket_context.socket_info[socket_index];
@@ -698,7 +698,7 @@ kal_int32 platform_socket_error(kal_uint8 socket_index)
 
 	return error;
 }
-/*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+/*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 
 kal_bool platform_socket_send(kal_uint8 socket_index,
                                        kal_uint8*    data,
@@ -707,22 +707,22 @@ kal_bool platform_socket_send(kal_uint8 socket_index,
   lua_socket_info_struct* sock = &lua_socket_context.socket_info[socket_index];
   socketRemainBuf *sbuf = openatGetRemainBuf(socket_index);
   INT32 ret;
-  /*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+  /*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
   int error;
-  /*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+  /*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
   if(sock->sock_id != LUA_INVALID_SOKCET_ID && sock->connected)
   {
     do{
       if(sock->sock_type == SOC_SOCK_STREAM)
       {
-        /*+\NEW\WJ\2018.11.30\¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+        /*+\NEW\WJ\2018.11.30\åŠ å¿«TCPå‘é€é€Ÿåº¦*/
         sbuf->readySendLen = length;
-        /*-\NEW\WJ\2018.11.30\¼Ó¿ìTCP·¢ËÍËÙ¶È*/
-        //TODO ·¢ËÍ³¤¶È²»×ãµÄÊ±ºòÈçºÎ´¦Àí£¿£¿£¿
-        /*+\bug\wangjian\2019.3.20\ĞŞ¸ÄsslºÍsocketÍ¬Ê±Á¬½Ó·¢ËÍ³öÏÖÎÊÌâ*/
+        /*-\NEW\WJ\2018.11.30\åŠ å¿«TCPå‘é€é€Ÿåº¦*/
+        //TODO å‘é€é•¿åº¦ä¸è¶³çš„æ—¶å€™å¦‚ä½•å¤„ç†ï¼Ÿï¼Ÿï¼Ÿ
+        /*+\bug\wangjian\2019.3.20\ä¿®æ”¹sslå’ŒsocketåŒæ—¶è¿æ¥å‘é€å‡ºç°é—®é¢˜*/
         ret = OPENAT_socket_send(sock->sock_id, data, length, 0);
-        /*-\bug\wangjian\2019.3.20\ĞŞ¸ÄsslºÍsocketÍ¬Ê±Á¬½Ó·¢ËÍ³öÏÖÎÊÌâ*/
-        /*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+        /*-\bug\wangjian\2019.3.20\ä¿®æ”¹sslå’ŒsocketåŒæ—¶è¿æ¥å‘é€å‡ºç°é—®é¢˜*/
+        /*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
         OPENAT_print("%s size = %d, written = %d",__FUNCTION__,sbuf->readySendLen,ret);
         if(ret < 0)
         {
@@ -735,7 +735,7 @@ kal_bool platform_socket_send(kal_uint8 socket_index,
         {
             QueueInsert(&sbuf->sbufQueue,data+ret,sbuf->readySendLen-ret);
         }
-        /*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+        /*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
       }
 	  #ifdef LUA_SOCKET_SSL_SUPPORT
       else if(sock->sock_type == SOC_SOCK_STREAM_SSL)
@@ -746,18 +746,18 @@ kal_bool platform_socket_send(kal_uint8 socket_index,
         {
           break;
         }
-		/*+\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+		/*+\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
 		#if 0
 		else
         {
         	platform_socket_sendCnf(sock,TRUE,ret);
         }
 		#endif
-        /*+\Bug 271\zhutianhua\2019.1.25 14:9\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
+        /*+\Bug 271\zhutianhua\2019.1.25 14:9\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
         sock->totalSendLen = openat_tls_get_encrypt_len(sock->sock_id);
-		/*-\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+		/*-\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
         sock->sentLen = 0;
-        /*-\Bug 271\zhutianhua\2019.1.25 14:9\tcp ssl·¢ËÍÒ»´ÎÊı¾İ£¬»áÊÕµ½Á½´Îsend cnf*/
+        /*-\Bug 271\zhutianhua\2019.1.25 14:9\tcp sslå‘é€ä¸€æ¬¡æ•°æ®ï¼Œä¼šæ”¶åˆ°ä¸¤æ¬¡send cnf*/
       }
       #endif
 	  else
@@ -778,7 +778,7 @@ kal_bool platform_socket_send(kal_uint8 socket_index,
       return TRUE;
     }while(0);
 
-	/*+\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+	/*+\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
 	error = OPENAT_socket_error(sock->sock_id);
 
 	if(error == OPENAT_SOCKET_EINPROGRESS || error == OPENAT_SOCKET_EWOULDBLOCK)
@@ -790,7 +790,7 @@ kal_bool platform_socket_send(kal_uint8 socket_index,
 	{
 		platform_socket_sendCnf(sock, FALSE, 0);
 	}
-    /*-\BUG \lijiaodi\2020.10.30sendµÄ·µ»Ø½á¹ûÌí¼Ó·¢ËÍÊ§°ÜµÄÔ­ÒòÉÏ±¨*/ 
+    /*-\BUG \lijiaodi\2020.10.30sendçš„è¿”å›ç»“æœæ·»åŠ å‘é€å¤±è´¥çš„åŸå› ä¸ŠæŠ¥*/ 
   }
   return FALSE;
 }
@@ -841,12 +841,12 @@ kal_int32 platform_socket_recv(kal_uint8 socket_index,
   from_addr.sin_port = sock_info->port;
   if(LUA_INVALID_SOKCET_ID !=sock_info->sock_id && sock_info->connected)
   {
-	/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+	/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
   	  if(length > sock_info->reqLen)
   	  {
 		 length = sock_info->reqLen;
 	  }
-	/*-\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+	/*-\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 	  if(sock_info->sock_type == SOC_SOCK_STREAM)
 	  {
 	      recv_result = OPENAT_socket_recv(sock_info->sock_id,
@@ -870,7 +870,7 @@ kal_int32 platform_socket_recv(kal_uint8 socket_index,
 	                                 &from_addr,
 	                                 &addrlen);
 	  }
-	/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+	/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 	  //OPENAT_print("%s wjwj end index %d length = %d reqLen=%d,buffLen=%d",__FUNCTION__,socket_index,length,sock_info->reqLen,sock_info->buffLen);
 	  HANDLE cr = OPENAT_enter_critical_section();
 	  if(recv_result >= 0)
@@ -882,7 +882,7 @@ kal_int32 platform_socket_recv(kal_uint8 socket_index,
 	  if(sock_info->reqLen == 0 && sock_info->buffLen > 0)
 	  {
 	  		if(sock_info->sock_type == SOC_SOCK_STREAM_SSL){
-		  		if(sock_info->buffLen > LUA_MAX_RECV_IND_LEN){ /*´óÓÚLUA_MAX_RECV_IND_LENµÄ»°¾ÍÏÈÉÏ±¨ÉÏ²ãÈ¡LUA_MAX_RECV_IND_LEN*/
+		  		if(sock_info->buffLen > LUA_MAX_RECV_IND_LEN){ /*å¤§äºLUA_MAX_RECV_IND_LENçš„è¯å°±å…ˆä¸ŠæŠ¥ä¸Šå±‚å–LUA_MAX_RECV_IND_LEN*/
 					sock_info->reqLen = LUA_MAX_RECV_IND_LEN;
 					sock_info->buffLen -= LUA_MAX_RECV_IND_LEN;
 		  		}
@@ -916,7 +916,7 @@ kal_int32 platform_socket_recv(kal_uint8 socket_index,
 	  else{
 			OPENAT_exit_critical_section(cr);
 	  }
-	  /*-\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+	  /*-\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
   }
 
   return recv_result;
@@ -941,7 +941,7 @@ void platform_socket_on_recv_done(kal_uint8 socket_index, kal_uint32 recv_len)
 
 kal_bool platform_socket_close_without_cnf(kal_uint8 socket_index)
 {
-  	//¹Ø±Õsocket
+  	//å…³é—­socket
   	lua_socket_info_struct* sock = &lua_socket_context.socket_info[socket_index];
 	socketRemainBuf *sbuf = NULL;
   	OPENAT_print("%s close socket id = %d,socket_index = %d", __FUNCTION__, sock->sock_id,socket_index);
@@ -949,10 +949,10 @@ kal_bool platform_socket_close_without_cnf(kal_uint8 socket_index)
 	
 	if(sock->sock_id != LUA_INVALID_SOKCET_ID)
 	{
-		/*+\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+		/*+\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
 		platform_socket_stop_remote_close_delay_timer(sock);
-		/*-\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
-		/*+\bug\wj\2021.1.15\BUG4223 SSL½ÓÊÕ¹ı³ÌÖĞÍ»È»¹Ø±Õ£¬Ôì³ÉËÀ»ú*/
+		/*-\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
+		/*+\bug\wj\2021.1.15\BUG4223 SSLæ¥æ”¶è¿‡ç¨‹ä¸­çªç„¶å…³é—­ï¼Œé€ æˆæ­»æœº*/
 		#ifdef LUA_SOCKET_SSL_SUPPORT
 		if(sock->sock_type == SOC_SOCK_STREAM_SSL)
 		{
@@ -977,7 +977,7 @@ kal_bool platform_socket_close_without_cnf(kal_uint8 socket_index)
 		}
 		
 		sock->conn_status = PLATFORM_CONN_CLOSE;	
-		/*-\bug\wj\2021.1.15\BUG4223 SSL½ÓÊÕ¹ı³ÌÖĞÍ»È»¹Ø±Õ£¬Ôì³ÉËÀ»ú*/
+		/*-\bug\wj\2021.1.15\BUG4223 SSLæ¥æ”¶è¿‡ç¨‹ä¸­çªç„¶å…³é—­ï¼Œé€ æˆæ­»æœº*/
 		sock->connected = FALSE;
 		sock->sock_id = LUA_INVALID_SOKCET_ID;
 	}
@@ -1001,13 +1001,13 @@ kal_bool platform_socket_close(kal_uint8 socket_index)
 
 kal_bool platform_socket_destroy(kal_uint8 socket_index)
 {
-  	//¹Ø±Õsocket
+  	//å…³é—­socket
   	lua_socket_info_struct* sock = &lua_socket_context.socket_info[socket_index];
 
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
   	OPENAT_print("%s destroy socket id = %d sock->conn_status = %d socket_index = %d", __FUNCTION__, sock->sock_id,sock->conn_status,socket_index);
 	if(sock->conn_status != PLATFORM_CONN_CLOSE)
 	{
@@ -1015,10 +1015,10 @@ kal_bool platform_socket_destroy(kal_uint8 socket_index)
 	}
 
 	sock->conn_status = PLATFORM_CONN_INIT;
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
  	sock->sock_id = LUA_INVALID_SOKCET_ID;
   	return KAL_TRUE;
 }
@@ -1027,15 +1027,15 @@ kal_bool platform_socket_destroy(kal_uint8 socket_index)
 static u8 platform_process_read_event(kal_int8 SocketID)
 {
 	#define RECVLEN  1460
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	lua_socket_info_struct* sock = platform_socket_ctx_ext(SocketID,PLATFORM_CONN_CONNECTED);
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	int recvLen;
 	int recved = 0;
 	char buf[RECVLEN+1];
@@ -1090,7 +1090,7 @@ static u8 platform_process_read_event(kal_int8 SocketID)
 }
 #endif
 
-/*+\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+/*+\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 void platform_free_cert(lua_socket_info_struct* sock)
 {
 	if(sock->soc_cert.serverCacert)
@@ -1174,32 +1174,32 @@ void platform_load_cert(lua_socket_info_struct* lua_socket_info,mthl_socket_cert
 	}
 }
 
-/*-\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+/*-\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 
 #ifdef LUA_SOCKET_SSL_SUPPORT
 
 static void platform_ssl_cb(int s, openSocketEvent evt, int err, char* data, int len)
 {
-	/*+\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	lua_socket_info_struct* sock = platform_socket_ctx_ext(s,PLATFORM_CONN_CONNECTED | PLATFORM_CONN_CONNECTING);
 	if((evt == SOC_EVT_SEND_ACK) && sock)
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	{
 		sock->sentLen += len;
 	}
-	/*-\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+	/*-\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
 	openat_tls_soc_notify_ind_hdlr(s,evt, (err == 0) ? KAL_TRUE : KAL_FALSE);
 }
 
 #endif
-/*+\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*+\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 void platform_ssl_notify_ind(kal_int16 mod,
                                  kal_int8 s,
                                  openat_tls_event_enum event,
@@ -1217,7 +1217,7 @@ void platform_ssl_notify_ind(kal_int16 mod,
 
 	OPENAT_send_message(g_s_tlsTask, PLATFORM_MSG_TLS, &indEvt, sizeof(indEvt));
 }
-/*-\BUG\lijiaodi\2020.8.12\½â¾öÁ¬ĞøÊÕµ½2´Îrecvind£¬µÚÒ»´Îread errorºócloseÁË£¬µÚ¶ş´ÎreadµÄÊ±ºòËÀ»ú*/
+/*-\BUG\lijiaodi\2020.8.12\è§£å†³è¿ç»­æ”¶åˆ°2æ¬¡recvindï¼Œç¬¬ä¸€æ¬¡read erroråcloseäº†ï¼Œç¬¬äºŒæ¬¡readçš„æ—¶å€™æ­»æœº*/
 
 #ifdef LUA_SOCKET_SSL_SUPPORT
 void platform_ssl_notify_process(
@@ -1227,18 +1227,18 @@ void platform_ssl_notify_process(
                                  kal_int32 error,
                                  kal_int32 detail_cause)
 {
-	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/
+	/*+\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/
 	lua_socket_info_struct* sock = platform_socket_ctx_ext(s,PLATFORM_CONN_CONNECTED|PLATFORM_CONN_CONNECTING);
 	int shakeRet = 0;
 	if (!sock)
 		return;
-	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeºósocketid¾Í±»»ØÊÕ£¬
-µ«ÊÇplatform²ãplatform_socket_closeºóĞèµÈplatform_socket_destoryºó²Å»ØÊÕid£¬Èç¹ûÔÚclose¸údestoryÖ®¼äÓĞĞÂµÄsocket£¬
-±ØÈ»´æÔÚsocketidÏàÍ¬µÄ¶àÌõsocket_info¼ÇÂ¼£¬Òò´Ë¼ÓÁËconn_status¼ÇÂ¼²»Í¬socket_infoµÄstatus£¬Í¨¹ıplatform_socket_ctx_ext´«Èëid+status
-»ñÈ¡¶ÔÓ¦µÄsocket_info¼ÇÂ¼£¬destoryµÄÊ±ºòstatus±ØĞëÊÇPLATFORM_CONN_CLOSE*/	
+	/*-\Bug \LIJIAODI\2020.10.22 \OPENAT_socket_closeåsocketidå°±è¢«å›æ”¶ï¼Œ
+ä½†æ˜¯platformå±‚platform_socket_closeåéœ€ç­‰platform_socket_destoryåæ‰å›æ”¶idï¼Œå¦‚æœåœ¨closeè·Ÿdestoryä¹‹é—´æœ‰æ–°çš„socketï¼Œ
+å¿…ç„¶å­˜åœ¨socketidç›¸åŒçš„å¤šæ¡socket_infoè®°å½•ï¼Œå› æ­¤åŠ äº†conn_statusè®°å½•ä¸åŒsocket_infoçš„statusï¼Œé€šè¿‡platform_socket_ctx_extä¼ å…¥id+status
+è·å–å¯¹åº”çš„socket_infoè®°å½•ï¼Œdestoryçš„æ—¶å€™statuså¿…é¡»æ˜¯PLATFORM_CONN_CLOSE*/	
 	OPENAT_print("%s sock= %d got event %d error %d result %d", __FUNCTION__, s,event,error,result);
     switch(event)
     {
@@ -1278,9 +1278,9 @@ void platform_ssl_notify_process(
             break;
 
         case OPENAT_TLS_WRITE:
-			/*+\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
-            platform_socket_sendCnf(sock, result, detail_cause);//ÕâÀïĞèÒªÌØ±ğ×¢Òâ
-			/*-\bug\wj\2020.4.5\ssl·¢ËÍºóµÚ¶ş´ÎÊÕ²»µ½»Ø¸´*/
+			/*+\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
+            platform_socket_sendCnf(sock, result, detail_cause);//è¿™é‡Œéœ€è¦ç‰¹åˆ«æ³¨æ„
+			/*-\bug\wj\2020.4.5\sslå‘é€åç¬¬äºŒæ¬¡æ”¶ä¸åˆ°å›å¤*/
             break;
 
         case OPENAT_TLS_CLOSE:
@@ -1311,15 +1311,15 @@ void platform_ssl_notify_process(
 }
 
 #endif
-/*+\wj\bug\2020.9.8\sslÖØ¸´ÊÍ·Åµ¼ÖÂ³öÏÖËÀ»ú£¬platform_socket_closeIndÀïÃæÒ²ÓĞÊÍ·Å´¦Àí*/
+/*+\wj\bug\2020.9.8\sslé‡å¤é‡Šæ”¾å¯¼è‡´å‡ºç°æ­»æœºï¼Œplatform_socket_closeIndé‡Œé¢ä¹Ÿæœ‰é‡Šæ”¾å¤„ç†*/
 #ifdef LUA_SOCKET_SSL_SUPPORT
 void platform_ssl_close(UINT8 socket_index){
     u32 ret = 0;
 	
 	lua_socket_info_struct* sock = &lua_socket_context.socket_info[socket_index];
-	/*+\wj\new\2020.12.9\¹Ò²âËÀ»ú£¬ÀàĞÍ´íÎó£¬µ¼ÖÂÏÂÃæÉ¾³ıµÄÊ±ºò³öÎÊÌâ*/
+	/*+\wj\new\2020.12.9\æŒ‚æµ‹æ­»æœºï¼Œç±»å‹é”™è¯¯ï¼Œå¯¼è‡´ä¸‹é¢åˆ é™¤çš„æ—¶å€™å‡ºé—®é¢˜*/
 	int ctxID = sock->ssl_ctx_id;
-	/*-\wj\new\2020.12.9\¹Ò²âËÀ»ú£¬ÀàĞÍ´íÎó£¬µ¼ÖÂÏÂÃæÉ¾³ıµÄÊ±ºò³öÎÊÌâ*/
+	/*-\wj\new\2020.12.9\æŒ‚æµ‹æ­»æœºï¼Œç±»å‹é”™è¯¯ï¼Œå¯¼è‡´ä¸‹é¢åˆ é™¤çš„æ—¶å€™å‡ºé—®é¢˜*/
 	OPENAT_print("%s index = %d,sock = %d", __FUNCTION__, socket_index,sock->sock_id);
 	
 	if(sock->sock_id != LUA_INVALID_SOKCET_ID)
@@ -1337,7 +1337,7 @@ void platform_ssl_close(UINT8 socket_index){
 	        OPENAT_print("%s delete_conn fail ret=%d", __FUNCTION__,ret);
 	    }
 
-		/*+\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+		/*+\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 		if(ctxID >=0)
 		{
 		    ret = openat_tls_delete_ctx(ctxID);
@@ -1345,7 +1345,7 @@ void platform_ssl_close(UINT8 socket_index){
 		        OPENAT_print("%s delete_ctx fail ret=%d", __FUNCTION__,ret);
 		    }
 		}
-		/*-\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+		/*-\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 		platform_free_cert(sock);
 	}
 }
@@ -1356,38 +1356,38 @@ void platform_ssl_close(UINT8 socket_index){
 int platform_ssl_create(lua_socket_info_struct* lua_socket_info)
 {
 	openat_tls_socaddr_struct faddr;
-	/*+\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+	/*+\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 	int   ssl_ctx_id;
-	/*-\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+	/*-\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 	int ret;
 
 
-	/*+\bug3002\lijiaodi\2020.09.19\¹æ±ÜËÀ»ú,Èç¹ûbuf²»Îª¿Õ£¬ÏÈfreeÔÙmalloc */
+	/*+\bug3002\lijiaodi\2020.09.19\è§„é¿æ­»æœº,å¦‚æœbufä¸ä¸ºç©ºï¼Œå…ˆfreeå†malloc */
 	if(lua_socket_info->sslRxQ.buf)
 	{
 		OPENAT_free(lua_socket_info->sslRxQ.buf);
 		lua_socket_info->sslRxQ.buf = NULL;
 		//platform_assert(__FUNCTION__,__LINE__);
 	}
-	/*-\bug3002\lijiaodi\2020.09.19\¹æ±ÜËÀ»ú,Èç¹ûbuf²»Îª¿Õ£¬ÏÈfreeÔÙmalloc */
+	/*-\bug3002\lijiaodi\2020.09.19\è§„é¿æ­»æœº,å¦‚æœbufä¸ä¸ºç©ºï¼Œå…ˆfreeå†malloc */
 	{
-		lua_socket_info->sslRxQ.buf = OPENAT_malloc(SSL_SOCKET_RX_BUF_SIZE);//buf;//ÕâÀïµÄbufÊ²Ã´Ê±ºòÊÍ·Å£¬ÕâÀïÊÇ·ñ¿¼ÂÇ·Åµ½platform_ssl_create
+		lua_socket_info->sslRxQ.buf = OPENAT_malloc(SSL_SOCKET_RX_BUF_SIZE);//buf;//è¿™é‡Œçš„bufä»€ä¹ˆæ—¶å€™é‡Šæ”¾ï¼Œè¿™é‡Œæ˜¯å¦è€ƒè™‘æ”¾åˆ°platform_ssl_create
 		lua_socket_info->sslRxQ.size = SSL_SOCKET_RX_BUF_SIZE;
 		QueueClean(&lua_socket_info->sslRxQ);
 	}
 	faddr.port = lua_socket_info->port;
-	/*+\bug:3807\czm\2020.12.8\V25 FOTA+coretest¹Ò²âËÀ»ú*/
-	/*Ã»ÓĞ¶Ô³¤¶È¸³Öµ£¬³¤¶ÈÊÇ¸öËæ»úÖµ£¬ÔÚopenat_tls_new_conn½Ó¿ÚÖĞÊ¹ÓÃµ½ÁË¸Ã³¤¶È½øĞĞmemcpyµ¼ÖÂÄÚ´æ¸²¸Ç¡£*/
+	/*+\bug:3807\czm\2020.12.8\V25 FOTA+coretestæŒ‚æµ‹æ­»æœº*/
+	/*æ²¡æœ‰å¯¹é•¿åº¦èµ‹å€¼ï¼Œé•¿åº¦æ˜¯ä¸ªéšæœºå€¼ï¼Œåœ¨openat_tls_new_connæ¥å£ä¸­ä½¿ç”¨åˆ°äº†è¯¥é•¿åº¦è¿›è¡Œmemcpyå¯¼è‡´å†…å­˜è¦†ç›–ã€‚*/
 	faddr.addr_len = sizeof(lua_socket_info->sock_addr.s_addr);
 	memcpy(faddr.addr, &lua_socket_info->sock_addr.s_addr, faddr.addr_len);
-	/*-\bug:3807\czm\2020.12.8\V25 FOTA+coretest¹Ò²âËÀ»ú*/
+	/*-\bug:3807\czm\2020.12.8\V25 FOTA+coretestæŒ‚æµ‹æ­»æœº*/
 	OPENAT_Socket_set_cb(lua_socket_info->sock_id, platform_ssl_cb);
 	ssl_ctx_id = openat_tls_new_ctx(OPENAT_TLS_ALL_VERSIONS,OPENAT_TLS_CLIENT_SIDE,0,0);
 	lua_socket_info->ssl_ctx_id = ssl_ctx_id;
 
-	/*+\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+	/*+\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 	if(ssl_ctx_id < 0)   return ssl_ctx_id;
-	/*-\bug2727\lijiaodi\2020.07.31\µ±ÓĞ´óÓÚ3Â·ssl tcpÊ±ËÀ»ú*/
+	/*-\bug2727\lijiaodi\2020.07.31\å½“æœ‰å¤§äº3è·¯ssl tcpæ—¶æ­»æœº*/
 	
 
 	openat_tls_new_conn(ssl_ctx_id ,lua_socket_info->sock_id,&faddr,platform_ssl_notify_ind);//CB ???
@@ -1428,7 +1428,7 @@ void platform_dns_cb(const char *name, struct openSocketip_addr *ipaddr, void *c
 		return;// when OPENAT_socket_create is fail
 	}
 
-	/*+\bug\zhuwangbin\2020.4.20\½â¾öÓòÃû½âÎöÊ§°Ü»áËÀ»úµÄÎÊÌâ*/
+	/*+\bug\zhuwangbin\2020.4.20\è§£å†³åŸŸåè§£æå¤±è´¥ä¼šæ­»æœºçš„é—®é¢˜*/
 	if (!ipaddr)
 	{
 		lua_socket_info->sock_addr.s_addr = 0;
@@ -1437,7 +1437,7 @@ void platform_dns_cb(const char *name, struct openSocketip_addr *ipaddr, void *c
 	{
 		lua_socket_info->sock_addr.s_addr = ipaddr->addr;
 	}
-	/*-\bug\zhuwangbin\2020.4.20\½â¾öÓòÃû½âÎöÊ§°Ü»áËÀ»úµÄÎÊÌâ*/
+	/*-\bug\zhuwangbin\2020.4.20\è§£å†³åŸŸåè§£æå¤±è´¥ä¼šæ­»æœºçš„é—®é¢˜*/
 	platform_socket_conn(lua_socket_info);
 }
 
@@ -1491,23 +1491,23 @@ int platform_socket_open(
 			OPENAT_print("%s create socket error", __FUNCTION__);
 			return -1;
 		}
-		/*+\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+		/*+\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 		if(sock_type == SOC_SOCK_STREAM_SSL && cert != NULL){
 			platform_load_cert(lua_socket_info,cert);
 		}
-		/*-\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+		/*-\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 	}
 	lua_socket_info->conn_status = PLATFORM_CONN_CONNECTING;
 
 	if(ret == 0)
     {
 		lua_socket_info->sock_addr.s_addr = ipAddr.addr;
-		/*+\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+		/*+\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 		platform_socket_conn(lua_socket_info);
-		/*-\BUG\WJ\2020.6.12\½â¾össl ÓòÃû½âÎöÒì²½Ê± SSLÁ¬½Ó²»ÉÏµÄÎÊÌâ*/
+		/*-\BUG\WJ\2020.6.12\è§£å†³ssl åŸŸåè§£æå¼‚æ­¥æ—¶ SSLè¿æ¥ä¸ä¸Šçš„é—®é¢˜*/
 		return socket_index;
     }
-    else if(-5 == ret)//×èÈû
+    else if(-5 == ret)//é˜»å¡
     {
       	return socket_index;
     }
@@ -1580,7 +1580,7 @@ kal_int32 platform_on_create_conn_cnf(lua_State *L,
 	OPENAT_print("%s index = %d,sock = %d,result = %d",__FUNCTION__,socket_index,sock->sock_id,create_conn_cnf->result);
 	if(sock->sock_id != LUA_INVALID_SOKCET_ID)
 	{
-		if(sock != NULL && !success) //Á¬½ÓÊ§°ÜµÄCNF
+		if(sock != NULL && !success) //è¿æ¥å¤±è´¥çš„CNF
 		{
 			platform_socket_close_without_cnf(socket_index);
 		}
@@ -1591,21 +1591,21 @@ kal_int32 platform_on_create_conn_cnf(lua_State *L,
 		    {
 		        openatFreeRemainBuf(socket_index);
 		    }
-			/*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+			/*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 			if(success)
 			{
 			    openatResetRemainBuf(socket_index);
 			    openatInitRemainBuf(socket_index);
 			}
-			/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+			/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 		}
 		if(success){
 			sock->conn_status = PLATFORM_CONN_CONNECTED;
 			sock->connected = TRUE;
-			/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+			/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 		 	sock->reqLen = 0;
 			sock->buffLen = 0;
-			/*+\bug\wj\2020.12.8\½ÓÊÕÏûÏ¢¹ı¶àµ¼ÖÂluaTaskÏûÏ¢¶ÓÁĞÂúÁË*/
+			/*+\bug\wj\2020.12.8\æ¥æ”¶æ¶ˆæ¯è¿‡å¤šå¯¼è‡´luaTaskæ¶ˆæ¯é˜Ÿåˆ—æ»¡äº†*/
 		}
 	}
     return 1;
@@ -1666,7 +1666,7 @@ kal_int32 platform_on_send_data_ind(lua_State *L,
 
     if(send_data_ind->result != KAL_TRUE)
     {
-        /*´íÎó´¦Àí */
+        /*é”™è¯¯å¤„ç† */
         lua_pushinteger(L, send_data_ind->ret_val);
     }
     else
@@ -1702,9 +1702,9 @@ kal_int32 platform_on_sock_close_ind(lua_State *L,
     setfieldInt(L, "socket_index", sock_close_ind->socket_index);
     setfieldInt(L, "result", !sock_close_ind->result);
 	OPENAT_print("%s index = %d,sock = %d",__FUNCTION__,sock_close_ind->socket_index,sock->sock_id);
-    /*+\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+    /*+\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
     platform_socket_stop_remote_close_delay_timer(sock);
-    /*-\Bug 183\zhutianhua\2018.12.19 11:13\ĞŞÕı"Lua°æ±¾£¬socket¶ÌÁ¬½Ó£¬Èç¹û·şÎñÆ÷·¢ËÍÊı¾İÖ®ºó£¬Á¢¼´Ö÷¶¯¹Ø±Õ£¬ÖÕ¶Ë»áÏÈÊÕµ½close ind£¬ºóÊÕµ½×îºóÒ»°üÊı¾İµÄrecv ind"µÄÎÊÌâ*/
+    /*-\Bug 183\zhutianhua\2018.12.19 11:13\ä¿®æ­£"Luaç‰ˆæœ¬ï¼ŒsocketçŸ­è¿æ¥ï¼Œå¦‚æœæœåŠ¡å™¨å‘é€æ•°æ®ä¹‹åï¼Œç«‹å³ä¸»åŠ¨å…³é—­ï¼Œç»ˆç«¯ä¼šå…ˆæ”¶åˆ°close indï¼Œåæ”¶åˆ°æœ€åä¸€åŒ…æ•°æ®çš„recv ind"çš„é—®é¢˜*/
 	if(sock->sock_id != LUA_INVALID_SOKCET_ID)
 	{
 		platform_socket_close_without_cnf(sock_close_ind->socket_index);
@@ -1756,12 +1756,12 @@ kal_int32 platform_on_sock_close_cnf(lua_State *L,
 		if(sock->sock_type == SOC_SOCK_STREAM)
 		{
 			socketRemainBuf *sbuf = openatGetRemainBuf(socket_index);
-			/*+\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+			/*+\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 			if (sbuf->sbufQueue.buf != NULL)
 			{
 		    	openatFreeRemainBuf(socket_index);
 			}
-			/*-\NEW\WJ\2018.11.30\Ìí¼ÓTCP·¢ËÍÊı¾İ»º´æ,¼Ó¿ìTCP·¢ËÍËÙ¶È*/
+			/*-\NEW\WJ\2018.11.30\æ·»åŠ TCPå‘é€æ•°æ®ç¼“å­˜,åŠ å¿«TCPå‘é€é€Ÿåº¦*/
 		}
 		else if(sock->sock_type == SOC_SOCK_STREAM_SSL)
 		{
@@ -1805,7 +1805,7 @@ kal_int32 platform_on_deactivate_pdp_ind(lua_State *L,
     return 1;
 }
 
-/*+\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+/*+\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
  kal_int32 platform_socket_setopt(kal_uint8 socket_index, int level, int optname, void *optval, int optlen)
  {
  	if(socket_index >=LUA_MAX_SOCKET_SUPPORT)
@@ -1818,6 +1818,6 @@ kal_int32 platform_on_deactivate_pdp_ind(lua_State *L,
 	
 	 return OPENAT_socket_setsockopt(sock->sock_id, level, optname, optval, optlen);
  }
- /*-\bug3105\lijiaodi\2020.09.22 Ìí¼ÓSocket Options²ÎÊıÉèÖÃ½Ó¿Ú,luaÍ¨¹ıÉèÖÃoptÊµÏÖ±£»î¹¦ÄÜ\*/
+ /*-\bug3105\lijiaodi\2020.09.22 æ·»åŠ Socket Optionså‚æ•°è®¾ç½®æ¥å£,luaé€šè¿‡è®¾ç½®optå®ç°ä¿æ´»åŠŸèƒ½\*/
 
 

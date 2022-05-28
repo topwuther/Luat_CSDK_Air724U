@@ -1,10 +1,10 @@
 #include "iot_uart.h"
 
-/**打开uart
-*@param		port:		UART 编号
-*@param		cfg:		配置信息
-*@return	TRUE: 	    成功
-*           FALSE:      失败
+/**鎵撳紑uart
+*@param		port:		UART 缂栧彿
+*@param		cfg:		閰嶇疆淇℃伅
+*@return	TRUE: 	    鎴愬姛
+*           FALSE:      澶辫触
 **/
 BOOL iot_uart_open(
                         E_AMOPENAT_UART_PORT port,          
@@ -14,10 +14,10 @@ BOOL iot_uart_open(
     return OPENAT_config_uart(port, cfg);
 }
 
-/**关闭uart
-*@param		port:		UART 编号
-*@return	TRUE: 	    成功
-*           FALSE:      失败
+/**鍏抽棴uart
+*@param		port:		UART 缂栧彿
+*@return	TRUE: 	    鎴愬姛
+*           FALSE:      澶辫触
 **/
 BOOL iot_uart_close(
                         E_AMOPENAT_UART_PORT port          
@@ -26,12 +26,12 @@ BOOL iot_uart_close(
     return OPENAT_close_uart(port);
 }
  
-/**读uart
-*@param		port:		UART 编号
-*@param		buf:		存储数据地址
-*@param		bufLen:		存储空间长度
-*@param		timeoutMs:	读取超时 ms
-*@return	UINT32:     实际读取长度
+/**璇籾art
+*@param		port:		UART 缂栧彿
+*@param		buf:		瀛樺偍鏁版嵁鍦板潃
+*@param		bufLen:		瀛樺偍绌洪棿闀垮害
+*@param		timeoutMs:	璇诲彇瓒呮椂 ms
+*@return	UINT32:     瀹為檯璇诲彇闀垮害
 **/
 UINT32 iot_uart_read(                                      
                         E_AMOPENAT_UART_PORT port,          
@@ -43,11 +43,11 @@ UINT32 iot_uart_read(
     return OPENAT_read_uart(port, buf, bufLen, timeoutMs);
 }
 
-/**写uart
-*@param		port:		UART 编号
-*@param		buf:		写入数据地址
-*@param		bufLen:		写入数据长度
-*@return	UINT32:     实际读取长度
+/**鍐檜art
+*@param		port:		UART 缂栧彿
+*@param		buf:		鍐欏叆鏁版嵁鍦板潃
+*@param		bufLen:		鍐欏叆鏁版嵁闀垮害
+*@return	UINT32:     瀹為檯璇诲彇闀垮害
 **/
 UINT32 iot_uart_write(                                        
                         E_AMOPENAT_UART_PORT port,           
@@ -58,11 +58,11 @@ UINT32 iot_uart_write(
     return OPENAT_write_uart(port, buf, bufLen);
 }
 
-/**uart接收中断使能
-*@param		port:		UART 编号
-*@param		enable:		是否使能
-*@return	TRUE: 	    成功
-*           FALSE:      失败
+/**uart鎺ユ敹涓柇浣胯兘
+*@param		port:		UART 缂栧彿
+*@param		enable:		鏄惁浣胯兘
+*@return	TRUE: 	    鎴愬姛
+*           FALSE:      澶辫触
 **/
 BOOL iot_uart_enable_rx_int(
                         E_AMOPENAT_UART_PORT port,          

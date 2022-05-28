@@ -83,7 +83,7 @@ BOOL demo_fs_create(char *file)
 {
     INT32 fd;
     fd = iot_fs_open_file(file, FS_O_RDONLY);
-    if (fd >= 0) //DEMO_FS_FILE_PATHÎÄ¼þ´æÔÚ
+    if (fd >= 0) //DEMO_FS_FILE_PATHæ–‡ä»¶å­˜åœ¨
     {
         iot_debug_print("[coreTest-fs]: DEMO_FS_FILE_PATH File exists");
         fd = iot_fs_close_file(fd);
@@ -94,7 +94,7 @@ BOOL demo_fs_create(char *file)
         }
         return FALSE;
     }
-    // ´´½¨ÎÄ¼þDEMO_FS_FILE_PATH
+    // åˆ›å»ºæ–‡ä»¶DEMO_FS_FILE_PATH
     fd = iot_fs_create_file(file);
     if (fd < 0)
     {
@@ -120,7 +120,7 @@ BOOL demo_fs_delete(char *file)
 bool fsTest(char *file)
 {
     T_AMOPENAT_FILE_INFO fileInfo = {0};
-    if (iot_fs_get_fs_info(E_AMOPENAT_FS_INTERNAL, &fileInfo) < 0) //»ñÈ¡ÎÄ¼þÐÅÏ¢
+    if (iot_fs_get_fs_info(E_AMOPENAT_FS_INTERNAL, &fileInfo) < 0) //èŽ·å–æ–‡ä»¶ä¿¡æ¯
     {
         iot_debug_print("[coreTest-fs]:iot_fs_get_fs_info false");
         return FALSE;
@@ -128,7 +128,7 @@ bool fsTest(char *file)
     iot_debug_print("[coreTest-fs]:iot_fs_get_fs_info->totalSize:%d,usedSize:%d", fileInfo.totalSize, fileInfo.usedSize);
 
     char pCurDirUniLe[20] = {0};
-    if (iot_fs_get_current_dir(pCurDirUniLe, sizeof(pCurDirUniLe)) < 0) //»ñÈ¡µ±Ç°Ä¿Â¼ÐÅÏ¢
+    if (iot_fs_get_current_dir(pCurDirUniLe, sizeof(pCurDirUniLe)) < 0) //èŽ·å–å½“å‰ç›®å½•ä¿¡æ¯
     {
         iot_debug_print("[coreTest-fs]:iot_fs_get_current_dir false");
         return FALSE;
@@ -136,14 +136,14 @@ bool fsTest(char *file)
     iot_debug_print("[coreTest-fs]:iot_fs_get_current_dir : pCurDirUniLe:%s", pCurDirUniLe);
 
     demo_fs_ls("/");
-    //ÎÄ¼þ²»´æ, ´´½¨³É¹¦, Ð´Êý¾Ý¶ÁÊý¾Ý
+    //æ–‡ä»¶ä¸å­˜, åˆ›å»ºæˆåŠŸ, å†™æ•°æ®è¯»æ•°æ®
     if (demo_fs_create(file))
     {
-        demo_fs_write(file); // Ð´ÎÄ¼þ
-        demo_fs_read(file);  // ¶ÁÎÄ¼þ
+        demo_fs_write(file); // å†™æ–‡ä»¶
+        demo_fs_read(file);  // è¯»æ–‡ä»¶
     }
     demo_fs_ls("/");
-    demo_fs_delete(file); //É¾³ýÎÄ¼þ
+    demo_fs_delete(file); //åˆ é™¤æ–‡ä»¶
     demo_fs_ls("/");
     return TRUE;
 }

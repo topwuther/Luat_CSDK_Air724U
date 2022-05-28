@@ -97,5 +97,5 @@ ril.regrsp("A",ccrsp)
 ril.regrsp("+CHUP",ccrsp)
 
 --cc config
-req("ATX4") --¿ªÆô²¦ºÅÒô,Ã¦Òô¼ì²â
+req("ATX4") --Â¿ÂªÃ†Ã´Â²Â¦ÂºÃ…Ã’Ã´,ÃƒÂ¦Ã’Ã´Â¼Ã¬Â²Ã¢
 req("AT+CLIP=1")

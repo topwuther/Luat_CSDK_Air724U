@@ -88,7 +88,7 @@ static char DHT11_Read_Byte(void)
     return dat;
 }
 
-//²É¼¯Êı¾İ
+//é‡‡é›†æ•°æ®
 static uint8 DHT11_Colle(char *data)
 {
 
@@ -106,7 +106,7 @@ static uint8 DHT11_Colle(char *data)
     data[3] = DHT11_Read_Byte(); // TemFlo
     data[4] = DHT11_Read_Byte(); // Check
 
-    // Êı¾İĞ£Ñé
+    // æ•°æ®æ ¡éªŒ
     if (data[4] != data[0] + data[1] + data[2] + data[3])
     {
         OneWire_printf("[dht11]DHT11_Colle: data[4] != data[0] + data[1] + data[2] + data[3]");
@@ -116,14 +116,14 @@ static uint8 DHT11_Colle(char *data)
 }
 
 /**
- * @description: ´Ódht11µÃµ½ÎÂ/Êª¶ÈÖµÊı×Ö
- * @param : pin{uint8}:Òª²Ù×÷µÄÒı½Å£¬¿ÉÑ¡·¶Î§0¡¢1¡¢2¡¢3¡¢7
- *          HumNum{uint8 *}:Êä³öÎÂ¶ÈÖµ
- *          TemNum{uint8 *}:Êä³öÊª¶ÈÖµ
- * @return  0:Õı³£»ñÈ¡
- *          2:´«ÈëµÄpin²»ÔÚÔÊĞí·¶Î§
- *          3:Î´¼ì²âµ½dht11
- *          4:Êı¾İĞ£Ñé´íÎó
+ * @description: ä»dht11å¾—åˆ°æ¸©/æ¹¿åº¦å€¼æ•°å­—
+ * @param : pin{uint8}:è¦æ“ä½œçš„å¼•è„šï¼Œå¯é€‰èŒƒå›´0ã€1ã€2ã€3ã€7
+ *          HumNum{uint8 *}:è¾“å‡ºæ¸©åº¦å€¼
+ *          TemNum{uint8 *}:è¾“å‡ºæ¹¿åº¦å€¼
+ * @return  0:æ­£å¸¸è·å–
+ *          2:ä¼ å…¥çš„pinä¸åœ¨å…è®¸èŒƒå›´
+ *          3:æœªæ£€æµ‹åˆ°dht11
+ *          4:æ•°æ®æ ¡éªŒé”™è¯¯
  */
 
 uint8 DHT11_GetData_Num(uint8 pin, uint8 *HumNum, uint8 *TemNum)
@@ -160,15 +160,15 @@ start:
 }
 
 /**
- * @description: ´Ódht11µÃµ½ÎÂ/Êª¶ÈÖµ×Ö·û´®
- * @param : pin{uint8}:Òª²Ù×÷µÄÒı½Å£¬¿ÉÑ¡·¶Î§0¡¢1¡¢2¡¢3¡¢7
- *          HumStr{char *}:Êä³öÎÂ¶ÈÖµ×Ö·û´®
- *          TemStr{char *}:Êä³öÊª¶ÈÖµ×Ö·û´®
- * @return  0:Õı³£»ñÈ¡
+ * @description: ä»dht11å¾—åˆ°æ¸©/æ¹¿åº¦å€¼å­—ç¬¦ä¸²
+ * @param : pin{uint8}:è¦æ“ä½œçš„å¼•è„šï¼Œå¯é€‰èŒƒå›´0ã€1ã€2ã€3ã€7
+ *          HumStr{char *}:è¾“å‡ºæ¸©åº¦å€¼å­—ç¬¦ä¸²
+ *          TemStr{char *}:è¾“å‡ºæ¹¿åº¦å€¼å­—ç¬¦ä¸²
+ * @return  0:æ­£å¸¸è·å–
  *          1:HumStr == NULL || TemStr == NULL
- *          2:´«ÈëµÄpin²»ÔÚÔÊĞí·¶Î§
- *          3:Î´¼ì²âµ½dht11
- *          4:Êı¾İĞ£Ñé´íÎó
+ *          2:ä¼ å…¥çš„pinä¸åœ¨å…è®¸èŒƒå›´
+ *          3:æœªæ£€æµ‹åˆ°dht11
+ *          4:æ•°æ®æ ¡éªŒé”™è¯¯
  */
 uint8 DHT11_GetData_String(uint8 pin, char *HumStr, char *TemStr)
 {

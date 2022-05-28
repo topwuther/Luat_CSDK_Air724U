@@ -1,4 +1,4 @@
--- ∆‰À˚≈‰÷√
+-- √Ü√§√ã√ª√Ö√§√ñ√É
 local string = require"string"
 local ril = require"ril"
 local sys = require"sys"

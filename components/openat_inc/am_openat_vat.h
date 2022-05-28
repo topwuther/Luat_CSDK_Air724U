@@ -1,11 +1,11 @@
 /*********************************************************
   Copyright (C), AirM2M Tech. Co., Ltd.
   Author: lifei
-  Description: AMOPENAT ¿ª·ÅÆ½Ì¨
+  Description: AMOPENAT å¼€æ”¾å¹³å°
   Others:
   History: 
-    Version£º Date:       Author:   Modification:
-    V0.1      2012.12.14  lifei     ´´½¨ÎÄ¼ş
+    Versionï¼š Date:       Author:   Modification:
+    V0.1      2012.12.14  lifei     åˆ›å»ºæ–‡ä»¶
 *********************************************************/
 #ifndef AM_OPENAT_VAT_H
 #define AM_OPENAT_VAT_H
@@ -15,14 +15,14 @@
 
 typedef VOID (*PAT_MESSAGE)(UINT8 *pData, UINT16 length);
 
-/*+\NEW\zhuwangbin\2020.4.22\Ìí¼ÓLUA_POCÏîÄ¿£¬ Í¨¹ıĞéÄâÍ¨µÀ¼æÈİPOCµÄ¿ØÖÆ*/
+/*+\NEW\zhuwangbin\2020.4.22\æ·»åŠ LUA_POCé¡¹ç›®ï¼Œ é€šè¿‡è™šæ‹Ÿé€šé“å…¼å®¹POCçš„æ§åˆ¶*/
 typedef BOOL (*PAT_POC_MESSAGE)(char *pData, int length);
-/*-\NEW\zhuwangbin\2020.4.22\Ìí¼ÓLUA_POCÏîÄ¿£¬ Í¨¹ıĞéÄâÍ¨µÀ¼æÈİPOCµÄ¿ØÖÆ*/
+/*-\NEW\zhuwangbin\2020.4.22\æ·»åŠ LUA_POCé¡¹ç›®ï¼Œ é€šè¿‡è™šæ‹Ÿé€šé“å…¼å®¹POCçš„æ§åˆ¶*/
 
-/*+\NEW\lijiaodi\2020.7.25\ĞŞ¸Älua task»¹Ã»ÅÜÆğÀ´µÄÊ±ºò¾ÍÒÑ¾­×¢²áÉÏÍø£¬»áÓĞºÜ¶àÖ÷¶¯ÉÏ±¨¶ªµôµÄÎÊÌâ*/
+/*+\NEW\lijiaodi\2020.7.25\ä¿®æ”¹lua taskè¿˜æ²¡è·‘èµ·æ¥çš„æ—¶å€™å°±å·²ç»æ³¨å†Œä¸Šç½‘ï¼Œä¼šæœ‰å¾ˆå¤šä¸»åŠ¨ä¸ŠæŠ¥ä¸¢æ‰çš„é—®é¢˜*/
 void OPENAT_vat_set_cb(PAT_MESSAGE resp_cb);
 BOOL OPENAT_vat_init(void);
-/*-\NEW\lijiaodi\2020.7.25\ĞŞ¸Älua task»¹Ã»ÅÜÆğÀ´µÄÊ±ºò¾ÍÒÑ¾­×¢²áÉÏÍø£¬»áÓĞºÜ¶àÖ÷¶¯ÉÏ±¨¶ªµôµÄÎÊÌâ*/
+/*-\NEW\lijiaodi\2020.7.25\ä¿®æ”¹lua taskè¿˜æ²¡è·‘èµ·æ¥çš„æ—¶å€™å°±å·²ç»æ³¨å†Œä¸Šç½‘ï¼Œä¼šæœ‰å¾ˆå¤šä¸»åŠ¨ä¸ŠæŠ¥ä¸¢æ‰çš„é—®é¢˜*/
 BOOL OPENAT_vat_send_at( const char* pAtCommand, unsigned nLength );
 
 int vat_test_enter(void *param);

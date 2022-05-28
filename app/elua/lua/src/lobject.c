@@ -68,12 +68,12 @@ int luaO_log2 (unsigned int x) {
 
 }
 
-/*+\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*+\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 int luaO_hexavalue (int c) {
   if (isdigit(c)) return c - '0';
   else return (tolower(c) - 'a') + 10;
 }
-/*-\NEW\liweiqiang\2018.8.2\¼ÓÈëstringÖ§³ÖÊäÈë16½øÖÆ\x×Ö·û´®Ö§³Ö */
+/*-\NEW\liweiqiang\2018.8.2\åŠ å…¥stringæ”¯æŒè¾“å…¥16è¿›åˆ¶\xå­—ç¬¦ä¸²æ”¯æŒ */
 
 int luaO_rawequalObj (const TValue *t1, const TValue *t2) {
   if (ttype(t1) != ttype(t2)) return 0;

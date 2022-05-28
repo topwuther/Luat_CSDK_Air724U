@@ -2,10 +2,10 @@
 /****************************** BLUETOOTH ******************************/
 
 
-/**´ò¿ªÀ¶ÑÀ
-*@param  mode:          À¶ÑÀ´ò¿ªÄ£Ê½
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ‰“å¼€è“ç‰™
+*@param  mode:          è“ç‰™æ‰“å¼€æ¨¡å¼
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_bt_open(                                        
                         E_OPENAT_BT_MODE mode
@@ -15,9 +15,9 @@ BOOL iot_bt_open(
     return IVTBL(OpenBT)(mode);
 }
 
-/**¹Ø±ÕÀ¶ÑÀ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**å…³é—­è“ç‰™
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_bt_close(                                        
                         VOID
@@ -26,14 +26,14 @@ BOOL iot_bt_close(
     return IVTBL(CloseBT)();
 }
 
-/**Ğ´À¶ÑÀ
-*@param  handle:      Á¬½Ó¾ä±ú  
-*@param  uuid:        Ğ´ÈëÌØÕ÷uuid
-*@param  data:      Ğ´ÈëÊı¾İÄÚÈİ
-*@param  len:        Ğ´ÈëÊı¾İ³¤¶È
+/**å†™è“ç‰™
+*@param  handle:      è¿æ¥å¥æŸ„  
+*@param  uuid:        å†™å…¥ç‰¹å¾uuid
+*@param  data:      å†™å…¥æ•°æ®å†…å®¹
+*@param  len:        å†™å…¥æ•°æ®é•¿åº¦
 
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_ble_write(    
                         UINT16 handle,   
@@ -45,12 +45,12 @@ BOOL iot_ble_write(
     return IVTBL(WriteBLE)(handle,uuid,data,len);
 }
 
-/**À¶ÑÀÆäËû²Ù×÷
-*@param  handle:      Á¬½Ó¾ä±ú  
-*@param  cmd:        ¹¦ÄÜcmd
-*@param  parm:        ²ÎÊı
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è“ç‰™å…¶ä»–æ“ä½œ
+*@param  handle:      è¿æ¥å¥æŸ„  
+*@param  cmd:        åŠŸèƒ½cmd
+*@param  parm:        å‚æ•°
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_ble_iotctl(      
                         UINT16 handle,                                  
@@ -62,10 +62,10 @@ BOOL iot_ble_iotctl(
     return IVTBL(IotctlBLE)(handle,cmd,param);
 }
 
-/**¶Ï¿ªÀ¶ÑÀÁ¬½Ó
-*@param  handle:      Á¬½Ó¾ä±ú  
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**æ–­å¼€è“ç‰™è¿æ¥
+*@param  handle:      è¿æ¥å¥æŸ„  
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_ble_disconnect(                                        
                         UINT16 handle
@@ -74,11 +74,11 @@ BOOL iot_ble_disconnect(
     return IVTBL(DisconnectBLE)(handle);
 }
 
-/**À¶ÑÀÁ¬½Ó
-* *@param  addr:      Á¬½ÓÀ¶ÑÀµØÖ·
-* *@param  addr_type: Á¬½ÓÀ¶ÑÀµØÖ·ÀàĞÍ
-*@return	TRUE: 	    ³É¹¦
-*           FALSE:      Ê§°Ü
+/**è“ç‰™è¿æ¥
+* *@param  addr:      è¿æ¥è“ç‰™åœ°å€
+* *@param  addr_type: è¿æ¥è“ç‰™åœ°å€ç±»å‹
+*@return	TRUE: 	    æˆåŠŸ
+*           FALSE:      å¤±è´¥
 **/
 BOOL iot_ble_connect(    
                         char *addr ,                                    

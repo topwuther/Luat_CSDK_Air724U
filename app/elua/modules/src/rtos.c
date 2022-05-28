@@ -7,7 +7,7 @@
  * Date:    2013/3/7
  *
  * Description:
- *          lua.rtos¿â
+ *          lua.rtosåº“
  **************************************************************************/
 
 #include <ctype.h>
@@ -30,7 +30,7 @@
 lua_State *appL;
 int appnum;
 HANDLE monitorid1=0;
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 #define BT_SUCCESS 0
 #define BT_ERROR 1
 
@@ -53,12 +53,12 @@ typedef struct rtos_ble_scan_report_info
     UINT8 rssi;
 } rtos_ble_scan_report_info_t;
 unsigned char  bleRcvBuffer[255]={0};
-/*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 void setfieldInt(lua_State *L, const char *key, int value)
 {
     lua_pushstring(L, key);
     lua_pushinteger(L, value);
-    lua_rawset(L, -3);// µ¯³ökey,value ÉèÖÃµ½tableÖĞ
+    lua_rawset(L, -3);// å¼¹å‡ºkey,value è®¾ç½®åˆ°tableä¸­
 }
 
 static void setfieldBool(lua_State *L, const char *key, int value)
@@ -68,17 +68,17 @@ static void setfieldBool(lua_State *L, const char *key, int value)
 
     lua_pushstring(L, key);
     lua_pushboolean(L, value);
-    lua_rawset(L, -3);// µ¯³ökey,value ÉèÖÃµ½tableÖĞ
+    lua_rawset(L, -3);// å¼¹å‡ºkey,value è®¾ç½®åˆ°tableä¸­
 }
-/*+\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*+\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 static void setfieldString(lua_State* L, const char* key, const char* str, const size_t len)
 {
   lua_pushstring(L, key);
   lua_pushlstring(L, str, len);
   lua_rawset(L, -3);
 }
-/*-\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
-/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
+/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 static void  handle_BlueTooth(lua_State* L,PlatformBluetoothData BluetoothData)
 {
 	int ret = 1;
@@ -110,7 +110,7 @@ static void  handle_BlueTooth(lua_State* L,PlatformBluetoothData BluetoothData)
 		case OPENAT_BLE_RECV_DATA:
             setfieldInt(L, "event", BluetoothData.eventid);
             setfieldInt(L, "result", BluetoothData.state);
-			/*+\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+			/*+\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
             // if(BluetoothData.uuid_flag == 0)
             // {
             //     setfieldInt(L, "uuid", BluetoothData.uuid);
@@ -121,7 +121,7 @@ static void  handle_BlueTooth(lua_State* L,PlatformBluetoothData BluetoothData)
             // }
             // setfieldInt(L, "len", BluetoothData.len);
 
-			// /*+\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
+			// /*+\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
             // if((BluetoothData.len != 0) && (BluetoothData.pData != NULL))
             // {
             //     memset(bleRcvBuffer,0,255);
@@ -129,8 +129,8 @@ static void  handle_BlueTooth(lua_State* L,PlatformBluetoothData BluetoothData)
             //     setfieldString(L, "data", bleRcvBuffer,BluetoothData.len);
 			//     OPENAT_free(BluetoothData.pData);
             // }
-			// /*-\NEW\czm\2020.11.25\BUG 3702: 1.3 À¶ÑÀlua ÊÕµ½Í¨Öª´øÓĞÊı¾İ£¬¸ÄÎªÊÕµ½Í¨Öªºó£¬¶ÁÈ¡»º³åÇøÊı¾İ*/
-			/*-\NEW\czm\2020.11.25\BUG 3702: ±£Áôµ±Ç°Êı¾İ°üµÄuuidÊôĞÔ£¬ÔÚ¶ÁÈ¡Ê±ÉÏ±¨£¬²»ĞèÒªÖ÷¶¯ÉÏ±¨ÁË*/
+			// /*-\NEW\czm\2020.11.25\BUG 3702: 1.3 è“ç‰™lua æ”¶åˆ°é€šçŸ¥å¸¦æœ‰æ•°æ®ï¼Œæ”¹ä¸ºæ”¶åˆ°é€šçŸ¥åï¼Œè¯»å–ç¼“å†²åŒºæ•°æ®*/
+			/*-\NEW\czm\2020.11.25\BUG 3702: ä¿ç•™å½“å‰æ•°æ®åŒ…çš„uuidå±æ€§ï¼Œåœ¨è¯»å–æ—¶ä¸ŠæŠ¥ï¼Œä¸éœ€è¦ä¸»åŠ¨ä¸ŠæŠ¥äº†*/
 			break;
         case OPENAT_BLE_SET_SCAN_ENABLE:
         case OPENAT_BLE_SET_SCAN_DISENABLE:
@@ -178,7 +178,7 @@ static void  handle_BlueTooth(lua_State* L,PlatformBluetoothData BluetoothData)
 
 	
 }
-/*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+/*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 
 static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT* pMsg)
 {
@@ -199,16 +199,16 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         break;
 
     case MSG_ID_RTOS_UART_RX_DATA:
-/*+\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*+\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
     case MSG_ID_RTOS_UART_TX_DONE:
-/*-\NEW\zhuwangbin\2018.8.10\Ìí¼ÓOPENAT_DRV_EVT_UART_TX_DONE_INDÉÏ±¨*/
+/*-\NEW\zhuwangbin\2018.8.10\æ·»åŠ OPENAT_DRV_EVT_UART_TX_DONE_INDä¸ŠæŠ¥*/
         lua_pushinteger(L, msg_id);
         lua_pushinteger(L, msgData->uart_id);
         ret = 2;
         break;
 
     case MSG_ID_RTOS_KEYPAD:
-        /* ÒÔtable·½Ê½·µ»ØÏûÏ¢ÄÚÈİ */
+        /* ä»¥tableæ–¹å¼è¿”å›æ¶ˆæ¯å†…å®¹ */
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
         setfieldBool(L, "pressed", msgData->keypadMsgData.bPressed);
@@ -216,21 +216,21 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         setfieldInt(L, "key_matrix_col", msgData->keypadMsgData.data.matrix.col);
         break;
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
     case MSG_ID_RTOS_INT:
         OPENAT_print("lua receive MSG_ID_RTOS_INT:%x %x", msgData->interruptData.id, msgData->interruptData.resnum);
 
-        /* ÒÔtable·½Ê½·µ»ØÏûÏ¢ÄÚÈİ */
+        /* ä»¥tableæ–¹å¼è¿”å›æ¶ˆæ¯å†…å®¹ */
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
         setfieldInt(L, "int_id", msgData->interruptData.id);
         setfieldInt(L, "int_resnum", msgData->interruptData.resnum);
         break;
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
     case MSG_ID_RTOS_PMD:
-        /* ÒÔtable·½Ê½·µ»ØÏûÏ¢ÄÚÈİ */
+        /* ä»¥tableæ–¹å¼è¿”å›æ¶ˆæ¯å†…å®¹ */
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
         setfieldBool(L, "present", msgData->pmdData.battStatus);
@@ -239,11 +239,11 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         setfieldBool(L, "charger", msgData->pmdData.chargerStatus);
         setfieldInt(L, "state", msgData->pmdData.chargeState);
         break;
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
 
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
     case MSG_ID_RTOS_AUDIO:
-        /* ÒÔtable·½Ê½·µ»ØÏûÏ¢ÄÚÈİ */
+        /* ä»¥tableæ–¹å¼è¿”å›æ¶ˆæ¯å†…å®¹ */
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
         if(msgData->audioData.playEndInd == TRUE)
@@ -251,23 +251,23 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         else if(msgData->audioData.playErrorInd == TRUE)
             setfieldBool(L,"play_error_ind",TRUE);
         break;
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
-/*+\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
+/*+\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
 	case MSG_ID_RTOS_HEADSET:
 		lua_newtable(L);
         setfieldInt(L, "id", msg_id);
 		setfieldInt(L, "type",msgData->headsetData.msg_id);
         setfieldInt(L,"param",msgData->headsetData.param);
         break;	
-/*-\new\wj\2020.9.19\luaÌí¼Ó¶ú»ú×Ô¶¯¼ì²â¹¦ÄÜ£¬Ìí¼Ó¿ª»úºÍ¶ú»úÉÏ±¨ÏûÏ¢*/
-/*+\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\new\wj\2020.9.19\luaæ·»åŠ è€³æœºè‡ªåŠ¨æ£€æµ‹åŠŸèƒ½ï¼Œæ·»åŠ å¼€æœºå’Œè€³æœºä¸ŠæŠ¥æ¶ˆæ¯*/
+/*+\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
 	case MSG_ID_RTOS_RTMP:
 		lua_newtable(L);
         setfieldInt(L, "id", msg_id);
 		setfieldBool(L, "result", msgData->rtmpData.result);
 		setfieldInt(L, "result_code", msgData->rtmpData.result_code);
         break;
-/*-\wj\new\2020.10.16\Ìí¼Órtmp¹¦ÄÜATÖ¸ÁîºÍluaÊ¹ÓÃ½Ó¿Ú*/
+/*-\wj\new\2020.10.16\æ·»åŠ rtmpåŠŸèƒ½ATæŒ‡ä»¤å’Œluaä½¿ç”¨æ¥å£*/
     case MSG_ID_RTOS_WEAR_STATUS:
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
@@ -283,22 +283,22 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         else if(msgData->recordData.recordErrorInd == TRUE)
             setfieldBool(L,"record_error_ind",TRUE);
         break;
-	/*+\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
+	/*+\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
     case MSG_ID_ROTS_STRAM_RECORD_IND:
 		lua_newtable(L);
 		setfieldInt(L, "id", msg_id);
 		setfieldInt(L, "wait_read_len",msgData->streamRecordLen);
 		break;
-	/*-\new\wj\2020.4.26\ÊµÏÖÂ¼Òô½Ó¿Ú*/
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+	/*-\new\wj\2020.4.26\å®ç°å½•éŸ³æ¥å£*/
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     case MSG_ID_RTOS_ALARM:
         lua_pushinteger(L, msg_id);
         ret = 1;
         break;
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     case MSG_ID_RTOS_TOUCH:
-        /* ÒÔtable·½Ê½·µ»ØÏûÏ¢ÄÚÈİ */
-#ifdef AM_RH_TP_SUPPORT //½«table¸Ä³ÉintÉÏ±¨£¬·ÀÖ¹ÉÏ±¨£¬luaÀ´²»¼°»ØÊÕ£¬µ¼ÖÂÄÚ´æĞ¹Â©
+        /* ä»¥tableæ–¹å¼è¿”å›æ¶ˆæ¯å†…å®¹ */
+#ifdef AM_RH_TP_SUPPORT //å°†tableæ”¹æˆintä¸ŠæŠ¥ï¼Œé˜²æ­¢ä¸ŠæŠ¥ï¼Œluaæ¥ä¸åŠå›æ”¶ï¼Œå¯¼è‡´å†…å­˜æ³„æ¼
         lua_newtable(L);
         setfieldInt(L, "id", msg_id);
         setfieldInt(L, "type", msgData->touchMsgData.type);
@@ -313,7 +313,7 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
 #endif
         break;
     //+TTS, panjun 160326.
-	/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+	/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
    // #if defined(__AM_LUA_TTSPLY_SUPPORT__)
     case MSG_ID_RTOS_TTSPLY_STATUS:
         lua_newtable(L);
@@ -326,7 +326,7 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         setfieldInt(L,"ttsply_error_ind", msgData->ttsPlyData.ttsPlyErrorInd);
         break;
    // #endif //__AM_LUA_TTSPLY_SUPPORT__
-   /*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+   /*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
     //-TTS, panjun 160326.
 
     case MSG_ID_APP_MTHL_ACTIVATE_PDP_CNF:
@@ -392,14 +392,14 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
         lua_pushinteger(L, msgData->gpsOpenInd.success);
         ret = 2;
         break;
-/*+:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
+/*+:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
     case MSG_ID_SIM_INSERT_IND:
         lua_pushinteger(L, msg_id);
         lua_pushinteger(L, msgData->remSimInsertInd.inserted);
         ret = 2;
         break;
-/*-:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
-	/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
+	/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 	case MSG_ID_RTOS_MSG_ZBAR:
 
 		lua_newtable(L);
@@ -417,9 +417,9 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
             platform_free(msgData->zbarData.pData);
         }
 		break;
-	/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+	/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 
-		/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+		/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
 	case MSG_ID_RTOS_MSG_WIFI:
 
 		lua_newtable(L);
@@ -432,12 +432,12 @@ static int handle_msg(lua_State *L, platform_msg_type msg_id, LOCAL_PARAM_STRUCT
 			platform_free(msgData->wifiData.pData);
 		}
 		break;
-		/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
-	/*+\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+		/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
+	/*+\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
 	case MSG_ID_RTOS_BLUETOOTH:		
 		handle_BlueTooth(L,msgData->blueData);
         break;
-	/*-\NEW\liangjian\2020.09.10\lua Ìí¼Ó À¶ÑÀ¹¦ÄÜ*/
+	/*-\NEW\liangjian\2020.09.10\lua æ·»åŠ  è“ç‰™åŠŸèƒ½*/
     default:
         ret = 0;
         break;
@@ -452,17 +452,17 @@ static int l_rtos_receive(lua_State *L) 		/* rtos.receive() */
     LOCAL_PARAM_STRUCT* pMsg = NULL;
     platform_msg_type msg_id;
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
     static BOOL firstRecv = TRUE;
     int ret = 0;
 
     if(firstRecv)
     {
-        // µÚÒ»´Î½ÓÊÕÏûÏ¢Ê±³¢ÊÔÊÇ·ñĞèÒªÆô¶¯ÏµÍ³
+        // ç¬¬ä¸€æ¬¡æ¥æ”¶æ¶ˆæ¯æ—¶å°è¯•æ˜¯å¦éœ€è¦å¯åŠ¨ç³»ç»Ÿ
         firstRecv = FALSE;
         platform_poweron_try();
     }
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 
     if(platform_rtos_receive(&msg_id, (void**)&pMsg, timeout) != PLATFORM_OK)
     {
@@ -473,10 +473,10 @@ static int l_rtos_receive(lua_State *L) 		/* rtos.receive() */
 
     if(pMsg)
     {
-    /*+\NEW\liweiqiang\2013.12.6\libc malloc×ßdlmallocÍ¨µÀ */
-        // ¸ÃÏûÏ¢ÄÚ´æÓÉÆ½Ì¨²àÆäËûÏß³ÌÉêÇëµÄ,¹ÊÓÃplatform_freeÀ´ÊÍ·Å
+    /*+\NEW\liweiqiang\2013.12.6\libc mallocèµ°dlmallocé€šé“ */
+        // è¯¥æ¶ˆæ¯å†…å­˜ç”±å¹³å°ä¾§å…¶ä»–çº¿ç¨‹ç”³è¯·çš„,æ•…ç”¨platform_freeæ¥é‡Šæ”¾
         platform_rtos_free_msg(pMsg);
-    /*-\NEW\liweiqiang\2013.12.6\libc malloc×ßdlmallocÍ¨µÀ */
+    /*-\NEW\liweiqiang\2013.12.6\libc mallocèµ°dlmallocé€šé“ */
     }
 
     return ret;
@@ -538,13 +538,13 @@ static int l_rtos_init_module(lua_State *L)
             ret = platform_rtos_init_module(RTOS_MODULE_ID_KEYPAD, &param);
         }
         break;
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     case RTOS_MODULE_ID_ALARM:
         {
             ret = platform_rtos_init_module(RTOS_MODULE_ID_ALARM, NULL);
         }
 		break;
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     case RTOS_MODULE_ID_TOUCH:
         {
             ret = platform_rtos_init_module(RTOS_MODULE_ID_TOUCH, NULL);
@@ -560,7 +560,7 @@ static int l_rtos_init_module(lua_State *L)
     return 1;
 }
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 static int l_rtos_poweron_reason(lua_State *L)
 {
     lua_pushinteger(L, platform_get_poweron_reason());
@@ -573,19 +573,19 @@ static int l_rtos_poweron(lua_State *L)
     platform_rtos_poweron(flag);
     return 0;
 }
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
 
-/*+\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*+\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 static int l_rtos_repoweron(lua_State *L)
 {
     platform_rtos_repoweron();
     return 0;
 }
-/*-\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*-\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
 
 static int l_rtos_poweroff(lua_State *L)
 {
-/*+\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*+\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 	int n,type = 0;
 	
 	n = lua_gettop(L);
@@ -595,20 +595,20 @@ static int l_rtos_poweroff(lua_State *L)
     }
 
 	platform_rtos_poweroff(type);
-/*-\BUG3096\zhuwangbin\2020.9.17\Ìí¼Ó¹Ø»ú³äµç¹¦ÄÜ*/
+/*-\BUG3096\zhuwangbin\2020.9.17\æ·»åŠ å…³æœºå……ç”µåŠŸèƒ½*/
 
 	return 0;
 }
 
-/*+\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 static int l_rtos_restart(lua_State *L)
 {
 	platform_rtos_restart();
 	return 0;
 }
-/*-\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
 
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 static int l_rtos_tick(lua_State *L)
 {
     lua_pushinteger(L, platform_rtos_tick());
@@ -619,7 +619,7 @@ static int l_rtos_sms_is_ready(lua_State *L)
     lua_pushinteger(L, platform_rtos_sms_is_ready());
     return 1;
 }
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
 static void app_monitor_call()
 {
     OPENAT_print("app_monitor_call");
@@ -628,13 +628,13 @@ static void app_monitor_call()
     lua_sethook(appL,NULL,0,0);  /* close hooks */
 }
 
-/*+\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*+\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 static void app_monitor(void *pParameter)
 {
     int   mask = LUA_MASKCALL | LUA_MASKRET | LUA_MASKLINE | LUA_MASKCOUNT;
     lua_sethook(appL, app_monitor_call, mask, 1);  /* set hooks */
 }
-/*-\NEW\zhuwangbin\2020.05.01\Ìí¼Ódisp camera¹¦ÄÜ*/
+/*-\NEW\zhuwangbin\2020.05.01\æ·»åŠ disp cameraåŠŸèƒ½*/
 static int l_rtos_app_monitor(lua_State *L)
 {
     OPENAT_print("l_rtos_app_monitor");
@@ -648,7 +648,7 @@ static int l_rtos_app_monitor(lua_State *L)
     return 0;
 }
 
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 static int l_rtos_setalarm(lua_State *L)
 {
     PlatformSetAlarmParam alarmparam;
@@ -688,7 +688,7 @@ static int l_rtos_base64_encode(lua_State *L)
     L_FREE(endcode_string);
     return 1;
 }
-/*+\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*+\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 /* lua exsample
 local function base64()
 	local enc_str = rtos.base64_encode("1234556661")
@@ -714,7 +714,7 @@ static int l_rtos_base64_decode(lua_State *L)
     L_FREE(endcode_string);
     return 1;
 }
-/*-\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*-\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
 
 //+panjun,160503,Add an API "rtos.disk_free".
 static int l_rtos_disk_free(lua_State *L)
@@ -751,9 +751,9 @@ static int l_get_env_usage(lua_State *L)
 }
 static int l_get_version(lua_State *L)
 {
-	/*+\NEW\zhuwangbin\2019.12.10\lua °æ±¾±àÒë²»¹ı*/
+	/*+\NEW\zhuwangbin\2019.12.10\lua ç‰ˆæœ¬ç¼–è¯‘ä¸è¿‡*/
  	char *ver = OPENAT_getProdOrVer();
-	/*-\NEW\zhuwangbin\2019.12.10\lua °æ±¾±àÒë²»¹ı*/
+	/*-\NEW\zhuwangbin\2019.12.10\lua ç‰ˆæœ¬ç¼–è¯‘ä¸è¿‡*/
 
 	lua_pushlstring(L, ver, strlen(ver));
 
@@ -772,7 +772,7 @@ static int l_rtos_get_build_time(lua_State *L)
 	return 1;
 }
 
-/*+\NEW\shenyuanyuan\2020.4.14\Ìí¼Órtos.set_traceÉèÖÃtrace¿ª¹ØºÍ¶Ë¿Ú*/
+/*+\NEW\shenyuanyuan\2020.4.14\æ·»åŠ rtos.set_traceè®¾ç½®traceå¼€å…³å’Œç«¯å£*/
 static int l_set_trace(lua_State *L)
 {
     u32 print = luaL_optinteger(L, 1, 0);
@@ -782,7 +782,7 @@ static int l_set_trace(lua_State *L)
 
     return 1;
 }
-/*-\NEW\shenyuanyuan\2020.4.14\Ìí¼Órtos.set_traceÉèÖÃtrace¿ª¹ØºÍ¶Ë¿Ú*/
+/*-\NEW\shenyuanyuan\2020.4.14\æ·»åŠ rtos.set_traceè®¾ç½®traceå¼€å…³å’Œç«¯å£*/
 
 static int l_rtos_sys32k_clk_out(lua_State *L)
 {
@@ -796,8 +796,8 @@ static int l_rtos_send_event(lua_State *L)
     printf("Detected Event 0x%08x\n", event);
     return 0;
 }
-/*+\new\liangjian\2020.06.17\Ôö¼Ó¶ÁÈ¡SD ¿¨¿Õ¼ä·½·¨*/
-/*+\new\liangjian\2020.06.22\Ôö¼ÓKb ÏÔÊ¾*/
+/*+\new\liangjian\2020.06.17\å¢åŠ è¯»å–SD å¡ç©ºé—´æ–¹æ³•*/
+/*+\new\liangjian\2020.06.22\å¢åŠ Kb æ˜¾ç¤º*/
 static int l_get_fs_free_size(lua_State *L)
 {
   // TODO
@@ -846,8 +846,8 @@ static int l_get_fs_total_size(lua_State *L)
 
 	return 1;
 }
-/*-\new\liangjian\2020.06.22\Ôö¼ÓKb ÏÔÊ¾*/
-/*+\new\liangjian\2020.06.17\Ôö¼Ó¶ÁÈ¡SD ¿¨¿Õ¼ä·½·¨*/
+/*-\new\liangjian\2020.06.22\å¢åŠ Kb æ˜¾ç¤º*/
+/*+\new\liangjian\2020.06.17\å¢åŠ è¯»å–SD å¡ç©ºé—´æ–¹æ³•*/
 
 static int l_make_dir(lua_State *L)
 {
@@ -1025,9 +1025,9 @@ static int l_rtos_compare_distance(lua_State *L) {
     lua_pushinteger(L, result);
     return 1;
 }
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
-/*+\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*+\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 static int l_rtos_sendok(lua_State *L)
 {
     size_t  len      = 0;
@@ -1036,9 +1036,9 @@ static int l_rtos_sendok(lua_State *L)
     platform_rtos_sendok(string);
     return 0;
 }
-/*-\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*-\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
 
-/*+\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
+/*+\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
 static int l_open_SoftDog(lua_State *L)
 {
     u32 timeout = luaL_optinteger(L, 1, 0);
@@ -1058,9 +1058,9 @@ static int l_close_SoftDog(lua_State *L)
 	platform_rtos_close_SoftDog();
     return 1;
 }
-/*-\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
+/*-\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
 
-	/*+\NEW\zhuwangbin\2020.6.28\Ìí¼ÓĞ´Âë¹¦ÄÜ*/
+	/*+\NEW\zhuwangbin\2020.6.28\æ·»åŠ å†™ç åŠŸèƒ½*/
 #ifdef AM_LUA_POC_SUPPORT
 static int l_rtos_flash_memcpy(lua_State *L)
 {
@@ -1090,7 +1090,7 @@ static int l_rtos_flash_memcpy(lua_State *L)
     return 1;
 }
 
-/*+\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+/*+\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 static int l_rtos_poc_ota(lua_State *L){
 	
 	extern BOOL platform_rtos_poc_ota(void);
@@ -1150,11 +1150,11 @@ static int l_rtos_poc_param_read(lua_State *L)
 
 
 
-/*-\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+/*-\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 
 #endif
-	/*+\NEW\zhuwangbin\2020.6.28\Ìí¼ÓĞ´Âë¹¦ÄÜ*/
-/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+	/*+\NEW\zhuwangbin\2020.6.28\æ·»åŠ å†™ç åŠŸèƒ½*/
+/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 static int l_rtos_set_luainfo(lua_State *L)
 {
     size_t  len      = 0;
@@ -1163,9 +1163,9 @@ static int l_rtos_set_luainfo(lua_State *L)
     platform_rtos_set_luainfo(string);	
     return 0;
 }
-/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 
-/*+\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+/*+\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 static int l_rtos_notify_sim_detect(lua_State * L)
 {
 	int simNum = luaL_checkinteger(L, 1);
@@ -1173,9 +1173,9 @@ static int l_rtos_notify_sim_detect(lua_State * L)
 	platform_rtos_notify_sim_detect(simNum,connect == 0 ? FALSE : TRUE);
 	return 0;
 }
-/*-\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+/*-\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 
-/*+\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
+/*+\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/
 // static int l_rtos_set_trans_data(lua_State *L)
 // {
 //     int len = luaL_checkinteger(L, 1);
@@ -1187,71 +1187,71 @@ static int l_rtos_notify_sim_detect(lua_State * L)
 //     platform_rtos_set_trans_data(len, buf);
 //     return 0;
 // }
-/*-\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
+/*-\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/
 
 #define MIN_OPT_LEVEL 2
 #include "lrodefs.h"
 const LUA_REG_TYPE rtos_map[] =
 {
     { LSTRKEY( "init_module" ),  LFUNCVAL( l_rtos_init_module ) },
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
     { LSTRKEY( "poweron_reason" ),  LFUNCVAL( l_rtos_poweron_reason ) },
     { LSTRKEY( "poweron" ),  LFUNCVAL( l_rtos_poweron ) },
-/*+\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
+/*+\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
     { LSTRKEY( "repoweron" ),  LFUNCVAL( l_rtos_repoweron ) },
-/*-\NEW\rufei\2015.4.17\ÊµÏÖÄÖÖÓ¿ª»úºóÖØĞÂÆô¶¯ÏµÍ³L4²ã¹¦ÄÜ*/
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
+/*-\NEW\rufei\2015.4.17\å®ç°é—¹é’Ÿå¼€æœºåé‡æ–°å¯åŠ¨ç³»ç»ŸL4å±‚åŠŸèƒ½*/
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
     { LSTRKEY( "poweroff" ),  LFUNCVAL( l_rtos_poweroff ) },
-/*+\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
     { LSTRKEY( "restart" ),  LFUNCVAL( l_rtos_restart ) },
-/*-\NEW\liweiqiang\2013.9.7\Ôö¼Órtos.restart½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.9.7\å¢åŠ rtos.restartæ¥å£*/
     { LSTRKEY( "receive" ),  LFUNCVAL( l_rtos_receive ) },
-    //{ LSTRKEY( "send" ), LFUNCVAL( l_rtos_send ) }, //Ôİ²»Ìá¹©send½Ó¿Ú
+    //{ LSTRKEY( "send" ), LFUNCVAL( l_rtos_send ) }, //æš‚ä¸æä¾›sendæ¥å£
     { LSTRKEY( "sleep" ), LFUNCVAL( l_rtos_sleep ) },
     { LSTRKEY( "timer_start" ), LFUNCVAL( l_rtos_timer_start ) },
     { LSTRKEY( "timer_stop" ), LFUNCVAL( l_rtos_timer_stop ) },
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
     { LSTRKEY( "tick" ), LFUNCVAL( l_rtos_tick ) },
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Órtos.tick½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ rtos.tickæ¥å£*/
     { LSTRKEY( "sms_is_ready" ), LFUNCVAL( l_rtos_sms_is_ready ) },
     { LSTRKEY( "app_monitor" ), LFUNCVAL( l_rtos_app_monitor ) },
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     { LSTRKEY( "set_alarm" ), LFUNCVAL( l_rtos_setalarm ) },
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
     { LSTRKEY( "base64_encode" ), LFUNCVAL( l_rtos_base64_encode ) },
-/*+\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*+\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
     { LSTRKEY( "base64_decode"),  LFUNCVAL( l_rtos_base64_decode ) },
-/*-\NEW\brezen\2016.4.25\Ôö¼Óbase64½Ó¿Ú*/
+/*-\NEW\brezen\2016.4.25\å¢åŠ base64æ¥å£*/
     { LSTRKEY( "disk_free" ), LFUNCVAL( l_rtos_disk_free ) },
     { LSTRKEY( "disk_volume" ), LFUNCVAL( l_rtos_disk_volume ) },
     { LSTRKEY( "keypad_state" ), LFUNCVAL( l_rtos_keypad_state_get ) },
     { LSTRKEY( "keypad_init_end" ), LFUNCVAL( l_rtos_keypad_init_over ) },
 
 	{ LSTRKEY( "get_env_usage" ), LFUNCVAL( l_get_env_usage ) },
-/*-\NEW\zhuwangbin\2017.2.12\Ìí¼Ó°æ±¾²éÑ¯½Ó¿Ú */
+/*-\NEW\zhuwangbin\2017.2.12\æ·»åŠ ç‰ˆæœ¬æŸ¥è¯¢æ¥å£ */
     { LSTRKEY( "get_version" ), LFUNCVAL( l_get_version ) },
-/*-\NEW\zhuwangbin\2017.2.12\Ìí¼Ó°æ±¾²éÑ¯½Ó¿Ú */
-    /*begin\NEW\zhutianhua\2017.2.28 14:4\ĞÂÔörtos.set_trace½Ó¿Ú£¬¿É¿ØÖÆÊÇ·ñÊä³öLuaµÄtrace*/
+/*-\NEW\zhuwangbin\2017.2.12\æ·»åŠ ç‰ˆæœ¬æŸ¥è¯¢æ¥å£ */
+    /*begin\NEW\zhutianhua\2017.2.28 14:4\æ–°å¢rtos.set_traceæ¥å£ï¼Œå¯æ§åˆ¶æ˜¯å¦è¾“å‡ºLuaçš„trace*/
     { LSTRKEY( "set_trace" ), LFUNCVAL( l_set_trace ) },
-    //9501GPS Ìá¹©32KÊ±ÖÓ
+    //9501GPS æä¾›32Kæ—¶é’Ÿ
     {LSTRKEY( "sys32k_clk_out" ), LFUNCVAL( l_rtos_sys32k_clk_out ) },
-    /*end\NEW\zhutianhua\2017.2.28 14:4\ĞÂÔörtos.set_trace½Ó¿Ú£¬¿É¿ØÖÆÊÇ·ñÊä³öLuaµÄtrace*/
+    /*end\NEW\zhutianhua\2017.2.28 14:4\æ–°å¢rtos.set_traceæ¥å£ï¼Œå¯æ§åˆ¶æ˜¯å¦è¾“å‡ºLuaçš„trace*/
     { LSTRKEY( "sendevent" ), LFUNCVAL( l_rtos_send_event ) },
-    /*begin\NEW\zhutianhua\2017.9.5 30:53\Ôö¼Óget_fs_free_size½Ó¿Ú*/
+    /*begin\NEW\zhutianhua\2017.9.5 30:53\å¢åŠ get_fs_free_sizeæ¥å£*/
     { LSTRKEY( "get_fs_free_size" ), LFUNCVAL( l_get_fs_free_size ) },
-    /*end\NEW\zhutianhua\2017.9.5 30:53\Ôö¼Óget_fs_free_size½Ó¿Ú*/
-	/*begin\NEW\liangjian\2020.6.16 \Ôö¼Óget_fs_total_size½Ó¿Ú*/
+    /*end\NEW\zhutianhua\2017.9.5 30:53\å¢åŠ get_fs_free_sizeæ¥å£*/
+	/*begin\NEW\liangjian\2020.6.16 \å¢åŠ get_fs_total_sizeæ¥å£*/
     { LSTRKEY( "get_fs_total_size" ), LFUNCVAL( l_get_fs_total_size ) },
-    /*end\NEW\liangjian\2020.6.16 \Ôö¼Óget_fs_total_size½Ó¿Ú*/
-    /*begin\NEW\zhutianhua\2017.9.27 19:41\Ôö¼Ómake_dir½Ó¿Ú*/
+    /*end\NEW\liangjian\2020.6.16 \å¢åŠ get_fs_total_sizeæ¥å£*/
+    /*begin\NEW\zhutianhua\2017.9.27 19:41\å¢åŠ make_diræ¥å£*/
     { LSTRKEY( "make_dir" ), LFUNCVAL( l_make_dir) },
     { LSTRKEY( "remove_dir" ), LFUNCVAL( l_remove_dir) },
-    /*end\NEW\zhutianhua\2017.9.27 19:41\Ôö¼Ómake_dir½Ó¿Ú*/
+    /*end\NEW\zhutianhua\2017.9.27 19:41\å¢åŠ make_diræ¥å£*/
     { LSTRKEY( "get_fs_flush_status" ), LFUNCVAL( l_get_fs_flush_status) },
-/*+\NEW\shenyuanyuan\2017.10.10\Ìí¼ÓÄÖÖÓ½Ó¿Ú*/
+/*+\NEW\shenyuanyuan\2017.10.10\æ·»åŠ é—¹é’Ÿæ¥å£*/
     { LSTRKEY( "set_alarm" ), LFUNCVAL( l_rtos_setalarm ) },
-    /*-\NEW\shenyuanyuan\2017.10.10\Ìí¼ÓÄÖÖÓ½Ó¿Ú*/
+    /*-\NEW\shenyuanyuan\2017.10.10\æ·»åŠ é—¹é’Ÿæ¥å£*/
     { LSTRKEY( "set_time" ), LFUNCVAL( l_rtos_set_time ) },
     { LSTRKEY( "fota_start" ), LFUNCVAL( l_rtos_fota_start )},
     { LSTRKEY( "fota_process" ), LFUNCVAL( l_rtos_fota_process )},
@@ -1263,34 +1263,34 @@ const LUA_REG_TYPE rtos_map[] =
     { LSTRKEY( "get_build_time" ), LFUNCVAL( l_rtos_get_build_time )},
 	{ LSTRKEY( "toint64" ),  LFUNCVAL( l_rtos_toint64 ) },
     { LSTRKEY( "compare_distance" ),  LFUNCVAL( l_rtos_compare_distance ) },
-/*+\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
+/*+\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
     { LSTRKEY( "send_ok" ),  LFUNCVAL( l_rtos_sendok ) },
-/*-\NEW\shenyuanyuan\2019.4.19\¿ª·¢AT+TRANSDATAÃüÁî*/
-/*+\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
+/*-\NEW\shenyuanyuan\2019.4.19\å¼€å‘AT+TRANSDATAå‘½ä»¤*/
+/*+\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
 	{ LSTRKEY( "openSoftDog" ),  LFUNCVAL( l_open_SoftDog ) },
 	{ LSTRKEY( "eatSoftDog" ),  LFUNCVAL( l_eat_SoftDog ) },
 	{ LSTRKEY( "closeSoftDog" ),  LFUNCVAL( l_close_SoftDog ) },
-/*-\NEW\hedonghao\2020.4.10\Ìí¼ÓLUAÈí¹·½Ó¿Ú*/
-	/*+\NEW\zhuwangbin\2020.6.28\Ìí¼ÓĞ´Âë¹¦ÄÜ*/
+/*-\NEW\hedonghao\2020.4.10\æ·»åŠ LUAè½¯ç‹—æ¥å£*/
+	/*+\NEW\zhuwangbin\2020.6.28\æ·»åŠ å†™ç åŠŸèƒ½*/
 #ifdef AM_LUA_POC_SUPPORT
 	{ LSTRKEY( "flash_memcpy" ), LFUNCVAL( l_rtos_flash_memcpy )},
-	/*+\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+	/*+\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 	{ LSTRKEY( "poc_ota" ), LFUNCVAL( l_rtos_poc_ota )},
 	{ LSTRKEY( "poc_param_erase" ), LFUNCVAL( l_rtos_poc_param_erase )},
 	{ LSTRKEY( "poc_param_read" ), LFUNCVAL( l_rtos_poc_param_read )},
 	{ LSTRKEY( "poc_param_write" ), LFUNCVAL( l_rtos_poc_param_write )},
-	/*-\BUG3109\zhuwangbin\2020.9.21\¶Ô½²»úĞèÒªÔÚ¿ª»ú×´Ì¬ÏÂÍ¨¹ı´®¿Ú»òÕßUSB´®¿Ú½øĞĞPOCĞ¡°üÏÂÔØºÍĞ´ºÅ*/
+	/*-\BUG3109\zhuwangbin\2020.9.21\å¯¹è®²æœºéœ€è¦åœ¨å¼€æœºçŠ¶æ€ä¸‹é€šè¿‡ä¸²å£æˆ–è€…USBä¸²å£è¿›è¡ŒPOCå°åŒ…ä¸‹è½½å’Œå†™å·*/
 #endif
-	/*-\NEW\zhuwangbin\2020.6.28\Ìí¼ÓĞ´Âë¹¦ÄÜ*/
-	/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
+	/*-\NEW\zhuwangbin\2020.6.28\æ·»åŠ å†™ç åŠŸèƒ½*/
+	/*+\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
 	{ LSTRKEY( "set_lua_info" ),	LFUNCVAL( l_rtos_set_luainfo ) },
-	/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910Æ½Ì¨LUA°æ±¾Ôö¼Ó¶ÁÈ¡¿Í»§°æ±¾ºÅµÄATÖ¸Áî£¬¼æÈİÖ®Ç°1802Æ½Ì¨µÄ¡°AT+LUAINFO?¡±*/
-	/*+\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+	/*-\BUG\wangyuan\2020.07.28\BUG_2640:8910å¹³å°LUAç‰ˆæœ¬å¢åŠ è¯»å–å®¢æˆ·ç‰ˆæœ¬å·çš„ATæŒ‡ä»¤ï¼Œå…¼å®¹ä¹‹å‰1802å¹³å°çš„â€œAT+LUAINFO?â€*/
+	/*+\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 	{ LSTRKEY( "notify_sim_detect" ),	LFUNCVAL( l_rtos_notify_sim_detect ) },
-/*+\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
+/*+\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/
 	/*{ LSTRKEY( "setTransData" ), LFUNCVAL( l_rtos_set_trans_data ) },*/
-/*-\bug\rww\2020.9.22\Ìí¼Órtos.setTransData*/
-	/*-\new\wj\luaÌí¼ÓÈÈ²å°Î½Ó¿Ú*/
+/*-\bug\rww\2020.9.22\æ·»åŠ rtos.setTransData*/
+	/*-\new\wj\luaæ·»åŠ çƒ­æ’æ‹”æ¥å£*/
 	  { LNILKEY, LNILVAL }
 };
 
@@ -1300,13 +1300,13 @@ int luaopen_rtos( lua_State *L )
 
     // module id
     MOD_REG_NUMBER(L, "MOD_KEYPAD", RTOS_MODULE_ID_KEYPAD);
-	/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+	/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     MOD_REG_NUMBER(L, "MOD_ALARM", RTOS_MODULE_ID_ALARM);
-	/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+	/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     MOD_REG_NUMBER(L, "MOD_TP", RTOS_MODULE_ID_TOUCH);
 
-/*+\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
-    // ¿ª»úÔ­Òò
+/*+\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
+    // å¼€æœºåŸå› 
     #define REG_POWERON_RESON(rEASON) MOD_REG_NUMBER(L, #rEASON, PLATFORM_##rEASON)
     REG_POWERON_RESON(POWERON_KEY);
     REG_POWERON_RESON(POWERON_CHARGER);
@@ -1314,12 +1314,12 @@ int luaopen_rtos( lua_State *L )
     REG_POWERON_RESON(POWERON_RESTART);
     REG_POWERON_RESON(POWERON_OTHER);
     REG_POWERON_RESON(POWERON_UNKNOWN);
-/*-\NEW\liweiqiang\2013.12.12\Ôö¼Ó³äµç¿ª»úÊ±ÓÉÓÃ»§×ÔĞĞ¾ö¶¨ÊÇ·ñÆô¶¯ÏµÍ³ */
-    /*+\NewReq NEW\zhuth\2014.6.18\Ôö¼Ó¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
+/*-\NEW\liweiqiang\2013.12.12\å¢åŠ å……ç”µå¼€æœºæ—¶ç”±ç”¨æˆ·è‡ªè¡Œå†³å®šæ˜¯å¦å¯åŠ¨ç³»ç»Ÿ */
+    /*+\NewReq NEW\zhuth\2014.6.18\å¢åŠ å¼€æœºåŸå› å€¼æ¥å£*/
     REG_POWERON_RESON(POWERON_EXCEPTION);
     REG_POWERON_RESON(POWERON_HOST);
     REG_POWERON_RESON(POWERON_WATCHDOG);
-    /*-\NewReq NEW\zhuth\2014.6.18\Ôö¼Ó¿ª»úÔ­ÒòÖµ½Ó¿Ú*/
+    /*-\NewReq NEW\zhuth\2014.6.18\å¢åŠ å¼€æœºåŸå› å€¼æ¥å£*/
 
     // msg id
     MOD_REG_NUMBER(L, "WAIT_MSG_TIMEOUT", MSG_ID_RTOS_WAIT_MSG_TIMEOUT);
@@ -1327,31 +1327,31 @@ int luaopen_rtos( lua_State *L )
     MOD_REG_NUMBER(L, "MSG_KEYPAD", MSG_ID_RTOS_KEYPAD);
     MOD_REG_NUMBER(L, "MSG_UART_RXDATA", MSG_ID_RTOS_UART_RX_DATA);
     MOD_REG_NUMBER(L, "MSG_UART_TX_DONE", MSG_ID_RTOS_UART_TX_DONE);
-/*+\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
+/*+\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
     MOD_REG_NUMBER(L, "MSG_INT", MSG_ID_RTOS_INT);
-/*-\NEW\liweiqiang\2013.4.5\Ôö¼Ólua gpio ÖĞ¶ÏÅäÖÃ*/
-/*+\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
+/*-\NEW\liweiqiang\2013.4.5\å¢åŠ lua gpio ä¸­æ–­é…ç½®*/
+/*+\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
     MOD_REG_NUMBER(L, "MSG_PMD", MSG_ID_RTOS_PMD);
-/*-\NEW\liweiqiang\2013.7.8\Ôö¼Órtos.pmdÏûÏ¢*/
-/*+\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.7.8\å¢åŠ rtos.pmdæ¶ˆæ¯*/
+/*+\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
     MOD_REG_NUMBER(L, "MSG_AUDIO", MSG_ID_RTOS_AUDIO);
-/*-\NEW\liweiqiang\2013.11.4\Ôö¼Óaudio.core½Ó¿Ú¿â */
+/*-\NEW\liweiqiang\2013.11.4\å¢åŠ audio.coreæ¥å£åº“ */
 	MOD_REG_NUMBER(L, "MSG_HEADSET",MSG_ID_RTOS_HEADSET);
 	MOD_REG_NUMBER(L, "MSG_RTMP", MSG_ID_RTOS_RTMP);
     MOD_REG_NUMBER(L, "MSG_RECORD", MSG_ID_RTOS_RECORD);
 	MOD_REG_NUMBER(L, "MSG_STREAM_RECORD", MSG_ID_ROTS_STRAM_RECORD_IND);
 
-/*+\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*+\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
     MOD_REG_NUMBER(L, "MSG_ALARM", MSG_ID_RTOS_ALARM);
-/*-\NEW\rufei\2015.3.13\Ôö¼ÓÄÖÖÓÏûÏ¢ */
+/*-\NEW\rufei\2015.3.13\å¢åŠ é—¹é’Ÿæ¶ˆæ¯ */
 
     MOD_REG_NUMBER(L, "MSG_TP", MSG_ID_RTOS_TOUCH);
 
 	//+TTS, panjun 160326.
-	/*+\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+	/*+\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
     MOD_REG_NUMBER(L, "MSG_TTSPLY_STATUS", MSG_ID_RTOS_TTSPLY_STATUS);
     MOD_REG_NUMBER(L, "MSG_TTSPLY_ERROR", MSG_ID_RTOS_TTSPLY_ERROR);
-	/*-\new\wj\2019.12.27\Ìí¼ÓTTS¹¦ÄÜ*/
+	/*-\new\wj\2019.12.27\æ·»åŠ TTSåŠŸèƒ½*/
 	//-TTS, panjun 160326.
 
     MOD_REG_NUMBER(L, "MSG_WEAR_STATUS", MSG_ID_RTOS_WEAR_STATUS);
@@ -1361,27 +1361,27 @@ int luaopen_rtos( lua_State *L )
     MOD_REG_NUMBER(L, "MSG_PDP_DEACT_IND", MSG_ID_TCPIP_PDP_DEACTIVATE_IND);
     MOD_REG_NUMBER(L, "MSG_SOCK_CONN_CNF", MSG_ID_TCPIP_SOCKET_CONNECT_CNF);
     MOD_REG_NUMBER(L, "MSG_SOCK_SEND_CNF", MSG_ID_TCPIP_SOCKET_SEND_CNF);
-/*+BUG\brezen\2016.03.02\send½Ó¿ÚÏÈ·µ»ØSEND ERRORÈ»ºóÓÖ·µ»ØSEND OK*/
+/*+BUG\brezen\2016.03.02\sendæ¥å£å…ˆè¿”å›SEND ERRORç„¶ååˆè¿”å›SEND OK*/
     MOD_REG_NUMBER(L, "MSG_SOCK_SEND_IND", MSG_ID_TCPIP_SOCKET_SEND_IND);
-/*-BUG\brezen\2016.03.02\send½Ó¿ÚÏÈ·µ»ØSEND ERRORÈ»ºóÓÖ·µ»ØSEND OK*/
+/*-BUG\brezen\2016.03.02\sendæ¥å£å…ˆè¿”å›SEND ERRORç„¶ååˆè¿”å›SEND OK*/
     MOD_REG_NUMBER(L, "MSG_SOCK_RECV_IND", MSG_ID_TCPIP_SOCKET_RECV_IND);
     MOD_REG_NUMBER(L, "MSG_SOCK_CLOSE_CNF", MSG_ID_TCPIP_SOCKET_CLOSE_CNF);
     MOD_REG_NUMBER(L, "MSG_SOCK_CLOSE_IND", MSG_ID_TCPIP_SOCKET_CLOSE_IND);
 
     //timeout
     MOD_REG_NUMBER(L, "INF_TIMEOUT", PLATFORM_RTOS_WAIT_MSG_INFINITE);
-/*+:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
+/*+:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
     MOD_REG_NUMBER(L, "MSG_SIM_INSERT_IND", MSG_ID_SIM_INSERT_IND);
-/*-:\NEW\brezen\2016.10.13\Ö§³ÖSIM¿¨ÇĞ»»*/
+/*-:\NEW\brezen\2016.10.13\æ”¯æŒSIMå¡åˆ‡æ¢*/
 
 	MOD_REG_NUMBER(L, "MSG_ZBAR", MSG_ID_RTOS_MSG_ZBAR);
 
-	/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+	/*+\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
 	MOD_REG_NUMBER(L, "MSG_WIFI", MSG_ID_RTOS_MSG_WIFI);
-	/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()½Ó¿Ú¸Ä³ÉÒì²½·¢ËÍÏûÏ¢µÄ·½Ê½Í¨ÖªLua½Å±¾*/
+	/*-\NEW\shenyuanyuan\2020.05.25\wifi.getinfo()æ¥å£æ”¹æˆå¼‚æ­¥å‘é€æ¶ˆæ¯çš„æ–¹å¼é€šçŸ¥Luaè„šæœ¬*/
 	MOD_REG_NUMBER(L, "MSG_BLUETOOTH", MSG_ID_RTOS_BLUETOOTH);
 
-    // ½øĞĞ±ØÒªµÄ³õÊ¼»¯
+    // è¿›è¡Œå¿…è¦çš„åˆå§‹åŒ–
     platform_rtos_init();
 
     return 1;

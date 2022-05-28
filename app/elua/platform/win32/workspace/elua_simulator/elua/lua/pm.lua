@@ -1,4 +1,4 @@
--- µçÔ´¹ÜÀí power manage
+-- ç”µæºç®¡ç† power manage
 local base = _G
 local pmd = require"pmd"
 local pairs = base.pairs
@@ -28,7 +28,7 @@ function sleep(tag)
 		tags[id] = 0
 	end
 
-	-- Ö»Òª´æÔÚÈÎºÎÒ»¸öÄ£¿é»½ĞÑ,Ôò²»Ë¯Ãß
+	-- åªè¦å­˜åœ¨ä»»ä½•ä¸€ä¸ªæ¨¡å—å”¤é†’,åˆ™ä¸ç¡çœ 
 	for k,v in pairs(tags) do
 		if v > 0 then
 			return

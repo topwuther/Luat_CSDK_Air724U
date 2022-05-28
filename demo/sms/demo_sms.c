@@ -87,7 +87,7 @@ static void demo_smstask(PVOID pParameter)
 int appimg_enter(void *param)
 {
     sms_print("[sms]appimg_enter");
-	 //ע������״̬�ص�����
+	 //×¢²áÍøÂç×´Ì¬»Øµ÷º¯Êý
   	iot_network_set_cb(demo_networkIndCallBack);
 	sms_setsmscb(demo_unsolSMSHandler);
 

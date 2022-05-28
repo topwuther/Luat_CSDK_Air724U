@@ -38,7 +38,7 @@
 
 #define	UINT_MAX	0xffffffffU	/* max value for an unsigned int */
 
-//cs_types.h 加了void *强转会导致luaconf.h定义出现问题
+//cs_types.h 鍔犱簡void *寮鸿浆浼氬鑷磍uaconf.h瀹氫箟鍑虹幇闂
 #undef INT_MAX
 #define	INT_MAX		0x7fffffff	/* max value for an int */
 

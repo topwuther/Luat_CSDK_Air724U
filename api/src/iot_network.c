@@ -81,10 +81,10 @@ end:
     return result;
 }
 
-/**��ȡ����״̬
-*@param     status:   ��������״̬
-*@return    TRUE:    �ɹ�
-            FLASE:   ʧ��            
+/**获取网络状态
+*@param     status:   返回网络状态
+*@return    TRUE:    成功
+            FLASE:   失败            
 **/                                
 BOOL iot_network_get_status(T_OPENAT_NETWORK_STATUS* status)
 {
@@ -192,10 +192,10 @@ static void gsmStatusCb( int status)
   
 }
                            
-/**��������״̬�ص�����
-*@param     indCb:   �ص�����
-*@return    TRUE:    �ɹ�
-            FLASE:   ʧ��
+/**设置网络状态回调函数
+*@param     indCb:   回调函数
+*@return    TRUE:    成功
+            FLASE:   失败
 **/                            
 BOOL iot_network_set_cb(F_OPENAT_NETWORK_IND_CB indCb)
 {
@@ -244,23 +244,23 @@ error:
   return FALSE;
 }
 
-/**�����������ӣ�ʵ��Ϊpdp��������
-*@param     connectParam:  �������Ӳ�������Ҫ����APN��username��passwrd��Ϣ
-*@return    TRUE:    �ɹ�
-            FLASE:   ʧ��
-@note      �ú���Ϊ�첽���������غ󲻴����������Ӿͳɹ��ˣ�indCb��֪ͨ�ϲ�Ӧ�����������Ƿ�ɹ������ӳɹ�������OPENAT_NETWORK_LINKED״̬
-           ����socket����֮ǰ����Ҫ������������
-           ��������֮ǰ��״̬��ҪΪOPENAT_NETWORK_READY״̬�����������ʧ��
+/**建立网络连接，实际为pdp激活流程
+*@param     connectParam:  网络连接参数，需要设置APN，username，passwrd信息
+*@return    TRUE:    成功
+            FLASE:   失败
+@note      该函数为异步函数，返回后不代表网络连接就成功了，indCb会通知上层应用网络连接是否成功，连接成功后会进入OPENAT_NETWORK_LINKED状态
+           创建socket连接之前必须要建立网络连接
+           建立连接之前的状态需要为OPENAT_NETWORK_READY状态，否则会连接失败
 **/                          
 BOOL iot_network_connect(T_OPENAT_NETWORK_CONNECT* connectParam)
 {
-    //1. �ȴ�4G����׼����
-    if(g_s_nwMode == 4) //4Gֱ���á�Ĭ�ϼ���pdp
+    //1. 等待4G网络准备好
+    if(g_s_nwMode == 4) //4G直接用。默认激活pdp
     {
         return TRUE;
         
     }
-    else if(g_s_nwMode == 2)//�����2g���ͻ�ȥ���¼���һ·pdp
+    else if(g_s_nwMode == 2)//如果是2g，就回去重新激活一路pdp
     {
         if(gsmGprsPDPActive(connectParam->apn, connectParam->username, connectParam->password))
         {
@@ -303,13 +303,13 @@ error:
 }
 
 
-/**�Ͽ��������ӣ�ʵ��Ϊpdpȥ����
-*@param     flymode:   ��ʱ��֧�֣�����ΪFLASE
-*@return    TRUE:    �ɹ�
-            FLASE:   ʧ��
-@note      �ú���Ϊ�첽���������غ󲻴����������������ͶϿ��ˣ�indCb��֪ͨ�ϲ�Ӧ��
-           ���ӶϿ�������״̬��ص�OPENAT_NETWORK_READY״̬
-           ��ǰ����socket����Ҳ��ʧЧ����Ҫclose��
+/**断开网络连接，实际为pdp去激活
+*@param     flymode:   暂时不支持，设置为FLASE
+*@return    TRUE:    成功
+            FLASE:   失败
+@note      该函数为异步函数，返回后不代表网络连接立即就断开了，indCb会通知上层应用
+           连接断开后网络状态会回到OPENAT_NETWORK_READY状态
+           此前创建socket连接也会失效，需要close掉
 **/                                        
 BOOL iot_network_disconnect(BOOL flymode)
 {

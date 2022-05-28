@@ -1,4 +1,4 @@
--- ²¼·À¹ÜÀí
+-- å¸ƒé˜²ç®¡ç†
 require"sys"
 require"misc"
 require"pinop"
@@ -7,52 +7,52 @@ module(...,package.seeall)
 local pinset = pinop.pinset
 local pinget = pinop.pinget
 
--- Î²Ïä¿ªÆôºó×Ô¶¯¹Ø±ÕÊ±¼ä
+-- å°¾ç®±å¼€å¯åè‡ªåŠ¨å…³é—­æ—¶é—´
 local AUTO_CLOSE_TRUNK = 5000
 
--- ²¼³··ÀÉù¹âĞÅºÅ´ÎÊı
+-- å¸ƒæ’¤é˜²å£°å…‰ä¿¡å·æ¬¡æ•°
 local ALERT_LS_TIME,DISARM_LS_TIME = 2,1
 
--- ³õÊ¼»¯Íê³É
+-- åˆå§‹åŒ–å®Œæˆ
 local ready = false
 
--- ACC×´Ì¬
+-- ACCçŠ¶æ€
 local ACC_ON = pinget(pins.def.ACC_IN_INT)
--- Æû³µĞĞÊ»×´Ì¬
+-- æ±½è½¦è¡Œé©¶çŠ¶æ€
 local carun = false
 
--- ·ÀÇø¶¨Òå
-local DEFSIDE = 1 -- ²àÃÅ
-local DEFTRUNK = 2 -- ºó±¸Ïä
-local DEFSHAKE = 3 -- Õñ¶¯·ÀÇø
-local DEF4 = 4 -- ÓÍÏä
-local DEF5 = 5 -- µç³Ø
-local DEFUEL = DEF4 -- ÓÍÏä
-local DEFEPOWER = 99 -- Æû³µµçÆ¿
+-- é˜²åŒºå®šä¹‰
+local DEFSIDE = 1 -- ä¾§é—¨
+local DEFTRUNK = 2 -- åå¤‡ç®±
+local DEFSHAKE = 3 -- æŒ¯åŠ¨é˜²åŒº
+local DEF4 = 4 -- æ²¹ç®±
+local DEF5 = 5 -- ç”µæ± 
+local DEFUEL = DEF4 -- æ²¹ç®±
+local DEFEPOWER = 99 -- æ±½è½¦ç”µç“¶
 
---ÊÂ¼ş¶¨Òå ²¼·À ³··À ³¬Ê± ´¥·¢
+--äº‹ä»¶å®šä¹‰ å¸ƒé˜² æ’¤é˜² è¶…æ—¶ è§¦å‘
 local EVT_ALERT = 1
 local EVT_DISARM = 2
 local EVT_TIMEOUT = 3
 local EVT_ALARM_STOP = 4
-local EVT_ACC = 5 -- ACCĞÅºÅ±ä»¯
+local EVT_ACC = 5 -- ACCä¿¡å·å˜åŒ–
 local EVT_TRIG = 0x100
 local EVT_SIDE = EVT_TRIG+DEFSIDE
 local EVT_WDEF = EVT_TRIG+0x80
 
 --[=[
-×´Ì¬¶¨Òå
-DISARM:³··À×´Ì¬
-ALERT:²¼·À×´Ì¬
-DISARMING:³··ÀÖĞ
-ALERTING:²¼·ÀÖĞ
-ALARM:¾¯±¨ÖĞ
+çŠ¶æ€å®šä¹‰
+DISARM:æ’¤é˜²çŠ¶æ€
+ALERT:å¸ƒé˜²çŠ¶æ€
+DISARMING:æ’¤é˜²ä¸­
+ALERTING:å¸ƒé˜²ä¸­
+ALARM:è­¦æŠ¥ä¸­
 --]=]
 local currstate = "DISARM"
 
--- ÖĞ¿ØËø
+-- ä¸­æ§é”
 local lock = -1
--- ¿ØÖÆÖĞ¿ØËøÎüºÏ
+-- æ§åˆ¶ä¸­æ§é”å¸åˆ
 local function locktimeout()
 	pinset(false,pins.def.LOCK1_EN)
 	pinset(false,pins.def.LOCK2_EN)
@@ -64,19 +64,19 @@ local function setlock(val)
 	lock = val
 
 	if lock == true then
-		-- ¼ÓËø
+		-- åŠ é”
 		pinset(false,pins.def.LOCK2_EN)
 		pinset(true,pins.def.LOCK1_EN)
 	else
-		-- ½âËø
+		-- è§£é”
 		pinset(false,pins.def.LOCK1_EN)
 		pinset(true,pins.def.LOCK2_EN)
 	end
-	-- ²úÉú1.5ÃëÂö³å¿ØÖÆÖĞ¿ØËøÎüºÏ
+	-- äº§ç”Ÿ1.5ç§’è„‰å†²æ§åˆ¶ä¸­æ§é”å¸åˆ
 	sys.timer_start(locktimeout,1500)
 end
 
--- ÉÁË¸
+-- é—ªçƒ
 local times = 0
 local total = 0
 
@@ -123,8 +123,8 @@ local function slstart(val)
 	end
 end
 
--- ¼ì²é·ÀÇø
--- ±£´æ·ÀÇø×´Ì¬
+-- æ£€æŸ¥é˜²åŒº
+-- ä¿å­˜é˜²åŒºçŠ¶æ€
 local function getdefstatus()
 	local tstatus = {}
 
@@ -132,8 +132,8 @@ local function getdefstatus()
 
 	tstatus[DEFSHAKE] = pinget(pins.def.SHAKE_IN_INT)
 	tstatus[DEFSIDE] = pinget(pins.def.SIDE_IN_INT)
-	-- Î²Ïä·ÀÇøÉèÖÃÎªÆÁ±Î
-	if nvm.get("def2valid") == "ÆÁ±Î" then
+	-- å°¾ç®±é˜²åŒºè®¾ç½®ä¸ºå±è”½
+	if nvm.get("def2valid") == "å±è”½" then
 		tstatus[DEFTRUNK] = false
 	else
 		tstatus[DEFTRUNK] = pinget(pins.def.TRUNK_IN_INT)
@@ -141,7 +141,7 @@ local function getdefstatus()
 
 	pinset(false,pins.def.VOLT_CHOICE)
 	rtos.sleep(10)
-	if nvm.get("def4stat") == "¶ÌÂ·" then
+	if nvm.get("def4stat") == "çŸ­è·¯" then
 		tstatus[DEF4] = pinget(pins.def.SHORT_ALARM)
 	else
 		tstatus[DEF4] = pinget(pins.def.PLOUGH_ALARM)
@@ -149,7 +149,7 @@ local function getdefstatus()
 
 	pinset(true,pins.def.VOLT_CHOICE)
 	rtos.sleep(10)
-	if nvm.get("def5stat") == "¶ÌÂ·" then
+	if nvm.get("def5stat") == "çŸ­è·¯" then
 		tstatus[DEF5] = pinget(pins.def.SHORT_ALARM)
 	else
 		tstatus[DEF5] = pinget(pins.def.PLOUGH_ALARM)
@@ -166,20 +166,20 @@ local onlyfuel = false
 local function checkstatus(t)
 	local talarm = {}
 
-	-- ¼ì²éÆû³µµçÆ¿
-	if t[DEFEPOWER] == true then print("EPOWER not ready") return DEFEPOWER end --Ö÷µçÒì³£Ö»±¨Ö÷µç
+	-- æ£€æŸ¥æ±½è½¦ç”µç“¶
+	if t[DEFEPOWER] == true then print("EPOWER not ready") return DEFEPOWER end --ä¸»ç”µå¼‚å¸¸åªæŠ¥ä¸»ç”µ
 
-	-- ¼ì²éÓÍÏä·ÀÇø
+	-- æ£€æŸ¥æ²¹ç®±é˜²åŒº
 	if onlyfuel == true then print("DEFUEL not ready") return t[DEFUEL] == true and DEFUEL or true end
 
-	-- ¼ì²éÕñ¶¯·ÀÇø
+	-- æ£€æŸ¥æŒ¯åŠ¨é˜²åŒº
 	if alertnoshake == false and t[DEFSHAKE] == true then print("DEFSHAKE not ready") table.insert(talarm,DEFSHAKE) end
 
 	if onlyfuel ~= true then
-		-- ¼ì²éÆäËû·ÀÇø
+		-- æ£€æŸ¥å…¶ä»–é˜²åŒº
 		for k,v in pairs(t) do
 			if k ~= DEFSHAKE and k ~= DEFEPOWER and k ~= DEFUEL and v == true then
-				if nvm.get("alarmtext",k) ~= "" then -- Ö»´¦ÀíÓĞ±¨¾¯ĞÅÏ¢µÄ·ÀÇø,ÎŞ±¨¾¯ĞÅÏ¢·ÀÇøÈÏÎªÎŞĞ§·ÀÇø
+				if nvm.get("alarmtext",k) ~= "" then -- åªå¤„ç†æœ‰æŠ¥è­¦ä¿¡æ¯çš„é˜²åŒº,æ— æŠ¥è­¦ä¿¡æ¯é˜²åŒºè®¤ä¸ºæ— æ•ˆé˜²åŒº
 					print("DEF not ready:",k)
 					table.insert(talarm,k)
 				end
@@ -188,13 +188,13 @@ local function checkstatus(t)
 	end
 
 	if #talarm == 0 then
-		-- ÎŞ·ÀÇøÒì³£
+		-- æ— é˜²åŒºå¼‚å¸¸
 		return true
 	elseif #talarm == 1 then
-		-- Ö»ÓĞÒ»¸ö·ÀÇøÒì³£,Ö±½ÓÌáÊ¾Òì³£·ÀÇø
+		-- åªæœ‰ä¸€ä¸ªé˜²åŒºå¼‚å¸¸,ç›´æ¥æç¤ºå¼‚å¸¸é˜²åŒº
 		return talarm[1]
 	else
-		-- ÓĞ¶à¸ö·ÀÇøÒì³£,·µ»ØËùÓĞÒì³£·ÀÇø
+		-- æœ‰å¤šä¸ªé˜²åŒºå¼‚å¸¸,è¿”å›æ‰€æœ‰å¼‚å¸¸é˜²åŒº
 		return talarm
 	end
 end
@@ -205,7 +205,7 @@ local function check()
 	for k,v in pairs(t) do
 		if defstatus[k] ~= v then
 			defstatus[k] = v
-			-- ·ÀÇøÕı³£ Çå³ı
+			-- é˜²åŒºæ­£å¸¸ æ¸…é™¤
 			if v == false then
 				t[k] = nil
 			end
@@ -221,22 +221,22 @@ local function fsmtimeout()
 	procevt(EVT_TIMEOUT)
 end
 
--- ²¼·À³É¹¦
+-- å¸ƒé˜²æˆåŠŸ
 local function alertsucc()
 	sys.timer_stop(fsmtimeout)
-	-- ²¼·À³É¹¦Éù¹âĞÅºÅÌáÊ¾
+	-- å¸ƒé˜²æˆåŠŸå£°å…‰ä¿¡å·æç¤º
 	slstart(ALERT_LS_TIME)
 	currstate = "ALERT"
 	alertnoshake = false
 	led.work("alertind")
 end
 
--- ³··À
+-- æ’¤é˜²
 local function procdisarm(user,mode)
-	-- ³··ÀÊ±Çå³ı·ÀÇø×´Ì¬
+	-- æ’¤é˜²æ—¶æ¸…é™¤é˜²åŒºçŠ¶æ€
 	defstatus = {}
 
-	-- Ö»³··ÀÕñ¶¯
+	-- åªæ’¤é˜²æŒ¯åŠ¨
 	if mode == "ALERT_NO_SHAKE" then
 		alertnoshake = true
 		slstart(ALERT_LS_TIME)
@@ -246,17 +246,17 @@ local function procdisarm(user,mode)
 	end
 
 	led.work("idle")
-	-- ³··ÀÊ±ÖĞ¿ØËø½âËø
+	-- æ’¤é˜²æ—¶ä¸­æ§é”è§£é”
 	setlock(false)
-	-- ¹Ø±Õ¶Ïµç¶ÏÓÍ
+	-- å…³é—­æ–­ç”µæ–­æ²¹
 	pinset(true,pins.def.OIL_EN)
 	pinset(true,pins.def.ENGINE_EN)
 	alarm.stop("disarm")
-	slstart(DISARM_LS_TIME) -- ³··À³É¹¦Éù¹âĞÅºÅ
+	slstart(DISARM_LS_TIME) -- æ’¤é˜²æˆåŠŸå£°å…‰ä¿¡å·
 
-	-- ÈÎºÎ·½Ê½µÄ³··À¶¼Òª×ö·ÀÎó½â³ıµÄ´¦Àí
-	if currstate == "ALERT" or currstate == "DISARMING" then -- Ö»ÔÚ²¼·À»òÕß´ı³··À×´Ì¬ÏÂ²Å×÷·ÀÎó½â³ıµÄ´¦Àí
-		-- ·ÀÎó½â³ı´¦Àí
+	-- ä»»ä½•æ–¹å¼çš„æ’¤é˜²éƒ½è¦åšé˜²è¯¯è§£é™¤çš„å¤„ç†
+	if currstate == "ALERT" or currstate == "DISARMING" then -- åªåœ¨å¸ƒé˜²æˆ–è€…å¾…æ’¤é˜²çŠ¶æ€ä¸‹æ‰ä½œé˜²è¯¯è§£é™¤çš„å¤„ç†
+		-- é˜²è¯¯è§£é™¤å¤„ç†
 		currstate = "DISARMING"
 		sys.timer_start(fsmtimeout,nvm.get("delayautoalert"))
 	else
@@ -266,10 +266,10 @@ local function procdisarm(user,mode)
 	return true
 end
 
--- ²¼·À
+-- å¸ƒé˜²
 local function procalert(user,mode)
 	if mode == "ONLY_FUEL" then
-		--Ö»²¼·ÀÓÍÏä
+		--åªå¸ƒé˜²æ²¹ç®±
 		onlyfuel = true
 	else
 		onlyfuel = false
@@ -277,20 +277,20 @@ local function procalert(user,mode)
 
 	setlock(true)
 
-	-- ÓÍÏäµ¥¶À²¼·ÀÊ± ²»Ó°ÏìÖĞ¿ØËø¸ú¶Ïµç¶ÏÓÍ¿ØÖÆ
-	if onlyfuel == false then -- ²»ÂÛÊÇ·ñ²¼·À³É¹¦¶¼Òª¿ØÖÆÖĞ¿ØËø¸úµçÓÍ
-		-- ¶Ïµç¶ÏÓÍ
+	-- æ²¹ç®±å•ç‹¬å¸ƒé˜²æ—¶ ä¸å½±å“ä¸­æ§é”è·Ÿæ–­ç”µæ–­æ²¹æ§åˆ¶
+	if onlyfuel == false then -- ä¸è®ºæ˜¯å¦å¸ƒé˜²æˆåŠŸéƒ½è¦æ§åˆ¶ä¸­æ§é”è·Ÿç”µæ²¹
+		-- æ–­ç”µæ–­æ²¹
 		pinset(false,pins.def.OIL_EN)
 		pinset(false,pins.def.ENGINE_EN)
 	end
 
 	if check() == true then
-		-- È«·ÀÇø¼ì²éÍ¨¹ı
+		-- å…¨é˜²åŒºæ£€æŸ¥é€šè¿‡
 		alertsucc()
 		return true
 	end
 
-	-- Éù¹âĞÅºÅ20´ÎÌáÊ¾³µÖ÷·ÀÇøÎ´×¼±¸ºÃ
+	-- å£°å…‰ä¿¡å·20æ¬¡æç¤ºè½¦ä¸»é˜²åŒºæœªå‡†å¤‡å¥½
 	slstart(20)
 	sys.timer_start(fsmtimeout,nvm.get("alertdelaytime"))
 
@@ -302,7 +302,7 @@ local function dodisarm(evt,user,mode)
 	if evt == EVT_ALERT then
 		return procalert(user,mode)
 	elseif evt == EVT_DISARM then
-		-- Ò£¿ØÆ÷ÖØ¸´²¼³··ÀÒª×÷³ö¶ÔÓ¦Éù¹âÌáÊ¾
+		-- é¥æ§å™¨é‡å¤å¸ƒæ’¤é˜²è¦ä½œå‡ºå¯¹åº”å£°å…‰æç¤º
 		if user == "controller" then
 			return procdisarm(user,mode)
 		else
@@ -314,26 +314,26 @@ local function dodisarm(evt,user,mode)
 end
 
 local function doalerting(evt,user,mode)
-	if evt == EVT_ALERT then -- ÑÓÊ±¼ì²é·ÀÇø×´Ì¬µÄÇé¿öÏÂÖØ¸´²¼·ÀµÄ´¦Àí
+	if evt == EVT_ALERT then -- å»¶æ—¶æ£€æŸ¥é˜²åŒºçŠ¶æ€çš„æƒ…å†µä¸‹é‡å¤å¸ƒé˜²çš„å¤„ç†
 		return procalert()
 	elseif evt == EVT_TIMEOUT then
-		-- ³¬Ê±¼ì²é, ²¼·À³É¹¦»òÕßÊ§°Ü
+		-- è¶…æ—¶æ£€æŸ¥, å¸ƒé˜²æˆåŠŸæˆ–è€…å¤±è´¥
 		local result = checkstatus(defstatus)
 		if result == true then
 			alertsucc()
 		else
-			-- ½øÈë²¼·À×´Ì¬
+			-- è¿›å…¥å¸ƒé˜²çŠ¶æ€
 			currstate = "ALERT"
 			led.work("alertind")
 			alertnoshake = false
-			-- ·¢³ö±¨¾¯
+			-- å‘å‡ºæŠ¥è­¦
 			alarm.start(result)
 		end
 	elseif evt > EVT_WDEF then
-		-- ÎŞÏß·ÀÇø´¥·¢
+		-- æ— çº¿é˜²åŒºè§¦å‘
 	elseif evt > EVT_TRIG then
-		-- ·ÀÇø×´Ì¬±ä»¯´¥·¢
-		check() -- ¸üĞÂ·ÀÇø×´Ì¬
+		-- é˜²åŒºçŠ¶æ€å˜åŒ–è§¦å‘
+		check() -- æ›´æ–°é˜²åŒºçŠ¶æ€
 		if checkstatus(defstatus) == true then
 			alertsucc()
 		end
@@ -346,18 +346,18 @@ end
 
 local function gotoalarm1(defid)
 	currstate = "ALARM1"
-	slstart(20000) -- 20ÃëÉù¹âĞÅºÅ
-	sys.timer_start(fsmtimeout,15000) -- 15Ãë¼ÌĞø¼à²â
-	-- ·ÀÇø¾¯±¨´¥·¢
+	slstart(20000) -- 20ç§’å£°å…‰ä¿¡å·
+	sys.timer_start(fsmtimeout,15000) -- 15ç§’ç»§ç»­ç›‘æµ‹
+	-- é˜²åŒºè­¦æŠ¥è§¦å‘
 	alarm.start(defid)
 end
 
 local function doalert(evt,user,mode)
 	if evt == EVT_ALERT then
-		-- ÖØ¸´²¼³··ÀÒª×÷³ö¶ÔÓ¦Éù¹âÌáÊ¾
+		-- é‡å¤å¸ƒæ’¤é˜²è¦ä½œå‡ºå¯¹åº”å£°å…‰æç¤º
 		return procalert(user,mode)
 	elseif evt > EVT_WDEF then
-		-- ÎŞÏß·ÀÇø´¥·¢
+		-- æ— çº¿é˜²åŒºè§¦å‘
 		gotoalarm1(evt-EVT_WDEF)
 	elseif evt > EVT_TRIG then
 		local result = check()
@@ -371,9 +371,9 @@ local function doalert(evt,user,mode)
 end
 
 local function gotoalarm2(defid)
-	-- 15ÃëÄÚÔÙ´Î´¥·¢·ÀÇø
+	-- 15ç§’å†…å†æ¬¡è§¦å‘é˜²åŒº
 	currstate = "ALARM2"
-	-- ´ËÊ±´¥·¢Éù¹âĞÅºÅ³ÖĞø40Ãë
+	-- æ­¤æ—¶è§¦å‘å£°å…‰ä¿¡å·æŒç»­40ç§’
 	slstart(40000)
 	sys.timer_start(fsmtimeout,40000)
 	alarm.start(defid)
@@ -381,7 +381,7 @@ end
 
 local function doalarm1(evt,user,mode)
 	if evt > EVT_WDEF then
-		-- ÎŞÏß·ÀÇø´¥·¢
+		-- æ— çº¿é˜²åŒºè§¦å‘
 		gotoalarm2(evt-EVT_WDEF)
 	elseif evt > EVT_TRIG then
 		local result = check()
@@ -389,7 +389,7 @@ local function doalarm1(evt,user,mode)
 			gotoalarm2(result)
 		end
 	elseif evt == EVT_TIMEOUT then
-		-- ³¬Ê±·µ»Ø²¼·À×´Ì¬
+		-- è¶…æ—¶è¿”å›å¸ƒé˜²çŠ¶æ€
 		currstate = "ALERT"
 	elseif evt == EVT_DISARM then
 		procdisarm(user,mode)
@@ -398,7 +398,7 @@ local function doalarm1(evt,user,mode)
 end
 
 local function alarmdef(defid)
-	-- ´ËÊ±ÈÎºÎ´¥·¢¶¼ÊÇÉù¹âĞÅºÅ³ÖĞø40Ãë
+	-- æ­¤æ—¶ä»»ä½•è§¦å‘éƒ½æ˜¯å£°å…‰ä¿¡å·æŒç»­40ç§’
 	slstart(40000)
 	sys.timer_start(fsmtimeout,40000)
 	alarm.start(defid)
@@ -406,7 +406,7 @@ end
 
 local function doalarm2(evt,user,mode)
 	if evt > EVT_WDEF then
-		-- ÎŞÏß·ÀÇø´¥·¢
+		-- æ— çº¿é˜²åŒºè§¦å‘
 		alarmdef(evt-EVT_WDEF)
 	elseif evt > EVT_TRIG then
 		local result = check()
@@ -414,7 +414,7 @@ local function doalarm2(evt,user,mode)
 			alarmdef(result)
 		end
 	elseif evt == EVT_TIMEOUT then
-		-- ³¬Ê±·µ»Ø²¼·À×´Ì¬
+		-- è¶…æ—¶è¿”å›å¸ƒé˜²çŠ¶æ€
 		currstate = "ALERT"
 	elseif evt == EVT_DISARM then
 		procdisarm(user,mode)
@@ -424,19 +424,19 @@ end
 
 local function dodisarming(evt,user,mode)
 	if evt == EVT_TIMEOUT or evt == EVT_ALERT then
-		-- ³¬Ê±,³µÃÅÎ´´ò¿ª,Îó½â³ı
+		-- è¶…æ—¶,è½¦é—¨æœªæ‰“å¼€,è¯¯è§£é™¤
 		return procalert(user,mode)
 	elseif evt > EVT_TRIG then
 		if pinget(pins.def.SIDE_IN_INT) == true then
-			-- ³µÃÅ´ò¿ª, ³··À
+			-- è½¦é—¨æ‰“å¼€, æ’¤é˜²
 			currstate = "DISARM"
 			sys.timer_stop(fsmtimeout)
 		end
 	elseif evt == EVT_DISARM then
-		-- Ò£¿ØÆ÷ÖØ¸´²¼³··ÀÒª×÷³ö¶ÔÓ¦Éù¹âÌáÊ¾
+		-- é¥æ§å™¨é‡å¤å¸ƒæ’¤é˜²è¦ä½œå‡ºå¯¹åº”å£°å…‰æç¤º
 		return procdisarm(user,mode)
 	elseif evt == EVT_ACC then
-		-- ´ı³··À, ACCµã»ğ½øÈë³··À×´Ì¬
+		-- å¾…æ’¤é˜², ACCç‚¹ç«è¿›å…¥æ’¤é˜²çŠ¶æ€
 		if ACC_ON == true then
 			currstate = "DISARM"
 			sys.timer_stop(fsmtimeout)
@@ -475,13 +475,13 @@ local fsm =
 }
 
 function procevt(evt,user,mode)
-	--  Î´³õÊ¼»¯Íê³É²»ÔÊĞí¿ØÖÆ
+	--  æœªåˆå§‹åŒ–å®Œæˆä¸å…è®¸æ§åˆ¶
 	if ready == false then return false end
 
-	-- ACC¿ªÆôÊ±Ò£¿ØÆ÷¿ØÖÆ´¦Àí
+	-- ACCå¼€å¯æ—¶é¥æ§å™¨æ§åˆ¶å¤„ç†
 	if ACC_ON == true and user == "controller" then
-		if evt == EVT_DISARM then -- Ò£¿ØÆ÷¿ÉÒÔÖ´ĞĞÈÎºÎ³··À¶¯×÷
-		elseif evt == EVT_ALERT and mode == "ONLY_FUEL" then -- Ò£¿ØÆ÷¿ÉÒÔµ¥¶À²¼·ÀÓÍÏä
+		if evt == EVT_DISARM then -- é¥æ§å™¨å¯ä»¥æ‰§è¡Œä»»ä½•æ’¤é˜²åŠ¨ä½œ
+		elseif evt == EVT_ALERT and mode == "ONLY_FUEL" then -- é¥æ§å™¨å¯ä»¥å•ç‹¬å¸ƒé˜²æ²¹ç®±
 		else
 			print("acc is on, cannot control")
 			return false
@@ -506,13 +506,13 @@ function getstate()
 end
 
 function alert(user)
-	if user == "controller" and ACC_ON == true then setlock(true) return end -- ĞĞÊ»ÖĞ°´·ÀµÁ¼ü£¬ÖĞ¿ØËø¼ÓËø
+	if user == "controller" and ACC_ON == true then setlock(true) return end -- è¡Œé©¶ä¸­æŒ‰é˜²ç›—é”®ï¼Œä¸­æ§é”åŠ é”
 
 	return procevt(EVT_ALERT,user)
 end
 
 function disarm(user)
-	if user == "controller" and carun == true then setlock(false) return end -- ĞĞÊ»ÖĞ°´½â³ı¼ü£¬ÖĞ¿ØËø½âËø
+	if user == "controller" and carun == true then setlock(false) return end -- è¡Œé©¶ä¸­æŒ‰è§£é™¤é”®ï¼Œä¸­æ§é”è§£é”
 
 	return procevt(EVT_DISARM,user)
 end
@@ -545,7 +545,7 @@ end
 local function trigevt(evt)
 	local t = getdefstatus()
 
-	-- ¼ì²éÈç¹ûÍ»È»³¬¹ıÁ½¸ö·ÀÇø·¢ÉúÒì³£ ÄÇÃ´ÑÓÊ±¼ì²âÊÇ·ñEPOWER¶Ïµç
+	-- æ£€æŸ¥å¦‚æœçªç„¶è¶…è¿‡ä¸¤ä¸ªé˜²åŒºå‘ç”Ÿå¼‚å¸¸ é‚£ä¹ˆå»¶æ—¶æ£€æµ‹æ˜¯å¦EPOWERæ–­ç”µ
 	for k,v in pairs(t) do
 		if defstatus[k] == nil then t = {} break end
 
@@ -564,7 +564,7 @@ local function trigevt(evt)
 	procevt(evt)
 end
 
-local DELAY_TRIG = 800 -- ÑÓÊ±800msºó¼ì²é·ÀÇø×´Ì¬
+local DELAY_TRIG = 800 -- å»¶æ—¶800msåæ£€æŸ¥é˜²åŒºçŠ¶æ€
 
 local function trunkind()
 	sys.timer_start(trigevt,DELAY_TRIG,EVT_TRIG+DEFTRUNK)
@@ -578,21 +578,21 @@ local function shakeind()
 	sys.timer_start(trigevt,DELAY_TRIG,EVT_TRIG+DEFSHAKE)
 end
 
--- Æû³µµçÆ¿×´Ì¬
+-- æ±½è½¦ç”µç“¶çŠ¶æ€
 local function epowerind(status)
 	sys.timer_start(trigevt,DELAY_TRIG,EVT_TRIG+DEFEPOWER)
 end
 
--- ÖĞ¿ØËø¿ØÖÆ
+-- ä¸­æ§é”æ§åˆ¶
 local acctimeout = false
 
 local function brakeind(status)
 	if ACC_ON == true and status == true then
-		-- 15Ãëºó²ÈÁËÉ²³µ×Ô¶¯¼ÓËø
+		-- 15ç§’åè¸©äº†åˆ¹è½¦è‡ªåŠ¨åŠ é”
 		if acctimeout == true then
 			acctimeout = false
 			carun = true
-			setlock(true) -- Æû³µĞĞÊ»×Ô¶¯¼ÓËø
+			setlock(true) -- æ±½è½¦è¡Œé©¶è‡ªåŠ¨åŠ é”
 		end
 	end
 end
@@ -611,12 +611,12 @@ local function accind(status)
 		sys.timer_stop(acctimer)
 		acctimeout = false
 		carun = false
-		setlock(false) -- Æû³µÏ¨»ğ×Ô¶¯½âËø
+		setlock(false) -- æ±½è½¦ç†„ç«è‡ªåŠ¨è§£é”
 	end
 	procevt(EVT_ACC)
 end
 
--- ·ÀÇø4 5 ÂÖÁ÷¼ì²â¿ØÖÆ
+-- é˜²åŒº4 5 è½®æµæ£€æµ‹æ§åˆ¶
 local function def45timer()
 	sys.timer_start(def45timer,2000)
 
@@ -627,11 +627,11 @@ local function def45timer()
 	def = pins.def.VOLT_CHOICE.val == true and DEF5 or DEF4
 
 	local trigstat = nvm.get(def == DEF4 and "def4stat" or "def5stat")
-	status = pinget(trigstat == "¶ÌÂ·" and pins.def.SHORT_ALARM or pins.def.PLOUGH_ALARM)
+	status = pinget(trigstat == "çŸ­è·¯" and pins.def.SHORT_ALARM or pins.def.PLOUGH_ALARM)
 
 	pinset(not pins.def.VOLT_CHOICE.val,pins.def.VOLT_CHOICE)
 
-	if defstatus[def] ~= status then -- ×´Ì¬·¢Éú±ä»¯²Å´¥·¢
+	if defstatus[def] ~= status then -- çŠ¶æ€å‘ç”Ÿå˜åŒ–æ‰è§¦å‘
 		sys.timer_start(trigevt,DELAY_TRIG,EVT_TRIG+def)
 	end
 end
@@ -658,14 +658,14 @@ local function devready()
 	led.work("readyind",3)
 end
 
--- ÓĞ¿¨Ê±ÒÔ¶ÌĞÅ³õÊ¼»¯Íê³ÉÎª³õÊ¼»¯½áÊø±êÖ¾
+-- æœ‰å¡æ—¶ä»¥çŸ­ä¿¡åˆå§‹åŒ–å®Œæˆä¸ºåˆå§‹åŒ–ç»“æŸæ ‡å¿—
 local function smsready()
 	devready()
 	sys.deregapp(smsready)
 end
 sys.regapp(smsready,"SMS_READY")
 
--- ÎŞ¿¨Ê±µÈ´ı2·ÖÖÓÎª³õÊ¼»¯½áÊø±êÖ¾
+-- æ— å¡æ—¶ç­‰å¾…2åˆ†é’Ÿä¸ºåˆå§‹åŒ–ç»“æŸæ ‡å¿—
 local function simind(msgid,simstat)
 	if simstat == "NIST" then
 		sys.deregapp(smsready)

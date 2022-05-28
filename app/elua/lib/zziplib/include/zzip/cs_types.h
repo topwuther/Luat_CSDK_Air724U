@@ -50,7 +50,7 @@
 #undef ULONG_MAX
 #define ULONG_MAX                   0xffffffff
 
-/*begin\add by wangzhiqiang\2001.6.27\移植工作*/
+/*begin\add by wangzhiqiang\2001.6.27\绉绘宸ヤ綔*/
 #ifndef USHRT_MAX
 #define USHRT_MAX                   0xFFFFU
 #endif
@@ -58,7 +58,7 @@
 #ifndef UCHAR_MAX
 #define UCHAR_MAX                   0xFFU
 #endif
-/*end\add by wangzhiqiang\2001.6.27\移植工作*/
+/*end\add by wangzhiqiang\2001.6.27\绉绘宸ヤ綔*/
 
 typedef unsigned char               u8;
 typedef unsigned short              u16;
@@ -116,9 +116,9 @@ typedef long long                   INT64;
 #endif
 typedef unsigned char               BOOL;
 
-/*+\BUG WM-85\xiongjunqun\2012.01.16\清理编译过程中的warning*/
+/*+\BUG WM-85\xiongjunqun\2012.01.16\娓呯悊缂栬瘧杩囩▼涓殑warning*/
 typedef unsigned short              WCHAR;
-/*-\BUG WM-85\xiongjunqun\2012.01.16\清理编译过程中的warning*/
+/*-\BUG WM-85\xiongjunqun\2012.01.16\娓呯悊缂栬瘧杩囩▼涓殑warning*/
 
 typedef char                        CHAR;
 typedef unsigned char               BYTE;

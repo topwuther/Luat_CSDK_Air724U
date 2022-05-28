@@ -1,11 +1,11 @@
--- PC±à³Ì´¦Àí
+-- PCç¼–ç¨‹å¤„ç†
 require"sys"
 require"nvm"
 require"pinop"
 require"led"
 module(...,package.seeall)
 
-local PROGRAM_TIMEOUT=120000 -- ±à³Ì³¬Ê±Ê±¼ä2·ÖÖÓ
+local PROGRAM_TIMEOUT=120000 -- ç¼–ç¨‹è¶…æ—¶æ—¶é—´2åˆ†é’Ÿ
 local mode = 0
 
 function inprogram()
@@ -100,11 +100,11 @@ function ctrlerlearn(ctrlid)
 end
 
 local function setctrler(id)
-	-- »Ø¸´µ±Ç°¼ÇÂ¼µÄÒ£¿ØÆ÷Éí·İÂë
+	-- å›å¤å½“å‰è®°å½•çš„é¥æ§å™¨èº«ä»½ç 
 	local code = nvm.get(id < 24 and "ctrler" or "wdef",getwdevnvid(id))
 	uart.write(3,string.format("%dA%s",id,code >= 0x10000 and "-" or code))
 
-	--¡¡½øÈëÒ£¿ØÆ÷Ñ§Ï°
+	--ã€€è¿›å…¥é¥æ§å™¨å­¦ä¹ 
 	currcmd = id
 	rmtctler.enterlearn()
 	sys.timer_start(learnctrltimeout,15000)
@@ -112,7 +112,7 @@ local function setctrler(id)
 end
 
 local function setalarmtext(id,text)
-	if text == "" then -- ²»ÔÊĞíÇå³ı·ÀÇø±¨¾¯ÄÚÈİ
+	if text == "" then -- ä¸å…è®¸æ¸…é™¤é˜²åŒºæŠ¥è­¦å†…å®¹
 		print("setalarmtext:invalid")
 		return false
 	end
@@ -122,7 +122,7 @@ local function setalarmtext(id,text)
 end
 
 local function setdef2valid(id,text)
-	if text == "¿ªÍ¨" or text == "ÆÁ±Î" then
+	if text == "å¼€é€š" or text == "å±è”½" then
 		nvm.set("def2valid",text)
 		return true
 	end
@@ -131,7 +131,7 @@ local function setdef2valid(id,text)
 end
 
 local function setdefstat(id,text)
-	if text == "¿ªÂ·" or text == "¶ÌÂ·" then
+	if text == "å¼€è·¯" or text == "çŸ­è·¯" then
 		nvm.set(id == 36 and "def4stat" or "def5stat",text)
 		return true
 	end
@@ -166,7 +166,7 @@ local function getcallrepeat(id)
 end
 
 local function getctrler(id)
-	-- Çå³ıÒ£¿ØÆ÷
+	-- æ¸…é™¤é¥æ§å™¨
 	nvm.set(id < 74 and "ctrler" or "wdef",getwdevnvid(id),0x10000)
 	return true
 end
@@ -276,7 +276,7 @@ local function setrmtcall(id,s)
 end
 
 local function setautoalertdelay(id,s)
-	if string.len(s) ~= 3 or string.match(s,"(%d+)") ~= s or tonumber(s) < 20 then -- ÖÁÉÙÒª³¬¹ı20Ãë
+	if string.len(s) ~= 3 or string.match(s,"(%d+)") ~= s or tonumber(s) < 20 then -- è‡³å°‘è¦è¶…è¿‡20ç§’
 		print("setautoalertdelay:invalid",s)
 		return false
 	end
@@ -354,7 +354,7 @@ local function parse(s)
 	sys.timer_start(timeout,PROGRAM_TIMEOUT)
 
 	if currcmd ~= nil then
-		uart.write(3,"ERROR") -- ÓĞÆäËûÃüÁîÔÚ´¦Àí,²»ÔÊĞí´¦ÀíÏÂÒ»ÌõÃüÁî
+		uart.write(3,"ERROR") -- æœ‰å…¶ä»–å‘½ä»¤åœ¨å¤„ç†,ä¸å…è®¸å¤„ç†ä¸‹ä¸€æ¡å‘½ä»¤
 		return
 	end
 

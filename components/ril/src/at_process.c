@@ -402,14 +402,14 @@ static void processLine(const char *line)
                 handleUnsolicited(line);
             }
             break;
-            /*+\NewReq ATMMI-144\xiongjunqun\2012.01.05\ĞŞ¸ÄÊÖ¶¯ËÑÍø´úÂë²»ºÏÀíµÄµØ·½----ÖØĞÂĞŞ¸ÄABORTEDµÄÉÏ±¨*/
+            /*+\NewReq ATMMI-144\xiongjunqun\2012.01.05\ä¿®æ”¹æ‰‹åŠ¨æœç½‘ä»£ç ä¸åˆç†çš„åœ°æ–¹----é‡æ–°ä¿®æ”¹ABORTEDçš„ä¸ŠæŠ¥*/
         case SINGLELINE:
             LOGD("%s", __FUNCTION__);
             if (sp_response->p_intermediates == NULL && (strStartsWith(line, s_responsePrefix) || 0 == strncmp(line, "ABORTED", strlen("ABORTED"))))
             {
                 addIntermediate(line);
             }
-			else if((sp_response->finalResponse == NULL)&&(strstr(s_responsePrefix, "+CMGR") || strstr(s_responsePrefix, "+CMGL"))) /*½«¶Áµ½µÄ¶ÌĞÅÄÚÈİ·µ»Øµ½½á¹ûÖĞ*/
+			else if((sp_response->finalResponse == NULL)&&(strstr(s_responsePrefix, "+CMGR") || strstr(s_responsePrefix, "+CMGL"))) /*å°†è¯»åˆ°çš„çŸ­ä¿¡å†…å®¹è¿”å›åˆ°ç»“æœä¸­*/
 			{
 				addIntermediate(line);
 			}
@@ -424,7 +424,7 @@ static void processLine(const char *line)
             {
                 addIntermediate(line);
             }
-			else if((sp_response->finalResponse == NULL)&&(strstr(s_responsePrefix, "+CMGR") || strstr(s_responsePrefix, "+CMGL"))) /*½«¶Áµ½µÄ¶ÌĞÅÄÚÈİ·µ»Øµ½½á¹ûÖĞ*/
+			else if((sp_response->finalResponse == NULL)&&(strstr(s_responsePrefix, "+CMGR") || strstr(s_responsePrefix, "+CMGL"))) /*å°†è¯»åˆ°çš„çŸ­ä¿¡å†…å®¹è¿”å›åˆ°ç»“æœä¸­*/
             {
                 addIntermediate(line);
             }
@@ -433,7 +433,7 @@ static void processLine(const char *line)
                 handleUnsolicited(line);
             }
             break;
-            /*-\NewReq ATMMI-144\xiongjunqun\2012.01.05\ĞŞ¸ÄÊÖ¶¯ËÑÍø´úÂë²»ºÏÀíµÄµØ·½----ÖØĞÂĞŞ¸ÄABORTEDµÄÉÏ±¨*/
+            /*-\NewReq ATMMI-144\xiongjunqun\2012.01.05\ä¿®æ”¹æ‰‹åŠ¨æœç½‘ä»£ç ä¸åˆç†çš„åœ°æ–¹----é‡æ–°ä¿®æ”¹ABORTEDçš„ä¸ŠæŠ¥*/
         default: /* this should never be reached */
             LOGE("Unsupported AT command type %d\n", s_type);
             handleUnsolicited(line);
@@ -665,9 +665,9 @@ static int at_send_command_full_nolock(const char *command, ATCommandType type,
 
 /*********************************************************
   Function:    at_iot_vat_init
-  Description: ×¢²áiot_vat_init»Øµ÷º¯Êı
+  Description: æ³¨å†Œiot_vat_initå›è°ƒå‡½æ•°
   Input:
-        pAtMessage:iot_vat_init»Øµ÷º¯Êı
+        pAtMessage:iot_vat_initå›è°ƒå‡½æ•°
 
 *********************************************************/
 void ril_set_cb(PAT_MESSAGE pAtMessage)
@@ -678,14 +678,14 @@ void ril_set_cb(PAT_MESSAGE pAtMessage)
 
 /*********************************************************
   Function:    at_init
-  Description: ³õÊ¼»¯
+  Description: åˆå§‹åŒ–
   Input:
 
   Output:
   Return:      
-  Others:  1£¬³õÊ¼»¯¶ÁÏß³Ì
-           2£¬³õÊ¼»¯µÈ´ıĞÅºÅÁ¿
-           3£¬³õÊ¼»¯ÏµÍ³±äÁ¿
+  Others:  1ï¼Œåˆå§‹åŒ–è¯»çº¿ç¨‹
+           2ï¼Œåˆå§‹åŒ–ç­‰å¾…ä¿¡å·é‡
+           3ï¼Œåˆå§‹åŒ–ç³»ç»Ÿå˜é‡
 *********************************************************/
 
 void at_init()
@@ -701,7 +701,7 @@ void at_init()
         at_open();
 
         OPENAT_init_at(at_message);
-        //ÍøÂç×´Ì¬Ö÷¶¯ÉÏ±¨
+        //ç½‘ç»œçŠ¶æ€ä¸»åŠ¨ä¸ŠæŠ¥
         at_send_command("ATE0", NULL);
         at_send_command("AT+CREG=1", NULL);
         at_send_command("AT+CEREG=1", NULL);
@@ -721,7 +721,7 @@ void at_regSmsHanlerCb(ATUnsolSMSHandler cb)
 
 /*********************************************************
   Function:    at_send_command_singleline
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -751,7 +751,7 @@ int at_send_command_singleline(const char *command,
 
 /*********************************************************
   Function:    at_send_command_numeric
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -780,7 +780,7 @@ int at_send_command_numeric(const char *command,
 
 /*********************************************************
   Function:    at_send_command_multiline
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -802,7 +802,7 @@ int at_send_command_multiline(const char *command,
 
 /*********************************************************
   Function:    at_send_command_sms
-  Description: ·¢ËÍATÖ¸Áî£¬²¢µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œå¹¶ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -834,7 +834,7 @@ int at_send_command_sms (const char *command,
 
 /*********************************************************
   Function:    at_send_command
-  Description: ·¢ËÍATÖ¸Áî£¬²»µÈ´ı½á¹û
+  Description: å‘é€ATæŒ‡ä»¤ï¼Œä¸ç­‰å¾…ç»“æœ
   Input:
 
   Output:
@@ -854,7 +854,7 @@ int at_send_command(const char *command, ATResponse **pp_outResponse)
 
 /*********************************************************
   Function:    at_response_free
-  Description: ÊÍ·Å½á¹û
+  Description: é‡Šæ”¾ç»“æœ
   Input:
 
   Output:
